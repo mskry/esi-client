@@ -1,11 +1,11 @@
-# EVE Online ESI TypeScript Client
+# ESI TypeScript Client
 
-A TypeScript client for EVE Online's ESI (EVE Swagger Interface) API.
+A TypeScript client for the ESI (EVE Swagger Interface) API.
 
 ## Installation
 
 ```bash
-npm install esi-client
+npm install @evespace/esi-client
 ```
 
 ## Usage
