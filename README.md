@@ -11,16 +11,23 @@ npm install @evespace/esi-client
 ## Usage
 
 ```typescript
-import { Configuration, DefaultApi } from 'esi-client';
+import {
+    CharacterApi,
+    Configuration,
+    GetCharactersCharacterIdXCompatibilityDateEnum,
+} from '@evespace/esi-client';
 
 const config = new Configuration({
-    basePath: 'https://esi.evetech.net/latest'
+    basePath: 'https://esi.evetech.net/latest',
 });
 
-const api = new DefaultApi(config);
+const api = new CharacterApi(config);
 
 // Example: Get character information
-const characterInfo = await api.getCharactersCharacterId(12345);
+const characterInfo = await api.getCharactersCharacterId({
+    characterId: 12345,
+    xCompatibilityDate: GetCharactersCharacterIdXCompatibilityDateEnum._20200101,
+});
 ```
 
 ## Features
