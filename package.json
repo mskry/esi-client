@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "generate": "openapi-generator-cli generate -i https://esi.evetech.net/_latest/swagger.json -g typescript-fetch -o src",
+    "generate": "rm -rf src && openapi-generator-cli generate -i https://esi.evetech.net/meta/openapi.json -g typescript-fetch -o /local/src --global-property apiDocs=false,modelDocs=false --model-name-mappings Error=EsiError && node scripts/fix-api-enums.mjs",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
     "prepare": "npm run build",
@@ -37,7 +37,7 @@
     "client"
   ],
   "author": "Mykola Skrypets",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/jest": "^29.5.11",

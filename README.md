@@ -32,8 +32,8 @@ const characterInfo = await api.getCharactersCharacterId(12345);
 
 ## Documentation
 
-For detailed API documentation, please refer to the [EVE Swagger Interface](https://esi.evetech.net/ui/).
+This client was regenerated from the OpenAPI 3.1 specification published in the [EVE Online API Explorer](https://developers.eveonline.com/api-explorer).
 
 ## License
 
-ISC © Mykola Skrypets
+MIT © Mykola Skrypets
