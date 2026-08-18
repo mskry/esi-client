@@ -39,7 +39,7 @@ const characterInfo = await api.getCharactersCharacterId({
 
 ## Documentation
 
-This client was regenerated from the OpenAPI 3.1 specification published in the [EVE Online API Explorer](https://developers.eveonline.com/api-explorer).
+This client was regenerated on 2026-08-18 from the OpenAPI 3.1 specification published in the [EVE Online API Explorer](https://developers.eveonline.com/api-explorer).
 
 ## License
 
