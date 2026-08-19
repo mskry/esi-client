@@ -37,7 +37,7 @@ import {
   type GetIndustryFacilitiesOutput,
   type GetIndustrySystemsInput,
   type GetIndustrySystemsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/industry.js';
 
 export const GetCharactersCharacterIdIndustryJobsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdIndustryJobsInput, GetCharactersCharacterIdIndustryJobsOutput> = {
   operationId: "GetCharactersCharacterIdIndustryJobs",
@@ -79,67 +79,6 @@ export const GetCharactersCharacterIdMiningDescriptor: OperationExecutionDescrip
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationCorporationIdMiningExtractionsDescriptor: OperationExecutionDescriptor<GetCorporationCorporationIdMiningExtractionsInput, GetCorporationCorporationIdMiningExtractionsOutput> = {
-  operationId: "GetCorporationCorporationIdMiningExtractions",
-  method: "GET",
-  path: "/corporation/{corporation_id}/mining/extractions",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationCorporationIdMiningExtractionsRequestSchema,
-  authentication: { scopes: ["esi-industry.read_corporation_mining.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationCorporationIdMiningExtractionsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationCorporationIdMiningObserversDescriptor: OperationExecutionDescriptor<GetCorporationCorporationIdMiningObserversInput, GetCorporationCorporationIdMiningObserversOutput> = {
-  operationId: "GetCorporationCorporationIdMiningObservers",
-  method: "GET",
-  path: "/corporation/{corporation_id}/mining/observers",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationCorporationIdMiningObserversRequestSchema,
-  authentication: { scopes: ["esi-industry.read_corporation_mining.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationCorporationIdMiningObserversStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationCorporationIdMiningObserversObserverIdDescriptor: OperationExecutionDescriptor<GetCorporationCorporationIdMiningObserversObserverIdInput, GetCorporationCorporationIdMiningObserversObserverIdOutput> = {
-  operationId: "GetCorporationCorporationIdMiningObserversObserverId",
-  method: "GET",
-  path: "/corporation/{corporation_id}/mining/observers/{observer_id}",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "observer_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationCorporationIdMiningObserversObserverIdRequestSchema,
-  authentication: { scopes: ["esi-industry.read_corporation_mining.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationCorporationIdMiningObserversObserverIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetCorporationsCorporationIdIndustryJobsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdIndustryJobsInput, GetCorporationsCorporationIdIndustryJobsOutput> = {
   operationId: "GetCorporationsCorporationIdIndustryJobs",
   method: "GET",
@@ -175,6 +114,67 @@ export const GetIndustryFacilitiesDescriptor: OperationExecutionDescriptor<GetIn
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetIndustryFacilitiesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationCorporationIdMiningObserversDescriptor: OperationExecutionDescriptor<GetCorporationCorporationIdMiningObserversInput, GetCorporationCorporationIdMiningObserversOutput> = {
+  operationId: "GetCorporationCorporationIdMiningObservers",
+  method: "GET",
+  path: "/corporation/{corporation_id}/mining/observers",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationCorporationIdMiningObserversRequestSchema,
+  authentication: { scopes: ["esi-industry.read_corporation_mining.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationCorporationIdMiningObserversStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationCorporationIdMiningExtractionsDescriptor: OperationExecutionDescriptor<GetCorporationCorporationIdMiningExtractionsInput, GetCorporationCorporationIdMiningExtractionsOutput> = {
+  operationId: "GetCorporationCorporationIdMiningExtractions",
+  method: "GET",
+  path: "/corporation/{corporation_id}/mining/extractions",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationCorporationIdMiningExtractionsRequestSchema,
+  authentication: { scopes: ["esi-industry.read_corporation_mining.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationCorporationIdMiningExtractionsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationCorporationIdMiningObserversObserverIdDescriptor: OperationExecutionDescriptor<GetCorporationCorporationIdMiningObserversObserverIdInput, GetCorporationCorporationIdMiningObserversObserverIdOutput> = {
+  operationId: "GetCorporationCorporationIdMiningObserversObserverId",
+  method: "GET",
+  path: "/corporation/{corporation_id}/mining/observers/{observer_id}",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "observer_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationCorporationIdMiningObserversObserverIdRequestSchema,
+  authentication: { scopes: ["esi-industry.read_corporation_mining.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationCorporationIdMiningObserversObserverIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

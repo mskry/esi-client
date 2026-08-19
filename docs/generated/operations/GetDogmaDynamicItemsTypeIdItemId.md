@@ -11,14 +11,27 @@ Get dynamic item information
 
 - Stable ID: `GetDogmaDynamicItemsTypeIdItemId`
 - HTTP: `GET /dogma/dynamic/items/{type_id}/{item_id}`
-- Domain method: `client.dogma.getDogmaDynamicItemsTypeIdItemId(typeId, itemId, options?)`
+- Domain method: `client.dogma.getDynamicItem(typeId, itemId, options?)`
 - Generic call: `client.callOperation("GetDogmaDynamicItemsTypeIdItemId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/dogma`
 - Domain index: [dogma](../domains/dogma.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createDogmaClient } from '@evespace/esi-client/domains/dogma';
+
+const client = createDogmaClient();
+
+const typeId = 34;
+const itemId = 1000000000001;
+
+const data = await client.getDynamicItem(typeId, itemId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -28,7 +41,7 @@ const client = new EsiClient();
 const typeId = 34;
 const itemId = 1000000000001;
 
-const data = await client.dogma.getDogmaDynamicItemsTypeIdItemId(typeId, itemId);
+const data = await client.dogma.getDynamicItem(typeId, itemId);
 ```
 
 ## Generic-execution snippet
@@ -61,7 +74,7 @@ const response = await client.callOperation('GetDogmaDynamicItemsTypeIdItemId', 
 
 - Request schema: `@evespace/esi-client/schemas` export `GetDogmaDynamicItemsTypeIdItemIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.dogma.withMetadata().getDogmaDynamicItemsTypeIdItemId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.dogma.withMetadata().getDynamicItem(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

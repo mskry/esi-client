@@ -17,7 +17,26 @@ import {
   type GetCharactersCharacterIdFittingsOutput,
   type PostCharactersCharacterIdFittingsInput,
   type PostCharactersCharacterIdFittingsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/fittings.js';
+
+export const PostCharactersCharacterIdFittingsDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdFittingsInput, PostCharactersCharacterIdFittingsOutput> = {
+  operationId: "PostCharactersCharacterIdFittings",
+  method: "POST",
+  path: "/characters/{character_id}/fittings",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: { required: true, mediaType: 'application/json' },
+  requestSchema: PostCharactersCharacterIdFittingsRequestSchema,
+  authentication: { scopes: ["esi-fittings.write_fittings.v1"] },
+  successResponses: [
+    { status: 201, body: 'json', schema: PostCharactersCharacterIdFittingsStatus201SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
 
 export const DeleteCharactersCharacterIdFittingsFittingIdDescriptor: OperationExecutionDescriptor<DeleteCharactersCharacterIdFittingsFittingIdInput, DeleteCharactersCharacterIdFittingsFittingIdOutput> = {
   operationId: "DeleteCharactersCharacterIdFittingsFittingId",
@@ -54,25 +73,6 @@ export const GetCharactersCharacterIdFittingsDescriptor: OperationExecutionDescr
   authentication: { scopes: ["esi-fittings.read_fittings.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersCharacterIdFittingsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const PostCharactersCharacterIdFittingsDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdFittingsInput, PostCharactersCharacterIdFittingsOutput> = {
-  operationId: "PostCharactersCharacterIdFittings",
-  method: "POST",
-  path: "/characters/{character_id}/fittings",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: { required: true, mediaType: 'application/json' },
-  requestSchema: PostCharactersCharacterIdFittingsRequestSchema,
-  authentication: { scopes: ["esi-fittings.write_fittings.v1"] },
-  successResponses: [
-    { status: 201, body: 'json', schema: PostCharactersCharacterIdFittingsStatus201SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

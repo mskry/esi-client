@@ -11,14 +11,33 @@ Respond to an event
 
 - Stable ID: `PutCharactersCharacterIdCalendarEventId`
 - HTTP: `PUT /characters/{character_id}/calendar/{event_id}`
-- Domain method: `client.calendar.putCharactersCharacterIdCalendarEventId(characterId, eventId, options)`
+- Domain method: `client.calendar.respondToEvent(characterId, eventId, options)`
 - Generic call: `client.callOperation("PutCharactersCharacterIdCalendarEventId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/calendar`
 - Domain index: [calendar](../domains/calendar.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCalendarClient } from '@evespace/esi-client/domains/calendar';
+import type { PutCharactersCharacterIdCalendarEventIdOptions } from '@evespace/esi-client/domains/calendar';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCalendarClient({ token: accessToken });
+
+const characterId = 90000001;
+const eventId = 12345;
+declare const requestBody: NonNullable<PutCharactersCharacterIdCalendarEventIdOptions['body']>;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.respondToEvent(characterId, eventId, { body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -34,7 +53,7 @@ const eventId = 12345;
 declare const requestBody: NonNullable<PutCharactersCharacterIdCalendarEventIdOptions['body']>;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.calendar.putCharactersCharacterIdCalendarEventId(characterId, eventId, { body: requestBody });
+const data = await client.calendar.respondToEvent(characterId, eventId, { body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -75,7 +94,7 @@ const response = await client.callOperation('PutCharactersCharacterIdCalendarEve
 
 - Request schema: `@evespace/esi-client/schemas` export `PutCharactersCharacterIdCalendarEventIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.calendar.withMetadata().putCharactersCharacterIdCalendarEventId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.calendar.withMetadata().respondToEvent(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

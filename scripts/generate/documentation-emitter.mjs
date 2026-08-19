@@ -25,8 +25,11 @@ const conceptPages = Object.freeze([
 ]);
 const safeSegmentPattern = /^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?$/u;
 
-export function renderGeneratedDocumentation(manifest, provenance) {
+export function renderGeneratedDocumentation(manifest, provenance, namingReviewReport) {
   validateManifest(manifest, provenance);
+  if (typeof namingReviewReport !== 'string' || namingReviewReport.length === 0) {
+    throw new TypeError('Generated naming review report must be a non-empty string');
+  }
   const operations = [...manifest.operations].toSorted((left, right) =>
     compareText(left.operationId, right.operationId),
   );
@@ -34,11 +37,22 @@ export function renderGeneratedDocumentation(manifest, provenance) {
   const generatedFiles = new Map();
   const snippets = renderOperationSnippets(manifest);
 
+  generatedFiles.set('facade-naming-review.md', namingReviewReport);
+
   for (const [slug, title] of conceptPages) {
     generatedFiles.set(`concepts/${slug}.md`, renderConceptPage(slug, title, provenance));
   }
   for (const domain of domains) {
-    generatedFiles.set(`domains/${domain.fileName}.md`, renderDomainPage(domain, provenance));
+    const firstOperation = domain.operations[0];
+    const domainSnippets =
+      firstOperation === undefined ? undefined : snippets.get(firstOperation.operationId);
+    if (domainSnippets === undefined) {
+      throw new Error(`Missing generated domain snippets: ${domain.domain}`);
+    }
+    generatedFiles.set(
+      `domains/${domain.fileName}.md`,
+      renderDomainPage(domain, domainSnippets, provenance),
+    );
   }
   for (const [path, content] of renderStandaloneExampleDocumentation(provenance)) {
     generatedFiles.set(path, content);
@@ -69,7 +83,11 @@ export async function emitGeneratedDocumentation(context) {
     context.operationMetadata,
     context.provenance,
   );
-  const rendered = renderGeneratedDocumentation(manifest, context.provenance);
+  const rendered = renderGeneratedDocumentation(
+    manifest,
+    context.provenance,
+    context.namingReviewReport,
+  );
   const generatedDirectory = context.outputPath(documentationTargets.generated);
   await mkdir(generatedDirectory, { recursive: true });
 
@@ -191,7 +209,7 @@ ${body}
   );
 }
 
-function renderDomainPage(domain, provenance) {
+function renderDomainPage(domain, snippets, provenance) {
   const rows = domain.operations
     .map((operation) => {
       const auth = operation.authentication.required ? 'required' : 'public';
@@ -209,6 +227,22 @@ function renderDomainPage(domain, provenance) {
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
 ${rows}
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+\`\`\`ts
+${snippets.standaloneDomainMethod.trim()}
+\`\`\`
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+\`\`\`ts
+${snippets.domainMethod.trim()}
+\`\`\`
 
 ## Shared concepts
 
@@ -242,7 +276,13 @@ ${markdownText(operation.summary ?? 'No summary is available for this operation.
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use \`path\`, \`query\`, \`header\`, and \`body\` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+\`\`\`ts
+${snippets.standaloneDomainMethod.trim()}
+\`\`\`
+
+## Aggregate EsiClient snippet
 
 \`\`\`ts
 ${snippets.domainMethod.trim()}

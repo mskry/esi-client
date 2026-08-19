@@ -3,72 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetCharactersCharacterIdLoyaltyPointsDescriptor,
-  GetLoyaltyStoresCorporationIdOffersDescriptor,
-} from '../internal/descriptors/loyalty.js';
-import type {
-  GetCharactersCharacterIdLoyaltyPointsInput,
-  GetCharactersCharacterIdLoyaltyPointsOutput,
-  GetLoyaltyStoresCorporationIdOffersInput,
-  GetLoyaltyStoresCorporationIdOffersOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindLoyaltyDomainClient } from '../internal/domains/loyalty.js';
+import type { LoyaltyDomainClient } from '../internal/domains/loyalty-contract.js';
 
-export interface GetCharactersCharacterIdLoyaltyPointsOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/loyalty-contract.js';
 
-export interface GetLoyaltyStoresCorporationIdOffersOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetLoyaltyStoresCorporationIdOffersInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetLoyaltyStoresCorporationIdOffersInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetLoyaltyStoresCorporationIdOffersInput["header"]>["X-Tenant"];
-}
-
-export class LoyaltyDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdLoyaltyPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<GetCharactersCharacterIdLoyaltyPointsOutput> {
-    const arguments_: GetCharactersCharacterIdLoyaltyPointsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdLoyaltyPointsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getLoyaltyStoresCorporationIdOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<GetLoyaltyStoresCorporationIdOffersOutput> {
-    const arguments_: GetLoyaltyStoresCorporationIdOffersInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetLoyaltyStoresCorporationIdOffersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): LoyaltyDomainClientWithMetadata {
-    return new LoyaltyDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class LoyaltyDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdLoyaltyPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<EsiResponse<GetCharactersCharacterIdLoyaltyPointsOutput>> {
-    const arguments_: GetCharactersCharacterIdLoyaltyPointsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdLoyaltyPointsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getLoyaltyStoresCorporationIdOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<EsiResponse<GetLoyaltyStoresCorporationIdOffersOutput>> {
-    const arguments_: GetLoyaltyStoresCorporationIdOffersInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetLoyaltyStoresCorporationIdOffersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createLoyaltyClient(options: EsiClientOptions = {}): LoyaltyDomainClient {
+  return bindLoyaltyDomainClient(new EsiClientConfiguration(options));
 }

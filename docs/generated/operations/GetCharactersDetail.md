@@ -11,14 +11,26 @@ Get character's public information
 
 - Stable ID: `GetCharactersDetail`
 - HTTP: `GET /characters/{character_id}`
-- Domain method: `client.character.getCharactersDetail(characterId, options?)`
+- Domain method: `client.character.getPublicInfo(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersDetail", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/character`
 - Domain index: [character](../domains/character.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCharacterClient } from '@evespace/esi-client/domains/character';
+
+const client = createCharacterClient();
+
+const characterId = 90000001;
+
+const data = await client.getPublicInfo(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const characterId = 90000001;
 
-const data = await client.character.getCharactersDetail(characterId);
+const data = await client.character.getPublicInfo(characterId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetCharactersDetail', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersDetailRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.character.withMetadata().getCharactersDetail(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.character.withMetadata().getPublicInfo(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

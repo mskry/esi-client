@@ -213,7 +213,7 @@ describe('generic operation execution', () => {
     const client = new EsiClient({ fetch, token: 'typed-mutation-token' });
 
     await expect(
-      client.contacts.postCharactersCharacterIdContacts(2_112_625_428, {
+      client.contacts.addCharacterContacts(2_112_625_428, {
         body: [2_112_625_429],
         standing: 5,
       }),

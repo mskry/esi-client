@@ -13,10 +13,44 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdPlanets`](../operations/GetCharactersCharacterIdPlanets.md) | `GET` | `getCharactersCharacterIdPlanets` | required | none | read | Get colonies |
-| [`GetCharactersCharacterIdPlanetsPlanetId`](../operations/GetCharactersCharacterIdPlanetsPlanetId.md) | `GET` | `getCharactersCharacterIdPlanetsPlanetId` | required | none | read | Get colony layout |
-| [`GetCorporationsCorporationIdCustomsOffices`](../operations/GetCorporationsCorporationIdCustomsOffices.md) | `GET` | `getCorporationsCorporationIdCustomsOffices` | required | offset | read | List corporation customs offices |
-| [`GetUniverseSchematicsSchematicId`](../operations/GetUniverseSchematicsSchematicId.md) | `GET` | `getUniverseSchematicsSchematicId` | public | none | read | Get schematic information |
+| [`GetCharactersCharacterIdPlanets`](../operations/GetCharactersCharacterIdPlanets.md) | `GET` | `listColonies` | required | none | read | Get colonies |
+| [`GetCharactersCharacterIdPlanetsPlanetId`](../operations/GetCharactersCharacterIdPlanetsPlanetId.md) | `GET` | `getColonyLayout` | required | none | read | Get colony layout |
+| [`GetCorporationsCorporationIdCustomsOffices`](../operations/GetCorporationsCorporationIdCustomsOffices.md) | `GET` | `listCustomsOffices` | required | offset | read | List corporation customs offices |
+| [`GetUniverseSchematicsSchematicId`](../operations/GetUniverseSchematicsSchematicId.md) | `GET` | `getSchematic` | public | none | read | Get schematic information |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createPlanetaryInteractionClient } from '@evespace/esi-client/domains/planetary-interaction';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createPlanetaryInteractionClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listColonies(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.planetaryInteraction.listColonies(characterId);
+```
 
 ## Shared concepts
 

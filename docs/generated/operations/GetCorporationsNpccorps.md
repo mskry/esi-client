@@ -11,21 +11,31 @@ Get npc corporations
 
 - Stable ID: `GetCorporationsNpccorps`
 - HTTP: `GET /corporations/npccorps`
-- Domain method: `client.corporation.getCorporationsNpccorps(options?)`
+- Domain method: `client.corporation.listNpcCorporations(options?)`
 - Generic call: `client.callOperation("GetCorporationsNpccorps", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/corporation`
 - Domain index: [corporation](../domains/corporation.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCorporationClient } from '@evespace/esi-client/domains/corporation';
+
+const client = createCorporationClient();
+
+const data = await client.listNpcCorporations();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.corporation.getCorporationsNpccorps();
+const data = await client.corporation.listNpcCorporations();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetCorporationsNpccorps', arguments
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsNpccorpsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.corporation.withMetadata().getCorporationsNpccorps(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.corporation.withMetadata().listNpcCorporations(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

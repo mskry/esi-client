@@ -13,11 +13,43 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`PostUiAutopilotWaypoint`](../operations/PostUiAutopilotWaypoint.md) | `POST` | `postUiAutopilotWaypoint` | required | none | mutation | Set Autopilot Waypoint |
-| [`PostUiOpenwindowContract`](../operations/PostUiOpenwindowContract.md) | `POST` | `postUiOpenwindowContract` | required | none | mutation | Open Contract Window |
-| [`PostUiOpenwindowInformation`](../operations/PostUiOpenwindowInformation.md) | `POST` | `postUiOpenwindowInformation` | required | none | mutation | Open Information Window |
-| [`PostUiOpenwindowMarketdetails`](../operations/PostUiOpenwindowMarketdetails.md) | `POST` | `postUiOpenwindowMarketdetails` | required | none | mutation | Open Market Details |
-| [`PostUiOpenwindowNewmail`](../operations/PostUiOpenwindowNewmail.md) | `POST` | `postUiOpenwindowNewmail` | required | none | mutation | Open New Mail Window |
+| [`PostUiAutopilotWaypoint`](../operations/PostUiAutopilotWaypoint.md) | `POST` | `setAutopilotWaypoint` | required | none | mutation | Set Autopilot Waypoint |
+| [`PostUiOpenwindowContract`](../operations/PostUiOpenwindowContract.md) | `POST` | `openContract` | required | none | mutation | Open Contract Window |
+| [`PostUiOpenwindowInformation`](../operations/PostUiOpenwindowInformation.md) | `POST` | `openInformation` | required | none | mutation | Open Information Window |
+| [`PostUiOpenwindowMarketdetails`](../operations/PostUiOpenwindowMarketdetails.md) | `POST` | `openMarketDetails` | required | none | mutation | Open Market Details |
+| [`PostUiOpenwindowNewmail`](../operations/PostUiOpenwindowNewmail.md) | `POST` | `openNewMail` | required | none | mutation | Open New Mail Window |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createUserInterfaceClient } from '@evespace/esi-client/domains/user-interface';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createUserInterfaceClient({ token: accessToken });
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.setAutopilotWaypoint({ addToBeginning: true, clearOtherWaypoints: true, destinationId: 12345 });
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.userInterface.setAutopilotWaypoint({ addToBeginning: true, clearOtherWaypoints: true, destinationId: 12345 });
+```
 
 ## Shared concepts
 

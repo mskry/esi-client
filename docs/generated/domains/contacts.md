@@ -13,15 +13,51 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`DeleteCharactersCharacterIdContacts`](../operations/DeleteCharactersCharacterIdContacts.md) | `DELETE` | `deleteCharactersCharacterIdContacts` | required | none | mutation | Delete contacts |
-| [`GetAlliancesAllianceIdContacts`](../operations/GetAlliancesAllianceIdContacts.md) | `GET` | `getAlliancesAllianceIdContacts` | required | offset | read | Get alliance contacts |
-| [`GetAlliancesAllianceIdContactsLabels`](../operations/GetAlliancesAllianceIdContactsLabels.md) | `GET` | `getAlliancesAllianceIdContactsLabels` | required | none | read | Get alliance contact labels |
-| [`GetCharactersCharacterIdContacts`](../operations/GetCharactersCharacterIdContacts.md) | `GET` | `getCharactersCharacterIdContacts` | required | offset | read | Get contacts |
-| [`GetCharactersCharacterIdContactsLabels`](../operations/GetCharactersCharacterIdContactsLabels.md) | `GET` | `getCharactersCharacterIdContactsLabels` | required | none | read | Get contact labels |
-| [`GetCorporationsCorporationIdContacts`](../operations/GetCorporationsCorporationIdContacts.md) | `GET` | `getCorporationsCorporationIdContacts` | required | offset | read | Get corporation contacts |
-| [`GetCorporationsCorporationIdContactsLabels`](../operations/GetCorporationsCorporationIdContactsLabels.md) | `GET` | `getCorporationsCorporationIdContactsLabels` | required | none | read | Get corporation contact labels |
-| [`PostCharactersCharacterIdContacts`](../operations/PostCharactersCharacterIdContacts.md) | `POST` | `postCharactersCharacterIdContacts` | required | none | mutation | Add contacts |
-| [`PutCharactersCharacterIdContacts`](../operations/PutCharactersCharacterIdContacts.md) | `PUT` | `putCharactersCharacterIdContacts` | required | none | mutation | Edit contacts |
+| [`DeleteCharactersCharacterIdContacts`](../operations/DeleteCharactersCharacterIdContacts.md) | `DELETE` | `deleteCharacterContacts` | required | none | mutation | Delete contacts |
+| [`GetAlliancesAllianceIdContacts`](../operations/GetAlliancesAllianceIdContacts.md) | `GET` | `listAllianceContacts` | required | offset | read | Get alliance contacts |
+| [`GetAlliancesAllianceIdContactsLabels`](../operations/GetAlliancesAllianceIdContactsLabels.md) | `GET` | `listAllianceContactLabels` | required | none | read | Get alliance contact labels |
+| [`GetCharactersCharacterIdContacts`](../operations/GetCharactersCharacterIdContacts.md) | `GET` | `listCharacterContacts` | required | offset | read | Get contacts |
+| [`GetCharactersCharacterIdContactsLabels`](../operations/GetCharactersCharacterIdContactsLabels.md) | `GET` | `listCharacterContactLabels` | required | none | read | Get contact labels |
+| [`GetCorporationsCorporationIdContacts`](../operations/GetCorporationsCorporationIdContacts.md) | `GET` | `listCorporationContacts` | required | offset | read | Get corporation contacts |
+| [`GetCorporationsCorporationIdContactsLabels`](../operations/GetCorporationsCorporationIdContactsLabels.md) | `GET` | `listCorporationContactLabels` | required | none | read | Get corporation contact labels |
+| [`PostCharactersCharacterIdContacts`](../operations/PostCharactersCharacterIdContacts.md) | `POST` | `addCharacterContacts` | required | none | mutation | Add contacts |
+| [`PutCharactersCharacterIdContacts`](../operations/PutCharactersCharacterIdContacts.md) | `PUT` | `updateCharacterContacts` | required | none | mutation | Edit contacts |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createContactsClient } from '@evespace/esi-client/domains/contacts';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createContactsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.deleteCharacterContacts(characterId, { contactIds: [12345] });
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.contacts.deleteCharacterContacts(characterId, { contactIds: [12345] });
+```
 
 ## Shared concepts
 

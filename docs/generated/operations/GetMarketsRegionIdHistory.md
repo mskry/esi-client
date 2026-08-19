@@ -11,14 +11,26 @@ List historical market statistics in a region
 
 - Stable ID: `GetMarketsRegionIdHistory`
 - HTTP: `GET /markets/{region_id}/history`
-- Domain method: `client.market.getMarketsRegionIdHistory(regionId, options)`
+- Domain method: `client.market.listRegionHistory(regionId, options)`
 - Generic call: `client.callOperation("GetMarketsRegionIdHistory", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/market`
 - Domain index: [market](../domains/market.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMarketClient } from '@evespace/esi-client/domains/market';
+
+const client = createMarketClient();
+
+const regionId = 10000002;
+
+const data = await client.listRegionHistory(regionId, { typeId: 34 });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const regionId = 10000002;
 
-const data = await client.market.getMarketsRegionIdHistory(regionId, { typeId: 34 });
+const data = await client.market.listRegionHistory(regionId, { typeId: 34 });
 ```
 
 ## Generic-execution snippet
@@ -59,7 +71,7 @@ const response = await client.callOperation('GetMarketsRegionIdHistory', argumen
 
 - Request schema: `@evespace/esi-client/schemas` export `GetMarketsRegionIdHistoryRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.market.withMetadata().getMarketsRegionIdHistory(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.market.withMetadata().listRegionHistory(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

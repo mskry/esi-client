@@ -29,23 +29,23 @@ import {
   type GetFreelanceJobsDetailOutput,
   type GetFreelanceJobsListingInput,
   type GetFreelanceJobsListingOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/freelance-jobs.js';
 
-export const GetCharactersFreelanceJobsListingDescriptor: OperationExecutionDescriptor<GetCharactersFreelanceJobsListingInput, GetCharactersFreelanceJobsListingOutput> = {
-  operationId: "GetCharactersFreelanceJobsListing",
+export const GetFreelanceJobsDetailDescriptor: OperationExecutionDescriptor<GetFreelanceJobsDetailInput, GetFreelanceJobsDetailOutput> = {
+  operationId: "GetFreelanceJobsDetail",
   method: "GET",
-  path: "/characters/{character_id}/freelance-jobs",
+  path: "/freelance-jobs/{job_id}",
   parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "job_id", placement: "path", required: true, schema: { type: "string" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCharactersFreelanceJobsListingRequestSchema,
-  authentication: { scopes: ["esi-characters.read_freelance_jobs.v1"] },
+  requestSchema: GetFreelanceJobsDetailRequestSchema,
+  authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersFreelanceJobsListingStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetFreelanceJobsDetailStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -66,6 +66,25 @@ export const GetCharactersFreelanceJobsParticipationDescriptor: OperationExecuti
   authentication: { scopes: ["esi-characters.read_freelance_jobs.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersFreelanceJobsParticipationStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersFreelanceJobsListingDescriptor: OperationExecutionDescriptor<GetCharactersFreelanceJobsListingInput, GetCharactersFreelanceJobsListingOutput> = {
+  operationId: "GetCharactersFreelanceJobsListing",
+  method: "GET",
+  path: "/characters/{character_id}/freelance-jobs",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersFreelanceJobsListingRequestSchema,
+  authentication: { scopes: ["esi-characters.read_freelance_jobs.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersFreelanceJobsListingStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -111,25 +130,6 @@ export const GetCorporationsFreelanceJobsParticipantsDescriptor: OperationExecut
   authentication: { scopes: ["esi-corporations.read_freelance_jobs.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsFreelanceJobsParticipantsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetFreelanceJobsDetailDescriptor: OperationExecutionDescriptor<GetFreelanceJobsDetailInput, GetFreelanceJobsDetailOutput> = {
-  operationId: "GetFreelanceJobsDetail",
-  method: "GET",
-  path: "/freelance-jobs/{job_id}",
-  parameters: [
-    { name: "job_id", placement: "path", required: true, schema: { type: "string" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetFreelanceJobsDetailRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetFreelanceJobsDetailStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

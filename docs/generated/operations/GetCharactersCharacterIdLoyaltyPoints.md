@@ -11,14 +11,29 @@ Get loyalty points
 
 - Stable ID: `GetCharactersCharacterIdLoyaltyPoints`
 - HTTP: `GET /characters/{character_id}/loyalty/points`
-- Domain method: `client.loyalty.getCharactersCharacterIdLoyaltyPoints(characterId, options?)`
+- Domain method: `client.loyalty.listPoints(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdLoyaltyPoints", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/loyalty`
 - Domain index: [loyalty](../domains/loyalty.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createLoyaltyClient } from '@evespace/esi-client/domains/loyalty';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createLoyaltyClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listPoints(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.loyalty.getCharactersCharacterIdLoyaltyPoints(characterId);
+const data = await client.loyalty.listPoints(characterId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCharactersCharacterIdLoyaltyPoin
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdLoyaltyPointsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.loyalty.withMetadata().getCharactersCharacterIdLoyaltyPoints(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.loyalty.withMetadata().listPoints(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

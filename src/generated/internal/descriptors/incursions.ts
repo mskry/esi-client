@@ -9,7 +9,7 @@ import {
   GetIncursionsStatus200SuccessResponseSchema,
   type GetIncursionsInput,
   type GetIncursionsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/incursions.js';
 
 export const GetIncursionsDescriptor: OperationExecutionDescriptor<GetIncursionsInput, GetIncursionsOutput> = {
   operationId: "GetIncursions",

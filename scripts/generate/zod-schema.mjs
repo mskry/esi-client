@@ -76,6 +76,148 @@ export function renderZodSchemaModule(models, provenance) {
   return renderZodModelSchemaModule(models, provenance);
 }
 
+export function createSchemaDependencyModel(models, operations, operationMetadata = []) {
+  if (!Array.isArray(models)) throw new TypeError('Normalized models must be an array');
+  if (!Array.isArray(operations)) throw new TypeError('Normalized operations must be an array');
+  if (!Array.isArray(operationMetadata)) {
+    throw new TypeError('Resolved operation metadata must be an array');
+  }
+
+  const { modelsByName, modelsByPointer } = indexModels(models);
+  const directByName = new Map();
+  for (const model of modelsByName.values()) {
+    directByName.set(
+      model.name,
+      resolveSchemaReferences(model.schema, model.pointer, modelsByPointer).map(
+        ({ model: dependency }) => dependency.name,
+      ),
+    );
+  }
+
+  const closures = new Map();
+  const active = [];
+  function modelClosure(name) {
+    const existing = closures.get(name);
+    if (existing !== undefined) return existing;
+    const cycleStart = active.indexOf(name);
+    if (cycleStart >= 0) {
+      throw new ZodSchemaEmissionError(
+        `Recursive component references are unsupported: ${[...active.slice(cycleStart), name].join(' -> ')}`,
+        modelsByName.get(name)?.pointer ?? '#/components/schemas',
+      );
+    }
+    active.push(name);
+    const closure = new Set();
+    for (const dependency of directByName.get(name) ?? []) {
+      closure.add(dependency);
+      for (const transitive of modelClosure(dependency)) closure.add(transitive);
+    }
+    active.pop();
+    const result = [...closure].toSorted(compareText);
+    closures.set(name, result);
+    return result;
+  }
+
+  const modelEntries = [...modelsByName.values()]
+    .toSorted((left, right) => compareText(left.name, right.name))
+    .map((model) => ({
+      dependencies: Object.freeze(modelClosure(model.name)),
+      directDependencies: Object.freeze(
+        [...(directByName.get(model.name) ?? [])].toSorted(compareText),
+      ),
+      fileName: schemaFileName(model.name),
+      model,
+    }));
+  assertUniqueFileNames(modelEntries, 'model');
+
+  const metadataById = new Map();
+  for (const metadata of operationMetadata) {
+    if (
+      !isObject(metadata) ||
+      typeof metadata.operationId !== 'string' ||
+      typeof metadata.domain !== 'string'
+    ) {
+      throw new TypeError('Resolved operation metadata entry is invalid');
+    }
+    if (metadataById.has(metadata.operationId)) {
+      throw new Error(`Duplicate resolved operation metadata: ${metadata.operationId}`);
+    }
+    metadataById.set(metadata.operationId, metadata);
+  }
+
+  const operationNames = new Map();
+  const operationEntries = operations
+    .map((operation, index) => {
+      if (!isObject(operation) || typeof operation.operationId !== 'string') {
+        throw new ZodSchemaEmissionError(
+          'Operation must contain an operation ID',
+          `operations/${index}`,
+        );
+      }
+      const schemaName = operationSchemaName(operation.operationId);
+      const previous = operationNames.get(schemaName);
+      if (previous !== undefined) {
+        throw new ZodSchemaEmissionError(
+          `Operation schema name collision ${schemaName}: ${previous} and ${operation.operationId}`,
+          `operations/${index}`,
+        );
+      }
+      operationNames.set(schemaName, operation.operationId);
+      const direct = resolveOperationReferences(operation, modelsByPointer);
+      const dependencies = new Set();
+      for (const dependency of direct) {
+        dependencies.add(dependency.name);
+        for (const transitive of modelClosure(dependency.name)) dependencies.add(transitive);
+      }
+      const metadata = metadataById.get(operation.operationId);
+      if (operationMetadata.length > 0 && metadata === undefined) {
+        throw new Error(`Missing resolved operation metadata: ${operation.operationId}`);
+      }
+      return {
+        dependencies: Object.freeze([...dependencies].toSorted(compareText)),
+        directDependencies: Object.freeze(direct.map(({ name }) => name).toSorted(compareText)),
+        domain: metadata?.domain ?? null,
+        operation,
+      };
+    })
+    .toSorted((left, right) =>
+      compareText(left.operation.operationId, right.operation.operationId),
+    );
+  if (operationMetadata.length > 0 && metadataById.size !== operationEntries.length) {
+    const operationIds = new Set(operationEntries.map(({ operation }) => operation.operationId));
+    const stale = [...metadataById.keys()].filter((operationId) => !operationIds.has(operationId));
+    throw new Error(`Stale resolved operation metadata: ${stale.toSorted(compareText).join(', ')}`);
+  }
+
+  const domainsByName = new Map();
+  for (const entry of operationEntries) {
+    if (entry.domain === null) continue;
+    const domain = domainsByName.get(entry.domain) ?? { dependencies: new Set(), operations: [] };
+    domain.operations.push(entry.operation);
+    for (const dependency of entry.dependencies) domain.dependencies.add(dependency);
+    domainsByName.set(entry.domain, domain);
+  }
+  const domains = [...domainsByName]
+    .toSorted(([left], [right]) => compareText(left, right))
+    .map(([domain, entry]) => ({
+      dependencies: Object.freeze([...entry.dependencies].toSorted(compareText)),
+      domain,
+      fileName: schemaFileName(domain),
+      operations: Object.freeze(
+        entry.operations.toSorted((left, right) =>
+          compareText(left.operationId, right.operationId),
+        ),
+      ),
+    }));
+  assertUniqueFileNames(domains, 'operation schema domain');
+
+  return Object.freeze({
+    domains: Object.freeze(domains),
+    models: Object.freeze(modelEntries),
+    operations: Object.freeze(operationEntries),
+  });
+}
+
 export function renderZodModelSchemaModule(models, provenance) {
   if (!Array.isArray(models)) throw new TypeError('Normalized models must be an array');
 
@@ -140,18 +282,75 @@ type ${model.name}OutputAssertion = Assert<IsExact<${model.name}, ${model.name}S
   return `${createProvenanceHeader(provenance, 'typescript')}\n${body}\n`;
 }
 
-export function renderZodOperationSchemaModule(operations, models, provenance) {
+export function renderZodModelDependencyModule(model, models, provenance) {
+  if (!isObject(model)) throw new TypeError('Normalized model must be an object');
+  const dependencyModel = createSchemaDependencyModel(models, [], []);
+  const entry = dependencyModel.models.find(
+    (candidate) => candidate.model.pointer === model.pointer,
+  );
+  if (entry === undefined) throw new Error(`Unknown normalized model: ${String(model.name)}`);
+  const { modelsByPointer } = indexModels(models);
+  const references = Object.fromEntries(
+    [...modelsByPointer].map(([pointer, candidate]) => [pointer, `${candidate.name}Schema`]),
+  );
+  const typeReferences = Object.fromEntries(
+    [...modelsByPointer].map(([pointer, candidate]) => [
+      pointer,
+      { input: `${candidate.name}Input`, output: candidate.name },
+    ]),
+  );
+  const state = { helpers: new Set(), references: normalizeReferenceNames(references, '#') };
+  const typeState = { references: normalizeTypeReferenceNames(typeReferences, '#') };
+  const expression = emitSchema(model.schema, model.pointer, state);
+  const input = emitSchemaType(model.schema, model.pointer, typeState, 'input');
+  const output = emitSchemaType(model.schema, model.pointer, typeState, 'output');
+  const imports = entry.directDependencies.map((name) => {
+    const dependency = dependencyModel.models.find((candidate) => candidate.model.name === name);
+    if (dependency === undefined) throw new Error(`Unresolved model dependency: ${name}`);
+    return `import {\n  ${name}Schema,\n  type ${name},\n  type ${name}Input,\n} from './${dependency.fileName}.js';`;
+  });
+  const helperSource = state.helpers.has('unique-array') ? renderUniqueArrayHelper() : '';
+  const body = [
+    "import { z } from 'zod';",
+    ...imports,
+    renderTypeAssertionHelpers(),
+    helperSource,
+    `type ${model.name}SchemaInput = ${input};
+type ${model.name}SchemaOutput = ${output};
+
+export const ${model.name}Schema: z.ZodType<${model.name}SchemaOutput, ${model.name}SchemaInput> = ${expression};
+export type ${model.name}Input = z.input<typeof ${model.name}Schema>;
+export type ${model.name} = z.output<typeof ${model.name}Schema>;
+
+type ${model.name}InputAssertion = Assert<IsExact<${model.name}Input, ${model.name}SchemaInput>>;
+type ${model.name}OutputAssertion = Assert<IsExact<${model.name}, ${model.name}SchemaOutput>>;`,
+  ]
+    .filter((section) => section.length > 0)
+    .join('\n\n');
+  return `${createProvenanceHeader(provenance, 'typescript')}\n${body}\n`;
+}
+
+export function renderZodOperationSchemaModule(
+  operations,
+  models,
+  provenance,
+  modelModulePrefix = './models',
+) {
   if (!Array.isArray(operations)) throw new TypeError('Normalized operations must be an array');
   if (!Array.isArray(models)) throw new TypeError('Normalized models must be an array');
 
   const { modelsByPointer } = indexModels(models);
+  const usedModels = resolveOperationsModelClosure(operations, models);
+  const usedPointers = new Set(usedModels.map(({ pointer }) => pointer));
   const references = Object.fromEntries(
     [...modelsByPointer]
+      .filter(([pointer]) => usedPointers.has(pointer))
       .toSorted(([left], [right]) => compareText(left, right))
       .map(([pointer, model]) => [pointer, `${model.name}Schema`]),
   );
   const typeReferences = Object.fromEntries(
     [...modelsByPointer]
+      .filter(([pointer]) => usedPointers.has(pointer))
       .toSorted(([left], [right]) => compareText(left, right))
       .map(([pointer, model]) => [pointer, { input: `${model.name}Input`, output: model.name }]),
   );
@@ -205,19 +404,24 @@ type ${name}InputAssertion = Assert<IsExact<${name}Input, ${name}RequestSchemaIn
 type ${name}OutputAssertion = Assert<IsExact<${name}Output, ${name}SuccessResponseSchemaOutput>>;`);
   }
 
-  const imports = [...modelsByPointer.values()]
-    .map(({ name }) => `${name}Schema`)
-    .toSorted(compareText);
+  const imports = usedModels.map(({ name }) => `${name}Schema`).toSorted(compareText);
   const modelImport =
     imports.length === 0
       ? ''
-      : `import {\n${imports
-          .flatMap((name) => [
-            `  ${name},`,
-            `  type ${name.slice(0, -'Schema'.length)},`,
-            `  type ${name.slice(0, -'Schema'.length)}Input,`,
-          ])
-          .join('\n')}\n} from './models.js';`;
+      : modelModulePrefix.endsWith('/')
+        ? imports
+            .map((name) => {
+              const typeName = name.slice(0, -'Schema'.length);
+              return `import {\n  ${name},\n  type ${typeName},\n  type ${typeName}Input,\n} from '${modelModulePrefix}${schemaFileName(typeName)}.js';`;
+            })
+            .join('\n')
+        : `import {\n${imports
+            .flatMap((name) => [
+              `  ${name},`,
+              `  type ${name.slice(0, -'Schema'.length)},`,
+              `  type ${name.slice(0, -'Schema'.length)}Input,`,
+            ])
+            .join('\n')}\n} from '${modelModulePrefix}.js';`;
   const helperSource = state.helpers.has('unique-array') ? renderUniqueArrayHelper() : '';
   const body = [
     "import { z } from 'zod';",
@@ -331,17 +535,29 @@ export async function emitZodSchemaSource(context, sourceDirectory) {
     throw new TypeError('Zod schema source directory must be a non-empty string');
   }
   const schemaDirectory = join(sourceDirectory, 'schemas');
-  await mkdir(schemaDirectory, { recursive: true });
+  const modelDirectory = join(schemaDirectory, 'models');
+  const operationDirectory = join(schemaDirectory, 'operations');
   await Promise.all([
+    mkdir(modelDirectory, { recursive: true }),
+    mkdir(operationDirectory, { recursive: true }),
+  ]);
+  const dependencyModel = createSchemaDependencyModel(
+    context.normalizedModel.models,
+    context.normalizedModel.operations,
+    context.operationMetadata,
+  );
+  const writes = [
     writeFile(
       join(schemaDirectory, 'models.ts'),
-      renderZodModelSchemaModule(context.normalizedModel.models, context.provenance),
+      renderGeneratedBarrel(
+        dependencyModel.models.map(({ fileName }) => `./models/${fileName}.js`),
+        context.provenance,
+      ),
     ),
     writeFile(
       join(schemaDirectory, 'operations.ts'),
-      renderZodOperationSchemaModule(
-        context.normalizedModel.operations,
-        context.normalizedModel.models,
+      renderGeneratedBarrel(
+        dependencyModel.domains.map(({ fileName }) => `./operations/${fileName}.js`),
         context.provenance,
       ),
     ),
@@ -360,8 +576,45 @@ export async function emitZodSchemaSource(context, sourceDirectory) {
         context.provenance,
       ),
     ),
-  ]);
-  return ['schemas/contracts.ts', 'schemas/index.ts', 'schemas/models.ts', 'schemas/operations.ts'];
+  ];
+  const outputs = [
+    'schemas/contracts.ts',
+    'schemas/index.ts',
+    'schemas/models.ts',
+    'schemas/operations.ts',
+  ];
+  for (const entry of dependencyModel.models) {
+    const path = `schemas/models/${entry.fileName}.ts`;
+    outputs.push(path);
+    writes.push(
+      writeFile(
+        join(sourceDirectory, path),
+        renderZodModelDependencyModule(
+          entry.model,
+          context.normalizedModel.models,
+          context.provenance,
+        ),
+      ),
+    );
+  }
+  for (const entry of dependencyModel.domains) {
+    const path = `schemas/operations/${entry.fileName}.ts`;
+    outputs.push(path);
+    writes.push(
+      writeFile(
+        join(sourceDirectory, path),
+        renderZodOperationSchemaModule(
+          entry.operations,
+          context.normalizedModel.models,
+          context.provenance,
+          '../models/',
+        ),
+      ),
+    );
+  }
+  validateGranularSchemaExports(dependencyModel);
+  await Promise.all(writes);
+  return outputs.toSorted(compareText);
 }
 
 export const zodSchemaSourceComponent = Object.freeze({
@@ -1229,6 +1482,114 @@ function collectReferences(schema, path, output) {
       collectReferences(value, joinPointer(path, keyword), output);
     }
   }
+}
+
+function resolveSchemaReferences(schema, path, modelsByPointer) {
+  const references = [];
+  collectReferences(schema, path, references);
+  const resolved = new Map();
+  for (const reference of references) {
+    const model = modelsByPointer.get(reference.reference);
+    if (model === undefined) {
+      throw new ZodSchemaEmissionError(
+        `Unresolved local component reference ${JSON.stringify(reference.reference)}`,
+        reference.path,
+      );
+    }
+    resolved.set(model.name, { model, path: reference.path });
+  }
+  return [...resolved.values()].toSorted((left, right) =>
+    compareText(left.model.name, right.model.name),
+  );
+}
+
+function resolveOperationReferences(operation, modelsByPointer) {
+  const schemas = [
+    ...operation.parameters.map(({ schema }) => schema),
+    ...(operation.requestBody?.content.map(({ schema }) => schema) ?? []),
+    ...operation.successResponses.flatMap(({ content }) => content.map(({ schema }) => schema)),
+  ];
+  const resolved = new Map();
+  for (const [index, schema] of schemas.entries()) {
+    for (const entry of resolveSchemaReferences(
+      schema,
+      `operations/${escapePointerSegment(operation.operationId)}/schemas/${index}`,
+      modelsByPointer,
+    )) {
+      resolved.set(entry.model.name, entry.model);
+    }
+  }
+  return [...resolved.values()].toSorted((left, right) => compareText(left.name, right.name));
+}
+
+function resolveOperationsModelClosure(operations, models) {
+  const dependencyModel = createSchemaDependencyModel(models, operations, []);
+  const names = new Set(dependencyModel.operations.flatMap(({ dependencies }) => dependencies));
+  return dependencyModel.models
+    .filter(({ model }) => names.has(model.name))
+    .map(({ model }) => model);
+}
+
+function validateGranularSchemaExports(dependencyModel) {
+  const modelExports = new Map();
+  for (const { model } of dependencyModel.models) {
+    for (const name of [`${model.name}Schema`, `${model.name}Input`, model.name]) {
+      const previous = modelExports.get(name);
+      if (previous !== undefined) throw new Error(`Duplicate granular model export ${name}`);
+      modelExports.set(name, model.name);
+    }
+  }
+  const operationExports = new Map();
+  for (const { operation } of dependencyModel.operations) {
+    const base = operationSchemaName(operation.operationId);
+    const names = [
+      `${base}RequestSchema`,
+      `${base}SuccessResponseSchema`,
+      `${base}SuccessResponseSchemasByStatus`,
+      `${base}Input`,
+      `${base}Output`,
+      ...operation.successResponses.map(({ status }) =>
+        operationStatusResponseSchemaName(operation.operationId, status),
+      ),
+    ];
+    for (const name of names) {
+      const previous = operationExports.get(name);
+      const model = modelExports.get(name);
+      if (model !== undefined) {
+        throw new Error(
+          `Duplicate granular schema export ${name}: model ${model} and operation ${operation.operationId}`,
+        );
+      }
+      if (previous !== undefined) {
+        throw new Error(
+          `Duplicate granular operation export ${name}: ${previous} and ${operation.operationId}`,
+        );
+      }
+      operationExports.set(name, operation.operationId);
+    }
+  }
+}
+
+function assertUniqueFileNames(entries, label) {
+  const names = new Map();
+  for (const entry of entries) {
+    const key = entry.fileName.toLowerCase();
+    const previous = names.get(key);
+    const name = entry.model?.name ?? entry.domain;
+    if (previous !== undefined) {
+      throw new Error(`Duplicate ${label} module file ${entry.fileName}: ${previous} and ${name}`);
+    }
+    names.set(key, name);
+  }
+}
+
+export function schemaFileName(value) {
+  return value
+    .replaceAll(/([a-z0-9])([A-Z])/gu, '$1-$2')
+    .replaceAll(/([A-Z]+)([A-Z][a-z])/gu, '$1-$2')
+    .replaceAll(/[^A-Za-z0-9]+/gu, '-')
+    .replaceAll(/^-|-$/gu, '')
+    .toLowerCase();
 }
 
 function topologicallyOrderModels(modelsByName, dependencies) {

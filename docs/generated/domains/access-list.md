@@ -13,8 +13,44 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersAccessListsDetail`](../operations/GetCharactersAccessListsDetail.md) | `GET` | `getCharactersAccessListsDetail` | required | none | read | Get Access List details |
-| [`GetCharactersAccessListsListing`](../operations/GetCharactersAccessListsListing.md) | `GET` | `getCharactersAccessListsListing` | required | none | read | List Access Lists |
+| [`GetCharactersAccessListsDetail`](../operations/GetCharactersAccessListsDetail.md) | `GET` | `get` | required | none | read | Get Access List details |
+| [`GetCharactersAccessListsListing`](../operations/GetCharactersAccessListsListing.md) | `GET` | `list` | required | none | read | List Access Lists |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createAccessListClient } from '@evespace/esi-client/domains/access-list';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createAccessListClient({ token: accessToken });
+
+const characterId = 90000001;
+const accessListId = 12345;
+
+const data = await client.get(characterId, accessListId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+const accessListId = 12345;
+
+const data = await client.accessList.get(characterId, accessListId);
+```
 
 ## Shared concepts
 

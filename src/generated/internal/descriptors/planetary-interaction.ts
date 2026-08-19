@@ -21,26 +21,7 @@ import {
   type GetCorporationsCorporationIdCustomsOfficesOutput,
   type GetUniverseSchematicsSchematicIdInput,
   type GetUniverseSchematicsSchematicIdOutput,
-} from '../../schemas/operations.js';
-
-export const GetCharactersCharacterIdPlanetsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdPlanetsInput, GetCharactersCharacterIdPlanetsOutput> = {
-  operationId: "GetCharactersCharacterIdPlanets",
-  method: "GET",
-  path: "/characters/{character_id}/planets",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdPlanetsRequestSchema,
-  authentication: { scopes: ["esi-planets.manage_planets.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdPlanetsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/planetary-interaction.js';
 
 export const GetCharactersCharacterIdPlanetsPlanetIdDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdPlanetsPlanetIdInput, GetCharactersCharacterIdPlanetsPlanetIdOutput> = {
   operationId: "GetCharactersCharacterIdPlanetsPlanetId",
@@ -62,6 +43,44 @@ export const GetCharactersCharacterIdPlanetsPlanetIdDescriptor: OperationExecuti
   transport: { compatibilityDateOverride: true },
 };
 
+export const GetUniverseSchematicsSchematicIdDescriptor: OperationExecutionDescriptor<GetUniverseSchematicsSchematicIdInput, GetUniverseSchematicsSchematicIdOutput> = {
+  operationId: "GetUniverseSchematicsSchematicId",
+  method: "GET",
+  path: "/universe/schematics/{schematic_id}",
+  parameters: [
+    { name: "schematic_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseSchematicsSchematicIdRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseSchematicsSchematicIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdPlanetsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdPlanetsInput, GetCharactersCharacterIdPlanetsOutput> = {
+  operationId: "GetCharactersCharacterIdPlanets",
+  method: "GET",
+  path: "/characters/{character_id}/planets",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdPlanetsRequestSchema,
+  authentication: { scopes: ["esi-planets.manage_planets.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdPlanetsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
 export const GetCorporationsCorporationIdCustomsOfficesDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdCustomsOfficesInput, GetCorporationsCorporationIdCustomsOfficesOutput> = {
   operationId: "GetCorporationsCorporationIdCustomsOffices",
   method: "GET",
@@ -78,25 +97,6 @@ export const GetCorporationsCorporationIdCustomsOfficesDescriptor: OperationExec
   authentication: { scopes: ["esi-planets.read_customs_offices.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsCorporationIdCustomsOfficesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseSchematicsSchematicIdDescriptor: OperationExecutionDescriptor<GetUniverseSchematicsSchematicIdInput, GetUniverseSchematicsSchematicIdOutput> = {
-  operationId: "GetUniverseSchematicsSchematicId",
-  method: "GET",
-  path: "/universe/schematics/{schematic_id}",
-  parameters: [
-    { name: "schematic_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseSchematicsSchematicIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseSchematicsSchematicIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

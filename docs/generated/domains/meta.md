@@ -13,10 +13,34 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetMetaChangelog`](../operations/GetMetaChangelog.md) | `GET` | `getMetaChangelog` | public | none | read | Get changelog |
-| [`GetMetaCompatibilityDates`](../operations/GetMetaCompatibilityDates.md) | `GET` | `getMetaCompatibilityDates` | public | none | read | Get compatibility dates |
-| [`GetMetaName`](../operations/GetMetaName.md) | `GET` | `getMetaName` | public | none | read | Get the name of ESI |
-| [`GetMetaStatus`](../operations/GetMetaStatus.md) | `GET` | `getMetaStatus` | public | none | read | Get health status |
+| [`GetMetaChangelog`](../operations/GetMetaChangelog.md) | `GET` | `getChangelog` | public | none | read | Get changelog |
+| [`GetMetaCompatibilityDates`](../operations/GetMetaCompatibilityDates.md) | `GET` | `listCompatibilityDates` | public | none | read | Get compatibility dates |
+| [`GetMetaName`](../operations/GetMetaName.md) | `GET` | `getName` | public | none | read | Get the name of ESI |
+| [`GetMetaStatus`](../operations/GetMetaStatus.md) | `GET` | `getHealthStatus` | public | none | read | Get health status |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createMetaClient } from '@evespace/esi-client/domains/meta';
+
+const client = createMetaClient();
+
+const data = await client.getChangelog();
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const data = await client.meta.getChangelog();
+```
 
 ## Shared concepts
 

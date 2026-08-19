@@ -278,12 +278,18 @@ function emitterContext(
     compatibilityDate: provenance.compatibilityDate,
     correctedDocument: {},
     normalizedModel,
+    namingReviewReport: 'test naming review\n',
     operationMetadata: [],
     outputDirectory,
     outputPath: (target) => join(outputDirectory, target),
     provenance: {
       ...provenance,
       appliedCorrections: [],
+      facadeCatalog: { path: 'openapi/config/naming-overrides.json', sha256: 'd'.repeat(64) },
+      facadeReviewReport: {
+        path: 'docs/generated/facade-naming-review.md',
+        sha256: 'e'.repeat(64),
+      },
       sourceSha256: 'e'.repeat(64),
       specificationUrl: 'https://example.test/openapi.json',
     },

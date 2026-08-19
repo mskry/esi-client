@@ -13,7 +13,7 @@ import {
   type GetCharactersAccessListsDetailOutput,
   type GetCharactersAccessListsListingInput,
   type GetCharactersAccessListsListingOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/access-list.js';
 
 export const GetCharactersAccessListsDetailDescriptor: OperationExecutionDescriptor<GetCharactersAccessListsDetailInput, GetCharactersAccessListsDetailOutput> = {
   operationId: "GetCharactersAccessListsDetail",

@@ -11,21 +11,31 @@ Get compatibility dates
 
 - Stable ID: `GetMetaCompatibilityDates`
 - HTTP: `GET /meta/compatibility-dates`
-- Domain method: `client.meta.getMetaCompatibilityDates(options?)`
+- Domain method: `client.meta.listCompatibilityDates(options?)`
 - Generic call: `client.callOperation("GetMetaCompatibilityDates", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/meta`
 - Domain index: [meta](../domains/meta.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMetaClient } from '@evespace/esi-client/domains/meta';
+
+const client = createMetaClient();
+
+const data = await client.listCompatibilityDates();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.meta.getMetaCompatibilityDates();
+const data = await client.meta.listCompatibilityDates();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetMetaCompatibilityDates', argumen
 
 - Request schema: `@evespace/esi-client/schemas` export `GetMetaCompatibilityDatesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.meta.withMetadata().getMetaCompatibilityDates(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.meta.withMetadata().listCompatibilityDates(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

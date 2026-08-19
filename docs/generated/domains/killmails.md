@@ -13,9 +13,43 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdKillmailsRecent`](../operations/GetCharactersCharacterIdKillmailsRecent.md) | `GET` | `getCharactersCharacterIdKillmailsRecent` | required | offset | read | Get a character's recent kills and losses |
-| [`GetCorporationsCorporationIdKillmailsRecent`](../operations/GetCorporationsCorporationIdKillmailsRecent.md) | `GET` | `getCorporationsCorporationIdKillmailsRecent` | required | offset | read | Get a corporation's recent kills and losses |
-| [`GetKillmailsKillmailIdKillmailHash`](../operations/GetKillmailsKillmailIdKillmailHash.md) | `GET` | `getKillmailsKillmailIdKillmailHash` | public | none | read | Get a single killmail |
+| [`GetCharactersCharacterIdKillmailsRecent`](../operations/GetCharactersCharacterIdKillmailsRecent.md) | `GET` | `listRecentForCharacter` | required | offset | read | Get a character's recent kills and losses |
+| [`GetCorporationsCorporationIdKillmailsRecent`](../operations/GetCorporationsCorporationIdKillmailsRecent.md) | `GET` | `listRecentForCorporation` | required | offset | read | Get a corporation's recent kills and losses |
+| [`GetKillmailsKillmailIdKillmailHash`](../operations/GetKillmailsKillmailIdKillmailHash.md) | `GET` | `get` | public | none | read | Get a single killmail |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createKillmailsClient } from '@evespace/esi-client/domains/killmails';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createKillmailsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listRecentForCharacter(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.killmails.listRecentForCharacter(characterId);
+```
 
 ## Shared concepts
 

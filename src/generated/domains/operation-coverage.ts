@@ -3,27 +3,24 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
+import type { EsiClientOptions } from '../../client/options.js';
 import type { EsiResponse } from '../../client/response.js';
 import type { GeneratedOperationSignatures } from '../schemas/contracts.js';
 import type {
-  DeleteCharactersCharacterIdContactsInput,
-  DeleteCharactersCharacterIdContactsOutput,
-  DeleteCharactersCharacterIdFittingsFittingIdInput,
-  DeleteCharactersCharacterIdFittingsFittingIdOutput,
-  DeleteCharactersCharacterIdMailLabelsLabelIdInput,
-  DeleteCharactersCharacterIdMailLabelsLabelIdOutput,
-  DeleteCharactersCharacterIdMailMailIdInput,
-  DeleteCharactersCharacterIdMailMailIdOutput,
-  DeleteFleetsFleetIdMembersMemberIdInput,
-  DeleteFleetsFleetIdMembersMemberIdOutput,
-  DeleteFleetsFleetIdSquadsSquadIdInput,
-  DeleteFleetsFleetIdSquadsSquadIdOutput,
-  DeleteFleetsFleetIdWingsWingIdInput,
-  DeleteFleetsFleetIdWingsWingIdOutput,
-  GetAlliancesAllianceIdContactsInput,
-  GetAlliancesAllianceIdContactsLabelsInput,
-  GetAlliancesAllianceIdContactsLabelsOutput,
-  GetAlliancesAllianceIdContactsOutput,
+  GetCharactersAccessListsDetailInput,
+  GetCharactersAccessListsDetailOutput,
+  GetCharactersAccessListsListingInput,
+  GetCharactersAccessListsListingOutput,
+} from '../schemas/operations/access-list.js';
+import type {
+  GetCharactersMercenaryTacticalOperationsDetailInput,
+  GetCharactersMercenaryTacticalOperationsDetailOutput,
+  GetCharactersMercenaryTacticalOperationsListingInput,
+  GetCharactersMercenaryTacticalOperationsListingOutput,
+  GetSkyhooksRaidableInput,
+  GetSkyhooksRaidableOutput,
+} from '../schemas/operations/activities.js';
+import type {
   GetAlliancesAllianceIdCorporationsInput,
   GetAlliancesAllianceIdCorporationsOutput,
   GetAlliancesAllianceIdIconsInput,
@@ -32,173 +29,121 @@ import type {
   GetAlliancesAllianceIdOutput,
   GetAlliancesInput,
   GetAlliancesOutput,
-  GetCharactersAccessListsDetailInput,
-  GetCharactersAccessListsDetailOutput,
-  GetCharactersAccessListsListingInput,
-  GetCharactersAccessListsListingOutput,
-  GetCharactersCharacterIdAgentsResearchInput,
-  GetCharactersCharacterIdAgentsResearchOutput,
+} from '../schemas/operations/alliance.js';
+import type {
   GetCharactersCharacterIdAssetsInput,
   GetCharactersCharacterIdAssetsOutput,
-  GetCharactersCharacterIdAttributesInput,
-  GetCharactersCharacterIdAttributesOutput,
-  GetCharactersCharacterIdBlueprintsInput,
-  GetCharactersCharacterIdBlueprintsOutput,
+  GetCorporationsCorporationIdAssetsInput,
+  GetCorporationsCorporationIdAssetsOutput,
+  PostCharactersCharacterIdAssetsLocationsInput,
+  PostCharactersCharacterIdAssetsLocationsOutput,
+  PostCharactersCharacterIdAssetsNamesInput,
+  PostCharactersCharacterIdAssetsNamesOutput,
+  PostCorporationsCorporationIdAssetsLocationsInput,
+  PostCorporationsCorporationIdAssetsLocationsOutput,
+  PostCorporationsCorporationIdAssetsNamesInput,
+  PostCorporationsCorporationIdAssetsNamesOutput,
+} from '../schemas/operations/assets.js';
+import type {
   GetCharactersCharacterIdCalendarEventIdAttendeesInput,
   GetCharactersCharacterIdCalendarEventIdAttendeesOutput,
   GetCharactersCharacterIdCalendarEventIdInput,
   GetCharactersCharacterIdCalendarEventIdOutput,
   GetCharactersCharacterIdCalendarInput,
   GetCharactersCharacterIdCalendarOutput,
+  PutCharactersCharacterIdCalendarEventIdInput,
+  PutCharactersCharacterIdCalendarEventIdOutput,
+} from '../schemas/operations/calendar.js';
+import type {
+  GetCharactersCharacterIdAgentsResearchInput,
+  GetCharactersCharacterIdAgentsResearchOutput,
+  GetCharactersCharacterIdBlueprintsInput,
+  GetCharactersCharacterIdBlueprintsOutput,
+  GetCharactersCharacterIdCorporationhistoryInput,
+  GetCharactersCharacterIdCorporationhistoryOutput,
+  GetCharactersCharacterIdFatigueInput,
+  GetCharactersCharacterIdFatigueOutput,
+  GetCharactersCharacterIdMedalsInput,
+  GetCharactersCharacterIdMedalsOutput,
+  GetCharactersCharacterIdNotificationsContactsInput,
+  GetCharactersCharacterIdNotificationsContactsOutput,
+  GetCharactersCharacterIdNotificationsInput,
+  GetCharactersCharacterIdNotificationsOutput,
+  GetCharactersCharacterIdPortraitInput,
+  GetCharactersCharacterIdPortraitOutput,
+  GetCharactersCharacterIdRolesInput,
+  GetCharactersCharacterIdRolesOutput,
+  GetCharactersCharacterIdStandingsInput,
+  GetCharactersCharacterIdStandingsOutput,
+  GetCharactersCharacterIdTitlesInput,
+  GetCharactersCharacterIdTitlesOutput,
+  GetCharactersDetailInput,
+  GetCharactersDetailOutput,
+  PostCharactersAffiliationInput,
+  PostCharactersAffiliationOutput,
+  PostCharactersCharacterIdCspaInput,
+  PostCharactersCharacterIdCspaOutput,
+} from '../schemas/operations/character.js';
+import type {
   GetCharactersCharacterIdClonesInput,
   GetCharactersCharacterIdClonesOutput,
+  GetCharactersCharacterIdImplantsInput,
+  GetCharactersCharacterIdImplantsOutput,
+} from '../schemas/operations/clones.js';
+import type {
+  DeleteCharactersCharacterIdContactsInput,
+  DeleteCharactersCharacterIdContactsOutput,
+  GetAlliancesAllianceIdContactsInput,
+  GetAlliancesAllianceIdContactsLabelsInput,
+  GetAlliancesAllianceIdContactsLabelsOutput,
+  GetAlliancesAllianceIdContactsOutput,
   GetCharactersCharacterIdContactsInput,
   GetCharactersCharacterIdContactsLabelsInput,
   GetCharactersCharacterIdContactsLabelsOutput,
   GetCharactersCharacterIdContactsOutput,
+  GetCorporationsCorporationIdContactsInput,
+  GetCorporationsCorporationIdContactsLabelsInput,
+  GetCorporationsCorporationIdContactsLabelsOutput,
+  GetCorporationsCorporationIdContactsOutput,
+  PostCharactersCharacterIdContactsInput,
+  PostCharactersCharacterIdContactsOutput,
+  PutCharactersCharacterIdContactsInput,
+  PutCharactersCharacterIdContactsOutput,
+} from '../schemas/operations/contacts.js';
+import type {
   GetCharactersCharacterIdContractsContractIdBidsInput,
   GetCharactersCharacterIdContractsContractIdBidsOutput,
   GetCharactersCharacterIdContractsContractIdItemsInput,
   GetCharactersCharacterIdContractsContractIdItemsOutput,
   GetCharactersCharacterIdContractsInput,
   GetCharactersCharacterIdContractsOutput,
-  GetCharactersCharacterIdCorporationhistoryInput,
-  GetCharactersCharacterIdCorporationhistoryOutput,
-  GetCharactersCharacterIdFatigueInput,
-  GetCharactersCharacterIdFatigueOutput,
-  GetCharactersCharacterIdFittingsInput,
-  GetCharactersCharacterIdFittingsOutput,
-  GetCharactersCharacterIdFleetInput,
-  GetCharactersCharacterIdFleetOutput,
-  GetCharactersCharacterIdFwStatsInput,
-  GetCharactersCharacterIdFwStatsOutput,
-  GetCharactersCharacterIdImplantsInput,
-  GetCharactersCharacterIdImplantsOutput,
-  GetCharactersCharacterIdIndustryJobsInput,
-  GetCharactersCharacterIdIndustryJobsOutput,
-  GetCharactersCharacterIdKillmailsRecentInput,
-  GetCharactersCharacterIdKillmailsRecentOutput,
-  GetCharactersCharacterIdLocationInput,
-  GetCharactersCharacterIdLocationOutput,
-  GetCharactersCharacterIdLoyaltyPointsInput,
-  GetCharactersCharacterIdLoyaltyPointsOutput,
-  GetCharactersCharacterIdMailInput,
-  GetCharactersCharacterIdMailLabelsInput,
-  GetCharactersCharacterIdMailLabelsOutput,
-  GetCharactersCharacterIdMailListsInput,
-  GetCharactersCharacterIdMailListsOutput,
-  GetCharactersCharacterIdMailMailIdInput,
-  GetCharactersCharacterIdMailMailIdOutput,
-  GetCharactersCharacterIdMailOutput,
-  GetCharactersCharacterIdMedalsInput,
-  GetCharactersCharacterIdMedalsOutput,
-  GetCharactersCharacterIdMiningInput,
-  GetCharactersCharacterIdMiningOutput,
-  GetCharactersCharacterIdNotificationsContactsInput,
-  GetCharactersCharacterIdNotificationsContactsOutput,
-  GetCharactersCharacterIdNotificationsInput,
-  GetCharactersCharacterIdNotificationsOutput,
-  GetCharactersCharacterIdOnlineInput,
-  GetCharactersCharacterIdOnlineOutput,
-  GetCharactersCharacterIdOrdersHistoryInput,
-  GetCharactersCharacterIdOrdersHistoryOutput,
-  GetCharactersCharacterIdOrdersInput,
-  GetCharactersCharacterIdOrdersOutput,
-  GetCharactersCharacterIdPlanetsInput,
-  GetCharactersCharacterIdPlanetsOutput,
-  GetCharactersCharacterIdPlanetsPlanetIdInput,
-  GetCharactersCharacterIdPlanetsPlanetIdOutput,
-  GetCharactersCharacterIdPortraitInput,
-  GetCharactersCharacterIdPortraitOutput,
-  GetCharactersCharacterIdRolesInput,
-  GetCharactersCharacterIdRolesOutput,
-  GetCharactersCharacterIdSearchInput,
-  GetCharactersCharacterIdSearchOutput,
-  GetCharactersCharacterIdShipInput,
-  GetCharactersCharacterIdShipOutput,
-  GetCharactersCharacterIdSkillqueueInput,
-  GetCharactersCharacterIdSkillqueueOutput,
-  GetCharactersCharacterIdSkillsInput,
-  GetCharactersCharacterIdSkillsOutput,
-  GetCharactersCharacterIdStandingsInput,
-  GetCharactersCharacterIdStandingsOutput,
-  GetCharactersCharacterIdTitlesInput,
-  GetCharactersCharacterIdTitlesOutput,
-  GetCharactersCharacterIdWalletInput,
-  GetCharactersCharacterIdWalletJournalInput,
-  GetCharactersCharacterIdWalletJournalOutput,
-  GetCharactersCharacterIdWalletOutput,
-  GetCharactersCharacterIdWalletTransactionsInput,
-  GetCharactersCharacterIdWalletTransactionsOutput,
-  GetCharactersCosmeticsSkinrComponentsInput,
-  GetCharactersCosmeticsSkinrComponentsOutput,
-  GetCharactersCosmeticsSkinrInput,
-  GetCharactersCosmeticsSkinrOutput,
-  GetCharactersDetailInput,
-  GetCharactersDetailOutput,
-  GetCharactersFreelanceJobsListingInput,
-  GetCharactersFreelanceJobsListingOutput,
-  GetCharactersFreelanceJobsParticipationInput,
-  GetCharactersFreelanceJobsParticipationOutput,
-  GetCharactersMercenaryTacticalOperationsDetailInput,
-  GetCharactersMercenaryTacticalOperationsDetailOutput,
-  GetCharactersMercenaryTacticalOperationsListingInput,
-  GetCharactersMercenaryTacticalOperationsListingOutput,
-  GetCharactersMilitaryCampaignsObjectivesListingInput,
-  GetCharactersMilitaryCampaignsObjectivesListingOutput,
-  GetCharactersMilitaryCampaignsObjectivesParticipationInput,
-  GetCharactersMilitaryCampaignsObjectivesParticipationOutput,
-  GetCharactersParagonHubSkinrInput,
-  GetCharactersParagonHubSkinrOutput,
-  GetCharactersStructuresMercenaryDensDetailInput,
-  GetCharactersStructuresMercenaryDensDetailOutput,
-  GetCharactersStructuresMercenaryDensListingInput,
-  GetCharactersStructuresMercenaryDensListingOutput,
   GetContractsPublicBidsContractIdInput,
   GetContractsPublicBidsContractIdOutput,
   GetContractsPublicItemsContractIdInput,
   GetContractsPublicItemsContractIdOutput,
   GetContractsPublicRegionIdInput,
   GetContractsPublicRegionIdOutput,
-  GetCorporationCorporationIdMiningExtractionsInput,
-  GetCorporationCorporationIdMiningExtractionsOutput,
-  GetCorporationCorporationIdMiningObserversInput,
-  GetCorporationCorporationIdMiningObserversObserverIdInput,
-  GetCorporationCorporationIdMiningObserversObserverIdOutput,
-  GetCorporationCorporationIdMiningObserversOutput,
-  GetCorporationsCorporationIdAlliancehistoryInput,
-  GetCorporationsCorporationIdAlliancehistoryOutput,
-  GetCorporationsCorporationIdAssetsInput,
-  GetCorporationsCorporationIdAssetsOutput,
-  GetCorporationsCorporationIdBlueprintsInput,
-  GetCorporationsCorporationIdBlueprintsOutput,
-  GetCorporationsCorporationIdContactsInput,
-  GetCorporationsCorporationIdContactsLabelsInput,
-  GetCorporationsCorporationIdContactsLabelsOutput,
-  GetCorporationsCorporationIdContactsOutput,
-  GetCorporationsCorporationIdContainersLogsInput,
-  GetCorporationsCorporationIdContainersLogsOutput,
   GetCorporationsCorporationIdContractsContractIdBidsInput,
   GetCorporationsCorporationIdContractsContractIdBidsOutput,
   GetCorporationsCorporationIdContractsContractIdItemsInput,
   GetCorporationsCorporationIdContractsContractIdItemsOutput,
   GetCorporationsCorporationIdContractsInput,
   GetCorporationsCorporationIdContractsOutput,
-  GetCorporationsCorporationIdCustomsOfficesInput,
-  GetCorporationsCorporationIdCustomsOfficesOutput,
+} from '../schemas/operations/contracts.js';
+import type {
+  GetCorporationsCorporationIdAlliancehistoryInput,
+  GetCorporationsCorporationIdAlliancehistoryOutput,
+  GetCorporationsCorporationIdBlueprintsInput,
+  GetCorporationsCorporationIdBlueprintsOutput,
+  GetCorporationsCorporationIdContainersLogsInput,
+  GetCorporationsCorporationIdContainersLogsOutput,
   GetCorporationsCorporationIdDivisionsInput,
   GetCorporationsCorporationIdDivisionsOutput,
   GetCorporationsCorporationIdFacilitiesInput,
   GetCorporationsCorporationIdFacilitiesOutput,
-  GetCorporationsCorporationIdFwStatsInput,
-  GetCorporationsCorporationIdFwStatsOutput,
   GetCorporationsCorporationIdIconsInput,
   GetCorporationsCorporationIdIconsOutput,
-  GetCorporationsCorporationIdIndustryJobsInput,
-  GetCorporationsCorporationIdIndustryJobsOutput,
   GetCorporationsCorporationIdInput,
-  GetCorporationsCorporationIdKillmailsRecentInput,
-  GetCorporationsCorporationIdKillmailsRecentOutput,
   GetCorporationsCorporationIdMedalsInput,
   GetCorporationsCorporationIdMedalsIssuedInput,
   GetCorporationsCorporationIdMedalsIssuedOutput,
@@ -211,10 +156,6 @@ import type {
   GetCorporationsCorporationIdMembersTitlesOutput,
   GetCorporationsCorporationIdMembertrackingInput,
   GetCorporationsCorporationIdMembertrackingOutput,
-  GetCorporationsCorporationIdOrdersHistoryInput,
-  GetCorporationsCorporationIdOrdersHistoryOutput,
-  GetCorporationsCorporationIdOrdersInput,
-  GetCorporationsCorporationIdOrdersOutput,
   GetCorporationsCorporationIdOutput,
   GetCorporationsCorporationIdRolesHistoryInput,
   GetCorporationsCorporationIdRolesHistoryOutput,
@@ -232,18 +173,10 @@ import type {
   GetCorporationsCorporationIdStructuresOutput,
   GetCorporationsCorporationIdTitlesInput,
   GetCorporationsCorporationIdTitlesOutput,
-  GetCorporationsCorporationIdWalletsDivisionJournalInput,
-  GetCorporationsCorporationIdWalletsDivisionJournalOutput,
-  GetCorporationsCorporationIdWalletsDivisionTransactionsInput,
-  GetCorporationsCorporationIdWalletsDivisionTransactionsOutput,
-  GetCorporationsCorporationIdWalletsInput,
-  GetCorporationsCorporationIdWalletsOutput,
-  GetCorporationsFreelanceJobsListingInput,
-  GetCorporationsFreelanceJobsListingOutput,
-  GetCorporationsFreelanceJobsParticipantsInput,
-  GetCorporationsFreelanceJobsParticipantsOutput,
   GetCorporationsNpccorpsInput,
   GetCorporationsNpccorpsOutput,
+} from '../schemas/operations/corporation.js';
+import type {
   GetCorporationsProjectsContributionInput,
   GetCorporationsProjectsContributionOutput,
   GetCorporationsProjectsContributorsInput,
@@ -252,16 +185,16 @@ import type {
   GetCorporationsProjectsDetailOutput,
   GetCorporationsProjectsListingInput,
   GetCorporationsProjectsListingOutput,
-  GetCorporationsStructuresSkyhooksDetailInput,
-  GetCorporationsStructuresSkyhooksDetailOutput,
-  GetCorporationsStructuresSkyhooksListingInput,
-  GetCorporationsStructuresSkyhooksListingOutput,
-  GetCorporationsStructuresSovereigntyHubsDetailInput,
-  GetCorporationsStructuresSovereigntyHubsDetailOutput,
-  GetCorporationsStructuresSovereigntyHubsListingInput,
-  GetCorporationsStructuresSovereigntyHubsListingOutput,
+} from '../schemas/operations/corporation-projects.js';
+import type {
+  GetCharactersCosmeticsSkinrComponentsInput,
+  GetCharactersCosmeticsSkinrComponentsOutput,
+  GetCharactersCosmeticsSkinrInput,
+  GetCharactersCosmeticsSkinrOutput,
   GetCosmeticsSkinrInput,
   GetCosmeticsSkinrOutput,
+} from '../schemas/operations/cosmetics.js';
+import type {
   GetDogmaAttributesAttributeIdInput,
   GetDogmaAttributesAttributeIdOutput,
   GetDogmaAttributesInput,
@@ -272,16 +205,12 @@ import type {
   GetDogmaEffectsEffectIdOutput,
   GetDogmaEffectsInput,
   GetDogmaEffectsOutput,
-  GetFleetsFleetIdInput,
-  GetFleetsFleetIdMembersInput,
-  GetFleetsFleetIdMembersOutput,
-  GetFleetsFleetIdOutput,
-  GetFleetsFleetIdWingsInput,
-  GetFleetsFleetIdWingsOutput,
-  GetFreelanceJobsDetailInput,
-  GetFreelanceJobsDetailOutput,
-  GetFreelanceJobsListingInput,
-  GetFreelanceJobsListingOutput,
+} from '../schemas/operations/dogma.js';
+import type {
+  GetCharactersCharacterIdFwStatsInput,
+  GetCharactersCharacterIdFwStatsOutput,
+  GetCorporationsCorporationIdFwStatsInput,
+  GetCorporationsCorporationIdFwStatsOutput,
   GetFwLeaderboardsCharactersInput,
   GetFwLeaderboardsCharactersOutput,
   GetFwLeaderboardsCorporationsInput,
@@ -294,18 +223,136 @@ import type {
   GetFwSystemsOutput,
   GetFwWarsInput,
   GetFwWarsOutput,
+} from '../schemas/operations/faction-warfare.js';
+import type {
+  DeleteCharactersCharacterIdFittingsFittingIdInput,
+  DeleteCharactersCharacterIdFittingsFittingIdOutput,
+  GetCharactersCharacterIdFittingsInput,
+  GetCharactersCharacterIdFittingsOutput,
+  PostCharactersCharacterIdFittingsInput,
+  PostCharactersCharacterIdFittingsOutput,
+} from '../schemas/operations/fittings.js';
+import type {
+  DeleteFleetsFleetIdMembersMemberIdInput,
+  DeleteFleetsFleetIdMembersMemberIdOutput,
+  DeleteFleetsFleetIdSquadsSquadIdInput,
+  DeleteFleetsFleetIdSquadsSquadIdOutput,
+  DeleteFleetsFleetIdWingsWingIdInput,
+  DeleteFleetsFleetIdWingsWingIdOutput,
+  GetCharactersCharacterIdFleetInput,
+  GetCharactersCharacterIdFleetOutput,
+  GetFleetsFleetIdInput,
+  GetFleetsFleetIdMembersInput,
+  GetFleetsFleetIdMembersOutput,
+  GetFleetsFleetIdOutput,
+  GetFleetsFleetIdWingsInput,
+  GetFleetsFleetIdWingsOutput,
+  PostFleetsFleetIdMembersInput,
+  PostFleetsFleetIdMembersOutput,
+  PostFleetsFleetIdWingsInput,
+  PostFleetsFleetIdWingsOutput,
+  PostFleetsFleetIdWingsWingIdSquadsInput,
+  PostFleetsFleetIdWingsWingIdSquadsOutput,
+  PutFleetsFleetIdInput,
+  PutFleetsFleetIdMembersMemberIdInput,
+  PutFleetsFleetIdMembersMemberIdOutput,
+  PutFleetsFleetIdOutput,
+  PutFleetsFleetIdSquadsSquadIdInput,
+  PutFleetsFleetIdSquadsSquadIdOutput,
+  PutFleetsFleetIdWingsWingIdInput,
+  PutFleetsFleetIdWingsWingIdOutput,
+} from '../schemas/operations/fleets.js';
+import type {
+  GetCharactersFreelanceJobsListingInput,
+  GetCharactersFreelanceJobsListingOutput,
+  GetCharactersFreelanceJobsParticipationInput,
+  GetCharactersFreelanceJobsParticipationOutput,
+  GetCorporationsFreelanceJobsListingInput,
+  GetCorporationsFreelanceJobsListingOutput,
+  GetCorporationsFreelanceJobsParticipantsInput,
+  GetCorporationsFreelanceJobsParticipantsOutput,
+  GetFreelanceJobsDetailInput,
+  GetFreelanceJobsDetailOutput,
+  GetFreelanceJobsListingInput,
+  GetFreelanceJobsListingOutput,
+} from '../schemas/operations/freelance-jobs.js';
+import type {
   GetIncursionsInput,
   GetIncursionsOutput,
+} from '../schemas/operations/incursions.js';
+import type {
+  GetCharactersCharacterIdIndustryJobsInput,
+  GetCharactersCharacterIdIndustryJobsOutput,
+  GetCharactersCharacterIdMiningInput,
+  GetCharactersCharacterIdMiningOutput,
+  GetCorporationCorporationIdMiningExtractionsInput,
+  GetCorporationCorporationIdMiningExtractionsOutput,
+  GetCorporationCorporationIdMiningObserversInput,
+  GetCorporationCorporationIdMiningObserversObserverIdInput,
+  GetCorporationCorporationIdMiningObserversObserverIdOutput,
+  GetCorporationCorporationIdMiningObserversOutput,
+  GetCorporationsCorporationIdIndustryJobsInput,
+  GetCorporationsCorporationIdIndustryJobsOutput,
   GetIndustryFacilitiesInput,
   GetIndustryFacilitiesOutput,
   GetIndustrySystemsInput,
   GetIndustrySystemsOutput,
+} from '../schemas/operations/industry.js';
+import type {
   GetInsurancePricesInput,
   GetInsurancePricesOutput,
+} from '../schemas/operations/insurance.js';
+import type {
+  GetCharactersCharacterIdKillmailsRecentInput,
+  GetCharactersCharacterIdKillmailsRecentOutput,
+  GetCorporationsCorporationIdKillmailsRecentInput,
+  GetCorporationsCorporationIdKillmailsRecentOutput,
   GetKillmailsKillmailIdKillmailHashInput,
   GetKillmailsKillmailIdKillmailHashOutput,
+} from '../schemas/operations/killmails.js';
+import type {
+  GetCharactersCharacterIdLocationInput,
+  GetCharactersCharacterIdLocationOutput,
+  GetCharactersCharacterIdOnlineInput,
+  GetCharactersCharacterIdOnlineOutput,
+  GetCharactersCharacterIdShipInput,
+  GetCharactersCharacterIdShipOutput,
+} from '../schemas/operations/location.js';
+import type {
+  GetCharactersCharacterIdLoyaltyPointsInput,
+  GetCharactersCharacterIdLoyaltyPointsOutput,
   GetLoyaltyStoresCorporationIdOffersInput,
   GetLoyaltyStoresCorporationIdOffersOutput,
+} from '../schemas/operations/loyalty.js';
+import type {
+  DeleteCharactersCharacterIdMailLabelsLabelIdInput,
+  DeleteCharactersCharacterIdMailLabelsLabelIdOutput,
+  DeleteCharactersCharacterIdMailMailIdInput,
+  DeleteCharactersCharacterIdMailMailIdOutput,
+  GetCharactersCharacterIdMailInput,
+  GetCharactersCharacterIdMailLabelsInput,
+  GetCharactersCharacterIdMailLabelsOutput,
+  GetCharactersCharacterIdMailListsInput,
+  GetCharactersCharacterIdMailListsOutput,
+  GetCharactersCharacterIdMailMailIdInput,
+  GetCharactersCharacterIdMailMailIdOutput,
+  GetCharactersCharacterIdMailOutput,
+  PostCharactersCharacterIdMailInput,
+  PostCharactersCharacterIdMailLabelsInput,
+  PostCharactersCharacterIdMailLabelsOutput,
+  PostCharactersCharacterIdMailOutput,
+  PutCharactersCharacterIdMailMailIdInput,
+  PutCharactersCharacterIdMailMailIdOutput,
+} from '../schemas/operations/mail.js';
+import type {
+  GetCharactersCharacterIdOrdersHistoryInput,
+  GetCharactersCharacterIdOrdersHistoryOutput,
+  GetCharactersCharacterIdOrdersInput,
+  GetCharactersCharacterIdOrdersOutput,
+  GetCorporationsCorporationIdOrdersHistoryInput,
+  GetCorporationsCorporationIdOrdersHistoryOutput,
+  GetCorporationsCorporationIdOrdersInput,
+  GetCorporationsCorporationIdOrdersOutput,
   GetMarketsGroupsInput,
   GetMarketsGroupsMarketGroupIdInput,
   GetMarketsGroupsMarketGroupIdOutput,
@@ -320,6 +367,8 @@ import type {
   GetMarketsRegionIdTypesOutput,
   GetMarketsStructuresStructureIdInput,
   GetMarketsStructuresStructureIdOutput,
+} from '../schemas/operations/market.js';
+import type {
   GetMetaChangelogInput,
   GetMetaChangelogOutput,
   GetMetaCompatibilityDatesInput,
@@ -328,6 +377,12 @@ import type {
   GetMetaNameOutput,
   GetMetaStatusInput,
   GetMetaStatusOutput,
+} from '../schemas/operations/meta.js';
+import type {
+  GetCharactersMilitaryCampaignsObjectivesListingInput,
+  GetCharactersMilitaryCampaignsObjectivesListingOutput,
+  GetCharactersMilitaryCampaignsObjectivesParticipationInput,
+  GetCharactersMilitaryCampaignsObjectivesParticipationOutput,
   GetMilitaryCampaignsDetailInput,
   GetMilitaryCampaignsDetailOutput,
   GetMilitaryCampaignsListingInput,
@@ -336,6 +391,10 @@ import type {
   GetMilitaryCampaignsObjectivesDetailOutput,
   GetMilitaryCampaignsObjectivesListingInput,
   GetMilitaryCampaignsObjectivesListingOutput,
+} from '../schemas/operations/military-campaigns.js';
+import type {
+  GetCharactersParagonHubSkinrInput,
+  GetCharactersParagonHubSkinrOutput,
   GetParagonHubSkinrAlliancesInput,
   GetParagonHubSkinrAlliancesOutput,
   GetParagonHubSkinrCharactersInput,
@@ -344,14 +403,58 @@ import type {
   GetParagonHubSkinrCorporationsOutput,
   GetParagonHubSkinrInput,
   GetParagonHubSkinrOutput,
-  GetSkyhooksRaidableInput,
-  GetSkyhooksRaidableOutput,
+} from '../schemas/operations/paragon-hub.js';
+import type {
+  GetCharactersCharacterIdPlanetsInput,
+  GetCharactersCharacterIdPlanetsOutput,
+  GetCharactersCharacterIdPlanetsPlanetIdInput,
+  GetCharactersCharacterIdPlanetsPlanetIdOutput,
+  GetCorporationsCorporationIdCustomsOfficesInput,
+  GetCorporationsCorporationIdCustomsOfficesOutput,
+  GetUniverseSchematicsSchematicIdInput,
+  GetUniverseSchematicsSchematicIdOutput,
+} from '../schemas/operations/planetary-interaction.js';
+import type {
+  PostRouteInput,
+  PostRouteOutput,
+} from '../schemas/operations/routes.js';
+import type {
+  GetCharactersCharacterIdSearchInput,
+  GetCharactersCharacterIdSearchOutput,
+} from '../schemas/operations/search.js';
+import type {
+  GetCharactersCharacterIdAttributesInput,
+  GetCharactersCharacterIdAttributesOutput,
+  GetCharactersCharacterIdSkillqueueInput,
+  GetCharactersCharacterIdSkillqueueOutput,
+  GetCharactersCharacterIdSkillsInput,
+  GetCharactersCharacterIdSkillsOutput,
+} from '../schemas/operations/skills.js';
+import type {
   GetSovereigntyCampaignsInput,
   GetSovereigntyCampaignsOutput,
   GetSovereigntySystemsInput,
   GetSovereigntySystemsOutput,
+} from '../schemas/operations/sovereignty.js';
+import type {
   GetStatusInput,
   GetStatusOutput,
+} from '../schemas/operations/status.js';
+import type {
+  GetCharactersStructuresMercenaryDensDetailInput,
+  GetCharactersStructuresMercenaryDensDetailOutput,
+  GetCharactersStructuresMercenaryDensListingInput,
+  GetCharactersStructuresMercenaryDensListingOutput,
+  GetCorporationsStructuresSkyhooksDetailInput,
+  GetCorporationsStructuresSkyhooksDetailOutput,
+  GetCorporationsStructuresSkyhooksListingInput,
+  GetCorporationsStructuresSkyhooksListingOutput,
+  GetCorporationsStructuresSovereigntyHubsDetailInput,
+  GetCorporationsStructuresSovereigntyHubsDetailOutput,
+  GetCorporationsStructuresSovereigntyHubsListingInput,
+  GetCorporationsStructuresSovereigntyHubsListingOutput,
+} from '../schemas/operations/structures.js';
+import type {
   GetUniverseAncestriesInput,
   GetUniverseAncestriesOutput,
   GetUniverseAsteroidBeltsAsteroidBeltIdInput,
@@ -386,8 +489,6 @@ import type {
   GetUniverseRegionsOutput,
   GetUniverseRegionsRegionIdInput,
   GetUniverseRegionsRegionIdOutput,
-  GetUniverseSchematicsSchematicIdInput,
-  GetUniverseSchematicsSchematicIdOutput,
   GetUniverseStargatesStargateIdInput,
   GetUniverseStargatesStargateIdOutput,
   GetUniverseStarsStarIdInput,
@@ -410,40 +511,12 @@ import type {
   GetUniverseTypesOutput,
   GetUniverseTypesTypeIdInput,
   GetUniverseTypesTypeIdOutput,
-  GetWarsInput,
-  GetWarsOutput,
-  GetWarsWarIdInput,
-  GetWarsWarIdKillmailsInput,
-  GetWarsWarIdKillmailsOutput,
-  GetWarsWarIdOutput,
-  PostCharactersAffiliationInput,
-  PostCharactersAffiliationOutput,
-  PostCharactersCharacterIdAssetsLocationsInput,
-  PostCharactersCharacterIdAssetsLocationsOutput,
-  PostCharactersCharacterIdAssetsNamesInput,
-  PostCharactersCharacterIdAssetsNamesOutput,
-  PostCharactersCharacterIdContactsInput,
-  PostCharactersCharacterIdContactsOutput,
-  PostCharactersCharacterIdCspaInput,
-  PostCharactersCharacterIdCspaOutput,
-  PostCharactersCharacterIdFittingsInput,
-  PostCharactersCharacterIdFittingsOutput,
-  PostCharactersCharacterIdMailInput,
-  PostCharactersCharacterIdMailLabelsInput,
-  PostCharactersCharacterIdMailLabelsOutput,
-  PostCharactersCharacterIdMailOutput,
-  PostCorporationsCorporationIdAssetsLocationsInput,
-  PostCorporationsCorporationIdAssetsLocationsOutput,
-  PostCorporationsCorporationIdAssetsNamesInput,
-  PostCorporationsCorporationIdAssetsNamesOutput,
-  PostFleetsFleetIdMembersInput,
-  PostFleetsFleetIdMembersOutput,
-  PostFleetsFleetIdWingsInput,
-  PostFleetsFleetIdWingsOutput,
-  PostFleetsFleetIdWingsWingIdSquadsInput,
-  PostFleetsFleetIdWingsWingIdSquadsOutput,
-  PostRouteInput,
-  PostRouteOutput,
+  PostUniverseIdsInput,
+  PostUniverseIdsOutput,
+  PostUniverseNamesInput,
+  PostUniverseNamesOutput,
+} from '../schemas/operations/universe.js';
+import type {
   PostUiAutopilotWaypointInput,
   PostUiAutopilotWaypointOutput,
   PostUiOpenwindowContractInput,
@@ -454,30 +527,35 @@ import type {
   PostUiOpenwindowMarketdetailsOutput,
   PostUiOpenwindowNewmailInput,
   PostUiOpenwindowNewmailOutput,
-  PostUniverseIdsInput,
-  PostUniverseIdsOutput,
-  PostUniverseNamesInput,
-  PostUniverseNamesOutput,
-  PutCharactersCharacterIdCalendarEventIdInput,
-  PutCharactersCharacterIdCalendarEventIdOutput,
-  PutCharactersCharacterIdContactsInput,
-  PutCharactersCharacterIdContactsOutput,
-  PutCharactersCharacterIdMailMailIdInput,
-  PutCharactersCharacterIdMailMailIdOutput,
-  PutFleetsFleetIdInput,
-  PutFleetsFleetIdMembersMemberIdInput,
-  PutFleetsFleetIdMembersMemberIdOutput,
-  PutFleetsFleetIdOutput,
-  PutFleetsFleetIdSquadsSquadIdInput,
-  PutFleetsFleetIdSquadsSquadIdOutput,
-  PutFleetsFleetIdWingsWingIdInput,
-  PutFleetsFleetIdWingsWingIdOutput,
-} from '../schemas/operations.js';
+} from '../schemas/operations/user-interface.js';
+import type {
+  GetCharactersCharacterIdWalletInput,
+  GetCharactersCharacterIdWalletJournalInput,
+  GetCharactersCharacterIdWalletJournalOutput,
+  GetCharactersCharacterIdWalletOutput,
+  GetCharactersCharacterIdWalletTransactionsInput,
+  GetCharactersCharacterIdWalletTransactionsOutput,
+  GetCorporationsCorporationIdWalletsDivisionJournalInput,
+  GetCorporationsCorporationIdWalletsDivisionJournalOutput,
+  GetCorporationsCorporationIdWalletsDivisionTransactionsInput,
+  GetCorporationsCorporationIdWalletsDivisionTransactionsOutput,
+  GetCorporationsCorporationIdWalletsInput,
+  GetCorporationsCorporationIdWalletsOutput,
+} from '../schemas/operations/wallet.js';
+import type {
+  GetWarsInput,
+  GetWarsOutput,
+  GetWarsWarIdInput,
+  GetWarsWarIdKillmailsInput,
+  GetWarsWarIdKillmailsOutput,
+  GetWarsWarIdOutput,
+} from '../schemas/operations/wars.js';
 import {
   AccessListDomainClient,
   AccessListDomainClientWithMetadata,
   type GetCharactersAccessListsDetailOptions,
   type GetCharactersAccessListsListingOptions,
+  createAccessListClient,
 } from './access-list.js';
 import {
   ActivitiesDomainClient,
@@ -485,6 +563,7 @@ import {
   type GetCharactersMercenaryTacticalOperationsDetailOptions,
   type GetCharactersMercenaryTacticalOperationsListingOptions,
   type GetSkyhooksRaidableOptions,
+  createActivitiesClient,
 } from './activities.js';
 import {
   AllianceDomainClient,
@@ -493,6 +572,7 @@ import {
   type GetAlliancesAllianceIdIconsOptions,
   type GetAlliancesAllianceIdOptions,
   type GetAlliancesOptions,
+  createAllianceClient,
 } from './alliance.js';
 import {
   AssetsDomainClient,
@@ -503,6 +583,7 @@ import {
   type PostCharactersCharacterIdAssetsNamesOptions,
   type PostCorporationsCorporationIdAssetsLocationsOptions,
   type PostCorporationsCorporationIdAssetsNamesOptions,
+  createAssetsClient,
 } from './assets.js';
 import {
   CalendarDomainClient,
@@ -511,6 +592,7 @@ import {
   type GetCharactersCharacterIdCalendarEventIdOptions,
   type GetCharactersCharacterIdCalendarOptions,
   type PutCharactersCharacterIdCalendarEventIdOptions,
+  createCalendarClient,
 } from './calendar.js';
 import {
   CharacterDomainClient,
@@ -529,12 +611,14 @@ import {
   type GetCharactersDetailOptions,
   type PostCharactersAffiliationOptions,
   type PostCharactersCharacterIdCspaOptions,
+  createCharacterClient,
 } from './character.js';
 import {
   ClonesDomainClient,
   ClonesDomainClientWithMetadata,
   type GetCharactersCharacterIdClonesOptions,
   type GetCharactersCharacterIdImplantsOptions,
+  createClonesClient,
 } from './clones.js';
 import {
   ContactsDomainClient,
@@ -548,6 +632,7 @@ import {
   type GetCorporationsCorporationIdContactsOptions,
   type PostCharactersCharacterIdContactsOptions,
   type PutCharactersCharacterIdContactsOptions,
+  createContactsClient,
 } from './contacts.js';
 import {
   ContractsDomainClient,
@@ -561,6 +646,7 @@ import {
   type GetCorporationsCorporationIdContractsContractIdBidsOptions,
   type GetCorporationsCorporationIdContractsContractIdItemsOptions,
   type GetCorporationsCorporationIdContractsOptions,
+  createContractsClient,
 } from './contracts.js';
 import {
   CorporationDomainClient,
@@ -587,6 +673,7 @@ import {
   type GetCorporationsCorporationIdStructuresOptions,
   type GetCorporationsCorporationIdTitlesOptions,
   type GetCorporationsNpccorpsOptions,
+  createCorporationClient,
 } from './corporation.js';
 import {
   CorporationProjectsDomainClient,
@@ -595,6 +682,7 @@ import {
   type GetCorporationsProjectsContributorsOptions,
   type GetCorporationsProjectsDetailOptions,
   type GetCorporationsProjectsListingOptions,
+  createCorporationProjectsClient,
 } from './corporation-projects.js';
 import {
   CosmeticsDomainClient,
@@ -602,6 +690,7 @@ import {
   type GetCharactersCosmeticsSkinrComponentsOptions,
   type GetCharactersCosmeticsSkinrOptions,
   type GetCosmeticsSkinrOptions,
+  createCosmeticsClient,
 } from './cosmetics.js';
 import {
   DogmaDomainClient,
@@ -611,6 +700,7 @@ import {
   type GetDogmaDynamicItemsTypeIdItemIdOptions,
   type GetDogmaEffectsEffectIdOptions,
   type GetDogmaEffectsOptions,
+  createDogmaClient,
 } from './dogma.js';
 import {
   FactionWarfareDomainClient,
@@ -623,6 +713,7 @@ import {
   type GetFwStatsOptions,
   type GetFwSystemsOptions,
   type GetFwWarsOptions,
+  createFactionWarfareClient,
 } from './faction-warfare.js';
 import {
   type DeleteCharactersCharacterIdFittingsFittingIdOptions,
@@ -630,6 +721,7 @@ import {
   FittingsDomainClientWithMetadata,
   type GetCharactersCharacterIdFittingsOptions,
   type PostCharactersCharacterIdFittingsOptions,
+  createFittingsClient,
 } from './fittings.js';
 import {
   type DeleteFleetsFleetIdMembersMemberIdOptions,
@@ -648,6 +740,7 @@ import {
   type PutFleetsFleetIdOptions,
   type PutFleetsFleetIdSquadsSquadIdOptions,
   type PutFleetsFleetIdWingsWingIdOptions,
+  createFleetsClient,
 } from './fleets.js';
 import {
   FreelanceJobsDomainClient,
@@ -658,11 +751,13 @@ import {
   type GetCorporationsFreelanceJobsParticipantsOptions,
   type GetFreelanceJobsDetailOptions,
   type GetFreelanceJobsListingOptions,
+  createFreelanceJobsClient,
 } from './freelance-jobs.js';
 import {
   type GetIncursionsOptions,
   IncursionsDomainClient,
   IncursionsDomainClientWithMetadata,
+  createIncursionsClient,
 } from './incursions.js';
 import {
   type GetCharactersCharacterIdIndustryJobsOptions,
@@ -675,11 +770,13 @@ import {
   type GetIndustrySystemsOptions,
   IndustryDomainClient,
   IndustryDomainClientWithMetadata,
+  createIndustryClient,
 } from './industry.js';
 import {
   type GetInsurancePricesOptions,
   InsuranceDomainClient,
   InsuranceDomainClientWithMetadata,
+  createInsuranceClient,
 } from './insurance.js';
 import {
   type GetCharactersCharacterIdKillmailsRecentOptions,
@@ -687,6 +784,7 @@ import {
   type GetKillmailsKillmailIdKillmailHashOptions,
   KillmailsDomainClient,
   KillmailsDomainClientWithMetadata,
+  createKillmailsClient,
 } from './killmails.js';
 import {
   type GetCharactersCharacterIdLocationOptions,
@@ -694,12 +792,14 @@ import {
   type GetCharactersCharacterIdShipOptions,
   LocationDomainClient,
   LocationDomainClientWithMetadata,
+  createLocationClient,
 } from './location.js';
 import {
   type GetCharactersCharacterIdLoyaltyPointsOptions,
   type GetLoyaltyStoresCorporationIdOffersOptions,
   LoyaltyDomainClient,
   LoyaltyDomainClientWithMetadata,
+  createLoyaltyClient,
 } from './loyalty.js';
 import {
   type DeleteCharactersCharacterIdMailLabelsLabelIdOptions,
@@ -713,6 +813,7 @@ import {
   type PostCharactersCharacterIdMailLabelsOptions,
   type PostCharactersCharacterIdMailOptions,
   type PutCharactersCharacterIdMailMailIdOptions,
+  createMailClient,
 } from './mail.js';
 import {
   type GetCharactersCharacterIdOrdersHistoryOptions,
@@ -728,6 +829,7 @@ import {
   type GetMarketsStructuresStructureIdOptions,
   MarketDomainClient,
   MarketDomainClientWithMetadata,
+  createMarketClient,
 } from './market.js';
 import {
   type GetMetaChangelogOptions,
@@ -736,6 +838,7 @@ import {
   type GetMetaStatusOptions,
   MetaDomainClient,
   MetaDomainClientWithMetadata,
+  createMetaClient,
 } from './meta.js';
 import {
   type GetCharactersMilitaryCampaignsObjectivesListingOptions,
@@ -746,6 +849,7 @@ import {
   type GetMilitaryCampaignsObjectivesListingOptions,
   MilitaryCampaignsDomainClient,
   MilitaryCampaignsDomainClientWithMetadata,
+  createMilitaryCampaignsClient,
 } from './military-campaigns.js';
 import {
   type GetCharactersParagonHubSkinrOptions,
@@ -755,6 +859,7 @@ import {
   type GetParagonHubSkinrOptions,
   ParagonHubDomainClient,
   ParagonHubDomainClientWithMetadata,
+  createParagonHubClient,
 } from './paragon-hub.js';
 import {
   type GetCharactersCharacterIdPlanetsOptions,
@@ -763,16 +868,19 @@ import {
   type GetUniverseSchematicsSchematicIdOptions,
   PlanetaryInteractionDomainClient,
   PlanetaryInteractionDomainClientWithMetadata,
+  createPlanetaryInteractionClient,
 } from './planetary-interaction.js';
 import {
   type PostRouteOptions,
   RoutesDomainClient,
   RoutesDomainClientWithMetadata,
+  createRoutesClient,
 } from './routes.js';
 import {
   type GetCharactersCharacterIdSearchOptions,
   SearchDomainClient,
   SearchDomainClientWithMetadata,
+  createSearchClient,
 } from './search.js';
 import {
   type GetCharactersCharacterIdAttributesOptions,
@@ -780,17 +888,20 @@ import {
   type GetCharactersCharacterIdSkillsOptions,
   SkillsDomainClient,
   SkillsDomainClientWithMetadata,
+  createSkillsClient,
 } from './skills.js';
 import {
   type GetSovereigntyCampaignsOptions,
   type GetSovereigntySystemsOptions,
   SovereigntyDomainClient,
   SovereigntyDomainClientWithMetadata,
+  createSovereigntyClient,
 } from './sovereignty.js';
 import {
   type GetStatusOptions,
   StatusDomainClient,
   StatusDomainClientWithMetadata,
+  createStatusClient,
 } from './status.js';
 import {
   type GetCharactersStructuresMercenaryDensDetailOptions,
@@ -801,6 +912,7 @@ import {
   type GetCorporationsStructuresSovereigntyHubsListingOptions,
   StructuresDomainClient,
   StructuresDomainClientWithMetadata,
+  createStructuresClient,
 } from './structures.js';
 import {
   type GetUniverseAncestriesOptions,
@@ -835,6 +947,7 @@ import {
   type PostUniverseNamesOptions,
   UniverseDomainClient,
   UniverseDomainClientWithMetadata,
+  createUniverseClient,
 } from './universe.js';
 import {
   type PostUiAutopilotWaypointOptions,
@@ -844,6 +957,7 @@ import {
   type PostUiOpenwindowNewmailOptions,
   UserInterfaceDomainClient,
   UserInterfaceDomainClientWithMetadata,
+  createUserInterfaceClient,
 } from './user-interface.js';
 import {
   type GetCharactersCharacterIdWalletJournalOptions,
@@ -854,6 +968,7 @@ import {
   type GetCorporationsCorporationIdWalletsOptions,
   WalletDomainClient,
   WalletDomainClientWithMetadata,
+  createWalletClient,
 } from './wallet.js';
 import {
   type GetWarsOptions,
@@ -861,6 +976,7 @@ import {
   type GetWarsWarIdOptions,
   WarsDomainClient,
   WarsDomainClientWithMetadata,
+  createWarsClient,
 } from './wars.js';
 
 type IsExact<Left, Right> =
@@ -875,1399 +991,1399 @@ type Assert<Value extends true> = Value;
 export interface GeneratedDomainOperationCoverage {
   readonly "GetCharactersAccessListsDetail": {
     readonly domain: "accessList";
-    readonly method: "getCharactersAccessListsDetail";
+    readonly method: "get";
     readonly input: GetCharactersAccessListsDetailInput;
     readonly output: GetCharactersAccessListsDetailOutput;
   };
   readonly "GetCharactersAccessListsListing": {
     readonly domain: "accessList";
-    readonly method: "getCharactersAccessListsListing";
+    readonly method: "list";
     readonly input: GetCharactersAccessListsListingInput;
     readonly output: GetCharactersAccessListsListingOutput;
   };
   readonly "GetCharactersMercenaryTacticalOperationsDetail": {
     readonly domain: "activities";
-    readonly method: "getCharactersMercenaryTacticalOperationsDetail";
+    readonly method: "getMercenaryTacticalOperation";
     readonly input: GetCharactersMercenaryTacticalOperationsDetailInput;
     readonly output: GetCharactersMercenaryTacticalOperationsDetailOutput;
   };
   readonly "GetCharactersMercenaryTacticalOperationsListing": {
     readonly domain: "activities";
-    readonly method: "getCharactersMercenaryTacticalOperationsListing";
+    readonly method: "listMercenaryTacticalOperations";
     readonly input: GetCharactersMercenaryTacticalOperationsListingInput;
     readonly output: GetCharactersMercenaryTacticalOperationsListingOutput;
   };
   readonly "GetSkyhooksRaidable": {
     readonly domain: "activities";
-    readonly method: "getSkyhooksRaidable";
+    readonly method: "listRaidableSkyhooks";
     readonly input: GetSkyhooksRaidableInput;
     readonly output: GetSkyhooksRaidableOutput;
   };
-  readonly "GetAlliances": {
-    readonly domain: "alliance";
-    readonly method: "getAlliances";
-    readonly input: GetAlliancesInput;
-    readonly output: GetAlliancesOutput;
-  };
-  readonly "GetAlliancesAllianceId": {
-    readonly domain: "alliance";
-    readonly method: "getAlliancesAllianceId";
-    readonly input: GetAlliancesAllianceIdInput;
-    readonly output: GetAlliancesAllianceIdOutput;
-  };
-  readonly "GetAlliancesAllianceIdCorporations": {
-    readonly domain: "alliance";
-    readonly method: "getAlliancesAllianceIdCorporations";
-    readonly input: GetAlliancesAllianceIdCorporationsInput;
-    readonly output: GetAlliancesAllianceIdCorporationsOutput;
-  };
   readonly "GetAlliancesAllianceIdIcons": {
     readonly domain: "alliance";
-    readonly method: "getAlliancesAllianceIdIcons";
+    readonly method: "getIcon";
     readonly input: GetAlliancesAllianceIdIconsInput;
     readonly output: GetAlliancesAllianceIdIconsOutput;
   };
+  readonly "GetAlliancesAllianceId": {
+    readonly domain: "alliance";
+    readonly method: "getPublicInfo";
+    readonly input: GetAlliancesAllianceIdInput;
+    readonly output: GetAlliancesAllianceIdOutput;
+  };
+  readonly "GetAlliances": {
+    readonly domain: "alliance";
+    readonly method: "list";
+    readonly input: GetAlliancesInput;
+    readonly output: GetAlliancesOutput;
+  };
+  readonly "GetAlliancesAllianceIdCorporations": {
+    readonly domain: "alliance";
+    readonly method: "listCorporations";
+    readonly input: GetAlliancesAllianceIdCorporationsInput;
+    readonly output: GetAlliancesAllianceIdCorporationsOutput;
+  };
   readonly "GetCharactersCharacterIdAssets": {
     readonly domain: "assets";
-    readonly method: "getCharactersCharacterIdAssets";
+    readonly method: "listCharacterAssets";
     readonly input: GetCharactersCharacterIdAssetsInput;
     readonly output: GetCharactersCharacterIdAssetsOutput;
   };
   readonly "GetCorporationsCorporationIdAssets": {
     readonly domain: "assets";
-    readonly method: "getCorporationsCorporationIdAssets";
+    readonly method: "listCorporationAssets";
     readonly input: GetCorporationsCorporationIdAssetsInput;
     readonly output: GetCorporationsCorporationIdAssetsOutput;
   };
   readonly "PostCharactersCharacterIdAssetsLocations": {
     readonly domain: "assets";
-    readonly method: "postCharactersCharacterIdAssetsLocations";
+    readonly method: "lookupCharacterLocations";
     readonly input: PostCharactersCharacterIdAssetsLocationsInput;
     readonly output: PostCharactersCharacterIdAssetsLocationsOutput;
   };
   readonly "PostCharactersCharacterIdAssetsNames": {
     readonly domain: "assets";
-    readonly method: "postCharactersCharacterIdAssetsNames";
+    readonly method: "lookupCharacterNames";
     readonly input: PostCharactersCharacterIdAssetsNamesInput;
     readonly output: PostCharactersCharacterIdAssetsNamesOutput;
   };
   readonly "PostCorporationsCorporationIdAssetsLocations": {
     readonly domain: "assets";
-    readonly method: "postCorporationsCorporationIdAssetsLocations";
+    readonly method: "lookupCorporationLocations";
     readonly input: PostCorporationsCorporationIdAssetsLocationsInput;
     readonly output: PostCorporationsCorporationIdAssetsLocationsOutput;
   };
   readonly "PostCorporationsCorporationIdAssetsNames": {
     readonly domain: "assets";
-    readonly method: "postCorporationsCorporationIdAssetsNames";
+    readonly method: "lookupCorporationNames";
     readonly input: PostCorporationsCorporationIdAssetsNamesInput;
     readonly output: PostCorporationsCorporationIdAssetsNamesOutput;
   };
-  readonly "GetCharactersCharacterIdCalendar": {
-    readonly domain: "calendar";
-    readonly method: "getCharactersCharacterIdCalendar";
-    readonly input: GetCharactersCharacterIdCalendarInput;
-    readonly output: GetCharactersCharacterIdCalendarOutput;
-  };
   readonly "GetCharactersCharacterIdCalendarEventId": {
     readonly domain: "calendar";
-    readonly method: "getCharactersCharacterIdCalendarEventId";
+    readonly method: "getEvent";
     readonly input: GetCharactersCharacterIdCalendarEventIdInput;
     readonly output: GetCharactersCharacterIdCalendarEventIdOutput;
   };
   readonly "GetCharactersCharacterIdCalendarEventIdAttendees": {
     readonly domain: "calendar";
-    readonly method: "getCharactersCharacterIdCalendarEventIdAttendees";
+    readonly method: "listEventAttendees";
     readonly input: GetCharactersCharacterIdCalendarEventIdAttendeesInput;
     readonly output: GetCharactersCharacterIdCalendarEventIdAttendeesOutput;
   };
+  readonly "GetCharactersCharacterIdCalendar": {
+    readonly domain: "calendar";
+    readonly method: "listEvents";
+    readonly input: GetCharactersCharacterIdCalendarInput;
+    readonly output: GetCharactersCharacterIdCalendarOutput;
+  };
   readonly "PutCharactersCharacterIdCalendarEventId": {
     readonly domain: "calendar";
-    readonly method: "putCharactersCharacterIdCalendarEventId";
+    readonly method: "respondToEvent";
     readonly input: PutCharactersCharacterIdCalendarEventIdInput;
     readonly output: PutCharactersCharacterIdCalendarEventIdOutput;
   };
   readonly "GetCharactersCharacterIdAgentsResearch": {
     readonly domain: "character";
-    readonly method: "getCharactersCharacterIdAgentsResearch";
+    readonly method: "agentsResearch";
     readonly input: GetCharactersCharacterIdAgentsResearchInput;
     readonly output: GetCharactersCharacterIdAgentsResearchOutput;
   };
-  readonly "GetCharactersCharacterIdBlueprints": {
+  readonly "PostCharactersCharacterIdCspa": {
     readonly domain: "character";
-    readonly method: "getCharactersCharacterIdBlueprints";
-    readonly input: GetCharactersCharacterIdBlueprintsInput;
-    readonly output: GetCharactersCharacterIdBlueprintsOutput;
+    readonly method: "calculateCspaCharge";
+    readonly input: PostCharactersCharacterIdCspaInput;
+    readonly output: PostCharactersCharacterIdCspaOutput;
   };
-  readonly "GetCharactersCharacterIdCorporationhistory": {
+  readonly "GetCharactersCharacterIdRoles": {
     readonly domain: "character";
-    readonly method: "getCharactersCharacterIdCorporationhistory";
-    readonly input: GetCharactersCharacterIdCorporationhistoryInput;
-    readonly output: GetCharactersCharacterIdCorporationhistoryOutput;
+    readonly method: "getCorporationRoles";
+    readonly input: GetCharactersCharacterIdRolesInput;
+    readonly output: GetCharactersCharacterIdRolesOutput;
   };
   readonly "GetCharactersCharacterIdFatigue": {
     readonly domain: "character";
-    readonly method: "getCharactersCharacterIdFatigue";
+    readonly method: "getJumpFatigue";
     readonly input: GetCharactersCharacterIdFatigueInput;
     readonly output: GetCharactersCharacterIdFatigueOutput;
   };
+  readonly "GetCharactersCharacterIdPortrait": {
+    readonly domain: "character";
+    readonly method: "getPortrait";
+    readonly input: GetCharactersCharacterIdPortraitInput;
+    readonly output: GetCharactersCharacterIdPortraitOutput;
+  };
+  readonly "GetCharactersDetail": {
+    readonly domain: "character";
+    readonly method: "getPublicInfo";
+    readonly input: GetCharactersDetailInput;
+    readonly output: GetCharactersDetailOutput;
+  };
+  readonly "GetCharactersCharacterIdBlueprints": {
+    readonly domain: "character";
+    readonly method: "listBlueprints";
+    readonly input: GetCharactersCharacterIdBlueprintsInput;
+    readonly output: GetCharactersCharacterIdBlueprintsOutput;
+  };
+  readonly "GetCharactersCharacterIdNotificationsContacts": {
+    readonly domain: "character";
+    readonly method: "listContactNotifications";
+    readonly input: GetCharactersCharacterIdNotificationsContactsInput;
+    readonly output: GetCharactersCharacterIdNotificationsContactsOutput;
+  };
+  readonly "GetCharactersCharacterIdCorporationhistory": {
+    readonly domain: "character";
+    readonly method: "listCorporationHistory";
+    readonly input: GetCharactersCharacterIdCorporationhistoryInput;
+    readonly output: GetCharactersCharacterIdCorporationhistoryOutput;
+  };
+  readonly "GetCharactersCharacterIdTitles": {
+    readonly domain: "character";
+    readonly method: "listCorporationTitles";
+    readonly input: GetCharactersCharacterIdTitlesInput;
+    readonly output: GetCharactersCharacterIdTitlesOutput;
+  };
   readonly "GetCharactersCharacterIdMedals": {
     readonly domain: "character";
-    readonly method: "getCharactersCharacterIdMedals";
+    readonly method: "listMedals";
     readonly input: GetCharactersCharacterIdMedalsInput;
     readonly output: GetCharactersCharacterIdMedalsOutput;
   };
   readonly "GetCharactersCharacterIdNotifications": {
     readonly domain: "character";
-    readonly method: "getCharactersCharacterIdNotifications";
+    readonly method: "listNotifications";
     readonly input: GetCharactersCharacterIdNotificationsInput;
     readonly output: GetCharactersCharacterIdNotificationsOutput;
   };
-  readonly "GetCharactersCharacterIdNotificationsContacts": {
-    readonly domain: "character";
-    readonly method: "getCharactersCharacterIdNotificationsContacts";
-    readonly input: GetCharactersCharacterIdNotificationsContactsInput;
-    readonly output: GetCharactersCharacterIdNotificationsContactsOutput;
-  };
-  readonly "GetCharactersCharacterIdPortrait": {
-    readonly domain: "character";
-    readonly method: "getCharactersCharacterIdPortrait";
-    readonly input: GetCharactersCharacterIdPortraitInput;
-    readonly output: GetCharactersCharacterIdPortraitOutput;
-  };
-  readonly "GetCharactersCharacterIdRoles": {
-    readonly domain: "character";
-    readonly method: "getCharactersCharacterIdRoles";
-    readonly input: GetCharactersCharacterIdRolesInput;
-    readonly output: GetCharactersCharacterIdRolesOutput;
-  };
   readonly "GetCharactersCharacterIdStandings": {
     readonly domain: "character";
-    readonly method: "getCharactersCharacterIdStandings";
+    readonly method: "listStandings";
     readonly input: GetCharactersCharacterIdStandingsInput;
     readonly output: GetCharactersCharacterIdStandingsOutput;
   };
-  readonly "GetCharactersCharacterIdTitles": {
-    readonly domain: "character";
-    readonly method: "getCharactersCharacterIdTitles";
-    readonly input: GetCharactersCharacterIdTitlesInput;
-    readonly output: GetCharactersCharacterIdTitlesOutput;
-  };
-  readonly "GetCharactersDetail": {
-    readonly domain: "character";
-    readonly method: "getCharactersDetail";
-    readonly input: GetCharactersDetailInput;
-    readonly output: GetCharactersDetailOutput;
-  };
   readonly "PostCharactersAffiliation": {
     readonly domain: "character";
-    readonly method: "postCharactersAffiliation";
+    readonly method: "lookupAffiliations";
     readonly input: PostCharactersAffiliationInput;
     readonly output: PostCharactersAffiliationOutput;
   };
-  readonly "PostCharactersCharacterIdCspa": {
-    readonly domain: "character";
-    readonly method: "postCharactersCharacterIdCspa";
-    readonly input: PostCharactersCharacterIdCspaInput;
-    readonly output: PostCharactersCharacterIdCspaOutput;
-  };
   readonly "GetCharactersCharacterIdClones": {
     readonly domain: "clones";
-    readonly method: "getCharactersCharacterIdClones";
+    readonly method: "getState";
     readonly input: GetCharactersCharacterIdClonesInput;
     readonly output: GetCharactersCharacterIdClonesOutput;
   };
   readonly "GetCharactersCharacterIdImplants": {
     readonly domain: "clones";
-    readonly method: "getCharactersCharacterIdImplants";
+    readonly method: "listActiveImplants";
     readonly input: GetCharactersCharacterIdImplantsInput;
     readonly output: GetCharactersCharacterIdImplantsOutput;
   };
-  readonly "DeleteCharactersCharacterIdContacts": {
-    readonly domain: "contacts";
-    readonly method: "deleteCharactersCharacterIdContacts";
-    readonly input: DeleteCharactersCharacterIdContactsInput;
-    readonly output: DeleteCharactersCharacterIdContactsOutput;
-  };
-  readonly "GetAlliancesAllianceIdContacts": {
-    readonly domain: "contacts";
-    readonly method: "getAlliancesAllianceIdContacts";
-    readonly input: GetAlliancesAllianceIdContactsInput;
-    readonly output: GetAlliancesAllianceIdContactsOutput;
-  };
-  readonly "GetAlliancesAllianceIdContactsLabels": {
-    readonly domain: "contacts";
-    readonly method: "getAlliancesAllianceIdContactsLabels";
-    readonly input: GetAlliancesAllianceIdContactsLabelsInput;
-    readonly output: GetAlliancesAllianceIdContactsLabelsOutput;
-  };
-  readonly "GetCharactersCharacterIdContacts": {
-    readonly domain: "contacts";
-    readonly method: "getCharactersCharacterIdContacts";
-    readonly input: GetCharactersCharacterIdContactsInput;
-    readonly output: GetCharactersCharacterIdContactsOutput;
-  };
-  readonly "GetCharactersCharacterIdContactsLabels": {
-    readonly domain: "contacts";
-    readonly method: "getCharactersCharacterIdContactsLabels";
-    readonly input: GetCharactersCharacterIdContactsLabelsInput;
-    readonly output: GetCharactersCharacterIdContactsLabelsOutput;
-  };
-  readonly "GetCorporationsCorporationIdContacts": {
-    readonly domain: "contacts";
-    readonly method: "getCorporationsCorporationIdContacts";
-    readonly input: GetCorporationsCorporationIdContactsInput;
-    readonly output: GetCorporationsCorporationIdContactsOutput;
-  };
-  readonly "GetCorporationsCorporationIdContactsLabels": {
-    readonly domain: "contacts";
-    readonly method: "getCorporationsCorporationIdContactsLabels";
-    readonly input: GetCorporationsCorporationIdContactsLabelsInput;
-    readonly output: GetCorporationsCorporationIdContactsLabelsOutput;
-  };
   readonly "PostCharactersCharacterIdContacts": {
     readonly domain: "contacts";
-    readonly method: "postCharactersCharacterIdContacts";
+    readonly method: "addCharacterContacts";
     readonly input: PostCharactersCharacterIdContactsInput;
     readonly output: PostCharactersCharacterIdContactsOutput;
   };
+  readonly "DeleteCharactersCharacterIdContacts": {
+    readonly domain: "contacts";
+    readonly method: "deleteCharacterContacts";
+    readonly input: DeleteCharactersCharacterIdContactsInput;
+    readonly output: DeleteCharactersCharacterIdContactsOutput;
+  };
+  readonly "GetAlliancesAllianceIdContactsLabels": {
+    readonly domain: "contacts";
+    readonly method: "listAllianceContactLabels";
+    readonly input: GetAlliancesAllianceIdContactsLabelsInput;
+    readonly output: GetAlliancesAllianceIdContactsLabelsOutput;
+  };
+  readonly "GetAlliancesAllianceIdContacts": {
+    readonly domain: "contacts";
+    readonly method: "listAllianceContacts";
+    readonly input: GetAlliancesAllianceIdContactsInput;
+    readonly output: GetAlliancesAllianceIdContactsOutput;
+  };
+  readonly "GetCharactersCharacterIdContactsLabels": {
+    readonly domain: "contacts";
+    readonly method: "listCharacterContactLabels";
+    readonly input: GetCharactersCharacterIdContactsLabelsInput;
+    readonly output: GetCharactersCharacterIdContactsLabelsOutput;
+  };
+  readonly "GetCharactersCharacterIdContacts": {
+    readonly domain: "contacts";
+    readonly method: "listCharacterContacts";
+    readonly input: GetCharactersCharacterIdContactsInput;
+    readonly output: GetCharactersCharacterIdContactsOutput;
+  };
+  readonly "GetCorporationsCorporationIdContactsLabels": {
+    readonly domain: "contacts";
+    readonly method: "listCorporationContactLabels";
+    readonly input: GetCorporationsCorporationIdContactsLabelsInput;
+    readonly output: GetCorporationsCorporationIdContactsLabelsOutput;
+  };
+  readonly "GetCorporationsCorporationIdContacts": {
+    readonly domain: "contacts";
+    readonly method: "listCorporationContacts";
+    readonly input: GetCorporationsCorporationIdContactsInput;
+    readonly output: GetCorporationsCorporationIdContactsOutput;
+  };
   readonly "PutCharactersCharacterIdContacts": {
     readonly domain: "contacts";
-    readonly method: "putCharactersCharacterIdContacts";
+    readonly method: "updateCharacterContacts";
     readonly input: PutCharactersCharacterIdContactsInput;
     readonly output: PutCharactersCharacterIdContactsOutput;
   };
-  readonly "GetCharactersCharacterIdContracts": {
-    readonly domain: "contracts";
-    readonly method: "getCharactersCharacterIdContracts";
-    readonly input: GetCharactersCharacterIdContractsInput;
-    readonly output: GetCharactersCharacterIdContractsOutput;
-  };
   readonly "GetCharactersCharacterIdContractsContractIdBids": {
     readonly domain: "contracts";
-    readonly method: "getCharactersCharacterIdContractsContractIdBids";
+    readonly method: "listCharacterContractBids";
     readonly input: GetCharactersCharacterIdContractsContractIdBidsInput;
     readonly output: GetCharactersCharacterIdContractsContractIdBidsOutput;
   };
   readonly "GetCharactersCharacterIdContractsContractIdItems": {
     readonly domain: "contracts";
-    readonly method: "getCharactersCharacterIdContractsContractIdItems";
+    readonly method: "listCharacterContractItems";
     readonly input: GetCharactersCharacterIdContractsContractIdItemsInput;
     readonly output: GetCharactersCharacterIdContractsContractIdItemsOutput;
   };
-  readonly "GetContractsPublicBidsContractId": {
+  readonly "GetCharactersCharacterIdContracts": {
     readonly domain: "contracts";
-    readonly method: "getContractsPublicBidsContractId";
-    readonly input: GetContractsPublicBidsContractIdInput;
-    readonly output: GetContractsPublicBidsContractIdOutput;
-  };
-  readonly "GetContractsPublicItemsContractId": {
-    readonly domain: "contracts";
-    readonly method: "getContractsPublicItemsContractId";
-    readonly input: GetContractsPublicItemsContractIdInput;
-    readonly output: GetContractsPublicItemsContractIdOutput;
-  };
-  readonly "GetContractsPublicRegionId": {
-    readonly domain: "contracts";
-    readonly method: "getContractsPublicRegionId";
-    readonly input: GetContractsPublicRegionIdInput;
-    readonly output: GetContractsPublicRegionIdOutput;
-  };
-  readonly "GetCorporationsCorporationIdContracts": {
-    readonly domain: "contracts";
-    readonly method: "getCorporationsCorporationIdContracts";
-    readonly input: GetCorporationsCorporationIdContractsInput;
-    readonly output: GetCorporationsCorporationIdContractsOutput;
+    readonly method: "listCharacterContracts";
+    readonly input: GetCharactersCharacterIdContractsInput;
+    readonly output: GetCharactersCharacterIdContractsOutput;
   };
   readonly "GetCorporationsCorporationIdContractsContractIdBids": {
     readonly domain: "contracts";
-    readonly method: "getCorporationsCorporationIdContractsContractIdBids";
+    readonly method: "listCorporationContractBids";
     readonly input: GetCorporationsCorporationIdContractsContractIdBidsInput;
     readonly output: GetCorporationsCorporationIdContractsContractIdBidsOutput;
   };
   readonly "GetCorporationsCorporationIdContractsContractIdItems": {
     readonly domain: "contracts";
-    readonly method: "getCorporationsCorporationIdContractsContractIdItems";
+    readonly method: "listCorporationContractItems";
     readonly input: GetCorporationsCorporationIdContractsContractIdItemsInput;
     readonly output: GetCorporationsCorporationIdContractsContractIdItemsOutput;
   };
+  readonly "GetCorporationsCorporationIdContracts": {
+    readonly domain: "contracts";
+    readonly method: "listCorporationContracts";
+    readonly input: GetCorporationsCorporationIdContractsInput;
+    readonly output: GetCorporationsCorporationIdContractsOutput;
+  };
+  readonly "GetContractsPublicBidsContractId": {
+    readonly domain: "contracts";
+    readonly method: "listPublicContractBids";
+    readonly input: GetContractsPublicBidsContractIdInput;
+    readonly output: GetContractsPublicBidsContractIdOutput;
+  };
+  readonly "GetContractsPublicItemsContractId": {
+    readonly domain: "contracts";
+    readonly method: "listPublicContractItems";
+    readonly input: GetContractsPublicItemsContractIdInput;
+    readonly output: GetContractsPublicItemsContractIdOutput;
+  };
+  readonly "GetContractsPublicRegionId": {
+    readonly domain: "contracts";
+    readonly method: "listPublicContracts";
+    readonly input: GetContractsPublicRegionIdInput;
+    readonly output: GetContractsPublicRegionIdOutput;
+  };
+  readonly "GetCorporationsCorporationIdIcons": {
+    readonly domain: "corporation";
+    readonly method: "getIcon";
+    readonly input: GetCorporationsCorporationIdIconsInput;
+    readonly output: GetCorporationsCorporationIdIconsOutput;
+  };
+  readonly "GetCorporationsCorporationIdMembersLimit": {
+    readonly domain: "corporation";
+    readonly method: "getMemberLimit";
+    readonly input: GetCorporationsCorporationIdMembersLimitInput;
+    readonly output: GetCorporationsCorporationIdMembersLimitOutput;
+  };
   readonly "GetCorporationsCorporationId": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationId";
+    readonly method: "getPublicInfo";
     readonly input: GetCorporationsCorporationIdInput;
     readonly output: GetCorporationsCorporationIdOutput;
   };
+  readonly "GetCorporationsCorporationIdStarbasesStarbaseId": {
+    readonly domain: "corporation";
+    readonly method: "getStarbase";
+    readonly input: GetCorporationsCorporationIdStarbasesStarbaseIdInput;
+    readonly output: GetCorporationsCorporationIdStarbasesStarbaseIdOutput;
+  };
   readonly "GetCorporationsCorporationIdAlliancehistory": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdAlliancehistory";
+    readonly method: "listAllianceHistory";
     readonly input: GetCorporationsCorporationIdAlliancehistoryInput;
     readonly output: GetCorporationsCorporationIdAlliancehistoryOutput;
   };
-  readonly "GetCorporationsCorporationIdBlueprints": {
-    readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdBlueprints";
-    readonly input: GetCorporationsCorporationIdBlueprintsInput;
-    readonly output: GetCorporationsCorporationIdBlueprintsOutput;
-  };
   readonly "GetCorporationsCorporationIdContainersLogs": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdContainersLogs";
+    readonly method: "listAuditLogSecureContainerLogs";
     readonly input: GetCorporationsCorporationIdContainersLogsInput;
     readonly output: GetCorporationsCorporationIdContainersLogsOutput;
   };
+  readonly "GetCorporationsCorporationIdBlueprints": {
+    readonly domain: "corporation";
+    readonly method: "listBlueprints";
+    readonly input: GetCorporationsCorporationIdBlueprintsInput;
+    readonly output: GetCorporationsCorporationIdBlueprintsOutput;
+  };
   readonly "GetCorporationsCorporationIdDivisions": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdDivisions";
+    readonly method: "listDivisions";
     readonly input: GetCorporationsCorporationIdDivisionsInput;
     readonly output: GetCorporationsCorporationIdDivisionsOutput;
   };
   readonly "GetCorporationsCorporationIdFacilities": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdFacilities";
+    readonly method: "listFacilities";
     readonly input: GetCorporationsCorporationIdFacilitiesInput;
     readonly output: GetCorporationsCorporationIdFacilitiesOutput;
   };
-  readonly "GetCorporationsCorporationIdIcons": {
-    readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdIcons";
-    readonly input: GetCorporationsCorporationIdIconsInput;
-    readonly output: GetCorporationsCorporationIdIconsOutput;
-  };
-  readonly "GetCorporationsCorporationIdMedals": {
-    readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdMedals";
-    readonly input: GetCorporationsCorporationIdMedalsInput;
-    readonly output: GetCorporationsCorporationIdMedalsOutput;
-  };
   readonly "GetCorporationsCorporationIdMedalsIssued": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdMedalsIssued";
+    readonly method: "listIssuedMedals";
     readonly input: GetCorporationsCorporationIdMedalsIssuedInput;
     readonly output: GetCorporationsCorporationIdMedalsIssuedOutput;
   };
-  readonly "GetCorporationsCorporationIdMembers": {
+  readonly "GetCorporationsCorporationIdMedals": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdMembers";
-    readonly input: GetCorporationsCorporationIdMembersInput;
-    readonly output: GetCorporationsCorporationIdMembersOutput;
+    readonly method: "listMedals";
+    readonly input: GetCorporationsCorporationIdMedalsInput;
+    readonly output: GetCorporationsCorporationIdMedalsOutput;
   };
-  readonly "GetCorporationsCorporationIdMembersLimit": {
+  readonly "GetCorporationsCorporationIdRolesHistory": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdMembersLimit";
-    readonly input: GetCorporationsCorporationIdMembersLimitInput;
-    readonly output: GetCorporationsCorporationIdMembersLimitOutput;
+    readonly method: "listMemberRoleHistory";
+    readonly input: GetCorporationsCorporationIdRolesHistoryInput;
+    readonly output: GetCorporationsCorporationIdRolesHistoryOutput;
+  };
+  readonly "GetCorporationsCorporationIdRoles": {
+    readonly domain: "corporation";
+    readonly method: "listMemberRoles";
+    readonly input: GetCorporationsCorporationIdRolesInput;
+    readonly output: GetCorporationsCorporationIdRolesOutput;
   };
   readonly "GetCorporationsCorporationIdMembersTitles": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdMembersTitles";
+    readonly method: "listMemberTitles";
     readonly input: GetCorporationsCorporationIdMembersTitlesInput;
     readonly output: GetCorporationsCorporationIdMembersTitlesOutput;
   };
   readonly "GetCorporationsCorporationIdMembertracking": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdMembertracking";
+    readonly method: "listMemberTracking";
     readonly input: GetCorporationsCorporationIdMembertrackingInput;
     readonly output: GetCorporationsCorporationIdMembertrackingOutput;
   };
-  readonly "GetCorporationsCorporationIdRoles": {
+  readonly "GetCorporationsCorporationIdMembers": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdRoles";
-    readonly input: GetCorporationsCorporationIdRolesInput;
-    readonly output: GetCorporationsCorporationIdRolesOutput;
+    readonly method: "listMembers";
+    readonly input: GetCorporationsCorporationIdMembersInput;
+    readonly output: GetCorporationsCorporationIdMembersOutput;
   };
-  readonly "GetCorporationsCorporationIdRolesHistory": {
+  readonly "GetCorporationsNpccorps": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdRolesHistory";
-    readonly input: GetCorporationsCorporationIdRolesHistoryInput;
-    readonly output: GetCorporationsCorporationIdRolesHistoryOutput;
+    readonly method: "listNpcCorporations";
+    readonly input: GetCorporationsNpccorpsInput;
+    readonly output: GetCorporationsNpccorpsOutput;
   };
   readonly "GetCorporationsCorporationIdShareholders": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdShareholders";
+    readonly method: "listShareholders";
     readonly input: GetCorporationsCorporationIdShareholdersInput;
     readonly output: GetCorporationsCorporationIdShareholdersOutput;
   };
   readonly "GetCorporationsCorporationIdStandings": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdStandings";
+    readonly method: "listStandings";
     readonly input: GetCorporationsCorporationIdStandingsInput;
     readonly output: GetCorporationsCorporationIdStandingsOutput;
   };
   readonly "GetCorporationsCorporationIdStarbases": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdStarbases";
+    readonly method: "listStarbases";
     readonly input: GetCorporationsCorporationIdStarbasesInput;
     readonly output: GetCorporationsCorporationIdStarbasesOutput;
   };
-  readonly "GetCorporationsCorporationIdStarbasesStarbaseId": {
-    readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdStarbasesStarbaseId";
-    readonly input: GetCorporationsCorporationIdStarbasesStarbaseIdInput;
-    readonly output: GetCorporationsCorporationIdStarbasesStarbaseIdOutput;
-  };
   readonly "GetCorporationsCorporationIdStructures": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdStructures";
+    readonly method: "listStructures";
     readonly input: GetCorporationsCorporationIdStructuresInput;
     readonly output: GetCorporationsCorporationIdStructuresOutput;
   };
   readonly "GetCorporationsCorporationIdTitles": {
     readonly domain: "corporation";
-    readonly method: "getCorporationsCorporationIdTitles";
+    readonly method: "listTitles";
     readonly input: GetCorporationsCorporationIdTitlesInput;
     readonly output: GetCorporationsCorporationIdTitlesOutput;
   };
-  readonly "GetCorporationsNpccorps": {
-    readonly domain: "corporation";
-    readonly method: "getCorporationsNpccorps";
-    readonly input: GetCorporationsNpccorpsInput;
-    readonly output: GetCorporationsNpccorpsOutput;
-  };
-  readonly "GetCorporationsProjectsContribution": {
-    readonly domain: "corporationProjects";
-    readonly method: "getCorporationsProjectsContribution";
-    readonly input: GetCorporationsProjectsContributionInput;
-    readonly output: GetCorporationsProjectsContributionOutput;
-  };
-  readonly "GetCorporationsProjectsContributors": {
-    readonly domain: "corporationProjects";
-    readonly method: "getCorporationsProjectsContributors";
-    readonly input: GetCorporationsProjectsContributorsInput;
-    readonly output: GetCorporationsProjectsContributorsOutput;
-  };
   readonly "GetCorporationsProjectsDetail": {
     readonly domain: "corporationProjects";
-    readonly method: "getCorporationsProjectsDetail";
+    readonly method: "get";
     readonly input: GetCorporationsProjectsDetailInput;
     readonly output: GetCorporationsProjectsDetailOutput;
   };
+  readonly "GetCorporationsProjectsContribution": {
+    readonly domain: "corporationProjects";
+    readonly method: "getContribution";
+    readonly input: GetCorporationsProjectsContributionInput;
+    readonly output: GetCorporationsProjectsContributionOutput;
+  };
   readonly "GetCorporationsProjectsListing": {
     readonly domain: "corporationProjects";
-    readonly method: "getCorporationsProjectsListing";
+    readonly method: "list";
     readonly input: GetCorporationsProjectsListingInput;
     readonly output: GetCorporationsProjectsListingOutput;
   };
-  readonly "GetCharactersCosmeticsSkinr": {
-    readonly domain: "cosmetics";
-    readonly method: "getCharactersCosmeticsSkinr";
-    readonly input: GetCharactersCosmeticsSkinrInput;
-    readonly output: GetCharactersCosmeticsSkinrOutput;
-  };
-  readonly "GetCharactersCosmeticsSkinrComponents": {
-    readonly domain: "cosmetics";
-    readonly method: "getCharactersCosmeticsSkinrComponents";
-    readonly input: GetCharactersCosmeticsSkinrComponentsInput;
-    readonly output: GetCharactersCosmeticsSkinrComponentsOutput;
+  readonly "GetCorporationsProjectsContributors": {
+    readonly domain: "corporationProjects";
+    readonly method: "listContributors";
+    readonly input: GetCorporationsProjectsContributorsInput;
+    readonly output: GetCorporationsProjectsContributorsOutput;
   };
   readonly "GetCosmeticsSkinr": {
     readonly domain: "cosmetics";
-    readonly method: "getCosmeticsSkinr";
+    readonly method: "getSkinrLicense";
     readonly input: GetCosmeticsSkinrInput;
     readonly output: GetCosmeticsSkinrOutput;
   };
-  readonly "GetDogmaAttributes": {
-    readonly domain: "dogma";
-    readonly method: "getDogmaAttributes";
-    readonly input: GetDogmaAttributesInput;
-    readonly output: GetDogmaAttributesOutput;
+  readonly "GetCharactersCosmeticsSkinrComponents": {
+    readonly domain: "cosmetics";
+    readonly method: "listSkinrComponentLicenses";
+    readonly input: GetCharactersCosmeticsSkinrComponentsInput;
+    readonly output: GetCharactersCosmeticsSkinrComponentsOutput;
+  };
+  readonly "GetCharactersCosmeticsSkinr": {
+    readonly domain: "cosmetics";
+    readonly method: "listSkinrLicenses";
+    readonly input: GetCharactersCosmeticsSkinrInput;
+    readonly output: GetCharactersCosmeticsSkinrOutput;
   };
   readonly "GetDogmaAttributesAttributeId": {
     readonly domain: "dogma";
-    readonly method: "getDogmaAttributesAttributeId";
+    readonly method: "getAttribute";
     readonly input: GetDogmaAttributesAttributeIdInput;
     readonly output: GetDogmaAttributesAttributeIdOutput;
   };
   readonly "GetDogmaDynamicItemsTypeIdItemId": {
     readonly domain: "dogma";
-    readonly method: "getDogmaDynamicItemsTypeIdItemId";
+    readonly method: "getDynamicItem";
     readonly input: GetDogmaDynamicItemsTypeIdItemIdInput;
     readonly output: GetDogmaDynamicItemsTypeIdItemIdOutput;
   };
-  readonly "GetDogmaEffects": {
-    readonly domain: "dogma";
-    readonly method: "getDogmaEffects";
-    readonly input: GetDogmaEffectsInput;
-    readonly output: GetDogmaEffectsOutput;
-  };
   readonly "GetDogmaEffectsEffectId": {
     readonly domain: "dogma";
-    readonly method: "getDogmaEffectsEffectId";
+    readonly method: "getEffect";
     readonly input: GetDogmaEffectsEffectIdInput;
     readonly output: GetDogmaEffectsEffectIdOutput;
   };
+  readonly "GetDogmaAttributes": {
+    readonly domain: "dogma";
+    readonly method: "listAttributes";
+    readonly input: GetDogmaAttributesInput;
+    readonly output: GetDogmaAttributesOutput;
+  };
+  readonly "GetDogmaEffects": {
+    readonly domain: "dogma";
+    readonly method: "listEffects";
+    readonly input: GetDogmaEffectsInput;
+    readonly output: GetDogmaEffectsOutput;
+  };
+  readonly "GetFwLeaderboardsCharacters": {
+    readonly domain: "factionWarfare";
+    readonly method: "getCharacterLeaderboards";
+    readonly input: GetFwLeaderboardsCharactersInput;
+    readonly output: GetFwLeaderboardsCharactersOutput;
+  };
   readonly "GetCharactersCharacterIdFwStats": {
     readonly domain: "factionWarfare";
-    readonly method: "getCharactersCharacterIdFwStats";
+    readonly method: "getCharacterStats";
     readonly input: GetCharactersCharacterIdFwStatsInput;
     readonly output: GetCharactersCharacterIdFwStatsOutput;
   };
+  readonly "GetFwLeaderboardsCorporations": {
+    readonly domain: "factionWarfare";
+    readonly method: "getCorporationLeaderboards";
+    readonly input: GetFwLeaderboardsCorporationsInput;
+    readonly output: GetFwLeaderboardsCorporationsOutput;
+  };
   readonly "GetCorporationsCorporationIdFwStats": {
     readonly domain: "factionWarfare";
-    readonly method: "getCorporationsCorporationIdFwStats";
+    readonly method: "getCorporationStats";
     readonly input: GetCorporationsCorporationIdFwStatsInput;
     readonly output: GetCorporationsCorporationIdFwStatsOutput;
   };
   readonly "GetFwLeaderboards": {
     readonly domain: "factionWarfare";
-    readonly method: "getFwLeaderboards";
+    readonly method: "getFactionLeaderboards";
     readonly input: GetFwLeaderboardsInput;
     readonly output: GetFwLeaderboardsOutput;
   };
-  readonly "GetFwLeaderboardsCharacters": {
-    readonly domain: "factionWarfare";
-    readonly method: "getFwLeaderboardsCharacters";
-    readonly input: GetFwLeaderboardsCharactersInput;
-    readonly output: GetFwLeaderboardsCharactersOutput;
-  };
-  readonly "GetFwLeaderboardsCorporations": {
-    readonly domain: "factionWarfare";
-    readonly method: "getFwLeaderboardsCorporations";
-    readonly input: GetFwLeaderboardsCorporationsInput;
-    readonly output: GetFwLeaderboardsCorporationsOutput;
-  };
   readonly "GetFwStats": {
     readonly domain: "factionWarfare";
-    readonly method: "getFwStats";
+    readonly method: "listFactionStats";
     readonly input: GetFwStatsInput;
     readonly output: GetFwStatsOutput;
   };
   readonly "GetFwSystems": {
     readonly domain: "factionWarfare";
-    readonly method: "getFwSystems";
+    readonly method: "listSystems";
     readonly input: GetFwSystemsInput;
     readonly output: GetFwSystemsOutput;
   };
   readonly "GetFwWars": {
     readonly domain: "factionWarfare";
-    readonly method: "getFwWars";
+    readonly method: "listWars";
     readonly input: GetFwWarsInput;
     readonly output: GetFwWarsOutput;
   };
+  readonly "PostCharactersCharacterIdFittings": {
+    readonly domain: "fittings";
+    readonly method: "create";
+    readonly input: PostCharactersCharacterIdFittingsInput;
+    readonly output: PostCharactersCharacterIdFittingsOutput;
+  };
   readonly "DeleteCharactersCharacterIdFittingsFittingId": {
     readonly domain: "fittings";
-    readonly method: "deleteCharactersCharacterIdFittingsFittingId";
+    readonly method: "deleteFitting";
     readonly input: DeleteCharactersCharacterIdFittingsFittingIdInput;
     readonly output: DeleteCharactersCharacterIdFittingsFittingIdOutput;
   };
   readonly "GetCharactersCharacterIdFittings": {
     readonly domain: "fittings";
-    readonly method: "getCharactersCharacterIdFittings";
+    readonly method: "list";
     readonly input: GetCharactersCharacterIdFittingsInput;
     readonly output: GetCharactersCharacterIdFittingsOutput;
   };
-  readonly "PostCharactersCharacterIdFittings": {
-    readonly domain: "fittings";
-    readonly method: "postCharactersCharacterIdFittings";
-    readonly input: PostCharactersCharacterIdFittingsInput;
-    readonly output: PostCharactersCharacterIdFittingsOutput;
-  };
-  readonly "DeleteFleetsFleetIdMembersMemberId": {
+  readonly "PostFleetsFleetIdWingsWingIdSquads": {
     readonly domain: "fleets";
-    readonly method: "deleteFleetsFleetIdMembersMemberId";
-    readonly input: DeleteFleetsFleetIdMembersMemberIdInput;
-    readonly output: DeleteFleetsFleetIdMembersMemberIdOutput;
+    readonly method: "createSquad";
+    readonly input: PostFleetsFleetIdWingsWingIdSquadsInput;
+    readonly output: PostFleetsFleetIdWingsWingIdSquadsOutput;
+  };
+  readonly "PostFleetsFleetIdWings": {
+    readonly domain: "fleets";
+    readonly method: "createWing";
+    readonly input: PostFleetsFleetIdWingsInput;
+    readonly output: PostFleetsFleetIdWingsOutput;
   };
   readonly "DeleteFleetsFleetIdSquadsSquadId": {
     readonly domain: "fleets";
-    readonly method: "deleteFleetsFleetIdSquadsSquadId";
+    readonly method: "deleteSquad";
     readonly input: DeleteFleetsFleetIdSquadsSquadIdInput;
     readonly output: DeleteFleetsFleetIdSquadsSquadIdOutput;
   };
   readonly "DeleteFleetsFleetIdWingsWingId": {
     readonly domain: "fleets";
-    readonly method: "deleteFleetsFleetIdWingsWingId";
+    readonly method: "deleteWing";
     readonly input: DeleteFleetsFleetIdWingsWingIdInput;
     readonly output: DeleteFleetsFleetIdWingsWingIdOutput;
   };
-  readonly "GetCharactersCharacterIdFleet": {
-    readonly domain: "fleets";
-    readonly method: "getCharactersCharacterIdFleet";
-    readonly input: GetCharactersCharacterIdFleetInput;
-    readonly output: GetCharactersCharacterIdFleetOutput;
-  };
   readonly "GetFleetsFleetId": {
     readonly domain: "fleets";
-    readonly method: "getFleetsFleetId";
+    readonly method: "get";
     readonly input: GetFleetsFleetIdInput;
     readonly output: GetFleetsFleetIdOutput;
   };
+  readonly "GetCharactersCharacterIdFleet": {
+    readonly domain: "fleets";
+    readonly method: "getCharacterFleet";
+    readonly input: GetCharactersCharacterIdFleetInput;
+    readonly output: GetCharactersCharacterIdFleetOutput;
+  };
+  readonly "PostFleetsFleetIdMembers": {
+    readonly domain: "fleets";
+    readonly method: "inviteMember";
+    readonly input: PostFleetsFleetIdMembersInput;
+    readonly output: PostFleetsFleetIdMembersOutput;
+  };
   readonly "GetFleetsFleetIdMembers": {
     readonly domain: "fleets";
-    readonly method: "getFleetsFleetIdMembers";
+    readonly method: "listMembers";
     readonly input: GetFleetsFleetIdMembersInput;
     readonly output: GetFleetsFleetIdMembersOutput;
   };
   readonly "GetFleetsFleetIdWings": {
     readonly domain: "fleets";
-    readonly method: "getFleetsFleetIdWings";
+    readonly method: "listWings";
     readonly input: GetFleetsFleetIdWingsInput;
     readonly output: GetFleetsFleetIdWingsOutput;
   };
-  readonly "PostFleetsFleetIdMembers": {
-    readonly domain: "fleets";
-    readonly method: "postFleetsFleetIdMembers";
-    readonly input: PostFleetsFleetIdMembersInput;
-    readonly output: PostFleetsFleetIdMembersOutput;
-  };
-  readonly "PostFleetsFleetIdWings": {
-    readonly domain: "fleets";
-    readonly method: "postFleetsFleetIdWings";
-    readonly input: PostFleetsFleetIdWingsInput;
-    readonly output: PostFleetsFleetIdWingsOutput;
-  };
-  readonly "PostFleetsFleetIdWingsWingIdSquads": {
-    readonly domain: "fleets";
-    readonly method: "postFleetsFleetIdWingsWingIdSquads";
-    readonly input: PostFleetsFleetIdWingsWingIdSquadsInput;
-    readonly output: PostFleetsFleetIdWingsWingIdSquadsOutput;
-  };
-  readonly "PutFleetsFleetId": {
-    readonly domain: "fleets";
-    readonly method: "putFleetsFleetId";
-    readonly input: PutFleetsFleetIdInput;
-    readonly output: PutFleetsFleetIdOutput;
-  };
   readonly "PutFleetsFleetIdMembersMemberId": {
     readonly domain: "fleets";
-    readonly method: "putFleetsFleetIdMembersMemberId";
+    readonly method: "moveMember";
     readonly input: PutFleetsFleetIdMembersMemberIdInput;
     readonly output: PutFleetsFleetIdMembersMemberIdOutput;
   };
+  readonly "DeleteFleetsFleetIdMembersMemberId": {
+    readonly domain: "fleets";
+    readonly method: "removeMember";
+    readonly input: DeleteFleetsFleetIdMembersMemberIdInput;
+    readonly output: DeleteFleetsFleetIdMembersMemberIdOutput;
+  };
   readonly "PutFleetsFleetIdSquadsSquadId": {
     readonly domain: "fleets";
-    readonly method: "putFleetsFleetIdSquadsSquadId";
+    readonly method: "renameSquad";
     readonly input: PutFleetsFleetIdSquadsSquadIdInput;
     readonly output: PutFleetsFleetIdSquadsSquadIdOutput;
   };
   readonly "PutFleetsFleetIdWingsWingId": {
     readonly domain: "fleets";
-    readonly method: "putFleetsFleetIdWingsWingId";
+    readonly method: "renameWing";
     readonly input: PutFleetsFleetIdWingsWingIdInput;
     readonly output: PutFleetsFleetIdWingsWingIdOutput;
   };
-  readonly "GetCharactersFreelanceJobsListing": {
+  readonly "PutFleetsFleetId": {
+    readonly domain: "fleets";
+    readonly method: "update";
+    readonly input: PutFleetsFleetIdInput;
+    readonly output: PutFleetsFleetIdOutput;
+  };
+  readonly "GetFreelanceJobsDetail": {
     readonly domain: "freelanceJobs";
-    readonly method: "getCharactersFreelanceJobsListing";
-    readonly input: GetCharactersFreelanceJobsListingInput;
-    readonly output: GetCharactersFreelanceJobsListingOutput;
+    readonly method: "get";
+    readonly input: GetFreelanceJobsDetailInput;
+    readonly output: GetFreelanceJobsDetailOutput;
   };
   readonly "GetCharactersFreelanceJobsParticipation": {
     readonly domain: "freelanceJobs";
-    readonly method: "getCharactersFreelanceJobsParticipation";
+    readonly method: "getCharacterParticipation";
     readonly input: GetCharactersFreelanceJobsParticipationInput;
     readonly output: GetCharactersFreelanceJobsParticipationOutput;
   };
+  readonly "GetCharactersFreelanceJobsListing": {
+    readonly domain: "freelanceJobs";
+    readonly method: "listCharacterJobs";
+    readonly input: GetCharactersFreelanceJobsListingInput;
+    readonly output: GetCharactersFreelanceJobsListingOutput;
+  };
   readonly "GetCorporationsFreelanceJobsListing": {
     readonly domain: "freelanceJobs";
-    readonly method: "getCorporationsFreelanceJobsListing";
+    readonly method: "listCorporationJobs";
     readonly input: GetCorporationsFreelanceJobsListingInput;
     readonly output: GetCorporationsFreelanceJobsListingOutput;
   };
   readonly "GetCorporationsFreelanceJobsParticipants": {
     readonly domain: "freelanceJobs";
-    readonly method: "getCorporationsFreelanceJobsParticipants";
+    readonly method: "listParticipants";
     readonly input: GetCorporationsFreelanceJobsParticipantsInput;
     readonly output: GetCorporationsFreelanceJobsParticipantsOutput;
   };
-  readonly "GetFreelanceJobsDetail": {
-    readonly domain: "freelanceJobs";
-    readonly method: "getFreelanceJobsDetail";
-    readonly input: GetFreelanceJobsDetailInput;
-    readonly output: GetFreelanceJobsDetailOutput;
-  };
   readonly "GetFreelanceJobsListing": {
     readonly domain: "freelanceJobs";
-    readonly method: "getFreelanceJobsListing";
+    readonly method: "listPublic";
     readonly input: GetFreelanceJobsListingInput;
     readonly output: GetFreelanceJobsListingOutput;
   };
   readonly "GetIncursions": {
     readonly domain: "incursions";
-    readonly method: "getIncursions";
+    readonly method: "list";
     readonly input: GetIncursionsInput;
     readonly output: GetIncursionsOutput;
   };
   readonly "GetCharactersCharacterIdIndustryJobs": {
     readonly domain: "industry";
-    readonly method: "getCharactersCharacterIdIndustryJobs";
+    readonly method: "listCharacterJobs";
     readonly input: GetCharactersCharacterIdIndustryJobsInput;
     readonly output: GetCharactersCharacterIdIndustryJobsOutput;
   };
   readonly "GetCharactersCharacterIdMining": {
     readonly domain: "industry";
-    readonly method: "getCharactersCharacterIdMining";
+    readonly method: "listCharacterMiningLedger";
     readonly input: GetCharactersCharacterIdMiningInput;
     readonly output: GetCharactersCharacterIdMiningOutput;
   };
-  readonly "GetCorporationCorporationIdMiningExtractions": {
-    readonly domain: "industry";
-    readonly method: "getCorporationCorporationIdMiningExtractions";
-    readonly input: GetCorporationCorporationIdMiningExtractionsInput;
-    readonly output: GetCorporationCorporationIdMiningExtractionsOutput;
-  };
-  readonly "GetCorporationCorporationIdMiningObservers": {
-    readonly domain: "industry";
-    readonly method: "getCorporationCorporationIdMiningObservers";
-    readonly input: GetCorporationCorporationIdMiningObserversInput;
-    readonly output: GetCorporationCorporationIdMiningObserversOutput;
-  };
-  readonly "GetCorporationCorporationIdMiningObserversObserverId": {
-    readonly domain: "industry";
-    readonly method: "getCorporationCorporationIdMiningObserversObserverId";
-    readonly input: GetCorporationCorporationIdMiningObserversObserverIdInput;
-    readonly output: GetCorporationCorporationIdMiningObserversObserverIdOutput;
-  };
   readonly "GetCorporationsCorporationIdIndustryJobs": {
     readonly domain: "industry";
-    readonly method: "getCorporationsCorporationIdIndustryJobs";
+    readonly method: "listCorporationJobs";
     readonly input: GetCorporationsCorporationIdIndustryJobsInput;
     readonly output: GetCorporationsCorporationIdIndustryJobsOutput;
   };
   readonly "GetIndustryFacilities": {
     readonly domain: "industry";
-    readonly method: "getIndustryFacilities";
+    readonly method: "listFacilities";
     readonly input: GetIndustryFacilitiesInput;
     readonly output: GetIndustryFacilitiesOutput;
   };
+  readonly "GetCorporationCorporationIdMiningObservers": {
+    readonly domain: "industry";
+    readonly method: "listMiningObservers";
+    readonly input: GetCorporationCorporationIdMiningObserversInput;
+    readonly output: GetCorporationCorporationIdMiningObserversOutput;
+  };
+  readonly "GetCorporationCorporationIdMiningExtractions": {
+    readonly domain: "industry";
+    readonly method: "listMoonExtractionTimers";
+    readonly input: GetCorporationCorporationIdMiningExtractionsInput;
+    readonly output: GetCorporationCorporationIdMiningExtractionsOutput;
+  };
+  readonly "GetCorporationCorporationIdMiningObserversObserverId": {
+    readonly domain: "industry";
+    readonly method: "listObservedMining";
+    readonly input: GetCorporationCorporationIdMiningObserversObserverIdInput;
+    readonly output: GetCorporationCorporationIdMiningObserversObserverIdOutput;
+  };
   readonly "GetIndustrySystems": {
     readonly domain: "industry";
-    readonly method: "getIndustrySystems";
+    readonly method: "listSystemCostIndices";
     readonly input: GetIndustrySystemsInput;
     readonly output: GetIndustrySystemsOutput;
   };
   readonly "GetInsurancePrices": {
     readonly domain: "insurance";
-    readonly method: "getInsurancePrices";
+    readonly method: "listPrices";
     readonly input: GetInsurancePricesInput;
     readonly output: GetInsurancePricesOutput;
   };
+  readonly "GetKillmailsKillmailIdKillmailHash": {
+    readonly domain: "killmails";
+    readonly method: "get";
+    readonly input: GetKillmailsKillmailIdKillmailHashInput;
+    readonly output: GetKillmailsKillmailIdKillmailHashOutput;
+  };
   readonly "GetCharactersCharacterIdKillmailsRecent": {
     readonly domain: "killmails";
-    readonly method: "getCharactersCharacterIdKillmailsRecent";
+    readonly method: "listRecentForCharacter";
     readonly input: GetCharactersCharacterIdKillmailsRecentInput;
     readonly output: GetCharactersCharacterIdKillmailsRecentOutput;
   };
   readonly "GetCorporationsCorporationIdKillmailsRecent": {
     readonly domain: "killmails";
-    readonly method: "getCorporationsCorporationIdKillmailsRecent";
+    readonly method: "listRecentForCorporation";
     readonly input: GetCorporationsCorporationIdKillmailsRecentInput;
     readonly output: GetCorporationsCorporationIdKillmailsRecentOutput;
   };
-  readonly "GetKillmailsKillmailIdKillmailHash": {
-    readonly domain: "killmails";
-    readonly method: "getKillmailsKillmailIdKillmailHash";
-    readonly input: GetKillmailsKillmailIdKillmailHashInput;
-    readonly output: GetKillmailsKillmailIdKillmailHashOutput;
-  };
   readonly "GetCharactersCharacterIdLocation": {
     readonly domain: "location";
-    readonly method: "getCharactersCharacterIdLocation";
+    readonly method: "get";
     readonly input: GetCharactersCharacterIdLocationInput;
     readonly output: GetCharactersCharacterIdLocationOutput;
   };
-  readonly "GetCharactersCharacterIdOnline": {
-    readonly domain: "location";
-    readonly method: "getCharactersCharacterIdOnline";
-    readonly input: GetCharactersCharacterIdOnlineInput;
-    readonly output: GetCharactersCharacterIdOnlineOutput;
-  };
   readonly "GetCharactersCharacterIdShip": {
     readonly domain: "location";
-    readonly method: "getCharactersCharacterIdShip";
+    readonly method: "getCurrentShip";
     readonly input: GetCharactersCharacterIdShipInput;
     readonly output: GetCharactersCharacterIdShipOutput;
   };
+  readonly "GetCharactersCharacterIdOnline": {
+    readonly domain: "location";
+    readonly method: "getOnlineStatus";
+    readonly input: GetCharactersCharacterIdOnlineInput;
+    readonly output: GetCharactersCharacterIdOnlineOutput;
+  };
   readonly "GetCharactersCharacterIdLoyaltyPoints": {
     readonly domain: "loyalty";
-    readonly method: "getCharactersCharacterIdLoyaltyPoints";
+    readonly method: "listPoints";
     readonly input: GetCharactersCharacterIdLoyaltyPointsInput;
     readonly output: GetCharactersCharacterIdLoyaltyPointsOutput;
   };
   readonly "GetLoyaltyStoresCorporationIdOffers": {
     readonly domain: "loyalty";
-    readonly method: "getLoyaltyStoresCorporationIdOffers";
+    readonly method: "listStoreOffers";
     readonly input: GetLoyaltyStoresCorporationIdOffersInput;
     readonly output: GetLoyaltyStoresCorporationIdOffersOutput;
   };
+  readonly "PostCharactersCharacterIdMailLabels": {
+    readonly domain: "mail";
+    readonly method: "createLabel";
+    readonly input: PostCharactersCharacterIdMailLabelsInput;
+    readonly output: PostCharactersCharacterIdMailLabelsOutput;
+  };
   readonly "DeleteCharactersCharacterIdMailLabelsLabelId": {
     readonly domain: "mail";
-    readonly method: "deleteCharactersCharacterIdMailLabelsLabelId";
+    readonly method: "deleteLabel";
     readonly input: DeleteCharactersCharacterIdMailLabelsLabelIdInput;
     readonly output: DeleteCharactersCharacterIdMailLabelsLabelIdOutput;
   };
   readonly "DeleteCharactersCharacterIdMailMailId": {
     readonly domain: "mail";
-    readonly method: "deleteCharactersCharacterIdMailMailId";
+    readonly method: "deleteMail";
     readonly input: DeleteCharactersCharacterIdMailMailIdInput;
     readonly output: DeleteCharactersCharacterIdMailMailIdOutput;
   };
+  readonly "GetCharactersCharacterIdMailMailId": {
+    readonly domain: "mail";
+    readonly method: "get";
+    readonly input: GetCharactersCharacterIdMailMailIdInput;
+    readonly output: GetCharactersCharacterIdMailMailIdOutput;
+  };
   readonly "GetCharactersCharacterIdMail": {
     readonly domain: "mail";
-    readonly method: "getCharactersCharacterIdMail";
+    readonly method: "listHeaders";
     readonly input: GetCharactersCharacterIdMailInput;
     readonly output: GetCharactersCharacterIdMailOutput;
   };
   readonly "GetCharactersCharacterIdMailLabels": {
     readonly domain: "mail";
-    readonly method: "getCharactersCharacterIdMailLabels";
+    readonly method: "listLabels";
     readonly input: GetCharactersCharacterIdMailLabelsInput;
     readonly output: GetCharactersCharacterIdMailLabelsOutput;
   };
   readonly "GetCharactersCharacterIdMailLists": {
     readonly domain: "mail";
-    readonly method: "getCharactersCharacterIdMailLists";
+    readonly method: "listMailingLists";
     readonly input: GetCharactersCharacterIdMailListsInput;
     readonly output: GetCharactersCharacterIdMailListsOutput;
   };
-  readonly "GetCharactersCharacterIdMailMailId": {
-    readonly domain: "mail";
-    readonly method: "getCharactersCharacterIdMailMailId";
-    readonly input: GetCharactersCharacterIdMailMailIdInput;
-    readonly output: GetCharactersCharacterIdMailMailIdOutput;
-  };
   readonly "PostCharactersCharacterIdMail": {
     readonly domain: "mail";
-    readonly method: "postCharactersCharacterIdMail";
+    readonly method: "send";
     readonly input: PostCharactersCharacterIdMailInput;
     readonly output: PostCharactersCharacterIdMailOutput;
   };
-  readonly "PostCharactersCharacterIdMailLabels": {
-    readonly domain: "mail";
-    readonly method: "postCharactersCharacterIdMailLabels";
-    readonly input: PostCharactersCharacterIdMailLabelsInput;
-    readonly output: PostCharactersCharacterIdMailLabelsOutput;
-  };
   readonly "PutCharactersCharacterIdMailMailId": {
     readonly domain: "mail";
-    readonly method: "putCharactersCharacterIdMailMailId";
+    readonly method: "update";
     readonly input: PutCharactersCharacterIdMailMailIdInput;
     readonly output: PutCharactersCharacterIdMailMailIdOutput;
   };
-  readonly "GetCharactersCharacterIdOrders": {
-    readonly domain: "market";
-    readonly method: "getCharactersCharacterIdOrders";
-    readonly input: GetCharactersCharacterIdOrdersInput;
-    readonly output: GetCharactersCharacterIdOrdersOutput;
-  };
-  readonly "GetCharactersCharacterIdOrdersHistory": {
-    readonly domain: "market";
-    readonly method: "getCharactersCharacterIdOrdersHistory";
-    readonly input: GetCharactersCharacterIdOrdersHistoryInput;
-    readonly output: GetCharactersCharacterIdOrdersHistoryOutput;
-  };
-  readonly "GetCorporationsCorporationIdOrders": {
-    readonly domain: "market";
-    readonly method: "getCorporationsCorporationIdOrders";
-    readonly input: GetCorporationsCorporationIdOrdersInput;
-    readonly output: GetCorporationsCorporationIdOrdersOutput;
-  };
-  readonly "GetCorporationsCorporationIdOrdersHistory": {
-    readonly domain: "market";
-    readonly method: "getCorporationsCorporationIdOrdersHistory";
-    readonly input: GetCorporationsCorporationIdOrdersHistoryInput;
-    readonly output: GetCorporationsCorporationIdOrdersHistoryOutput;
-  };
-  readonly "GetMarketsGroups": {
-    readonly domain: "market";
-    readonly method: "getMarketsGroups";
-    readonly input: GetMarketsGroupsInput;
-    readonly output: GetMarketsGroupsOutput;
-  };
   readonly "GetMarketsGroupsMarketGroupId": {
     readonly domain: "market";
-    readonly method: "getMarketsGroupsMarketGroupId";
+    readonly method: "getGroup";
     readonly input: GetMarketsGroupsMarketGroupIdInput;
     readonly output: GetMarketsGroupsMarketGroupIdOutput;
   };
+  readonly "GetCharactersCharacterIdOrdersHistory": {
+    readonly domain: "market";
+    readonly method: "listCharacterOrderHistory";
+    readonly input: GetCharactersCharacterIdOrdersHistoryInput;
+    readonly output: GetCharactersCharacterIdOrdersHistoryOutput;
+  };
+  readonly "GetCharactersCharacterIdOrders": {
+    readonly domain: "market";
+    readonly method: "listCharacterOrders";
+    readonly input: GetCharactersCharacterIdOrdersInput;
+    readonly output: GetCharactersCharacterIdOrdersOutput;
+  };
+  readonly "GetCorporationsCorporationIdOrdersHistory": {
+    readonly domain: "market";
+    readonly method: "listCorporationOrderHistory";
+    readonly input: GetCorporationsCorporationIdOrdersHistoryInput;
+    readonly output: GetCorporationsCorporationIdOrdersHistoryOutput;
+  };
+  readonly "GetCorporationsCorporationIdOrders": {
+    readonly domain: "market";
+    readonly method: "listCorporationOrders";
+    readonly input: GetCorporationsCorporationIdOrdersInput;
+    readonly output: GetCorporationsCorporationIdOrdersOutput;
+  };
+  readonly "GetMarketsGroups": {
+    readonly domain: "market";
+    readonly method: "listGroups";
+    readonly input: GetMarketsGroupsInput;
+    readonly output: GetMarketsGroupsOutput;
+  };
   readonly "GetMarketsPrices": {
     readonly domain: "market";
-    readonly method: "getMarketsPrices";
+    readonly method: "listPrices";
     readonly input: GetMarketsPricesInput;
     readonly output: GetMarketsPricesOutput;
   };
   readonly "GetMarketsRegionIdHistory": {
     readonly domain: "market";
-    readonly method: "getMarketsRegionIdHistory";
+    readonly method: "listRegionHistory";
     readonly input: GetMarketsRegionIdHistoryInput;
     readonly output: GetMarketsRegionIdHistoryOutput;
   };
   readonly "GetMarketsRegionIdOrders": {
     readonly domain: "market";
-    readonly method: "getMarketsRegionIdOrders";
+    readonly method: "listRegionOrders";
     readonly input: GetMarketsRegionIdOrdersInput;
     readonly output: GetMarketsRegionIdOrdersOutput;
   };
   readonly "GetMarketsRegionIdTypes": {
     readonly domain: "market";
-    readonly method: "getMarketsRegionIdTypes";
+    readonly method: "listRegionTypes";
     readonly input: GetMarketsRegionIdTypesInput;
     readonly output: GetMarketsRegionIdTypesOutput;
   };
   readonly "GetMarketsStructuresStructureId": {
     readonly domain: "market";
-    readonly method: "getMarketsStructuresStructureId";
+    readonly method: "listStructureOrders";
     readonly input: GetMarketsStructuresStructureIdInput;
     readonly output: GetMarketsStructuresStructureIdOutput;
   };
   readonly "GetMetaChangelog": {
     readonly domain: "meta";
-    readonly method: "getMetaChangelog";
+    readonly method: "getChangelog";
     readonly input: GetMetaChangelogInput;
     readonly output: GetMetaChangelogOutput;
   };
-  readonly "GetMetaCompatibilityDates": {
-    readonly domain: "meta";
-    readonly method: "getMetaCompatibilityDates";
-    readonly input: GetMetaCompatibilityDatesInput;
-    readonly output: GetMetaCompatibilityDatesOutput;
-  };
-  readonly "GetMetaName": {
-    readonly domain: "meta";
-    readonly method: "getMetaName";
-    readonly input: GetMetaNameInput;
-    readonly output: GetMetaNameOutput;
-  };
   readonly "GetMetaStatus": {
     readonly domain: "meta";
-    readonly method: "getMetaStatus";
+    readonly method: "getHealthStatus";
     readonly input: GetMetaStatusInput;
     readonly output: GetMetaStatusOutput;
   };
-  readonly "GetCharactersMilitaryCampaignsObjectivesListing": {
-    readonly domain: "militaryCampaigns";
-    readonly method: "getCharactersMilitaryCampaignsObjectivesListing";
-    readonly input: GetCharactersMilitaryCampaignsObjectivesListingInput;
-    readonly output: GetCharactersMilitaryCampaignsObjectivesListingOutput;
+  readonly "GetMetaName": {
+    readonly domain: "meta";
+    readonly method: "getName";
+    readonly input: GetMetaNameInput;
+    readonly output: GetMetaNameOutput;
   };
-  readonly "GetCharactersMilitaryCampaignsObjectivesParticipation": {
-    readonly domain: "militaryCampaigns";
-    readonly method: "getCharactersMilitaryCampaignsObjectivesParticipation";
-    readonly input: GetCharactersMilitaryCampaignsObjectivesParticipationInput;
-    readonly output: GetCharactersMilitaryCampaignsObjectivesParticipationOutput;
+  readonly "GetMetaCompatibilityDates": {
+    readonly domain: "meta";
+    readonly method: "listCompatibilityDates";
+    readonly input: GetMetaCompatibilityDatesInput;
+    readonly output: GetMetaCompatibilityDatesOutput;
   };
   readonly "GetMilitaryCampaignsDetail": {
     readonly domain: "militaryCampaigns";
-    readonly method: "getMilitaryCampaignsDetail";
+    readonly method: "getCampaign";
     readonly input: GetMilitaryCampaignsDetailInput;
     readonly output: GetMilitaryCampaignsDetailOutput;
   };
-  readonly "GetMilitaryCampaignsListing": {
+  readonly "GetCharactersMilitaryCampaignsObjectivesParticipation": {
     readonly domain: "militaryCampaigns";
-    readonly method: "getMilitaryCampaignsListing";
-    readonly input: GetMilitaryCampaignsListingInput;
-    readonly output: GetMilitaryCampaignsListingOutput;
+    readonly method: "getCharacterObjectiveParticipation";
+    readonly input: GetCharactersMilitaryCampaignsObjectivesParticipationInput;
+    readonly output: GetCharactersMilitaryCampaignsObjectivesParticipationOutput;
   };
   readonly "GetMilitaryCampaignsObjectivesDetail": {
     readonly domain: "militaryCampaigns";
-    readonly method: "getMilitaryCampaignsObjectivesDetail";
+    readonly method: "getObjective";
     readonly input: GetMilitaryCampaignsObjectivesDetailInput;
     readonly output: GetMilitaryCampaignsObjectivesDetailOutput;
   };
+  readonly "GetMilitaryCampaignsListing": {
+    readonly domain: "militaryCampaigns";
+    readonly method: "listCampaigns";
+    readonly input: GetMilitaryCampaignsListingInput;
+    readonly output: GetMilitaryCampaignsListingOutput;
+  };
+  readonly "GetCharactersMilitaryCampaignsObjectivesListing": {
+    readonly domain: "militaryCampaigns";
+    readonly method: "listCharacterObjectiveParticipations";
+    readonly input: GetCharactersMilitaryCampaignsObjectivesListingInput;
+    readonly output: GetCharactersMilitaryCampaignsObjectivesListingOutput;
+  };
   readonly "GetMilitaryCampaignsObjectivesListing": {
     readonly domain: "militaryCampaigns";
-    readonly method: "getMilitaryCampaignsObjectivesListing";
+    readonly method: "listObjectives";
     readonly input: GetMilitaryCampaignsObjectivesListingInput;
     readonly output: GetMilitaryCampaignsObjectivesListingOutput;
   };
-  readonly "GetCharactersParagonHubSkinr": {
-    readonly domain: "paragonHub";
-    readonly method: "getCharactersParagonHubSkinr";
-    readonly input: GetCharactersParagonHubSkinrInput;
-    readonly output: GetCharactersParagonHubSkinrOutput;
-  };
-  readonly "GetParagonHubSkinr": {
-    readonly domain: "paragonHub";
-    readonly method: "getParagonHubSkinr";
-    readonly input: GetParagonHubSkinrInput;
-    readonly output: GetParagonHubSkinrOutput;
-  };
   readonly "GetParagonHubSkinrAlliances": {
     readonly domain: "paragonHub";
-    readonly method: "getParagonHubSkinrAlliances";
+    readonly method: "listListingsForAlliance";
     readonly input: GetParagonHubSkinrAlliancesInput;
     readonly output: GetParagonHubSkinrAlliancesOutput;
   };
   readonly "GetParagonHubSkinrCharacters": {
     readonly domain: "paragonHub";
-    readonly method: "getParagonHubSkinrCharacters";
+    readonly method: "listListingsForCharacter";
     readonly input: GetParagonHubSkinrCharactersInput;
     readonly output: GetParagonHubSkinrCharactersOutput;
   };
   readonly "GetParagonHubSkinrCorporations": {
     readonly domain: "paragonHub";
-    readonly method: "getParagonHubSkinrCorporations";
+    readonly method: "listListingsForCorporation";
     readonly input: GetParagonHubSkinrCorporationsInput;
     readonly output: GetParagonHubSkinrCorporationsOutput;
   };
-  readonly "GetCharactersCharacterIdPlanets": {
-    readonly domain: "planetaryInteraction";
-    readonly method: "getCharactersCharacterIdPlanets";
-    readonly input: GetCharactersCharacterIdPlanetsInput;
-    readonly output: GetCharactersCharacterIdPlanetsOutput;
+  readonly "GetCharactersParagonHubSkinr": {
+    readonly domain: "paragonHub";
+    readonly method: "listPostedListings";
+    readonly input: GetCharactersParagonHubSkinrInput;
+    readonly output: GetCharactersParagonHubSkinrOutput;
+  };
+  readonly "GetParagonHubSkinr": {
+    readonly domain: "paragonHub";
+    readonly method: "listPublicListings";
+    readonly input: GetParagonHubSkinrInput;
+    readonly output: GetParagonHubSkinrOutput;
   };
   readonly "GetCharactersCharacterIdPlanetsPlanetId": {
     readonly domain: "planetaryInteraction";
-    readonly method: "getCharactersCharacterIdPlanetsPlanetId";
+    readonly method: "getColonyLayout";
     readonly input: GetCharactersCharacterIdPlanetsPlanetIdInput;
     readonly output: GetCharactersCharacterIdPlanetsPlanetIdOutput;
   };
-  readonly "GetCorporationsCorporationIdCustomsOffices": {
-    readonly domain: "planetaryInteraction";
-    readonly method: "getCorporationsCorporationIdCustomsOffices";
-    readonly input: GetCorporationsCorporationIdCustomsOfficesInput;
-    readonly output: GetCorporationsCorporationIdCustomsOfficesOutput;
-  };
   readonly "GetUniverseSchematicsSchematicId": {
     readonly domain: "planetaryInteraction";
-    readonly method: "getUniverseSchematicsSchematicId";
+    readonly method: "getSchematic";
     readonly input: GetUniverseSchematicsSchematicIdInput;
     readonly output: GetUniverseSchematicsSchematicIdOutput;
   };
+  readonly "GetCharactersCharacterIdPlanets": {
+    readonly domain: "planetaryInteraction";
+    readonly method: "listColonies";
+    readonly input: GetCharactersCharacterIdPlanetsInput;
+    readonly output: GetCharactersCharacterIdPlanetsOutput;
+  };
+  readonly "GetCorporationsCorporationIdCustomsOffices": {
+    readonly domain: "planetaryInteraction";
+    readonly method: "listCustomsOffices";
+    readonly input: GetCorporationsCorporationIdCustomsOfficesInput;
+    readonly output: GetCorporationsCorporationIdCustomsOfficesOutput;
+  };
   readonly "PostRoute": {
     readonly domain: "routes";
-    readonly method: "postRoute";
+    readonly method: "calculate";
     readonly input: PostRouteInput;
     readonly output: PostRouteOutput;
   };
   readonly "GetCharactersCharacterIdSearch": {
     readonly domain: "search";
-    readonly method: "getCharactersCharacterIdSearch";
+    readonly method: "search";
     readonly input: GetCharactersCharacterIdSearchInput;
     readonly output: GetCharactersCharacterIdSearchOutput;
   };
   readonly "GetCharactersCharacterIdAttributes": {
     readonly domain: "skills";
-    readonly method: "getCharactersCharacterIdAttributes";
+    readonly method: "getAttributes";
     readonly input: GetCharactersCharacterIdAttributesInput;
     readonly output: GetCharactersCharacterIdAttributesOutput;
   };
   readonly "GetCharactersCharacterIdSkillqueue": {
     readonly domain: "skills";
-    readonly method: "getCharactersCharacterIdSkillqueue";
+    readonly method: "getSkillQueue";
     readonly input: GetCharactersCharacterIdSkillqueueInput;
     readonly output: GetCharactersCharacterIdSkillqueueOutput;
   };
   readonly "GetCharactersCharacterIdSkills": {
     readonly domain: "skills";
-    readonly method: "getCharactersCharacterIdSkills";
+    readonly method: "getSkills";
     readonly input: GetCharactersCharacterIdSkillsInput;
     readonly output: GetCharactersCharacterIdSkillsOutput;
   };
   readonly "GetSovereigntyCampaigns": {
     readonly domain: "sovereignty";
-    readonly method: "getSovereigntyCampaigns";
+    readonly method: "listCampaigns";
     readonly input: GetSovereigntyCampaignsInput;
     readonly output: GetSovereigntyCampaignsOutput;
   };
   readonly "GetSovereigntySystems": {
     readonly domain: "sovereignty";
-    readonly method: "getSovereigntySystems";
+    readonly method: "listSystems";
     readonly input: GetSovereigntySystemsInput;
     readonly output: GetSovereigntySystemsOutput;
   };
   readonly "GetStatus": {
     readonly domain: "status";
-    readonly method: "getStatus";
+    readonly method: "get";
     readonly input: GetStatusInput;
     readonly output: GetStatusOutput;
   };
   readonly "GetCharactersStructuresMercenaryDensDetail": {
     readonly domain: "structures";
-    readonly method: "getCharactersStructuresMercenaryDensDetail";
+    readonly method: "getMercenaryDen";
     readonly input: GetCharactersStructuresMercenaryDensDetailInput;
     readonly output: GetCharactersStructuresMercenaryDensDetailOutput;
   };
-  readonly "GetCharactersStructuresMercenaryDensListing": {
-    readonly domain: "structures";
-    readonly method: "getCharactersStructuresMercenaryDensListing";
-    readonly input: GetCharactersStructuresMercenaryDensListingInput;
-    readonly output: GetCharactersStructuresMercenaryDensListingOutput;
-  };
   readonly "GetCorporationsStructuresSkyhooksDetail": {
     readonly domain: "structures";
-    readonly method: "getCorporationsStructuresSkyhooksDetail";
+    readonly method: "getSkyhook";
     readonly input: GetCorporationsStructuresSkyhooksDetailInput;
     readonly output: GetCorporationsStructuresSkyhooksDetailOutput;
   };
-  readonly "GetCorporationsStructuresSkyhooksListing": {
-    readonly domain: "structures";
-    readonly method: "getCorporationsStructuresSkyhooksListing";
-    readonly input: GetCorporationsStructuresSkyhooksListingInput;
-    readonly output: GetCorporationsStructuresSkyhooksListingOutput;
-  };
   readonly "GetCorporationsStructuresSovereigntyHubsDetail": {
     readonly domain: "structures";
-    readonly method: "getCorporationsStructuresSovereigntyHubsDetail";
+    readonly method: "getSovereigntyHub";
     readonly input: GetCorporationsStructuresSovereigntyHubsDetailInput;
     readonly output: GetCorporationsStructuresSovereigntyHubsDetailOutput;
   };
+  readonly "GetCharactersStructuresMercenaryDensListing": {
+    readonly domain: "structures";
+    readonly method: "listMercenaryDens";
+    readonly input: GetCharactersStructuresMercenaryDensListingInput;
+    readonly output: GetCharactersStructuresMercenaryDensListingOutput;
+  };
+  readonly "GetCorporationsStructuresSkyhooksListing": {
+    readonly domain: "structures";
+    readonly method: "listSkyhooks";
+    readonly input: GetCorporationsStructuresSkyhooksListingInput;
+    readonly output: GetCorporationsStructuresSkyhooksListingOutput;
+  };
   readonly "GetCorporationsStructuresSovereigntyHubsListing": {
     readonly domain: "structures";
-    readonly method: "getCorporationsStructuresSovereigntyHubsListing";
+    readonly method: "listSovereigntyHubs";
     readonly input: GetCorporationsStructuresSovereigntyHubsListingInput;
     readonly output: GetCorporationsStructuresSovereigntyHubsListingOutput;
   };
-  readonly "GetUniverseAncestries": {
-    readonly domain: "universe";
-    readonly method: "getUniverseAncestries";
-    readonly input: GetUniverseAncestriesInput;
-    readonly output: GetUniverseAncestriesOutput;
-  };
   readonly "GetUniverseAsteroidBeltsAsteroidBeltId": {
     readonly domain: "universe";
-    readonly method: "getUniverseAsteroidBeltsAsteroidBeltId";
+    readonly method: "getAsteroidBelt";
     readonly input: GetUniverseAsteroidBeltsAsteroidBeltIdInput;
     readonly output: GetUniverseAsteroidBeltsAsteroidBeltIdOutput;
   };
-  readonly "GetUniverseBloodlines": {
-    readonly domain: "universe";
-    readonly method: "getUniverseBloodlines";
-    readonly input: GetUniverseBloodlinesInput;
-    readonly output: GetUniverseBloodlinesOutput;
-  };
-  readonly "GetUniverseCategories": {
-    readonly domain: "universe";
-    readonly method: "getUniverseCategories";
-    readonly input: GetUniverseCategoriesInput;
-    readonly output: GetUniverseCategoriesOutput;
-  };
-  readonly "GetUniverseCategoriesCategoryId": {
-    readonly domain: "universe";
-    readonly method: "getUniverseCategoriesCategoryId";
-    readonly input: GetUniverseCategoriesCategoryIdInput;
-    readonly output: GetUniverseCategoriesCategoryIdOutput;
-  };
-  readonly "GetUniverseConstellations": {
-    readonly domain: "universe";
-    readonly method: "getUniverseConstellations";
-    readonly input: GetUniverseConstellationsInput;
-    readonly output: GetUniverseConstellationsOutput;
-  };
   readonly "GetUniverseConstellationsConstellationId": {
     readonly domain: "universe";
-    readonly method: "getUniverseConstellationsConstellationId";
+    readonly method: "getConstellation";
     readonly input: GetUniverseConstellationsConstellationIdInput;
     readonly output: GetUniverseConstellationsConstellationIdOutput;
   };
-  readonly "GetUniverseFactions": {
-    readonly domain: "universe";
-    readonly method: "getUniverseFactions";
-    readonly input: GetUniverseFactionsInput;
-    readonly output: GetUniverseFactionsOutput;
-  };
-  readonly "GetUniverseGraphics": {
-    readonly domain: "universe";
-    readonly method: "getUniverseGraphics";
-    readonly input: GetUniverseGraphicsInput;
-    readonly output: GetUniverseGraphicsOutput;
-  };
   readonly "GetUniverseGraphicsGraphicId": {
     readonly domain: "universe";
-    readonly method: "getUniverseGraphicsGraphicId";
+    readonly method: "getGraphic";
     readonly input: GetUniverseGraphicsGraphicIdInput;
     readonly output: GetUniverseGraphicsGraphicIdOutput;
   };
-  readonly "GetUniverseGroups": {
+  readonly "GetUniverseCategoriesCategoryId": {
     readonly domain: "universe";
-    readonly method: "getUniverseGroups";
-    readonly input: GetUniverseGroupsInput;
-    readonly output: GetUniverseGroupsOutput;
+    readonly method: "getItemCategory";
+    readonly input: GetUniverseCategoriesCategoryIdInput;
+    readonly output: GetUniverseCategoriesCategoryIdOutput;
   };
   readonly "GetUniverseGroupsGroupId": {
     readonly domain: "universe";
-    readonly method: "getUniverseGroupsGroupId";
+    readonly method: "getItemGroup";
     readonly input: GetUniverseGroupsGroupIdInput;
     readonly output: GetUniverseGroupsGroupIdOutput;
   };
   readonly "GetUniverseMoonsMoonId": {
     readonly domain: "universe";
-    readonly method: "getUniverseMoonsMoonId";
+    readonly method: "getMoon";
     readonly input: GetUniverseMoonsMoonIdInput;
     readonly output: GetUniverseMoonsMoonIdOutput;
   };
   readonly "GetUniversePlanetsPlanetId": {
     readonly domain: "universe";
-    readonly method: "getUniversePlanetsPlanetId";
+    readonly method: "getPlanet";
     readonly input: GetUniversePlanetsPlanetIdInput;
     readonly output: GetUniversePlanetsPlanetIdOutput;
   };
+  readonly "GetUniverseRegionsRegionId": {
+    readonly domain: "universe";
+    readonly method: "getRegion";
+    readonly input: GetUniverseRegionsRegionIdInput;
+    readonly output: GetUniverseRegionsRegionIdOutput;
+  };
+  readonly "GetUniverseSystemsSystemId": {
+    readonly domain: "universe";
+    readonly method: "getSolarSystem";
+    readonly input: GetUniverseSystemsSystemIdInput;
+    readonly output: GetUniverseSystemsSystemIdOutput;
+  };
+  readonly "GetUniverseStarsStarId": {
+    readonly domain: "universe";
+    readonly method: "getStar";
+    readonly input: GetUniverseStarsStarIdInput;
+    readonly output: GetUniverseStarsStarIdOutput;
+  };
+  readonly "GetUniverseStargatesStargateId": {
+    readonly domain: "universe";
+    readonly method: "getStargate";
+    readonly input: GetUniverseStargatesStargateIdInput;
+    readonly output: GetUniverseStargatesStargateIdOutput;
+  };
+  readonly "GetUniverseStationsStationId": {
+    readonly domain: "universe";
+    readonly method: "getStation";
+    readonly input: GetUniverseStationsStationIdInput;
+    readonly output: GetUniverseStationsStationIdOutput;
+  };
+  readonly "GetUniverseStructuresStructureId": {
+    readonly domain: "universe";
+    readonly method: "getStructure";
+    readonly input: GetUniverseStructuresStructureIdInput;
+    readonly output: GetUniverseStructuresStructureIdOutput;
+  };
+  readonly "GetUniverseTypesTypeId": {
+    readonly domain: "universe";
+    readonly method: "getType";
+    readonly input: GetUniverseTypesTypeIdInput;
+    readonly output: GetUniverseTypesTypeIdOutput;
+  };
+  readonly "GetUniverseAncestries": {
+    readonly domain: "universe";
+    readonly method: "listAncestries";
+    readonly input: GetUniverseAncestriesInput;
+    readonly output: GetUniverseAncestriesOutput;
+  };
+  readonly "GetUniverseBloodlines": {
+    readonly domain: "universe";
+    readonly method: "listBloodlines";
+    readonly input: GetUniverseBloodlinesInput;
+    readonly output: GetUniverseBloodlinesOutput;
+  };
+  readonly "GetUniverseConstellations": {
+    readonly domain: "universe";
+    readonly method: "listConstellations";
+    readonly input: GetUniverseConstellationsInput;
+    readonly output: GetUniverseConstellationsOutput;
+  };
+  readonly "GetUniverseFactions": {
+    readonly domain: "universe";
+    readonly method: "listFactions";
+    readonly input: GetUniverseFactionsInput;
+    readonly output: GetUniverseFactionsOutput;
+  };
+  readonly "GetUniverseGraphics": {
+    readonly domain: "universe";
+    readonly method: "listGraphics";
+    readonly input: GetUniverseGraphicsInput;
+    readonly output: GetUniverseGraphicsOutput;
+  };
+  readonly "GetUniverseCategories": {
+    readonly domain: "universe";
+    readonly method: "listItemCategories";
+    readonly input: GetUniverseCategoriesInput;
+    readonly output: GetUniverseCategoriesOutput;
+  };
+  readonly "GetUniverseGroups": {
+    readonly domain: "universe";
+    readonly method: "listItemGroups";
+    readonly input: GetUniverseGroupsInput;
+    readonly output: GetUniverseGroupsOutput;
+  };
+  readonly "GetUniverseStructures": {
+    readonly domain: "universe";
+    readonly method: "listPublicStructures";
+    readonly input: GetUniverseStructuresInput;
+    readonly output: GetUniverseStructuresOutput;
+  };
   readonly "GetUniverseRaces": {
     readonly domain: "universe";
-    readonly method: "getUniverseRaces";
+    readonly method: "listRaces";
     readonly input: GetUniverseRacesInput;
     readonly output: GetUniverseRacesOutput;
   };
   readonly "GetUniverseRegions": {
     readonly domain: "universe";
-    readonly method: "getUniverseRegions";
+    readonly method: "listRegions";
     readonly input: GetUniverseRegionsInput;
     readonly output: GetUniverseRegionsOutput;
   };
-  readonly "GetUniverseRegionsRegionId": {
+  readonly "GetUniverseSystems": {
     readonly domain: "universe";
-    readonly method: "getUniverseRegionsRegionId";
-    readonly input: GetUniverseRegionsRegionIdInput;
-    readonly output: GetUniverseRegionsRegionIdOutput;
-  };
-  readonly "GetUniverseStargatesStargateId": {
-    readonly domain: "universe";
-    readonly method: "getUniverseStargatesStargateId";
-    readonly input: GetUniverseStargatesStargateIdInput;
-    readonly output: GetUniverseStargatesStargateIdOutput;
-  };
-  readonly "GetUniverseStarsStarId": {
-    readonly domain: "universe";
-    readonly method: "getUniverseStarsStarId";
-    readonly input: GetUniverseStarsStarIdInput;
-    readonly output: GetUniverseStarsStarIdOutput;
-  };
-  readonly "GetUniverseStationsStationId": {
-    readonly domain: "universe";
-    readonly method: "getUniverseStationsStationId";
-    readonly input: GetUniverseStationsStationIdInput;
-    readonly output: GetUniverseStationsStationIdOutput;
-  };
-  readonly "GetUniverseStructures": {
-    readonly domain: "universe";
-    readonly method: "getUniverseStructures";
-    readonly input: GetUniverseStructuresInput;
-    readonly output: GetUniverseStructuresOutput;
-  };
-  readonly "GetUniverseStructuresStructureId": {
-    readonly domain: "universe";
-    readonly method: "getUniverseStructuresStructureId";
-    readonly input: GetUniverseStructuresStructureIdInput;
-    readonly output: GetUniverseStructuresStructureIdOutput;
+    readonly method: "listSolarSystems";
+    readonly input: GetUniverseSystemsInput;
+    readonly output: GetUniverseSystemsOutput;
   };
   readonly "GetUniverseSystemJumps": {
     readonly domain: "universe";
-    readonly method: "getUniverseSystemJumps";
+    readonly method: "listSystemJumps";
     readonly input: GetUniverseSystemJumpsInput;
     readonly output: GetUniverseSystemJumpsOutput;
   };
   readonly "GetUniverseSystemKills": {
     readonly domain: "universe";
-    readonly method: "getUniverseSystemKills";
+    readonly method: "listSystemKills";
     readonly input: GetUniverseSystemKillsInput;
     readonly output: GetUniverseSystemKillsOutput;
   };
-  readonly "GetUniverseSystems": {
-    readonly domain: "universe";
-    readonly method: "getUniverseSystems";
-    readonly input: GetUniverseSystemsInput;
-    readonly output: GetUniverseSystemsOutput;
-  };
-  readonly "GetUniverseSystemsSystemId": {
-    readonly domain: "universe";
-    readonly method: "getUniverseSystemsSystemId";
-    readonly input: GetUniverseSystemsSystemIdInput;
-    readonly output: GetUniverseSystemsSystemIdOutput;
-  };
   readonly "GetUniverseTypes": {
     readonly domain: "universe";
-    readonly method: "getUniverseTypes";
+    readonly method: "listTypes";
     readonly input: GetUniverseTypesInput;
     readonly output: GetUniverseTypesOutput;
   };
-  readonly "GetUniverseTypesTypeId": {
-    readonly domain: "universe";
-    readonly method: "getUniverseTypesTypeId";
-    readonly input: GetUniverseTypesTypeIdInput;
-    readonly output: GetUniverseTypesTypeIdOutput;
-  };
   readonly "PostUniverseIds": {
     readonly domain: "universe";
-    readonly method: "postUniverseIds";
+    readonly method: "resolveIds";
     readonly input: PostUniverseIdsInput;
     readonly output: PostUniverseIdsOutput;
   };
   readonly "PostUniverseNames": {
     readonly domain: "universe";
-    readonly method: "postUniverseNames";
+    readonly method: "resolveNames";
     readonly input: PostUniverseNamesInput;
     readonly output: PostUniverseNamesOutput;
   };
-  readonly "PostUiAutopilotWaypoint": {
-    readonly domain: "userInterface";
-    readonly method: "postUiAutopilotWaypoint";
-    readonly input: PostUiAutopilotWaypointInput;
-    readonly output: PostUiAutopilotWaypointOutput;
-  };
   readonly "PostUiOpenwindowContract": {
     readonly domain: "userInterface";
-    readonly method: "postUiOpenwindowContract";
+    readonly method: "openContract";
     readonly input: PostUiOpenwindowContractInput;
     readonly output: PostUiOpenwindowContractOutput;
   };
   readonly "PostUiOpenwindowInformation": {
     readonly domain: "userInterface";
-    readonly method: "postUiOpenwindowInformation";
+    readonly method: "openInformation";
     readonly input: PostUiOpenwindowInformationInput;
     readonly output: PostUiOpenwindowInformationOutput;
   };
   readonly "PostUiOpenwindowMarketdetails": {
     readonly domain: "userInterface";
-    readonly method: "postUiOpenwindowMarketdetails";
+    readonly method: "openMarketDetails";
     readonly input: PostUiOpenwindowMarketdetailsInput;
     readonly output: PostUiOpenwindowMarketdetailsOutput;
   };
   readonly "PostUiOpenwindowNewmail": {
     readonly domain: "userInterface";
-    readonly method: "postUiOpenwindowNewmail";
+    readonly method: "openNewMail";
     readonly input: PostUiOpenwindowNewmailInput;
     readonly output: PostUiOpenwindowNewmailOutput;
   };
+  readonly "PostUiAutopilotWaypoint": {
+    readonly domain: "userInterface";
+    readonly method: "setAutopilotWaypoint";
+    readonly input: PostUiAutopilotWaypointInput;
+    readonly output: PostUiAutopilotWaypointOutput;
+  };
   readonly "GetCharactersCharacterIdWallet": {
     readonly domain: "wallet";
-    readonly method: "getCharactersCharacterIdWallet";
+    readonly method: "getCharacterBalance";
     readonly input: GetCharactersCharacterIdWalletInput;
     readonly output: GetCharactersCharacterIdWalletOutput;
   };
   readonly "GetCharactersCharacterIdWalletJournal": {
     readonly domain: "wallet";
-    readonly method: "getCharactersCharacterIdWalletJournal";
+    readonly method: "listCharacterJournal";
     readonly input: GetCharactersCharacterIdWalletJournalInput;
     readonly output: GetCharactersCharacterIdWalletJournalOutput;
   };
   readonly "GetCharactersCharacterIdWalletTransactions": {
     readonly domain: "wallet";
-    readonly method: "getCharactersCharacterIdWalletTransactions";
+    readonly method: "listCharacterTransactions";
     readonly input: GetCharactersCharacterIdWalletTransactionsInput;
     readonly output: GetCharactersCharacterIdWalletTransactionsOutput;
   };
   readonly "GetCorporationsCorporationIdWallets": {
     readonly domain: "wallet";
-    readonly method: "getCorporationsCorporationIdWallets";
+    readonly method: "listCorporationBalances";
     readonly input: GetCorporationsCorporationIdWalletsInput;
     readonly output: GetCorporationsCorporationIdWalletsOutput;
   };
   readonly "GetCorporationsCorporationIdWalletsDivisionJournal": {
     readonly domain: "wallet";
-    readonly method: "getCorporationsCorporationIdWalletsDivisionJournal";
+    readonly method: "listCorporationDivisionJournal";
     readonly input: GetCorporationsCorporationIdWalletsDivisionJournalInput;
     readonly output: GetCorporationsCorporationIdWalletsDivisionJournalOutput;
   };
   readonly "GetCorporationsCorporationIdWalletsDivisionTransactions": {
     readonly domain: "wallet";
-    readonly method: "getCorporationsCorporationIdWalletsDivisionTransactions";
+    readonly method: "listCorporationDivisionTransactions";
     readonly input: GetCorporationsCorporationIdWalletsDivisionTransactionsInput;
     readonly output: GetCorporationsCorporationIdWalletsDivisionTransactionsOutput;
   };
-  readonly "GetWars": {
-    readonly domain: "wars";
-    readonly method: "getWars";
-    readonly input: GetWarsInput;
-    readonly output: GetWarsOutput;
-  };
   readonly "GetWarsWarId": {
     readonly domain: "wars";
-    readonly method: "getWarsWarId";
+    readonly method: "get";
     readonly input: GetWarsWarIdInput;
     readonly output: GetWarsWarIdOutput;
   };
+  readonly "GetWars": {
+    readonly domain: "wars";
+    readonly method: "list";
+    readonly input: GetWarsInput;
+    readonly output: GetWarsOutput;
+  };
   readonly "GetWarsWarIdKillmails": {
     readonly domain: "wars";
-    readonly method: "getWarsWarIdKillmails";
+    readonly method: "listKillmails";
     readonly input: GetWarsWarIdKillmailsInput;
     readonly output: GetWarsWarIdKillmailsOutput;
   };
@@ -2277,469 +2393,2074 @@ type GeneratedDomainOperationCoverageAssertion = Assert<
   IsExact<keyof GeneratedDomainOperationCoverage, keyof GeneratedOperationSignatures>
 >;
 
-type GetCharactersAccessListsDetailDomainMethodAssertion = Assert<IsExact<AccessListDomainClient["getCharactersAccessListsDetail"], (identifier1: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions) => Promise<GetCharactersAccessListsDetailOutput>>>;
-type GetCharactersAccessListsDetailMetadataMethodAssertion = Assert<IsExact<AccessListDomainClientWithMetadata["getCharactersAccessListsDetail"], (identifier1: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions) => Promise<EsiResponse<GetCharactersAccessListsDetailOutput>>>>;
-type GetCharactersAccessListsListingDomainMethodAssertion = Assert<IsExact<AccessListDomainClient["getCharactersAccessListsListing"], (identifier1: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions) => Promise<GetCharactersAccessListsListingOutput>>>;
-type GetCharactersAccessListsListingMetadataMethodAssertion = Assert<IsExact<AccessListDomainClientWithMetadata["getCharactersAccessListsListing"], (identifier1: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions) => Promise<EsiResponse<GetCharactersAccessListsListingOutput>>>>;
-type GetCharactersMercenaryTacticalOperationsDetailDomainMethodAssertion = Assert<IsExact<ActivitiesDomainClient["getCharactersMercenaryTacticalOperationsDetail"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["operation_id"], options?: GetCharactersMercenaryTacticalOperationsDetailOptions) => Promise<GetCharactersMercenaryTacticalOperationsDetailOutput>>>;
-type GetCharactersMercenaryTacticalOperationsDetailMetadataMethodAssertion = Assert<IsExact<ActivitiesDomainClientWithMetadata["getCharactersMercenaryTacticalOperationsDetail"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["operation_id"], options?: GetCharactersMercenaryTacticalOperationsDetailOptions) => Promise<EsiResponse<GetCharactersMercenaryTacticalOperationsDetailOutput>>>>;
-type GetCharactersMercenaryTacticalOperationsListingDomainMethodAssertion = Assert<IsExact<ActivitiesDomainClient["getCharactersMercenaryTacticalOperationsListing"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput['path']>["character_id"], options?: GetCharactersMercenaryTacticalOperationsListingOptions) => Promise<GetCharactersMercenaryTacticalOperationsListingOutput>>>;
-type GetCharactersMercenaryTacticalOperationsListingMetadataMethodAssertion = Assert<IsExact<ActivitiesDomainClientWithMetadata["getCharactersMercenaryTacticalOperationsListing"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput['path']>["character_id"], options?: GetCharactersMercenaryTacticalOperationsListingOptions) => Promise<EsiResponse<GetCharactersMercenaryTacticalOperationsListingOutput>>>>;
-type GetSkyhooksRaidableDomainMethodAssertion = Assert<IsExact<ActivitiesDomainClient["getSkyhooksRaidable"], (options?: GetSkyhooksRaidableOptions) => Promise<GetSkyhooksRaidableOutput>>>;
-type GetSkyhooksRaidableMetadataMethodAssertion = Assert<IsExact<ActivitiesDomainClientWithMetadata["getSkyhooksRaidable"], (options?: GetSkyhooksRaidableOptions) => Promise<EsiResponse<GetSkyhooksRaidableOutput>>>>;
-type GetAlliancesDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["getAlliances"], (options?: GetAlliancesOptions) => Promise<GetAlliancesOutput>>>;
-type GetAlliancesMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["getAlliances"], (options?: GetAlliancesOptions) => Promise<EsiResponse<GetAlliancesOutput>>>>;
-type GetAlliancesAllianceIdDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["getAlliancesAllianceId"], (identifier1: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions) => Promise<GetAlliancesAllianceIdOutput>>>;
-type GetAlliancesAllianceIdMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["getAlliancesAllianceId"], (identifier1: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions) => Promise<EsiResponse<GetAlliancesAllianceIdOutput>>>>;
-type GetAlliancesAllianceIdCorporationsDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["getAlliancesAllianceIdCorporations"], (identifier1: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions) => Promise<GetAlliancesAllianceIdCorporationsOutput>>>;
-type GetAlliancesAllianceIdCorporationsMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["getAlliancesAllianceIdCorporations"], (identifier1: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdCorporationsOutput>>>>;
-type GetAlliancesAllianceIdIconsDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["getAlliancesAllianceIdIcons"], (identifier1: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions) => Promise<GetAlliancesAllianceIdIconsOutput>>>;
-type GetAlliancesAllianceIdIconsMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["getAlliancesAllianceIdIcons"], (identifier1: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdIconsOutput>>>>;
-type GetCharactersCharacterIdAssetsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["getCharactersCharacterIdAssets"], (identifier1: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions) => Promise<GetCharactersCharacterIdAssetsOutput>>>;
-type GetCharactersCharacterIdAssetsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["getCharactersCharacterIdAssets"], (identifier1: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions) => Promise<EsiResponse<GetCharactersCharacterIdAssetsOutput>>>>;
-type GetCorporationsCorporationIdAssetsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["getCorporationsCorporationIdAssets"], (identifier1: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions) => Promise<GetCorporationsCorporationIdAssetsOutput>>>;
-type GetCorporationsCorporationIdAssetsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["getCorporationsCorporationIdAssets"], (identifier1: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdAssetsOutput>>>>;
-type PostCharactersCharacterIdAssetsLocationsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["postCharactersCharacterIdAssetsLocations"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions) => Promise<PostCharactersCharacterIdAssetsLocationsOutput>>>;
-type PostCharactersCharacterIdAssetsLocationsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["postCharactersCharacterIdAssetsLocations"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions) => Promise<EsiResponse<PostCharactersCharacterIdAssetsLocationsOutput>>>>;
-type PostCharactersCharacterIdAssetsNamesDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["postCharactersCharacterIdAssetsNames"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions) => Promise<PostCharactersCharacterIdAssetsNamesOutput>>>;
-type PostCharactersCharacterIdAssetsNamesMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["postCharactersCharacterIdAssetsNames"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions) => Promise<EsiResponse<PostCharactersCharacterIdAssetsNamesOutput>>>>;
-type PostCorporationsCorporationIdAssetsLocationsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["postCorporationsCorporationIdAssetsLocations"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions) => Promise<PostCorporationsCorporationIdAssetsLocationsOutput>>>;
-type PostCorporationsCorporationIdAssetsLocationsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["postCorporationsCorporationIdAssetsLocations"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions) => Promise<EsiResponse<PostCorporationsCorporationIdAssetsLocationsOutput>>>>;
-type PostCorporationsCorporationIdAssetsNamesDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["postCorporationsCorporationIdAssetsNames"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions) => Promise<PostCorporationsCorporationIdAssetsNamesOutput>>>;
-type PostCorporationsCorporationIdAssetsNamesMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["postCorporationsCorporationIdAssetsNames"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions) => Promise<EsiResponse<PostCorporationsCorporationIdAssetsNamesOutput>>>>;
-type GetCharactersCharacterIdCalendarDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["getCharactersCharacterIdCalendar"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions) => Promise<GetCharactersCharacterIdCalendarOutput>>>;
-type GetCharactersCharacterIdCalendarMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["getCharactersCharacterIdCalendar"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions) => Promise<EsiResponse<GetCharactersCharacterIdCalendarOutput>>>>;
-type GetCharactersCharacterIdCalendarEventIdDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["getCharactersCharacterIdCalendarEventId"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions) => Promise<GetCharactersCharacterIdCalendarEventIdOutput>>>;
-type GetCharactersCharacterIdCalendarEventIdMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["getCharactersCharacterIdCalendarEventId"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions) => Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdOutput>>>>;
-type GetCharactersCharacterIdCalendarEventIdAttendeesDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["getCharactersCharacterIdCalendarEventIdAttendees"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions) => Promise<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>>>;
-type GetCharactersCharacterIdCalendarEventIdAttendeesMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["getCharactersCharacterIdCalendarEventIdAttendees"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions) => Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>>>>;
-type PutCharactersCharacterIdCalendarEventIdDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["putCharactersCharacterIdCalendarEventId"], (identifier1: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions) => Promise<PutCharactersCharacterIdCalendarEventIdOutput>>>;
-type PutCharactersCharacterIdCalendarEventIdMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["putCharactersCharacterIdCalendarEventId"], (identifier1: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions) => Promise<EsiResponse<PutCharactersCharacterIdCalendarEventIdOutput>>>>;
-type GetCharactersCharacterIdAgentsResearchDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdAgentsResearch"], (identifier1: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions) => Promise<GetCharactersCharacterIdAgentsResearchOutput>>>;
-type GetCharactersCharacterIdAgentsResearchMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdAgentsResearch"], (identifier1: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions) => Promise<EsiResponse<GetCharactersCharacterIdAgentsResearchOutput>>>>;
-type GetCharactersCharacterIdBlueprintsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdBlueprints"], (identifier1: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions) => Promise<GetCharactersCharacterIdBlueprintsOutput>>>;
-type GetCharactersCharacterIdBlueprintsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdBlueprints"], (identifier1: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions) => Promise<EsiResponse<GetCharactersCharacterIdBlueprintsOutput>>>>;
-type GetCharactersCharacterIdCorporationhistoryDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdCorporationhistory"], (identifier1: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions) => Promise<GetCharactersCharacterIdCorporationhistoryOutput>>>;
-type GetCharactersCharacterIdCorporationhistoryMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdCorporationhistory"], (identifier1: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions) => Promise<EsiResponse<GetCharactersCharacterIdCorporationhistoryOutput>>>>;
-type GetCharactersCharacterIdFatigueDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdFatigue"], (identifier1: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions) => Promise<GetCharactersCharacterIdFatigueOutput>>>;
-type GetCharactersCharacterIdFatigueMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdFatigue"], (identifier1: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions) => Promise<EsiResponse<GetCharactersCharacterIdFatigueOutput>>>>;
-type GetCharactersCharacterIdMedalsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdMedals"], (identifier1: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions) => Promise<GetCharactersCharacterIdMedalsOutput>>>;
-type GetCharactersCharacterIdMedalsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdMedals"], (identifier1: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions) => Promise<EsiResponse<GetCharactersCharacterIdMedalsOutput>>>>;
-type GetCharactersCharacterIdNotificationsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdNotifications"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions) => Promise<GetCharactersCharacterIdNotificationsOutput>>>;
-type GetCharactersCharacterIdNotificationsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdNotifications"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions) => Promise<EsiResponse<GetCharactersCharacterIdNotificationsOutput>>>>;
-type GetCharactersCharacterIdNotificationsContactsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdNotificationsContacts"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions) => Promise<GetCharactersCharacterIdNotificationsContactsOutput>>>;
-type GetCharactersCharacterIdNotificationsContactsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdNotificationsContacts"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions) => Promise<EsiResponse<GetCharactersCharacterIdNotificationsContactsOutput>>>>;
-type GetCharactersCharacterIdPortraitDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdPortrait"], (identifier1: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions) => Promise<GetCharactersCharacterIdPortraitOutput>>>;
-type GetCharactersCharacterIdPortraitMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdPortrait"], (identifier1: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions) => Promise<EsiResponse<GetCharactersCharacterIdPortraitOutput>>>>;
-type GetCharactersCharacterIdRolesDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdRoles"], (identifier1: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions) => Promise<GetCharactersCharacterIdRolesOutput>>>;
-type GetCharactersCharacterIdRolesMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdRoles"], (identifier1: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions) => Promise<EsiResponse<GetCharactersCharacterIdRolesOutput>>>>;
-type GetCharactersCharacterIdStandingsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdStandings"], (identifier1: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions) => Promise<GetCharactersCharacterIdStandingsOutput>>>;
-type GetCharactersCharacterIdStandingsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdStandings"], (identifier1: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions) => Promise<EsiResponse<GetCharactersCharacterIdStandingsOutput>>>>;
-type GetCharactersCharacterIdTitlesDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersCharacterIdTitles"], (identifier1: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions) => Promise<GetCharactersCharacterIdTitlesOutput>>>;
-type GetCharactersCharacterIdTitlesMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersCharacterIdTitles"], (identifier1: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions) => Promise<EsiResponse<GetCharactersCharacterIdTitlesOutput>>>>;
-type GetCharactersDetailDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCharactersDetail"], (identifier1: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions) => Promise<GetCharactersDetailOutput>>>;
-type GetCharactersDetailMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCharactersDetail"], (identifier1: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions) => Promise<EsiResponse<GetCharactersDetailOutput>>>>;
-type PostCharactersAffiliationDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["postCharactersAffiliation"], (options: PostCharactersAffiliationOptions) => Promise<PostCharactersAffiliationOutput>>>;
-type PostCharactersAffiliationMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["postCharactersAffiliation"], (options: PostCharactersAffiliationOptions) => Promise<EsiResponse<PostCharactersAffiliationOutput>>>>;
-type PostCharactersCharacterIdCspaDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["postCharactersCharacterIdCspa"], (identifier1: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions) => Promise<PostCharactersCharacterIdCspaOutput>>>;
-type PostCharactersCharacterIdCspaMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["postCharactersCharacterIdCspa"], (identifier1: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions) => Promise<EsiResponse<PostCharactersCharacterIdCspaOutput>>>>;
-type GetCharactersCharacterIdClonesDomainMethodAssertion = Assert<IsExact<ClonesDomainClient["getCharactersCharacterIdClones"], (identifier1: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions) => Promise<GetCharactersCharacterIdClonesOutput>>>;
-type GetCharactersCharacterIdClonesMetadataMethodAssertion = Assert<IsExact<ClonesDomainClientWithMetadata["getCharactersCharacterIdClones"], (identifier1: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions) => Promise<EsiResponse<GetCharactersCharacterIdClonesOutput>>>>;
-type GetCharactersCharacterIdImplantsDomainMethodAssertion = Assert<IsExact<ClonesDomainClient["getCharactersCharacterIdImplants"], (identifier1: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions) => Promise<GetCharactersCharacterIdImplantsOutput>>>;
-type GetCharactersCharacterIdImplantsMetadataMethodAssertion = Assert<IsExact<ClonesDomainClientWithMetadata["getCharactersCharacterIdImplants"], (identifier1: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions) => Promise<EsiResponse<GetCharactersCharacterIdImplantsOutput>>>>;
-type DeleteCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["deleteCharactersCharacterIdContacts"], (identifier1: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions) => Promise<DeleteCharactersCharacterIdContactsOutput>>>;
-type DeleteCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["deleteCharactersCharacterIdContacts"], (identifier1: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdContactsOutput>>>>;
-type GetAlliancesAllianceIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["getAlliancesAllianceIdContacts"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions) => Promise<GetAlliancesAllianceIdContactsOutput>>>;
-type GetAlliancesAllianceIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["getAlliancesAllianceIdContacts"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdContactsOutput>>>>;
-type GetAlliancesAllianceIdContactsLabelsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["getAlliancesAllianceIdContactsLabels"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions) => Promise<GetAlliancesAllianceIdContactsLabelsOutput>>>;
-type GetAlliancesAllianceIdContactsLabelsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["getAlliancesAllianceIdContactsLabels"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdContactsLabelsOutput>>>>;
-type GetCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["getCharactersCharacterIdContacts"], (identifier1: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions) => Promise<GetCharactersCharacterIdContactsOutput>>>;
-type GetCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["getCharactersCharacterIdContacts"], (identifier1: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContactsOutput>>>>;
-type GetCharactersCharacterIdContactsLabelsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["getCharactersCharacterIdContactsLabels"], (identifier1: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions) => Promise<GetCharactersCharacterIdContactsLabelsOutput>>>;
-type GetCharactersCharacterIdContactsLabelsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["getCharactersCharacterIdContactsLabels"], (identifier1: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContactsLabelsOutput>>>>;
-type GetCorporationsCorporationIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["getCorporationsCorporationIdContacts"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions) => Promise<GetCorporationsCorporationIdContactsOutput>>>;
-type GetCorporationsCorporationIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["getCorporationsCorporationIdContacts"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContactsOutput>>>>;
-type GetCorporationsCorporationIdContactsLabelsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["getCorporationsCorporationIdContactsLabels"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions) => Promise<GetCorporationsCorporationIdContactsLabelsOutput>>>;
-type GetCorporationsCorporationIdContactsLabelsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["getCorporationsCorporationIdContactsLabels"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContactsLabelsOutput>>>>;
-type PostCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["postCharactersCharacterIdContacts"], (identifier1: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions) => Promise<PostCharactersCharacterIdContactsOutput>>>;
-type PostCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["postCharactersCharacterIdContacts"], (identifier1: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions) => Promise<EsiResponse<PostCharactersCharacterIdContactsOutput>>>>;
-type PutCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["putCharactersCharacterIdContacts"], (identifier1: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions) => Promise<PutCharactersCharacterIdContactsOutput>>>;
-type PutCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["putCharactersCharacterIdContacts"], (identifier1: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions) => Promise<EsiResponse<PutCharactersCharacterIdContactsOutput>>>>;
-type GetCharactersCharacterIdContractsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getCharactersCharacterIdContracts"], (identifier1: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions) => Promise<GetCharactersCharacterIdContractsOutput>>>;
-type GetCharactersCharacterIdContractsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getCharactersCharacterIdContracts"], (identifier1: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContractsOutput>>>>;
-type GetCharactersCharacterIdContractsContractIdBidsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getCharactersCharacterIdContractsContractIdBids"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions) => Promise<GetCharactersCharacterIdContractsContractIdBidsOutput>>>;
-type GetCharactersCharacterIdContractsContractIdBidsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getCharactersCharacterIdContractsContractIdBids"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdBidsOutput>>>>;
-type GetCharactersCharacterIdContractsContractIdItemsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getCharactersCharacterIdContractsContractIdItems"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions) => Promise<GetCharactersCharacterIdContractsContractIdItemsOutput>>>;
-type GetCharactersCharacterIdContractsContractIdItemsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getCharactersCharacterIdContractsContractIdItems"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdItemsOutput>>>>;
-type GetContractsPublicBidsContractIdDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getContractsPublicBidsContractId"], (identifier1: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions) => Promise<GetContractsPublicBidsContractIdOutput>>>;
-type GetContractsPublicBidsContractIdMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getContractsPublicBidsContractId"], (identifier1: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions) => Promise<EsiResponse<GetContractsPublicBidsContractIdOutput>>>>;
-type GetContractsPublicItemsContractIdDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getContractsPublicItemsContractId"], (identifier1: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions) => Promise<GetContractsPublicItemsContractIdOutput>>>;
-type GetContractsPublicItemsContractIdMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getContractsPublicItemsContractId"], (identifier1: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions) => Promise<EsiResponse<GetContractsPublicItemsContractIdOutput>>>>;
-type GetContractsPublicRegionIdDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getContractsPublicRegionId"], (identifier1: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions) => Promise<GetContractsPublicRegionIdOutput>>>;
-type GetContractsPublicRegionIdMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getContractsPublicRegionId"], (identifier1: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions) => Promise<EsiResponse<GetContractsPublicRegionIdOutput>>>>;
-type GetCorporationsCorporationIdContractsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getCorporationsCorporationIdContracts"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions) => Promise<GetCorporationsCorporationIdContractsOutput>>>;
-type GetCorporationsCorporationIdContractsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getCorporationsCorporationIdContracts"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContractsOutput>>>>;
-type GetCorporationsCorporationIdContractsContractIdBidsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getCorporationsCorporationIdContractsContractIdBids"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions) => Promise<GetCorporationsCorporationIdContractsContractIdBidsOutput>>>;
-type GetCorporationsCorporationIdContractsContractIdBidsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getCorporationsCorporationIdContractsContractIdBids"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdBidsOutput>>>>;
-type GetCorporationsCorporationIdContractsContractIdItemsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["getCorporationsCorporationIdContractsContractIdItems"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions) => Promise<GetCorporationsCorporationIdContractsContractIdItemsOutput>>>;
-type GetCorporationsCorporationIdContractsContractIdItemsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["getCorporationsCorporationIdContractsContractIdItems"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdItemsOutput>>>>;
-type GetCorporationsCorporationIdDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationId"], (identifier1: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions) => Promise<GetCorporationsCorporationIdOutput>>>;
-type GetCorporationsCorporationIdMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationId"], (identifier1: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions) => Promise<EsiResponse<GetCorporationsCorporationIdOutput>>>>;
-type GetCorporationsCorporationIdAlliancehistoryDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdAlliancehistory"], (identifier1: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions) => Promise<GetCorporationsCorporationIdAlliancehistoryOutput>>>;
-type GetCorporationsCorporationIdAlliancehistoryMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdAlliancehistory"], (identifier1: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions) => Promise<EsiResponse<GetCorporationsCorporationIdAlliancehistoryOutput>>>>;
-type GetCorporationsCorporationIdBlueprintsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdBlueprints"], (identifier1: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions) => Promise<GetCorporationsCorporationIdBlueprintsOutput>>>;
-type GetCorporationsCorporationIdBlueprintsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdBlueprints"], (identifier1: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdBlueprintsOutput>>>>;
-type GetCorporationsCorporationIdContainersLogsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdContainersLogs"], (identifier1: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions) => Promise<GetCorporationsCorporationIdContainersLogsOutput>>>;
-type GetCorporationsCorporationIdContainersLogsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdContainersLogs"], (identifier1: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContainersLogsOutput>>>>;
-type GetCorporationsCorporationIdDivisionsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdDivisions"], (identifier1: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions) => Promise<GetCorporationsCorporationIdDivisionsOutput>>>;
-type GetCorporationsCorporationIdDivisionsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdDivisions"], (identifier1: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdDivisionsOutput>>>>;
-type GetCorporationsCorporationIdFacilitiesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdFacilities"], (identifier1: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions) => Promise<GetCorporationsCorporationIdFacilitiesOutput>>>;
-type GetCorporationsCorporationIdFacilitiesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdFacilities"], (identifier1: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdFacilitiesOutput>>>>;
-type GetCorporationsCorporationIdIconsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdIcons"], (identifier1: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions) => Promise<GetCorporationsCorporationIdIconsOutput>>>;
-type GetCorporationsCorporationIdIconsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdIcons"], (identifier1: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdIconsOutput>>>>;
-type GetCorporationsCorporationIdMedalsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdMedals"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions) => Promise<GetCorporationsCorporationIdMedalsOutput>>>;
-type GetCorporationsCorporationIdMedalsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdMedals"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMedalsOutput>>>>;
-type GetCorporationsCorporationIdMedalsIssuedDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdMedalsIssued"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions) => Promise<GetCorporationsCorporationIdMedalsIssuedOutput>>>;
-type GetCorporationsCorporationIdMedalsIssuedMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdMedalsIssued"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMedalsIssuedOutput>>>>;
-type GetCorporationsCorporationIdMembersDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdMembers"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions) => Promise<GetCorporationsCorporationIdMembersOutput>>>;
-type GetCorporationsCorporationIdMembersMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdMembers"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembersOutput>>>>;
-type GetCorporationsCorporationIdMembersLimitDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdMembersLimit"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions) => Promise<GetCorporationsCorporationIdMembersLimitOutput>>>;
-type GetCorporationsCorporationIdMembersLimitMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdMembersLimit"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembersLimitOutput>>>>;
-type GetCorporationsCorporationIdMembersTitlesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdMembersTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions) => Promise<GetCorporationsCorporationIdMembersTitlesOutput>>>;
-type GetCorporationsCorporationIdMembersTitlesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdMembersTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembersTitlesOutput>>>>;
-type GetCorporationsCorporationIdMembertrackingDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdMembertracking"], (identifier1: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions) => Promise<GetCorporationsCorporationIdMembertrackingOutput>>>;
-type GetCorporationsCorporationIdMembertrackingMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdMembertracking"], (identifier1: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembertrackingOutput>>>>;
-type GetCorporationsCorporationIdRolesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdRoles"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions) => Promise<GetCorporationsCorporationIdRolesOutput>>>;
-type GetCorporationsCorporationIdRolesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdRoles"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdRolesOutput>>>>;
-type GetCorporationsCorporationIdRolesHistoryDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdRolesHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions) => Promise<GetCorporationsCorporationIdRolesHistoryOutput>>>;
-type GetCorporationsCorporationIdRolesHistoryMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdRolesHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions) => Promise<EsiResponse<GetCorporationsCorporationIdRolesHistoryOutput>>>>;
-type GetCorporationsCorporationIdShareholdersDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdShareholders"], (identifier1: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions) => Promise<GetCorporationsCorporationIdShareholdersOutput>>>;
-type GetCorporationsCorporationIdShareholdersMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdShareholders"], (identifier1: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions) => Promise<EsiResponse<GetCorporationsCorporationIdShareholdersOutput>>>>;
-type GetCorporationsCorporationIdStandingsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdStandings"], (identifier1: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions) => Promise<GetCorporationsCorporationIdStandingsOutput>>>;
-type GetCorporationsCorporationIdStandingsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdStandings"], (identifier1: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStandingsOutput>>>>;
-type GetCorporationsCorporationIdStarbasesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdStarbases"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions) => Promise<GetCorporationsCorporationIdStarbasesOutput>>>;
-type GetCorporationsCorporationIdStarbasesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdStarbases"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStarbasesOutput>>>>;
-type GetCorporationsCorporationIdStarbasesStarbaseIdDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdStarbasesStarbaseId"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions) => Promise<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>>>;
-type GetCorporationsCorporationIdStarbasesStarbaseIdMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdStarbasesStarbaseId"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>>>>;
-type GetCorporationsCorporationIdStructuresDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdStructures"], (identifier1: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions) => Promise<GetCorporationsCorporationIdStructuresOutput>>>;
-type GetCorporationsCorporationIdStructuresMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdStructures"], (identifier1: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStructuresOutput>>>>;
-type GetCorporationsCorporationIdTitlesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsCorporationIdTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions) => Promise<GetCorporationsCorporationIdTitlesOutput>>>;
-type GetCorporationsCorporationIdTitlesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsCorporationIdTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdTitlesOutput>>>>;
-type GetCorporationsNpccorpsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getCorporationsNpccorps"], (options?: GetCorporationsNpccorpsOptions) => Promise<GetCorporationsNpccorpsOutput>>>;
-type GetCorporationsNpccorpsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getCorporationsNpccorps"], (options?: GetCorporationsNpccorpsOptions) => Promise<EsiResponse<GetCorporationsNpccorpsOutput>>>>;
-type GetCorporationsProjectsContributionDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["getCorporationsProjectsContribution"], (identifier1: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], identifier3: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions) => Promise<GetCorporationsProjectsContributionOutput>>>;
-type GetCorporationsProjectsContributionMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["getCorporationsProjectsContribution"], (identifier1: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], identifier3: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions) => Promise<EsiResponse<GetCorporationsProjectsContributionOutput>>>>;
-type GetCorporationsProjectsContributorsDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["getCorporationsProjectsContributors"], (identifier1: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions) => Promise<GetCorporationsProjectsContributorsOutput>>>;
-type GetCorporationsProjectsContributorsMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["getCorporationsProjectsContributors"], (identifier1: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions) => Promise<EsiResponse<GetCorporationsProjectsContributorsOutput>>>>;
-type GetCorporationsProjectsDetailDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["getCorporationsProjectsDetail"], (identifier1: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions) => Promise<GetCorporationsProjectsDetailOutput>>>;
-type GetCorporationsProjectsDetailMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["getCorporationsProjectsDetail"], (identifier1: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions) => Promise<EsiResponse<GetCorporationsProjectsDetailOutput>>>>;
-type GetCorporationsProjectsListingDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["getCorporationsProjectsListing"], (identifier1: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions) => Promise<GetCorporationsProjectsListingOutput>>>;
-type GetCorporationsProjectsListingMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["getCorporationsProjectsListing"], (identifier1: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions) => Promise<EsiResponse<GetCorporationsProjectsListingOutput>>>>;
-type GetCharactersCosmeticsSkinrDomainMethodAssertion = Assert<IsExact<CosmeticsDomainClient["getCharactersCosmeticsSkinr"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions) => Promise<GetCharactersCosmeticsSkinrOutput>>>;
-type GetCharactersCosmeticsSkinrMetadataMethodAssertion = Assert<IsExact<CosmeticsDomainClientWithMetadata["getCharactersCosmeticsSkinr"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions) => Promise<EsiResponse<GetCharactersCosmeticsSkinrOutput>>>>;
-type GetCharactersCosmeticsSkinrComponentsDomainMethodAssertion = Assert<IsExact<CosmeticsDomainClient["getCharactersCosmeticsSkinrComponents"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions) => Promise<GetCharactersCosmeticsSkinrComponentsOutput>>>;
-type GetCharactersCosmeticsSkinrComponentsMetadataMethodAssertion = Assert<IsExact<CosmeticsDomainClientWithMetadata["getCharactersCosmeticsSkinrComponents"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions) => Promise<EsiResponse<GetCharactersCosmeticsSkinrComponentsOutput>>>>;
-type GetCosmeticsSkinrDomainMethodAssertion = Assert<IsExact<CosmeticsDomainClient["getCosmeticsSkinr"], (identifier1: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions) => Promise<GetCosmeticsSkinrOutput>>>;
-type GetCosmeticsSkinrMetadataMethodAssertion = Assert<IsExact<CosmeticsDomainClientWithMetadata["getCosmeticsSkinr"], (identifier1: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions) => Promise<EsiResponse<GetCosmeticsSkinrOutput>>>>;
-type GetDogmaAttributesDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getDogmaAttributes"], (options?: GetDogmaAttributesOptions) => Promise<GetDogmaAttributesOutput>>>;
-type GetDogmaAttributesMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getDogmaAttributes"], (options?: GetDogmaAttributesOptions) => Promise<EsiResponse<GetDogmaAttributesOutput>>>>;
-type GetDogmaAttributesAttributeIdDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getDogmaAttributesAttributeId"], (identifier1: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions) => Promise<GetDogmaAttributesAttributeIdOutput>>>;
-type GetDogmaAttributesAttributeIdMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getDogmaAttributesAttributeId"], (identifier1: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions) => Promise<EsiResponse<GetDogmaAttributesAttributeIdOutput>>>>;
-type GetDogmaDynamicItemsTypeIdItemIdDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getDogmaDynamicItemsTypeIdItemId"], (identifier1: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], identifier2: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions) => Promise<GetDogmaDynamicItemsTypeIdItemIdOutput>>>;
-type GetDogmaDynamicItemsTypeIdItemIdMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getDogmaDynamicItemsTypeIdItemId"], (identifier1: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], identifier2: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions) => Promise<EsiResponse<GetDogmaDynamicItemsTypeIdItemIdOutput>>>>;
-type GetDogmaEffectsDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getDogmaEffects"], (options?: GetDogmaEffectsOptions) => Promise<GetDogmaEffectsOutput>>>;
-type GetDogmaEffectsMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getDogmaEffects"], (options?: GetDogmaEffectsOptions) => Promise<EsiResponse<GetDogmaEffectsOutput>>>>;
-type GetDogmaEffectsEffectIdDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getDogmaEffectsEffectId"], (identifier1: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions) => Promise<GetDogmaEffectsEffectIdOutput>>>;
-type GetDogmaEffectsEffectIdMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getDogmaEffectsEffectId"], (identifier1: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions) => Promise<EsiResponse<GetDogmaEffectsEffectIdOutput>>>>;
-type GetCharactersCharacterIdFwStatsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getCharactersCharacterIdFwStats"], (identifier1: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions) => Promise<GetCharactersCharacterIdFwStatsOutput>>>;
-type GetCharactersCharacterIdFwStatsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getCharactersCharacterIdFwStats"], (identifier1: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions) => Promise<EsiResponse<GetCharactersCharacterIdFwStatsOutput>>>>;
-type GetCorporationsCorporationIdFwStatsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getCorporationsCorporationIdFwStats"], (identifier1: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions) => Promise<GetCorporationsCorporationIdFwStatsOutput>>>;
-type GetCorporationsCorporationIdFwStatsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getCorporationsCorporationIdFwStats"], (identifier1: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdFwStatsOutput>>>>;
-type GetFwLeaderboardsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getFwLeaderboards"], (options?: GetFwLeaderboardsOptions) => Promise<GetFwLeaderboardsOutput>>>;
-type GetFwLeaderboardsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getFwLeaderboards"], (options?: GetFwLeaderboardsOptions) => Promise<EsiResponse<GetFwLeaderboardsOutput>>>>;
-type GetFwLeaderboardsCharactersDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getFwLeaderboardsCharacters"], (options?: GetFwLeaderboardsCharactersOptions) => Promise<GetFwLeaderboardsCharactersOutput>>>;
-type GetFwLeaderboardsCharactersMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getFwLeaderboardsCharacters"], (options?: GetFwLeaderboardsCharactersOptions) => Promise<EsiResponse<GetFwLeaderboardsCharactersOutput>>>>;
-type GetFwLeaderboardsCorporationsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getFwLeaderboardsCorporations"], (options?: GetFwLeaderboardsCorporationsOptions) => Promise<GetFwLeaderboardsCorporationsOutput>>>;
-type GetFwLeaderboardsCorporationsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getFwLeaderboardsCorporations"], (options?: GetFwLeaderboardsCorporationsOptions) => Promise<EsiResponse<GetFwLeaderboardsCorporationsOutput>>>>;
-type GetFwStatsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getFwStats"], (options?: GetFwStatsOptions) => Promise<GetFwStatsOutput>>>;
-type GetFwStatsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getFwStats"], (options?: GetFwStatsOptions) => Promise<EsiResponse<GetFwStatsOutput>>>>;
-type GetFwSystemsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getFwSystems"], (options?: GetFwSystemsOptions) => Promise<GetFwSystemsOutput>>>;
-type GetFwSystemsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getFwSystems"], (options?: GetFwSystemsOptions) => Promise<EsiResponse<GetFwSystemsOutput>>>>;
-type GetFwWarsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getFwWars"], (options?: GetFwWarsOptions) => Promise<GetFwWarsOutput>>>;
-type GetFwWarsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getFwWars"], (options?: GetFwWarsOptions) => Promise<EsiResponse<GetFwWarsOutput>>>>;
-type DeleteCharactersCharacterIdFittingsFittingIdDomainMethodAssertion = Assert<IsExact<FittingsDomainClient["deleteCharactersCharacterIdFittingsFittingId"], (identifier1: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions) => Promise<DeleteCharactersCharacterIdFittingsFittingIdOutput>>>;
-type DeleteCharactersCharacterIdFittingsFittingIdMetadataMethodAssertion = Assert<IsExact<FittingsDomainClientWithMetadata["deleteCharactersCharacterIdFittingsFittingId"], (identifier1: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdFittingsFittingIdOutput>>>>;
-type GetCharactersCharacterIdFittingsDomainMethodAssertion = Assert<IsExact<FittingsDomainClient["getCharactersCharacterIdFittings"], (identifier1: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions) => Promise<GetCharactersCharacterIdFittingsOutput>>>;
-type GetCharactersCharacterIdFittingsMetadataMethodAssertion = Assert<IsExact<FittingsDomainClientWithMetadata["getCharactersCharacterIdFittings"], (identifier1: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions) => Promise<EsiResponse<GetCharactersCharacterIdFittingsOutput>>>>;
-type PostCharactersCharacterIdFittingsDomainMethodAssertion = Assert<IsExact<FittingsDomainClient["postCharactersCharacterIdFittings"], (identifier1: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions) => Promise<PostCharactersCharacterIdFittingsOutput>>>;
-type PostCharactersCharacterIdFittingsMetadataMethodAssertion = Assert<IsExact<FittingsDomainClientWithMetadata["postCharactersCharacterIdFittings"], (identifier1: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions) => Promise<EsiResponse<PostCharactersCharacterIdFittingsOutput>>>>;
-type DeleteFleetsFleetIdMembersMemberIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["deleteFleetsFleetIdMembersMemberId"], (identifier1: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions) => Promise<DeleteFleetsFleetIdMembersMemberIdOutput>>>;
-type DeleteFleetsFleetIdMembersMemberIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["deleteFleetsFleetIdMembersMemberId"], (identifier1: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions) => Promise<EsiResponse<DeleteFleetsFleetIdMembersMemberIdOutput>>>>;
-type DeleteFleetsFleetIdSquadsSquadIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["deleteFleetsFleetIdSquadsSquadId"], (identifier1: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions) => Promise<DeleteFleetsFleetIdSquadsSquadIdOutput>>>;
-type DeleteFleetsFleetIdSquadsSquadIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["deleteFleetsFleetIdSquadsSquadId"], (identifier1: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions) => Promise<EsiResponse<DeleteFleetsFleetIdSquadsSquadIdOutput>>>>;
-type DeleteFleetsFleetIdWingsWingIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["deleteFleetsFleetIdWingsWingId"], (identifier1: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions) => Promise<DeleteFleetsFleetIdWingsWingIdOutput>>>;
-type DeleteFleetsFleetIdWingsWingIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["deleteFleetsFleetIdWingsWingId"], (identifier1: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions) => Promise<EsiResponse<DeleteFleetsFleetIdWingsWingIdOutput>>>>;
-type GetCharactersCharacterIdFleetDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["getCharactersCharacterIdFleet"], (identifier1: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions) => Promise<GetCharactersCharacterIdFleetOutput>>>;
-type GetCharactersCharacterIdFleetMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["getCharactersCharacterIdFleet"], (identifier1: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions) => Promise<EsiResponse<GetCharactersCharacterIdFleetOutput>>>>;
-type GetFleetsFleetIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["getFleetsFleetId"], (identifier1: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions) => Promise<GetFleetsFleetIdOutput>>>;
-type GetFleetsFleetIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["getFleetsFleetId"], (identifier1: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions) => Promise<EsiResponse<GetFleetsFleetIdOutput>>>>;
-type GetFleetsFleetIdMembersDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["getFleetsFleetIdMembers"], (identifier1: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions) => Promise<GetFleetsFleetIdMembersOutput>>>;
-type GetFleetsFleetIdMembersMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["getFleetsFleetIdMembers"], (identifier1: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions) => Promise<EsiResponse<GetFleetsFleetIdMembersOutput>>>>;
-type GetFleetsFleetIdWingsDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["getFleetsFleetIdWings"], (identifier1: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions) => Promise<GetFleetsFleetIdWingsOutput>>>;
-type GetFleetsFleetIdWingsMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["getFleetsFleetIdWings"], (identifier1: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions) => Promise<EsiResponse<GetFleetsFleetIdWingsOutput>>>>;
-type PostFleetsFleetIdMembersDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["postFleetsFleetIdMembers"], (identifier1: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions) => Promise<PostFleetsFleetIdMembersOutput>>>;
-type PostFleetsFleetIdMembersMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["postFleetsFleetIdMembers"], (identifier1: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions) => Promise<EsiResponse<PostFleetsFleetIdMembersOutput>>>>;
-type PostFleetsFleetIdWingsDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["postFleetsFleetIdWings"], (identifier1: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions) => Promise<PostFleetsFleetIdWingsOutput>>>;
-type PostFleetsFleetIdWingsMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["postFleetsFleetIdWings"], (identifier1: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions) => Promise<EsiResponse<PostFleetsFleetIdWingsOutput>>>>;
-type PostFleetsFleetIdWingsWingIdSquadsDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["postFleetsFleetIdWingsWingIdSquads"], (identifier1: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], identifier2: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions) => Promise<PostFleetsFleetIdWingsWingIdSquadsOutput>>>;
-type PostFleetsFleetIdWingsWingIdSquadsMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["postFleetsFleetIdWingsWingIdSquads"], (identifier1: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], identifier2: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions) => Promise<EsiResponse<PostFleetsFleetIdWingsWingIdSquadsOutput>>>>;
-type PutFleetsFleetIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["putFleetsFleetId"], (identifier1: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions) => Promise<PutFleetsFleetIdOutput>>>;
-type PutFleetsFleetIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["putFleetsFleetId"], (identifier1: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions) => Promise<EsiResponse<PutFleetsFleetIdOutput>>>>;
-type PutFleetsFleetIdMembersMemberIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["putFleetsFleetIdMembersMemberId"], (identifier1: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions) => Promise<PutFleetsFleetIdMembersMemberIdOutput>>>;
-type PutFleetsFleetIdMembersMemberIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["putFleetsFleetIdMembersMemberId"], (identifier1: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions) => Promise<EsiResponse<PutFleetsFleetIdMembersMemberIdOutput>>>>;
-type PutFleetsFleetIdSquadsSquadIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["putFleetsFleetIdSquadsSquadId"], (identifier1: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions) => Promise<PutFleetsFleetIdSquadsSquadIdOutput>>>;
-type PutFleetsFleetIdSquadsSquadIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["putFleetsFleetIdSquadsSquadId"], (identifier1: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions) => Promise<EsiResponse<PutFleetsFleetIdSquadsSquadIdOutput>>>>;
-type PutFleetsFleetIdWingsWingIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["putFleetsFleetIdWingsWingId"], (identifier1: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions) => Promise<PutFleetsFleetIdWingsWingIdOutput>>>;
-type PutFleetsFleetIdWingsWingIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["putFleetsFleetIdWingsWingId"], (identifier1: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions) => Promise<EsiResponse<PutFleetsFleetIdWingsWingIdOutput>>>>;
-type GetCharactersFreelanceJobsListingDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["getCharactersFreelanceJobsListing"], (identifier1: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions) => Promise<GetCharactersFreelanceJobsListingOutput>>>;
-type GetCharactersFreelanceJobsListingMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["getCharactersFreelanceJobsListing"], (identifier1: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions) => Promise<EsiResponse<GetCharactersFreelanceJobsListingOutput>>>>;
-type GetCharactersFreelanceJobsParticipationDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["getCharactersFreelanceJobsParticipation"], (identifier1: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions) => Promise<GetCharactersFreelanceJobsParticipationOutput>>>;
-type GetCharactersFreelanceJobsParticipationMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["getCharactersFreelanceJobsParticipation"], (identifier1: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions) => Promise<EsiResponse<GetCharactersFreelanceJobsParticipationOutput>>>>;
-type GetCorporationsFreelanceJobsListingDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["getCorporationsFreelanceJobsListing"], (identifier1: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions) => Promise<GetCorporationsFreelanceJobsListingOutput>>>;
-type GetCorporationsFreelanceJobsListingMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["getCorporationsFreelanceJobsListing"], (identifier1: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions) => Promise<EsiResponse<GetCorporationsFreelanceJobsListingOutput>>>>;
-type GetCorporationsFreelanceJobsParticipantsDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["getCorporationsFreelanceJobsParticipants"], (identifier1: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions) => Promise<GetCorporationsFreelanceJobsParticipantsOutput>>>;
-type GetCorporationsFreelanceJobsParticipantsMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["getCorporationsFreelanceJobsParticipants"], (identifier1: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions) => Promise<EsiResponse<GetCorporationsFreelanceJobsParticipantsOutput>>>>;
-type GetFreelanceJobsDetailDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["getFreelanceJobsDetail"], (identifier1: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions) => Promise<GetFreelanceJobsDetailOutput>>>;
-type GetFreelanceJobsDetailMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["getFreelanceJobsDetail"], (identifier1: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions) => Promise<EsiResponse<GetFreelanceJobsDetailOutput>>>>;
-type GetFreelanceJobsListingDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["getFreelanceJobsListing"], (options?: GetFreelanceJobsListingOptions) => Promise<GetFreelanceJobsListingOutput>>>;
-type GetFreelanceJobsListingMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["getFreelanceJobsListing"], (options?: GetFreelanceJobsListingOptions) => Promise<EsiResponse<GetFreelanceJobsListingOutput>>>>;
-type GetIncursionsDomainMethodAssertion = Assert<IsExact<IncursionsDomainClient["getIncursions"], (options?: GetIncursionsOptions) => Promise<GetIncursionsOutput>>>;
-type GetIncursionsMetadataMethodAssertion = Assert<IsExact<IncursionsDomainClientWithMetadata["getIncursions"], (options?: GetIncursionsOptions) => Promise<EsiResponse<GetIncursionsOutput>>>>;
-type GetCharactersCharacterIdIndustryJobsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getCharactersCharacterIdIndustryJobs"], (identifier1: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions) => Promise<GetCharactersCharacterIdIndustryJobsOutput>>>;
-type GetCharactersCharacterIdIndustryJobsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getCharactersCharacterIdIndustryJobs"], (identifier1: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions) => Promise<EsiResponse<GetCharactersCharacterIdIndustryJobsOutput>>>>;
-type GetCharactersCharacterIdMiningDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getCharactersCharacterIdMining"], (identifier1: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions) => Promise<GetCharactersCharacterIdMiningOutput>>>;
-type GetCharactersCharacterIdMiningMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getCharactersCharacterIdMining"], (identifier1: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions) => Promise<EsiResponse<GetCharactersCharacterIdMiningOutput>>>>;
-type GetCorporationCorporationIdMiningExtractionsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getCorporationCorporationIdMiningExtractions"], (identifier1: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions) => Promise<GetCorporationCorporationIdMiningExtractionsOutput>>>;
-type GetCorporationCorporationIdMiningExtractionsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getCorporationCorporationIdMiningExtractions"], (identifier1: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions) => Promise<EsiResponse<GetCorporationCorporationIdMiningExtractionsOutput>>>>;
-type GetCorporationCorporationIdMiningObserversDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getCorporationCorporationIdMiningObservers"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions) => Promise<GetCorporationCorporationIdMiningObserversOutput>>>;
-type GetCorporationCorporationIdMiningObserversMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getCorporationCorporationIdMiningObservers"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions) => Promise<EsiResponse<GetCorporationCorporationIdMiningObserversOutput>>>>;
-type GetCorporationCorporationIdMiningObserversObserverIdDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getCorporationCorporationIdMiningObserversObserverId"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions) => Promise<GetCorporationCorporationIdMiningObserversObserverIdOutput>>>;
-type GetCorporationCorporationIdMiningObserversObserverIdMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getCorporationCorporationIdMiningObserversObserverId"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions) => Promise<EsiResponse<GetCorporationCorporationIdMiningObserversObserverIdOutput>>>>;
-type GetCorporationsCorporationIdIndustryJobsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getCorporationsCorporationIdIndustryJobs"], (identifier1: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions) => Promise<GetCorporationsCorporationIdIndustryJobsOutput>>>;
-type GetCorporationsCorporationIdIndustryJobsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getCorporationsCorporationIdIndustryJobs"], (identifier1: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdIndustryJobsOutput>>>>;
-type GetIndustryFacilitiesDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getIndustryFacilities"], (options?: GetIndustryFacilitiesOptions) => Promise<GetIndustryFacilitiesOutput>>>;
-type GetIndustryFacilitiesMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getIndustryFacilities"], (options?: GetIndustryFacilitiesOptions) => Promise<EsiResponse<GetIndustryFacilitiesOutput>>>>;
-type GetIndustrySystemsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["getIndustrySystems"], (options?: GetIndustrySystemsOptions) => Promise<GetIndustrySystemsOutput>>>;
-type GetIndustrySystemsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["getIndustrySystems"], (options?: GetIndustrySystemsOptions) => Promise<EsiResponse<GetIndustrySystemsOutput>>>>;
-type GetInsurancePricesDomainMethodAssertion = Assert<IsExact<InsuranceDomainClient["getInsurancePrices"], (options?: GetInsurancePricesOptions) => Promise<GetInsurancePricesOutput>>>;
-type GetInsurancePricesMetadataMethodAssertion = Assert<IsExact<InsuranceDomainClientWithMetadata["getInsurancePrices"], (options?: GetInsurancePricesOptions) => Promise<EsiResponse<GetInsurancePricesOutput>>>>;
-type GetCharactersCharacterIdKillmailsRecentDomainMethodAssertion = Assert<IsExact<KillmailsDomainClient["getCharactersCharacterIdKillmailsRecent"], (identifier1: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions) => Promise<GetCharactersCharacterIdKillmailsRecentOutput>>>;
-type GetCharactersCharacterIdKillmailsRecentMetadataMethodAssertion = Assert<IsExact<KillmailsDomainClientWithMetadata["getCharactersCharacterIdKillmailsRecent"], (identifier1: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions) => Promise<EsiResponse<GetCharactersCharacterIdKillmailsRecentOutput>>>>;
-type GetCorporationsCorporationIdKillmailsRecentDomainMethodAssertion = Assert<IsExact<KillmailsDomainClient["getCorporationsCorporationIdKillmailsRecent"], (identifier1: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions) => Promise<GetCorporationsCorporationIdKillmailsRecentOutput>>>;
-type GetCorporationsCorporationIdKillmailsRecentMetadataMethodAssertion = Assert<IsExact<KillmailsDomainClientWithMetadata["getCorporationsCorporationIdKillmailsRecent"], (identifier1: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions) => Promise<EsiResponse<GetCorporationsCorporationIdKillmailsRecentOutput>>>>;
-type GetKillmailsKillmailIdKillmailHashDomainMethodAssertion = Assert<IsExact<KillmailsDomainClient["getKillmailsKillmailIdKillmailHash"], (identifier1: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], identifier2: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions) => Promise<GetKillmailsKillmailIdKillmailHashOutput>>>;
-type GetKillmailsKillmailIdKillmailHashMetadataMethodAssertion = Assert<IsExact<KillmailsDomainClientWithMetadata["getKillmailsKillmailIdKillmailHash"], (identifier1: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], identifier2: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions) => Promise<EsiResponse<GetKillmailsKillmailIdKillmailHashOutput>>>>;
-type GetCharactersCharacterIdLocationDomainMethodAssertion = Assert<IsExact<LocationDomainClient["getCharactersCharacterIdLocation"], (identifier1: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions) => Promise<GetCharactersCharacterIdLocationOutput>>>;
-type GetCharactersCharacterIdLocationMetadataMethodAssertion = Assert<IsExact<LocationDomainClientWithMetadata["getCharactersCharacterIdLocation"], (identifier1: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions) => Promise<EsiResponse<GetCharactersCharacterIdLocationOutput>>>>;
-type GetCharactersCharacterIdOnlineDomainMethodAssertion = Assert<IsExact<LocationDomainClient["getCharactersCharacterIdOnline"], (identifier1: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions) => Promise<GetCharactersCharacterIdOnlineOutput>>>;
-type GetCharactersCharacterIdOnlineMetadataMethodAssertion = Assert<IsExact<LocationDomainClientWithMetadata["getCharactersCharacterIdOnline"], (identifier1: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions) => Promise<EsiResponse<GetCharactersCharacterIdOnlineOutput>>>>;
-type GetCharactersCharacterIdShipDomainMethodAssertion = Assert<IsExact<LocationDomainClient["getCharactersCharacterIdShip"], (identifier1: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions) => Promise<GetCharactersCharacterIdShipOutput>>>;
-type GetCharactersCharacterIdShipMetadataMethodAssertion = Assert<IsExact<LocationDomainClientWithMetadata["getCharactersCharacterIdShip"], (identifier1: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions) => Promise<EsiResponse<GetCharactersCharacterIdShipOutput>>>>;
-type GetCharactersCharacterIdLoyaltyPointsDomainMethodAssertion = Assert<IsExact<LoyaltyDomainClient["getCharactersCharacterIdLoyaltyPoints"], (identifier1: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions) => Promise<GetCharactersCharacterIdLoyaltyPointsOutput>>>;
-type GetCharactersCharacterIdLoyaltyPointsMetadataMethodAssertion = Assert<IsExact<LoyaltyDomainClientWithMetadata["getCharactersCharacterIdLoyaltyPoints"], (identifier1: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions) => Promise<EsiResponse<GetCharactersCharacterIdLoyaltyPointsOutput>>>>;
-type GetLoyaltyStoresCorporationIdOffersDomainMethodAssertion = Assert<IsExact<LoyaltyDomainClient["getLoyaltyStoresCorporationIdOffers"], (identifier1: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions) => Promise<GetLoyaltyStoresCorporationIdOffersOutput>>>;
-type GetLoyaltyStoresCorporationIdOffersMetadataMethodAssertion = Assert<IsExact<LoyaltyDomainClientWithMetadata["getLoyaltyStoresCorporationIdOffers"], (identifier1: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions) => Promise<EsiResponse<GetLoyaltyStoresCorporationIdOffersOutput>>>>;
-type DeleteCharactersCharacterIdMailLabelsLabelIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["deleteCharactersCharacterIdMailLabelsLabelId"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions) => Promise<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>>>;
-type DeleteCharactersCharacterIdMailLabelsLabelIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["deleteCharactersCharacterIdMailLabelsLabelId"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>>>>;
-type DeleteCharactersCharacterIdMailMailIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["deleteCharactersCharacterIdMailMailId"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions) => Promise<DeleteCharactersCharacterIdMailMailIdOutput>>>;
-type DeleteCharactersCharacterIdMailMailIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["deleteCharactersCharacterIdMailMailId"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdMailMailIdOutput>>>>;
-type GetCharactersCharacterIdMailDomainMethodAssertion = Assert<IsExact<MailDomainClient["getCharactersCharacterIdMail"], (identifier1: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions) => Promise<GetCharactersCharacterIdMailOutput>>>;
-type GetCharactersCharacterIdMailMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["getCharactersCharacterIdMail"], (identifier1: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailOutput>>>>;
-type GetCharactersCharacterIdMailLabelsDomainMethodAssertion = Assert<IsExact<MailDomainClient["getCharactersCharacterIdMailLabels"], (identifier1: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions) => Promise<GetCharactersCharacterIdMailLabelsOutput>>>;
-type GetCharactersCharacterIdMailLabelsMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["getCharactersCharacterIdMailLabels"], (identifier1: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailLabelsOutput>>>>;
-type GetCharactersCharacterIdMailListsDomainMethodAssertion = Assert<IsExact<MailDomainClient["getCharactersCharacterIdMailLists"], (identifier1: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions) => Promise<GetCharactersCharacterIdMailListsOutput>>>;
-type GetCharactersCharacterIdMailListsMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["getCharactersCharacterIdMailLists"], (identifier1: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailListsOutput>>>>;
-type GetCharactersCharacterIdMailMailIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["getCharactersCharacterIdMailMailId"], (identifier1: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions) => Promise<GetCharactersCharacterIdMailMailIdOutput>>>;
-type GetCharactersCharacterIdMailMailIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["getCharactersCharacterIdMailMailId"], (identifier1: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailMailIdOutput>>>>;
-type PostCharactersCharacterIdMailDomainMethodAssertion = Assert<IsExact<MailDomainClient["postCharactersCharacterIdMail"], (identifier1: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions) => Promise<PostCharactersCharacterIdMailOutput>>>;
-type PostCharactersCharacterIdMailMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["postCharactersCharacterIdMail"], (identifier1: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions) => Promise<EsiResponse<PostCharactersCharacterIdMailOutput>>>>;
-type PostCharactersCharacterIdMailLabelsDomainMethodAssertion = Assert<IsExact<MailDomainClient["postCharactersCharacterIdMailLabels"], (identifier1: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions) => Promise<PostCharactersCharacterIdMailLabelsOutput>>>;
-type PostCharactersCharacterIdMailLabelsMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["postCharactersCharacterIdMailLabels"], (identifier1: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions) => Promise<EsiResponse<PostCharactersCharacterIdMailLabelsOutput>>>>;
-type PutCharactersCharacterIdMailMailIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["putCharactersCharacterIdMailMailId"], (identifier1: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions) => Promise<PutCharactersCharacterIdMailMailIdOutput>>>;
-type PutCharactersCharacterIdMailMailIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["putCharactersCharacterIdMailMailId"], (identifier1: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions) => Promise<EsiResponse<PutCharactersCharacterIdMailMailIdOutput>>>>;
-type GetCharactersCharacterIdOrdersDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getCharactersCharacterIdOrders"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions) => Promise<GetCharactersCharacterIdOrdersOutput>>>;
-type GetCharactersCharacterIdOrdersMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getCharactersCharacterIdOrders"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions) => Promise<EsiResponse<GetCharactersCharacterIdOrdersOutput>>>>;
-type GetCharactersCharacterIdOrdersHistoryDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getCharactersCharacterIdOrdersHistory"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions) => Promise<GetCharactersCharacterIdOrdersHistoryOutput>>>;
-type GetCharactersCharacterIdOrdersHistoryMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getCharactersCharacterIdOrdersHistory"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions) => Promise<EsiResponse<GetCharactersCharacterIdOrdersHistoryOutput>>>>;
-type GetCorporationsCorporationIdOrdersDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getCorporationsCorporationIdOrders"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions) => Promise<GetCorporationsCorporationIdOrdersOutput>>>;
-type GetCorporationsCorporationIdOrdersMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getCorporationsCorporationIdOrders"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions) => Promise<EsiResponse<GetCorporationsCorporationIdOrdersOutput>>>>;
-type GetCorporationsCorporationIdOrdersHistoryDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getCorporationsCorporationIdOrdersHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions) => Promise<GetCorporationsCorporationIdOrdersHistoryOutput>>>;
-type GetCorporationsCorporationIdOrdersHistoryMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getCorporationsCorporationIdOrdersHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions) => Promise<EsiResponse<GetCorporationsCorporationIdOrdersHistoryOutput>>>>;
-type GetMarketsGroupsDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getMarketsGroups"], (options?: GetMarketsGroupsOptions) => Promise<GetMarketsGroupsOutput>>>;
-type GetMarketsGroupsMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getMarketsGroups"], (options?: GetMarketsGroupsOptions) => Promise<EsiResponse<GetMarketsGroupsOutput>>>>;
-type GetMarketsGroupsMarketGroupIdDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getMarketsGroupsMarketGroupId"], (identifier1: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions) => Promise<GetMarketsGroupsMarketGroupIdOutput>>>;
-type GetMarketsGroupsMarketGroupIdMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getMarketsGroupsMarketGroupId"], (identifier1: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions) => Promise<EsiResponse<GetMarketsGroupsMarketGroupIdOutput>>>>;
-type GetMarketsPricesDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getMarketsPrices"], (options?: GetMarketsPricesOptions) => Promise<GetMarketsPricesOutput>>>;
-type GetMarketsPricesMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getMarketsPrices"], (options?: GetMarketsPricesOptions) => Promise<EsiResponse<GetMarketsPricesOutput>>>>;
-type GetMarketsRegionIdHistoryDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getMarketsRegionIdHistory"], (identifier1: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions) => Promise<GetMarketsRegionIdHistoryOutput>>>;
-type GetMarketsRegionIdHistoryMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getMarketsRegionIdHistory"], (identifier1: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions) => Promise<EsiResponse<GetMarketsRegionIdHistoryOutput>>>>;
-type GetMarketsRegionIdOrdersDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getMarketsRegionIdOrders"], (identifier1: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions) => Promise<GetMarketsRegionIdOrdersOutput>>>;
-type GetMarketsRegionIdOrdersMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getMarketsRegionIdOrders"], (identifier1: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions) => Promise<EsiResponse<GetMarketsRegionIdOrdersOutput>>>>;
-type GetMarketsRegionIdTypesDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getMarketsRegionIdTypes"], (identifier1: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions) => Promise<GetMarketsRegionIdTypesOutput>>>;
-type GetMarketsRegionIdTypesMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getMarketsRegionIdTypes"], (identifier1: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions) => Promise<EsiResponse<GetMarketsRegionIdTypesOutput>>>>;
-type GetMarketsStructuresStructureIdDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getMarketsStructuresStructureId"], (identifier1: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions) => Promise<GetMarketsStructuresStructureIdOutput>>>;
-type GetMarketsStructuresStructureIdMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getMarketsStructuresStructureId"], (identifier1: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions) => Promise<EsiResponse<GetMarketsStructuresStructureIdOutput>>>>;
-type GetMetaChangelogDomainMethodAssertion = Assert<IsExact<MetaDomainClient["getMetaChangelog"], (options?: GetMetaChangelogOptions) => Promise<GetMetaChangelogOutput>>>;
-type GetMetaChangelogMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["getMetaChangelog"], (options?: GetMetaChangelogOptions) => Promise<EsiResponse<GetMetaChangelogOutput>>>>;
-type GetMetaCompatibilityDatesDomainMethodAssertion = Assert<IsExact<MetaDomainClient["getMetaCompatibilityDates"], (options?: GetMetaCompatibilityDatesOptions) => Promise<GetMetaCompatibilityDatesOutput>>>;
-type GetMetaCompatibilityDatesMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["getMetaCompatibilityDates"], (options?: GetMetaCompatibilityDatesOptions) => Promise<EsiResponse<GetMetaCompatibilityDatesOutput>>>>;
-type GetMetaNameDomainMethodAssertion = Assert<IsExact<MetaDomainClient["getMetaName"], (options?: GetMetaNameOptions) => Promise<GetMetaNameOutput>>>;
-type GetMetaNameMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["getMetaName"], (options?: GetMetaNameOptions) => Promise<EsiResponse<GetMetaNameOutput>>>>;
-type GetMetaStatusDomainMethodAssertion = Assert<IsExact<MetaDomainClient["getMetaStatus"], (options?: GetMetaStatusOptions) => Promise<GetMetaStatusOutput>>>;
-type GetMetaStatusMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["getMetaStatus"], (options?: GetMetaStatusOptions) => Promise<EsiResponse<GetMetaStatusOutput>>>>;
-type GetCharactersMilitaryCampaignsObjectivesListingDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getCharactersMilitaryCampaignsObjectivesListing"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions) => Promise<GetCharactersMilitaryCampaignsObjectivesListingOutput>>>;
-type GetCharactersMilitaryCampaignsObjectivesListingMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getCharactersMilitaryCampaignsObjectivesListing"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions) => Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesListingOutput>>>>;
-type GetCharactersMilitaryCampaignsObjectivesParticipationDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getCharactersMilitaryCampaignsObjectivesParticipation"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions) => Promise<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>>>;
-type GetCharactersMilitaryCampaignsObjectivesParticipationMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getCharactersMilitaryCampaignsObjectivesParticipation"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions) => Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>>>>;
-type GetMilitaryCampaignsDetailDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getMilitaryCampaignsDetail"], (identifier1: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions) => Promise<GetMilitaryCampaignsDetailOutput>>>;
-type GetMilitaryCampaignsDetailMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getMilitaryCampaignsDetail"], (identifier1: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions) => Promise<EsiResponse<GetMilitaryCampaignsDetailOutput>>>>;
-type GetMilitaryCampaignsListingDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getMilitaryCampaignsListing"], (options?: GetMilitaryCampaignsListingOptions) => Promise<GetMilitaryCampaignsListingOutput>>>;
-type GetMilitaryCampaignsListingMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getMilitaryCampaignsListing"], (options?: GetMilitaryCampaignsListingOptions) => Promise<EsiResponse<GetMilitaryCampaignsListingOutput>>>>;
-type GetMilitaryCampaignsObjectivesDetailDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getMilitaryCampaignsObjectivesDetail"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], identifier2: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions) => Promise<GetMilitaryCampaignsObjectivesDetailOutput>>>;
-type GetMilitaryCampaignsObjectivesDetailMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getMilitaryCampaignsObjectivesDetail"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], identifier2: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions) => Promise<EsiResponse<GetMilitaryCampaignsObjectivesDetailOutput>>>>;
-type GetMilitaryCampaignsObjectivesListingDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getMilitaryCampaignsObjectivesListing"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions) => Promise<GetMilitaryCampaignsObjectivesListingOutput>>>;
-type GetMilitaryCampaignsObjectivesListingMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getMilitaryCampaignsObjectivesListing"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions) => Promise<EsiResponse<GetMilitaryCampaignsObjectivesListingOutput>>>>;
-type GetCharactersParagonHubSkinrDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["getCharactersParagonHubSkinr"], (identifier1: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions) => Promise<GetCharactersParagonHubSkinrOutput>>>;
-type GetCharactersParagonHubSkinrMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["getCharactersParagonHubSkinr"], (identifier1: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions) => Promise<EsiResponse<GetCharactersParagonHubSkinrOutput>>>>;
-type GetParagonHubSkinrDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["getParagonHubSkinr"], (options?: GetParagonHubSkinrOptions) => Promise<GetParagonHubSkinrOutput>>>;
-type GetParagonHubSkinrMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["getParagonHubSkinr"], (options?: GetParagonHubSkinrOptions) => Promise<EsiResponse<GetParagonHubSkinrOutput>>>>;
-type GetParagonHubSkinrAlliancesDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["getParagonHubSkinrAlliances"], (identifier1: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions) => Promise<GetParagonHubSkinrAlliancesOutput>>>;
-type GetParagonHubSkinrAlliancesMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["getParagonHubSkinrAlliances"], (identifier1: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions) => Promise<EsiResponse<GetParagonHubSkinrAlliancesOutput>>>>;
-type GetParagonHubSkinrCharactersDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["getParagonHubSkinrCharacters"], (identifier1: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions) => Promise<GetParagonHubSkinrCharactersOutput>>>;
-type GetParagonHubSkinrCharactersMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["getParagonHubSkinrCharacters"], (identifier1: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions) => Promise<EsiResponse<GetParagonHubSkinrCharactersOutput>>>>;
-type GetParagonHubSkinrCorporationsDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["getParagonHubSkinrCorporations"], (identifier1: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions) => Promise<GetParagonHubSkinrCorporationsOutput>>>;
-type GetParagonHubSkinrCorporationsMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["getParagonHubSkinrCorporations"], (identifier1: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions) => Promise<EsiResponse<GetParagonHubSkinrCorporationsOutput>>>>;
-type GetCharactersCharacterIdPlanetsDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["getCharactersCharacterIdPlanets"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions) => Promise<GetCharactersCharacterIdPlanetsOutput>>>;
-type GetCharactersCharacterIdPlanetsMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["getCharactersCharacterIdPlanets"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions) => Promise<EsiResponse<GetCharactersCharacterIdPlanetsOutput>>>>;
-type GetCharactersCharacterIdPlanetsPlanetIdDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["getCharactersCharacterIdPlanetsPlanetId"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions) => Promise<GetCharactersCharacterIdPlanetsPlanetIdOutput>>>;
-type GetCharactersCharacterIdPlanetsPlanetIdMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["getCharactersCharacterIdPlanetsPlanetId"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions) => Promise<EsiResponse<GetCharactersCharacterIdPlanetsPlanetIdOutput>>>>;
-type GetCorporationsCorporationIdCustomsOfficesDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["getCorporationsCorporationIdCustomsOffices"], (identifier1: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions) => Promise<GetCorporationsCorporationIdCustomsOfficesOutput>>>;
-type GetCorporationsCorporationIdCustomsOfficesMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["getCorporationsCorporationIdCustomsOffices"], (identifier1: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdCustomsOfficesOutput>>>>;
-type GetUniverseSchematicsSchematicIdDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["getUniverseSchematicsSchematicId"], (identifier1: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions) => Promise<GetUniverseSchematicsSchematicIdOutput>>>;
-type GetUniverseSchematicsSchematicIdMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["getUniverseSchematicsSchematicId"], (identifier1: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions) => Promise<EsiResponse<GetUniverseSchematicsSchematicIdOutput>>>>;
-type PostRouteDomainMethodAssertion = Assert<IsExact<RoutesDomainClient["postRoute"], (identifier1: NonNullable<PostRouteInput['path']>["origin_system_id"], identifier2: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions) => Promise<PostRouteOutput>>>;
-type PostRouteMetadataMethodAssertion = Assert<IsExact<RoutesDomainClientWithMetadata["postRoute"], (identifier1: NonNullable<PostRouteInput['path']>["origin_system_id"], identifier2: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions) => Promise<EsiResponse<PostRouteOutput>>>>;
-type GetCharactersCharacterIdSearchDomainMethodAssertion = Assert<IsExact<SearchDomainClient["getCharactersCharacterIdSearch"], (identifier1: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions) => Promise<GetCharactersCharacterIdSearchOutput>>>;
-type GetCharactersCharacterIdSearchMetadataMethodAssertion = Assert<IsExact<SearchDomainClientWithMetadata["getCharactersCharacterIdSearch"], (identifier1: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions) => Promise<EsiResponse<GetCharactersCharacterIdSearchOutput>>>>;
-type GetCharactersCharacterIdAttributesDomainMethodAssertion = Assert<IsExact<SkillsDomainClient["getCharactersCharacterIdAttributes"], (identifier1: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions) => Promise<GetCharactersCharacterIdAttributesOutput>>>;
-type GetCharactersCharacterIdAttributesMetadataMethodAssertion = Assert<IsExact<SkillsDomainClientWithMetadata["getCharactersCharacterIdAttributes"], (identifier1: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions) => Promise<EsiResponse<GetCharactersCharacterIdAttributesOutput>>>>;
-type GetCharactersCharacterIdSkillqueueDomainMethodAssertion = Assert<IsExact<SkillsDomainClient["getCharactersCharacterIdSkillqueue"], (identifier1: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions) => Promise<GetCharactersCharacterIdSkillqueueOutput>>>;
-type GetCharactersCharacterIdSkillqueueMetadataMethodAssertion = Assert<IsExact<SkillsDomainClientWithMetadata["getCharactersCharacterIdSkillqueue"], (identifier1: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions) => Promise<EsiResponse<GetCharactersCharacterIdSkillqueueOutput>>>>;
-type GetCharactersCharacterIdSkillsDomainMethodAssertion = Assert<IsExact<SkillsDomainClient["getCharactersCharacterIdSkills"], (identifier1: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions) => Promise<GetCharactersCharacterIdSkillsOutput>>>;
-type GetCharactersCharacterIdSkillsMetadataMethodAssertion = Assert<IsExact<SkillsDomainClientWithMetadata["getCharactersCharacterIdSkills"], (identifier1: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions) => Promise<EsiResponse<GetCharactersCharacterIdSkillsOutput>>>>;
-type GetSovereigntyCampaignsDomainMethodAssertion = Assert<IsExact<SovereigntyDomainClient["getSovereigntyCampaigns"], (options?: GetSovereigntyCampaignsOptions) => Promise<GetSovereigntyCampaignsOutput>>>;
-type GetSovereigntyCampaignsMetadataMethodAssertion = Assert<IsExact<SovereigntyDomainClientWithMetadata["getSovereigntyCampaigns"], (options?: GetSovereigntyCampaignsOptions) => Promise<EsiResponse<GetSovereigntyCampaignsOutput>>>>;
-type GetSovereigntySystemsDomainMethodAssertion = Assert<IsExact<SovereigntyDomainClient["getSovereigntySystems"], (options?: GetSovereigntySystemsOptions) => Promise<GetSovereigntySystemsOutput>>>;
-type GetSovereigntySystemsMetadataMethodAssertion = Assert<IsExact<SovereigntyDomainClientWithMetadata["getSovereigntySystems"], (options?: GetSovereigntySystemsOptions) => Promise<EsiResponse<GetSovereigntySystemsOutput>>>>;
-type GetStatusDomainMethodAssertion = Assert<IsExact<StatusDomainClient["getStatus"], (options?: GetStatusOptions) => Promise<GetStatusOutput>>>;
-type GetStatusMetadataMethodAssertion = Assert<IsExact<StatusDomainClientWithMetadata["getStatus"], (options?: GetStatusOptions) => Promise<EsiResponse<GetStatusOutput>>>>;
-type GetCharactersStructuresMercenaryDensDetailDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getCharactersStructuresMercenaryDensDetail"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions) => Promise<GetCharactersStructuresMercenaryDensDetailOutput>>>;
-type GetCharactersStructuresMercenaryDensDetailMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getCharactersStructuresMercenaryDensDetail"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions) => Promise<EsiResponse<GetCharactersStructuresMercenaryDensDetailOutput>>>>;
-type GetCharactersStructuresMercenaryDensListingDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getCharactersStructuresMercenaryDensListing"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions) => Promise<GetCharactersStructuresMercenaryDensListingOutput>>>;
-type GetCharactersStructuresMercenaryDensListingMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getCharactersStructuresMercenaryDensListing"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions) => Promise<EsiResponse<GetCharactersStructuresMercenaryDensListingOutput>>>>;
-type GetCorporationsStructuresSkyhooksDetailDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getCorporationsStructuresSkyhooksDetail"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions) => Promise<GetCorporationsStructuresSkyhooksDetailOutput>>>;
-type GetCorporationsStructuresSkyhooksDetailMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getCorporationsStructuresSkyhooksDetail"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions) => Promise<EsiResponse<GetCorporationsStructuresSkyhooksDetailOutput>>>>;
-type GetCorporationsStructuresSkyhooksListingDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getCorporationsStructuresSkyhooksListing"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions) => Promise<GetCorporationsStructuresSkyhooksListingOutput>>>;
-type GetCorporationsStructuresSkyhooksListingMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getCorporationsStructuresSkyhooksListing"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions) => Promise<EsiResponse<GetCorporationsStructuresSkyhooksListingOutput>>>>;
-type GetCorporationsStructuresSovereigntyHubsDetailDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getCorporationsStructuresSovereigntyHubsDetail"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions) => Promise<GetCorporationsStructuresSovereigntyHubsDetailOutput>>>;
-type GetCorporationsStructuresSovereigntyHubsDetailMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getCorporationsStructuresSovereigntyHubsDetail"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions) => Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsDetailOutput>>>>;
-type GetCorporationsStructuresSovereigntyHubsListingDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getCorporationsStructuresSovereigntyHubsListing"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions) => Promise<GetCorporationsStructuresSovereigntyHubsListingOutput>>>;
-type GetCorporationsStructuresSovereigntyHubsListingMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getCorporationsStructuresSovereigntyHubsListing"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions) => Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsListingOutput>>>>;
-type GetUniverseAncestriesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseAncestries"], (options?: GetUniverseAncestriesOptions) => Promise<GetUniverseAncestriesOutput>>>;
-type GetUniverseAncestriesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseAncestries"], (options?: GetUniverseAncestriesOptions) => Promise<EsiResponse<GetUniverseAncestriesOutput>>>>;
-type GetUniverseAsteroidBeltsAsteroidBeltIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseAsteroidBeltsAsteroidBeltId"], (identifier1: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions) => Promise<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>>>;
-type GetUniverseAsteroidBeltsAsteroidBeltIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseAsteroidBeltsAsteroidBeltId"], (identifier1: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions) => Promise<EsiResponse<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>>>>;
-type GetUniverseBloodlinesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseBloodlines"], (options?: GetUniverseBloodlinesOptions) => Promise<GetUniverseBloodlinesOutput>>>;
-type GetUniverseBloodlinesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseBloodlines"], (options?: GetUniverseBloodlinesOptions) => Promise<EsiResponse<GetUniverseBloodlinesOutput>>>>;
-type GetUniverseCategoriesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseCategories"], (options?: GetUniverseCategoriesOptions) => Promise<GetUniverseCategoriesOutput>>>;
-type GetUniverseCategoriesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseCategories"], (options?: GetUniverseCategoriesOptions) => Promise<EsiResponse<GetUniverseCategoriesOutput>>>>;
-type GetUniverseCategoriesCategoryIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseCategoriesCategoryId"], (identifier1: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions) => Promise<GetUniverseCategoriesCategoryIdOutput>>>;
-type GetUniverseCategoriesCategoryIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseCategoriesCategoryId"], (identifier1: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions) => Promise<EsiResponse<GetUniverseCategoriesCategoryIdOutput>>>>;
-type GetUniverseConstellationsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseConstellations"], (options?: GetUniverseConstellationsOptions) => Promise<GetUniverseConstellationsOutput>>>;
-type GetUniverseConstellationsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseConstellations"], (options?: GetUniverseConstellationsOptions) => Promise<EsiResponse<GetUniverseConstellationsOutput>>>>;
-type GetUniverseConstellationsConstellationIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseConstellationsConstellationId"], (identifier1: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions) => Promise<GetUniverseConstellationsConstellationIdOutput>>>;
-type GetUniverseConstellationsConstellationIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseConstellationsConstellationId"], (identifier1: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions) => Promise<EsiResponse<GetUniverseConstellationsConstellationIdOutput>>>>;
-type GetUniverseFactionsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseFactions"], (options?: GetUniverseFactionsOptions) => Promise<GetUniverseFactionsOutput>>>;
-type GetUniverseFactionsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseFactions"], (options?: GetUniverseFactionsOptions) => Promise<EsiResponse<GetUniverseFactionsOutput>>>>;
-type GetUniverseGraphicsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseGraphics"], (options?: GetUniverseGraphicsOptions) => Promise<GetUniverseGraphicsOutput>>>;
-type GetUniverseGraphicsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseGraphics"], (options?: GetUniverseGraphicsOptions) => Promise<EsiResponse<GetUniverseGraphicsOutput>>>>;
-type GetUniverseGraphicsGraphicIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseGraphicsGraphicId"], (identifier1: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions) => Promise<GetUniverseGraphicsGraphicIdOutput>>>;
-type GetUniverseGraphicsGraphicIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseGraphicsGraphicId"], (identifier1: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions) => Promise<EsiResponse<GetUniverseGraphicsGraphicIdOutput>>>>;
-type GetUniverseGroupsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseGroups"], (options?: GetUniverseGroupsOptions) => Promise<GetUniverseGroupsOutput>>>;
-type GetUniverseGroupsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseGroups"], (options?: GetUniverseGroupsOptions) => Promise<EsiResponse<GetUniverseGroupsOutput>>>>;
-type GetUniverseGroupsGroupIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseGroupsGroupId"], (identifier1: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions) => Promise<GetUniverseGroupsGroupIdOutput>>>;
-type GetUniverseGroupsGroupIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseGroupsGroupId"], (identifier1: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions) => Promise<EsiResponse<GetUniverseGroupsGroupIdOutput>>>>;
-type GetUniverseMoonsMoonIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseMoonsMoonId"], (identifier1: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions) => Promise<GetUniverseMoonsMoonIdOutput>>>;
-type GetUniverseMoonsMoonIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseMoonsMoonId"], (identifier1: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions) => Promise<EsiResponse<GetUniverseMoonsMoonIdOutput>>>>;
-type GetUniversePlanetsPlanetIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniversePlanetsPlanetId"], (identifier1: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions) => Promise<GetUniversePlanetsPlanetIdOutput>>>;
-type GetUniversePlanetsPlanetIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniversePlanetsPlanetId"], (identifier1: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions) => Promise<EsiResponse<GetUniversePlanetsPlanetIdOutput>>>>;
-type GetUniverseRacesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseRaces"], (options?: GetUniverseRacesOptions) => Promise<GetUniverseRacesOutput>>>;
-type GetUniverseRacesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseRaces"], (options?: GetUniverseRacesOptions) => Promise<EsiResponse<GetUniverseRacesOutput>>>>;
-type GetUniverseRegionsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseRegions"], (options?: GetUniverseRegionsOptions) => Promise<GetUniverseRegionsOutput>>>;
-type GetUniverseRegionsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseRegions"], (options?: GetUniverseRegionsOptions) => Promise<EsiResponse<GetUniverseRegionsOutput>>>>;
-type GetUniverseRegionsRegionIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseRegionsRegionId"], (identifier1: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions) => Promise<GetUniverseRegionsRegionIdOutput>>>;
-type GetUniverseRegionsRegionIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseRegionsRegionId"], (identifier1: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions) => Promise<EsiResponse<GetUniverseRegionsRegionIdOutput>>>>;
-type GetUniverseStargatesStargateIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseStargatesStargateId"], (identifier1: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions) => Promise<GetUniverseStargatesStargateIdOutput>>>;
-type GetUniverseStargatesStargateIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseStargatesStargateId"], (identifier1: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions) => Promise<EsiResponse<GetUniverseStargatesStargateIdOutput>>>>;
-type GetUniverseStarsStarIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseStarsStarId"], (identifier1: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions) => Promise<GetUniverseStarsStarIdOutput>>>;
-type GetUniverseStarsStarIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseStarsStarId"], (identifier1: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions) => Promise<EsiResponse<GetUniverseStarsStarIdOutput>>>>;
-type GetUniverseStationsStationIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseStationsStationId"], (identifier1: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions) => Promise<GetUniverseStationsStationIdOutput>>>;
-type GetUniverseStationsStationIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseStationsStationId"], (identifier1: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions) => Promise<EsiResponse<GetUniverseStationsStationIdOutput>>>>;
-type GetUniverseStructuresDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseStructures"], (options?: GetUniverseStructuresOptions) => Promise<GetUniverseStructuresOutput>>>;
-type GetUniverseStructuresMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseStructures"], (options?: GetUniverseStructuresOptions) => Promise<EsiResponse<GetUniverseStructuresOutput>>>>;
-type GetUniverseStructuresStructureIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseStructuresStructureId"], (identifier1: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions) => Promise<GetUniverseStructuresStructureIdOutput>>>;
-type GetUniverseStructuresStructureIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseStructuresStructureId"], (identifier1: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions) => Promise<EsiResponse<GetUniverseStructuresStructureIdOutput>>>>;
-type GetUniverseSystemJumpsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseSystemJumps"], (options?: GetUniverseSystemJumpsOptions) => Promise<GetUniverseSystemJumpsOutput>>>;
-type GetUniverseSystemJumpsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseSystemJumps"], (options?: GetUniverseSystemJumpsOptions) => Promise<EsiResponse<GetUniverseSystemJumpsOutput>>>>;
-type GetUniverseSystemKillsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseSystemKills"], (options?: GetUniverseSystemKillsOptions) => Promise<GetUniverseSystemKillsOutput>>>;
-type GetUniverseSystemKillsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseSystemKills"], (options?: GetUniverseSystemKillsOptions) => Promise<EsiResponse<GetUniverseSystemKillsOutput>>>>;
-type GetUniverseSystemsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseSystems"], (options?: GetUniverseSystemsOptions) => Promise<GetUniverseSystemsOutput>>>;
-type GetUniverseSystemsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseSystems"], (options?: GetUniverseSystemsOptions) => Promise<EsiResponse<GetUniverseSystemsOutput>>>>;
-type GetUniverseSystemsSystemIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseSystemsSystemId"], (identifier1: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions) => Promise<GetUniverseSystemsSystemIdOutput>>>;
-type GetUniverseSystemsSystemIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseSystemsSystemId"], (identifier1: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions) => Promise<EsiResponse<GetUniverseSystemsSystemIdOutput>>>>;
-type GetUniverseTypesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseTypes"], (options?: GetUniverseTypesOptions) => Promise<GetUniverseTypesOutput>>>;
-type GetUniverseTypesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseTypes"], (options?: GetUniverseTypesOptions) => Promise<EsiResponse<GetUniverseTypesOutput>>>>;
-type GetUniverseTypesTypeIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getUniverseTypesTypeId"], (identifier1: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions) => Promise<GetUniverseTypesTypeIdOutput>>>;
-type GetUniverseTypesTypeIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getUniverseTypesTypeId"], (identifier1: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions) => Promise<EsiResponse<GetUniverseTypesTypeIdOutput>>>>;
-type PostUniverseIdsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["postUniverseIds"], (options: PostUniverseIdsOptions) => Promise<PostUniverseIdsOutput>>>;
-type PostUniverseIdsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["postUniverseIds"], (options: PostUniverseIdsOptions) => Promise<EsiResponse<PostUniverseIdsOutput>>>>;
-type PostUniverseNamesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["postUniverseNames"], (options: PostUniverseNamesOptions) => Promise<PostUniverseNamesOutput>>>;
-type PostUniverseNamesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["postUniverseNames"], (options: PostUniverseNamesOptions) => Promise<EsiResponse<PostUniverseNamesOutput>>>>;
-type PostUiAutopilotWaypointDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["postUiAutopilotWaypoint"], (options: PostUiAutopilotWaypointOptions) => Promise<PostUiAutopilotWaypointOutput>>>;
-type PostUiAutopilotWaypointMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["postUiAutopilotWaypoint"], (options: PostUiAutopilotWaypointOptions) => Promise<EsiResponse<PostUiAutopilotWaypointOutput>>>>;
-type PostUiOpenwindowContractDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["postUiOpenwindowContract"], (options: PostUiOpenwindowContractOptions) => Promise<PostUiOpenwindowContractOutput>>>;
-type PostUiOpenwindowContractMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["postUiOpenwindowContract"], (options: PostUiOpenwindowContractOptions) => Promise<EsiResponse<PostUiOpenwindowContractOutput>>>>;
-type PostUiOpenwindowInformationDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["postUiOpenwindowInformation"], (options: PostUiOpenwindowInformationOptions) => Promise<PostUiOpenwindowInformationOutput>>>;
-type PostUiOpenwindowInformationMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["postUiOpenwindowInformation"], (options: PostUiOpenwindowInformationOptions) => Promise<EsiResponse<PostUiOpenwindowInformationOutput>>>>;
-type PostUiOpenwindowMarketdetailsDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["postUiOpenwindowMarketdetails"], (options: PostUiOpenwindowMarketdetailsOptions) => Promise<PostUiOpenwindowMarketdetailsOutput>>>;
-type PostUiOpenwindowMarketdetailsMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["postUiOpenwindowMarketdetails"], (options: PostUiOpenwindowMarketdetailsOptions) => Promise<EsiResponse<PostUiOpenwindowMarketdetailsOutput>>>>;
-type PostUiOpenwindowNewmailDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["postUiOpenwindowNewmail"], (options: PostUiOpenwindowNewmailOptions) => Promise<PostUiOpenwindowNewmailOutput>>>;
-type PostUiOpenwindowNewmailMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["postUiOpenwindowNewmail"], (options: PostUiOpenwindowNewmailOptions) => Promise<EsiResponse<PostUiOpenwindowNewmailOutput>>>>;
-type GetCharactersCharacterIdWalletDomainMethodAssertion = Assert<IsExact<WalletDomainClient["getCharactersCharacterIdWallet"], (identifier1: NonNullable<GetCharactersCharacterIdWalletInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletOptions) => Promise<GetCharactersCharacterIdWalletOutput>>>;
-type GetCharactersCharacterIdWalletMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["getCharactersCharacterIdWallet"], (identifier1: NonNullable<GetCharactersCharacterIdWalletInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletOptions) => Promise<EsiResponse<GetCharactersCharacterIdWalletOutput>>>>;
-type GetCharactersCharacterIdWalletJournalDomainMethodAssertion = Assert<IsExact<WalletDomainClient["getCharactersCharacterIdWalletJournal"], (identifier1: NonNullable<GetCharactersCharacterIdWalletJournalInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletJournalOptions) => Promise<GetCharactersCharacterIdWalletJournalOutput>>>;
-type GetCharactersCharacterIdWalletJournalMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["getCharactersCharacterIdWalletJournal"], (identifier1: NonNullable<GetCharactersCharacterIdWalletJournalInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletJournalOptions) => Promise<EsiResponse<GetCharactersCharacterIdWalletJournalOutput>>>>;
-type GetCharactersCharacterIdWalletTransactionsDomainMethodAssertion = Assert<IsExact<WalletDomainClient["getCharactersCharacterIdWalletTransactions"], (identifier1: NonNullable<GetCharactersCharacterIdWalletTransactionsInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletTransactionsOptions) => Promise<GetCharactersCharacterIdWalletTransactionsOutput>>>;
-type GetCharactersCharacterIdWalletTransactionsMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["getCharactersCharacterIdWalletTransactions"], (identifier1: NonNullable<GetCharactersCharacterIdWalletTransactionsInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletTransactionsOptions) => Promise<EsiResponse<GetCharactersCharacterIdWalletTransactionsOutput>>>>;
-type GetCorporationsCorporationIdWalletsDomainMethodAssertion = Assert<IsExact<WalletDomainClient["getCorporationsCorporationIdWallets"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdWalletsOptions) => Promise<GetCorporationsCorporationIdWalletsOutput>>>;
-type GetCorporationsCorporationIdWalletsMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["getCorporationsCorporationIdWallets"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdWalletsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdWalletsOutput>>>>;
-type GetCorporationsCorporationIdWalletsDivisionJournalDomainMethodAssertion = Assert<IsExact<WalletDomainClient["getCorporationsCorporationIdWalletsDivisionJournal"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionJournalOptions) => Promise<GetCorporationsCorporationIdWalletsDivisionJournalOutput>>>;
-type GetCorporationsCorporationIdWalletsDivisionJournalMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["getCorporationsCorporationIdWalletsDivisionJournal"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionJournalOptions) => Promise<EsiResponse<GetCorporationsCorporationIdWalletsDivisionJournalOutput>>>>;
-type GetCorporationsCorporationIdWalletsDivisionTransactionsDomainMethodAssertion = Assert<IsExact<WalletDomainClient["getCorporationsCorporationIdWalletsDivisionTransactions"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionTransactionsOptions) => Promise<GetCorporationsCorporationIdWalletsDivisionTransactionsOutput>>>;
-type GetCorporationsCorporationIdWalletsDivisionTransactionsMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["getCorporationsCorporationIdWalletsDivisionTransactions"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionTransactionsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdWalletsDivisionTransactionsOutput>>>>;
-type GetWarsDomainMethodAssertion = Assert<IsExact<WarsDomainClient["getWars"], (options?: GetWarsOptions) => Promise<GetWarsOutput>>>;
-type GetWarsMetadataMethodAssertion = Assert<IsExact<WarsDomainClientWithMetadata["getWars"], (options?: GetWarsOptions) => Promise<EsiResponse<GetWarsOutput>>>>;
-type GetWarsWarIdDomainMethodAssertion = Assert<IsExact<WarsDomainClient["getWarsWarId"], (identifier1: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions) => Promise<GetWarsWarIdOutput>>>;
-type GetWarsWarIdMetadataMethodAssertion = Assert<IsExact<WarsDomainClientWithMetadata["getWarsWarId"], (identifier1: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions) => Promise<EsiResponse<GetWarsWarIdOutput>>>>;
-type GetWarsWarIdKillmailsDomainMethodAssertion = Assert<IsExact<WarsDomainClient["getWarsWarIdKillmails"], (identifier1: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions) => Promise<GetWarsWarIdKillmailsOutput>>>;
-type GetWarsWarIdKillmailsMetadataMethodAssertion = Assert<IsExact<WarsDomainClientWithMetadata["getWarsWarIdKillmails"], (identifier1: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions) => Promise<EsiResponse<GetWarsWarIdKillmailsOutput>>>>;
+type GetCharactersAccessListsDetailDomainMethodAssertion = Assert<IsExact<AccessListDomainClient["get"], (identifier1: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions) => Promise<GetCharactersAccessListsDetailOutput>>>;
+type GetCharactersAccessListsDetailMetadataMethodAssertion = Assert<IsExact<AccessListDomainClientWithMetadata["get"], (identifier1: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions) => Promise<EsiResponse<GetCharactersAccessListsDetailOutput>>>>;
+type GetCharactersAccessListsDetailOptionsAssertion = Assert<IsExact<GetCharactersAccessListsDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersAccessListsDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersAccessListsDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersAccessListsDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersAccessListsListingDomainMethodAssertion = Assert<IsExact<AccessListDomainClient["list"], (identifier1: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions) => Promise<GetCharactersAccessListsListingOutput>>>;
+type GetCharactersAccessListsListingMetadataMethodAssertion = Assert<IsExact<AccessListDomainClientWithMetadata["list"], (identifier1: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions) => Promise<EsiResponse<GetCharactersAccessListsListingOutput>>>>;
+type GetCharactersAccessListsListingOptionsAssertion = Assert<IsExact<GetCharactersAccessListsListingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersAccessListsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersAccessListsListingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersAccessListsListingInput["header"]>["X-Tenant"];
+}>>;
+type AccessListDomainClientFactoryAssertion = Assert<IsExact<typeof createAccessListClient, (options?: EsiClientOptions) => AccessListDomainClient>>;
+type AccessListDomainClientMetadataViewAssertion = Assert<IsExact<AccessListDomainClient['withMetadata'], () => AccessListDomainClientWithMetadata>>;
+type GetCharactersMercenaryTacticalOperationsDetailDomainMethodAssertion = Assert<IsExact<ActivitiesDomainClient["getMercenaryTacticalOperation"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["operation_id"], options?: GetCharactersMercenaryTacticalOperationsDetailOptions) => Promise<GetCharactersMercenaryTacticalOperationsDetailOutput>>>;
+type GetCharactersMercenaryTacticalOperationsDetailMetadataMethodAssertion = Assert<IsExact<ActivitiesDomainClientWithMetadata["getMercenaryTacticalOperation"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["operation_id"], options?: GetCharactersMercenaryTacticalOperationsDetailOptions) => Promise<EsiResponse<GetCharactersMercenaryTacticalOperationsDetailOutput>>>>;
+type GetCharactersMercenaryTacticalOperationsDetailOptionsAssertion = Assert<IsExact<GetCharactersMercenaryTacticalOperationsDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersMercenaryTacticalOperationsListingDomainMethodAssertion = Assert<IsExact<ActivitiesDomainClient["listMercenaryTacticalOperations"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput['path']>["character_id"], options?: GetCharactersMercenaryTacticalOperationsListingOptions) => Promise<GetCharactersMercenaryTacticalOperationsListingOutput>>>;
+type GetCharactersMercenaryTacticalOperationsListingMetadataMethodAssertion = Assert<IsExact<ActivitiesDomainClientWithMetadata["listMercenaryTacticalOperations"], (identifier1: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput['path']>["character_id"], options?: GetCharactersMercenaryTacticalOperationsListingOptions) => Promise<EsiResponse<GetCharactersMercenaryTacticalOperationsListingOutput>>>>;
+type GetCharactersMercenaryTacticalOperationsListingOptionsAssertion = Assert<IsExact<GetCharactersMercenaryTacticalOperationsListingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput["header"]>["X-Tenant"];
+}>>;
+type GetSkyhooksRaidableDomainMethodAssertion = Assert<IsExact<ActivitiesDomainClient["listRaidableSkyhooks"], (options?: GetSkyhooksRaidableOptions) => Promise<GetSkyhooksRaidableOutput>>>;
+type GetSkyhooksRaidableMetadataMethodAssertion = Assert<IsExact<ActivitiesDomainClientWithMetadata["listRaidableSkyhooks"], (options?: GetSkyhooksRaidableOptions) => Promise<EsiResponse<GetSkyhooksRaidableOutput>>>>;
+type GetSkyhooksRaidableOptionsAssertion = Assert<IsExact<GetSkyhooksRaidableOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetSkyhooksRaidableInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetSkyhooksRaidableInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetSkyhooksRaidableInput["header"]>["X-Tenant"];
+}>>;
+type ActivitiesDomainClientFactoryAssertion = Assert<IsExact<typeof createActivitiesClient, (options?: EsiClientOptions) => ActivitiesDomainClient>>;
+type ActivitiesDomainClientMetadataViewAssertion = Assert<IsExact<ActivitiesDomainClient['withMetadata'], () => ActivitiesDomainClientWithMetadata>>;
+type GetAlliancesAllianceIdIconsDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["getIcon"], (identifier1: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions) => Promise<GetAlliancesAllianceIdIconsOutput>>>;
+type GetAlliancesAllianceIdIconsMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["getIcon"], (identifier1: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdIconsOutput>>>>;
+type GetAlliancesAllianceIdIconsOptionsAssertion = Assert<IsExact<GetAlliancesAllianceIdIconsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetAlliancesAllianceIdIconsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetAlliancesAllianceIdIconsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetAlliancesAllianceIdIconsInput["header"]>["X-Tenant"];
+}>>;
+type GetAlliancesAllianceIdDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["getPublicInfo"], (identifier1: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions) => Promise<GetAlliancesAllianceIdOutput>>>;
+type GetAlliancesAllianceIdMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["getPublicInfo"], (identifier1: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions) => Promise<EsiResponse<GetAlliancesAllianceIdOutput>>>>;
+type GetAlliancesAllianceIdOptionsAssertion = Assert<IsExact<GetAlliancesAllianceIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetAlliancesAllianceIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetAlliancesAllianceIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetAlliancesAllianceIdInput["header"]>["X-Tenant"];
+}>>;
+type GetAlliancesDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["list"], (options?: GetAlliancesOptions) => Promise<GetAlliancesOutput>>>;
+type GetAlliancesMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["list"], (options?: GetAlliancesOptions) => Promise<EsiResponse<GetAlliancesOutput>>>>;
+type GetAlliancesOptionsAssertion = Assert<IsExact<GetAlliancesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetAlliancesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetAlliancesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetAlliancesInput["header"]>["X-Tenant"];
+}>>;
+type GetAlliancesAllianceIdCorporationsDomainMethodAssertion = Assert<IsExact<AllianceDomainClient["listCorporations"], (identifier1: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions) => Promise<GetAlliancesAllianceIdCorporationsOutput>>>;
+type GetAlliancesAllianceIdCorporationsMetadataMethodAssertion = Assert<IsExact<AllianceDomainClientWithMetadata["listCorporations"], (identifier1: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdCorporationsOutput>>>>;
+type GetAlliancesAllianceIdCorporationsOptionsAssertion = Assert<IsExact<GetAlliancesAllianceIdCorporationsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetAlliancesAllianceIdCorporationsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetAlliancesAllianceIdCorporationsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetAlliancesAllianceIdCorporationsInput["header"]>["X-Tenant"];
+}>>;
+type AllianceDomainClientFactoryAssertion = Assert<IsExact<typeof createAllianceClient, (options?: EsiClientOptions) => AllianceDomainClient>>;
+type AllianceDomainClientMetadataViewAssertion = Assert<IsExact<AllianceDomainClient['withMetadata'], () => AllianceDomainClientWithMetadata>>;
+type GetCharactersCharacterIdAssetsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["listCharacterAssets"], (identifier1: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions) => Promise<GetCharactersCharacterIdAssetsOutput>>>;
+type GetCharactersCharacterIdAssetsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["listCharacterAssets"], (identifier1: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions) => Promise<EsiResponse<GetCharactersCharacterIdAssetsOutput>>>>;
+type GetCharactersCharacterIdAssetsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdAssetsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdAssetsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdAssetsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdAssetsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdAssetsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdAssetsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["listCorporationAssets"], (identifier1: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions) => Promise<GetCorporationsCorporationIdAssetsOutput>>>;
+type GetCorporationsCorporationIdAssetsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["listCorporationAssets"], (identifier1: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdAssetsOutput>>>>;
+type GetCorporationsCorporationIdAssetsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdAssetsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdAssetsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdAssetsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdAssetsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdAssetsInput["header"]>["X-Tenant"];
+}>>;
+type PostCharactersCharacterIdAssetsLocationsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["lookupCharacterLocations"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions) => Promise<PostCharactersCharacterIdAssetsLocationsOutput>>>;
+type PostCharactersCharacterIdAssetsLocationsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["lookupCharacterLocations"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions) => Promise<EsiResponse<PostCharactersCharacterIdAssetsLocationsOutput>>>>;
+type PostCharactersCharacterIdAssetsLocationsOptionsAssertion = Assert<IsExact<PostCharactersCharacterIdAssetsLocationsOptions, {
+  readonly "body": PostCharactersCharacterIdAssetsLocationsInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersCharacterIdAssetsLocationsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersCharacterIdAssetsLocationsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCharactersCharacterIdAssetsLocationsInput["header"]>["X-Tenant"];
+}>>;
+type PostCharactersCharacterIdAssetsNamesDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["lookupCharacterNames"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions) => Promise<PostCharactersCharacterIdAssetsNamesOutput>>>;
+type PostCharactersCharacterIdAssetsNamesMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["lookupCharacterNames"], (identifier1: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions) => Promise<EsiResponse<PostCharactersCharacterIdAssetsNamesOutput>>>>;
+type PostCharactersCharacterIdAssetsNamesOptionsAssertion = Assert<IsExact<PostCharactersCharacterIdAssetsNamesOptions, {
+  readonly "body": PostCharactersCharacterIdAssetsNamesInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersCharacterIdAssetsNamesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersCharacterIdAssetsNamesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCharactersCharacterIdAssetsNamesInput["header"]>["X-Tenant"];
+}>>;
+type PostCorporationsCorporationIdAssetsLocationsDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["lookupCorporationLocations"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions) => Promise<PostCorporationsCorporationIdAssetsLocationsOutput>>>;
+type PostCorporationsCorporationIdAssetsLocationsMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["lookupCorporationLocations"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions) => Promise<EsiResponse<PostCorporationsCorporationIdAssetsLocationsOutput>>>>;
+type PostCorporationsCorporationIdAssetsLocationsOptionsAssertion = Assert<IsExact<PostCorporationsCorporationIdAssetsLocationsOptions, {
+  readonly "body": PostCorporationsCorporationIdAssetsLocationsInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput["header"]>["X-Tenant"];
+}>>;
+type PostCorporationsCorporationIdAssetsNamesDomainMethodAssertion = Assert<IsExact<AssetsDomainClient["lookupCorporationNames"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions) => Promise<PostCorporationsCorporationIdAssetsNamesOutput>>>;
+type PostCorporationsCorporationIdAssetsNamesMetadataMethodAssertion = Assert<IsExact<AssetsDomainClientWithMetadata["lookupCorporationNames"], (identifier1: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions) => Promise<EsiResponse<PostCorporationsCorporationIdAssetsNamesOutput>>>>;
+type PostCorporationsCorporationIdAssetsNamesOptionsAssertion = Assert<IsExact<PostCorporationsCorporationIdAssetsNamesOptions, {
+  readonly "body": PostCorporationsCorporationIdAssetsNamesInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCorporationsCorporationIdAssetsNamesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCorporationsCorporationIdAssetsNamesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCorporationsCorporationIdAssetsNamesInput["header"]>["X-Tenant"];
+}>>;
+type AssetsDomainClientFactoryAssertion = Assert<IsExact<typeof createAssetsClient, (options?: EsiClientOptions) => AssetsDomainClient>>;
+type AssetsDomainClientMetadataViewAssertion = Assert<IsExact<AssetsDomainClient['withMetadata'], () => AssetsDomainClientWithMetadata>>;
+type GetCharactersCharacterIdCalendarEventIdDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["getEvent"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions) => Promise<GetCharactersCharacterIdCalendarEventIdOutput>>>;
+type GetCharactersCharacterIdCalendarEventIdMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["getEvent"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions) => Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdOutput>>>>;
+type GetCharactersCharacterIdCalendarEventIdOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdCalendarEventIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdCalendarEventIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdCalendarEventIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdCalendarEventIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdCalendarEventIdAttendeesDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["listEventAttendees"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions) => Promise<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>>>;
+type GetCharactersCharacterIdCalendarEventIdAttendeesMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["listEventAttendees"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions) => Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>>>>;
+type GetCharactersCharacterIdCalendarEventIdAttendeesOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdCalendarEventIdAttendeesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdCalendarDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["listEvents"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions) => Promise<GetCharactersCharacterIdCalendarOutput>>>;
+type GetCharactersCharacterIdCalendarMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["listEvents"], (identifier1: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions) => Promise<EsiResponse<GetCharactersCharacterIdCalendarOutput>>>>;
+type GetCharactersCharacterIdCalendarOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdCalendarOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "fromEvent"?: NonNullable<GetCharactersCharacterIdCalendarInput["query"]>["from_event"];
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdCalendarInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdCalendarInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdCalendarInput["header"]>["X-Tenant"];
+}>>;
+type PutCharactersCharacterIdCalendarEventIdDomainMethodAssertion = Assert<IsExact<CalendarDomainClient["respondToEvent"], (identifier1: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions) => Promise<PutCharactersCharacterIdCalendarEventIdOutput>>>;
+type PutCharactersCharacterIdCalendarEventIdMetadataMethodAssertion = Assert<IsExact<CalendarDomainClientWithMetadata["respondToEvent"], (identifier1: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions) => Promise<EsiResponse<PutCharactersCharacterIdCalendarEventIdOutput>>>>;
+type PutCharactersCharacterIdCalendarEventIdOptionsAssertion = Assert<IsExact<PutCharactersCharacterIdCalendarEventIdOptions, {
+  readonly "body": PutCharactersCharacterIdCalendarEventIdInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PutCharactersCharacterIdCalendarEventIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PutCharactersCharacterIdCalendarEventIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PutCharactersCharacterIdCalendarEventIdInput["header"]>["X-Tenant"];
+}>>;
+type CalendarDomainClientFactoryAssertion = Assert<IsExact<typeof createCalendarClient, (options?: EsiClientOptions) => CalendarDomainClient>>;
+type CalendarDomainClientMetadataViewAssertion = Assert<IsExact<CalendarDomainClient['withMetadata'], () => CalendarDomainClientWithMetadata>>;
+type GetCharactersCharacterIdAgentsResearchDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["agentsResearch"], (identifier1: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions) => Promise<GetCharactersCharacterIdAgentsResearchOutput>>>;
+type GetCharactersCharacterIdAgentsResearchMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["agentsResearch"], (identifier1: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions) => Promise<EsiResponse<GetCharactersCharacterIdAgentsResearchOutput>>>>;
+type GetCharactersCharacterIdAgentsResearchOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdAgentsResearchOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdAgentsResearchInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdAgentsResearchInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdAgentsResearchInput["header"]>["X-Tenant"];
+}>>;
+type PostCharactersCharacterIdCspaDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["calculateCspaCharge"], (identifier1: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions) => Promise<PostCharactersCharacterIdCspaOutput>>>;
+type PostCharactersCharacterIdCspaMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["calculateCspaCharge"], (identifier1: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions) => Promise<EsiResponse<PostCharactersCharacterIdCspaOutput>>>>;
+type PostCharactersCharacterIdCspaOptionsAssertion = Assert<IsExact<PostCharactersCharacterIdCspaOptions, {
+  readonly "body": PostCharactersCharacterIdCspaInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersCharacterIdCspaInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersCharacterIdCspaInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCharactersCharacterIdCspaInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdRolesDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getCorporationRoles"], (identifier1: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions) => Promise<GetCharactersCharacterIdRolesOutput>>>;
+type GetCharactersCharacterIdRolesMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getCorporationRoles"], (identifier1: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions) => Promise<EsiResponse<GetCharactersCharacterIdRolesOutput>>>>;
+type GetCharactersCharacterIdRolesOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdRolesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdRolesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdRolesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdRolesInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdFatigueDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getJumpFatigue"], (identifier1: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions) => Promise<GetCharactersCharacterIdFatigueOutput>>>;
+type GetCharactersCharacterIdFatigueMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getJumpFatigue"], (identifier1: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions) => Promise<EsiResponse<GetCharactersCharacterIdFatigueOutput>>>>;
+type GetCharactersCharacterIdFatigueOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdFatigueOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdFatigueInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdFatigueInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdFatigueInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdPortraitDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getPortrait"], (identifier1: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions) => Promise<GetCharactersCharacterIdPortraitOutput>>>;
+type GetCharactersCharacterIdPortraitMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getPortrait"], (identifier1: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions) => Promise<EsiResponse<GetCharactersCharacterIdPortraitOutput>>>>;
+type GetCharactersCharacterIdPortraitOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdPortraitOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdPortraitInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdPortraitInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdPortraitInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersDetailDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["getPublicInfo"], (identifier1: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions) => Promise<GetCharactersDetailOutput>>>;
+type GetCharactersDetailMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["getPublicInfo"], (identifier1: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions) => Promise<EsiResponse<GetCharactersDetailOutput>>>>;
+type GetCharactersDetailOptionsAssertion = Assert<IsExact<GetCharactersDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdBlueprintsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["listBlueprints"], (identifier1: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions) => Promise<GetCharactersCharacterIdBlueprintsOutput>>>;
+type GetCharactersCharacterIdBlueprintsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["listBlueprints"], (identifier1: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions) => Promise<EsiResponse<GetCharactersCharacterIdBlueprintsOutput>>>>;
+type GetCharactersCharacterIdBlueprintsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdBlueprintsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdBlueprintsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdBlueprintsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdBlueprintsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdBlueprintsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdNotificationsContactsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["listContactNotifications"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions) => Promise<GetCharactersCharacterIdNotificationsContactsOutput>>>;
+type GetCharactersCharacterIdNotificationsContactsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["listContactNotifications"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions) => Promise<EsiResponse<GetCharactersCharacterIdNotificationsContactsOutput>>>>;
+type GetCharactersCharacterIdNotificationsContactsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdNotificationsContactsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdNotificationsContactsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdNotificationsContactsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdNotificationsContactsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdCorporationhistoryDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["listCorporationHistory"], (identifier1: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions) => Promise<GetCharactersCharacterIdCorporationhistoryOutput>>>;
+type GetCharactersCharacterIdCorporationhistoryMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["listCorporationHistory"], (identifier1: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions) => Promise<EsiResponse<GetCharactersCharacterIdCorporationhistoryOutput>>>>;
+type GetCharactersCharacterIdCorporationhistoryOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdCorporationhistoryOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdCorporationhistoryInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdCorporationhistoryInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdCorporationhistoryInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdTitlesDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["listCorporationTitles"], (identifier1: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions) => Promise<GetCharactersCharacterIdTitlesOutput>>>;
+type GetCharactersCharacterIdTitlesMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["listCorporationTitles"], (identifier1: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions) => Promise<EsiResponse<GetCharactersCharacterIdTitlesOutput>>>>;
+type GetCharactersCharacterIdTitlesOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdTitlesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdTitlesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdTitlesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdTitlesInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdMedalsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["listMedals"], (identifier1: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions) => Promise<GetCharactersCharacterIdMedalsOutput>>>;
+type GetCharactersCharacterIdMedalsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["listMedals"], (identifier1: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions) => Promise<EsiResponse<GetCharactersCharacterIdMedalsOutput>>>>;
+type GetCharactersCharacterIdMedalsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdMedalsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdMedalsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdMedalsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdMedalsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdNotificationsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["listNotifications"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions) => Promise<GetCharactersCharacterIdNotificationsOutput>>>;
+type GetCharactersCharacterIdNotificationsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["listNotifications"], (identifier1: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions) => Promise<EsiResponse<GetCharactersCharacterIdNotificationsOutput>>>>;
+type GetCharactersCharacterIdNotificationsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdNotificationsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdNotificationsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdNotificationsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdNotificationsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdStandingsDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["listStandings"], (identifier1: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions) => Promise<GetCharactersCharacterIdStandingsOutput>>>;
+type GetCharactersCharacterIdStandingsMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["listStandings"], (identifier1: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions) => Promise<EsiResponse<GetCharactersCharacterIdStandingsOutput>>>>;
+type GetCharactersCharacterIdStandingsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdStandingsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdStandingsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdStandingsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdStandingsInput["header"]>["X-Tenant"];
+}>>;
+type PostCharactersAffiliationDomainMethodAssertion = Assert<IsExact<CharacterDomainClient["lookupAffiliations"], (options: PostCharactersAffiliationOptions) => Promise<PostCharactersAffiliationOutput>>>;
+type PostCharactersAffiliationMetadataMethodAssertion = Assert<IsExact<CharacterDomainClientWithMetadata["lookupAffiliations"], (options: PostCharactersAffiliationOptions) => Promise<EsiResponse<PostCharactersAffiliationOutput>>>>;
+type PostCharactersAffiliationOptionsAssertion = Assert<IsExact<PostCharactersAffiliationOptions, {
+  readonly "body": PostCharactersAffiliationInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersAffiliationInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersAffiliationInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCharactersAffiliationInput["header"]>["X-Tenant"];
+}>>;
+type CharacterDomainClientFactoryAssertion = Assert<IsExact<typeof createCharacterClient, (options?: EsiClientOptions) => CharacterDomainClient>>;
+type CharacterDomainClientMetadataViewAssertion = Assert<IsExact<CharacterDomainClient['withMetadata'], () => CharacterDomainClientWithMetadata>>;
+type GetCharactersCharacterIdClonesDomainMethodAssertion = Assert<IsExact<ClonesDomainClient["getState"], (identifier1: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions) => Promise<GetCharactersCharacterIdClonesOutput>>>;
+type GetCharactersCharacterIdClonesMetadataMethodAssertion = Assert<IsExact<ClonesDomainClientWithMetadata["getState"], (identifier1: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions) => Promise<EsiResponse<GetCharactersCharacterIdClonesOutput>>>>;
+type GetCharactersCharacterIdClonesOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdClonesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdClonesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdClonesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdClonesInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdImplantsDomainMethodAssertion = Assert<IsExact<ClonesDomainClient["listActiveImplants"], (identifier1: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions) => Promise<GetCharactersCharacterIdImplantsOutput>>>;
+type GetCharactersCharacterIdImplantsMetadataMethodAssertion = Assert<IsExact<ClonesDomainClientWithMetadata["listActiveImplants"], (identifier1: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions) => Promise<EsiResponse<GetCharactersCharacterIdImplantsOutput>>>>;
+type GetCharactersCharacterIdImplantsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdImplantsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdImplantsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdImplantsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdImplantsInput["header"]>["X-Tenant"];
+}>>;
+type ClonesDomainClientFactoryAssertion = Assert<IsExact<typeof createClonesClient, (options?: EsiClientOptions) => ClonesDomainClient>>;
+type ClonesDomainClientMetadataViewAssertion = Assert<IsExact<ClonesDomainClient['withMetadata'], () => ClonesDomainClientWithMetadata>>;
+type PostCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["addCharacterContacts"], (identifier1: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions) => Promise<PostCharactersCharacterIdContactsOutput>>>;
+type PostCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["addCharacterContacts"], (identifier1: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions) => Promise<EsiResponse<PostCharactersCharacterIdContactsOutput>>>>;
+type PostCharactersCharacterIdContactsOptionsAssertion = Assert<IsExact<PostCharactersCharacterIdContactsOptions, {
+  readonly "body": PostCharactersCharacterIdContactsInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersCharacterIdContactsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersCharacterIdContactsInput["header"]>["If-None-Match"];
+  readonly "labelIds"?: NonNullable<PostCharactersCharacterIdContactsInput["query"]>["label_ids"];
+  readonly "standing": NonNullable<PostCharactersCharacterIdContactsInput["query"]>["standing"];
+  readonly "watched"?: NonNullable<PostCharactersCharacterIdContactsInput["query"]>["watched"];
+  readonly "xTenant"?: NonNullable<PostCharactersCharacterIdContactsInput["header"]>["X-Tenant"];
+}>>;
+type DeleteCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["deleteCharacterContacts"], (identifier1: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions) => Promise<DeleteCharactersCharacterIdContactsOutput>>>;
+type DeleteCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["deleteCharacterContacts"], (identifier1: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdContactsOutput>>>>;
+type DeleteCharactersCharacterIdContactsOptionsAssertion = Assert<IsExact<DeleteCharactersCharacterIdContactsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "contactIds": NonNullable<DeleteCharactersCharacterIdContactsInput["query"]>["contact_ids"];
+  readonly "ifModifiedSince"?: NonNullable<DeleteCharactersCharacterIdContactsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<DeleteCharactersCharacterIdContactsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<DeleteCharactersCharacterIdContactsInput["header"]>["X-Tenant"];
+}>>;
+type GetAlliancesAllianceIdContactsLabelsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["listAllianceContactLabels"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions) => Promise<GetAlliancesAllianceIdContactsLabelsOutput>>>;
+type GetAlliancesAllianceIdContactsLabelsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["listAllianceContactLabels"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdContactsLabelsOutput>>>>;
+type GetAlliancesAllianceIdContactsLabelsOptionsAssertion = Assert<IsExact<GetAlliancesAllianceIdContactsLabelsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetAlliancesAllianceIdContactsLabelsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetAlliancesAllianceIdContactsLabelsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetAlliancesAllianceIdContactsLabelsInput["header"]>["X-Tenant"];
+}>>;
+type GetAlliancesAllianceIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["listAllianceContacts"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions) => Promise<GetAlliancesAllianceIdContactsOutput>>>;
+type GetAlliancesAllianceIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["listAllianceContacts"], (identifier1: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions) => Promise<EsiResponse<GetAlliancesAllianceIdContactsOutput>>>>;
+type GetAlliancesAllianceIdContactsOptionsAssertion = Assert<IsExact<GetAlliancesAllianceIdContactsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetAlliancesAllianceIdContactsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetAlliancesAllianceIdContactsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetAlliancesAllianceIdContactsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetAlliancesAllianceIdContactsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdContactsLabelsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["listCharacterContactLabels"], (identifier1: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions) => Promise<GetCharactersCharacterIdContactsLabelsOutput>>>;
+type GetCharactersCharacterIdContactsLabelsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["listCharacterContactLabels"], (identifier1: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContactsLabelsOutput>>>>;
+type GetCharactersCharacterIdContactsLabelsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdContactsLabelsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdContactsLabelsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdContactsLabelsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdContactsLabelsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["listCharacterContacts"], (identifier1: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions) => Promise<GetCharactersCharacterIdContactsOutput>>>;
+type GetCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["listCharacterContacts"], (identifier1: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContactsOutput>>>>;
+type GetCharactersCharacterIdContactsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdContactsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdContactsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdContactsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdContactsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdContactsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdContactsLabelsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["listCorporationContactLabels"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions) => Promise<GetCorporationsCorporationIdContactsLabelsOutput>>>;
+type GetCorporationsCorporationIdContactsLabelsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["listCorporationContactLabels"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContactsLabelsOutput>>>>;
+type GetCorporationsCorporationIdContactsLabelsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdContactsLabelsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdContactsLabelsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdContactsLabelsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdContactsLabelsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["listCorporationContacts"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions) => Promise<GetCorporationsCorporationIdContactsOutput>>>;
+type GetCorporationsCorporationIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["listCorporationContacts"], (identifier1: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContactsOutput>>>>;
+type GetCorporationsCorporationIdContactsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdContactsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdContactsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdContactsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdContactsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdContactsInput["header"]>["X-Tenant"];
+}>>;
+type PutCharactersCharacterIdContactsDomainMethodAssertion = Assert<IsExact<ContactsDomainClient["updateCharacterContacts"], (identifier1: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions) => Promise<PutCharactersCharacterIdContactsOutput>>>;
+type PutCharactersCharacterIdContactsMetadataMethodAssertion = Assert<IsExact<ContactsDomainClientWithMetadata["updateCharacterContacts"], (identifier1: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions) => Promise<EsiResponse<PutCharactersCharacterIdContactsOutput>>>>;
+type PutCharactersCharacterIdContactsOptionsAssertion = Assert<IsExact<PutCharactersCharacterIdContactsOptions, {
+  readonly "body": PutCharactersCharacterIdContactsInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PutCharactersCharacterIdContactsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PutCharactersCharacterIdContactsInput["header"]>["If-None-Match"];
+  readonly "labelIds"?: NonNullable<PutCharactersCharacterIdContactsInput["query"]>["label_ids"];
+  readonly "standing": NonNullable<PutCharactersCharacterIdContactsInput["query"]>["standing"];
+  readonly "watched"?: NonNullable<PutCharactersCharacterIdContactsInput["query"]>["watched"];
+  readonly "xTenant"?: NonNullable<PutCharactersCharacterIdContactsInput["header"]>["X-Tenant"];
+}>>;
+type ContactsDomainClientFactoryAssertion = Assert<IsExact<typeof createContactsClient, (options?: EsiClientOptions) => ContactsDomainClient>>;
+type ContactsDomainClientMetadataViewAssertion = Assert<IsExact<ContactsDomainClient['withMetadata'], () => ContactsDomainClientWithMetadata>>;
+type GetCharactersCharacterIdContractsContractIdBidsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listCharacterContractBids"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions) => Promise<GetCharactersCharacterIdContractsContractIdBidsOutput>>>;
+type GetCharactersCharacterIdContractsContractIdBidsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listCharacterContractBids"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdBidsOutput>>>>;
+type GetCharactersCharacterIdContractsContractIdBidsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdContractsContractIdBidsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdContractsContractIdItemsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listCharacterContractItems"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions) => Promise<GetCharactersCharacterIdContractsContractIdItemsOutput>>>;
+type GetCharactersCharacterIdContractsContractIdItemsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listCharacterContractItems"], (identifier1: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdItemsOutput>>>>;
+type GetCharactersCharacterIdContractsContractIdItemsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdContractsContractIdItemsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdContractsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listCharacterContracts"], (identifier1: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions) => Promise<GetCharactersCharacterIdContractsOutput>>>;
+type GetCharactersCharacterIdContractsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listCharacterContracts"], (identifier1: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions) => Promise<EsiResponse<GetCharactersCharacterIdContractsOutput>>>>;
+type GetCharactersCharacterIdContractsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdContractsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdContractsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdContractsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdContractsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdContractsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdContractsContractIdBidsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listCorporationContractBids"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions) => Promise<GetCorporationsCorporationIdContractsContractIdBidsOutput>>>;
+type GetCorporationsCorporationIdContractsContractIdBidsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listCorporationContractBids"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdBidsOutput>>>>;
+type GetCorporationsCorporationIdContractsContractIdBidsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdContractsContractIdBidsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdContractsContractIdItemsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listCorporationContractItems"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions) => Promise<GetCorporationsCorporationIdContractsContractIdItemsOutput>>>;
+type GetCorporationsCorporationIdContractsContractIdItemsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listCorporationContractItems"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdItemsOutput>>>>;
+type GetCorporationsCorporationIdContractsContractIdItemsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdContractsContractIdItemsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdContractsDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listCorporationContracts"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions) => Promise<GetCorporationsCorporationIdContractsOutput>>>;
+type GetCorporationsCorporationIdContractsMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listCorporationContracts"], (identifier1: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContractsOutput>>>>;
+type GetCorporationsCorporationIdContractsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdContractsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdContractsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdContractsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdContractsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdContractsInput["header"]>["X-Tenant"];
+}>>;
+type GetContractsPublicBidsContractIdDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listPublicContractBids"], (identifier1: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions) => Promise<GetContractsPublicBidsContractIdOutput>>>;
+type GetContractsPublicBidsContractIdMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listPublicContractBids"], (identifier1: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions) => Promise<EsiResponse<GetContractsPublicBidsContractIdOutput>>>>;
+type GetContractsPublicBidsContractIdOptionsAssertion = Assert<IsExact<GetContractsPublicBidsContractIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetContractsPublicBidsContractIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetContractsPublicBidsContractIdInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetContractsPublicBidsContractIdInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetContractsPublicBidsContractIdInput["header"]>["X-Tenant"];
+}>>;
+type GetContractsPublicItemsContractIdDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listPublicContractItems"], (identifier1: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions) => Promise<GetContractsPublicItemsContractIdOutput>>>;
+type GetContractsPublicItemsContractIdMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listPublicContractItems"], (identifier1: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions) => Promise<EsiResponse<GetContractsPublicItemsContractIdOutput>>>>;
+type GetContractsPublicItemsContractIdOptionsAssertion = Assert<IsExact<GetContractsPublicItemsContractIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetContractsPublicItemsContractIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetContractsPublicItemsContractIdInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetContractsPublicItemsContractIdInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetContractsPublicItemsContractIdInput["header"]>["X-Tenant"];
+}>>;
+type GetContractsPublicRegionIdDomainMethodAssertion = Assert<IsExact<ContractsDomainClient["listPublicContracts"], (identifier1: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions) => Promise<GetContractsPublicRegionIdOutput>>>;
+type GetContractsPublicRegionIdMetadataMethodAssertion = Assert<IsExact<ContractsDomainClientWithMetadata["listPublicContracts"], (identifier1: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions) => Promise<EsiResponse<GetContractsPublicRegionIdOutput>>>>;
+type GetContractsPublicRegionIdOptionsAssertion = Assert<IsExact<GetContractsPublicRegionIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetContractsPublicRegionIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetContractsPublicRegionIdInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetContractsPublicRegionIdInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetContractsPublicRegionIdInput["header"]>["X-Tenant"];
+}>>;
+type ContractsDomainClientFactoryAssertion = Assert<IsExact<typeof createContractsClient, (options?: EsiClientOptions) => ContractsDomainClient>>;
+type ContractsDomainClientMetadataViewAssertion = Assert<IsExact<ContractsDomainClient['withMetadata'], () => ContractsDomainClientWithMetadata>>;
+type GetCorporationsCorporationIdIconsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getIcon"], (identifier1: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions) => Promise<GetCorporationsCorporationIdIconsOutput>>>;
+type GetCorporationsCorporationIdIconsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getIcon"], (identifier1: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdIconsOutput>>>>;
+type GetCorporationsCorporationIdIconsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdIconsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdIconsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdIconsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdIconsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdMembersLimitDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getMemberLimit"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions) => Promise<GetCorporationsCorporationIdMembersLimitOutput>>>;
+type GetCorporationsCorporationIdMembersLimitMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getMemberLimit"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembersLimitOutput>>>>;
+type GetCorporationsCorporationIdMembersLimitOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdMembersLimitOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdMembersLimitInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdMembersLimitInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdMembersLimitInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getPublicInfo"], (identifier1: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions) => Promise<GetCorporationsCorporationIdOutput>>>;
+type GetCorporationsCorporationIdMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getPublicInfo"], (identifier1: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions) => Promise<EsiResponse<GetCorporationsCorporationIdOutput>>>>;
+type GetCorporationsCorporationIdOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdStarbasesStarbaseIdDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["getStarbase"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions) => Promise<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>>>;
+type GetCorporationsCorporationIdStarbasesStarbaseIdMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["getStarbase"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>>>>;
+type GetCorporationsCorporationIdStarbasesStarbaseIdOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdStarbasesStarbaseIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput["header"]>["If-None-Match"];
+  readonly "systemId": NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput["query"]>["system_id"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdAlliancehistoryDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listAllianceHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions) => Promise<GetCorporationsCorporationIdAlliancehistoryOutput>>>;
+type GetCorporationsCorporationIdAlliancehistoryMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listAllianceHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions) => Promise<EsiResponse<GetCorporationsCorporationIdAlliancehistoryOutput>>>>;
+type GetCorporationsCorporationIdAlliancehistoryOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdAlliancehistoryOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdContainersLogsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listAuditLogSecureContainerLogs"], (identifier1: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions) => Promise<GetCorporationsCorporationIdContainersLogsOutput>>>;
+type GetCorporationsCorporationIdContainersLogsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listAuditLogSecureContainerLogs"], (identifier1: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdContainersLogsOutput>>>>;
+type GetCorporationsCorporationIdContainersLogsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdContainersLogsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdContainersLogsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdContainersLogsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdContainersLogsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdContainersLogsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdBlueprintsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listBlueprints"], (identifier1: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions) => Promise<GetCorporationsCorporationIdBlueprintsOutput>>>;
+type GetCorporationsCorporationIdBlueprintsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listBlueprints"], (identifier1: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdBlueprintsOutput>>>>;
+type GetCorporationsCorporationIdBlueprintsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdBlueprintsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdBlueprintsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdBlueprintsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdBlueprintsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdBlueprintsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdDivisionsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listDivisions"], (identifier1: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions) => Promise<GetCorporationsCorporationIdDivisionsOutput>>>;
+type GetCorporationsCorporationIdDivisionsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listDivisions"], (identifier1: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdDivisionsOutput>>>>;
+type GetCorporationsCorporationIdDivisionsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdDivisionsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdDivisionsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdDivisionsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdDivisionsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdFacilitiesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listFacilities"], (identifier1: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions) => Promise<GetCorporationsCorporationIdFacilitiesOutput>>>;
+type GetCorporationsCorporationIdFacilitiesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listFacilities"], (identifier1: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdFacilitiesOutput>>>>;
+type GetCorporationsCorporationIdFacilitiesOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdFacilitiesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdFacilitiesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdFacilitiesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdFacilitiesInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdMedalsIssuedDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listIssuedMedals"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions) => Promise<GetCorporationsCorporationIdMedalsIssuedOutput>>>;
+type GetCorporationsCorporationIdMedalsIssuedMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listIssuedMedals"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMedalsIssuedOutput>>>>;
+type GetCorporationsCorporationIdMedalsIssuedOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdMedalsIssuedOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdMedalsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listMedals"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions) => Promise<GetCorporationsCorporationIdMedalsOutput>>>;
+type GetCorporationsCorporationIdMedalsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listMedals"], (identifier1: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMedalsOutput>>>>;
+type GetCorporationsCorporationIdMedalsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdMedalsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdMedalsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdMedalsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdMedalsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdMedalsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdRolesHistoryDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listMemberRoleHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions) => Promise<GetCorporationsCorporationIdRolesHistoryOutput>>>;
+type GetCorporationsCorporationIdRolesHistoryMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listMemberRoleHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions) => Promise<EsiResponse<GetCorporationsCorporationIdRolesHistoryOutput>>>>;
+type GetCorporationsCorporationIdRolesHistoryOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdRolesHistoryOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdRolesHistoryInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdRolesHistoryInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdRolesHistoryInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdRolesHistoryInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdRolesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listMemberRoles"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions) => Promise<GetCorporationsCorporationIdRolesOutput>>>;
+type GetCorporationsCorporationIdRolesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listMemberRoles"], (identifier1: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdRolesOutput>>>>;
+type GetCorporationsCorporationIdRolesOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdRolesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdRolesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdRolesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdRolesInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdMembersTitlesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listMemberTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions) => Promise<GetCorporationsCorporationIdMembersTitlesOutput>>>;
+type GetCorporationsCorporationIdMembersTitlesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listMemberTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembersTitlesOutput>>>>;
+type GetCorporationsCorporationIdMembersTitlesOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdMembersTitlesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdMembersTitlesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdMembersTitlesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdMembersTitlesInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdMembertrackingDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listMemberTracking"], (identifier1: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions) => Promise<GetCorporationsCorporationIdMembertrackingOutput>>>;
+type GetCorporationsCorporationIdMembertrackingMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listMemberTracking"], (identifier1: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembertrackingOutput>>>>;
+type GetCorporationsCorporationIdMembertrackingOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdMembertrackingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdMembertrackingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdMembertrackingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdMembertrackingInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdMembersDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listMembers"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions) => Promise<GetCorporationsCorporationIdMembersOutput>>>;
+type GetCorporationsCorporationIdMembersMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listMembers"], (identifier1: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions) => Promise<EsiResponse<GetCorporationsCorporationIdMembersOutput>>>>;
+type GetCorporationsCorporationIdMembersOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdMembersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdMembersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdMembersInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdMembersInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsNpccorpsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listNpcCorporations"], (options?: GetCorporationsNpccorpsOptions) => Promise<GetCorporationsNpccorpsOutput>>>;
+type GetCorporationsNpccorpsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listNpcCorporations"], (options?: GetCorporationsNpccorpsOptions) => Promise<EsiResponse<GetCorporationsNpccorpsOutput>>>>;
+type GetCorporationsNpccorpsOptionsAssertion = Assert<IsExact<GetCorporationsNpccorpsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsNpccorpsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsNpccorpsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsNpccorpsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdShareholdersDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listShareholders"], (identifier1: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions) => Promise<GetCorporationsCorporationIdShareholdersOutput>>>;
+type GetCorporationsCorporationIdShareholdersMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listShareholders"], (identifier1: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions) => Promise<EsiResponse<GetCorporationsCorporationIdShareholdersOutput>>>>;
+type GetCorporationsCorporationIdShareholdersOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdShareholdersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdShareholdersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdShareholdersInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdShareholdersInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdShareholdersInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdStandingsDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listStandings"], (identifier1: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions) => Promise<GetCorporationsCorporationIdStandingsOutput>>>;
+type GetCorporationsCorporationIdStandingsMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listStandings"], (identifier1: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStandingsOutput>>>>;
+type GetCorporationsCorporationIdStandingsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdStandingsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdStandingsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdStandingsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdStandingsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdStandingsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdStarbasesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listStarbases"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions) => Promise<GetCorporationsCorporationIdStarbasesOutput>>>;
+type GetCorporationsCorporationIdStarbasesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listStarbases"], (identifier1: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStarbasesOutput>>>>;
+type GetCorporationsCorporationIdStarbasesOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdStarbasesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdStarbasesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdStarbasesInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdStarbasesInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdStarbasesInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdStructuresDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listStructures"], (identifier1: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions) => Promise<GetCorporationsCorporationIdStructuresOutput>>>;
+type GetCorporationsCorporationIdStructuresMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listStructures"], (identifier1: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions) => Promise<EsiResponse<GetCorporationsCorporationIdStructuresOutput>>>>;
+type GetCorporationsCorporationIdStructuresOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdStructuresOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdStructuresInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdStructuresInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdStructuresInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdStructuresInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdTitlesDomainMethodAssertion = Assert<IsExact<CorporationDomainClient["listTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions) => Promise<GetCorporationsCorporationIdTitlesOutput>>>;
+type GetCorporationsCorporationIdTitlesMetadataMethodAssertion = Assert<IsExact<CorporationDomainClientWithMetadata["listTitles"], (identifier1: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdTitlesOutput>>>>;
+type GetCorporationsCorporationIdTitlesOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdTitlesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdTitlesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdTitlesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdTitlesInput["header"]>["X-Tenant"];
+}>>;
+type CorporationDomainClientFactoryAssertion = Assert<IsExact<typeof createCorporationClient, (options?: EsiClientOptions) => CorporationDomainClient>>;
+type CorporationDomainClientMetadataViewAssertion = Assert<IsExact<CorporationDomainClient['withMetadata'], () => CorporationDomainClientWithMetadata>>;
+type GetCorporationsProjectsDetailDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["get"], (identifier1: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions) => Promise<GetCorporationsProjectsDetailOutput>>>;
+type GetCorporationsProjectsDetailMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["get"], (identifier1: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions) => Promise<EsiResponse<GetCorporationsProjectsDetailOutput>>>>;
+type GetCorporationsProjectsDetailOptionsAssertion = Assert<IsExact<GetCorporationsProjectsDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsProjectsDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsProjectsContributionDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["getContribution"], (identifier1: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], identifier3: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions) => Promise<GetCorporationsProjectsContributionOutput>>>;
+type GetCorporationsProjectsContributionMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["getContribution"], (identifier1: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], identifier3: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions) => Promise<EsiResponse<GetCorporationsProjectsContributionOutput>>>>;
+type GetCorporationsProjectsContributionOptionsAssertion = Assert<IsExact<GetCorporationsProjectsContributionOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsContributionInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsContributionInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsProjectsContributionInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsProjectsListingDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["list"], (identifier1: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions) => Promise<GetCorporationsProjectsListingOutput>>>;
+type GetCorporationsProjectsListingMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["list"], (identifier1: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions) => Promise<EsiResponse<GetCorporationsProjectsListingOutput>>>>;
+type GetCorporationsProjectsListingOptionsAssertion = Assert<IsExact<GetCorporationsProjectsListingOptions, {
+  readonly "after"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsListingInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["limit"];
+  readonly "state"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["state"];
+  readonly "xTenant"?: NonNullable<GetCorporationsProjectsListingInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsProjectsContributorsDomainMethodAssertion = Assert<IsExact<CorporationProjectsDomainClient["listContributors"], (identifier1: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions) => Promise<GetCorporationsProjectsContributorsOutput>>>;
+type GetCorporationsProjectsContributorsMetadataMethodAssertion = Assert<IsExact<CorporationProjectsDomainClientWithMetadata["listContributors"], (identifier1: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions) => Promise<EsiResponse<GetCorporationsProjectsContributorsOutput>>>>;
+type GetCorporationsProjectsContributorsOptionsAssertion = Assert<IsExact<GetCorporationsProjectsContributorsOptions, {
+  readonly "after"?: NonNullable<GetCorporationsProjectsContributorsInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetCorporationsProjectsContributorsInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsContributorsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsContributorsInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetCorporationsProjectsContributorsInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetCorporationsProjectsContributorsInput["header"]>["X-Tenant"];
+}>>;
+type CorporationProjectsDomainClientFactoryAssertion = Assert<IsExact<typeof createCorporationProjectsClient, (options?: EsiClientOptions) => CorporationProjectsDomainClient>>;
+type CorporationProjectsDomainClientMetadataViewAssertion = Assert<IsExact<CorporationProjectsDomainClient['withMetadata'], () => CorporationProjectsDomainClientWithMetadata>>;
+type GetCosmeticsSkinrDomainMethodAssertion = Assert<IsExact<CosmeticsDomainClient["getSkinrLicense"], (identifier1: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions) => Promise<GetCosmeticsSkinrOutput>>>;
+type GetCosmeticsSkinrMetadataMethodAssertion = Assert<IsExact<CosmeticsDomainClientWithMetadata["getSkinrLicense"], (identifier1: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions) => Promise<EsiResponse<GetCosmeticsSkinrOutput>>>>;
+type GetCosmeticsSkinrOptionsAssertion = Assert<IsExact<GetCosmeticsSkinrOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCosmeticsSkinrInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCosmeticsSkinrInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCosmeticsSkinrInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCosmeticsSkinrComponentsDomainMethodAssertion = Assert<IsExact<CosmeticsDomainClient["listSkinrComponentLicenses"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions) => Promise<GetCharactersCosmeticsSkinrComponentsOutput>>>;
+type GetCharactersCosmeticsSkinrComponentsMetadataMethodAssertion = Assert<IsExact<CosmeticsDomainClientWithMetadata["listSkinrComponentLicenses"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions) => Promise<EsiResponse<GetCharactersCosmeticsSkinrComponentsOutput>>>>;
+type GetCharactersCosmeticsSkinrComponentsOptionsAssertion = Assert<IsExact<GetCharactersCosmeticsSkinrComponentsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCosmeticsSkinrComponentsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCosmeticsSkinrComponentsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCosmeticsSkinrComponentsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCosmeticsSkinrDomainMethodAssertion = Assert<IsExact<CosmeticsDomainClient["listSkinrLicenses"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions) => Promise<GetCharactersCosmeticsSkinrOutput>>>;
+type GetCharactersCosmeticsSkinrMetadataMethodAssertion = Assert<IsExact<CosmeticsDomainClientWithMetadata["listSkinrLicenses"], (identifier1: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions) => Promise<EsiResponse<GetCharactersCosmeticsSkinrOutput>>>>;
+type GetCharactersCosmeticsSkinrOptionsAssertion = Assert<IsExact<GetCharactersCosmeticsSkinrOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCosmeticsSkinrInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCosmeticsSkinrInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCosmeticsSkinrInput["header"]>["X-Tenant"];
+}>>;
+type CosmeticsDomainClientFactoryAssertion = Assert<IsExact<typeof createCosmeticsClient, (options?: EsiClientOptions) => CosmeticsDomainClient>>;
+type CosmeticsDomainClientMetadataViewAssertion = Assert<IsExact<CosmeticsDomainClient['withMetadata'], () => CosmeticsDomainClientWithMetadata>>;
+type GetDogmaAttributesAttributeIdDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getAttribute"], (identifier1: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions) => Promise<GetDogmaAttributesAttributeIdOutput>>>;
+type GetDogmaAttributesAttributeIdMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getAttribute"], (identifier1: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions) => Promise<EsiResponse<GetDogmaAttributesAttributeIdOutput>>>>;
+type GetDogmaAttributesAttributeIdOptionsAssertion = Assert<IsExact<GetDogmaAttributesAttributeIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetDogmaAttributesAttributeIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetDogmaAttributesAttributeIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetDogmaAttributesAttributeIdInput["header"]>["X-Tenant"];
+}>>;
+type GetDogmaDynamicItemsTypeIdItemIdDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getDynamicItem"], (identifier1: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], identifier2: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions) => Promise<GetDogmaDynamicItemsTypeIdItemIdOutput>>>;
+type GetDogmaDynamicItemsTypeIdItemIdMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getDynamicItem"], (identifier1: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], identifier2: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions) => Promise<EsiResponse<GetDogmaDynamicItemsTypeIdItemIdOutput>>>>;
+type GetDogmaDynamicItemsTypeIdItemIdOptionsAssertion = Assert<IsExact<GetDogmaDynamicItemsTypeIdItemIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput["header"]>["X-Tenant"];
+}>>;
+type GetDogmaEffectsEffectIdDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["getEffect"], (identifier1: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions) => Promise<GetDogmaEffectsEffectIdOutput>>>;
+type GetDogmaEffectsEffectIdMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["getEffect"], (identifier1: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions) => Promise<EsiResponse<GetDogmaEffectsEffectIdOutput>>>>;
+type GetDogmaEffectsEffectIdOptionsAssertion = Assert<IsExact<GetDogmaEffectsEffectIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetDogmaEffectsEffectIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetDogmaEffectsEffectIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetDogmaEffectsEffectIdInput["header"]>["X-Tenant"];
+}>>;
+type GetDogmaAttributesDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["listAttributes"], (options?: GetDogmaAttributesOptions) => Promise<GetDogmaAttributesOutput>>>;
+type GetDogmaAttributesMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["listAttributes"], (options?: GetDogmaAttributesOptions) => Promise<EsiResponse<GetDogmaAttributesOutput>>>>;
+type GetDogmaAttributesOptionsAssertion = Assert<IsExact<GetDogmaAttributesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetDogmaAttributesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetDogmaAttributesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetDogmaAttributesInput["header"]>["X-Tenant"];
+}>>;
+type GetDogmaEffectsDomainMethodAssertion = Assert<IsExact<DogmaDomainClient["listEffects"], (options?: GetDogmaEffectsOptions) => Promise<GetDogmaEffectsOutput>>>;
+type GetDogmaEffectsMetadataMethodAssertion = Assert<IsExact<DogmaDomainClientWithMetadata["listEffects"], (options?: GetDogmaEffectsOptions) => Promise<EsiResponse<GetDogmaEffectsOutput>>>>;
+type GetDogmaEffectsOptionsAssertion = Assert<IsExact<GetDogmaEffectsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetDogmaEffectsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetDogmaEffectsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetDogmaEffectsInput["header"]>["X-Tenant"];
+}>>;
+type DogmaDomainClientFactoryAssertion = Assert<IsExact<typeof createDogmaClient, (options?: EsiClientOptions) => DogmaDomainClient>>;
+type DogmaDomainClientMetadataViewAssertion = Assert<IsExact<DogmaDomainClient['withMetadata'], () => DogmaDomainClientWithMetadata>>;
+type GetFwLeaderboardsCharactersDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getCharacterLeaderboards"], (options?: GetFwLeaderboardsCharactersOptions) => Promise<GetFwLeaderboardsCharactersOutput>>>;
+type GetFwLeaderboardsCharactersMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getCharacterLeaderboards"], (options?: GetFwLeaderboardsCharactersOptions) => Promise<EsiResponse<GetFwLeaderboardsCharactersOutput>>>>;
+type GetFwLeaderboardsCharactersOptionsAssertion = Assert<IsExact<GetFwLeaderboardsCharactersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFwLeaderboardsCharactersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFwLeaderboardsCharactersInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFwLeaderboardsCharactersInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdFwStatsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getCharacterStats"], (identifier1: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions) => Promise<GetCharactersCharacterIdFwStatsOutput>>>;
+type GetCharactersCharacterIdFwStatsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getCharacterStats"], (identifier1: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions) => Promise<EsiResponse<GetCharactersCharacterIdFwStatsOutput>>>>;
+type GetCharactersCharacterIdFwStatsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdFwStatsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdFwStatsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdFwStatsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdFwStatsInput["header"]>["X-Tenant"];
+}>>;
+type GetFwLeaderboardsCorporationsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getCorporationLeaderboards"], (options?: GetFwLeaderboardsCorporationsOptions) => Promise<GetFwLeaderboardsCorporationsOutput>>>;
+type GetFwLeaderboardsCorporationsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getCorporationLeaderboards"], (options?: GetFwLeaderboardsCorporationsOptions) => Promise<EsiResponse<GetFwLeaderboardsCorporationsOutput>>>>;
+type GetFwLeaderboardsCorporationsOptionsAssertion = Assert<IsExact<GetFwLeaderboardsCorporationsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFwLeaderboardsCorporationsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFwLeaderboardsCorporationsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFwLeaderboardsCorporationsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdFwStatsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getCorporationStats"], (identifier1: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions) => Promise<GetCorporationsCorporationIdFwStatsOutput>>>;
+type GetCorporationsCorporationIdFwStatsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getCorporationStats"], (identifier1: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdFwStatsOutput>>>>;
+type GetCorporationsCorporationIdFwStatsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdFwStatsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdFwStatsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdFwStatsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdFwStatsInput["header"]>["X-Tenant"];
+}>>;
+type GetFwLeaderboardsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["getFactionLeaderboards"], (options?: GetFwLeaderboardsOptions) => Promise<GetFwLeaderboardsOutput>>>;
+type GetFwLeaderboardsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["getFactionLeaderboards"], (options?: GetFwLeaderboardsOptions) => Promise<EsiResponse<GetFwLeaderboardsOutput>>>>;
+type GetFwLeaderboardsOptionsAssertion = Assert<IsExact<GetFwLeaderboardsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFwLeaderboardsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFwLeaderboardsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFwLeaderboardsInput["header"]>["X-Tenant"];
+}>>;
+type GetFwStatsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["listFactionStats"], (options?: GetFwStatsOptions) => Promise<GetFwStatsOutput>>>;
+type GetFwStatsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["listFactionStats"], (options?: GetFwStatsOptions) => Promise<EsiResponse<GetFwStatsOutput>>>>;
+type GetFwStatsOptionsAssertion = Assert<IsExact<GetFwStatsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFwStatsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFwStatsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFwStatsInput["header"]>["X-Tenant"];
+}>>;
+type GetFwSystemsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["listSystems"], (options?: GetFwSystemsOptions) => Promise<GetFwSystemsOutput>>>;
+type GetFwSystemsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["listSystems"], (options?: GetFwSystemsOptions) => Promise<EsiResponse<GetFwSystemsOutput>>>>;
+type GetFwSystemsOptionsAssertion = Assert<IsExact<GetFwSystemsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFwSystemsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFwSystemsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFwSystemsInput["header"]>["X-Tenant"];
+}>>;
+type GetFwWarsDomainMethodAssertion = Assert<IsExact<FactionWarfareDomainClient["listWars"], (options?: GetFwWarsOptions) => Promise<GetFwWarsOutput>>>;
+type GetFwWarsMetadataMethodAssertion = Assert<IsExact<FactionWarfareDomainClientWithMetadata["listWars"], (options?: GetFwWarsOptions) => Promise<EsiResponse<GetFwWarsOutput>>>>;
+type GetFwWarsOptionsAssertion = Assert<IsExact<GetFwWarsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFwWarsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFwWarsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFwWarsInput["header"]>["X-Tenant"];
+}>>;
+type FactionWarfareDomainClientFactoryAssertion = Assert<IsExact<typeof createFactionWarfareClient, (options?: EsiClientOptions) => FactionWarfareDomainClient>>;
+type FactionWarfareDomainClientMetadataViewAssertion = Assert<IsExact<FactionWarfareDomainClient['withMetadata'], () => FactionWarfareDomainClientWithMetadata>>;
+type PostCharactersCharacterIdFittingsDomainMethodAssertion = Assert<IsExact<FittingsDomainClient["create"], (identifier1: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions) => Promise<PostCharactersCharacterIdFittingsOutput>>>;
+type PostCharactersCharacterIdFittingsMetadataMethodAssertion = Assert<IsExact<FittingsDomainClientWithMetadata["create"], (identifier1: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions) => Promise<EsiResponse<PostCharactersCharacterIdFittingsOutput>>>>;
+type PostCharactersCharacterIdFittingsOptionsAssertion = Assert<IsExact<PostCharactersCharacterIdFittingsOptions, {
+  readonly "body": PostCharactersCharacterIdFittingsInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersCharacterIdFittingsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersCharacterIdFittingsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCharactersCharacterIdFittingsInput["header"]>["X-Tenant"];
+}>>;
+type DeleteCharactersCharacterIdFittingsFittingIdDomainMethodAssertion = Assert<IsExact<FittingsDomainClient["deleteFitting"], (identifier1: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions) => Promise<DeleteCharactersCharacterIdFittingsFittingIdOutput>>>;
+type DeleteCharactersCharacterIdFittingsFittingIdMetadataMethodAssertion = Assert<IsExact<FittingsDomainClientWithMetadata["deleteFitting"], (identifier1: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdFittingsFittingIdOutput>>>>;
+type DeleteCharactersCharacterIdFittingsFittingIdOptionsAssertion = Assert<IsExact<DeleteCharactersCharacterIdFittingsFittingIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdFittingsDomainMethodAssertion = Assert<IsExact<FittingsDomainClient["list"], (identifier1: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions) => Promise<GetCharactersCharacterIdFittingsOutput>>>;
+type GetCharactersCharacterIdFittingsMetadataMethodAssertion = Assert<IsExact<FittingsDomainClientWithMetadata["list"], (identifier1: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions) => Promise<EsiResponse<GetCharactersCharacterIdFittingsOutput>>>>;
+type GetCharactersCharacterIdFittingsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdFittingsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdFittingsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdFittingsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdFittingsInput["header"]>["X-Tenant"];
+}>>;
+type FittingsDomainClientFactoryAssertion = Assert<IsExact<typeof createFittingsClient, (options?: EsiClientOptions) => FittingsDomainClient>>;
+type FittingsDomainClientMetadataViewAssertion = Assert<IsExact<FittingsDomainClient['withMetadata'], () => FittingsDomainClientWithMetadata>>;
+type PostFleetsFleetIdWingsWingIdSquadsDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["createSquad"], (identifier1: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], identifier2: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions) => Promise<PostFleetsFleetIdWingsWingIdSquadsOutput>>>;
+type PostFleetsFleetIdWingsWingIdSquadsMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["createSquad"], (identifier1: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], identifier2: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions) => Promise<EsiResponse<PostFleetsFleetIdWingsWingIdSquadsOutput>>>>;
+type PostFleetsFleetIdWingsWingIdSquadsOptionsAssertion = Assert<IsExact<PostFleetsFleetIdWingsWingIdSquadsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput["header"]>["X-Tenant"];
+}>>;
+type PostFleetsFleetIdWingsDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["createWing"], (identifier1: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions) => Promise<PostFleetsFleetIdWingsOutput>>>;
+type PostFleetsFleetIdWingsMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["createWing"], (identifier1: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions) => Promise<EsiResponse<PostFleetsFleetIdWingsOutput>>>>;
+type PostFleetsFleetIdWingsOptionsAssertion = Assert<IsExact<PostFleetsFleetIdWingsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostFleetsFleetIdWingsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostFleetsFleetIdWingsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostFleetsFleetIdWingsInput["header"]>["X-Tenant"];
+}>>;
+type DeleteFleetsFleetIdSquadsSquadIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["deleteSquad"], (identifier1: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions) => Promise<DeleteFleetsFleetIdSquadsSquadIdOutput>>>;
+type DeleteFleetsFleetIdSquadsSquadIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["deleteSquad"], (identifier1: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions) => Promise<EsiResponse<DeleteFleetsFleetIdSquadsSquadIdOutput>>>>;
+type DeleteFleetsFleetIdSquadsSquadIdOptionsAssertion = Assert<IsExact<DeleteFleetsFleetIdSquadsSquadIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput["header"]>["X-Tenant"];
+}>>;
+type DeleteFleetsFleetIdWingsWingIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["deleteWing"], (identifier1: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions) => Promise<DeleteFleetsFleetIdWingsWingIdOutput>>>;
+type DeleteFleetsFleetIdWingsWingIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["deleteWing"], (identifier1: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions) => Promise<EsiResponse<DeleteFleetsFleetIdWingsWingIdOutput>>>>;
+type DeleteFleetsFleetIdWingsWingIdOptionsAssertion = Assert<IsExact<DeleteFleetsFleetIdWingsWingIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<DeleteFleetsFleetIdWingsWingIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<DeleteFleetsFleetIdWingsWingIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<DeleteFleetsFleetIdWingsWingIdInput["header"]>["X-Tenant"];
+}>>;
+type GetFleetsFleetIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["get"], (identifier1: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions) => Promise<GetFleetsFleetIdOutput>>>;
+type GetFleetsFleetIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["get"], (identifier1: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions) => Promise<EsiResponse<GetFleetsFleetIdOutput>>>>;
+type GetFleetsFleetIdOptionsAssertion = Assert<IsExact<GetFleetsFleetIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFleetsFleetIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFleetsFleetIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFleetsFleetIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdFleetDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["getCharacterFleet"], (identifier1: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions) => Promise<GetCharactersCharacterIdFleetOutput>>>;
+type GetCharactersCharacterIdFleetMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["getCharacterFleet"], (identifier1: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions) => Promise<EsiResponse<GetCharactersCharacterIdFleetOutput>>>>;
+type GetCharactersCharacterIdFleetOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdFleetOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdFleetInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdFleetInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdFleetInput["header"]>["X-Tenant"];
+}>>;
+type PostFleetsFleetIdMembersDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["inviteMember"], (identifier1: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions) => Promise<PostFleetsFleetIdMembersOutput>>>;
+type PostFleetsFleetIdMembersMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["inviteMember"], (identifier1: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions) => Promise<EsiResponse<PostFleetsFleetIdMembersOutput>>>>;
+type PostFleetsFleetIdMembersOptionsAssertion = Assert<IsExact<PostFleetsFleetIdMembersOptions, {
+  readonly "body": PostFleetsFleetIdMembersInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostFleetsFleetIdMembersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostFleetsFleetIdMembersInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostFleetsFleetIdMembersInput["header"]>["X-Tenant"];
+}>>;
+type GetFleetsFleetIdMembersDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["listMembers"], (identifier1: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions) => Promise<GetFleetsFleetIdMembersOutput>>>;
+type GetFleetsFleetIdMembersMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["listMembers"], (identifier1: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions) => Promise<EsiResponse<GetFleetsFleetIdMembersOutput>>>>;
+type GetFleetsFleetIdMembersOptionsAssertion = Assert<IsExact<GetFleetsFleetIdMembersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFleetsFleetIdMembersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFleetsFleetIdMembersInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFleetsFleetIdMembersInput["header"]>["X-Tenant"];
+}>>;
+type GetFleetsFleetIdWingsDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["listWings"], (identifier1: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions) => Promise<GetFleetsFleetIdWingsOutput>>>;
+type GetFleetsFleetIdWingsMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["listWings"], (identifier1: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions) => Promise<EsiResponse<GetFleetsFleetIdWingsOutput>>>>;
+type GetFleetsFleetIdWingsOptionsAssertion = Assert<IsExact<GetFleetsFleetIdWingsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFleetsFleetIdWingsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFleetsFleetIdWingsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFleetsFleetIdWingsInput["header"]>["X-Tenant"];
+}>>;
+type PutFleetsFleetIdMembersMemberIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["moveMember"], (identifier1: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions) => Promise<PutFleetsFleetIdMembersMemberIdOutput>>>;
+type PutFleetsFleetIdMembersMemberIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["moveMember"], (identifier1: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions) => Promise<EsiResponse<PutFleetsFleetIdMembersMemberIdOutput>>>>;
+type PutFleetsFleetIdMembersMemberIdOptionsAssertion = Assert<IsExact<PutFleetsFleetIdMembersMemberIdOptions, {
+  readonly "body": PutFleetsFleetIdMembersMemberIdInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PutFleetsFleetIdMembersMemberIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PutFleetsFleetIdMembersMemberIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PutFleetsFleetIdMembersMemberIdInput["header"]>["X-Tenant"];
+}>>;
+type DeleteFleetsFleetIdMembersMemberIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["removeMember"], (identifier1: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions) => Promise<DeleteFleetsFleetIdMembersMemberIdOutput>>>;
+type DeleteFleetsFleetIdMembersMemberIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["removeMember"], (identifier1: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], identifier2: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions) => Promise<EsiResponse<DeleteFleetsFleetIdMembersMemberIdOutput>>>>;
+type DeleteFleetsFleetIdMembersMemberIdOptionsAssertion = Assert<IsExact<DeleteFleetsFleetIdMembersMemberIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput["header"]>["X-Tenant"];
+}>>;
+type PutFleetsFleetIdSquadsSquadIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["renameSquad"], (identifier1: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions) => Promise<PutFleetsFleetIdSquadsSquadIdOutput>>>;
+type PutFleetsFleetIdSquadsSquadIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["renameSquad"], (identifier1: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions) => Promise<EsiResponse<PutFleetsFleetIdSquadsSquadIdOutput>>>>;
+type PutFleetsFleetIdSquadsSquadIdOptionsAssertion = Assert<IsExact<PutFleetsFleetIdSquadsSquadIdOptions, {
+  readonly "body": PutFleetsFleetIdSquadsSquadIdInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PutFleetsFleetIdSquadsSquadIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PutFleetsFleetIdSquadsSquadIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PutFleetsFleetIdSquadsSquadIdInput["header"]>["X-Tenant"];
+}>>;
+type PutFleetsFleetIdWingsWingIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["renameWing"], (identifier1: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions) => Promise<PutFleetsFleetIdWingsWingIdOutput>>>;
+type PutFleetsFleetIdWingsWingIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["renameWing"], (identifier1: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], identifier2: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions) => Promise<EsiResponse<PutFleetsFleetIdWingsWingIdOutput>>>>;
+type PutFleetsFleetIdWingsWingIdOptionsAssertion = Assert<IsExact<PutFleetsFleetIdWingsWingIdOptions, {
+  readonly "body": PutFleetsFleetIdWingsWingIdInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PutFleetsFleetIdWingsWingIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PutFleetsFleetIdWingsWingIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PutFleetsFleetIdWingsWingIdInput["header"]>["X-Tenant"];
+}>>;
+type PutFleetsFleetIdDomainMethodAssertion = Assert<IsExact<FleetsDomainClient["update"], (identifier1: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions) => Promise<PutFleetsFleetIdOutput>>>;
+type PutFleetsFleetIdMetadataMethodAssertion = Assert<IsExact<FleetsDomainClientWithMetadata["update"], (identifier1: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions) => Promise<EsiResponse<PutFleetsFleetIdOutput>>>>;
+type PutFleetsFleetIdOptionsAssertion = Assert<IsExact<PutFleetsFleetIdOptions, {
+  readonly "body": PutFleetsFleetIdInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PutFleetsFleetIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PutFleetsFleetIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PutFleetsFleetIdInput["header"]>["X-Tenant"];
+}>>;
+type FleetsDomainClientFactoryAssertion = Assert<IsExact<typeof createFleetsClient, (options?: EsiClientOptions) => FleetsDomainClient>>;
+type FleetsDomainClientMetadataViewAssertion = Assert<IsExact<FleetsDomainClient['withMetadata'], () => FleetsDomainClientWithMetadata>>;
+type GetFreelanceJobsDetailDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["get"], (identifier1: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions) => Promise<GetFreelanceJobsDetailOutput>>>;
+type GetFreelanceJobsDetailMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["get"], (identifier1: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions) => Promise<EsiResponse<GetFreelanceJobsDetailOutput>>>>;
+type GetFreelanceJobsDetailOptionsAssertion = Assert<IsExact<GetFreelanceJobsDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetFreelanceJobsDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFreelanceJobsDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetFreelanceJobsDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersFreelanceJobsParticipationDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["getCharacterParticipation"], (identifier1: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions) => Promise<GetCharactersFreelanceJobsParticipationOutput>>>;
+type GetCharactersFreelanceJobsParticipationMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["getCharacterParticipation"], (identifier1: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions) => Promise<EsiResponse<GetCharactersFreelanceJobsParticipationOutput>>>>;
+type GetCharactersFreelanceJobsParticipationOptionsAssertion = Assert<IsExact<GetCharactersFreelanceJobsParticipationOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersFreelanceJobsParticipationInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersFreelanceJobsParticipationInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersFreelanceJobsParticipationInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersFreelanceJobsListingDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["listCharacterJobs"], (identifier1: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions) => Promise<GetCharactersFreelanceJobsListingOutput>>>;
+type GetCharactersFreelanceJobsListingMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["listCharacterJobs"], (identifier1: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions) => Promise<EsiResponse<GetCharactersFreelanceJobsListingOutput>>>>;
+type GetCharactersFreelanceJobsListingOptionsAssertion = Assert<IsExact<GetCharactersFreelanceJobsListingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersFreelanceJobsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersFreelanceJobsListingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersFreelanceJobsListingInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsFreelanceJobsListingDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["listCorporationJobs"], (identifier1: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions) => Promise<GetCorporationsFreelanceJobsListingOutput>>>;
+type GetCorporationsFreelanceJobsListingMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["listCorporationJobs"], (identifier1: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions) => Promise<EsiResponse<GetCorporationsFreelanceJobsListingOutput>>>>;
+type GetCorporationsFreelanceJobsListingOptionsAssertion = Assert<IsExact<GetCorporationsFreelanceJobsListingOptions, {
+  readonly "after"?: NonNullable<GetCorporationsFreelanceJobsListingInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetCorporationsFreelanceJobsListingInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsFreelanceJobsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsFreelanceJobsListingInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetCorporationsFreelanceJobsListingInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetCorporationsFreelanceJobsListingInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsFreelanceJobsParticipantsDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["listParticipants"], (identifier1: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions) => Promise<GetCorporationsFreelanceJobsParticipantsOutput>>>;
+type GetCorporationsFreelanceJobsParticipantsMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["listParticipants"], (identifier1: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions) => Promise<EsiResponse<GetCorporationsFreelanceJobsParticipantsOutput>>>>;
+type GetCorporationsFreelanceJobsParticipantsOptionsAssertion = Assert<IsExact<GetCorporationsFreelanceJobsParticipantsOptions, {
+  readonly "after"?: NonNullable<GetCorporationsFreelanceJobsParticipantsInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetCorporationsFreelanceJobsParticipantsInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsFreelanceJobsParticipantsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsFreelanceJobsParticipantsInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetCorporationsFreelanceJobsParticipantsInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetCorporationsFreelanceJobsParticipantsInput["header"]>["X-Tenant"];
+}>>;
+type GetFreelanceJobsListingDomainMethodAssertion = Assert<IsExact<FreelanceJobsDomainClient["listPublic"], (options?: GetFreelanceJobsListingOptions) => Promise<GetFreelanceJobsListingOutput>>>;
+type GetFreelanceJobsListingMetadataMethodAssertion = Assert<IsExact<FreelanceJobsDomainClientWithMetadata["listPublic"], (options?: GetFreelanceJobsListingOptions) => Promise<EsiResponse<GetFreelanceJobsListingOutput>>>>;
+type GetFreelanceJobsListingOptionsAssertion = Assert<IsExact<GetFreelanceJobsListingOptions, {
+  readonly "after"?: NonNullable<GetFreelanceJobsListingInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetFreelanceJobsListingInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "corporationId"?: NonNullable<GetFreelanceJobsListingInput["query"]>["corporation_id"];
+  readonly "ifModifiedSince"?: NonNullable<GetFreelanceJobsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetFreelanceJobsListingInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetFreelanceJobsListingInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetFreelanceJobsListingInput["header"]>["X-Tenant"];
+}>>;
+type FreelanceJobsDomainClientFactoryAssertion = Assert<IsExact<typeof createFreelanceJobsClient, (options?: EsiClientOptions) => FreelanceJobsDomainClient>>;
+type FreelanceJobsDomainClientMetadataViewAssertion = Assert<IsExact<FreelanceJobsDomainClient['withMetadata'], () => FreelanceJobsDomainClientWithMetadata>>;
+type GetIncursionsDomainMethodAssertion = Assert<IsExact<IncursionsDomainClient["list"], (options?: GetIncursionsOptions) => Promise<GetIncursionsOutput>>>;
+type GetIncursionsMetadataMethodAssertion = Assert<IsExact<IncursionsDomainClientWithMetadata["list"], (options?: GetIncursionsOptions) => Promise<EsiResponse<GetIncursionsOutput>>>>;
+type GetIncursionsOptionsAssertion = Assert<IsExact<GetIncursionsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetIncursionsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetIncursionsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetIncursionsInput["header"]>["X-Tenant"];
+}>>;
+type IncursionsDomainClientFactoryAssertion = Assert<IsExact<typeof createIncursionsClient, (options?: EsiClientOptions) => IncursionsDomainClient>>;
+type IncursionsDomainClientMetadataViewAssertion = Assert<IsExact<IncursionsDomainClient['withMetadata'], () => IncursionsDomainClientWithMetadata>>;
+type GetCharactersCharacterIdIndustryJobsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listCharacterJobs"], (identifier1: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions) => Promise<GetCharactersCharacterIdIndustryJobsOutput>>>;
+type GetCharactersCharacterIdIndustryJobsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listCharacterJobs"], (identifier1: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions) => Promise<EsiResponse<GetCharactersCharacterIdIndustryJobsOutput>>>>;
+type GetCharactersCharacterIdIndustryJobsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdIndustryJobsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdIndustryJobsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdIndustryJobsInput["header"]>["If-None-Match"];
+  readonly "includeCompleted"?: NonNullable<GetCharactersCharacterIdIndustryJobsInput["query"]>["include_completed"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdIndustryJobsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdMiningDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listCharacterMiningLedger"], (identifier1: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions) => Promise<GetCharactersCharacterIdMiningOutput>>>;
+type GetCharactersCharacterIdMiningMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listCharacterMiningLedger"], (identifier1: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions) => Promise<EsiResponse<GetCharactersCharacterIdMiningOutput>>>>;
+type GetCharactersCharacterIdMiningOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdMiningOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdMiningInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdMiningInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdMiningInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdMiningInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdIndustryJobsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listCorporationJobs"], (identifier1: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions) => Promise<GetCorporationsCorporationIdIndustryJobsOutput>>>;
+type GetCorporationsCorporationIdIndustryJobsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listCorporationJobs"], (identifier1: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdIndustryJobsOutput>>>>;
+type GetCorporationsCorporationIdIndustryJobsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdIndustryJobsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdIndustryJobsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdIndustryJobsInput["header"]>["If-None-Match"];
+  readonly "includeCompleted"?: NonNullable<GetCorporationsCorporationIdIndustryJobsInput["query"]>["include_completed"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdIndustryJobsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdIndustryJobsInput["header"]>["X-Tenant"];
+}>>;
+type GetIndustryFacilitiesDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listFacilities"], (options?: GetIndustryFacilitiesOptions) => Promise<GetIndustryFacilitiesOutput>>>;
+type GetIndustryFacilitiesMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listFacilities"], (options?: GetIndustryFacilitiesOptions) => Promise<EsiResponse<GetIndustryFacilitiesOutput>>>>;
+type GetIndustryFacilitiesOptionsAssertion = Assert<IsExact<GetIndustryFacilitiesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetIndustryFacilitiesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetIndustryFacilitiesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetIndustryFacilitiesInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationCorporationIdMiningObserversDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listMiningObservers"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions) => Promise<GetCorporationCorporationIdMiningObserversOutput>>>;
+type GetCorporationCorporationIdMiningObserversMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listMiningObservers"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions) => Promise<EsiResponse<GetCorporationCorporationIdMiningObserversOutput>>>>;
+type GetCorporationCorporationIdMiningObserversOptionsAssertion = Assert<IsExact<GetCorporationCorporationIdMiningObserversOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationCorporationIdMiningObserversInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationCorporationIdMiningObserversInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationCorporationIdMiningObserversInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationCorporationIdMiningObserversInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationCorporationIdMiningExtractionsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listMoonExtractionTimers"], (identifier1: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions) => Promise<GetCorporationCorporationIdMiningExtractionsOutput>>>;
+type GetCorporationCorporationIdMiningExtractionsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listMoonExtractionTimers"], (identifier1: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions) => Promise<EsiResponse<GetCorporationCorporationIdMiningExtractionsOutput>>>>;
+type GetCorporationCorporationIdMiningExtractionsOptionsAssertion = Assert<IsExact<GetCorporationCorporationIdMiningExtractionsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationCorporationIdMiningExtractionsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationCorporationIdMiningExtractionsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationCorporationIdMiningExtractionsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationCorporationIdMiningExtractionsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationCorporationIdMiningObserversObserverIdDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listObservedMining"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions) => Promise<GetCorporationCorporationIdMiningObserversObserverIdOutput>>>;
+type GetCorporationCorporationIdMiningObserversObserverIdMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listObservedMining"], (identifier1: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions) => Promise<EsiResponse<GetCorporationCorporationIdMiningObserversObserverIdOutput>>>>;
+type GetCorporationCorporationIdMiningObserversObserverIdOptionsAssertion = Assert<IsExact<GetCorporationCorporationIdMiningObserversObserverIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput["header"]>["X-Tenant"];
+}>>;
+type GetIndustrySystemsDomainMethodAssertion = Assert<IsExact<IndustryDomainClient["listSystemCostIndices"], (options?: GetIndustrySystemsOptions) => Promise<GetIndustrySystemsOutput>>>;
+type GetIndustrySystemsMetadataMethodAssertion = Assert<IsExact<IndustryDomainClientWithMetadata["listSystemCostIndices"], (options?: GetIndustrySystemsOptions) => Promise<EsiResponse<GetIndustrySystemsOutput>>>>;
+type GetIndustrySystemsOptionsAssertion = Assert<IsExact<GetIndustrySystemsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetIndustrySystemsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetIndustrySystemsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetIndustrySystemsInput["header"]>["X-Tenant"];
+}>>;
+type IndustryDomainClientFactoryAssertion = Assert<IsExact<typeof createIndustryClient, (options?: EsiClientOptions) => IndustryDomainClient>>;
+type IndustryDomainClientMetadataViewAssertion = Assert<IsExact<IndustryDomainClient['withMetadata'], () => IndustryDomainClientWithMetadata>>;
+type GetInsurancePricesDomainMethodAssertion = Assert<IsExact<InsuranceDomainClient["listPrices"], (options?: GetInsurancePricesOptions) => Promise<GetInsurancePricesOutput>>>;
+type GetInsurancePricesMetadataMethodAssertion = Assert<IsExact<InsuranceDomainClientWithMetadata["listPrices"], (options?: GetInsurancePricesOptions) => Promise<EsiResponse<GetInsurancePricesOutput>>>>;
+type GetInsurancePricesOptionsAssertion = Assert<IsExact<GetInsurancePricesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetInsurancePricesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetInsurancePricesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetInsurancePricesInput["header"]>["X-Tenant"];
+}>>;
+type InsuranceDomainClientFactoryAssertion = Assert<IsExact<typeof createInsuranceClient, (options?: EsiClientOptions) => InsuranceDomainClient>>;
+type InsuranceDomainClientMetadataViewAssertion = Assert<IsExact<InsuranceDomainClient['withMetadata'], () => InsuranceDomainClientWithMetadata>>;
+type GetKillmailsKillmailIdKillmailHashDomainMethodAssertion = Assert<IsExact<KillmailsDomainClient["get"], (identifier1: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], identifier2: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions) => Promise<GetKillmailsKillmailIdKillmailHashOutput>>>;
+type GetKillmailsKillmailIdKillmailHashMetadataMethodAssertion = Assert<IsExact<KillmailsDomainClientWithMetadata["get"], (identifier1: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], identifier2: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions) => Promise<EsiResponse<GetKillmailsKillmailIdKillmailHashOutput>>>>;
+type GetKillmailsKillmailIdKillmailHashOptionsAssertion = Assert<IsExact<GetKillmailsKillmailIdKillmailHashOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetKillmailsKillmailIdKillmailHashInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetKillmailsKillmailIdKillmailHashInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetKillmailsKillmailIdKillmailHashInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdKillmailsRecentDomainMethodAssertion = Assert<IsExact<KillmailsDomainClient["listRecentForCharacter"], (identifier1: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions) => Promise<GetCharactersCharacterIdKillmailsRecentOutput>>>;
+type GetCharactersCharacterIdKillmailsRecentMetadataMethodAssertion = Assert<IsExact<KillmailsDomainClientWithMetadata["listRecentForCharacter"], (identifier1: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions) => Promise<EsiResponse<GetCharactersCharacterIdKillmailsRecentOutput>>>>;
+type GetCharactersCharacterIdKillmailsRecentOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdKillmailsRecentOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdKillmailsRecentInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdKillmailsRecentInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdKillmailsRecentInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdKillmailsRecentInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdKillmailsRecentDomainMethodAssertion = Assert<IsExact<KillmailsDomainClient["listRecentForCorporation"], (identifier1: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions) => Promise<GetCorporationsCorporationIdKillmailsRecentOutput>>>;
+type GetCorporationsCorporationIdKillmailsRecentMetadataMethodAssertion = Assert<IsExact<KillmailsDomainClientWithMetadata["listRecentForCorporation"], (identifier1: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions) => Promise<EsiResponse<GetCorporationsCorporationIdKillmailsRecentOutput>>>>;
+type GetCorporationsCorporationIdKillmailsRecentOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdKillmailsRecentOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput["header"]>["X-Tenant"];
+}>>;
+type KillmailsDomainClientFactoryAssertion = Assert<IsExact<typeof createKillmailsClient, (options?: EsiClientOptions) => KillmailsDomainClient>>;
+type KillmailsDomainClientMetadataViewAssertion = Assert<IsExact<KillmailsDomainClient['withMetadata'], () => KillmailsDomainClientWithMetadata>>;
+type GetCharactersCharacterIdLocationDomainMethodAssertion = Assert<IsExact<LocationDomainClient["get"], (identifier1: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions) => Promise<GetCharactersCharacterIdLocationOutput>>>;
+type GetCharactersCharacterIdLocationMetadataMethodAssertion = Assert<IsExact<LocationDomainClientWithMetadata["get"], (identifier1: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions) => Promise<EsiResponse<GetCharactersCharacterIdLocationOutput>>>>;
+type GetCharactersCharacterIdLocationOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdLocationOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdLocationInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdLocationInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdLocationInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdShipDomainMethodAssertion = Assert<IsExact<LocationDomainClient["getCurrentShip"], (identifier1: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions) => Promise<GetCharactersCharacterIdShipOutput>>>;
+type GetCharactersCharacterIdShipMetadataMethodAssertion = Assert<IsExact<LocationDomainClientWithMetadata["getCurrentShip"], (identifier1: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions) => Promise<EsiResponse<GetCharactersCharacterIdShipOutput>>>>;
+type GetCharactersCharacterIdShipOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdShipOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdShipInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdShipInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdShipInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdOnlineDomainMethodAssertion = Assert<IsExact<LocationDomainClient["getOnlineStatus"], (identifier1: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions) => Promise<GetCharactersCharacterIdOnlineOutput>>>;
+type GetCharactersCharacterIdOnlineMetadataMethodAssertion = Assert<IsExact<LocationDomainClientWithMetadata["getOnlineStatus"], (identifier1: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions) => Promise<EsiResponse<GetCharactersCharacterIdOnlineOutput>>>>;
+type GetCharactersCharacterIdOnlineOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdOnlineOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdOnlineInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdOnlineInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdOnlineInput["header"]>["X-Tenant"];
+}>>;
+type LocationDomainClientFactoryAssertion = Assert<IsExact<typeof createLocationClient, (options?: EsiClientOptions) => LocationDomainClient>>;
+type LocationDomainClientMetadataViewAssertion = Assert<IsExact<LocationDomainClient['withMetadata'], () => LocationDomainClientWithMetadata>>;
+type GetCharactersCharacterIdLoyaltyPointsDomainMethodAssertion = Assert<IsExact<LoyaltyDomainClient["listPoints"], (identifier1: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions) => Promise<GetCharactersCharacterIdLoyaltyPointsOutput>>>;
+type GetCharactersCharacterIdLoyaltyPointsMetadataMethodAssertion = Assert<IsExact<LoyaltyDomainClientWithMetadata["listPoints"], (identifier1: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions) => Promise<EsiResponse<GetCharactersCharacterIdLoyaltyPointsOutput>>>>;
+type GetCharactersCharacterIdLoyaltyPointsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdLoyaltyPointsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput["header"]>["X-Tenant"];
+}>>;
+type GetLoyaltyStoresCorporationIdOffersDomainMethodAssertion = Assert<IsExact<LoyaltyDomainClient["listStoreOffers"], (identifier1: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions) => Promise<GetLoyaltyStoresCorporationIdOffersOutput>>>;
+type GetLoyaltyStoresCorporationIdOffersMetadataMethodAssertion = Assert<IsExact<LoyaltyDomainClientWithMetadata["listStoreOffers"], (identifier1: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions) => Promise<EsiResponse<GetLoyaltyStoresCorporationIdOffersOutput>>>>;
+type GetLoyaltyStoresCorporationIdOffersOptionsAssertion = Assert<IsExact<GetLoyaltyStoresCorporationIdOffersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetLoyaltyStoresCorporationIdOffersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetLoyaltyStoresCorporationIdOffersInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetLoyaltyStoresCorporationIdOffersInput["header"]>["X-Tenant"];
+}>>;
+type LoyaltyDomainClientFactoryAssertion = Assert<IsExact<typeof createLoyaltyClient, (options?: EsiClientOptions) => LoyaltyDomainClient>>;
+type LoyaltyDomainClientMetadataViewAssertion = Assert<IsExact<LoyaltyDomainClient['withMetadata'], () => LoyaltyDomainClientWithMetadata>>;
+type PostCharactersCharacterIdMailLabelsDomainMethodAssertion = Assert<IsExact<MailDomainClient["createLabel"], (identifier1: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions) => Promise<PostCharactersCharacterIdMailLabelsOutput>>>;
+type PostCharactersCharacterIdMailLabelsMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["createLabel"], (identifier1: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions) => Promise<EsiResponse<PostCharactersCharacterIdMailLabelsOutput>>>>;
+type PostCharactersCharacterIdMailLabelsOptionsAssertion = Assert<IsExact<PostCharactersCharacterIdMailLabelsOptions, {
+  readonly "body": PostCharactersCharacterIdMailLabelsInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersCharacterIdMailLabelsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersCharacterIdMailLabelsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCharactersCharacterIdMailLabelsInput["header"]>["X-Tenant"];
+}>>;
+type DeleteCharactersCharacterIdMailLabelsLabelIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["deleteLabel"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions) => Promise<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>>>;
+type DeleteCharactersCharacterIdMailLabelsLabelIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["deleteLabel"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>>>>;
+type DeleteCharactersCharacterIdMailLabelsLabelIdOptionsAssertion = Assert<IsExact<DeleteCharactersCharacterIdMailLabelsLabelIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput["header"]>["X-Tenant"];
+}>>;
+type DeleteCharactersCharacterIdMailMailIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["deleteMail"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions) => Promise<DeleteCharactersCharacterIdMailMailIdOutput>>>;
+type DeleteCharactersCharacterIdMailMailIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["deleteMail"], (identifier1: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions) => Promise<EsiResponse<DeleteCharactersCharacterIdMailMailIdOutput>>>>;
+type DeleteCharactersCharacterIdMailMailIdOptionsAssertion = Assert<IsExact<DeleteCharactersCharacterIdMailMailIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<DeleteCharactersCharacterIdMailMailIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<DeleteCharactersCharacterIdMailMailIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<DeleteCharactersCharacterIdMailMailIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdMailMailIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["get"], (identifier1: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions) => Promise<GetCharactersCharacterIdMailMailIdOutput>>>;
+type GetCharactersCharacterIdMailMailIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["get"], (identifier1: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailMailIdOutput>>>>;
+type GetCharactersCharacterIdMailMailIdOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdMailMailIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdMailMailIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdMailMailIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdMailMailIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdMailDomainMethodAssertion = Assert<IsExact<MailDomainClient["listHeaders"], (identifier1: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions) => Promise<GetCharactersCharacterIdMailOutput>>>;
+type GetCharactersCharacterIdMailMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["listHeaders"], (identifier1: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailOutput>>>>;
+type GetCharactersCharacterIdMailOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdMailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdMailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdMailInput["header"]>["If-None-Match"];
+  readonly "labels"?: NonNullable<GetCharactersCharacterIdMailInput["query"]>["labels"];
+  readonly "lastMailId"?: NonNullable<GetCharactersCharacterIdMailInput["query"]>["last_mail_id"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdMailInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdMailLabelsDomainMethodAssertion = Assert<IsExact<MailDomainClient["listLabels"], (identifier1: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions) => Promise<GetCharactersCharacterIdMailLabelsOutput>>>;
+type GetCharactersCharacterIdMailLabelsMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["listLabels"], (identifier1: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailLabelsOutput>>>>;
+type GetCharactersCharacterIdMailLabelsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdMailLabelsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdMailLabelsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdMailLabelsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdMailLabelsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdMailListsDomainMethodAssertion = Assert<IsExact<MailDomainClient["listMailingLists"], (identifier1: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions) => Promise<GetCharactersCharacterIdMailListsOutput>>>;
+type GetCharactersCharacterIdMailListsMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["listMailingLists"], (identifier1: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions) => Promise<EsiResponse<GetCharactersCharacterIdMailListsOutput>>>>;
+type GetCharactersCharacterIdMailListsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdMailListsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdMailListsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdMailListsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdMailListsInput["header"]>["X-Tenant"];
+}>>;
+type PostCharactersCharacterIdMailDomainMethodAssertion = Assert<IsExact<MailDomainClient["send"], (identifier1: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions) => Promise<PostCharactersCharacterIdMailOutput>>>;
+type PostCharactersCharacterIdMailMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["send"], (identifier1: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions) => Promise<EsiResponse<PostCharactersCharacterIdMailOutput>>>>;
+type PostCharactersCharacterIdMailOptionsAssertion = Assert<IsExact<PostCharactersCharacterIdMailOptions, {
+  readonly "body": PostCharactersCharacterIdMailInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostCharactersCharacterIdMailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostCharactersCharacterIdMailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostCharactersCharacterIdMailInput["header"]>["X-Tenant"];
+}>>;
+type PutCharactersCharacterIdMailMailIdDomainMethodAssertion = Assert<IsExact<MailDomainClient["update"], (identifier1: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions) => Promise<PutCharactersCharacterIdMailMailIdOutput>>>;
+type PutCharactersCharacterIdMailMailIdMetadataMethodAssertion = Assert<IsExact<MailDomainClientWithMetadata["update"], (identifier1: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], identifier2: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions) => Promise<EsiResponse<PutCharactersCharacterIdMailMailIdOutput>>>>;
+type PutCharactersCharacterIdMailMailIdOptionsAssertion = Assert<IsExact<PutCharactersCharacterIdMailMailIdOptions, {
+  readonly "body": PutCharactersCharacterIdMailMailIdInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PutCharactersCharacterIdMailMailIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PutCharactersCharacterIdMailMailIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PutCharactersCharacterIdMailMailIdInput["header"]>["X-Tenant"];
+}>>;
+type MailDomainClientFactoryAssertion = Assert<IsExact<typeof createMailClient, (options?: EsiClientOptions) => MailDomainClient>>;
+type MailDomainClientMetadataViewAssertion = Assert<IsExact<MailDomainClient['withMetadata'], () => MailDomainClientWithMetadata>>;
+type GetMarketsGroupsMarketGroupIdDomainMethodAssertion = Assert<IsExact<MarketDomainClient["getGroup"], (identifier1: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions) => Promise<GetMarketsGroupsMarketGroupIdOutput>>>;
+type GetMarketsGroupsMarketGroupIdMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["getGroup"], (identifier1: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions) => Promise<EsiResponse<GetMarketsGroupsMarketGroupIdOutput>>>>;
+type GetMarketsGroupsMarketGroupIdOptionsAssertion = Assert<IsExact<GetMarketsGroupsMarketGroupIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMarketsGroupsMarketGroupIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMarketsGroupsMarketGroupIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMarketsGroupsMarketGroupIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdOrdersHistoryDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listCharacterOrderHistory"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions) => Promise<GetCharactersCharacterIdOrdersHistoryOutput>>>;
+type GetCharactersCharacterIdOrdersHistoryMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listCharacterOrderHistory"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions) => Promise<EsiResponse<GetCharactersCharacterIdOrdersHistoryOutput>>>>;
+type GetCharactersCharacterIdOrdersHistoryOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdOrdersHistoryOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdOrdersHistoryInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdOrdersHistoryInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdOrdersHistoryInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdOrdersHistoryInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdOrdersDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listCharacterOrders"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions) => Promise<GetCharactersCharacterIdOrdersOutput>>>;
+type GetCharactersCharacterIdOrdersMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listCharacterOrders"], (identifier1: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions) => Promise<EsiResponse<GetCharactersCharacterIdOrdersOutput>>>>;
+type GetCharactersCharacterIdOrdersOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdOrdersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdOrdersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdOrdersInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdOrdersInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdOrdersHistoryDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listCorporationOrderHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions) => Promise<GetCorporationsCorporationIdOrdersHistoryOutput>>>;
+type GetCorporationsCorporationIdOrdersHistoryMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listCorporationOrderHistory"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions) => Promise<EsiResponse<GetCorporationsCorporationIdOrdersHistoryOutput>>>>;
+type GetCorporationsCorporationIdOrdersHistoryOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdOrdersHistoryOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdOrdersDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listCorporationOrders"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions) => Promise<GetCorporationsCorporationIdOrdersOutput>>>;
+type GetCorporationsCorporationIdOrdersMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listCorporationOrders"], (identifier1: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions) => Promise<EsiResponse<GetCorporationsCorporationIdOrdersOutput>>>>;
+type GetCorporationsCorporationIdOrdersOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdOrdersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdOrdersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdOrdersInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdOrdersInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdOrdersInput["header"]>["X-Tenant"];
+}>>;
+type GetMarketsGroupsDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listGroups"], (options?: GetMarketsGroupsOptions) => Promise<GetMarketsGroupsOutput>>>;
+type GetMarketsGroupsMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listGroups"], (options?: GetMarketsGroupsOptions) => Promise<EsiResponse<GetMarketsGroupsOutput>>>>;
+type GetMarketsGroupsOptionsAssertion = Assert<IsExact<GetMarketsGroupsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMarketsGroupsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMarketsGroupsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMarketsGroupsInput["header"]>["X-Tenant"];
+}>>;
+type GetMarketsPricesDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listPrices"], (options?: GetMarketsPricesOptions) => Promise<GetMarketsPricesOutput>>>;
+type GetMarketsPricesMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listPrices"], (options?: GetMarketsPricesOptions) => Promise<EsiResponse<GetMarketsPricesOutput>>>>;
+type GetMarketsPricesOptionsAssertion = Assert<IsExact<GetMarketsPricesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMarketsPricesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMarketsPricesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMarketsPricesInput["header"]>["X-Tenant"];
+}>>;
+type GetMarketsRegionIdHistoryDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listRegionHistory"], (identifier1: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions) => Promise<GetMarketsRegionIdHistoryOutput>>>;
+type GetMarketsRegionIdHistoryMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listRegionHistory"], (identifier1: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions) => Promise<EsiResponse<GetMarketsRegionIdHistoryOutput>>>>;
+type GetMarketsRegionIdHistoryOptionsAssertion = Assert<IsExact<GetMarketsRegionIdHistoryOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMarketsRegionIdHistoryInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMarketsRegionIdHistoryInput["header"]>["If-None-Match"];
+  readonly "typeId": NonNullable<GetMarketsRegionIdHistoryInput["query"]>["type_id"];
+  readonly "xTenant"?: NonNullable<GetMarketsRegionIdHistoryInput["header"]>["X-Tenant"];
+}>>;
+type GetMarketsRegionIdOrdersDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listRegionOrders"], (identifier1: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions) => Promise<GetMarketsRegionIdOrdersOutput>>>;
+type GetMarketsRegionIdOrdersMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listRegionOrders"], (identifier1: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions) => Promise<EsiResponse<GetMarketsRegionIdOrdersOutput>>>>;
+type GetMarketsRegionIdOrdersOptionsAssertion = Assert<IsExact<GetMarketsRegionIdOrdersOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMarketsRegionIdOrdersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMarketsRegionIdOrdersInput["header"]>["If-None-Match"];
+  readonly "orderType": NonNullable<GetMarketsRegionIdOrdersInput["query"]>["order_type"];
+  readonly "page"?: NonNullable<GetMarketsRegionIdOrdersInput["query"]>["page"];
+  readonly "typeId"?: NonNullable<GetMarketsRegionIdOrdersInput["query"]>["type_id"];
+  readonly "xTenant"?: NonNullable<GetMarketsRegionIdOrdersInput["header"]>["X-Tenant"];
+}>>;
+type GetMarketsRegionIdTypesDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listRegionTypes"], (identifier1: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions) => Promise<GetMarketsRegionIdTypesOutput>>>;
+type GetMarketsRegionIdTypesMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listRegionTypes"], (identifier1: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions) => Promise<EsiResponse<GetMarketsRegionIdTypesOutput>>>>;
+type GetMarketsRegionIdTypesOptionsAssertion = Assert<IsExact<GetMarketsRegionIdTypesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMarketsRegionIdTypesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMarketsRegionIdTypesInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetMarketsRegionIdTypesInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetMarketsRegionIdTypesInput["header"]>["X-Tenant"];
+}>>;
+type GetMarketsStructuresStructureIdDomainMethodAssertion = Assert<IsExact<MarketDomainClient["listStructureOrders"], (identifier1: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions) => Promise<GetMarketsStructuresStructureIdOutput>>>;
+type GetMarketsStructuresStructureIdMetadataMethodAssertion = Assert<IsExact<MarketDomainClientWithMetadata["listStructureOrders"], (identifier1: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions) => Promise<EsiResponse<GetMarketsStructuresStructureIdOutput>>>>;
+type GetMarketsStructuresStructureIdOptionsAssertion = Assert<IsExact<GetMarketsStructuresStructureIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMarketsStructuresStructureIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMarketsStructuresStructureIdInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetMarketsStructuresStructureIdInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetMarketsStructuresStructureIdInput["header"]>["X-Tenant"];
+}>>;
+type MarketDomainClientFactoryAssertion = Assert<IsExact<typeof createMarketClient, (options?: EsiClientOptions) => MarketDomainClient>>;
+type MarketDomainClientMetadataViewAssertion = Assert<IsExact<MarketDomainClient['withMetadata'], () => MarketDomainClientWithMetadata>>;
+type GetMetaChangelogDomainMethodAssertion = Assert<IsExact<MetaDomainClient["getChangelog"], (options?: GetMetaChangelogOptions) => Promise<GetMetaChangelogOutput>>>;
+type GetMetaChangelogMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["getChangelog"], (options?: GetMetaChangelogOptions) => Promise<EsiResponse<GetMetaChangelogOutput>>>>;
+type GetMetaChangelogOptionsAssertion = Assert<IsExact<GetMetaChangelogOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMetaChangelogInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMetaChangelogInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMetaChangelogInput["header"]>["X-Tenant"];
+}>>;
+type GetMetaStatusDomainMethodAssertion = Assert<IsExact<MetaDomainClient["getHealthStatus"], (options?: GetMetaStatusOptions) => Promise<GetMetaStatusOutput>>>;
+type GetMetaStatusMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["getHealthStatus"], (options?: GetMetaStatusOptions) => Promise<EsiResponse<GetMetaStatusOutput>>>>;
+type GetMetaStatusOptionsAssertion = Assert<IsExact<GetMetaStatusOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMetaStatusInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMetaStatusInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMetaStatusInput["header"]>["X-Tenant"];
+}>>;
+type GetMetaNameDomainMethodAssertion = Assert<IsExact<MetaDomainClient["getName"], (options?: GetMetaNameOptions) => Promise<GetMetaNameOutput>>>;
+type GetMetaNameMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["getName"], (options?: GetMetaNameOptions) => Promise<EsiResponse<GetMetaNameOutput>>>>;
+type GetMetaNameOptionsAssertion = Assert<IsExact<GetMetaNameOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMetaNameInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMetaNameInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMetaNameInput["header"]>["X-Tenant"];
+}>>;
+type GetMetaCompatibilityDatesDomainMethodAssertion = Assert<IsExact<MetaDomainClient["listCompatibilityDates"], (options?: GetMetaCompatibilityDatesOptions) => Promise<GetMetaCompatibilityDatesOutput>>>;
+type GetMetaCompatibilityDatesMetadataMethodAssertion = Assert<IsExact<MetaDomainClientWithMetadata["listCompatibilityDates"], (options?: GetMetaCompatibilityDatesOptions) => Promise<EsiResponse<GetMetaCompatibilityDatesOutput>>>>;
+type GetMetaCompatibilityDatesOptionsAssertion = Assert<IsExact<GetMetaCompatibilityDatesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMetaCompatibilityDatesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMetaCompatibilityDatesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMetaCompatibilityDatesInput["header"]>["X-Tenant"];
+}>>;
+type MetaDomainClientFactoryAssertion = Assert<IsExact<typeof createMetaClient, (options?: EsiClientOptions) => MetaDomainClient>>;
+type MetaDomainClientMetadataViewAssertion = Assert<IsExact<MetaDomainClient['withMetadata'], () => MetaDomainClientWithMetadata>>;
+type GetMilitaryCampaignsDetailDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getCampaign"], (identifier1: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions) => Promise<GetMilitaryCampaignsDetailOutput>>>;
+type GetMilitaryCampaignsDetailMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getCampaign"], (identifier1: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions) => Promise<EsiResponse<GetMilitaryCampaignsDetailOutput>>>>;
+type GetMilitaryCampaignsDetailOptionsAssertion = Assert<IsExact<GetMilitaryCampaignsDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMilitaryCampaignsDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMilitaryCampaignsDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMilitaryCampaignsDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersMilitaryCampaignsObjectivesParticipationDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getCharacterObjectiveParticipation"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions) => Promise<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>>>;
+type GetCharactersMilitaryCampaignsObjectivesParticipationMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getCharacterObjectiveParticipation"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], identifier2: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions) => Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>>>>;
+type GetCharactersMilitaryCampaignsObjectivesParticipationOptionsAssertion = Assert<IsExact<GetCharactersMilitaryCampaignsObjectivesParticipationOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput["header"]>["X-Tenant"];
+}>>;
+type GetMilitaryCampaignsObjectivesDetailDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["getObjective"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], identifier2: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions) => Promise<GetMilitaryCampaignsObjectivesDetailOutput>>>;
+type GetMilitaryCampaignsObjectivesDetailMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["getObjective"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], identifier2: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions) => Promise<EsiResponse<GetMilitaryCampaignsObjectivesDetailOutput>>>>;
+type GetMilitaryCampaignsObjectivesDetailOptionsAssertion = Assert<IsExact<GetMilitaryCampaignsObjectivesDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMilitaryCampaignsObjectivesDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMilitaryCampaignsObjectivesDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMilitaryCampaignsObjectivesDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetMilitaryCampaignsListingDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["listCampaigns"], (options?: GetMilitaryCampaignsListingOptions) => Promise<GetMilitaryCampaignsListingOutput>>>;
+type GetMilitaryCampaignsListingMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["listCampaigns"], (options?: GetMilitaryCampaignsListingOptions) => Promise<EsiResponse<GetMilitaryCampaignsListingOutput>>>>;
+type GetMilitaryCampaignsListingOptionsAssertion = Assert<IsExact<GetMilitaryCampaignsListingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMilitaryCampaignsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMilitaryCampaignsListingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetMilitaryCampaignsListingInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersMilitaryCampaignsObjectivesListingDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["listCharacterObjectiveParticipations"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions) => Promise<GetCharactersMilitaryCampaignsObjectivesListingOutput>>>;
+type GetCharactersMilitaryCampaignsObjectivesListingMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["listCharacterObjectiveParticipations"], (identifier1: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions) => Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesListingOutput>>>>;
+type GetCharactersMilitaryCampaignsObjectivesListingOptionsAssertion = Assert<IsExact<GetCharactersMilitaryCampaignsObjectivesListingOptions, {
+  readonly "after"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput["header"]>["X-Tenant"];
+}>>;
+type GetMilitaryCampaignsObjectivesListingDomainMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClient["listObjectives"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions) => Promise<GetMilitaryCampaignsObjectivesListingOutput>>>;
+type GetMilitaryCampaignsObjectivesListingMetadataMethodAssertion = Assert<IsExact<MilitaryCampaignsDomainClientWithMetadata["listObjectives"], (identifier1: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions) => Promise<EsiResponse<GetMilitaryCampaignsObjectivesListingOutput>>>>;
+type GetMilitaryCampaignsObjectivesListingOptionsAssertion = Assert<IsExact<GetMilitaryCampaignsObjectivesListingOptions, {
+  readonly "after"?: NonNullable<GetMilitaryCampaignsObjectivesListingInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetMilitaryCampaignsObjectivesListingInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetMilitaryCampaignsObjectivesListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetMilitaryCampaignsObjectivesListingInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetMilitaryCampaignsObjectivesListingInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetMilitaryCampaignsObjectivesListingInput["header"]>["X-Tenant"];
+}>>;
+type MilitaryCampaignsDomainClientFactoryAssertion = Assert<IsExact<typeof createMilitaryCampaignsClient, (options?: EsiClientOptions) => MilitaryCampaignsDomainClient>>;
+type MilitaryCampaignsDomainClientMetadataViewAssertion = Assert<IsExact<MilitaryCampaignsDomainClient['withMetadata'], () => MilitaryCampaignsDomainClientWithMetadata>>;
+type GetParagonHubSkinrAlliancesDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["listListingsForAlliance"], (identifier1: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions) => Promise<GetParagonHubSkinrAlliancesOutput>>>;
+type GetParagonHubSkinrAlliancesMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["listListingsForAlliance"], (identifier1: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions) => Promise<EsiResponse<GetParagonHubSkinrAlliancesOutput>>>>;
+type GetParagonHubSkinrAlliancesOptionsAssertion = Assert<IsExact<GetParagonHubSkinrAlliancesOptions, {
+  readonly "after"?: NonNullable<GetParagonHubSkinrAlliancesInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetParagonHubSkinrAlliancesInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetParagonHubSkinrAlliancesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetParagonHubSkinrAlliancesInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetParagonHubSkinrAlliancesInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetParagonHubSkinrAlliancesInput["header"]>["X-Tenant"];
+}>>;
+type GetParagonHubSkinrCharactersDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["listListingsForCharacter"], (identifier1: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions) => Promise<GetParagonHubSkinrCharactersOutput>>>;
+type GetParagonHubSkinrCharactersMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["listListingsForCharacter"], (identifier1: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions) => Promise<EsiResponse<GetParagonHubSkinrCharactersOutput>>>>;
+type GetParagonHubSkinrCharactersOptionsAssertion = Assert<IsExact<GetParagonHubSkinrCharactersOptions, {
+  readonly "after"?: NonNullable<GetParagonHubSkinrCharactersInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetParagonHubSkinrCharactersInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetParagonHubSkinrCharactersInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetParagonHubSkinrCharactersInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetParagonHubSkinrCharactersInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetParagonHubSkinrCharactersInput["header"]>["X-Tenant"];
+}>>;
+type GetParagonHubSkinrCorporationsDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["listListingsForCorporation"], (identifier1: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions) => Promise<GetParagonHubSkinrCorporationsOutput>>>;
+type GetParagonHubSkinrCorporationsMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["listListingsForCorporation"], (identifier1: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions) => Promise<EsiResponse<GetParagonHubSkinrCorporationsOutput>>>>;
+type GetParagonHubSkinrCorporationsOptionsAssertion = Assert<IsExact<GetParagonHubSkinrCorporationsOptions, {
+  readonly "after"?: NonNullable<GetParagonHubSkinrCorporationsInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetParagonHubSkinrCorporationsInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetParagonHubSkinrCorporationsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetParagonHubSkinrCorporationsInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetParagonHubSkinrCorporationsInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetParagonHubSkinrCorporationsInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersParagonHubSkinrDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["listPostedListings"], (identifier1: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions) => Promise<GetCharactersParagonHubSkinrOutput>>>;
+type GetCharactersParagonHubSkinrMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["listPostedListings"], (identifier1: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions) => Promise<EsiResponse<GetCharactersParagonHubSkinrOutput>>>>;
+type GetCharactersParagonHubSkinrOptionsAssertion = Assert<IsExact<GetCharactersParagonHubSkinrOptions, {
+  readonly "after"?: NonNullable<GetCharactersParagonHubSkinrInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetCharactersParagonHubSkinrInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersParagonHubSkinrInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersParagonHubSkinrInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetCharactersParagonHubSkinrInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetCharactersParagonHubSkinrInput["header"]>["X-Tenant"];
+}>>;
+type GetParagonHubSkinrDomainMethodAssertion = Assert<IsExact<ParagonHubDomainClient["listPublicListings"], (options?: GetParagonHubSkinrOptions) => Promise<GetParagonHubSkinrOutput>>>;
+type GetParagonHubSkinrMetadataMethodAssertion = Assert<IsExact<ParagonHubDomainClientWithMetadata["listPublicListings"], (options?: GetParagonHubSkinrOptions) => Promise<EsiResponse<GetParagonHubSkinrOutput>>>>;
+type GetParagonHubSkinrOptionsAssertion = Assert<IsExact<GetParagonHubSkinrOptions, {
+  readonly "after"?: NonNullable<GetParagonHubSkinrInput["query"]>["after"];
+  readonly "before"?: NonNullable<GetParagonHubSkinrInput["query"]>["before"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetParagonHubSkinrInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetParagonHubSkinrInput["header"]>["If-None-Match"];
+  readonly "limit"?: NonNullable<GetParagonHubSkinrInput["query"]>["limit"];
+  readonly "xTenant"?: NonNullable<GetParagonHubSkinrInput["header"]>["X-Tenant"];
+}>>;
+type ParagonHubDomainClientFactoryAssertion = Assert<IsExact<typeof createParagonHubClient, (options?: EsiClientOptions) => ParagonHubDomainClient>>;
+type ParagonHubDomainClientMetadataViewAssertion = Assert<IsExact<ParagonHubDomainClient['withMetadata'], () => ParagonHubDomainClientWithMetadata>>;
+type GetCharactersCharacterIdPlanetsPlanetIdDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["getColonyLayout"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions) => Promise<GetCharactersCharacterIdPlanetsPlanetIdOutput>>>;
+type GetCharactersCharacterIdPlanetsPlanetIdMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["getColonyLayout"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], identifier2: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions) => Promise<EsiResponse<GetCharactersCharacterIdPlanetsPlanetIdOutput>>>>;
+type GetCharactersCharacterIdPlanetsPlanetIdOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdPlanetsPlanetIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseSchematicsSchematicIdDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["getSchematic"], (identifier1: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions) => Promise<GetUniverseSchematicsSchematicIdOutput>>>;
+type GetUniverseSchematicsSchematicIdMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["getSchematic"], (identifier1: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions) => Promise<EsiResponse<GetUniverseSchematicsSchematicIdOutput>>>>;
+type GetUniverseSchematicsSchematicIdOptionsAssertion = Assert<IsExact<GetUniverseSchematicsSchematicIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseSchematicsSchematicIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseSchematicsSchematicIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseSchematicsSchematicIdInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdPlanetsDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["listColonies"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions) => Promise<GetCharactersCharacterIdPlanetsOutput>>>;
+type GetCharactersCharacterIdPlanetsMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["listColonies"], (identifier1: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions) => Promise<EsiResponse<GetCharactersCharacterIdPlanetsOutput>>>>;
+type GetCharactersCharacterIdPlanetsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdPlanetsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdPlanetsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdPlanetsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdPlanetsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdCustomsOfficesDomainMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClient["listCustomsOffices"], (identifier1: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions) => Promise<GetCorporationsCorporationIdCustomsOfficesOutput>>>;
+type GetCorporationsCorporationIdCustomsOfficesMetadataMethodAssertion = Assert<IsExact<PlanetaryInteractionDomainClientWithMetadata["listCustomsOffices"], (identifier1: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions) => Promise<EsiResponse<GetCorporationsCorporationIdCustomsOfficesOutput>>>>;
+type GetCorporationsCorporationIdCustomsOfficesOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdCustomsOfficesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["header"]>["X-Tenant"];
+}>>;
+type PlanetaryInteractionDomainClientFactoryAssertion = Assert<IsExact<typeof createPlanetaryInteractionClient, (options?: EsiClientOptions) => PlanetaryInteractionDomainClient>>;
+type PlanetaryInteractionDomainClientMetadataViewAssertion = Assert<IsExact<PlanetaryInteractionDomainClient['withMetadata'], () => PlanetaryInteractionDomainClientWithMetadata>>;
+type PostRouteDomainMethodAssertion = Assert<IsExact<RoutesDomainClient["calculate"], (identifier1: NonNullable<PostRouteInput['path']>["origin_system_id"], identifier2: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions) => Promise<PostRouteOutput>>>;
+type PostRouteMetadataMethodAssertion = Assert<IsExact<RoutesDomainClientWithMetadata["calculate"], (identifier1: NonNullable<PostRouteInput['path']>["origin_system_id"], identifier2: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions) => Promise<EsiResponse<PostRouteOutput>>>>;
+type PostRouteOptionsAssertion = Assert<IsExact<PostRouteOptions, {
+  readonly "body": PostRouteInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostRouteInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostRouteInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostRouteInput["header"]>["X-Tenant"];
+}>>;
+type RoutesDomainClientFactoryAssertion = Assert<IsExact<typeof createRoutesClient, (options?: EsiClientOptions) => RoutesDomainClient>>;
+type RoutesDomainClientMetadataViewAssertion = Assert<IsExact<RoutesDomainClient['withMetadata'], () => RoutesDomainClientWithMetadata>>;
+type GetCharactersCharacterIdSearchDomainMethodAssertion = Assert<IsExact<SearchDomainClient["search"], (identifier1: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions) => Promise<GetCharactersCharacterIdSearchOutput>>>;
+type GetCharactersCharacterIdSearchMetadataMethodAssertion = Assert<IsExact<SearchDomainClientWithMetadata["search"], (identifier1: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions) => Promise<EsiResponse<GetCharactersCharacterIdSearchOutput>>>>;
+type GetCharactersCharacterIdSearchOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdSearchOptions, {
+  readonly "categories": NonNullable<GetCharactersCharacterIdSearchInput["query"]>["categories"];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdSearchInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdSearchInput["header"]>["If-None-Match"];
+  readonly "search": NonNullable<GetCharactersCharacterIdSearchInput["query"]>["search"];
+  readonly "strict"?: NonNullable<GetCharactersCharacterIdSearchInput["query"]>["strict"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdSearchInput["header"]>["X-Tenant"];
+}>>;
+type SearchDomainClientFactoryAssertion = Assert<IsExact<typeof createSearchClient, (options?: EsiClientOptions) => SearchDomainClient>>;
+type SearchDomainClientMetadataViewAssertion = Assert<IsExact<SearchDomainClient['withMetadata'], () => SearchDomainClientWithMetadata>>;
+type GetCharactersCharacterIdAttributesDomainMethodAssertion = Assert<IsExact<SkillsDomainClient["getAttributes"], (identifier1: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions) => Promise<GetCharactersCharacterIdAttributesOutput>>>;
+type GetCharactersCharacterIdAttributesMetadataMethodAssertion = Assert<IsExact<SkillsDomainClientWithMetadata["getAttributes"], (identifier1: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions) => Promise<EsiResponse<GetCharactersCharacterIdAttributesOutput>>>>;
+type GetCharactersCharacterIdAttributesOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdAttributesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdAttributesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdAttributesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdAttributesInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdSkillqueueDomainMethodAssertion = Assert<IsExact<SkillsDomainClient["getSkillQueue"], (identifier1: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions) => Promise<GetCharactersCharacterIdSkillqueueOutput>>>;
+type GetCharactersCharacterIdSkillqueueMetadataMethodAssertion = Assert<IsExact<SkillsDomainClientWithMetadata["getSkillQueue"], (identifier1: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions) => Promise<EsiResponse<GetCharactersCharacterIdSkillqueueOutput>>>>;
+type GetCharactersCharacterIdSkillqueueOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdSkillqueueOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdSkillqueueInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdSkillqueueInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdSkillqueueInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdSkillsDomainMethodAssertion = Assert<IsExact<SkillsDomainClient["getSkills"], (identifier1: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions) => Promise<GetCharactersCharacterIdSkillsOutput>>>;
+type GetCharactersCharacterIdSkillsMetadataMethodAssertion = Assert<IsExact<SkillsDomainClientWithMetadata["getSkills"], (identifier1: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions) => Promise<EsiResponse<GetCharactersCharacterIdSkillsOutput>>>>;
+type GetCharactersCharacterIdSkillsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdSkillsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdSkillsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdSkillsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdSkillsInput["header"]>["X-Tenant"];
+}>>;
+type SkillsDomainClientFactoryAssertion = Assert<IsExact<typeof createSkillsClient, (options?: EsiClientOptions) => SkillsDomainClient>>;
+type SkillsDomainClientMetadataViewAssertion = Assert<IsExact<SkillsDomainClient['withMetadata'], () => SkillsDomainClientWithMetadata>>;
+type GetSovereigntyCampaignsDomainMethodAssertion = Assert<IsExact<SovereigntyDomainClient["listCampaigns"], (options?: GetSovereigntyCampaignsOptions) => Promise<GetSovereigntyCampaignsOutput>>>;
+type GetSovereigntyCampaignsMetadataMethodAssertion = Assert<IsExact<SovereigntyDomainClientWithMetadata["listCampaigns"], (options?: GetSovereigntyCampaignsOptions) => Promise<EsiResponse<GetSovereigntyCampaignsOutput>>>>;
+type GetSovereigntyCampaignsOptionsAssertion = Assert<IsExact<GetSovereigntyCampaignsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetSovereigntyCampaignsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetSovereigntyCampaignsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetSovereigntyCampaignsInput["header"]>["X-Tenant"];
+}>>;
+type GetSovereigntySystemsDomainMethodAssertion = Assert<IsExact<SovereigntyDomainClient["listSystems"], (options?: GetSovereigntySystemsOptions) => Promise<GetSovereigntySystemsOutput>>>;
+type GetSovereigntySystemsMetadataMethodAssertion = Assert<IsExact<SovereigntyDomainClientWithMetadata["listSystems"], (options?: GetSovereigntySystemsOptions) => Promise<EsiResponse<GetSovereigntySystemsOutput>>>>;
+type GetSovereigntySystemsOptionsAssertion = Assert<IsExact<GetSovereigntySystemsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetSovereigntySystemsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetSovereigntySystemsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetSovereigntySystemsInput["header"]>["X-Tenant"];
+}>>;
+type SovereigntyDomainClientFactoryAssertion = Assert<IsExact<typeof createSovereigntyClient, (options?: EsiClientOptions) => SovereigntyDomainClient>>;
+type SovereigntyDomainClientMetadataViewAssertion = Assert<IsExact<SovereigntyDomainClient['withMetadata'], () => SovereigntyDomainClientWithMetadata>>;
+type GetStatusDomainMethodAssertion = Assert<IsExact<StatusDomainClient["get"], (options?: GetStatusOptions) => Promise<GetStatusOutput>>>;
+type GetStatusMetadataMethodAssertion = Assert<IsExact<StatusDomainClientWithMetadata["get"], (options?: GetStatusOptions) => Promise<EsiResponse<GetStatusOutput>>>>;
+type GetStatusOptionsAssertion = Assert<IsExact<GetStatusOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetStatusInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetStatusInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetStatusInput["header"]>["X-Tenant"];
+}>>;
+type StatusDomainClientFactoryAssertion = Assert<IsExact<typeof createStatusClient, (options?: EsiClientOptions) => StatusDomainClient>>;
+type StatusDomainClientMetadataViewAssertion = Assert<IsExact<StatusDomainClient['withMetadata'], () => StatusDomainClientWithMetadata>>;
+type GetCharactersStructuresMercenaryDensDetailDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getMercenaryDen"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions) => Promise<GetCharactersStructuresMercenaryDensDetailOutput>>>;
+type GetCharactersStructuresMercenaryDensDetailMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getMercenaryDen"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], identifier2: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions) => Promise<EsiResponse<GetCharactersStructuresMercenaryDensDetailOutput>>>>;
+type GetCharactersStructuresMercenaryDensDetailOptionsAssertion = Assert<IsExact<GetCharactersStructuresMercenaryDensDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersStructuresMercenaryDensDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersStructuresMercenaryDensDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersStructuresMercenaryDensDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsStructuresSkyhooksDetailDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getSkyhook"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions) => Promise<GetCorporationsStructuresSkyhooksDetailOutput>>>;
+type GetCorporationsStructuresSkyhooksDetailMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getSkyhook"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions) => Promise<EsiResponse<GetCorporationsStructuresSkyhooksDetailOutput>>>>;
+type GetCorporationsStructuresSkyhooksDetailOptionsAssertion = Assert<IsExact<GetCorporationsStructuresSkyhooksDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsStructuresSkyhooksDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsStructuresSkyhooksDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsStructuresSkyhooksDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsStructuresSovereigntyHubsDetailDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["getSovereigntyHub"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions) => Promise<GetCorporationsStructuresSovereigntyHubsDetailOutput>>>;
+type GetCorporationsStructuresSovereigntyHubsDetailMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["getSovereigntyHub"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions) => Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsDetailOutput>>>>;
+type GetCorporationsStructuresSovereigntyHubsDetailOptionsAssertion = Assert<IsExact<GetCorporationsStructuresSovereigntyHubsDetailOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersStructuresMercenaryDensListingDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["listMercenaryDens"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions) => Promise<GetCharactersStructuresMercenaryDensListingOutput>>>;
+type GetCharactersStructuresMercenaryDensListingMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["listMercenaryDens"], (identifier1: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions) => Promise<EsiResponse<GetCharactersStructuresMercenaryDensListingOutput>>>>;
+type GetCharactersStructuresMercenaryDensListingOptionsAssertion = Assert<IsExact<GetCharactersStructuresMercenaryDensListingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersStructuresMercenaryDensListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersStructuresMercenaryDensListingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersStructuresMercenaryDensListingInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsStructuresSkyhooksListingDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["listSkyhooks"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions) => Promise<GetCorporationsStructuresSkyhooksListingOutput>>>;
+type GetCorporationsStructuresSkyhooksListingMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["listSkyhooks"], (identifier1: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions) => Promise<EsiResponse<GetCorporationsStructuresSkyhooksListingOutput>>>>;
+type GetCorporationsStructuresSkyhooksListingOptionsAssertion = Assert<IsExact<GetCorporationsStructuresSkyhooksListingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsStructuresSkyhooksListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsStructuresSkyhooksListingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsStructuresSkyhooksListingInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsStructuresSovereigntyHubsListingDomainMethodAssertion = Assert<IsExact<StructuresDomainClient["listSovereigntyHubs"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions) => Promise<GetCorporationsStructuresSovereigntyHubsListingOutput>>>;
+type GetCorporationsStructuresSovereigntyHubsListingMetadataMethodAssertion = Assert<IsExact<StructuresDomainClientWithMetadata["listSovereigntyHubs"], (identifier1: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions) => Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsListingOutput>>>>;
+type GetCorporationsStructuresSovereigntyHubsListingOptionsAssertion = Assert<IsExact<GetCorporationsStructuresSovereigntyHubsListingOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput["header"]>["X-Tenant"];
+}>>;
+type StructuresDomainClientFactoryAssertion = Assert<IsExact<typeof createStructuresClient, (options?: EsiClientOptions) => StructuresDomainClient>>;
+type StructuresDomainClientMetadataViewAssertion = Assert<IsExact<StructuresDomainClient['withMetadata'], () => StructuresDomainClientWithMetadata>>;
+type GetUniverseAsteroidBeltsAsteroidBeltIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getAsteroidBelt"], (identifier1: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions) => Promise<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>>>;
+type GetUniverseAsteroidBeltsAsteroidBeltIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getAsteroidBelt"], (identifier1: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions) => Promise<EsiResponse<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>>>>;
+type GetUniverseAsteroidBeltsAsteroidBeltIdOptionsAssertion = Assert<IsExact<GetUniverseAsteroidBeltsAsteroidBeltIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseConstellationsConstellationIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getConstellation"], (identifier1: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions) => Promise<GetUniverseConstellationsConstellationIdOutput>>>;
+type GetUniverseConstellationsConstellationIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getConstellation"], (identifier1: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions) => Promise<EsiResponse<GetUniverseConstellationsConstellationIdOutput>>>>;
+type GetUniverseConstellationsConstellationIdOptionsAssertion = Assert<IsExact<GetUniverseConstellationsConstellationIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseConstellationsConstellationIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseConstellationsConstellationIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseConstellationsConstellationIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseGraphicsGraphicIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getGraphic"], (identifier1: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions) => Promise<GetUniverseGraphicsGraphicIdOutput>>>;
+type GetUniverseGraphicsGraphicIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getGraphic"], (identifier1: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions) => Promise<EsiResponse<GetUniverseGraphicsGraphicIdOutput>>>>;
+type GetUniverseGraphicsGraphicIdOptionsAssertion = Assert<IsExact<GetUniverseGraphicsGraphicIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseGraphicsGraphicIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseGraphicsGraphicIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseGraphicsGraphicIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseCategoriesCategoryIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getItemCategory"], (identifier1: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions) => Promise<GetUniverseCategoriesCategoryIdOutput>>>;
+type GetUniverseCategoriesCategoryIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getItemCategory"], (identifier1: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions) => Promise<EsiResponse<GetUniverseCategoriesCategoryIdOutput>>>>;
+type GetUniverseCategoriesCategoryIdOptionsAssertion = Assert<IsExact<GetUniverseCategoriesCategoryIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseCategoriesCategoryIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseCategoriesCategoryIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseCategoriesCategoryIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseGroupsGroupIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getItemGroup"], (identifier1: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions) => Promise<GetUniverseGroupsGroupIdOutput>>>;
+type GetUniverseGroupsGroupIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getItemGroup"], (identifier1: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions) => Promise<EsiResponse<GetUniverseGroupsGroupIdOutput>>>>;
+type GetUniverseGroupsGroupIdOptionsAssertion = Assert<IsExact<GetUniverseGroupsGroupIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseGroupsGroupIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseGroupsGroupIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseGroupsGroupIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseMoonsMoonIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getMoon"], (identifier1: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions) => Promise<GetUniverseMoonsMoonIdOutput>>>;
+type GetUniverseMoonsMoonIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getMoon"], (identifier1: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions) => Promise<EsiResponse<GetUniverseMoonsMoonIdOutput>>>>;
+type GetUniverseMoonsMoonIdOptionsAssertion = Assert<IsExact<GetUniverseMoonsMoonIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseMoonsMoonIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseMoonsMoonIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseMoonsMoonIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniversePlanetsPlanetIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getPlanet"], (identifier1: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions) => Promise<GetUniversePlanetsPlanetIdOutput>>>;
+type GetUniversePlanetsPlanetIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getPlanet"], (identifier1: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions) => Promise<EsiResponse<GetUniversePlanetsPlanetIdOutput>>>>;
+type GetUniversePlanetsPlanetIdOptionsAssertion = Assert<IsExact<GetUniversePlanetsPlanetIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniversePlanetsPlanetIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniversePlanetsPlanetIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniversePlanetsPlanetIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseRegionsRegionIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getRegion"], (identifier1: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions) => Promise<GetUniverseRegionsRegionIdOutput>>>;
+type GetUniverseRegionsRegionIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getRegion"], (identifier1: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions) => Promise<EsiResponse<GetUniverseRegionsRegionIdOutput>>>>;
+type GetUniverseRegionsRegionIdOptionsAssertion = Assert<IsExact<GetUniverseRegionsRegionIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseRegionsRegionIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseRegionsRegionIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseRegionsRegionIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseSystemsSystemIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getSolarSystem"], (identifier1: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions) => Promise<GetUniverseSystemsSystemIdOutput>>>;
+type GetUniverseSystemsSystemIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getSolarSystem"], (identifier1: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions) => Promise<EsiResponse<GetUniverseSystemsSystemIdOutput>>>>;
+type GetUniverseSystemsSystemIdOptionsAssertion = Assert<IsExact<GetUniverseSystemsSystemIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseSystemsSystemIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseSystemsSystemIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseSystemsSystemIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseStarsStarIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getStar"], (identifier1: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions) => Promise<GetUniverseStarsStarIdOutput>>>;
+type GetUniverseStarsStarIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getStar"], (identifier1: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions) => Promise<EsiResponse<GetUniverseStarsStarIdOutput>>>>;
+type GetUniverseStarsStarIdOptionsAssertion = Assert<IsExact<GetUniverseStarsStarIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseStarsStarIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseStarsStarIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseStarsStarIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseStargatesStargateIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getStargate"], (identifier1: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions) => Promise<GetUniverseStargatesStargateIdOutput>>>;
+type GetUniverseStargatesStargateIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getStargate"], (identifier1: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions) => Promise<EsiResponse<GetUniverseStargatesStargateIdOutput>>>>;
+type GetUniverseStargatesStargateIdOptionsAssertion = Assert<IsExact<GetUniverseStargatesStargateIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseStargatesStargateIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseStargatesStargateIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseStargatesStargateIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseStationsStationIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getStation"], (identifier1: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions) => Promise<GetUniverseStationsStationIdOutput>>>;
+type GetUniverseStationsStationIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getStation"], (identifier1: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions) => Promise<EsiResponse<GetUniverseStationsStationIdOutput>>>>;
+type GetUniverseStationsStationIdOptionsAssertion = Assert<IsExact<GetUniverseStationsStationIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseStationsStationIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseStationsStationIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseStationsStationIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseStructuresStructureIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getStructure"], (identifier1: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions) => Promise<GetUniverseStructuresStructureIdOutput>>>;
+type GetUniverseStructuresStructureIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getStructure"], (identifier1: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions) => Promise<EsiResponse<GetUniverseStructuresStructureIdOutput>>>>;
+type GetUniverseStructuresStructureIdOptionsAssertion = Assert<IsExact<GetUniverseStructuresStructureIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseStructuresStructureIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseStructuresStructureIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseStructuresStructureIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseTypesTypeIdDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["getType"], (identifier1: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions) => Promise<GetUniverseTypesTypeIdOutput>>>;
+type GetUniverseTypesTypeIdMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["getType"], (identifier1: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions) => Promise<EsiResponse<GetUniverseTypesTypeIdOutput>>>>;
+type GetUniverseTypesTypeIdOptionsAssertion = Assert<IsExact<GetUniverseTypesTypeIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseTypesTypeIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseTypesTypeIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseTypesTypeIdInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseAncestriesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listAncestries"], (options?: GetUniverseAncestriesOptions) => Promise<GetUniverseAncestriesOutput>>>;
+type GetUniverseAncestriesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listAncestries"], (options?: GetUniverseAncestriesOptions) => Promise<EsiResponse<GetUniverseAncestriesOutput>>>>;
+type GetUniverseAncestriesOptionsAssertion = Assert<IsExact<GetUniverseAncestriesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseAncestriesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseAncestriesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseAncestriesInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseBloodlinesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listBloodlines"], (options?: GetUniverseBloodlinesOptions) => Promise<GetUniverseBloodlinesOutput>>>;
+type GetUniverseBloodlinesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listBloodlines"], (options?: GetUniverseBloodlinesOptions) => Promise<EsiResponse<GetUniverseBloodlinesOutput>>>>;
+type GetUniverseBloodlinesOptionsAssertion = Assert<IsExact<GetUniverseBloodlinesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseBloodlinesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseBloodlinesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseBloodlinesInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseConstellationsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listConstellations"], (options?: GetUniverseConstellationsOptions) => Promise<GetUniverseConstellationsOutput>>>;
+type GetUniverseConstellationsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listConstellations"], (options?: GetUniverseConstellationsOptions) => Promise<EsiResponse<GetUniverseConstellationsOutput>>>>;
+type GetUniverseConstellationsOptionsAssertion = Assert<IsExact<GetUniverseConstellationsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseConstellationsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseConstellationsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseConstellationsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseFactionsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listFactions"], (options?: GetUniverseFactionsOptions) => Promise<GetUniverseFactionsOutput>>>;
+type GetUniverseFactionsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listFactions"], (options?: GetUniverseFactionsOptions) => Promise<EsiResponse<GetUniverseFactionsOutput>>>>;
+type GetUniverseFactionsOptionsAssertion = Assert<IsExact<GetUniverseFactionsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseFactionsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseFactionsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseFactionsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseGraphicsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listGraphics"], (options?: GetUniverseGraphicsOptions) => Promise<GetUniverseGraphicsOutput>>>;
+type GetUniverseGraphicsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listGraphics"], (options?: GetUniverseGraphicsOptions) => Promise<EsiResponse<GetUniverseGraphicsOutput>>>>;
+type GetUniverseGraphicsOptionsAssertion = Assert<IsExact<GetUniverseGraphicsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseGraphicsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseGraphicsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseGraphicsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseCategoriesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listItemCategories"], (options?: GetUniverseCategoriesOptions) => Promise<GetUniverseCategoriesOutput>>>;
+type GetUniverseCategoriesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listItemCategories"], (options?: GetUniverseCategoriesOptions) => Promise<EsiResponse<GetUniverseCategoriesOutput>>>>;
+type GetUniverseCategoriesOptionsAssertion = Assert<IsExact<GetUniverseCategoriesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseCategoriesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseCategoriesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseCategoriesInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseGroupsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listItemGroups"], (options?: GetUniverseGroupsOptions) => Promise<GetUniverseGroupsOutput>>>;
+type GetUniverseGroupsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listItemGroups"], (options?: GetUniverseGroupsOptions) => Promise<EsiResponse<GetUniverseGroupsOutput>>>>;
+type GetUniverseGroupsOptionsAssertion = Assert<IsExact<GetUniverseGroupsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseGroupsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseGroupsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetUniverseGroupsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetUniverseGroupsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseStructuresDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listPublicStructures"], (options?: GetUniverseStructuresOptions) => Promise<GetUniverseStructuresOutput>>>;
+type GetUniverseStructuresMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listPublicStructures"], (options?: GetUniverseStructuresOptions) => Promise<EsiResponse<GetUniverseStructuresOutput>>>>;
+type GetUniverseStructuresOptionsAssertion = Assert<IsExact<GetUniverseStructuresOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "filter"?: NonNullable<GetUniverseStructuresInput["query"]>["filter"];
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseStructuresInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseStructuresInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseStructuresInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseRacesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listRaces"], (options?: GetUniverseRacesOptions) => Promise<GetUniverseRacesOutput>>>;
+type GetUniverseRacesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listRaces"], (options?: GetUniverseRacesOptions) => Promise<EsiResponse<GetUniverseRacesOutput>>>>;
+type GetUniverseRacesOptionsAssertion = Assert<IsExact<GetUniverseRacesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseRacesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseRacesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseRacesInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseRegionsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listRegions"], (options?: GetUniverseRegionsOptions) => Promise<GetUniverseRegionsOutput>>>;
+type GetUniverseRegionsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listRegions"], (options?: GetUniverseRegionsOptions) => Promise<EsiResponse<GetUniverseRegionsOutput>>>>;
+type GetUniverseRegionsOptionsAssertion = Assert<IsExact<GetUniverseRegionsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseRegionsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseRegionsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseRegionsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseSystemsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listSolarSystems"], (options?: GetUniverseSystemsOptions) => Promise<GetUniverseSystemsOutput>>>;
+type GetUniverseSystemsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listSolarSystems"], (options?: GetUniverseSystemsOptions) => Promise<EsiResponse<GetUniverseSystemsOutput>>>>;
+type GetUniverseSystemsOptionsAssertion = Assert<IsExact<GetUniverseSystemsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseSystemsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseSystemsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseSystemsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseSystemJumpsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listSystemJumps"], (options?: GetUniverseSystemJumpsOptions) => Promise<GetUniverseSystemJumpsOutput>>>;
+type GetUniverseSystemJumpsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listSystemJumps"], (options?: GetUniverseSystemJumpsOptions) => Promise<EsiResponse<GetUniverseSystemJumpsOutput>>>>;
+type GetUniverseSystemJumpsOptionsAssertion = Assert<IsExact<GetUniverseSystemJumpsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseSystemJumpsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseSystemJumpsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseSystemJumpsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseSystemKillsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listSystemKills"], (options?: GetUniverseSystemKillsOptions) => Promise<GetUniverseSystemKillsOutput>>>;
+type GetUniverseSystemKillsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listSystemKills"], (options?: GetUniverseSystemKillsOptions) => Promise<EsiResponse<GetUniverseSystemKillsOutput>>>>;
+type GetUniverseSystemKillsOptionsAssertion = Assert<IsExact<GetUniverseSystemKillsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseSystemKillsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseSystemKillsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetUniverseSystemKillsInput["header"]>["X-Tenant"];
+}>>;
+type GetUniverseTypesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["listTypes"], (options?: GetUniverseTypesOptions) => Promise<GetUniverseTypesOutput>>>;
+type GetUniverseTypesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["listTypes"], (options?: GetUniverseTypesOptions) => Promise<EsiResponse<GetUniverseTypesOutput>>>>;
+type GetUniverseTypesOptionsAssertion = Assert<IsExact<GetUniverseTypesOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetUniverseTypesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetUniverseTypesInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetUniverseTypesInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetUniverseTypesInput["header"]>["X-Tenant"];
+}>>;
+type PostUniverseIdsDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["resolveIds"], (options: PostUniverseIdsOptions) => Promise<PostUniverseIdsOutput>>>;
+type PostUniverseIdsMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["resolveIds"], (options: PostUniverseIdsOptions) => Promise<EsiResponse<PostUniverseIdsOutput>>>>;
+type PostUniverseIdsOptionsAssertion = Assert<IsExact<PostUniverseIdsOptions, {
+  readonly "body": PostUniverseIdsInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostUniverseIdsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostUniverseIdsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostUniverseIdsInput["header"]>["X-Tenant"];
+}>>;
+type PostUniverseNamesDomainMethodAssertion = Assert<IsExact<UniverseDomainClient["resolveNames"], (options: PostUniverseNamesOptions) => Promise<PostUniverseNamesOutput>>>;
+type PostUniverseNamesMetadataMethodAssertion = Assert<IsExact<UniverseDomainClientWithMetadata["resolveNames"], (options: PostUniverseNamesOptions) => Promise<EsiResponse<PostUniverseNamesOutput>>>>;
+type PostUniverseNamesOptionsAssertion = Assert<IsExact<PostUniverseNamesOptions, {
+  readonly "body": PostUniverseNamesInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostUniverseNamesInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostUniverseNamesInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostUniverseNamesInput["header"]>["X-Tenant"];
+}>>;
+type UniverseDomainClientFactoryAssertion = Assert<IsExact<typeof createUniverseClient, (options?: EsiClientOptions) => UniverseDomainClient>>;
+type UniverseDomainClientMetadataViewAssertion = Assert<IsExact<UniverseDomainClient['withMetadata'], () => UniverseDomainClientWithMetadata>>;
+type PostUiOpenwindowContractDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["openContract"], (options: PostUiOpenwindowContractOptions) => Promise<PostUiOpenwindowContractOutput>>>;
+type PostUiOpenwindowContractMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["openContract"], (options: PostUiOpenwindowContractOptions) => Promise<EsiResponse<PostUiOpenwindowContractOutput>>>>;
+type PostUiOpenwindowContractOptionsAssertion = Assert<IsExact<PostUiOpenwindowContractOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "contractId": NonNullable<PostUiOpenwindowContractInput["query"]>["contract_id"];
+  readonly "ifModifiedSince"?: NonNullable<PostUiOpenwindowContractInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostUiOpenwindowContractInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostUiOpenwindowContractInput["header"]>["X-Tenant"];
+}>>;
+type PostUiOpenwindowInformationDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["openInformation"], (options: PostUiOpenwindowInformationOptions) => Promise<PostUiOpenwindowInformationOutput>>>;
+type PostUiOpenwindowInformationMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["openInformation"], (options: PostUiOpenwindowInformationOptions) => Promise<EsiResponse<PostUiOpenwindowInformationOutput>>>>;
+type PostUiOpenwindowInformationOptionsAssertion = Assert<IsExact<PostUiOpenwindowInformationOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostUiOpenwindowInformationInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostUiOpenwindowInformationInput["header"]>["If-None-Match"];
+  readonly "targetId": NonNullable<PostUiOpenwindowInformationInput["query"]>["target_id"];
+  readonly "xTenant"?: NonNullable<PostUiOpenwindowInformationInput["header"]>["X-Tenant"];
+}>>;
+type PostUiOpenwindowMarketdetailsDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["openMarketDetails"], (options: PostUiOpenwindowMarketdetailsOptions) => Promise<PostUiOpenwindowMarketdetailsOutput>>>;
+type PostUiOpenwindowMarketdetailsMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["openMarketDetails"], (options: PostUiOpenwindowMarketdetailsOptions) => Promise<EsiResponse<PostUiOpenwindowMarketdetailsOutput>>>>;
+type PostUiOpenwindowMarketdetailsOptionsAssertion = Assert<IsExact<PostUiOpenwindowMarketdetailsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostUiOpenwindowMarketdetailsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostUiOpenwindowMarketdetailsInput["header"]>["If-None-Match"];
+  readonly "typeId": NonNullable<PostUiOpenwindowMarketdetailsInput["query"]>["type_id"];
+  readonly "xTenant"?: NonNullable<PostUiOpenwindowMarketdetailsInput["header"]>["X-Tenant"];
+}>>;
+type PostUiOpenwindowNewmailDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["openNewMail"], (options: PostUiOpenwindowNewmailOptions) => Promise<PostUiOpenwindowNewmailOutput>>>;
+type PostUiOpenwindowNewmailMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["openNewMail"], (options: PostUiOpenwindowNewmailOptions) => Promise<EsiResponse<PostUiOpenwindowNewmailOutput>>>>;
+type PostUiOpenwindowNewmailOptionsAssertion = Assert<IsExact<PostUiOpenwindowNewmailOptions, {
+  readonly "body": PostUiOpenwindowNewmailInput['body'];
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<PostUiOpenwindowNewmailInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostUiOpenwindowNewmailInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostUiOpenwindowNewmailInput["header"]>["X-Tenant"];
+}>>;
+type PostUiAutopilotWaypointDomainMethodAssertion = Assert<IsExact<UserInterfaceDomainClient["setAutopilotWaypoint"], (options: PostUiAutopilotWaypointOptions) => Promise<PostUiAutopilotWaypointOutput>>>;
+type PostUiAutopilotWaypointMetadataMethodAssertion = Assert<IsExact<UserInterfaceDomainClientWithMetadata["setAutopilotWaypoint"], (options: PostUiAutopilotWaypointOptions) => Promise<EsiResponse<PostUiAutopilotWaypointOutput>>>>;
+type PostUiAutopilotWaypointOptionsAssertion = Assert<IsExact<PostUiAutopilotWaypointOptions, {
+  readonly "addToBeginning": NonNullable<PostUiAutopilotWaypointInput["query"]>["add_to_beginning"];
+  readonly "clearOtherWaypoints": NonNullable<PostUiAutopilotWaypointInput["query"]>["clear_other_waypoints"];
+  readonly "compatibilityDate"?: string;
+  readonly "destinationId": NonNullable<PostUiAutopilotWaypointInput["query"]>["destination_id"];
+  readonly "ifModifiedSince"?: NonNullable<PostUiAutopilotWaypointInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<PostUiAutopilotWaypointInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<PostUiAutopilotWaypointInput["header"]>["X-Tenant"];
+}>>;
+type UserInterfaceDomainClientFactoryAssertion = Assert<IsExact<typeof createUserInterfaceClient, (options?: EsiClientOptions) => UserInterfaceDomainClient>>;
+type UserInterfaceDomainClientMetadataViewAssertion = Assert<IsExact<UserInterfaceDomainClient['withMetadata'], () => UserInterfaceDomainClientWithMetadata>>;
+type GetCharactersCharacterIdWalletDomainMethodAssertion = Assert<IsExact<WalletDomainClient["getCharacterBalance"], (identifier1: NonNullable<GetCharactersCharacterIdWalletInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletOptions) => Promise<GetCharactersCharacterIdWalletOutput>>>;
+type GetCharactersCharacterIdWalletMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["getCharacterBalance"], (identifier1: NonNullable<GetCharactersCharacterIdWalletInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletOptions) => Promise<EsiResponse<GetCharactersCharacterIdWalletOutput>>>>;
+type GetCharactersCharacterIdWalletOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdWalletOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdWalletInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdWalletInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdWalletInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdWalletJournalDomainMethodAssertion = Assert<IsExact<WalletDomainClient["listCharacterJournal"], (identifier1: NonNullable<GetCharactersCharacterIdWalletJournalInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletJournalOptions) => Promise<GetCharactersCharacterIdWalletJournalOutput>>>;
+type GetCharactersCharacterIdWalletJournalMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["listCharacterJournal"], (identifier1: NonNullable<GetCharactersCharacterIdWalletJournalInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletJournalOptions) => Promise<EsiResponse<GetCharactersCharacterIdWalletJournalOutput>>>>;
+type GetCharactersCharacterIdWalletJournalOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdWalletJournalOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdWalletJournalInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdWalletJournalInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCharactersCharacterIdWalletJournalInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdWalletJournalInput["header"]>["X-Tenant"];
+}>>;
+type GetCharactersCharacterIdWalletTransactionsDomainMethodAssertion = Assert<IsExact<WalletDomainClient["listCharacterTransactions"], (identifier1: NonNullable<GetCharactersCharacterIdWalletTransactionsInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletTransactionsOptions) => Promise<GetCharactersCharacterIdWalletTransactionsOutput>>>;
+type GetCharactersCharacterIdWalletTransactionsMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["listCharacterTransactions"], (identifier1: NonNullable<GetCharactersCharacterIdWalletTransactionsInput['path']>["character_id"], options?: GetCharactersCharacterIdWalletTransactionsOptions) => Promise<EsiResponse<GetCharactersCharacterIdWalletTransactionsOutput>>>>;
+type GetCharactersCharacterIdWalletTransactionsOptionsAssertion = Assert<IsExact<GetCharactersCharacterIdWalletTransactionsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "fromId"?: NonNullable<GetCharactersCharacterIdWalletTransactionsInput["query"]>["from_id"];
+  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdWalletTransactionsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdWalletTransactionsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdWalletTransactionsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdWalletsDomainMethodAssertion = Assert<IsExact<WalletDomainClient["listCorporationBalances"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdWalletsOptions) => Promise<GetCorporationsCorporationIdWalletsOutput>>>;
+type GetCorporationsCorporationIdWalletsMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["listCorporationBalances"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdWalletsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdWalletsOutput>>>>;
+type GetCorporationsCorporationIdWalletsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdWalletsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdWalletsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdWalletsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdWalletsInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdWalletsDivisionJournalDomainMethodAssertion = Assert<IsExact<WalletDomainClient["listCorporationDivisionJournal"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionJournalOptions) => Promise<GetCorporationsCorporationIdWalletsDivisionJournalOutput>>>;
+type GetCorporationsCorporationIdWalletsDivisionJournalMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["listCorporationDivisionJournal"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionJournalOptions) => Promise<EsiResponse<GetCorporationsCorporationIdWalletsDivisionJournalOutput>>>>;
+type GetCorporationsCorporationIdWalletsDivisionJournalOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdWalletsDivisionJournalOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionJournalInput["header"]>["X-Tenant"];
+}>>;
+type GetCorporationsCorporationIdWalletsDivisionTransactionsDomainMethodAssertion = Assert<IsExact<WalletDomainClient["listCorporationDivisionTransactions"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionTransactionsOptions) => Promise<GetCorporationsCorporationIdWalletsDivisionTransactionsOutput>>>;
+type GetCorporationsCorporationIdWalletsDivisionTransactionsMetadataMethodAssertion = Assert<IsExact<WalletDomainClientWithMetadata["listCorporationDivisionTransactions"], (identifier1: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["corporation_id"], identifier2: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput['path']>["division"], options?: GetCorporationsCorporationIdWalletsDivisionTransactionsOptions) => Promise<EsiResponse<GetCorporationsCorporationIdWalletsDivisionTransactionsOutput>>>>;
+type GetCorporationsCorporationIdWalletsDivisionTransactionsOptionsAssertion = Assert<IsExact<GetCorporationsCorporationIdWalletsDivisionTransactionsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "fromId"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput["query"]>["from_id"];
+  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdWalletsDivisionTransactionsInput["header"]>["X-Tenant"];
+}>>;
+type WalletDomainClientFactoryAssertion = Assert<IsExact<typeof createWalletClient, (options?: EsiClientOptions) => WalletDomainClient>>;
+type WalletDomainClientMetadataViewAssertion = Assert<IsExact<WalletDomainClient['withMetadata'], () => WalletDomainClientWithMetadata>>;
+type GetWarsWarIdDomainMethodAssertion = Assert<IsExact<WarsDomainClient["get"], (identifier1: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions) => Promise<GetWarsWarIdOutput>>>;
+type GetWarsWarIdMetadataMethodAssertion = Assert<IsExact<WarsDomainClientWithMetadata["get"], (identifier1: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions) => Promise<EsiResponse<GetWarsWarIdOutput>>>>;
+type GetWarsWarIdOptionsAssertion = Assert<IsExact<GetWarsWarIdOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetWarsWarIdInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetWarsWarIdInput["header"]>["If-None-Match"];
+  readonly "xTenant"?: NonNullable<GetWarsWarIdInput["header"]>["X-Tenant"];
+}>>;
+type GetWarsDomainMethodAssertion = Assert<IsExact<WarsDomainClient["list"], (options?: GetWarsOptions) => Promise<GetWarsOutput>>>;
+type GetWarsMetadataMethodAssertion = Assert<IsExact<WarsDomainClientWithMetadata["list"], (options?: GetWarsOptions) => Promise<EsiResponse<GetWarsOutput>>>>;
+type GetWarsOptionsAssertion = Assert<IsExact<GetWarsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetWarsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetWarsInput["header"]>["If-None-Match"];
+  readonly "maxWarId"?: NonNullable<GetWarsInput["query"]>["max_war_id"];
+  readonly "xTenant"?: NonNullable<GetWarsInput["header"]>["X-Tenant"];
+}>>;
+type GetWarsWarIdKillmailsDomainMethodAssertion = Assert<IsExact<WarsDomainClient["listKillmails"], (identifier1: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions) => Promise<GetWarsWarIdKillmailsOutput>>>;
+type GetWarsWarIdKillmailsMetadataMethodAssertion = Assert<IsExact<WarsDomainClientWithMetadata["listKillmails"], (identifier1: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions) => Promise<EsiResponse<GetWarsWarIdKillmailsOutput>>>>;
+type GetWarsWarIdKillmailsOptionsAssertion = Assert<IsExact<GetWarsWarIdKillmailsOptions, {
+  readonly "compatibilityDate"?: string;
+  readonly "ifModifiedSince"?: NonNullable<GetWarsWarIdKillmailsInput["header"]>["If-Modified-Since"];
+  readonly "ifNoneMatch"?: NonNullable<GetWarsWarIdKillmailsInput["header"]>["If-None-Match"];
+  readonly "page"?: NonNullable<GetWarsWarIdKillmailsInput["query"]>["page"];
+  readonly "xTenant"?: NonNullable<GetWarsWarIdKillmailsInput["header"]>["X-Tenant"];
+}>>;
+type WarsDomainClientFactoryAssertion = Assert<IsExact<typeof createWarsClient, (options?: EsiClientOptions) => WarsDomainClient>>;
+type WarsDomainClientMetadataViewAssertion = Assert<IsExact<WarsDomainClient['withMetadata'], () => WarsDomainClientWithMetadata>>;

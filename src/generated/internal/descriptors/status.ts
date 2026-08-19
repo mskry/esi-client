@@ -9,7 +9,7 @@ import {
   GetStatusStatus200SuccessResponseSchema,
   type GetStatusInput,
   type GetStatusOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/status.js';
 
 export const GetStatusDescriptor: OperationExecutionDescriptor<GetStatusInput, GetStatusOutput> = {
   operationId: "GetStatus",

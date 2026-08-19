@@ -13,8 +13,42 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdLoyaltyPoints`](../operations/GetCharactersCharacterIdLoyaltyPoints.md) | `GET` | `getCharactersCharacterIdLoyaltyPoints` | required | none | read | Get loyalty points |
-| [`GetLoyaltyStoresCorporationIdOffers`](../operations/GetLoyaltyStoresCorporationIdOffers.md) | `GET` | `getLoyaltyStoresCorporationIdOffers` | public | none | read | List loyalty store offers |
+| [`GetCharactersCharacterIdLoyaltyPoints`](../operations/GetCharactersCharacterIdLoyaltyPoints.md) | `GET` | `listPoints` | required | none | read | Get loyalty points |
+| [`GetLoyaltyStoresCorporationIdOffers`](../operations/GetLoyaltyStoresCorporationIdOffers.md) | `GET` | `listStoreOffers` | public | none | read | List loyalty store offers |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createLoyaltyClient } from '@evespace/esi-client/domains/loyalty';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createLoyaltyClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listPoints(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.loyalty.listPoints(characterId);
+```
 
 ## Shared concepts
 

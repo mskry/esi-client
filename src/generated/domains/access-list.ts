@@ -3,72 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetCharactersAccessListsDetailDescriptor,
-  GetCharactersAccessListsListingDescriptor,
-} from '../internal/descriptors/access-list.js';
-import type {
-  GetCharactersAccessListsDetailInput,
-  GetCharactersAccessListsDetailOutput,
-  GetCharactersAccessListsListingInput,
-  GetCharactersAccessListsListingOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindAccessListDomainClient } from '../internal/domains/access-list.js';
+import type { AccessListDomainClient } from '../internal/domains/access-list-contract.js';
 
-export interface GetCharactersAccessListsDetailOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersAccessListsDetailInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersAccessListsDetailInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersAccessListsDetailInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/access-list-contract.js';
 
-export interface GetCharactersAccessListsListingOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersAccessListsListingInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersAccessListsListingInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersAccessListsListingInput["header"]>["X-Tenant"];
-}
-
-export class AccessListDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersAccessListsDetail(characterId: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], accessListId: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions): Promise<GetCharactersAccessListsDetailOutput> {
-    const arguments_: GetCharactersAccessListsDetailInput = { path: { "character_id": characterId, "access_list_id": accessListId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersAccessListsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCharactersAccessListsListing(characterId: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions): Promise<GetCharactersAccessListsListingOutput> {
-    const arguments_: GetCharactersAccessListsListingInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersAccessListsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): AccessListDomainClientWithMetadata {
-    return new AccessListDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class AccessListDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersAccessListsDetail(characterId: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], accessListId: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions): Promise<EsiResponse<GetCharactersAccessListsDetailOutput>> {
-    const arguments_: GetCharactersAccessListsDetailInput = { path: { "character_id": characterId, "access_list_id": accessListId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersAccessListsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCharactersAccessListsListing(characterId: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions): Promise<EsiResponse<GetCharactersAccessListsListingOutput>> {
-    const arguments_: GetCharactersAccessListsListingInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersAccessListsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createAccessListClient(options: EsiClientOptions = {}): AccessListDomainClient {
+  return bindAccessListDomainClient(new EsiClientConfiguration(options));
 }

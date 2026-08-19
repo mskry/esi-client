@@ -13,20 +13,58 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`DeleteFleetsFleetIdMembersMemberId`](../operations/DeleteFleetsFleetIdMembersMemberId.md) | `DELETE` | `deleteFleetsFleetIdMembersMemberId` | required | none | mutation | Kick fleet member |
-| [`DeleteFleetsFleetIdSquadsSquadId`](../operations/DeleteFleetsFleetIdSquadsSquadId.md) | `DELETE` | `deleteFleetsFleetIdSquadsSquadId` | required | none | mutation | Delete fleet squad |
-| [`DeleteFleetsFleetIdWingsWingId`](../operations/DeleteFleetsFleetIdWingsWingId.md) | `DELETE` | `deleteFleetsFleetIdWingsWingId` | required | none | mutation | Delete fleet wing |
-| [`GetCharactersCharacterIdFleet`](../operations/GetCharactersCharacterIdFleet.md) | `GET` | `getCharactersCharacterIdFleet` | required | none | read | Get character fleet info |
-| [`GetFleetsFleetId`](../operations/GetFleetsFleetId.md) | `GET` | `getFleetsFleetId` | required | none | read | Get fleet information |
-| [`GetFleetsFleetIdMembers`](../operations/GetFleetsFleetIdMembers.md) | `GET` | `getFleetsFleetIdMembers` | required | none | read | Get fleet members |
-| [`GetFleetsFleetIdWings`](../operations/GetFleetsFleetIdWings.md) | `GET` | `getFleetsFleetIdWings` | required | none | read | Get fleet wings |
-| [`PostFleetsFleetIdMembers`](../operations/PostFleetsFleetIdMembers.md) | `POST` | `postFleetsFleetIdMembers` | required | none | mutation | Create fleet invitation |
-| [`PostFleetsFleetIdWings`](../operations/PostFleetsFleetIdWings.md) | `POST` | `postFleetsFleetIdWings` | required | none | mutation | Create fleet wing |
-| [`PostFleetsFleetIdWingsWingIdSquads`](../operations/PostFleetsFleetIdWingsWingIdSquads.md) | `POST` | `postFleetsFleetIdWingsWingIdSquads` | required | none | mutation | Create fleet squad |
-| [`PutFleetsFleetId`](../operations/PutFleetsFleetId.md) | `PUT` | `putFleetsFleetId` | required | none | mutation | Update fleet |
-| [`PutFleetsFleetIdMembersMemberId`](../operations/PutFleetsFleetIdMembersMemberId.md) | `PUT` | `putFleetsFleetIdMembersMemberId` | required | none | mutation | Move fleet member |
-| [`PutFleetsFleetIdSquadsSquadId`](../operations/PutFleetsFleetIdSquadsSquadId.md) | `PUT` | `putFleetsFleetIdSquadsSquadId` | required | none | mutation | Rename fleet squad |
-| [`PutFleetsFleetIdWingsWingId`](../operations/PutFleetsFleetIdWingsWingId.md) | `PUT` | `putFleetsFleetIdWingsWingId` | required | none | mutation | Rename fleet wing |
+| [`DeleteFleetsFleetIdMembersMemberId`](../operations/DeleteFleetsFleetIdMembersMemberId.md) | `DELETE` | `removeMember` | required | none | mutation | Kick fleet member |
+| [`DeleteFleetsFleetIdSquadsSquadId`](../operations/DeleteFleetsFleetIdSquadsSquadId.md) | `DELETE` | `deleteSquad` | required | none | mutation | Delete fleet squad |
+| [`DeleteFleetsFleetIdWingsWingId`](../operations/DeleteFleetsFleetIdWingsWingId.md) | `DELETE` | `deleteWing` | required | none | mutation | Delete fleet wing |
+| [`GetCharactersCharacterIdFleet`](../operations/GetCharactersCharacterIdFleet.md) | `GET` | `getCharacterFleet` | required | none | read | Get character fleet info |
+| [`GetFleetsFleetId`](../operations/GetFleetsFleetId.md) | `GET` | `get` | required | none | read | Get fleet information |
+| [`GetFleetsFleetIdMembers`](../operations/GetFleetsFleetIdMembers.md) | `GET` | `listMembers` | required | none | read | Get fleet members |
+| [`GetFleetsFleetIdWings`](../operations/GetFleetsFleetIdWings.md) | `GET` | `listWings` | required | none | read | Get fleet wings |
+| [`PostFleetsFleetIdMembers`](../operations/PostFleetsFleetIdMembers.md) | `POST` | `inviteMember` | required | none | mutation | Create fleet invitation |
+| [`PostFleetsFleetIdWings`](../operations/PostFleetsFleetIdWings.md) | `POST` | `createWing` | required | none | mutation | Create fleet wing |
+| [`PostFleetsFleetIdWingsWingIdSquads`](../operations/PostFleetsFleetIdWingsWingIdSquads.md) | `POST` | `createSquad` | required | none | mutation | Create fleet squad |
+| [`PutFleetsFleetId`](../operations/PutFleetsFleetId.md) | `PUT` | `update` | required | none | mutation | Update fleet |
+| [`PutFleetsFleetIdMembersMemberId`](../operations/PutFleetsFleetIdMembersMemberId.md) | `PUT` | `moveMember` | required | none | mutation | Move fleet member |
+| [`PutFleetsFleetIdSquadsSquadId`](../operations/PutFleetsFleetIdSquadsSquadId.md) | `PUT` | `renameSquad` | required | none | mutation | Rename fleet squad |
+| [`PutFleetsFleetIdWingsWingId`](../operations/PutFleetsFleetIdWingsWingId.md) | `PUT` | `renameWing` | required | none | mutation | Rename fleet wing |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createFleetsClient } from '@evespace/esi-client/domains/fleets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFleetsClient({ token: accessToken });
+
+const fleetId = 12345;
+const memberId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.removeMember(fleetId, memberId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const fleetId = 12345;
+const memberId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.fleets.removeMember(fleetId, memberId);
+```
 
 ## Shared concepts
 

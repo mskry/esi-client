@@ -11,14 +11,29 @@ Get route between two systems
 
 - Stable ID: `PostRoute`
 - HTTP: `POST /route/{origin_system_id}/{destination_system_id}`
-- Domain method: `client.routes.postRoute(originSystemId, destinationSystemId, options)`
+- Domain method: `client.routes.calculate(originSystemId, destinationSystemId, options)`
 - Generic call: `client.callOperation("PostRoute", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/routes`
 - Domain index: [routes](../domains/routes.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createRoutesClient } from '@evespace/esi-client/domains/routes';
+import type { PostRouteOptions } from '@evespace/esi-client/domains/routes';
+
+const client = createRoutesClient();
+
+const originSystemId = 30000142;
+const destinationSystemId = 30000142;
+declare const requestBody: NonNullable<PostRouteOptions['body']>;
+
+const data = await client.calculate(originSystemId, destinationSystemId, { body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const originSystemId = 30000142;
 const destinationSystemId = 30000142;
 declare const requestBody: NonNullable<PostRouteOptions['body']>;
 
-const data = await client.routes.postRoute(originSystemId, destinationSystemId, { body: requestBody });
+const data = await client.routes.calculate(originSystemId, destinationSystemId, { body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -65,7 +80,7 @@ const response = await client.callOperation('PostRoute', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `PostRouteRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.routes.withMetadata().postRoute(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.routes.withMetadata().calculate(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

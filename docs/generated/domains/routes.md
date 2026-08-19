@@ -13,7 +13,41 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`PostRoute`](../operations/PostRoute.md) | `POST` | `postRoute` | public | none | read | Get route between two systems |
+| [`PostRoute`](../operations/PostRoute.md) | `POST` | `calculate` | public | none | read | Get route between two systems |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createRoutesClient } from '@evespace/esi-client/domains/routes';
+import type { PostRouteOptions } from '@evespace/esi-client/domains/routes';
+
+const client = createRoutesClient();
+
+const originSystemId = 30000142;
+const destinationSystemId = 30000142;
+declare const requestBody: NonNullable<PostRouteOptions['body']>;
+
+const data = await client.calculate(originSystemId, destinationSystemId, { body: requestBody });
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+import type { PostRouteOptions } from '@evespace/esi-client/domains/routes';
+
+const client = new EsiClient();
+
+const originSystemId = 30000142;
+const destinationSystemId = 30000142;
+declare const requestBody: NonNullable<PostRouteOptions['body']>;
+
+const data = await client.routes.calculate(originSystemId, destinationSystemId, { body: requestBody });
+```
 
 ## Shared concepts
 

@@ -11,21 +11,31 @@ List freelance jobs
 
 - Stable ID: `GetFreelanceJobsListing`
 - HTTP: `GET /freelance-jobs`
-- Domain method: `client.freelanceJobs.getFreelanceJobsListing(options?)`
+- Domain method: `client.freelanceJobs.listPublic(options?)`
 - Generic call: `client.callOperation("GetFreelanceJobsListing", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/freelance-jobs`
 - Domain index: [freelanceJobs](../domains/freelance-jobs.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFreelanceJobsClient } from '@evespace/esi-client/domains/freelance-jobs';
+
+const client = createFreelanceJobsClient();
+
+const data = await client.listPublic();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.freelanceJobs.getFreelanceJobsListing();
+const data = await client.freelanceJobs.listPublic();
 ```
 
 ## Generic-execution snippet
@@ -57,7 +67,7 @@ const response = await client.callOperation('GetFreelanceJobsListing', arguments
 
 - Request schema: `@evespace/esi-client/schemas` export `GetFreelanceJobsListingRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.freelanceJobs.withMetadata().getFreelanceJobsListing(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.freelanceJobs.withMetadata().listPublic(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

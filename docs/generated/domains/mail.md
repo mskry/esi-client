@@ -13,15 +13,53 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`DeleteCharactersCharacterIdMailLabelsLabelId`](../operations/DeleteCharactersCharacterIdMailLabelsLabelId.md) | `DELETE` | `deleteCharactersCharacterIdMailLabelsLabelId` | required | none | mutation | Delete a mail label |
-| [`DeleteCharactersCharacterIdMailMailId`](../operations/DeleteCharactersCharacterIdMailMailId.md) | `DELETE` | `deleteCharactersCharacterIdMailMailId` | required | none | mutation | Delete a mail |
-| [`GetCharactersCharacterIdMail`](../operations/GetCharactersCharacterIdMail.md) | `GET` | `getCharactersCharacterIdMail` | required | none | read | Return mail headers |
-| [`GetCharactersCharacterIdMailLabels`](../operations/GetCharactersCharacterIdMailLabels.md) | `GET` | `getCharactersCharacterIdMailLabels` | required | none | read | Get mail labels and unread counts |
-| [`GetCharactersCharacterIdMailLists`](../operations/GetCharactersCharacterIdMailLists.md) | `GET` | `getCharactersCharacterIdMailLists` | required | none | read | Return mailing list subscriptions |
-| [`GetCharactersCharacterIdMailMailId`](../operations/GetCharactersCharacterIdMailMailId.md) | `GET` | `getCharactersCharacterIdMailMailId` | required | none | read | Return a mail |
-| [`PostCharactersCharacterIdMail`](../operations/PostCharactersCharacterIdMail.md) | `POST` | `postCharactersCharacterIdMail` | required | none | mutation | Send a new mail |
-| [`PostCharactersCharacterIdMailLabels`](../operations/PostCharactersCharacterIdMailLabels.md) | `POST` | `postCharactersCharacterIdMailLabels` | required | none | mutation | Create a mail label |
-| [`PutCharactersCharacterIdMailMailId`](../operations/PutCharactersCharacterIdMailMailId.md) | `PUT` | `putCharactersCharacterIdMailMailId` | required | none | mutation | Update metadata about a mail |
+| [`DeleteCharactersCharacterIdMailLabelsLabelId`](../operations/DeleteCharactersCharacterIdMailLabelsLabelId.md) | `DELETE` | `deleteLabel` | required | none | mutation | Delete a mail label |
+| [`DeleteCharactersCharacterIdMailMailId`](../operations/DeleteCharactersCharacterIdMailMailId.md) | `DELETE` | `deleteMail` | required | none | mutation | Delete a mail |
+| [`GetCharactersCharacterIdMail`](../operations/GetCharactersCharacterIdMail.md) | `GET` | `listHeaders` | required | none | read | Return mail headers |
+| [`GetCharactersCharacterIdMailLabels`](../operations/GetCharactersCharacterIdMailLabels.md) | `GET` | `listLabels` | required | none | read | Get mail labels and unread counts |
+| [`GetCharactersCharacterIdMailLists`](../operations/GetCharactersCharacterIdMailLists.md) | `GET` | `listMailingLists` | required | none | read | Return mailing list subscriptions |
+| [`GetCharactersCharacterIdMailMailId`](../operations/GetCharactersCharacterIdMailMailId.md) | `GET` | `get` | required | none | read | Return a mail |
+| [`PostCharactersCharacterIdMail`](../operations/PostCharactersCharacterIdMail.md) | `POST` | `send` | required | none | mutation | Send a new mail |
+| [`PostCharactersCharacterIdMailLabels`](../operations/PostCharactersCharacterIdMailLabels.md) | `POST` | `createLabel` | required | none | mutation | Create a mail label |
+| [`PutCharactersCharacterIdMailMailId`](../operations/PutCharactersCharacterIdMailMailId.md) | `PUT` | `update` | required | none | mutation | Update metadata about a mail |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createMailClient } from '@evespace/esi-client/domains/mail';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMailClient({ token: accessToken });
+
+const characterId = 90000001;
+const labelId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.deleteLabel(characterId, labelId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+const labelId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.mail.deleteLabel(characterId, labelId);
+```
 
 ## Shared concepts
 

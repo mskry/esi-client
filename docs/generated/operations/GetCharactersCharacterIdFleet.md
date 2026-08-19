@@ -11,14 +11,29 @@ Get character fleet info
 
 - Stable ID: `GetCharactersCharacterIdFleet`
 - HTTP: `GET /characters/{character_id}/fleet`
-- Domain method: `client.fleets.getCharactersCharacterIdFleet(characterId, options?)`
+- Domain method: `client.fleets.getCharacterFleet(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdFleet", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/fleets`
 - Domain index: [fleets](../domains/fleets.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFleetsClient } from '@evespace/esi-client/domains/fleets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFleetsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.getCharacterFleet(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.fleets.getCharactersCharacterIdFleet(characterId);
+const data = await client.fleets.getCharacterFleet(characterId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCharactersCharacterIdFleet', arg
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdFleetRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.fleets.withMetadata().getCharactersCharacterIdFleet(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.fleets.withMetadata().getCharacterFleet(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

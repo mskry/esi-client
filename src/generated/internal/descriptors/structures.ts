@@ -29,7 +29,7 @@ import {
   type GetCorporationsStructuresSovereigntyHubsDetailOutput,
   type GetCorporationsStructuresSovereigntyHubsListingInput,
   type GetCorporationsStructuresSovereigntyHubsListingOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/structures.js';
 
 export const GetCharactersStructuresMercenaryDensDetailDescriptor: OperationExecutionDescriptor<GetCharactersStructuresMercenaryDensDetailInput, GetCharactersStructuresMercenaryDensDetailOutput> = {
   operationId: "GetCharactersStructuresMercenaryDensDetail",
@@ -47,25 +47,6 @@ export const GetCharactersStructuresMercenaryDensDetailDescriptor: OperationExec
   authentication: { scopes: ["esi-structures.read_character.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersStructuresMercenaryDensDetailStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCharactersStructuresMercenaryDensListingDescriptor: OperationExecutionDescriptor<GetCharactersStructuresMercenaryDensListingInput, GetCharactersStructuresMercenaryDensListingOutput> = {
-  operationId: "GetCharactersStructuresMercenaryDensListing",
-  method: "GET",
-  path: "/characters/{character_id}/structures/mercenary-dens",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersStructuresMercenaryDensListingRequestSchema,
-  authentication: { scopes: ["esi-structures.read_character.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersStructuresMercenaryDensListingStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -90,25 +71,6 @@ export const GetCorporationsStructuresSkyhooksDetailDescriptor: OperationExecuti
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsStructuresSkyhooksListingDescriptor: OperationExecutionDescriptor<GetCorporationsStructuresSkyhooksListingInput, GetCorporationsStructuresSkyhooksListingOutput> = {
-  operationId: "GetCorporationsStructuresSkyhooksListing",
-  method: "GET",
-  path: "/corporations/{corporation_id}/structures/skyhooks",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsStructuresSkyhooksListingRequestSchema,
-  authentication: { scopes: ["esi-structures.read_corporation.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsStructuresSkyhooksListingStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetCorporationsStructuresSovereigntyHubsDetailDescriptor: OperationExecutionDescriptor<GetCorporationsStructuresSovereigntyHubsDetailInput, GetCorporationsStructuresSovereigntyHubsDetailOutput> = {
   operationId: "GetCorporationsStructuresSovereigntyHubsDetail",
   method: "GET",
@@ -125,6 +87,44 @@ export const GetCorporationsStructuresSovereigntyHubsDetailDescriptor: Operation
   authentication: { scopes: ["esi-structures.read_corporation.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsStructuresSovereigntyHubsDetailStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersStructuresMercenaryDensListingDescriptor: OperationExecutionDescriptor<GetCharactersStructuresMercenaryDensListingInput, GetCharactersStructuresMercenaryDensListingOutput> = {
+  operationId: "GetCharactersStructuresMercenaryDensListing",
+  method: "GET",
+  path: "/characters/{character_id}/structures/mercenary-dens",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersStructuresMercenaryDensListingRequestSchema,
+  authentication: { scopes: ["esi-structures.read_character.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersStructuresMercenaryDensListingStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsStructuresSkyhooksListingDescriptor: OperationExecutionDescriptor<GetCorporationsStructuresSkyhooksListingInput, GetCorporationsStructuresSkyhooksListingOutput> = {
+  operationId: "GetCorporationsStructuresSkyhooksListing",
+  method: "GET",
+  path: "/corporations/{corporation_id}/structures/skyhooks",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsStructuresSkyhooksListingRequestSchema,
+  authentication: { scopes: ["esi-structures.read_corporation.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsStructuresSkyhooksListingStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

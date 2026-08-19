@@ -13,9 +13,43 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCosmeticsSkinr`](../operations/GetCharactersCosmeticsSkinr.md) | `GET` | `getCharactersCosmeticsSkinr` | required | none | read | List a character's owned SKINR licenses |
-| [`GetCharactersCosmeticsSkinrComponents`](../operations/GetCharactersCosmeticsSkinrComponents.md) | `GET` | `getCharactersCosmeticsSkinrComponents` | required | none | read | List a character's owned SKINR component licenses |
-| [`GetCosmeticsSkinr`](../operations/GetCosmeticsSkinr.md) | `GET` | `getCosmeticsSkinr` | public | none | read | Get SKINR attributes |
+| [`GetCharactersCosmeticsSkinr`](../operations/GetCharactersCosmeticsSkinr.md) | `GET` | `listSkinrLicenses` | required | none | read | List a character's owned SKINR licenses |
+| [`GetCharactersCosmeticsSkinrComponents`](../operations/GetCharactersCosmeticsSkinrComponents.md) | `GET` | `listSkinrComponentLicenses` | required | none | read | List a character's owned SKINR component licenses |
+| [`GetCosmeticsSkinr`](../operations/GetCosmeticsSkinr.md) | `GET` | `getSkinrLicense` | public | none | read | Get SKINR attributes |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createCosmeticsClient } from '@evespace/esi-client/domains/cosmetics';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCosmeticsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listSkinrLicenses(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.cosmetics.listSkinrLicenses(characterId);
+```
 
 ## Shared concepts
 

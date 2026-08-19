@@ -11,14 +11,30 @@ Get character freelance job participation
 
 - Stable ID: `GetCharactersFreelanceJobsParticipation`
 - HTTP: `GET /characters/{character_id}/freelance-jobs/{job_id}/participation`
-- Domain method: `client.freelanceJobs.getCharactersFreelanceJobsParticipation(characterId, jobId, options?)`
+- Domain method: `client.freelanceJobs.getCharacterParticipation(characterId, jobId, options?)`
 - Generic call: `client.callOperation("GetCharactersFreelanceJobsParticipation", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/freelance-jobs`
 - Domain index: [freelanceJobs](../domains/freelance-jobs.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFreelanceJobsClient } from '@evespace/esi-client/domains/freelance-jobs';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFreelanceJobsClient({ token: accessToken });
+
+const characterId = 90000001;
+const jobId = "00000000-0000-4000-8000-000000000000";
+
+const data = await client.getCharacterParticipation(characterId, jobId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -31,7 +47,7 @@ const client = new EsiClient({ token: accessToken });
 const characterId = 90000001;
 const jobId = "00000000-0000-4000-8000-000000000000";
 
-const data = await client.freelanceJobs.getCharactersFreelanceJobsParticipation(characterId, jobId);
+const data = await client.freelanceJobs.getCharacterParticipation(characterId, jobId);
 ```
 
 ## Generic-execution snippet
@@ -67,7 +83,7 @@ const response = await client.callOperation('GetCharactersFreelanceJobsParticipa
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersFreelanceJobsParticipationRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.freelanceJobs.withMetadata().getCharactersFreelanceJobsParticipation(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.freelanceJobs.withMetadata().getCharacterParticipation(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

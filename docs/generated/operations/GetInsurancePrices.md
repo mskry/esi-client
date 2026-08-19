@@ -11,21 +11,31 @@ List insurance levels
 
 - Stable ID: `GetInsurancePrices`
 - HTTP: `GET /insurance/prices`
-- Domain method: `client.insurance.getInsurancePrices(options?)`
+- Domain method: `client.insurance.listPrices(options?)`
 - Generic call: `client.callOperation("GetInsurancePrices", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/insurance`
 - Domain index: [insurance](../domains/insurance.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createInsuranceClient } from '@evespace/esi-client/domains/insurance';
+
+const client = createInsuranceClient();
+
+const data = await client.listPrices();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.insurance.getInsurancePrices();
+const data = await client.insurance.listPrices();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetInsurancePrices', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetInsurancePricesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.insurance.withMetadata().getInsurancePrices(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.insurance.withMetadata().listPrices(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

@@ -21,27 +21,7 @@ import {
   type GetCharactersCharacterIdCalendarOutput,
   type PutCharactersCharacterIdCalendarEventIdInput,
   type PutCharactersCharacterIdCalendarEventIdOutput,
-} from '../../schemas/operations.js';
-
-export const GetCharactersCharacterIdCalendarDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdCalendarInput, GetCharactersCharacterIdCalendarOutput> = {
-  operationId: "GetCharactersCharacterIdCalendar",
-  method: "GET",
-  path: "/characters/{character_id}/calendar",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "from_event", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdCalendarRequestSchema,
-  authentication: { scopes: ["esi-calendar.read_calendar_events.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdCalendarStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/calendar.js';
 
 export const GetCharactersCharacterIdCalendarEventIdDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdCalendarEventIdInput, GetCharactersCharacterIdCalendarEventIdOutput> = {
   operationId: "GetCharactersCharacterIdCalendarEventId",
@@ -79,6 +59,26 @@ export const GetCharactersCharacterIdCalendarEventIdAttendeesDescriptor: Operati
   authentication: { scopes: ["esi-calendar.read_calendar_events.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersCharacterIdCalendarEventIdAttendeesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdCalendarDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdCalendarInput, GetCharactersCharacterIdCalendarOutput> = {
+  operationId: "GetCharactersCharacterIdCalendar",
+  method: "GET",
+  path: "/characters/{character_id}/calendar",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "from_event", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdCalendarRequestSchema,
+  authentication: { scopes: ["esi-calendar.read_calendar_events.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdCalendarStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

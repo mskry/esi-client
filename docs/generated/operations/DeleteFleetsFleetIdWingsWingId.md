@@ -11,14 +11,31 @@ Delete fleet wing
 
 - Stable ID: `DeleteFleetsFleetIdWingsWingId`
 - HTTP: `DELETE /fleets/{fleet_id}/wings/{wing_id}`
-- Domain method: `client.fleets.deleteFleetsFleetIdWingsWingId(fleetId, wingId, options?)`
+- Domain method: `client.fleets.deleteWing(fleetId, wingId, options?)`
 - Generic call: `client.callOperation("DeleteFleetsFleetIdWingsWingId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/fleets`
 - Domain index: [fleets](../domains/fleets.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFleetsClient } from '@evespace/esi-client/domains/fleets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFleetsClient({ token: accessToken });
+
+const fleetId = 12345;
+const wingId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.deleteWing(fleetId, wingId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -32,7 +49,7 @@ const fleetId = 12345;
 const wingId = 12345;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.fleets.deleteFleetsFleetIdWingsWingId(fleetId, wingId);
+const data = await client.fleets.deleteWing(fleetId, wingId);
 ```
 
 ## Generic-execution snippet
@@ -71,7 +88,7 @@ const response = await client.callOperation('DeleteFleetsFleetIdWingsWingId', ar
 
 - Request schema: `@evespace/esi-client/schemas` export `DeleteFleetsFleetIdWingsWingIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.fleets.withMetadata().deleteFleetsFleetIdWingsWingId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.fleets.withMetadata().deleteWing(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

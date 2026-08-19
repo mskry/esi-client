@@ -11,14 +11,27 @@ Character affiliation
 
 - Stable ID: `PostCharactersAffiliation`
 - HTTP: `POST /characters/affiliation`
-- Domain method: `client.character.postCharactersAffiliation(options)`
+- Domain method: `client.character.lookupAffiliations(options)`
 - Generic call: `client.callOperation("PostCharactersAffiliation", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/character`
 - Domain index: [character](../domains/character.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCharacterClient } from '@evespace/esi-client/domains/character';
+import type { PostCharactersAffiliationOptions } from '@evespace/esi-client/domains/character';
+
+const client = createCharacterClient();
+
+declare const requestBody: NonNullable<PostCharactersAffiliationOptions['body']>;
+
+const data = await client.lookupAffiliations({ body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -28,7 +41,7 @@ const client = new EsiClient();
 
 declare const requestBody: NonNullable<PostCharactersAffiliationOptions['body']>;
 
-const data = await client.character.postCharactersAffiliation({ body: requestBody });
+const data = await client.character.lookupAffiliations({ body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -59,7 +72,7 @@ const response = await client.callOperation('PostCharactersAffiliation', argumen
 
 - Request schema: `@evespace/esi-client/schemas` export `PostCharactersAffiliationRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.character.withMetadata().postCharactersAffiliation(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.character.withMetadata().lookupAffiliations(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

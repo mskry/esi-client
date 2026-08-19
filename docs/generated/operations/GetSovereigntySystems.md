@@ -11,21 +11,31 @@ List sovereignty details for K-space systems
 
 - Stable ID: `GetSovereigntySystems`
 - HTTP: `GET /sovereignty/systems`
-- Domain method: `client.sovereignty.getSovereigntySystems(options?)`
+- Domain method: `client.sovereignty.listSystems(options?)`
 - Generic call: `client.callOperation("GetSovereigntySystems", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/sovereignty`
 - Domain index: [sovereignty](../domains/sovereignty.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createSovereigntyClient } from '@evespace/esi-client/domains/sovereignty';
+
+const client = createSovereigntyClient();
+
+const data = await client.listSystems();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.sovereignty.getSovereigntySystems();
+const data = await client.sovereignty.listSystems();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetSovereigntySystems', arguments_)
 
 - Request schema: `@evespace/esi-client/schemas` export `GetSovereigntySystemsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.sovereignty.withMetadata().getSovereigntySystems(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.sovereignty.withMetadata().listSystems(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

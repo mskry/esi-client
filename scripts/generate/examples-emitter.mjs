@@ -3,6 +3,8 @@ import { isAbsolute, join, normalize } from 'node:path';
 
 import { createProvenanceHeader } from './artifacts.mjs';
 import { domainFileName } from './domain-client.mjs';
+import { createSerializableOperationManifest } from './operation-registry.mjs';
+import { operationSchemaName } from './zod-schema.mjs';
 
 const examplesTarget = 'examples/generated';
 const identifierPattern = /^[A-Za-z_$][A-Za-z0-9_$]*$/u;
@@ -66,7 +68,7 @@ const standaloneExamples = Object.freeze([
 const client = new EsiClient();
 
 export async function getPublicStatus() {
-  return client.status.getStatus();
+  return client.status.get();
 }`,
   },
   {
@@ -80,7 +82,7 @@ const characterId = 90000001;
 
 export async function getAuthenticatedCharacterLocation() {
   const client = new EsiClient({ token: requiredAccessToken() });
-  return client.location.getCharactersCharacterIdLocation(characterId);
+  return client.location.get(characterId);
 }
 
 function requiredAccessToken(): string {
@@ -99,7 +101,7 @@ function requiredAccessToken(): string {
 const client = new EsiClient();
 
 export async function getUniverseGroupPage(page = 1) {
-  const response = await client.universe.withMetadata().getUniverseGroups({ page });
+  const response = await client.universe.withMetadata().listItemGroups({ page });
   return {
     groupIds: response.data,
     page,
@@ -117,7 +119,7 @@ export async function getUniverseGroupPage(page = 1) {
 const client = new EsiClient();
 
 export async function getMarketPricesWithMetadata() {
-  const response = await client.market.withMetadata().getMarketsPrices();
+  const response = await client.market.withMetadata().listPrices();
   return {
     prices: response.data,
     status: response.meta.status,
@@ -168,7 +170,7 @@ export async function deleteFittingWithTypedIntent(authorizationApproved: boolea
   const client = new EsiClient({ token: requiredAccessToken() });
 
   // Selecting this named typed mutation is explicit intent; generic gates do not apply.
-  return client.fittings.deleteCharactersCharacterIdFittingsFittingId(characterId, fittingId);
+  return client.fittings.deleteFitting(characterId, fittingId);
 }
 
 export async function deleteFittingGenerically(authorizationApproved: boolean) {
@@ -214,6 +216,7 @@ export function renderOperationSnippets(manifest) {
       operation.operationId,
       Object.freeze({
         domainMethod: renderDomainMethodSnippet(operation, shape),
+        standaloneDomainMethod: renderStandaloneDomainMethodSnippet(operation, shape),
         genericExecution: renderGenericExecutionSnippet(operation, shape),
         standaloneExamples: relatedStandaloneExamples(operation),
       }),
@@ -222,12 +225,31 @@ export function renderOperationSnippets(manifest) {
   return snippets;
 }
 
-export function renderStandaloneExamples(provenance) {
+export function renderStandaloneExamples(manifest, provenance) {
   const files = new Map();
   for (const example of standaloneExamples) {
     files.set(
       example.fileName,
       `${createProvenanceHeader(provenance, 'typescript')}\n${example.source.trim()}\n`,
+    );
+  }
+  const snippets = renderOperationSnippets(manifest);
+  const firstOperationByDomain = new Map();
+  for (const operation of manifest.operations) {
+    if (!firstOperationByDomain.has(operation.facade.domain)) {
+      firstOperationByDomain.set(operation.facade.domain, operation);
+    }
+  }
+  for (const [domain, operation] of [...firstOperationByDomain].toSorted(([left], [right]) =>
+    compareText(left, right),
+  )) {
+    const snippet = snippets.get(operation.operationId)?.standaloneDomainMethod;
+    if (snippet === undefined) {
+      throw new Error(`Missing standalone domain example snippet: ${operation.operationId}`);
+    }
+    files.set(
+      `domain-${domainFileName(domain)}.ts`,
+      `${createProvenanceHeader(provenance, 'typescript')}\n${snippet.trim()}\n`,
     );
   }
   return files;
@@ -326,7 +348,12 @@ export function createGeneratedExamplesEmitter(components) {
 }
 
 export async function emitStandaloneExamples(context, examplesDirectory) {
-  const files = renderStandaloneExamples(context.provenance);
+  const manifest = createSerializableOperationManifest(
+    context.normalizedModel,
+    context.operationMetadata,
+    context.provenance,
+  );
+  const files = renderStandaloneExamples(manifest, context.provenance);
   await Promise.all(
     [...files].map(([relativePath, content]) =>
       writeFile(join(examplesDirectory, relativePath), content),
@@ -349,7 +376,7 @@ function renderDomainMethodSnippet(operation, shape) {
   const declarations = renderPathDeclarations(shape.pathParameters);
   let bodyName;
   if (operation.requestBody?.required === true) {
-    const optionsName = `${capitalize(operation.facade.method)}Options`;
+    const optionsName = `${operationSchemaName(operation.operationId)}Options`;
     imports.push(
       `import type { ${optionsName} } from '@evespace/esi-client/domains/${domainFileName(operation.facade.domain)}';`,
     );
@@ -376,6 +403,39 @@ function renderDomainMethodSnippet(operation, shape) {
   lines.push(
     `const data = await client.${operation.facade.domain}.${operation.facade.method}(${callArguments.join(', ')});`,
   );
+  return `${lines.join('\n')}\n`;
+}
+
+function renderStandaloneDomainMethodSnippet(operation, shape) {
+  const factoryName = `create${capitalize(operation.facade.domain)}Client`;
+  const domainSubpath = `@evespace/esi-client/domains/${domainFileName(operation.facade.domain)}`;
+  const imports = [`import { ${factoryName} } from '${domainSubpath}';`];
+  const declarations = renderPathDeclarations(shape.pathParameters);
+  let bodyName;
+  if (operation.requestBody?.required === true) {
+    const optionsName = `${operationSchemaName(operation.operationId)}Options`;
+    imports.push(`import type { ${optionsName} } from '${domainSubpath}';`);
+    bodyName = 'requestBody';
+    declarations.push(`declare const requestBody: NonNullable<${optionsName}['body']>;`);
+  }
+  const options = renderDomainRequiredOptions(shape.requiredOptions, bodyName);
+  const callArguments = [
+    ...shape.pathParameters.map(({ identifier }) => identifier),
+    ...(options === null ? [] : [options]),
+  ];
+  const lines = [
+    ...imports,
+    '',
+    ...renderStandaloneClientSetup(operation, factoryName),
+    ...(declarations.length === 0 ? [] : ['', ...declarations]),
+    '',
+  ];
+  if (operation.classification === 'mutation') {
+    lines.push(
+      '// This named typed mutation expresses explicit intent. Verify authorization before calling it.',
+    );
+  }
+  lines.push(`const data = await client.${operation.facade.method}(${callArguments.join(', ')});`);
   return `${lines.join('\n')}\n`;
 }
 
@@ -431,6 +491,16 @@ function renderClientSetup(operation, allowGenericMutations = false) {
   if (allowGenericMutations) options.push('allowGenericMutations: true');
   lines.push(`const client = new EsiClient({ ${options.join(', ')} });`);
   return lines;
+}
+
+function renderStandaloneClientSetup(operation, factoryName) {
+  if (!operation.authentication.required) return [`const client = ${factoryName}();`];
+  return [
+    'const accessToken = process.env.ESI_ACCESS_TOKEN;',
+    "if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');",
+    '',
+    `const client = ${factoryName}({ token: accessToken });`,
+  ];
 }
 
 function createFacadeShape(operation) {

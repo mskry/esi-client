@@ -9,6 +9,7 @@ import {
   DEFAULT_ESI_BASE_URL,
   PINNED_ESI_COMPATIBILITY_DATE,
 } from '../src/client/configuration.js';
+import { domainFileName } from '../scripts/generate/domain-client.mjs';
 import { normalizeOpenApiDocument } from '../scripts/generate/normalize.mjs';
 import { resolveOperationMetadata } from '../scripts/generate/operation-metadata.mjs';
 import type { EmitterContext } from '../scripts/generate/orchestrate.mjs';
@@ -78,12 +79,15 @@ it(
       compatibilityDate: staged.compatibilityDate,
       correctedDocument: corrected.document,
       normalizedModel: model,
+      namingReviewReport: 'test naming review\n',
       operationMetadata,
       outputDirectory: directory,
       outputPath: (target) => join(directory, target),
       provenance: {
         ...provenance,
         appliedCorrections: corrected.appliedCorrections,
+        facadeCatalog: committedProvenance.facadeCatalog,
+        facadeReviewReport: committedProvenance.facadeReviewReport,
         sourceSha256: staged.sha256,
         specificationUrl: committedProvenance.specificationUrl,
       },
@@ -98,6 +102,9 @@ it(
     const domainNames = new Set(operationMetadata.map(({ domain }) => domain));
     const domainFiles = await readdir(join(sourceDirectory, 'domains'));
     const descriptorFiles = await readdir(join(sourceDirectory, 'internal/descriptors'));
+    const implementationFiles = await readdir(join(sourceDirectory, 'internal/domains'));
+    const modelFiles = await readdir(join(sourceDirectory, 'schemas/models'));
+    const operationSchemaFiles = await readdir(join(sourceDirectory, 'schemas/operations'));
     const clientSource = await readFile(join(sourceDirectory, 'esi-client.ts'), 'utf8');
     const rootIndexSource = await readFile(join(sourceDirectory, 'index.ts'), 'utf8');
     const contracts = await readFile(
@@ -106,16 +113,38 @@ it(
     );
     expect(domainFiles).toHaveLength(domainNames.size + 2);
     expect(descriptorFiles).toHaveLength(domainNames.size);
+    expect(implementationFiles).toHaveLength(domainNames.size * 2);
+    expect(modelFiles).toHaveLength(model.models.length);
+    expect(operationSchemaFiles).toHaveLength(domainNames.size);
     expect(rootIndexSource).toContain("export * from './esi-client.js';");
     expect(
       clientSource.match(/^  readonly [A-Za-z][A-Za-z0-9]*: \w+DomainClient;$/gmu),
     ).toHaveLength(domainNames.size);
     expect(contracts.match(/^  readonly "[^"]+": \{$/gmu)).toHaveLength(model.operations.length);
+    expect(contracts.match(/^type \w+DomainClientFactoryAssertion =/gmu)).toHaveLength(
+      domainNames.size,
+    );
     for (const domain of domainNames) {
-      const className = `${capitalize(domain)}DomainClient`;
+      const domainName = capitalize(domain);
+      const className = `${domainName}DomainClient`;
+      const factoryName = `create${domainName}Client`;
+      const fileName = domainFileName(domain);
+      const domainSource = await readFile(join(sourceDirectory, `domains/${fileName}.ts`), 'utf8');
+      const contractSource = await readFile(
+        join(sourceDirectory, `internal/domains/${fileName}-contract.ts`),
+        'utf8',
+      );
+      const descriptorSource = await readFile(
+        join(sourceDirectory, `internal/descriptors/${fileName}.ts`),
+        'utf8',
+      );
       expect(clientSource).toContain(`/** Operations for the ESI \`${domain}\` domain. */`);
       expect(clientSource).toContain(`readonly ${domain}: ${className};`);
-      expect(clientSource).toContain(`this.${domain} = new ${className}(this.configuration);`);
+      expect(clientSource).toContain(`this.${domain} = bind${className}(this.configuration);`);
+      expect(domainSource).toContain(`export function ${factoryName}(`);
+      expect(contractSource).toContain(`export abstract class ${className}`);
+      expect(contractSource).toContain('protected constructor() {}');
+      expect(descriptorSource).toContain(`from '../../schemas/operations/${fileName}.js';`);
     }
     for (const { domain, method, operationId } of operationMetadata) {
       expect(contracts).toContain(`readonly ${JSON.stringify(operationId)}: {`);
@@ -148,15 +177,30 @@ it(
       expect(domainClient).toEqual(expect.objectContaining({ withMetadata: expect.any(Function) }));
       expect(Object.isFrozen(domainClient)).toBe(true);
     }
+    const domainsBundlePath = join(directory, 'domains.mjs');
     await build({
       bundle: true,
       entryPoints: [join(sourceDirectory, 'domains/index.ts')],
       format: 'esm',
       nodePaths: [join(process.cwd(), 'node_modules')],
-      outfile: join(directory, 'domains.mjs'),
+      outfile: domainsBundlePath,
       platform: 'node',
       target: 'node22',
     });
+    const domainsModule: unknown = await import(pathToFileURL(domainsBundlePath).href);
+    if (!isRecord(domainsModule)) throw new TypeError('Generated domains module is invalid');
+    for (const domain of domainNames) {
+      const domainName = capitalize(domain);
+      const className = `${domainName}DomainClient`;
+      const factory = domainsModule[`create${domainName}Client`];
+      const contract = domainsModule[className];
+      if (typeof factory !== 'function' || typeof contract !== 'function') {
+        throw new TypeError(`Missing generated domain factory or contract: ${domain}`);
+      }
+      const standalone: unknown = factory();
+      expect(standalone).toBeInstanceOf(contract);
+      expect(Object.isFrozen(standalone)).toBe(true);
+    }
   },
 );
 
@@ -186,6 +230,8 @@ function parseCommittedProvenance(source: string): EmitterContext['provenance'] 
   if (
     !isStringArray(value.appliedCorrections) ||
     typeof value.compatibilityDate !== 'string' ||
+    !isProvenanceArtifact(value.facadeCatalog) ||
+    !isProvenanceArtifact(value.facadeReviewReport) ||
     typeof value.sha256 !== 'string' ||
     typeof value.sourceSha256 !== 'string' ||
     typeof value.specificationUrl !== 'string'
@@ -195,10 +241,18 @@ function parseCommittedProvenance(source: string): EmitterContext['provenance'] 
   return Object.freeze({
     appliedCorrections: Object.freeze([...value.appliedCorrections]),
     compatibilityDate: value.compatibilityDate,
+    facadeCatalog: value.facadeCatalog,
+    facadeReviewReport: value.facadeReviewReport,
     sha256: value.sha256,
     sourceSha256: value.sourceSha256,
     specificationUrl: value.specificationUrl,
   });
+}
+
+function isProvenanceArtifact(
+  value: unknown,
+): value is EmitterContext['provenance']['facadeCatalog'] {
+  return isRecord(value) && typeof value.path === 'string' && typeof value.sha256 === 'string';
 }
 
 function isStringArray(value: unknown): value is string[] {

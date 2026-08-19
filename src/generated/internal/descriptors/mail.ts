@@ -41,7 +41,26 @@ import {
   type PostCharactersCharacterIdMailOutput,
   type PutCharactersCharacterIdMailMailIdInput,
   type PutCharactersCharacterIdMailMailIdOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/mail.js';
+
+export const PostCharactersCharacterIdMailLabelsDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdMailLabelsInput, PostCharactersCharacterIdMailLabelsOutput> = {
+  operationId: "PostCharactersCharacterIdMailLabels",
+  method: "POST",
+  path: "/characters/{character_id}/mail/labels",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: { required: true, mediaType: 'application/json' },
+  requestSchema: PostCharactersCharacterIdMailLabelsRequestSchema,
+  authentication: { scopes: ["esi-mail.organize_mail.v1"] },
+  successResponses: [
+    { status: 201, body: 'json', schema: PostCharactersCharacterIdMailLabelsStatus201SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
 
 export const DeleteCharactersCharacterIdMailLabelsLabelIdDescriptor: OperationExecutionDescriptor<DeleteCharactersCharacterIdMailLabelsLabelIdInput, DeleteCharactersCharacterIdMailLabelsLabelIdOutput> = {
   operationId: "DeleteCharactersCharacterIdMailLabelsLabelId",
@@ -79,6 +98,26 @@ export const DeleteCharactersCharacterIdMailMailIdDescriptor: OperationExecution
   authentication: { scopes: ["esi-mail.organize_mail.v1"] },
   successResponses: [
     { status: 204, body: 'none' },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdMailMailIdDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdMailMailIdInput, GetCharactersCharacterIdMailMailIdOutput> = {
+  operationId: "GetCharactersCharacterIdMailMailId",
+  method: "GET",
+  path: "/characters/{character_id}/mail/{mail_id}",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "mail_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdMailMailIdRequestSchema,
+  authentication: { scopes: ["esi-mail.read_mail.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdMailMailIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -142,26 +181,6 @@ export const GetCharactersCharacterIdMailListsDescriptor: OperationExecutionDesc
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCharactersCharacterIdMailMailIdDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdMailMailIdInput, GetCharactersCharacterIdMailMailIdOutput> = {
-  operationId: "GetCharactersCharacterIdMailMailId",
-  method: "GET",
-  path: "/characters/{character_id}/mail/{mail_id}",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "mail_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdMailMailIdRequestSchema,
-  authentication: { scopes: ["esi-mail.read_mail.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdMailMailIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const PostCharactersCharacterIdMailDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdMailInput, PostCharactersCharacterIdMailOutput> = {
   operationId: "PostCharactersCharacterIdMail",
   method: "POST",
@@ -177,25 +196,6 @@ export const PostCharactersCharacterIdMailDescriptor: OperationExecutionDescript
   authentication: { scopes: ["esi-mail.send_mail.v1"] },
   successResponses: [
     { status: 201, body: 'json', schema: PostCharactersCharacterIdMailStatus201SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const PostCharactersCharacterIdMailLabelsDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdMailLabelsInput, PostCharactersCharacterIdMailLabelsOutput> = {
-  operationId: "PostCharactersCharacterIdMailLabels",
-  method: "POST",
-  path: "/characters/{character_id}/mail/labels",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: { required: true, mediaType: 'application/json' },
-  requestSchema: PostCharactersCharacterIdMailLabelsRequestSchema,
-  authentication: { scopes: ["esi-mail.organize_mail.v1"] },
-  successResponses: [
-    { status: 201, body: 'json', schema: PostCharactersCharacterIdMailLabelsStatus201SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

@@ -25,28 +25,7 @@ import {
   type PostUiOpenwindowMarketdetailsOutput,
   type PostUiOpenwindowNewmailInput,
   type PostUiOpenwindowNewmailOutput,
-} from '../../schemas/operations.js';
-
-export const PostUiAutopilotWaypointDescriptor: OperationExecutionDescriptor<PostUiAutopilotWaypointInput, PostUiAutopilotWaypointOutput> = {
-  operationId: "PostUiAutopilotWaypoint",
-  method: "POST",
-  path: "/ui/autopilot/waypoint",
-  parameters: [
-    { name: "add_to_beginning", placement: "query", required: true, schema: { type: "boolean" } },
-    { name: "clear_other_waypoints", placement: "query", required: true, schema: { type: "boolean" } },
-    { name: "destination_id", placement: "query", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: PostUiAutopilotWaypointRequestSchema,
-  authentication: { scopes: ["esi-ui.write_waypoint.v1"] },
-  successResponses: [
-    { status: 204, body: 'none' },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/user-interface.js';
 
 export const PostUiOpenwindowContractDescriptor: OperationExecutionDescriptor<PostUiOpenwindowContractInput, PostUiOpenwindowContractOutput> = {
   operationId: "PostUiOpenwindowContract",
@@ -117,6 +96,27 @@ export const PostUiOpenwindowNewmailDescriptor: OperationExecutionDescriptor<Pos
   requestBody: { required: true, mediaType: 'application/json' },
   requestSchema: PostUiOpenwindowNewmailRequestSchema,
   authentication: { scopes: ["esi-ui.open_window.v1"] },
+  successResponses: [
+    { status: 204, body: 'none' },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const PostUiAutopilotWaypointDescriptor: OperationExecutionDescriptor<PostUiAutopilotWaypointInput, PostUiAutopilotWaypointOutput> = {
+  operationId: "PostUiAutopilotWaypoint",
+  method: "POST",
+  path: "/ui/autopilot/waypoint",
+  parameters: [
+    { name: "add_to_beginning", placement: "query", required: true, schema: { type: "boolean" } },
+    { name: "clear_other_waypoints", placement: "query", required: true, schema: { type: "boolean" } },
+    { name: "destination_id", placement: "query", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: PostUiAutopilotWaypointRequestSchema,
+  authentication: { scopes: ["esi-ui.write_waypoint.v1"] },
   successResponses: [
     { status: 204, body: 'none' },
   ],

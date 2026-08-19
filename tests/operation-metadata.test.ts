@@ -11,7 +11,7 @@ import type {
 import {
   defaultDomainName,
   defaultMethodName,
-  loadNamingOverrides,
+  loadFacadeCatalog,
   loadSafetyOverrides,
   resolveOperationMetadata,
 } from '../scripts/generate/operation-metadata.mjs';
@@ -57,12 +57,19 @@ describe('operation facade naming and safety metadata', () => {
       makeOperation('get_item', 'GET', 'Items'),
       makeOperation('post_search', 'POST', 'Search'),
     ]);
-    const namingOverridesPath = await writeConfig('naming', [
+    const facadeCatalogPath = await writeFacadeCatalog('naming', [
       {
         operationId: 'get_item',
         domain: 'inventory',
         method: 'findItem',
         reviewed: true,
+      },
+      {
+        operationId: 'post_search',
+        domain: 'search',
+        method: 'search',
+        reviewed: true,
+        note: 'POST is used for this read-like search.',
       },
     ]);
     const safetyOverridesPath = await writeConfig('safety', [
@@ -75,7 +82,7 @@ describe('operation facade naming and safety metadata', () => {
     ]);
 
     const metadata = await resolveOperationMetadata(model, {
-      namingOverridesPath,
+      facadeCatalogPath,
       safetyOverridesPath,
     });
 
@@ -90,7 +97,7 @@ describe('operation facade naming and safety metadata', () => {
       {
         classification: 'read',
         domain: 'search',
-        method: 'postSearch',
+        method: 'search',
         operationId: 'post_search',
         safetyOverrideReason: 'Searches without changing server state.',
       },
@@ -124,18 +131,18 @@ describe('operation facade naming and safety metadata', () => {
     [
       'duplicate entries',
       [reviewedNaming('get_item'), reviewedNaming('get_item')],
-      'Duplicate facade naming override: get_item',
+      'Duplicate facade catalog entry: get_item',
     ],
-    ['stale entries', [reviewedNaming('removed')], 'Stale or unknown facade naming override'],
+    ['stale entries', [reviewedNaming('removed')], 'Stale facade catalog entry: removed'],
     [
       'unreviewed entries',
       [{ ...reviewedNaming('get_item'), reviewed: false }],
-      'Facade naming override is not reviewed',
+      'Facade catalog entry is not reviewed',
     ],
     [
       'unknown fields',
       [{ ...reviewedNaming('get_item'), source: 'manual' }],
-      'Unknown facade naming override 0 field',
+      'Unknown facade catalog entry 0 field',
     ],
     [
       'invalid domain identifiers',
@@ -143,14 +150,69 @@ describe('operation facade naming and safety metadata', () => {
       'Invalid TypeScript identifier for Facade domain',
     ],
     [
+      'uppercase domains',
+      [{ ...reviewedNaming('get_item'), domain: 'Items' }],
+      'Facade domain must begin with a lowercase letter',
+    ],
+    [
+      'uppercase methods',
+      [{ ...reviewedNaming('get_item'), method: 'GetItem' }],
+      'Facade method must begin with a lowercase letter',
+    ],
+    [
       'reserved method identifiers',
       [{ ...reviewedNaming('get_item'), method: 'class' }],
-      'Invalid TypeScript identifier for Facade method',
+      'Reserved facade method for get_item: class',
     ],
-  ])('rejects naming overrides with %s', async (_case, overrides, message) => {
-    const path = await writeConfig('invalid-naming', overrides);
-    await expect(loadNamingOverrides(makeModel([makeOperation('get_item')]), path)).rejects.toThrow(
+    [
+      'empty notes',
+      [{ ...reviewedNaming('get_item'), note: '' }],
+      'Facade catalog note for get_item must be a non-empty trimmed string',
+    ],
+  ])('rejects facade catalogs with %s', async (_case, operations, message) => {
+    const path = await writeFacadeCatalog('invalid-naming', operations);
+    await expect(loadFacadeCatalog(makeModel([makeOperation('get_item')]), path)).rejects.toThrow(
       message,
+    );
+  });
+
+  it('requires exact normalized-model coverage', async () => {
+    const path = await writeFacadeCatalog('missing-naming', [reviewedNaming('get_item')]);
+    await expect(
+      loadFacadeCatalog(
+        makeModel([makeOperation('get_item'), makeOperation('post_item', 'POST')]),
+        path,
+      ),
+    ).rejects.toThrow('Missing facade catalog entries: post_item');
+  });
+
+  it('requires catalog entries to be deterministically sorted by operation ID', async () => {
+    const path = await writeFacadeCatalog('unordered-naming', [
+      reviewedNaming('post_item'),
+      reviewedNaming('get_item'),
+    ]);
+    await expect(
+      loadFacadeCatalog(
+        makeModel([makeOperation('get_item'), makeOperation('post_item', 'POST')]),
+        path,
+      ),
+    ).rejects.toThrow(
+      'Facade catalog entries must be sorted by operationId: post_item before get_item',
+    );
+  });
+
+  it.each([
+    ['constructor', 'method'],
+    ['withMetadata', 'method'],
+    ['toString', 'method'],
+    ['callOperation', 'domain'],
+    ['configuration', 'domain'],
+  ] as const)('rejects reserved generated or inherited %s members', async (member, kind) => {
+    const path = await writeFacadeCatalog('reserved-naming', [
+      { ...reviewedNaming('get_item'), [kind]: member },
+    ]);
+    await expect(loadFacadeCatalog(makeModel([makeOperation('get_item')]), path)).rejects.toThrow(
+      `Reserved facade ${kind} for get_item: ${member}`,
     );
   });
 
@@ -193,22 +255,49 @@ describe('operation facade naming and safety metadata', () => {
     },
   );
 
-  it('rejects facade domain/method collisions after applying defaults and overrides', async () => {
+  it('rejects exact facade domain/method collisions', async () => {
     const model = makeModel([
       makeOperation('get_item', 'GET', 'Items'),
-      makeOperation('getItem', 'GET', 'Items'),
+      makeOperation('get_other', 'GET', 'Items'),
+    ]);
+    const path = await writeFacadeCatalog('colliding-naming', [
+      reviewedNaming('get_item'),
+      reviewedNaming('get_other'),
     ]);
 
-    await expect(resolveSyntheticOperationMetadata(model)).rejects.toThrow(
-      'Facade domain/method collision items.getItem: get_item and getItem',
+    await expect(loadFacadeCatalog(model, path)).rejects.toThrow(
+      'Facade domain/method collision items.getItem: get_item and get_other',
+    );
+  });
+
+  it('rejects case-insensitive derived domain path collisions', async () => {
+    const model = makeModel([makeOperation('get_first'), makeOperation('get_second')]);
+    const path = await writeFacadeCatalog('domain-path-collision', [
+      { ...reviewedNaming('get_first'), domain: 'fooBAR', method: 'first' },
+      { ...reviewedNaming('get_second'), domain: 'fooBar', method: 'second' },
+    ]);
+
+    await expect(loadFacadeCatalog(model, path)).rejects.toThrow(
+      'Case-insensitive domain path collision foo-bar: get_first and get_second',
     );
   });
 
   it('rejects inexact config roots', async () => {
-    const path = await writeConfig('unknown-root', [], { owner: 'generator' });
-    await expect(loadNamingOverrides(makeModel([]), path)).rejects.toThrow(
-      'Unknown facade naming overrides config field: owner',
+    const path = await writeFacadeCatalog('unknown-root', [], { owner: 'generator' });
+    await expect(loadFacadeCatalog(makeModel([]), path)).rejects.toThrow(
+      'Unknown facade catalog config field: owner',
     );
+  });
+
+  it('loads optional notes and freezes the exhaustive catalog without reordering it', async () => {
+    const entry = { ...reviewedNaming('get_item'), note: 'Explains a non-obvious name.' };
+    const path = await writeFacadeCatalog('valid-note', [entry]);
+
+    const catalog = await loadFacadeCatalog(makeModel([makeOperation('get_item')]), path);
+
+    expect(catalog).toEqual([entry]);
+    expect(Object.isFrozen(catalog)).toBe(true);
+    expect(Object.isFrozen(catalog[0])).toBe(true);
   });
 });
 
@@ -283,7 +372,32 @@ async function writeConfig(
   return path;
 }
 
+async function writeFacadeCatalog(
+  name: string,
+  operations: readonly object[],
+  extra: Readonly<Record<string, unknown>> = {},
+): Promise<string> {
+  const directory = await makeTemporaryDirectory(`esi-client-${name}-catalog-`);
+  const path = join(directory, 'config.json');
+  await writeFile(path, `${JSON.stringify({ schemaVersion: 2, operations, ...extra })}\n`);
+  return path;
+}
+
 async function resolveSyntheticOperationMetadata(model: NormalizedOpenApiModel) {
+  const facadeCatalogPath = await writeFacadeCatalog(
+    'synthetic-naming',
+    model.operations.reduce<ReturnType<typeof reviewedNaming>[]>((catalog, operation) => {
+      const entry = {
+        operationId: operation.operationId,
+        domain: defaultDomainName(operation),
+        method: defaultMethodName(operation.operationId),
+        reviewed: true as const,
+      };
+      const index = catalog.findIndex(({ operationId }) => entry.operationId < operationId);
+      if (index === -1) return [...catalog, entry];
+      return [...catalog.slice(0, index), entry, ...catalog.slice(index)];
+    }, []),
+  );
   const safetyOverridesPath = await writeConfig('empty-safety', []);
-  return resolveOperationMetadata(model, { safetyOverridesPath });
+  return resolveOperationMetadata(model, { facadeCatalogPath, safetyOverridesPath });
 }

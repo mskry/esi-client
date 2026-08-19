@@ -13,6 +13,7 @@ import {
 import {
   domainClientSourceComponent,
   renderDomainClientArtifacts,
+  validateDomainClientArtifacts,
 } from '../scripts/generate/domain-client.mjs';
 import type {
   NormalizedOpenApiModel,
@@ -51,21 +52,33 @@ describe('generated domain clients', () => {
     expect(first.clientSource).toContain('export class EsiClient extends EsiClientBase');
     expect(first.clientSource).toContain('/** Operations for the ESI `items` domain. */');
     expect(first.clientSource).toContain('readonly items: ItemsDomainClient;');
-    expect(first.clientSource).toContain('this.items = new ItemsDomainClient(this.configuration);');
+    expect(first.clientSource).toContain('this.items = bindItemsDomainClient(this.configuration);');
     expect(first.indexSource).toContain("export * from './items.js';");
     expect(first.indexSource).toContain("export * from './operation-coverage.js';");
-    expect(first.domains[0]?.domainSource).toContain(
+    expect(first.domains[0]?.contractSource).toContain('export abstract class ItemsDomainClient');
+    expect(first.domains[0]?.contractSource).toContain('protected constructor() {}');
+    expect(first.domains[0]?.contractSource).toContain(
       'getItem(itemId: NonNullable<GetItemInput[\'path\']>["item_id"], options?: GetItemOptions)',
     );
-    expect(first.domains[0]?.domainSource).toContain('readonly "page"?:');
-    expect(first.domains[0]?.domainSource).toContain('readonly "ifNoneMatch"?:');
-    expect(first.domains[0]?.domainSource).toContain('readonly "compatibilityDate"?: string;');
-    expect(first.domains[0]?.domainSource).not.toContain('acceptLanguage');
-    expect(first.domains[0]?.domainSource).toContain(
+    expect(first.domains[0]?.contractSource).toContain('readonly "page"?:');
+    expect(first.domains[0]?.contractSource).toContain('readonly "ifNoneMatch"?:');
+    expect(first.domains[0]?.contractSource).toContain('readonly "compatibilityDate"?: string;');
+    expect(first.domains[0]?.contractSource).not.toContain('acceptLanguage');
+    expect(first.domains[0]?.contractSource).toContain(
       'createItem(options: CreateItemOptions): Promise<CreateItemOutput>',
     );
-    expect(first.domains[0]?.domainSource).toContain(
+    expect(first.domains[0]?.contractSource).toContain(
       'withMetadata(): ItemsDomainClientWithMetadata',
+    );
+    expect(first.domains[0]?.domainSource).toContain(
+      'export function createItemsClient(options: EsiClientOptions = {})',
+    );
+    expect(first.domains[0]?.domainSource).not.toContain('bindItemsDomainClient(configuration');
+    expect(first.domains[0]?.implementationSource).toContain(
+      'export function bindItemsDomainClient(configuration: EsiClientConfiguration)',
+    );
+    expect(first.domains[0]?.implementationSource).toContain(
+      'class ItemsDomainClientImplementation extends ItemsDomainClient',
     );
     expect(first.domains[0]?.descriptorSource).toContain(
       'transport: { compatibilityDateOverride: true }',
@@ -80,10 +93,14 @@ describe('generated domain clients', () => {
       first.contractsSource,
       first.indexSource,
       first.rootIndexSource,
-      ...first.domains.flatMap(({ descriptorSource, domainSource }) => [
-        descriptorSource,
-        domainSource,
-      ]),
+      ...first.domains.flatMap(
+        ({ contractSource, descriptorSource, domainSource, implementationSource }) => [
+          contractSource,
+          descriptorSource,
+          domainSource,
+          implementationSource,
+        ],
+      ),
     ];
     for (const source of sources) expect(source).not.toMatch(/[ \t]+$/mu);
   });
@@ -134,7 +151,7 @@ describe('generated domain clients', () => {
         });
       },
     });
-    const domainClient = new module.ItemsDomainClient(configuration);
+    const domainClient = module.createItemsClient({ fetch: configuration.fetch });
     const minimalClient = new module.EsiClient();
     const client = new module.EsiClient({
       baseUrl: 'https://esi.example.test',
@@ -224,6 +241,36 @@ describe('generated domain clients', () => {
       ),
     ).toThrow('EsiClient domain property collision: configuration');
   });
+
+  it('rejects missing factories and cross-domain descriptor schema imports', () => {
+    const artifacts = renderDomainClientArtifacts(
+      representativeModel(),
+      representativeMetadata(),
+      provenance,
+    );
+    const domain = artifacts.domains[0];
+    if (domain === undefined) throw new Error('Missing domain fixture');
+    expect(() =>
+      validateDomainClientArtifacts({
+        ...artifacts,
+        domains: [{ ...domain, domainSource: 'export {};' }],
+      }),
+    ).toThrow('Missing domain factory');
+    expect(() =>
+      validateDomainClientArtifacts({
+        ...artifacts,
+        domains: [
+          {
+            ...domain,
+            descriptorSource: domain.descriptorSource.replace(
+              '../../schemas/operations/items.js',
+              '../../schemas/operations/other.js',
+            ),
+          },
+        ],
+      }),
+    ).toThrow('outside its domain');
+  });
 });
 
 interface RuntimeItemsDomainClient {
@@ -253,6 +300,9 @@ interface RuntimeDomainModule {
   readonly ItemsDomainClient: new (
     configuration: EsiClientConfiguration,
   ) => RuntimeItemsDomainClient;
+  readonly createItemsClient: (options?: {
+    readonly fetch?: typeof fetch;
+  }) => RuntimeItemsDomainClient;
 }
 
 function assertDomainModule(value: unknown): RuntimeDomainModule {
@@ -262,7 +312,9 @@ function assertDomainModule(value: unknown): RuntimeDomainModule {
     !('EsiClient' in value) ||
     typeof value.EsiClient !== 'function' ||
     !('ItemsDomainClient' in value) ||
-    typeof value.ItemsDomainClient !== 'function'
+    typeof value.ItemsDomainClient !== 'function' ||
+    !('createItemsClient' in value) ||
+    typeof value.createItemsClient !== 'function'
   ) {
     throw new TypeError('Generated items domain module is invalid');
   }
@@ -427,12 +479,18 @@ function emitterContext(
     compatibilityDate: provenance.compatibilityDate,
     correctedDocument: {},
     normalizedModel,
+    namingReviewReport: 'test naming review\n',
     operationMetadata: representativeMetadata(),
     outputDirectory,
     outputPath: (target) => join(outputDirectory, target),
     provenance: {
       ...provenance,
       appliedCorrections: [],
+      facadeCatalog: { path: 'openapi/config/naming-overrides.json', sha256: 'd'.repeat(64) },
+      facadeReviewReport: {
+        path: 'docs/generated/facade-naming-review.md',
+        sha256: 'e'.repeat(64),
+      },
       sourceSha256: 'e'.repeat(64),
       specificationUrl: 'https://example.test/openapi.json',
     },

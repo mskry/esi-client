@@ -9,7 +9,7 @@ import {
   GetCharactersCharacterIdSearchStatus200SuccessResponseSchema,
   type GetCharactersCharacterIdSearchInput,
   type GetCharactersCharacterIdSearchOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/search.js';
 
 export const GetCharactersCharacterIdSearchDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdSearchInput, GetCharactersCharacterIdSearchOutput> = {
   operationId: "GetCharactersCharacterIdSearch",

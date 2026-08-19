@@ -17,7 +17,7 @@ import {
   type GetCharactersCharacterIdSkillqueueOutput,
   type GetCharactersCharacterIdSkillsInput,
   type GetCharactersCharacterIdSkillsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/skills.js';
 
 export const GetCharactersCharacterIdAttributesDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdAttributesInput, GetCharactersCharacterIdAttributesOutput> = {
   operationId: "GetCharactersCharacterIdAttributes",

@@ -11,14 +11,30 @@ Get colony layout
 
 - Stable ID: `GetCharactersCharacterIdPlanetsPlanetId`
 - HTTP: `GET /characters/{character_id}/planets/{planet_id}`
-- Domain method: `client.planetaryInteraction.getCharactersCharacterIdPlanetsPlanetId(characterId, planetId, options?)`
+- Domain method: `client.planetaryInteraction.getColonyLayout(characterId, planetId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdPlanetsPlanetId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/planetary-interaction`
 - Domain index: [planetaryInteraction](../domains/planetary-interaction.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createPlanetaryInteractionClient } from '@evespace/esi-client/domains/planetary-interaction';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createPlanetaryInteractionClient({ token: accessToken });
+
+const characterId = 90000001;
+const planetId = 12345;
+
+const data = await client.getColonyLayout(characterId, planetId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -31,7 +47,7 @@ const client = new EsiClient({ token: accessToken });
 const characterId = 90000001;
 const planetId = 12345;
 
-const data = await client.planetaryInteraction.getCharactersCharacterIdPlanetsPlanetId(characterId, planetId);
+const data = await client.planetaryInteraction.getColonyLayout(characterId, planetId);
 ```
 
 ## Generic-execution snippet
@@ -67,7 +83,7 @@ const response = await client.callOperation('GetCharactersCharacterIdPlanetsPlan
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdPlanetsPlanetIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.planetaryInteraction.withMetadata().getCharactersCharacterIdPlanetsPlanetId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.planetaryInteraction.withMetadata().getColonyLayout(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

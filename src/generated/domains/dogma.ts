@@ -3,132 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetDogmaAttributesDescriptor,
-  GetDogmaAttributesAttributeIdDescriptor,
-  GetDogmaDynamicItemsTypeIdItemIdDescriptor,
-  GetDogmaEffectsDescriptor,
-  GetDogmaEffectsEffectIdDescriptor,
-} from '../internal/descriptors/dogma.js';
-import type {
-  GetDogmaAttributesAttributeIdInput,
-  GetDogmaAttributesAttributeIdOutput,
-  GetDogmaAttributesInput,
-  GetDogmaAttributesOutput,
-  GetDogmaDynamicItemsTypeIdItemIdInput,
-  GetDogmaDynamicItemsTypeIdItemIdOutput,
-  GetDogmaEffectsEffectIdInput,
-  GetDogmaEffectsEffectIdOutput,
-  GetDogmaEffectsInput,
-  GetDogmaEffectsOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindDogmaDomainClient } from '../internal/domains/dogma.js';
+import type { DogmaDomainClient } from '../internal/domains/dogma-contract.js';
 
-export interface GetDogmaAttributesOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetDogmaAttributesInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetDogmaAttributesInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetDogmaAttributesInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/dogma-contract.js';
 
-export interface GetDogmaAttributesAttributeIdOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetDogmaAttributesAttributeIdInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetDogmaAttributesAttributeIdInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetDogmaAttributesAttributeIdInput["header"]>["X-Tenant"];
-}
-
-export interface GetDogmaDynamicItemsTypeIdItemIdOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput["header"]>["X-Tenant"];
-}
-
-export interface GetDogmaEffectsOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetDogmaEffectsInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetDogmaEffectsInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetDogmaEffectsInput["header"]>["X-Tenant"];
-}
-
-export interface GetDogmaEffectsEffectIdOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetDogmaEffectsEffectIdInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetDogmaEffectsEffectIdInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetDogmaEffectsEffectIdInput["header"]>["X-Tenant"];
-}
-
-export class DogmaDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getDogmaAttributes(options?: GetDogmaAttributesOptions): Promise<GetDogmaAttributesOutput> {
-    const arguments_: GetDogmaAttributesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaAttributesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getDogmaAttributesAttributeId(attributeId: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions): Promise<GetDogmaAttributesAttributeIdOutput> {
-    const arguments_: GetDogmaAttributesAttributeIdInput = { path: { "attribute_id": attributeId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaAttributesAttributeIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getDogmaDynamicItemsTypeIdItemId(typeId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], itemId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions): Promise<GetDogmaDynamicItemsTypeIdItemIdOutput> {
-    const arguments_: GetDogmaDynamicItemsTypeIdItemIdInput = { path: { "type_id": typeId, "item_id": itemId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaDynamicItemsTypeIdItemIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getDogmaEffects(options?: GetDogmaEffectsOptions): Promise<GetDogmaEffectsOutput> {
-    const arguments_: GetDogmaEffectsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaEffectsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getDogmaEffectsEffectId(effectId: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions): Promise<GetDogmaEffectsEffectIdOutput> {
-    const arguments_: GetDogmaEffectsEffectIdInput = { path: { "effect_id": effectId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaEffectsEffectIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): DogmaDomainClientWithMetadata {
-    return new DogmaDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class DogmaDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getDogmaAttributes(options?: GetDogmaAttributesOptions): Promise<EsiResponse<GetDogmaAttributesOutput>> {
-    const arguments_: GetDogmaAttributesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaAttributesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getDogmaAttributesAttributeId(attributeId: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions): Promise<EsiResponse<GetDogmaAttributesAttributeIdOutput>> {
-    const arguments_: GetDogmaAttributesAttributeIdInput = { path: { "attribute_id": attributeId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaAttributesAttributeIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getDogmaDynamicItemsTypeIdItemId(typeId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], itemId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions): Promise<EsiResponse<GetDogmaDynamicItemsTypeIdItemIdOutput>> {
-    const arguments_: GetDogmaDynamicItemsTypeIdItemIdInput = { path: { "type_id": typeId, "item_id": itemId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaDynamicItemsTypeIdItemIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getDogmaEffects(options?: GetDogmaEffectsOptions): Promise<EsiResponse<GetDogmaEffectsOutput>> {
-    const arguments_: GetDogmaEffectsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaEffectsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getDogmaEffectsEffectId(effectId: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions): Promise<EsiResponse<GetDogmaEffectsEffectIdOutput>> {
-    const arguments_: GetDogmaEffectsEffectIdInput = { path: { "effect_id": effectId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetDogmaEffectsEffectIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createDogmaClient(options: EsiClientOptions = {}): DogmaDomainClient {
+  return bindDogmaDomainClient(new EsiClientConfiguration(options));
 }

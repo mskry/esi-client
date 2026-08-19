@@ -11,14 +11,26 @@ Get freelance job details
 
 - Stable ID: `GetFreelanceJobsDetail`
 - HTTP: `GET /freelance-jobs/{job_id}`
-- Domain method: `client.freelanceJobs.getFreelanceJobsDetail(jobId, options?)`
+- Domain method: `client.freelanceJobs.get(jobId, options?)`
 - Generic call: `client.callOperation("GetFreelanceJobsDetail", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/freelance-jobs`
 - Domain index: [freelanceJobs](../domains/freelance-jobs.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFreelanceJobsClient } from '@evespace/esi-client/domains/freelance-jobs';
+
+const client = createFreelanceJobsClient();
+
+const jobId = "00000000-0000-4000-8000-000000000000";
+
+const data = await client.get(jobId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const jobId = "00000000-0000-4000-8000-000000000000";
 
-const data = await client.freelanceJobs.getFreelanceJobsDetail(jobId);
+const data = await client.freelanceJobs.get(jobId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetFreelanceJobsDetail', arguments_
 
 - Request schema: `@evespace/esi-client/schemas` export `GetFreelanceJobsDetailRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.freelanceJobs.withMetadata().getFreelanceJobsDetail(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.freelanceJobs.withMetadata().get(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

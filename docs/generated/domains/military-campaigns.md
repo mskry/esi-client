@@ -13,12 +13,46 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersMilitaryCampaignsObjectivesListing`](../operations/GetCharactersMilitaryCampaignsObjectivesListing.md) | `GET` | `getCharactersMilitaryCampaignsObjectivesListing` | required | none | read | List character participation in military campaigns |
-| [`GetCharactersMilitaryCampaignsObjectivesParticipation`](../operations/GetCharactersMilitaryCampaignsObjectivesParticipation.md) | `GET` | `getCharactersMilitaryCampaignsObjectivesParticipation` | required | none | read | Get character military campaign objective participation |
-| [`GetMilitaryCampaignsDetail`](../operations/GetMilitaryCampaignsDetail.md) | `GET` | `getMilitaryCampaignsDetail` | public | none | read | Get military campaign details |
-| [`GetMilitaryCampaignsListing`](../operations/GetMilitaryCampaignsListing.md) | `GET` | `getMilitaryCampaignsListing` | public | none | read | List military campaigns |
-| [`GetMilitaryCampaignsObjectivesDetail`](../operations/GetMilitaryCampaignsObjectivesDetail.md) | `GET` | `getMilitaryCampaignsObjectivesDetail` | public | none | read | Get military campaign objective details |
-| [`GetMilitaryCampaignsObjectivesListing`](../operations/GetMilitaryCampaignsObjectivesListing.md) | `GET` | `getMilitaryCampaignsObjectivesListing` | public | none | read | List military campaign objectives |
+| [`GetCharactersMilitaryCampaignsObjectivesListing`](../operations/GetCharactersMilitaryCampaignsObjectivesListing.md) | `GET` | `listCharacterObjectiveParticipations` | required | none | read | List character participation in military campaigns |
+| [`GetCharactersMilitaryCampaignsObjectivesParticipation`](../operations/GetCharactersMilitaryCampaignsObjectivesParticipation.md) | `GET` | `getCharacterObjectiveParticipation` | required | none | read | Get character military campaign objective participation |
+| [`GetMilitaryCampaignsDetail`](../operations/GetMilitaryCampaignsDetail.md) | `GET` | `getCampaign` | public | none | read | Get military campaign details |
+| [`GetMilitaryCampaignsListing`](../operations/GetMilitaryCampaignsListing.md) | `GET` | `listCampaigns` | public | none | read | List military campaigns |
+| [`GetMilitaryCampaignsObjectivesDetail`](../operations/GetMilitaryCampaignsObjectivesDetail.md) | `GET` | `getObjective` | public | none | read | Get military campaign objective details |
+| [`GetMilitaryCampaignsObjectivesListing`](../operations/GetMilitaryCampaignsObjectivesListing.md) | `GET` | `listObjectives` | public | none | read | List military campaign objectives |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createMilitaryCampaignsClient } from '@evespace/esi-client/domains/military-campaigns';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMilitaryCampaignsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listCharacterObjectiveParticipations(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.militaryCampaigns.listCharacterObjectiveParticipations(characterId);
+```
 
 ## Shared concepts
 

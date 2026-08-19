@@ -21,22 +21,23 @@ import {
   type GetAlliancesAllianceIdOutput,
   type GetAlliancesInput,
   type GetAlliancesOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/alliance.js';
 
-export const GetAlliancesDescriptor: OperationExecutionDescriptor<GetAlliancesInput, GetAlliancesOutput> = {
-  operationId: "GetAlliances",
+export const GetAlliancesAllianceIdIconsDescriptor: OperationExecutionDescriptor<GetAlliancesAllianceIdIconsInput, GetAlliancesAllianceIdIconsOutput> = {
+  operationId: "GetAlliancesAllianceIdIcons",
   method: "GET",
-  path: "/alliances",
+  path: "/alliances/{alliance_id}/icons",
   parameters: [
+    { name: "alliance_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetAlliancesRequestSchema,
+  requestSchema: GetAlliancesAllianceIdIconsRequestSchema,
   authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetAlliancesStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetAlliancesAllianceIdIconsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -60,6 +61,24 @@ export const GetAlliancesAllianceIdDescriptor: OperationExecutionDescriptor<GetA
   transport: { compatibilityDateOverride: true },
 };
 
+export const GetAlliancesDescriptor: OperationExecutionDescriptor<GetAlliancesInput, GetAlliancesOutput> = {
+  operationId: "GetAlliances",
+  method: "GET",
+  path: "/alliances",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetAlliancesRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetAlliancesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
 export const GetAlliancesAllianceIdCorporationsDescriptor: OperationExecutionDescriptor<GetAlliancesAllianceIdCorporationsInput, GetAlliancesAllianceIdCorporationsOutput> = {
   operationId: "GetAlliancesAllianceIdCorporations",
   method: "GET",
@@ -75,25 +94,6 @@ export const GetAlliancesAllianceIdCorporationsDescriptor: OperationExecutionDes
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetAlliancesAllianceIdCorporationsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetAlliancesAllianceIdIconsDescriptor: OperationExecutionDescriptor<GetAlliancesAllianceIdIconsInput, GetAlliancesAllianceIdIconsOutput> = {
-  operationId: "GetAlliancesAllianceIdIcons",
-  method: "GET",
-  path: "/alliances/{alliance_id}/icons",
-  parameters: [
-    { name: "alliance_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetAlliancesAllianceIdIconsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetAlliancesAllianceIdIconsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

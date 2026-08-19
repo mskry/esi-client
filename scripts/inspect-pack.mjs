@@ -6,7 +6,10 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { npmPack } from './lib/npm-pack.mjs';
 import {
   createPackageBudgetBaseline,
+  expectedDomainEntryCount,
   measurePackedPackage,
+  validateDomainDeclarationSurface,
+  validateDomainEntryIsolation,
   validatePackageBudgets,
   validatePackedPackageBoundary,
 } from './lib/package-inspection.mjs';
@@ -29,11 +32,15 @@ try {
     );
   }
   const inlineSourceMaps = [];
-  for (const { path } of pack.files) {
-    if (!path.endsWith('.js') && !path.endsWith('.d.ts')) continue;
-    const source = await readFile(join(root, path), 'utf8');
-    if (/sourceMappingURL\s*=/.test(source)) inlineSourceMaps.push(path);
-  }
+  const analyzedFiles = await Promise.all(
+    pack.files.map(async (file) => {
+      const { path } = file;
+      if (!path.endsWith('.js') && !/\.d\.(?:ts|mts|cts)$/u.test(path)) return file;
+      const source = await readFile(join(root, path), 'utf8');
+      if (/sourceMappingURL\s*=/.test(source)) inlineSourceMaps.push(path);
+      return { ...file, source };
+    }),
+  );
   if (inlineSourceMaps.length > 0) {
     throw new Error(`Packed inline source maps are forbidden: ${inlineSourceMaps.join(', ')}`);
   }
@@ -59,7 +66,9 @@ try {
   ) {
     throw new Error('Packed ./operations export does not expose all 233 runtime metadata entries');
   }
-  const measurements = measurePackedPackage(pack, packageJson);
+  const measurements = measurePackedPackage({ ...pack, files: analyzedFiles }, packageJson);
+  const isolation = validateDomainEntryIsolation(measurements, expectedDomainEntryCount);
+  validateDomainDeclarationSurface(measurements, analyzedFiles, expectedDomainEntryCount);
   let baseline;
   if (refreshBudgets) {
     baseline = createPackageBudgetBaseline(measurements);
@@ -79,6 +88,7 @@ try {
           Object.entries(baseline.totals).map(([metric, budget]) => [metric, budget.maximum]),
         ),
         publicEntryCount: Object.keys(measurements.publicEntries).length,
+        domainEntryCount: isolation.domainEntryCount,
         operationExportTargets: packageBoundary.operationExportTargets,
       },
       null,

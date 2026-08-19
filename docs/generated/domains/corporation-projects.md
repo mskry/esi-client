@@ -13,10 +13,48 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCorporationsProjectsContribution`](../operations/GetCorporationsProjectsContribution.md) | `GET` | `getCorporationsProjectsContribution` | required | none | read | Get your project contribution |
-| [`GetCorporationsProjectsContributors`](../operations/GetCorporationsProjectsContributors.md) | `GET` | `getCorporationsProjectsContributors` | required | none | read | List project contributors |
-| [`GetCorporationsProjectsDetail`](../operations/GetCorporationsProjectsDetail.md) | `GET` | `getCorporationsProjectsDetail` | required | none | read | Get project details |
-| [`GetCorporationsProjectsListing`](../operations/GetCorporationsProjectsListing.md) | `GET` | `getCorporationsProjectsListing` | required | none | read | List corporation projects |
+| [`GetCorporationsProjectsContribution`](../operations/GetCorporationsProjectsContribution.md) | `GET` | `getContribution` | required | none | read | Get your project contribution |
+| [`GetCorporationsProjectsContributors`](../operations/GetCorporationsProjectsContributors.md) | `GET` | `listContributors` | required | none | read | List project contributors |
+| [`GetCorporationsProjectsDetail`](../operations/GetCorporationsProjectsDetail.md) | `GET` | `get` | required | none | read | Get project details |
+| [`GetCorporationsProjectsListing`](../operations/GetCorporationsProjectsListing.md) | `GET` | `list` | required | none | read | List corporation projects |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createCorporationProjectsClient } from '@evespace/esi-client/domains/corporation-projects';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCorporationProjectsClient({ token: accessToken });
+
+const corporationId = 98000001;
+const projectId = "00000000-0000-4000-8000-000000000000";
+const characterId = 90000001;
+
+const data = await client.getContribution(corporationId, projectId, characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const corporationId = 98000001;
+const projectId = "00000000-0000-4000-8000-000000000000";
+const characterId = 90000001;
+
+const data = await client.corporationProjects.getContribution(corporationId, projectId, characterId);
+```
 
 ## Shared concepts
 

@@ -13,36 +13,60 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetUniverseAncestries`](../operations/GetUniverseAncestries.md) | `GET` | `getUniverseAncestries` | public | none | read | Get ancestries |
-| [`GetUniverseAsteroidBeltsAsteroidBeltId`](../operations/GetUniverseAsteroidBeltsAsteroidBeltId.md) | `GET` | `getUniverseAsteroidBeltsAsteroidBeltId` | public | none | read | Get asteroid belt information |
-| [`GetUniverseBloodlines`](../operations/GetUniverseBloodlines.md) | `GET` | `getUniverseBloodlines` | public | none | read | Get bloodlines |
-| [`GetUniverseCategories`](../operations/GetUniverseCategories.md) | `GET` | `getUniverseCategories` | public | none | read | Get item categories |
-| [`GetUniverseCategoriesCategoryId`](../operations/GetUniverseCategoriesCategoryId.md) | `GET` | `getUniverseCategoriesCategoryId` | public | none | read | Get item category information |
-| [`GetUniverseConstellations`](../operations/GetUniverseConstellations.md) | `GET` | `getUniverseConstellations` | public | none | read | Get constellations |
-| [`GetUniverseConstellationsConstellationId`](../operations/GetUniverseConstellationsConstellationId.md) | `GET` | `getUniverseConstellationsConstellationId` | public | none | read | Get constellation information |
-| [`GetUniverseFactions`](../operations/GetUniverseFactions.md) | `GET` | `getUniverseFactions` | public | none | read | Get factions |
-| [`GetUniverseGraphics`](../operations/GetUniverseGraphics.md) | `GET` | `getUniverseGraphics` | public | none | read | Get graphics |
-| [`GetUniverseGraphicsGraphicId`](../operations/GetUniverseGraphicsGraphicId.md) | `GET` | `getUniverseGraphicsGraphicId` | public | none | read | Get graphic information |
-| [`GetUniverseGroups`](../operations/GetUniverseGroups.md) | `GET` | `getUniverseGroups` | public | offset | read | Get item groups |
-| [`GetUniverseGroupsGroupId`](../operations/GetUniverseGroupsGroupId.md) | `GET` | `getUniverseGroupsGroupId` | public | none | read | Get item group information |
-| [`GetUniverseMoonsMoonId`](../operations/GetUniverseMoonsMoonId.md) | `GET` | `getUniverseMoonsMoonId` | public | none | read | Get moon information |
-| [`GetUniversePlanetsPlanetId`](../operations/GetUniversePlanetsPlanetId.md) | `GET` | `getUniversePlanetsPlanetId` | public | none | read | Get planet information |
-| [`GetUniverseRaces`](../operations/GetUniverseRaces.md) | `GET` | `getUniverseRaces` | public | none | read | Get character races |
-| [`GetUniverseRegions`](../operations/GetUniverseRegions.md) | `GET` | `getUniverseRegions` | public | none | read | Get regions |
-| [`GetUniverseRegionsRegionId`](../operations/GetUniverseRegionsRegionId.md) | `GET` | `getUniverseRegionsRegionId` | public | none | read | Get region information |
-| [`GetUniverseStargatesStargateId`](../operations/GetUniverseStargatesStargateId.md) | `GET` | `getUniverseStargatesStargateId` | public | none | read | Get stargate information |
-| [`GetUniverseStarsStarId`](../operations/GetUniverseStarsStarId.md) | `GET` | `getUniverseStarsStarId` | public | none | read | Get star information |
-| [`GetUniverseStationsStationId`](../operations/GetUniverseStationsStationId.md) | `GET` | `getUniverseStationsStationId` | public | none | read | Get station information |
-| [`GetUniverseStructures`](../operations/GetUniverseStructures.md) | `GET` | `getUniverseStructures` | public | none | read | List all public structures |
-| [`GetUniverseStructuresStructureId`](../operations/GetUniverseStructuresStructureId.md) | `GET` | `getUniverseStructuresStructureId` | required | none | read | Get structure information |
-| [`GetUniverseSystemJumps`](../operations/GetUniverseSystemJumps.md) | `GET` | `getUniverseSystemJumps` | public | none | read | Get system jumps |
-| [`GetUniverseSystemKills`](../operations/GetUniverseSystemKills.md) | `GET` | `getUniverseSystemKills` | public | none | read | Get system kills |
-| [`GetUniverseSystems`](../operations/GetUniverseSystems.md) | `GET` | `getUniverseSystems` | public | none | read | Get solar systems |
-| [`GetUniverseSystemsSystemId`](../operations/GetUniverseSystemsSystemId.md) | `GET` | `getUniverseSystemsSystemId` | public | none | read | Get solar system information |
-| [`GetUniverseTypes`](../operations/GetUniverseTypes.md) | `GET` | `getUniverseTypes` | public | offset | read | Get types |
-| [`GetUniverseTypesTypeId`](../operations/GetUniverseTypesTypeId.md) | `GET` | `getUniverseTypesTypeId` | public | none | read | Get type information |
-| [`PostUniverseIds`](../operations/PostUniverseIds.md) | `POST` | `postUniverseIds` | public | none | read | Bulk names to IDs |
-| [`PostUniverseNames`](../operations/PostUniverseNames.md) | `POST` | `postUniverseNames` | public | none | read | Get names and categories for a set of IDs |
+| [`GetUniverseAncestries`](../operations/GetUniverseAncestries.md) | `GET` | `listAncestries` | public | none | read | Get ancestries |
+| [`GetUniverseAsteroidBeltsAsteroidBeltId`](../operations/GetUniverseAsteroidBeltsAsteroidBeltId.md) | `GET` | `getAsteroidBelt` | public | none | read | Get asteroid belt information |
+| [`GetUniverseBloodlines`](../operations/GetUniverseBloodlines.md) | `GET` | `listBloodlines` | public | none | read | Get bloodlines |
+| [`GetUniverseCategories`](../operations/GetUniverseCategories.md) | `GET` | `listItemCategories` | public | none | read | Get item categories |
+| [`GetUniverseCategoriesCategoryId`](../operations/GetUniverseCategoriesCategoryId.md) | `GET` | `getItemCategory` | public | none | read | Get item category information |
+| [`GetUniverseConstellations`](../operations/GetUniverseConstellations.md) | `GET` | `listConstellations` | public | none | read | Get constellations |
+| [`GetUniverseConstellationsConstellationId`](../operations/GetUniverseConstellationsConstellationId.md) | `GET` | `getConstellation` | public | none | read | Get constellation information |
+| [`GetUniverseFactions`](../operations/GetUniverseFactions.md) | `GET` | `listFactions` | public | none | read | Get factions |
+| [`GetUniverseGraphics`](../operations/GetUniverseGraphics.md) | `GET` | `listGraphics` | public | none | read | Get graphics |
+| [`GetUniverseGraphicsGraphicId`](../operations/GetUniverseGraphicsGraphicId.md) | `GET` | `getGraphic` | public | none | read | Get graphic information |
+| [`GetUniverseGroups`](../operations/GetUniverseGroups.md) | `GET` | `listItemGroups` | public | offset | read | Get item groups |
+| [`GetUniverseGroupsGroupId`](../operations/GetUniverseGroupsGroupId.md) | `GET` | `getItemGroup` | public | none | read | Get item group information |
+| [`GetUniverseMoonsMoonId`](../operations/GetUniverseMoonsMoonId.md) | `GET` | `getMoon` | public | none | read | Get moon information |
+| [`GetUniversePlanetsPlanetId`](../operations/GetUniversePlanetsPlanetId.md) | `GET` | `getPlanet` | public | none | read | Get planet information |
+| [`GetUniverseRaces`](../operations/GetUniverseRaces.md) | `GET` | `listRaces` | public | none | read | Get character races |
+| [`GetUniverseRegions`](../operations/GetUniverseRegions.md) | `GET` | `listRegions` | public | none | read | Get regions |
+| [`GetUniverseRegionsRegionId`](../operations/GetUniverseRegionsRegionId.md) | `GET` | `getRegion` | public | none | read | Get region information |
+| [`GetUniverseStargatesStargateId`](../operations/GetUniverseStargatesStargateId.md) | `GET` | `getStargate` | public | none | read | Get stargate information |
+| [`GetUniverseStarsStarId`](../operations/GetUniverseStarsStarId.md) | `GET` | `getStar` | public | none | read | Get star information |
+| [`GetUniverseStationsStationId`](../operations/GetUniverseStationsStationId.md) | `GET` | `getStation` | public | none | read | Get station information |
+| [`GetUniverseStructures`](../operations/GetUniverseStructures.md) | `GET` | `listPublicStructures` | public | none | read | List all public structures |
+| [`GetUniverseStructuresStructureId`](../operations/GetUniverseStructuresStructureId.md) | `GET` | `getStructure` | required | none | read | Get structure information |
+| [`GetUniverseSystemJumps`](../operations/GetUniverseSystemJumps.md) | `GET` | `listSystemJumps` | public | none | read | Get system jumps |
+| [`GetUniverseSystemKills`](../operations/GetUniverseSystemKills.md) | `GET` | `listSystemKills` | public | none | read | Get system kills |
+| [`GetUniverseSystems`](../operations/GetUniverseSystems.md) | `GET` | `listSolarSystems` | public | none | read | Get solar systems |
+| [`GetUniverseSystemsSystemId`](../operations/GetUniverseSystemsSystemId.md) | `GET` | `getSolarSystem` | public | none | read | Get solar system information |
+| [`GetUniverseTypes`](../operations/GetUniverseTypes.md) | `GET` | `listTypes` | public | offset | read | Get types |
+| [`GetUniverseTypesTypeId`](../operations/GetUniverseTypesTypeId.md) | `GET` | `getType` | public | none | read | Get type information |
+| [`PostUniverseIds`](../operations/PostUniverseIds.md) | `POST` | `resolveIds` | public | none | read | Bulk names to IDs |
+| [`PostUniverseNames`](../operations/PostUniverseNames.md) | `POST` | `resolveNames` | public | none | read | Get names and categories for a set of IDs |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createUniverseClient } from '@evespace/esi-client/domains/universe';
+
+const client = createUniverseClient();
+
+const data = await client.listAncestries();
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const data = await client.universe.listAncestries();
+```
 
 ## Shared concepts
 

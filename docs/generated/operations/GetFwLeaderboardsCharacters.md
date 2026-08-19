@@ -11,21 +11,31 @@ List of the top pilots in faction warfare
 
 - Stable ID: `GetFwLeaderboardsCharacters`
 - HTTP: `GET /fw/leaderboards/characters`
-- Domain method: `client.factionWarfare.getFwLeaderboardsCharacters(options?)`
+- Domain method: `client.factionWarfare.getCharacterLeaderboards(options?)`
 - Generic call: `client.callOperation("GetFwLeaderboardsCharacters", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/faction-warfare`
 - Domain index: [factionWarfare](../domains/faction-warfare.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFactionWarfareClient } from '@evespace/esi-client/domains/faction-warfare';
+
+const client = createFactionWarfareClient();
+
+const data = await client.getCharacterLeaderboards();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.factionWarfare.getFwLeaderboardsCharacters();
+const data = await client.factionWarfare.getCharacterLeaderboards();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetFwLeaderboardsCharacters', argum
 
 - Request schema: `@evespace/esi-client/schemas` export `GetFwLeaderboardsCharactersRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.factionWarfare.withMetadata().getFwLeaderboardsCharacters(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.factionWarfare.withMetadata().getCharacterLeaderboards(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

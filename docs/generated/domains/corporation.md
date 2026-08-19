@@ -13,28 +13,56 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCorporationsCorporationId`](../operations/GetCorporationsCorporationId.md) | `GET` | `getCorporationsCorporationId` | public | none | read | Get corporation's public information |
-| [`GetCorporationsCorporationIdAlliancehistory`](../operations/GetCorporationsCorporationIdAlliancehistory.md) | `GET` | `getCorporationsCorporationIdAlliancehistory` | public | none | read | Get alliance history |
-| [`GetCorporationsCorporationIdBlueprints`](../operations/GetCorporationsCorporationIdBlueprints.md) | `GET` | `getCorporationsCorporationIdBlueprints` | required | offset | read | Get corporation blueprints |
-| [`GetCorporationsCorporationIdContainersLogs`](../operations/GetCorporationsCorporationIdContainersLogs.md) | `GET` | `getCorporationsCorporationIdContainersLogs` | required | offset | read | Get all corporation ALSC logs |
-| [`GetCorporationsCorporationIdDivisions`](../operations/GetCorporationsCorporationIdDivisions.md) | `GET` | `getCorporationsCorporationIdDivisions` | required | none | read | Get corporation divisions |
-| [`GetCorporationsCorporationIdFacilities`](../operations/GetCorporationsCorporationIdFacilities.md) | `GET` | `getCorporationsCorporationIdFacilities` | required | none | read | Get corporation facilities |
-| [`GetCorporationsCorporationIdIcons`](../operations/GetCorporationsCorporationIdIcons.md) | `GET` | `getCorporationsCorporationIdIcons` | public | none | read | Get corporation icon |
-| [`GetCorporationsCorporationIdMedals`](../operations/GetCorporationsCorporationIdMedals.md) | `GET` | `getCorporationsCorporationIdMedals` | required | offset | read | Get corporation medals |
-| [`GetCorporationsCorporationIdMedalsIssued`](../operations/GetCorporationsCorporationIdMedalsIssued.md) | `GET` | `getCorporationsCorporationIdMedalsIssued` | required | offset | read | Get corporation issued medals |
-| [`GetCorporationsCorporationIdMembers`](../operations/GetCorporationsCorporationIdMembers.md) | `GET` | `getCorporationsCorporationIdMembers` | required | none | read | Get corporation members |
-| [`GetCorporationsCorporationIdMembersLimit`](../operations/GetCorporationsCorporationIdMembersLimit.md) | `GET` | `getCorporationsCorporationIdMembersLimit` | required | none | read | Get corporation member limit |
-| [`GetCorporationsCorporationIdMembersTitles`](../operations/GetCorporationsCorporationIdMembersTitles.md) | `GET` | `getCorporationsCorporationIdMembersTitles` | required | none | read | Get corporation's members' titles |
-| [`GetCorporationsCorporationIdMembertracking`](../operations/GetCorporationsCorporationIdMembertracking.md) | `GET` | `getCorporationsCorporationIdMembertracking` | required | none | read | Track corporation members |
-| [`GetCorporationsCorporationIdRoles`](../operations/GetCorporationsCorporationIdRoles.md) | `GET` | `getCorporationsCorporationIdRoles` | required | none | read | Get corporation member roles |
-| [`GetCorporationsCorporationIdRolesHistory`](../operations/GetCorporationsCorporationIdRolesHistory.md) | `GET` | `getCorporationsCorporationIdRolesHistory` | required | offset | read | Get corporation member roles history |
-| [`GetCorporationsCorporationIdShareholders`](../operations/GetCorporationsCorporationIdShareholders.md) | `GET` | `getCorporationsCorporationIdShareholders` | required | offset | read | Get corporation shareholders |
-| [`GetCorporationsCorporationIdStandings`](../operations/GetCorporationsCorporationIdStandings.md) | `GET` | `getCorporationsCorporationIdStandings` | required | offset | read | Get corporation standings |
-| [`GetCorporationsCorporationIdStarbases`](../operations/GetCorporationsCorporationIdStarbases.md) | `GET` | `getCorporationsCorporationIdStarbases` | required | offset | read | Get corporation starbases (POSes) |
-| [`GetCorporationsCorporationIdStarbasesStarbaseId`](../operations/GetCorporationsCorporationIdStarbasesStarbaseId.md) | `GET` | `getCorporationsCorporationIdStarbasesStarbaseId` | required | none | read | Get starbase (POS) detail |
-| [`GetCorporationsCorporationIdStructures`](../operations/GetCorporationsCorporationIdStructures.md) | `GET` | `getCorporationsCorporationIdStructures` | required | offset | read | Get corporation structures |
-| [`GetCorporationsCorporationIdTitles`](../operations/GetCorporationsCorporationIdTitles.md) | `GET` | `getCorporationsCorporationIdTitles` | required | none | read | Get corporation titles |
-| [`GetCorporationsNpccorps`](../operations/GetCorporationsNpccorps.md) | `GET` | `getCorporationsNpccorps` | public | none | read | Get npc corporations |
+| [`GetCorporationsCorporationId`](../operations/GetCorporationsCorporationId.md) | `GET` | `getPublicInfo` | public | none | read | Get corporation's public information |
+| [`GetCorporationsCorporationIdAlliancehistory`](../operations/GetCorporationsCorporationIdAlliancehistory.md) | `GET` | `listAllianceHistory` | public | none | read | Get alliance history |
+| [`GetCorporationsCorporationIdBlueprints`](../operations/GetCorporationsCorporationIdBlueprints.md) | `GET` | `listBlueprints` | required | offset | read | Get corporation blueprints |
+| [`GetCorporationsCorporationIdContainersLogs`](../operations/GetCorporationsCorporationIdContainersLogs.md) | `GET` | `listAuditLogSecureContainerLogs` | required | offset | read | Get all corporation ALSC logs |
+| [`GetCorporationsCorporationIdDivisions`](../operations/GetCorporationsCorporationIdDivisions.md) | `GET` | `listDivisions` | required | none | read | Get corporation divisions |
+| [`GetCorporationsCorporationIdFacilities`](../operations/GetCorporationsCorporationIdFacilities.md) | `GET` | `listFacilities` | required | none | read | Get corporation facilities |
+| [`GetCorporationsCorporationIdIcons`](../operations/GetCorporationsCorporationIdIcons.md) | `GET` | `getIcon` | public | none | read | Get corporation icon |
+| [`GetCorporationsCorporationIdMedals`](../operations/GetCorporationsCorporationIdMedals.md) | `GET` | `listMedals` | required | offset | read | Get corporation medals |
+| [`GetCorporationsCorporationIdMedalsIssued`](../operations/GetCorporationsCorporationIdMedalsIssued.md) | `GET` | `listIssuedMedals` | required | offset | read | Get corporation issued medals |
+| [`GetCorporationsCorporationIdMembers`](../operations/GetCorporationsCorporationIdMembers.md) | `GET` | `listMembers` | required | none | read | Get corporation members |
+| [`GetCorporationsCorporationIdMembersLimit`](../operations/GetCorporationsCorporationIdMembersLimit.md) | `GET` | `getMemberLimit` | required | none | read | Get corporation member limit |
+| [`GetCorporationsCorporationIdMembersTitles`](../operations/GetCorporationsCorporationIdMembersTitles.md) | `GET` | `listMemberTitles` | required | none | read | Get corporation's members' titles |
+| [`GetCorporationsCorporationIdMembertracking`](../operations/GetCorporationsCorporationIdMembertracking.md) | `GET` | `listMemberTracking` | required | none | read | Track corporation members |
+| [`GetCorporationsCorporationIdRoles`](../operations/GetCorporationsCorporationIdRoles.md) | `GET` | `listMemberRoles` | required | none | read | Get corporation member roles |
+| [`GetCorporationsCorporationIdRolesHistory`](../operations/GetCorporationsCorporationIdRolesHistory.md) | `GET` | `listMemberRoleHistory` | required | offset | read | Get corporation member roles history |
+| [`GetCorporationsCorporationIdShareholders`](../operations/GetCorporationsCorporationIdShareholders.md) | `GET` | `listShareholders` | required | offset | read | Get corporation shareholders |
+| [`GetCorporationsCorporationIdStandings`](../operations/GetCorporationsCorporationIdStandings.md) | `GET` | `listStandings` | required | offset | read | Get corporation standings |
+| [`GetCorporationsCorporationIdStarbases`](../operations/GetCorporationsCorporationIdStarbases.md) | `GET` | `listStarbases` | required | offset | read | Get corporation starbases (POSes) |
+| [`GetCorporationsCorporationIdStarbasesStarbaseId`](../operations/GetCorporationsCorporationIdStarbasesStarbaseId.md) | `GET` | `getStarbase` | required | none | read | Get starbase (POS) detail |
+| [`GetCorporationsCorporationIdStructures`](../operations/GetCorporationsCorporationIdStructures.md) | `GET` | `listStructures` | required | offset | read | Get corporation structures |
+| [`GetCorporationsCorporationIdTitles`](../operations/GetCorporationsCorporationIdTitles.md) | `GET` | `listTitles` | required | none | read | Get corporation titles |
+| [`GetCorporationsNpccorps`](../operations/GetCorporationsNpccorps.md) | `GET` | `listNpcCorporations` | public | none | read | Get npc corporations |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createCorporationClient } from '@evespace/esi-client/domains/corporation';
+
+const client = createCorporationClient();
+
+const corporationId = 98000001;
+
+const data = await client.getPublicInfo(corporationId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const corporationId = 98000001;
+
+const data = await client.corporation.getPublicInfo(corporationId);
+```
 
 ## Shared concepts
 

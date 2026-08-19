@@ -34,6 +34,7 @@ describe('generation orchestration', () => {
     const manifestPath = await writeCorrectionManifest(fixture.projectRoot);
     let emitterOutputDirectory = '';
     let emitterOperationMetadata: EmitterContext['operationMetadata'] = [];
+    let emitterNamingReviewReport = '';
 
     const result = await orchestrateGeneration({
       ...baseOptions(fixture),
@@ -42,6 +43,7 @@ describe('generation orchestration', () => {
         outputEmitter(async (context) => {
           emitterOutputDirectory = context.outputDirectory;
           emitterOperationMetadata = context.operationMetadata;
+          emitterNamingReviewReport = context.namingReviewReport;
           await writeExternalOutputs(context);
           return externalClaims();
         }),
@@ -84,9 +86,20 @@ describe('generation orchestration', () => {
     expect(provenance).toMatchObject({
       appliedCorrections: ['correct-title'],
       compatibilityDate: '2026-08-18',
+      facadeCatalog: {
+        path: '../facade-catalog.json',
+        sha256: createHash('sha256')
+          .update(await readFile(fixture.facadeCatalogPath, 'utf8'))
+          .digest('hex'),
+      },
+      facadeReviewReport: {
+        path: 'docs/generated/facade-naming-review.md',
+        sha256: createHash('sha256').update(emitterNamingReviewReport).digest('hex'),
+      },
       sha256: createHash('sha256').update(snapshot).digest('hex'),
       specificationUrl: 'https://example.test/openapi.json',
     });
+    expect(emitterNamingReviewReport).not.toContain(provenance.facadeReviewReport.sha256);
     const accounting = JSON.parse(
       await readFile(
         join(fixture.projectRoot, 'openapi/generated/operation-accounting.json'),
@@ -251,14 +264,14 @@ describe('generation orchestration', () => {
     await expectNoTransactionDebris(fixture);
   });
 
-  it('validates maintained operation overrides before replacing generated output', async () => {
+  it('validates the maintained facade catalog before replacing generated output', async () => {
     const fixture = await makeFixture();
-    const namingOverridesPath = join(fixture.projectRoot, 'naming-overrides.json');
+    const facadeCatalogPath = join(fixture.projectRoot, 'naming-overrides.json');
     await writeFile(
-      namingOverridesPath,
+      facadeCatalogPath,
       `${JSON.stringify({
-        schemaVersion: 1,
-        overrides: [
+        schemaVersion: 2,
+        operations: [
           {
             operationId: 'removed_operation',
             domain: 'items',
@@ -273,14 +286,53 @@ describe('generation orchestration', () => {
       orchestrateGeneration({
         ...baseOptions(fixture),
         operationMetadata: {
-          namingOverridesPath,
+          facadeCatalogPath,
           safetyOverridesPath: fixture.safetyOverridesPath,
         },
       }),
-    ).rejects.toThrow('Stale or unknown facade naming override: removed_operation');
+    ).rejects.toThrow('Stale facade catalog entry: removed_operation');
     await expectPriorOutputs(fixture);
     await expectNoTransactionDebris(fixture);
   });
+
+  it.each([
+    {
+      name: 'missing',
+      operations: [],
+      message: 'Missing facade catalog entries: after_operation',
+    },
+    {
+      name: 'unreviewed',
+      operations: [
+        {
+          operationId: 'after_operation',
+          domain: 'after',
+          method: 'afterOperation',
+          reviewed: false,
+        },
+      ],
+      message: 'Facade catalog entry is not reviewed: after_operation',
+    },
+  ])(
+    'does not use a production naming fallback for a $name entry',
+    async ({ operations, message }) => {
+      const fixture = await makeFixture();
+      const facadeCatalogPath = join(fixture.projectRoot, 'naming-overrides.json');
+      await writeFile(facadeCatalogPath, `${JSON.stringify({ schemaVersion: 2, operations })}\n`);
+
+      await expect(
+        orchestrateGeneration({
+          ...baseOptions(fixture),
+          operationMetadata: {
+            facadeCatalogPath,
+            safetyOverridesPath: fixture.safetyOverridesPath,
+          },
+        }),
+      ).rejects.toThrow(message);
+      await expectPriorOutputs(fixture);
+      await expectNoTransactionDebris(fixture);
+    },
+  );
 });
 
 function baseOptions(fixture: Fixture): OrchestrateGenerationOptions {
@@ -288,7 +340,10 @@ function baseOptions(fixture: Fixture): OrchestrateGenerationOptions {
     projectRoot: fixture.projectRoot,
     temporaryRoot: fixture.temporaryRoot,
     corrections: { manifestPath: fixture.correctionManifestPath },
-    operationMetadata: { safetyOverridesPath: fixture.safetyOverridesPath },
+    operationMetadata: {
+      facadeCatalogPath: fixture.facadeCatalogPath,
+      safetyOverridesPath: fixture.safetyOverridesPath,
+    },
     emitters: [
       outputEmitter(async (context) => {
         await writeExternalOutputs(context);
@@ -334,6 +389,7 @@ async function writeExternalOutputs(
 
 interface Fixture {
   readonly correctionManifestPath: string;
+  readonly facadeCatalogPath: string;
   readonly projectRoot: string;
   readonly safetyOverridesPath: string;
   readonly temporaryRoot: string;
@@ -347,10 +403,24 @@ async function makeFixture(): Promise<Fixture> {
     mkdir(projectRoot, { recursive: true }),
     mkdir(temporaryRoot, { recursive: true }),
   ]);
-  const correctionManifestPath = join(root, 'empty-correction-manifest.json');
+  const correctionManifestPath = await writeCorrectionManifest(projectRoot);
+  const facadeCatalogPath = join(root, 'facade-catalog.json');
   const safetyOverridesPath = join(root, 'empty-safety-overrides.json');
   await Promise.all([
-    writeFile(correctionManifestPath, `${JSON.stringify({ schemaVersion: 1, corrections: [] })}\n`),
+    writeFile(
+      facadeCatalogPath,
+      `${JSON.stringify({
+        schemaVersion: 2,
+        operations: [
+          {
+            operationId: 'after_operation',
+            domain: 'after',
+            method: 'afterOperation',
+            reviewed: true,
+          },
+        ],
+      })}\n`,
+    ),
     writeFile(safetyOverridesPath, `${JSON.stringify({ schemaVersion: 1, overrides: [] })}\n`),
   ]);
   for (const target of generatedReplacementTargets) {
@@ -370,7 +440,13 @@ async function makeFixture(): Promise<Fixture> {
     ),
     writeFile(join(projectRoot, 'tests/maintained.test.ts'), 'maintained test\n'),
   ]);
-  return { correctionManifestPath, projectRoot, safetyOverridesPath, temporaryRoot };
+  return {
+    correctionManifestPath,
+    facadeCatalogPath,
+    projectRoot,
+    safetyOverridesPath,
+    temporaryRoot,
+  };
 }
 
 async function writeCorrectionManifest(

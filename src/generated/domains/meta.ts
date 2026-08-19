@@ -3,112 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetMetaChangelogDescriptor,
-  GetMetaCompatibilityDatesDescriptor,
-  GetMetaNameDescriptor,
-  GetMetaStatusDescriptor,
-} from '../internal/descriptors/meta.js';
-import type {
-  GetMetaChangelogInput,
-  GetMetaChangelogOutput,
-  GetMetaCompatibilityDatesInput,
-  GetMetaCompatibilityDatesOutput,
-  GetMetaNameInput,
-  GetMetaNameOutput,
-  GetMetaStatusInput,
-  GetMetaStatusOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindMetaDomainClient } from '../internal/domains/meta.js';
+import type { MetaDomainClient } from '../internal/domains/meta-contract.js';
 
-export interface GetMetaChangelogOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetMetaChangelogInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetMetaChangelogInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetMetaChangelogInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/meta-contract.js';
 
-export interface GetMetaCompatibilityDatesOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetMetaCompatibilityDatesInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetMetaCompatibilityDatesInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetMetaCompatibilityDatesInput["header"]>["X-Tenant"];
-}
-
-export interface GetMetaNameOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetMetaNameInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetMetaNameInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetMetaNameInput["header"]>["X-Tenant"];
-}
-
-export interface GetMetaStatusOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetMetaStatusInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetMetaStatusInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetMetaStatusInput["header"]>["X-Tenant"];
-}
-
-export class MetaDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getMetaChangelog(options?: GetMetaChangelogOptions): Promise<GetMetaChangelogOutput> {
-    const arguments_: GetMetaChangelogInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaChangelogDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getMetaCompatibilityDates(options?: GetMetaCompatibilityDatesOptions): Promise<GetMetaCompatibilityDatesOutput> {
-    const arguments_: GetMetaCompatibilityDatesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaCompatibilityDatesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getMetaName(options?: GetMetaNameOptions): Promise<GetMetaNameOutput> {
-    const arguments_: GetMetaNameInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaNameDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getMetaStatus(options?: GetMetaStatusOptions): Promise<GetMetaStatusOutput> {
-    const arguments_: GetMetaStatusInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaStatusDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): MetaDomainClientWithMetadata {
-    return new MetaDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class MetaDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getMetaChangelog(options?: GetMetaChangelogOptions): Promise<EsiResponse<GetMetaChangelogOutput>> {
-    const arguments_: GetMetaChangelogInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaChangelogDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getMetaCompatibilityDates(options?: GetMetaCompatibilityDatesOptions): Promise<EsiResponse<GetMetaCompatibilityDatesOutput>> {
-    const arguments_: GetMetaCompatibilityDatesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaCompatibilityDatesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getMetaName(options?: GetMetaNameOptions): Promise<EsiResponse<GetMetaNameOutput>> {
-    const arguments_: GetMetaNameInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaNameDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getMetaStatus(options?: GetMetaStatusOptions): Promise<EsiResponse<GetMetaStatusOutput>> {
-    const arguments_: GetMetaStatusInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMetaStatusDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createMetaClient(options: EsiClientOptions = {}): MetaDomainClient {
+  return bindMetaDomainClient(new EsiClientConfiguration(options));
 }

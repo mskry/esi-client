@@ -1,7 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
-export const defaultNamingOverridesPath = fileURLToPath(
+import { operationSchemaName } from './zod-schema.mjs';
+
+export const defaultFacadeCatalogPath = fileURLToPath(
   new URL('../../openapi/config/naming-overrides.json', import.meta.url),
 );
 export const defaultSafetyOverridesPath = fileURLToPath(
@@ -58,6 +60,18 @@ const reservedIdentifiers = new Set([
   'with',
   'yield',
 ]);
+const reservedFacadeMembers = new Set([
+  ...reservedIdentifiers,
+  'callOperation',
+  'configuration',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf',
+  'withMetadata',
+]);
 const httpMethodWords = new Set([
   'delete',
   'get',
@@ -69,30 +83,50 @@ const httpMethodWords = new Set([
   'trace',
 ]);
 
-export async function loadNamingOverrides(model, path = defaultNamingOverridesPath) {
-  const config = await readConfig(path, 'facade naming overrides');
+export async function loadFacadeCatalog(model, path = defaultFacadeCatalogPath) {
+  const config = await readFacadeCatalog(path);
   const operationIds = operationIdSet(model);
   const seen = new Set();
-  const overrides = config.overrides.map((entry, index) => {
-    assertRecord(entry, `Facade naming override ${index}`);
+  let previousOperationId;
+  const catalog = config.operations.map((entry, index) => {
+    assertRecord(entry, `Facade catalog entry ${index}`);
     rejectUnknownKeys(
       entry,
-      new Set(['domain', 'method', 'operationId', 'reviewed']),
-      `facade naming override ${index}`,
+      new Set(['domain', 'method', 'note', 'operationId', 'reviewed']),
+      `facade catalog entry ${index}`,
     );
     const operationId = requiredString(
       entry.operationId,
-      `Facade naming override ${index} operationId`,
+      `Facade catalog entry ${index} operationId`,
     );
-    rejectDuplicateOrStale(operationId, seen, operationIds, 'facade naming override');
-    if (entry.reviewed !== true) {
-      throw new Error(`Facade naming override is not reviewed: ${operationId}`);
+    if (seen.has(operationId)) throw new Error(`Duplicate facade catalog entry: ${operationId}`);
+    seen.add(operationId);
+    if (!operationIds.has(operationId))
+      throw new Error(`Stale facade catalog entry: ${operationId}`);
+    if (previousOperationId !== undefined && previousOperationId > operationId) {
+      throw new Error(
+        `Facade catalog entries must be sorted by operationId: ${previousOperationId} before ${operationId}`,
+      );
     }
-    const domain = validIdentifier(entry.domain, `Facade domain for ${operationId}`);
-    const method = validIdentifier(entry.method, `Facade method for ${operationId}`);
-    return { domain, method, operationId, reviewed: true };
+    previousOperationId = operationId;
+    if (entry.reviewed !== true) {
+      throw new Error(`Facade catalog entry is not reviewed: ${operationId}`);
+    }
+    const domain = validFacadeIdentifier(entry.domain, 'domain', operationId);
+    const method = validFacadeIdentifier(entry.method, 'method', operationId);
+    const note = Object.hasOwn(entry, 'note')
+      ? requiredString(entry.note, `Facade catalog note for ${operationId}`)
+      : undefined;
+    return note === undefined
+      ? { domain, method, operationId, reviewed: true }
+      : { domain, method, note, operationId, reviewed: true };
   });
-  return deepFreeze(overrides.toSorted(compareOperationIds));
+  const missing = [...operationIds]
+    .filter((operationId) => !seen.has(operationId))
+    .toSorted(compareText);
+  if (missing.length > 0) throw new Error(`Missing facade catalog entries: ${missing.join(', ')}`);
+  validateFacadeCatalog(model, catalog);
+  return deepFreeze(catalog);
 }
 
 export async function loadSafetyOverrides(model, path = defaultSafetyOverridesPath) {
@@ -140,31 +174,23 @@ export async function loadSafetyOverrides(model, path = defaultSafetyOverridesPa
 }
 
 export async function resolveOperationMetadata(model, options = {}) {
-  const [namingOverrides, safetyOverrides] = await Promise.all([
-    loadNamingOverrides(model, options.namingOverridesPath),
+  const [facadeCatalog, safetyOverrides] = await Promise.all([
+    loadFacadeCatalog(model, options.facadeCatalogPath),
     loadSafetyOverrides(model, options.safetyOverridesPath),
   ]);
-  const namingById = new Map(namingOverrides.map((entry) => [entry.operationId, entry]));
+  const namingById = new Map(facadeCatalog.map((entry) => [entry.operationId, entry]));
   const safetyById = new Map(safetyOverrides.map((entry) => [entry.operationId, entry]));
-  const facadeNames = new Map();
 
   const metadata = model.operations.map((operation) => {
     const naming = namingById.get(operation.operationId);
-    const domain = naming?.domain ?? defaultDomainName(operation);
-    const method = naming?.method ?? defaultMethodName(operation.operationId);
-    const facadeName = `${domain}.${method}`;
-    const collidingOperationId = facadeNames.get(facadeName);
-    if (collidingOperationId !== undefined) {
-      throw new Error(
-        `Facade domain/method collision ${facadeName}: ${collidingOperationId} and ${operation.operationId}`,
-      );
+    if (naming === undefined) {
+      throw new Error(`Resolved facade catalog is missing operation: ${operation.operationId}`);
     }
-    facadeNames.set(facadeName, operation.operationId);
     return {
       classification:
         operation.method === 'GET' || safetyById.has(operation.operationId) ? 'read' : 'mutation',
-      domain,
-      method,
+      domain: naming.domain,
+      method: naming.method,
       operationId: operation.operationId,
       safetyOverrideReason: safetyById.get(operation.operationId)?.reason ?? null,
     };
@@ -186,7 +212,25 @@ export function defaultMethodName(operationId) {
   return safeDefaultIdentifier(toIdentifier(operationId, 'operation'), 'operation');
 }
 
+async function readFacadeCatalog(path) {
+  const config = await readJsonConfig(path, 'facade catalog');
+  rejectUnknownKeys(config, new Set(['operations', 'schemaVersion']), 'facade catalog config');
+  if (config.schemaVersion !== 2 || !Array.isArray(config.operations)) {
+    throw new Error('Invalid facade catalog config');
+  }
+  return config;
+}
+
 async function readConfig(path, name) {
+  const config = await readJsonConfig(path, name);
+  rejectUnknownKeys(config, new Set(['overrides', 'schemaVersion']), `${name} config`);
+  if (config.schemaVersion !== 1 || !Array.isArray(config.overrides)) {
+    throw new Error(`Invalid ${name} config`);
+  }
+  return config;
+}
+
+async function readJsonConfig(path, name) {
   let config;
   try {
     config = JSON.parse(await readFile(path, 'utf8'));
@@ -194,10 +238,6 @@ async function readConfig(path, name) {
     throw new Error(`Failed to read ${name} from ${path}`, { cause: error });
   }
   assertRecord(config, `${name} config`);
-  rejectUnknownKeys(config, new Set(['overrides', 'schemaVersion']), `${name} config`);
-  if (config.schemaVersion !== 1 || !Array.isArray(config.overrides)) {
-    throw new Error(`Invalid ${name} config`);
-  }
   return config;
 }
 
@@ -214,12 +254,118 @@ function rejectDuplicateOrStale(operationId, seen, operationIds, name) {
   seen.add(operationId);
 }
 
-function validIdentifier(value, context) {
+function validFacadeIdentifier(value, kind, operationId) {
+  const context = `Facade ${kind} for ${operationId}`;
   const identifier = requiredString(value, context);
-  if (!identifierPattern.test(identifier) || reservedIdentifiers.has(identifier)) {
+  if (!identifierPattern.test(identifier)) {
     throw new Error(`Invalid TypeScript identifier for ${context}: ${identifier}`);
   }
+  if (!/^[a-z]/u.test(identifier)) {
+    throw new Error(
+      `Facade ${kind} must begin with a lowercase letter for ${operationId}: ${identifier}`,
+    );
+  }
+  if (reservedFacadeMembers.has(identifier)) {
+    throw new Error(`Reserved facade ${kind} for ${operationId}: ${identifier}`);
+  }
   return identifier;
+}
+
+function validateFacadeCatalog(model, catalog) {
+  const operationsById = new Map(
+    model.operations.map((operation) => [operation.operationId, operation]),
+  );
+  const facadeNames = new Map();
+  const domains = new Map();
+  const optionNames = new Map();
+
+  for (const entry of catalog) {
+    const facadeName = `${entry.domain}.${entry.method}`;
+    rejectDerivedCollision(
+      facadeNames,
+      facadeName,
+      entry.operationId,
+      `Facade domain/method collision ${facadeName}`,
+    );
+    if (!domains.has(entry.domain)) domains.set(entry.domain, entry.operationId);
+
+    const operation = operationsById.get(entry.operationId);
+    if (operationHasOptions(operation)) {
+      const optionsName = `${operationSchemaName(entry.operationId)}Options`;
+      assertDerivedIdentifier(optionsName, 'options type', entry.operationId);
+      rejectDerivedCollision(
+        optionNames,
+        optionsName,
+        entry.operationId,
+        `Facade options type collision: ${optionsName}`,
+      );
+    }
+  }
+
+  const files = new Map();
+  const classes = new Map();
+  const factories = new Map();
+  for (const [domain, operationId] of domains) {
+    const className = `${capitalize(domain)}DomainClient`;
+    const metadataClassName = `${className}WithMetadata`;
+    const factoryName = `create${capitalize(domain)}Client`;
+    const fileName = domainFileName(domain);
+    assertDerivedIdentifier(className, 'domain class', operationId);
+    assertDerivedIdentifier(metadataClassName, 'metadata domain class', operationId);
+    assertDerivedIdentifier(factoryName, 'domain factory', operationId);
+    rejectDerivedCollision(
+      files,
+      fileName.toLowerCase(),
+      operationId,
+      `Case-insensitive domain path collision ${fileName}`,
+    );
+    rejectDerivedCollision(
+      classes,
+      className,
+      operationId,
+      `Facade domain class collision ${className}`,
+    );
+    rejectDerivedCollision(
+      classes,
+      metadataClassName,
+      operationId,
+      `Facade domain class collision ${metadataClassName}`,
+    );
+    rejectDerivedCollision(
+      factories,
+      factoryName,
+      operationId,
+      `Facade domain factory collision ${factoryName}`,
+    );
+  }
+}
+
+function operationHasOptions(operation) {
+  return (
+    operation.requestBody !== null ||
+    operation.parameters.some((parameter) => parameter.placement !== 'path')
+  );
+}
+
+function assertDerivedIdentifier(identifier, kind, operationId) {
+  if (!identifierPattern.test(identifier) || reservedIdentifiers.has(identifier)) {
+    throw new Error(`Invalid derived facade ${kind} for ${operationId}: ${identifier}`);
+  }
+}
+
+function rejectDerivedCollision(symbols, symbol, operationId, context) {
+  const previousOperationId = symbols.get(symbol);
+  if (previousOperationId !== undefined) {
+    throw new Error(`${context}: ${previousOperationId} and ${operationId}`);
+  }
+  symbols.set(symbol, operationId);
+}
+
+function domainFileName(domain) {
+  return domain
+    .replaceAll(/([a-z0-9])([A-Z])/gu, '$1-$2')
+    .replaceAll(/([A-Z]+)([A-Z][a-z])/gu, '$1-$2')
+    .toLowerCase();
 }
 
 function safeDefaultIdentifier(identifier, prefix) {
@@ -252,6 +398,10 @@ function capitalize(value) {
 
 function compareOperationIds(left, right) {
   return left.operationId < right.operationId ? -1 : left.operationId > right.operationId ? 1 : 0;
+}
+
+function compareText(left, right) {
+  return left < right ? -1 : left > right ? 1 : 0;
 }
 
 function requiredString(value, context) {

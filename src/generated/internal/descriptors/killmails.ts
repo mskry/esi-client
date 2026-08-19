@@ -17,7 +17,27 @@ import {
   type GetCorporationsCorporationIdKillmailsRecentOutput,
   type GetKillmailsKillmailIdKillmailHashInput,
   type GetKillmailsKillmailIdKillmailHashOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/killmails.js';
+
+export const GetKillmailsKillmailIdKillmailHashDescriptor: OperationExecutionDescriptor<GetKillmailsKillmailIdKillmailHashInput, GetKillmailsKillmailIdKillmailHashOutput> = {
+  operationId: "GetKillmailsKillmailIdKillmailHash",
+  method: "GET",
+  path: "/killmails/{killmail_id}/{killmail_hash}",
+  parameters: [
+    { name: "killmail_hash", placement: "path", required: true, schema: { type: "string" } },
+    { name: "killmail_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetKillmailsKillmailIdKillmailHashRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetKillmailsKillmailIdKillmailHashStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
 
 export const GetCharactersCharacterIdKillmailsRecentDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdKillmailsRecentInput, GetCharactersCharacterIdKillmailsRecentOutput> = {
   operationId: "GetCharactersCharacterIdKillmailsRecent",
@@ -55,26 +75,6 @@ export const GetCorporationsCorporationIdKillmailsRecentDescriptor: OperationExe
   authentication: { scopes: ["esi-killmails.read_corporation_killmails.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsCorporationIdKillmailsRecentStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetKillmailsKillmailIdKillmailHashDescriptor: OperationExecutionDescriptor<GetKillmailsKillmailIdKillmailHashInput, GetKillmailsKillmailIdKillmailHashOutput> = {
-  operationId: "GetKillmailsKillmailIdKillmailHash",
-  method: "GET",
-  path: "/killmails/{killmail_id}/{killmail_hash}",
-  parameters: [
-    { name: "killmail_hash", placement: "path", required: true, schema: { type: "string" } },
-    { name: "killmail_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetKillmailsKillmailIdKillmailHashRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetKillmailsKillmailIdKillmailHashStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

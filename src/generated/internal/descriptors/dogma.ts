@@ -25,25 +25,7 @@ import {
   type GetDogmaEffectsEffectIdOutput,
   type GetDogmaEffectsInput,
   type GetDogmaEffectsOutput,
-} from '../../schemas/operations.js';
-
-export const GetDogmaAttributesDescriptor: OperationExecutionDescriptor<GetDogmaAttributesInput, GetDogmaAttributesOutput> = {
-  operationId: "GetDogmaAttributes",
-  method: "GET",
-  path: "/dogma/attributes",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetDogmaAttributesRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetDogmaAttributesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/dogma.js';
 
 export const GetDogmaAttributesAttributeIdDescriptor: OperationExecutionDescriptor<GetDogmaAttributesAttributeIdInput, GetDogmaAttributesAttributeIdOutput> = {
   operationId: "GetDogmaAttributesAttributeId",
@@ -84,24 +66,6 @@ export const GetDogmaDynamicItemsTypeIdItemIdDescriptor: OperationExecutionDescr
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetDogmaEffectsDescriptor: OperationExecutionDescriptor<GetDogmaEffectsInput, GetDogmaEffectsOutput> = {
-  operationId: "GetDogmaEffects",
-  method: "GET",
-  path: "/dogma/effects",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetDogmaEffectsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetDogmaEffectsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetDogmaEffectsEffectIdDescriptor: OperationExecutionDescriptor<GetDogmaEffectsEffectIdInput, GetDogmaEffectsEffectIdOutput> = {
   operationId: "GetDogmaEffectsEffectId",
   method: "GET",
@@ -117,6 +81,42 @@ export const GetDogmaEffectsEffectIdDescriptor: OperationExecutionDescriptor<Get
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetDogmaEffectsEffectIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetDogmaAttributesDescriptor: OperationExecutionDescriptor<GetDogmaAttributesInput, GetDogmaAttributesOutput> = {
+  operationId: "GetDogmaAttributes",
+  method: "GET",
+  path: "/dogma/attributes",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetDogmaAttributesRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetDogmaAttributesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetDogmaEffectsDescriptor: OperationExecutionDescriptor<GetDogmaEffectsInput, GetDogmaEffectsOutput> = {
+  operationId: "GetDogmaEffects",
+  method: "GET",
+  path: "/dogma/effects",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetDogmaEffectsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetDogmaEffectsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

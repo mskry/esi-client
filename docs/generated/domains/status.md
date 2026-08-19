@@ -13,7 +13,31 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetStatus`](../operations/GetStatus.md) | `GET` | `getStatus` | public | none | read | Get the server's status |
+| [`GetStatus`](../operations/GetStatus.md) | `GET` | `get` | public | none | read | Get the server's status |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createStatusClient } from '@evespace/esi-client/domains/status';
+
+const client = createStatusClient();
+
+const data = await client.get();
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const data = await client.status.get();
+```
 
 ## Shared concepts
 

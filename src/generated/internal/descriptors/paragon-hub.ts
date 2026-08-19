@@ -25,50 +25,7 @@ import {
   type GetParagonHubSkinrCorporationsOutput,
   type GetParagonHubSkinrInput,
   type GetParagonHubSkinrOutput,
-} from '../../schemas/operations.js';
-
-export const GetCharactersParagonHubSkinrDescriptor: OperationExecutionDescriptor<GetCharactersParagonHubSkinrInput, GetCharactersParagonHubSkinrOutput> = {
-  operationId: "GetCharactersParagonHubSkinr",
-  method: "GET",
-  path: "/characters/{character_id}/paragon-hub/skinr",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersParagonHubSkinrRequestSchema,
-  authentication: { scopes: ["esi.cosmetic.char:read"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersParagonHubSkinrStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetParagonHubSkinrDescriptor: OperationExecutionDescriptor<GetParagonHubSkinrInput, GetParagonHubSkinrOutput> = {
-  operationId: "GetParagonHubSkinr",
-  method: "GET",
-  path: "/paragon-hub/skinr",
-  parameters: [
-    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetParagonHubSkinrRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetParagonHubSkinrStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/paragon-hub.js';
 
 export const GetParagonHubSkinrAlliancesDescriptor: OperationExecutionDescriptor<GetParagonHubSkinrAlliancesInput, GetParagonHubSkinrAlliancesOutput> = {
   operationId: "GetParagonHubSkinrAlliances",
@@ -132,6 +89,49 @@ export const GetParagonHubSkinrCorporationsDescriptor: OperationExecutionDescrip
   authentication: { scopes: ["esi.cosmetic.char:read"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetParagonHubSkinrCorporationsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersParagonHubSkinrDescriptor: OperationExecutionDescriptor<GetCharactersParagonHubSkinrInput, GetCharactersParagonHubSkinrOutput> = {
+  operationId: "GetCharactersParagonHubSkinr",
+  method: "GET",
+  path: "/characters/{character_id}/paragon-hub/skinr",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersParagonHubSkinrRequestSchema,
+  authentication: { scopes: ["esi.cosmetic.char:read"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersParagonHubSkinrStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetParagonHubSkinrDescriptor: OperationExecutionDescriptor<GetParagonHubSkinrInput, GetParagonHubSkinrOutput> = {
+  operationId: "GetParagonHubSkinr",
+  method: "GET",
+  path: "/paragon-hub/skinr",
+  parameters: [
+    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetParagonHubSkinrRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetParagonHubSkinrStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

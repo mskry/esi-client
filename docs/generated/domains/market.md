@@ -13,17 +13,51 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdOrders`](../operations/GetCharactersCharacterIdOrders.md) | `GET` | `getCharactersCharacterIdOrders` | required | none | read | List open orders from a character |
-| [`GetCharactersCharacterIdOrdersHistory`](../operations/GetCharactersCharacterIdOrdersHistory.md) | `GET` | `getCharactersCharacterIdOrdersHistory` | required | offset | read | List historical orders by a character |
-| [`GetCorporationsCorporationIdOrders`](../operations/GetCorporationsCorporationIdOrders.md) | `GET` | `getCorporationsCorporationIdOrders` | required | offset | read | List open orders from a corporation |
-| [`GetCorporationsCorporationIdOrdersHistory`](../operations/GetCorporationsCorporationIdOrdersHistory.md) | `GET` | `getCorporationsCorporationIdOrdersHistory` | required | offset | read | List historical orders from a corporation |
-| [`GetMarketsGroups`](../operations/GetMarketsGroups.md) | `GET` | `getMarketsGroups` | public | none | read | Get item groups |
-| [`GetMarketsGroupsMarketGroupId`](../operations/GetMarketsGroupsMarketGroupId.md) | `GET` | `getMarketsGroupsMarketGroupId` | public | none | read | Get item group information |
-| [`GetMarketsPrices`](../operations/GetMarketsPrices.md) | `GET` | `getMarketsPrices` | public | none | read | List market prices |
-| [`GetMarketsRegionIdHistory`](../operations/GetMarketsRegionIdHistory.md) | `GET` | `getMarketsRegionIdHistory` | public | none | read | List historical market statistics in a region |
-| [`GetMarketsRegionIdOrders`](../operations/GetMarketsRegionIdOrders.md) | `GET` | `getMarketsRegionIdOrders` | public | offset | read | List orders in a region |
-| [`GetMarketsRegionIdTypes`](../operations/GetMarketsRegionIdTypes.md) | `GET` | `getMarketsRegionIdTypes` | public | offset | read | List type IDs relevant to a market |
-| [`GetMarketsStructuresStructureId`](../operations/GetMarketsStructuresStructureId.md) | `GET` | `getMarketsStructuresStructureId` | required | offset | read | List orders in a structure |
+| [`GetCharactersCharacterIdOrders`](../operations/GetCharactersCharacterIdOrders.md) | `GET` | `listCharacterOrders` | required | none | read | List open orders from a character |
+| [`GetCharactersCharacterIdOrdersHistory`](../operations/GetCharactersCharacterIdOrdersHistory.md) | `GET` | `listCharacterOrderHistory` | required | offset | read | List historical orders by a character |
+| [`GetCorporationsCorporationIdOrders`](../operations/GetCorporationsCorporationIdOrders.md) | `GET` | `listCorporationOrders` | required | offset | read | List open orders from a corporation |
+| [`GetCorporationsCorporationIdOrdersHistory`](../operations/GetCorporationsCorporationIdOrdersHistory.md) | `GET` | `listCorporationOrderHistory` | required | offset | read | List historical orders from a corporation |
+| [`GetMarketsGroups`](../operations/GetMarketsGroups.md) | `GET` | `listGroups` | public | none | read | Get item groups |
+| [`GetMarketsGroupsMarketGroupId`](../operations/GetMarketsGroupsMarketGroupId.md) | `GET` | `getGroup` | public | none | read | Get item group information |
+| [`GetMarketsPrices`](../operations/GetMarketsPrices.md) | `GET` | `listPrices` | public | none | read | List market prices |
+| [`GetMarketsRegionIdHistory`](../operations/GetMarketsRegionIdHistory.md) | `GET` | `listRegionHistory` | public | none | read | List historical market statistics in a region |
+| [`GetMarketsRegionIdOrders`](../operations/GetMarketsRegionIdOrders.md) | `GET` | `listRegionOrders` | public | offset | read | List orders in a region |
+| [`GetMarketsRegionIdTypes`](../operations/GetMarketsRegionIdTypes.md) | `GET` | `listRegionTypes` | public | offset | read | List type IDs relevant to a market |
+| [`GetMarketsStructuresStructureId`](../operations/GetMarketsStructuresStructureId.md) | `GET` | `listStructureOrders` | required | offset | read | List orders in a structure |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createMarketClient } from '@evespace/esi-client/domains/market';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMarketClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listCharacterOrders(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.market.listCharacterOrders(characterId);
+```
 
 ## Shared concepts
 

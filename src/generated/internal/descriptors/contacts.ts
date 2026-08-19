@@ -41,7 +41,29 @@ import {
   type PostCharactersCharacterIdContactsOutput,
   type PutCharactersCharacterIdContactsInput,
   type PutCharactersCharacterIdContactsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/contacts.js';
+
+export const PostCharactersCharacterIdContactsDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdContactsInput, PostCharactersCharacterIdContactsOutput> = {
+  operationId: "PostCharactersCharacterIdContacts",
+  method: "POST",
+  path: "/characters/{character_id}/contacts",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "label_ids", placement: "query", required: false, schema: { type: 'array', items: { type: "integer" } } },
+    { name: "standing", placement: "query", required: true, schema: { type: "number" } },
+    { name: "watched", placement: "query", required: false, schema: { type: "boolean" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: { required: true, mediaType: 'application/json' },
+  requestSchema: PostCharactersCharacterIdContactsRequestSchema,
+  authentication: { scopes: ["esi-characters.write_contacts.v1"] },
+  successResponses: [
+    { status: 201, body: 'json', schema: PostCharactersCharacterIdContactsStatus201SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
 
 export const DeleteCharactersCharacterIdContactsDescriptor: OperationExecutionDescriptor<DeleteCharactersCharacterIdContactsInput, DeleteCharactersCharacterIdContactsOutput> = {
   operationId: "DeleteCharactersCharacterIdContacts",
@@ -59,6 +81,25 @@ export const DeleteCharactersCharacterIdContactsDescriptor: OperationExecutionDe
   authentication: { scopes: ["esi-characters.write_contacts.v1"] },
   successResponses: [
     { status: 204, body: 'none' },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetAlliancesAllianceIdContactsLabelsDescriptor: OperationExecutionDescriptor<GetAlliancesAllianceIdContactsLabelsInput, GetAlliancesAllianceIdContactsLabelsOutput> = {
+  operationId: "GetAlliancesAllianceIdContactsLabels",
+  method: "GET",
+  path: "/alliances/{alliance_id}/contacts/labels",
+  parameters: [
+    { name: "alliance_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetAlliancesAllianceIdContactsLabelsRequestSchema,
+  authentication: { scopes: ["esi-alliances.read_contacts.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetAlliancesAllianceIdContactsLabelsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -83,21 +124,21 @@ export const GetAlliancesAllianceIdContactsDescriptor: OperationExecutionDescrip
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetAlliancesAllianceIdContactsLabelsDescriptor: OperationExecutionDescriptor<GetAlliancesAllianceIdContactsLabelsInput, GetAlliancesAllianceIdContactsLabelsOutput> = {
-  operationId: "GetAlliancesAllianceIdContactsLabels",
+export const GetCharactersCharacterIdContactsLabelsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdContactsLabelsInput, GetCharactersCharacterIdContactsLabelsOutput> = {
+  operationId: "GetCharactersCharacterIdContactsLabels",
   method: "GET",
-  path: "/alliances/{alliance_id}/contacts/labels",
+  path: "/characters/{character_id}/contacts/labels",
   parameters: [
-    { name: "alliance_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetAlliancesAllianceIdContactsLabelsRequestSchema,
-  authentication: { scopes: ["esi-alliances.read_contacts.v1"] },
+  requestSchema: GetCharactersCharacterIdContactsLabelsRequestSchema,
+  authentication: { scopes: ["esi-characters.read_contacts.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetAlliancesAllianceIdContactsLabelsStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdContactsLabelsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -122,21 +163,21 @@ export const GetCharactersCharacterIdContactsDescriptor: OperationExecutionDescr
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCharactersCharacterIdContactsLabelsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdContactsLabelsInput, GetCharactersCharacterIdContactsLabelsOutput> = {
-  operationId: "GetCharactersCharacterIdContactsLabels",
+export const GetCorporationsCorporationIdContactsLabelsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContactsLabelsInput, GetCorporationsCorporationIdContactsLabelsOutput> = {
+  operationId: "GetCorporationsCorporationIdContactsLabels",
   method: "GET",
-  path: "/characters/{character_id}/contacts/labels",
+  path: "/corporations/{corporation_id}/contacts/labels",
   parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCharactersCharacterIdContactsLabelsRequestSchema,
-  authentication: { scopes: ["esi-characters.read_contacts.v1"] },
+  requestSchema: GetCorporationsCorporationIdContactsLabelsRequestSchema,
+  authentication: { scopes: ["esi-corporations.read_contacts.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdContactsLabelsStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContactsLabelsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -157,47 +198,6 @@ export const GetCorporationsCorporationIdContactsDescriptor: OperationExecutionD
   authentication: { scopes: ["esi-corporations.read_contacts.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsCorporationIdContactsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsCorporationIdContactsLabelsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContactsLabelsInput, GetCorporationsCorporationIdContactsLabelsOutput> = {
-  operationId: "GetCorporationsCorporationIdContactsLabels",
-  method: "GET",
-  path: "/corporations/{corporation_id}/contacts/labels",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsCorporationIdContactsLabelsRequestSchema,
-  authentication: { scopes: ["esi-corporations.read_contacts.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContactsLabelsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const PostCharactersCharacterIdContactsDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdContactsInput, PostCharactersCharacterIdContactsOutput> = {
-  operationId: "PostCharactersCharacterIdContacts",
-  method: "POST",
-  path: "/characters/{character_id}/contacts",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "label_ids", placement: "query", required: false, schema: { type: 'array', items: { type: "integer" } } },
-    { name: "standing", placement: "query", required: true, schema: { type: "number" } },
-    { name: "watched", placement: "query", required: false, schema: { type: "boolean" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: { required: true, mediaType: 'application/json' },
-  requestSchema: PostCharactersCharacterIdContactsRequestSchema,
-  authentication: { scopes: ["esi-characters.write_contacts.v1"] },
-  successResponses: [
-    { status: 201, body: 'json', schema: PostCharactersCharacterIdContactsStatus201SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

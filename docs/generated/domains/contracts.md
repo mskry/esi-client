@@ -13,15 +13,49 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdContracts`](../operations/GetCharactersCharacterIdContracts.md) | `GET` | `getCharactersCharacterIdContracts` | required | offset | read | Get contracts |
-| [`GetCharactersCharacterIdContractsContractIdBids`](../operations/GetCharactersCharacterIdContractsContractIdBids.md) | `GET` | `getCharactersCharacterIdContractsContractIdBids` | required | none | read | Get contract bids |
-| [`GetCharactersCharacterIdContractsContractIdItems`](../operations/GetCharactersCharacterIdContractsContractIdItems.md) | `GET` | `getCharactersCharacterIdContractsContractIdItems` | required | none | read | Get contract items |
-| [`GetContractsPublicBidsContractId`](../operations/GetContractsPublicBidsContractId.md) | `GET` | `getContractsPublicBidsContractId` | public | offset | read | Get public contract bids |
-| [`GetContractsPublicItemsContractId`](../operations/GetContractsPublicItemsContractId.md) | `GET` | `getContractsPublicItemsContractId` | public | offset | read | Get public contract items |
-| [`GetContractsPublicRegionId`](../operations/GetContractsPublicRegionId.md) | `GET` | `getContractsPublicRegionId` | public | offset | read | Get public contracts |
-| [`GetCorporationsCorporationIdContracts`](../operations/GetCorporationsCorporationIdContracts.md) | `GET` | `getCorporationsCorporationIdContracts` | required | offset | read | Get corporation contracts |
-| [`GetCorporationsCorporationIdContractsContractIdBids`](../operations/GetCorporationsCorporationIdContractsContractIdBids.md) | `GET` | `getCorporationsCorporationIdContractsContractIdBids` | required | offset | read | Get corporation contract bids |
-| [`GetCorporationsCorporationIdContractsContractIdItems`](../operations/GetCorporationsCorporationIdContractsContractIdItems.md) | `GET` | `getCorporationsCorporationIdContractsContractIdItems` | required | none | read | Get corporation contract items |
+| [`GetCharactersCharacterIdContracts`](../operations/GetCharactersCharacterIdContracts.md) | `GET` | `listCharacterContracts` | required | offset | read | Get contracts |
+| [`GetCharactersCharacterIdContractsContractIdBids`](../operations/GetCharactersCharacterIdContractsContractIdBids.md) | `GET` | `listCharacterContractBids` | required | none | read | Get contract bids |
+| [`GetCharactersCharacterIdContractsContractIdItems`](../operations/GetCharactersCharacterIdContractsContractIdItems.md) | `GET` | `listCharacterContractItems` | required | none | read | Get contract items |
+| [`GetContractsPublicBidsContractId`](../operations/GetContractsPublicBidsContractId.md) | `GET` | `listPublicContractBids` | public | offset | read | Get public contract bids |
+| [`GetContractsPublicItemsContractId`](../operations/GetContractsPublicItemsContractId.md) | `GET` | `listPublicContractItems` | public | offset | read | Get public contract items |
+| [`GetContractsPublicRegionId`](../operations/GetContractsPublicRegionId.md) | `GET` | `listPublicContracts` | public | offset | read | Get public contracts |
+| [`GetCorporationsCorporationIdContracts`](../operations/GetCorporationsCorporationIdContracts.md) | `GET` | `listCorporationContracts` | required | offset | read | Get corporation contracts |
+| [`GetCorporationsCorporationIdContractsContractIdBids`](../operations/GetCorporationsCorporationIdContractsContractIdBids.md) | `GET` | `listCorporationContractBids` | required | offset | read | Get corporation contract bids |
+| [`GetCorporationsCorporationIdContractsContractIdItems`](../operations/GetCorporationsCorporationIdContractsContractIdItems.md) | `GET` | `listCorporationContractItems` | required | none | read | Get corporation contract items |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createContractsClient } from '@evespace/esi-client/domains/contracts';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createContractsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listCharacterContracts(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.contracts.listCharacterContracts(characterId);
+```
 
 ## Shared concepts
 

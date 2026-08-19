@@ -11,21 +11,31 @@ List of the top corporations in faction warfare
 
 - Stable ID: `GetFwLeaderboardsCorporations`
 - HTTP: `GET /fw/leaderboards/corporations`
-- Domain method: `client.factionWarfare.getFwLeaderboardsCorporations(options?)`
+- Domain method: `client.factionWarfare.getCorporationLeaderboards(options?)`
 - Generic call: `client.callOperation("GetFwLeaderboardsCorporations", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/faction-warfare`
 - Domain index: [factionWarfare](../domains/faction-warfare.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFactionWarfareClient } from '@evespace/esi-client/domains/faction-warfare';
+
+const client = createFactionWarfareClient();
+
+const data = await client.getCorporationLeaderboards();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.factionWarfare.getFwLeaderboardsCorporations();
+const data = await client.factionWarfare.getCorporationLeaderboards();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetFwLeaderboardsCorporations', arg
 
 - Request schema: `@evespace/esi-client/schemas` export `GetFwLeaderboardsCorporationsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.factionWarfare.withMetadata().getFwLeaderboardsCorporations(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.factionWarfare.withMetadata().getCorporationLeaderboards(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

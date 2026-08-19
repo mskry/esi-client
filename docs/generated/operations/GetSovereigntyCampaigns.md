@@ -11,21 +11,31 @@ List sovereignty campaigns
 
 - Stable ID: `GetSovereigntyCampaigns`
 - HTTP: `GET /sovereignty/campaigns`
-- Domain method: `client.sovereignty.getSovereigntyCampaigns(options?)`
+- Domain method: `client.sovereignty.listCampaigns(options?)`
 - Generic call: `client.callOperation("GetSovereigntyCampaigns", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/sovereignty`
 - Domain index: [sovereignty](../domains/sovereignty.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createSovereigntyClient } from '@evespace/esi-client/domains/sovereignty';
+
+const client = createSovereigntyClient();
+
+const data = await client.listCampaigns();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.sovereignty.getSovereigntyCampaigns();
+const data = await client.sovereignty.listCampaigns();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetSovereigntyCampaigns', arguments
 
 - Request schema: `@evespace/esi-client/schemas` export `GetSovereigntyCampaignsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.sovereignty.withMetadata().getSovereigntyCampaigns(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.sovereignty.withMetadata().listCampaigns(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

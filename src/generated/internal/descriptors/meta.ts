@@ -21,7 +21,7 @@ import {
   type GetMetaNameOutput,
   type GetMetaStatusInput,
   type GetMetaStatusOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/meta.js';
 
 export const GetMetaChangelogDescriptor: OperationExecutionDescriptor<GetMetaChangelogInput, GetMetaChangelogOutput> = {
   operationId: "GetMetaChangelog",
@@ -41,20 +41,20 @@ export const GetMetaChangelogDescriptor: OperationExecutionDescriptor<GetMetaCha
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetMetaCompatibilityDatesDescriptor: OperationExecutionDescriptor<GetMetaCompatibilityDatesInput, GetMetaCompatibilityDatesOutput> = {
-  operationId: "GetMetaCompatibilityDates",
+export const GetMetaStatusDescriptor: OperationExecutionDescriptor<GetMetaStatusInput, GetMetaStatusOutput> = {
+  operationId: "GetMetaStatus",
   method: "GET",
-  path: "/meta/compatibility-dates",
+  path: "/meta/status",
   parameters: [
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetMetaCompatibilityDatesRequestSchema,
+  requestSchema: GetMetaStatusRequestSchema,
   authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetMetaCompatibilityDatesStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetMetaStatusStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -77,20 +77,20 @@ export const GetMetaNameDescriptor: OperationExecutionDescriptor<GetMetaNameInpu
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetMetaStatusDescriptor: OperationExecutionDescriptor<GetMetaStatusInput, GetMetaStatusOutput> = {
-  operationId: "GetMetaStatus",
+export const GetMetaCompatibilityDatesDescriptor: OperationExecutionDescriptor<GetMetaCompatibilityDatesInput, GetMetaCompatibilityDatesOutput> = {
+  operationId: "GetMetaCompatibilityDates",
   method: "GET",
-  path: "/meta/status",
+  path: "/meta/compatibility-dates",
   parameters: [
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetMetaStatusRequestSchema,
+  requestSchema: GetMetaCompatibilityDatesRequestSchema,
   authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetMetaStatusStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetMetaCompatibilityDatesStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

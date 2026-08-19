@@ -17,7 +17,7 @@ import {
   type GetCharactersMercenaryTacticalOperationsListingOutput,
   type GetSkyhooksRaidableInput,
   type GetSkyhooksRaidableOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/activities.js';
 
 export const GetCharactersMercenaryTacticalOperationsDetailDescriptor: OperationExecutionDescriptor<GetCharactersMercenaryTacticalOperationsDetailInput, GetCharactersMercenaryTacticalOperationsDetailOutput> = {
   operationId: "GetCharactersMercenaryTacticalOperationsDetail",

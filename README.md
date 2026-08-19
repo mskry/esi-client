@@ -6,10 +6,20 @@ An ESM-only TypeScript SDK for EVE Online ESI, centered on `EsiClient` and gener
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
-const status = await client.status.getStatus();
+const status = await client.status.get();
 ```
 
 `new EsiClient()` uses the standard ESI base URL and the package's pinned compatibility date, **2026-08-18**.
+
+For one domain without loading the aggregate client, construct it from its subpath:
+
+```ts
+import { createStatusClient } from '@evespace/esi-client/domains/status';
+
+const statusClient = createStatusClient();
+const status = await statusClient.get();
+const response = await statusClient.withMetadata().get();
+```
 
 ## Install
 
@@ -31,7 +41,7 @@ if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this autho
 
 const client = new EsiClient({ token: accessToken });
 const characterId = 90000001;
-const location = await client.location.getCharactersCharacterIdLocation(characterId);
+const location = await client.location.get(characterId);
 ```
 
 Required path identifiers are positional. Optional query and header values, including a per-operation compatibility-date override, are grouped in a final typed options object.
@@ -48,6 +58,8 @@ Required path identifiers are positional. Optional query and header values, incl
 
 Import `searchOperations` and `describeOperation` from `@evespace/esi-client/operations` to discover stable operation IDs and serializable contracts. Execute one validated request with `client.callOperation(stableId, arguments)`; generic execution always returns an `EsiResponse<T>` and never follows pagination automatically.
 
+Domain methods use concise reviewed names such as `client.location.get(characterId)`. Stable OpenAPI operation IDs such as `GetCharactersCharacterIdLocation` remain unchanged for discovery, descriptions, schemas, diagnostics, and generic `callOperation` execution.
+
 Generic mutations are denied by default. They require both `allowGenericMutations: true` when constructing the client and `{ confirmMutation: true }` on the individual `callOperation`. Named typed mutation methods express explicit caller intent and do not use these generic gates.
 
 ## Imports And Documentation
@@ -57,6 +69,12 @@ The root export is the convenient entry point. ESM subpaths provide narrower imp
 - `@evespace/esi-client/operations` for discovery, descriptors, and generic execution types
 - `@evespace/esi-client/schemas` for generated Zod schemas and inferred types
 - `@evespace/esi-client/domains/<domain>` for one generated domain client
+
+Method option interfaces use stable operation IDs, for example `GetAlliancesAllianceIdIconsOptions`, matching the operation's generated input, output, schemas, descriptor, manifest entry, and discovery identity. Their globally unique names are available from both the package root and corresponding domain subpath.
+
+Every domain subpath exports a `create<Domain>Client` factory, such as `createStatusClient`. Factories accept the same client options applicable to `EsiClient`; direct domain-class construction is unsupported because configuration plumbing is internal. The classes remain available as abstract contracts and runtime `instanceof` values.
+
+Domain subpaths reduce the runtime and TypeScript declaration graph reached by an import. They do not reduce npm installation size: the installed tarball still contains all domains, aggregate discovery metadata, and shared schemas.
 
 Start with the repository [`llms.txt`](llms.txt), then retrieve only the documentation needed:
 

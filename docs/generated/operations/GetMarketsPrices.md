@@ -11,21 +11,31 @@ List market prices
 
 - Stable ID: `GetMarketsPrices`
 - HTTP: `GET /markets/prices`
-- Domain method: `client.market.getMarketsPrices(options?)`
+- Domain method: `client.market.listPrices(options?)`
 - Generic call: `client.callOperation("GetMarketsPrices", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/market`
 - Domain index: [market](../domains/market.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMarketClient } from '@evespace/esi-client/domains/market';
+
+const client = createMarketClient();
+
+const data = await client.listPrices();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.market.getMarketsPrices();
+const data = await client.market.listPrices();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetMarketsPrices', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetMarketsPricesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.market.withMetadata().getMarketsPrices(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.market.withMetadata().listPrices(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

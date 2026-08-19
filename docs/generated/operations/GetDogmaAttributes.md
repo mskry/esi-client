@@ -11,21 +11,31 @@ Get attributes
 
 - Stable ID: `GetDogmaAttributes`
 - HTTP: `GET /dogma/attributes`
-- Domain method: `client.dogma.getDogmaAttributes(options?)`
+- Domain method: `client.dogma.listAttributes(options?)`
 - Generic call: `client.callOperation("GetDogmaAttributes", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/dogma`
 - Domain index: [dogma](../domains/dogma.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createDogmaClient } from '@evespace/esi-client/domains/dogma';
+
+const client = createDogmaClient();
+
+const data = await client.listAttributes();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.dogma.getDogmaAttributes();
+const data = await client.dogma.listAttributes();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetDogmaAttributes', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetDogmaAttributesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.dogma.withMetadata().getDogmaAttributes(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.dogma.withMetadata().listAttributes(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

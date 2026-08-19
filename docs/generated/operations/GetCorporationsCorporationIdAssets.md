@@ -11,14 +11,29 @@ Get corporation assets
 
 - Stable ID: `GetCorporationsCorporationIdAssets`
 - HTTP: `GET /corporations/{corporation_id}/assets`
-- Domain method: `client.assets.getCorporationsCorporationIdAssets(corporationId, options?)`
+- Domain method: `client.assets.listCorporationAssets(corporationId, options?)`
 - Generic call: `client.callOperation("GetCorporationsCorporationIdAssets", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/assets`
 - Domain index: [assets](../domains/assets.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createAssetsClient } from '@evespace/esi-client/domains/assets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createAssetsClient({ token: accessToken });
+
+const corporationId = 98000001;
+
+const data = await client.listCorporationAssets(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const corporationId = 98000001;
 
-const data = await client.assets.getCorporationsCorporationIdAssets(corporationId);
+const data = await client.assets.listCorporationAssets(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -65,7 +80,7 @@ const response = await client.callOperation('GetCorporationsCorporationIdAssets'
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsCorporationIdAssetsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.assets.withMetadata().getCorporationsCorporationIdAssets(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.assets.withMetadata().listCorporationAssets(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

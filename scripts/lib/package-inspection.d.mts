@@ -1,10 +1,14 @@
 export interface PackedFile {
   readonly path: string;
   readonly size?: number;
+  readonly source?: string;
 }
 
 export interface PackedPackageManifest {
   readonly exports?: { readonly [entry: string]: unknown };
+  readonly dependencies?: { readonly [name: string]: string };
+  readonly optionalDependencies?: { readonly [name: string]: string };
+  readonly peerDependencies?: { readonly [name: string]: string };
 }
 
 export interface PackedPackageBoundaryResult {
@@ -16,6 +20,7 @@ export const forbiddenPackagePaths: readonly string[];
 export const packageBudgetSchemaVersion: number;
 export const packageBudgetByteHeadroomPercent: number;
 export const packageBudgetFileCountHeadroom: number;
+export const expectedDomainEntryCount: number;
 export function findForbiddenPackedPaths(files: readonly PackedFile[]): readonly string[];
 export function validatePackedPackageBoundary(
   files: readonly PackedFile[],
@@ -27,11 +32,23 @@ export interface PackageMeasurements {
   totals: { [metric: string]: number };
   publicEntries: {
     [entry: string]: {
-      javascript: { path: string; bytes: number };
-      declaration: { path: string; bytes: number };
+      runtime: PackedArtifactGraph;
+      declaration: PackedArtifactGraph;
     };
   };
   files: string[];
+}
+
+export interface PackedArtifactExternalEdge {
+  from: string;
+  specifier: string;
+}
+
+export interface PackedArtifactGraph {
+  target: string;
+  files: string[];
+  externalEdges: PackedArtifactExternalEdge[];
+  uniqueBytes: number;
 }
 
 export interface PackageBudgetBaseline {
@@ -46,20 +63,36 @@ export interface PackageBudgetBaseline {
   };
   publicEntries: {
     [entry: string]: {
-      javascript: {
-        path: string;
-        measuredBytes: number;
-        maximumBytes: number;
-      };
-      declaration: {
-        path: string;
-        measuredBytes: number;
-        maximumBytes: number;
-      };
+      runtime: PackageEntryBudget;
+      declaration: PackageEntryBudget;
     };
   };
   allowedFiles: string[];
 }
+
+export interface PackageEntryBudget {
+  target: string;
+  files: string[];
+  externalEdges: PackedArtifactExternalEdge[];
+  measuredUniqueBytes: number;
+  maximumUniqueBytes: number;
+}
+
+export function tracePackedArtifactGraph(
+  files: readonly PackedFile[],
+  target: string,
+  kind: 'runtime' | 'declaration',
+  approvedExternalPackages?: readonly string[],
+): PackedArtifactGraph;
+export function validateDomainEntryIsolation(
+  measurements: PackageMeasurements,
+  expectedCount?: number,
+): { domainEntryCount: number };
+export function validateDomainDeclarationSurface(
+  measurements: PackageMeasurements,
+  files: readonly PackedFile[],
+  expectedCount?: number,
+): { domainEntryCount: number };
 
 export function measurePackedPackage(
   pack: {

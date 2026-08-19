@@ -11,14 +11,29 @@ Get a character's wallet balance
 
 - Stable ID: `GetCharactersCharacterIdWallet`
 - HTTP: `GET /characters/{character_id}/wallet`
-- Domain method: `client.wallet.getCharactersCharacterIdWallet(characterId, options?)`
+- Domain method: `client.wallet.getCharacterBalance(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdWallet", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/wallet`
 - Domain index: [wallet](../domains/wallet.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createWalletClient } from '@evespace/esi-client/domains/wallet';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createWalletClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.getCharacterBalance(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.wallet.getCharactersCharacterIdWallet(characterId);
+const data = await client.wallet.getCharacterBalance(characterId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCharactersCharacterIdWallet', ar
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdWalletRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.wallet.withMetadata().getCharactersCharacterIdWallet(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.wallet.withMetadata().getCharacterBalance(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

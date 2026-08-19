@@ -13,7 +13,7 @@ import {
   type GetSovereigntyCampaignsOutput,
   type GetSovereigntySystemsInput,
   type GetSovereigntySystemsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/sovereignty.js';
 
 export const GetSovereigntyCampaignsDescriptor: OperationExecutionDescriptor<GetSovereigntyCampaignsInput, GetSovereigntyCampaignsOutput> = {
   operationId: "GetSovereigntyCampaigns",

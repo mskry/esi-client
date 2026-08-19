@@ -17,26 +17,7 @@ import {
   type GetWarsWarIdKillmailsInput,
   type GetWarsWarIdKillmailsOutput,
   type GetWarsWarIdOutput,
-} from '../../schemas/operations.js';
-
-export const GetWarsDescriptor: OperationExecutionDescriptor<GetWarsInput, GetWarsOutput> = {
-  operationId: "GetWars",
-  method: "GET",
-  path: "/wars",
-  parameters: [
-    { name: "max_war_id", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetWarsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetWarsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/wars.js';
 
 export const GetWarsWarIdDescriptor: OperationExecutionDescriptor<GetWarsWarIdInput, GetWarsWarIdOutput> = {
   operationId: "GetWarsWarId",
@@ -53,6 +34,25 @@ export const GetWarsWarIdDescriptor: OperationExecutionDescriptor<GetWarsWarIdIn
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetWarsWarIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetWarsDescriptor: OperationExecutionDescriptor<GetWarsInput, GetWarsOutput> = {
+  operationId: "GetWars",
+  method: "GET",
+  path: "/wars",
+  parameters: [
+    { name: "max_war_id", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetWarsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetWarsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

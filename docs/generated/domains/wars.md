@@ -13,9 +13,33 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetWars`](../operations/GetWars.md) | `GET` | `getWars` | public | none | read | List wars |
-| [`GetWarsWarId`](../operations/GetWarsWarId.md) | `GET` | `getWarsWarId` | public | none | read | Get war information |
-| [`GetWarsWarIdKillmails`](../operations/GetWarsWarIdKillmails.md) | `GET` | `getWarsWarIdKillmails` | public | offset | read | List kills for a war |
+| [`GetWars`](../operations/GetWars.md) | `GET` | `list` | public | none | read | List wars |
+| [`GetWarsWarId`](../operations/GetWarsWarId.md) | `GET` | `get` | public | none | read | Get war information |
+| [`GetWarsWarIdKillmails`](../operations/GetWarsWarIdKillmails.md) | `GET` | `listKillmails` | public | offset | read | List kills for a war |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createWarsClient } from '@evespace/esi-client/domains/wars';
+
+const client = createWarsClient();
+
+const data = await client.list();
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const data = await client.wars.list();
+```
 
 ## Shared concepts
 

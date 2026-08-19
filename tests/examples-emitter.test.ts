@@ -20,7 +20,8 @@ import type { EmitterContext, GenerationProvenance } from '../scripts/generate/o
 import { makeTemporaryDirectory } from './helpers/temporary-directory.js';
 
 const operationCount = 233;
-const standalonePaths = [
+const domainCount = 39;
+const representativePaths = [
   'authenticated.ts',
   'metadata.ts',
   'mutation-safety.ts',
@@ -50,6 +51,9 @@ describe('generated examples', () => {
         `client.${operation.facade.domain}.${operation.facade.method}(`,
       );
       expect(snippets.domainMethod).toContain("from '@evespace/esi-client';");
+      expect(snippets.standaloneDomainMethod).toContain(`client.${operation.facade.method}(`);
+      expect(snippets.standaloneDomainMethod).toContain(`from '@evespace/esi-client/domains/`);
+      expect(snippets.standaloneDomainMethod).not.toContain("from '@evespace/esi-client';");
       expect(snippets.genericExecution).toContain(
         `CallOperationArguments<'${operation.operationId}'>`,
       );
@@ -57,9 +61,10 @@ describe('generated examples', () => {
         `client.callOperation('${operation.operationId}', arguments_`,
       );
       expect(syntaxDiagnostics(snippets.domainMethod)).toEqual([]);
+      expect(syntaxDiagnostics(snippets.standaloneDomainMethod)).toEqual([]);
       expect(syntaxDiagnostics(snippets.genericExecution)).toEqual([]);
 
-      const combined = `${snippets.domainMethod}\n${snippets.genericExecution}`;
+      const combined = `${snippets.domainMethod}\n${snippets.standaloneDomainMethod}\n${snippets.genericExecution}`;
       expect(combined).not.toMatch(/Bearer\s+[A-Za-z0-9._~-]{8,}/u);
       expect(combined).not.toMatch(/-----BEGIN [A-Z ]*PRIVATE KEY-----/u);
     }
@@ -89,9 +94,13 @@ describe('generated examples', () => {
 
   it('emits the curated standalone set with provenance and safe mutation credentials', async () => {
     const fixture = await loadFixture();
-    const rendered = renderStandaloneExamples(fixture.provenance);
+    const rendered = renderStandaloneExamples(fixture.manifest, fixture.provenance);
 
-    expect(sortedText(rendered.keys())).toEqual(standalonePaths);
+    expect(rendered.size).toBe(representativePaths.length + domainCount);
+    for (const path of representativePaths) expect(rendered.has(path)).toBe(true);
+    expect([...rendered.keys()].filter((path) => path.startsWith('domain-'))).toHaveLength(
+      domainCount,
+    );
     for (const [path, source] of rendered) {
       expect(source).toContain(`Compatibility date: ${fixture.provenance.compatibilityDate}.`);
       expect(source).toContain(`Specification SHA-256: ${fixture.provenance.sha256}.`);
@@ -121,17 +130,17 @@ describe('generated examples', () => {
       { target: 'examples/generated', kind: 'directory' },
     ]);
     await expect(readdir(join(outputDirectory, 'examples/generated'))).resolves.toHaveLength(
-      standalonePaths.length,
+      representativePaths.length + domainCount,
     );
   });
 
   it('matches every materialized standalone output without stale files', async () => {
     const fixture = await loadFixture();
-    const rendered = renderStandaloneExamples(fixture.provenance);
+    const rendered = renderStandaloneExamples(fixture.manifest, fixture.provenance);
     const generatedRoot = new URL('../examples/generated/', import.meta.url);
     const materializedPaths = sortedText(await readdir(generatedRoot));
 
-    expect(materializedPaths).toEqual(standalonePaths);
+    expect(materializedPaths).toEqual(sortedText(rendered.keys()));
     await Promise.all(
       materializedPaths.map(async (path) => {
         await expect(readFile(new URL(path, generatedRoot), 'utf8')).resolves.toBe(
@@ -149,14 +158,7 @@ describe('generated examples', () => {
 
     await expect(
       emitStandaloneExamples(createContext(fixture, outputDirectory), examplesDirectory),
-    ).resolves.toEqual([
-      'public.ts',
-      'authenticated.ts',
-      'paginated.ts',
-      'metadata.ts',
-      'validation-error.ts',
-      'mutation-safety.ts',
-    ]);
+    ).resolves.toHaveLength(representativePaths.length + domainCount);
   });
 });
 
@@ -192,6 +194,7 @@ function createContext(fixture: ExamplesFixture, outputDirectory: string): Emitt
     compatibilityDate: fixture.provenance.compatibilityDate,
     correctedDocument: {},
     normalizedModel: fixture.model,
+    namingReviewReport: 'test naming review\n',
     operationMetadata: fixture.metadata,
     outputDirectory,
     outputPath: (target) => join(outputDirectory, target),

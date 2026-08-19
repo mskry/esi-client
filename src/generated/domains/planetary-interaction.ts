@@ -3,113 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetCharactersCharacterIdPlanetsDescriptor,
-  GetCharactersCharacterIdPlanetsPlanetIdDescriptor,
-  GetCorporationsCorporationIdCustomsOfficesDescriptor,
-  GetUniverseSchematicsSchematicIdDescriptor,
-} from '../internal/descriptors/planetary-interaction.js';
-import type {
-  GetCharactersCharacterIdPlanetsInput,
-  GetCharactersCharacterIdPlanetsOutput,
-  GetCharactersCharacterIdPlanetsPlanetIdInput,
-  GetCharactersCharacterIdPlanetsPlanetIdOutput,
-  GetCorporationsCorporationIdCustomsOfficesInput,
-  GetCorporationsCorporationIdCustomsOfficesOutput,
-  GetUniverseSchematicsSchematicIdInput,
-  GetUniverseSchematicsSchematicIdOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindPlanetaryInteractionDomainClient } from '../internal/domains/planetary-interaction.js';
+import type { PlanetaryInteractionDomainClient } from '../internal/domains/planetary-interaction-contract.js';
 
-export interface GetCharactersCharacterIdPlanetsOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdPlanetsInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdPlanetsInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdPlanetsInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/planetary-interaction-contract.js';
 
-export interface GetCharactersCharacterIdPlanetsPlanetIdOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput["header"]>["X-Tenant"];
-}
-
-export interface GetCorporationsCorporationIdCustomsOfficesOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["header"]>["If-None-Match"];
-  readonly "page"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["query"]>["page"];
-  readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["header"]>["X-Tenant"];
-}
-
-export interface GetUniverseSchematicsSchematicIdOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetUniverseSchematicsSchematicIdInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetUniverseSchematicsSchematicIdInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetUniverseSchematicsSchematicIdInput["header"]>["X-Tenant"];
-}
-
-export class PlanetaryInteractionDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdPlanets(characterId: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions): Promise<GetCharactersCharacterIdPlanetsOutput> {
-    const arguments_: GetCharactersCharacterIdPlanetsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdPlanetsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCharactersCharacterIdPlanetsPlanetId(characterId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], planetId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions): Promise<GetCharactersCharacterIdPlanetsPlanetIdOutput> {
-    const arguments_: GetCharactersCharacterIdPlanetsPlanetIdInput = { path: { "character_id": characterId, "planet_id": planetId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdPlanetsPlanetIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCorporationsCorporationIdCustomsOffices(corporationId: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions): Promise<GetCorporationsCorporationIdCustomsOfficesOutput> {
-    const arguments_: GetCorporationsCorporationIdCustomsOfficesInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdCustomsOfficesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getUniverseSchematicsSchematicId(schematicId: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions): Promise<GetUniverseSchematicsSchematicIdOutput> {
-    const arguments_: GetUniverseSchematicsSchematicIdInput = { path: { "schematic_id": schematicId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseSchematicsSchematicIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): PlanetaryInteractionDomainClientWithMetadata {
-    return new PlanetaryInteractionDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class PlanetaryInteractionDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdPlanets(characterId: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions): Promise<EsiResponse<GetCharactersCharacterIdPlanetsOutput>> {
-    const arguments_: GetCharactersCharacterIdPlanetsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdPlanetsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCharactersCharacterIdPlanetsPlanetId(characterId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], planetId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions): Promise<EsiResponse<GetCharactersCharacterIdPlanetsPlanetIdOutput>> {
-    const arguments_: GetCharactersCharacterIdPlanetsPlanetIdInput = { path: { "character_id": characterId, "planet_id": planetId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdPlanetsPlanetIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCorporationsCorporationIdCustomsOffices(corporationId: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions): Promise<EsiResponse<GetCorporationsCorporationIdCustomsOfficesOutput>> {
-    const arguments_: GetCorporationsCorporationIdCustomsOfficesInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdCustomsOfficesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getUniverseSchematicsSchematicId(schematicId: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions): Promise<EsiResponse<GetUniverseSchematicsSchematicIdOutput>> {
-    const arguments_: GetUniverseSchematicsSchematicIdInput = { path: { "schematic_id": schematicId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseSchematicsSchematicIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createPlanetaryInteractionClient(options: EsiClientOptions = {}): PlanetaryInteractionDomainClient {
+  return bindPlanetaryInteractionDomainClient(new EsiClientConfiguration(options));
 }

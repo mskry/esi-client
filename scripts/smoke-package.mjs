@@ -24,6 +24,10 @@ const exportedDomains = Object.keys(packageJson.exports)
   .filter((subpath) => subpath.startsWith('./domains/'))
   .map((subpath) => subpath.slice('./domains/'.length))
   .toSorted();
+const domainFactories = exportedDomains.map((domain) => ({
+  domain,
+  factoryName: `create${domain.split('-').map(capitalize).join('')}Client`,
+}));
 if (JSON.stringify(exportedDomains) !== JSON.stringify(generatedDomains)) {
   throw new Error(
     `Package domain exports do not match generated domains (${exportedDomains.length}/${generatedDomains.length})`,
@@ -51,6 +55,91 @@ try {
     ['install', '--ignore-scripts', '--no-audit', '--no-fund', tarball],
     { cwd: consumerDirectory },
   );
+
+  const standaloneRuntimeSource = `import { createStatusClient, StatusDomainClient } from '@evespace/esi-client/domains/status';
+
+const requests = [];
+const client = createStatusClient({
+  baseUrl: 'https://example.test',
+  fetch: async (input, init) => {
+    requests.push({ input, init });
+    return new Response(JSON.stringify({
+      players: 42,
+      server_version: 'standalone-smoke',
+      start_time: '2026-08-18T00:00:00Z',
+      vip: false,
+    }), {
+      status: 200,
+      headers: { 'content-type': 'application/json', 'x-request-id': 'standalone-request' },
+    });
+  },
+});
+
+if (!(client instanceof StatusDomainClient)) throw new Error('Invalid standalone status domain');
+const status = await client.get({ compatibilityDate: '2020-01-01' });
+const response = await client.withMetadata().get({ compatibilityDate: '2020-01-01' });
+if (requests.length !== 2) throw new Error('Standalone status did not make two requests');
+for (const request of requests) {
+  if (request.input !== 'https://example.test/status') throw new Error('Unexpected standalone URL');
+  if (request.init.method !== 'GET') throw new Error('Unexpected standalone method');
+  if (new Headers(request.init.headers).get('x-compatibility-date') !== '2020-01-01') {
+    throw new Error('Missing standalone compatibility header');
+  }
+}
+if (status.players !== 42 || response.data.server_version !== 'standalone-smoke') {
+  throw new Error('Unexpected standalone status result');
+}
+if (response.meta.status !== 200 || response.meta.requestId !== 'standalone-request') {
+  throw new Error('Unexpected standalone status metadata');
+}
+`;
+  if (/from ['"]@evespace\/esi-client['"]/u.test(standaloneRuntimeSource)) {
+    throw new Error('Standalone runtime consumer must not import the package root');
+  }
+  await writeFile(
+    join(consumerDirectory, 'status-standalone-runtime.mjs'),
+    standaloneRuntimeSource,
+  );
+  await execFileAsync(process.execPath, ['status-standalone-runtime.mjs'], {
+    cwd: consumerDirectory,
+  });
+
+  await writeFile(
+    join(consumerDirectory, 'status-generic-parity.mjs'),
+    `import { EsiClient } from '@evespace/esi-client';
+import { createStatusClient } from '@evespace/esi-client/domains/status';
+
+const requests = [];
+const fetch = async (input, init) => {
+  requests.push({
+    input,
+    method: init.method,
+    headers: Object.fromEntries(new Headers(init.headers)),
+    body: init.body,
+  });
+  return new Response(JSON.stringify({
+    players: 42,
+    server_version: 'parity-smoke',
+    start_time: '2026-08-18T00:00:00Z',
+    vip: false,
+  }), { status: 200, headers: { 'content-type': 'application/json' } });
+};
+const options = {
+  baseUrl: 'https://example.test',
+  compatibilityDate: '2020-01-01',
+  fetch,
+};
+const curated = await createStatusClient(options).get();
+const generic = await new EsiClient(options).callOperation('GetStatus', {});
+if (JSON.stringify(curated) !== JSON.stringify(generic.data)) {
+  throw new Error('Curated and generic status results differ');
+}
+if (requests.length !== 2 || JSON.stringify(requests[0]) !== JSON.stringify(requests[1])) {
+  throw new Error('Curated and stable-ID generic status requests differ');
+}
+`,
+  );
+  await execFileAsync(process.execPath, ['status-generic-parity.mjs'], { cwd: consumerDirectory });
 
   await writeFile(
     join(consumerDirectory, 'runtime-smoke.mjs'),
@@ -114,9 +203,8 @@ const client = new EsiClient({
     }), { status: 200, headers: { 'content-type': 'application/json' } });
   },
 });
-
 if (!(client.status instanceof StatusDomainClient)) throw new Error('Missing status domain');
-const status = await client.status.getStatus({ compatibilityDate: '2020-01-01' });
+const status = await client.status.get({ compatibilityDate: '2020-01-01' });
 if (request.input !== 'https://example.test/status') throw new Error('Unexpected request URL');
 if (request.init.method !== 'GET') throw new Error('Unexpected request method');
 if (new Headers(request.init.headers).get('x-compatibility-date') !== '2020-01-01') {
@@ -131,6 +219,50 @@ if ('Configuration' in sdk || 'StatusApi' in sdk) throw new Error('Prototype exp
 `,
   );
   await execFileAsync(process.execPath, ['runtime-smoke.mjs'], { cwd: consumerDirectory });
+
+  const factoryTypeSource = `${domainFactories
+    .map(({ domain, factoryName }) => {
+      const extra =
+        domain === 'status'
+          ? ', StatusDomainClient, type GetStatusOptions'
+          : domain === 'location'
+            ? ', type GetCharactersCharacterIdLocationOptions'
+            : '';
+      return `import { ${factoryName}${extra} } from '@evespace/esi-client/domains/${domain}';`;
+    })
+    .join('\n')}
+// @ts-expect-error EsiClientConfiguration is internal and is not a domain export.
+import type { EsiClientConfiguration } from '@evespace/esi-client/domains/status';
+// @ts-expect-error Method-derived option names are not exported.
+import type { GetOptions } from '@evespace/esi-client/domains/status';
+// @ts-expect-error Domain/method-derived option names are not exported.
+import type { StatusGetOptions } from '@evespace/esi-client/domains/status';
+
+const options = { baseUrl: 'https://example.test', fetch: async () => new Response() };
+${domainFactories
+  .map(
+    ({ domain, factoryName }) => `const ${domain.replaceAll('-', '_')} = ${factoryName}(options);`,
+  )
+  .join('\n')}
+
+const statusOptions: GetStatusOptions = { compatibilityDate: '2026-08-18' };
+const statusClient: StatusDomainClient = status;
+const statusResult = statusClient.get(statusOptions);
+// @ts-expect-error The raw operation-ID transliteration was replaced by get.
+statusClient.getStatus();
+
+const locationOptions: GetCharactersCharacterIdLocationOptions = {};
+const locationResult = location.get(90000001, locationOptions);
+// @ts-expect-error The raw operation-ID transliteration was replaced by get.
+location.getCharactersCharacterIdLocation(90000001);
+
+void statusResult;
+void locationResult;
+`;
+  if (/from ['"]@evespace\/esi-client['"]/u.test(factoryTypeSource)) {
+    throw new Error('Domain factory type consumer must not import the package root');
+  }
+  await writeFile(join(consumerDirectory, 'domain-factories-smoke.ts'), factoryTypeSource);
 
   await writeFile(
     join(consumerDirectory, 'types-smoke.ts'),
@@ -162,12 +294,19 @@ import {
   GetStatusSuccessResponseSchema,
   type GetStatusOutput,
 } from '@evespace/esi-client/schemas';
-import { StatusDomainClient } from '@evespace/esi-client/domains/status';
+import {
+  createStatusClient,
+  StatusDomainClient,
+  type GetStatusOptions,
+} from '@evespace/esi-client/domains/status';
 
 const options: EsiClientOptions = { compatibilityDate: '2026-08-18' };
 const client = new EsiClient(options);
 const domain: StatusDomainClient = client.status;
-const status: Promise<GetStatusOutput> = domain.getStatus();
+const status: Promise<GetStatusOutput> = domain.get();
+const statusOptions: GetStatusOptions = { compatibilityDate: '2026-08-18' };
+const standaloneDomain: StatusDomainClient = createStatusClient(options);
+const standaloneStatus: Promise<GetStatusOutput> = standaloneDomain.get(statusOptions);
 const parsed: GetStatusOutput = GetStatusSuccessResponseSchema.parse({
   players: 1,
   server_version: 'smoke',
@@ -183,6 +322,7 @@ const searchResults: readonly OperationSearchResult[] = searchOperations(searchO
 const description: SerializableOperationManifestEntry = describeOperation('GetStatus');
 const errorConstructor: typeof EsiHttpError = EsiHttpError;
 void status;
+void standaloneStatus;
 void parsed;
 void errorConstructor;
 void (undefined as StatusEnvelope | undefined);
@@ -207,7 +347,7 @@ ${publicCodeSpecifiers
         strict: true,
         target: 'ES2022',
       },
-      include: ['types-smoke.ts'],
+      include: ['domain-factories-smoke.ts', 'types-smoke.ts'],
     }),
   );
   await execFileAsync(
@@ -244,4 +384,8 @@ function argumentValue(name) {
   const value = process.argv[index + 1];
   if (value === undefined) throw new Error(`${name} requires a value`);
   return resolve(value);
+}
+
+function capitalize(value) {
+  return `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
 }

@@ -11,14 +11,29 @@ List character participation in military campaigns
 
 - Stable ID: `GetCharactersMilitaryCampaignsObjectivesListing`
 - HTTP: `GET /characters/{character_id}/military-campaigns/objectives`
-- Domain method: `client.militaryCampaigns.getCharactersMilitaryCampaignsObjectivesListing(characterId, options?)`
+- Domain method: `client.militaryCampaigns.listCharacterObjectiveParticipations(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersMilitaryCampaignsObjectivesListing", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/military-campaigns`
 - Domain index: [militaryCampaigns](../domains/military-campaigns.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMilitaryCampaignsClient } from '@evespace/esi-client/domains/military-campaigns';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMilitaryCampaignsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listCharacterObjectiveParticipations(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.militaryCampaigns.getCharactersMilitaryCampaignsObjectivesListing(characterId);
+const data = await client.militaryCampaigns.listCharacterObjectiveParticipations(characterId);
 ```
 
 ## Generic-execution snippet
@@ -67,7 +82,7 @@ const response = await client.callOperation('GetCharactersMilitaryCampaignsObjec
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersMilitaryCampaignsObjectivesListingRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.militaryCampaigns.withMetadata().getCharactersMilitaryCampaignsObjectivesListing(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.militaryCampaigns.withMetadata().listCharacterObjectiveParticipations(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

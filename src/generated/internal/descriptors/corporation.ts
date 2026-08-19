@@ -93,7 +93,45 @@ import {
   type GetCorporationsCorporationIdTitlesOutput,
   type GetCorporationsNpccorpsInput,
   type GetCorporationsNpccorpsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/corporation.js';
+
+export const GetCorporationsCorporationIdIconsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdIconsInput, GetCorporationsCorporationIdIconsOutput> = {
+  operationId: "GetCorporationsCorporationIdIcons",
+  method: "GET",
+  path: "/corporations/{corporation_id}/icons",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdIconsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdIconsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsCorporationIdMembersLimitDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdMembersLimitInput, GetCorporationsCorporationIdMembersLimitOutput> = {
+  operationId: "GetCorporationsCorporationIdMembersLimit",
+  method: "GET",
+  path: "/corporations/{corporation_id}/members/limit",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdMembersLimitRequestSchema,
+  authentication: { scopes: ["esi-corporations.track_members.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdMembersLimitStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
 
 export const GetCorporationsCorporationIdDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdInput, GetCorporationsCorporationIdOutput> = {
   operationId: "GetCorporationsCorporationId",
@@ -110,6 +148,27 @@ export const GetCorporationsCorporationIdDescriptor: OperationExecutionDescripto
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsCorporationIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsCorporationIdStarbasesStarbaseIdDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdStarbasesStarbaseIdInput, GetCorporationsCorporationIdStarbasesStarbaseIdOutput> = {
+  operationId: "GetCorporationsCorporationIdStarbasesStarbaseId",
+  method: "GET",
+  path: "/corporations/{corporation_id}/starbases/{starbase_id}",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "starbase_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "system_id", placement: "query", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdStarbasesStarbaseIdRequestSchema,
+  authentication: { scopes: ["esi-corporations.read_starbases.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdStarbasesStarbaseIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -133,26 +192,6 @@ export const GetCorporationsCorporationIdAlliancehistoryDescriptor: OperationExe
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdBlueprintsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdBlueprintsInput, GetCorporationsCorporationIdBlueprintsOutput> = {
-  operationId: "GetCorporationsCorporationIdBlueprints",
-  method: "GET",
-  path: "/corporations/{corporation_id}/blueprints",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsCorporationIdBlueprintsRequestSchema,
-  authentication: { scopes: ["esi-corporations.read_blueprints.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdBlueprintsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetCorporationsCorporationIdContainersLogsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContainersLogsInput, GetCorporationsCorporationIdContainersLogsOutput> = {
   operationId: "GetCorporationsCorporationIdContainersLogs",
   method: "GET",
@@ -169,6 +208,26 @@ export const GetCorporationsCorporationIdContainersLogsDescriptor: OperationExec
   authentication: { scopes: ["esi-corporations.read_container_logs.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsCorporationIdContainersLogsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsCorporationIdBlueprintsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdBlueprintsInput, GetCorporationsCorporationIdBlueprintsOutput> = {
+  operationId: "GetCorporationsCorporationIdBlueprints",
+  method: "GET",
+  path: "/corporations/{corporation_id}/blueprints",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdBlueprintsRequestSchema,
+  authentication: { scopes: ["esi-corporations.read_blueprints.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdBlueprintsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -211,21 +270,22 @@ export const GetCorporationsCorporationIdFacilitiesDescriptor: OperationExecutio
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdIconsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdIconsInput, GetCorporationsCorporationIdIconsOutput> = {
-  operationId: "GetCorporationsCorporationIdIcons",
+export const GetCorporationsCorporationIdMedalsIssuedDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdMedalsIssuedInput, GetCorporationsCorporationIdMedalsIssuedOutput> = {
+  operationId: "GetCorporationsCorporationIdMedalsIssued",
   method: "GET",
-  path: "/corporations/{corporation_id}/icons",
+  path: "/corporations/{corporation_id}/medals/issued",
   parameters: [
     { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCorporationsCorporationIdIconsRequestSchema,
-  authentication: null,
+  requestSchema: GetCorporationsCorporationIdMedalsIssuedRequestSchema,
+  authentication: { scopes: ["esi-corporations.read_medals.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdIconsStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdMedalsIssuedStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -250,10 +310,10 @@ export const GetCorporationsCorporationIdMedalsDescriptor: OperationExecutionDes
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdMedalsIssuedDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdMedalsIssuedInput, GetCorporationsCorporationIdMedalsIssuedOutput> = {
-  operationId: "GetCorporationsCorporationIdMedalsIssued",
+export const GetCorporationsCorporationIdRolesHistoryDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdRolesHistoryInput, GetCorporationsCorporationIdRolesHistoryOutput> = {
+  operationId: "GetCorporationsCorporationIdRolesHistory",
   method: "GET",
-  path: "/corporations/{corporation_id}/medals/issued",
+  path: "/corporations/{corporation_id}/roles/history",
   parameters: [
     { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "page", placement: "query", required: false, schema: { type: "integer" } },
@@ -262,37 +322,18 @@ export const GetCorporationsCorporationIdMedalsIssuedDescriptor: OperationExecut
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCorporationsCorporationIdMedalsIssuedRequestSchema,
-  authentication: { scopes: ["esi-corporations.read_medals.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdMedalsIssuedStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsCorporationIdMembersDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdMembersInput, GetCorporationsCorporationIdMembersOutput> = {
-  operationId: "GetCorporationsCorporationIdMembers",
-  method: "GET",
-  path: "/corporations/{corporation_id}/members",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsCorporationIdMembersRequestSchema,
+  requestSchema: GetCorporationsCorporationIdRolesHistoryRequestSchema,
   authentication: { scopes: ["esi-corporations.read_corporation_membership.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdMembersStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdRolesHistoryStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdMembersLimitDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdMembersLimitInput, GetCorporationsCorporationIdMembersLimitOutput> = {
-  operationId: "GetCorporationsCorporationIdMembersLimit",
+export const GetCorporationsCorporationIdRolesDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdRolesInput, GetCorporationsCorporationIdRolesOutput> = {
+  operationId: "GetCorporationsCorporationIdRoles",
   method: "GET",
-  path: "/corporations/{corporation_id}/members/limit",
+  path: "/corporations/{corporation_id}/roles",
   parameters: [
     { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
@@ -300,10 +341,10 @@ export const GetCorporationsCorporationIdMembersLimitDescriptor: OperationExecut
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCorporationsCorporationIdMembersLimitRequestSchema,
-  authentication: { scopes: ["esi-corporations.track_members.v1"] },
+  requestSchema: GetCorporationsCorporationIdRolesRequestSchema,
+  authentication: { scopes: ["esi-corporations.read_corporation_membership.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdMembersLimitStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdRolesStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -346,10 +387,10 @@ export const GetCorporationsCorporationIdMembertrackingDescriptor: OperationExec
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdRolesDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdRolesInput, GetCorporationsCorporationIdRolesOutput> = {
-  operationId: "GetCorporationsCorporationIdRoles",
+export const GetCorporationsCorporationIdMembersDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdMembersInput, GetCorporationsCorporationIdMembersOutput> = {
+  operationId: "GetCorporationsCorporationIdMembers",
   method: "GET",
-  path: "/corporations/{corporation_id}/roles",
+  path: "/corporations/{corporation_id}/members",
   parameters: [
     { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
@@ -357,30 +398,28 @@ export const GetCorporationsCorporationIdRolesDescriptor: OperationExecutionDesc
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCorporationsCorporationIdRolesRequestSchema,
+  requestSchema: GetCorporationsCorporationIdMembersRequestSchema,
   authentication: { scopes: ["esi-corporations.read_corporation_membership.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdRolesStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdMembersStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdRolesHistoryDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdRolesHistoryInput, GetCorporationsCorporationIdRolesHistoryOutput> = {
-  operationId: "GetCorporationsCorporationIdRolesHistory",
+export const GetCorporationsNpccorpsDescriptor: OperationExecutionDescriptor<GetCorporationsNpccorpsInput, GetCorporationsNpccorpsOutput> = {
+  operationId: "GetCorporationsNpccorps",
   method: "GET",
-  path: "/corporations/{corporation_id}/roles/history",
+  path: "/corporations/npccorps",
   parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCorporationsCorporationIdRolesHistoryRequestSchema,
-  authentication: { scopes: ["esi-corporations.read_corporation_membership.v1"] },
+  requestSchema: GetCorporationsNpccorpsRequestSchema,
+  authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdRolesHistoryStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCorporationsNpccorpsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -445,27 +484,6 @@ export const GetCorporationsCorporationIdStarbasesDescriptor: OperationExecution
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdStarbasesStarbaseIdDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdStarbasesStarbaseIdInput, GetCorporationsCorporationIdStarbasesStarbaseIdOutput> = {
-  operationId: "GetCorporationsCorporationIdStarbasesStarbaseId",
-  method: "GET",
-  path: "/corporations/{corporation_id}/starbases/{starbase_id}",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "starbase_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "system_id", placement: "query", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsCorporationIdStarbasesStarbaseIdRequestSchema,
-  authentication: { scopes: ["esi-corporations.read_starbases.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdStarbasesStarbaseIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetCorporationsCorporationIdStructuresDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdStructuresInput, GetCorporationsCorporationIdStructuresOutput> = {
   operationId: "GetCorporationsCorporationIdStructures",
   method: "GET",
@@ -501,24 +519,6 @@ export const GetCorporationsCorporationIdTitlesDescriptor: OperationExecutionDes
   authentication: { scopes: ["esi-corporations.read_titles.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsCorporationIdTitlesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsNpccorpsDescriptor: OperationExecutionDescriptor<GetCorporationsNpccorpsInput, GetCorporationsNpccorpsOutput> = {
-  operationId: "GetCorporationsNpccorps",
-  method: "GET",
-  path: "/corporations/npccorps",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsNpccorpsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsNpccorpsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

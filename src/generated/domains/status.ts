@@ -3,52 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetStatusDescriptor,
-} from '../internal/descriptors/status.js';
-import type {
-  GetStatusInput,
-  GetStatusOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindStatusDomainClient } from '../internal/domains/status.js';
+import type { StatusDomainClient } from '../internal/domains/status-contract.js';
 
-export interface GetStatusOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetStatusInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetStatusInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetStatusInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/status-contract.js';
 
-export class StatusDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getStatus(options?: GetStatusOptions): Promise<GetStatusOutput> {
-    const arguments_: GetStatusInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetStatusDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): StatusDomainClientWithMetadata {
-    return new StatusDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class StatusDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getStatus(options?: GetStatusOptions): Promise<EsiResponse<GetStatusOutput>> {
-    const arguments_: GetStatusInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetStatusDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createStatusClient(options: EsiClientOptions = {}): StatusDomainClient {
+  return bindStatusDomainClient(new EsiClientConfiguration(options));
 }

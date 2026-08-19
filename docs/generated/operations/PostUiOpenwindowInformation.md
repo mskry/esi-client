@@ -11,14 +11,28 @@ Open Information Window
 
 - Stable ID: `PostUiOpenwindowInformation`
 - HTTP: `POST /ui/openwindow/information`
-- Domain method: `client.userInterface.postUiOpenwindowInformation(options)`
+- Domain method: `client.userInterface.openInformation(options)`
 - Generic call: `client.callOperation("PostUiOpenwindowInformation", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/user-interface`
 - Domain index: [userInterface](../domains/user-interface.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createUserInterfaceClient } from '@evespace/esi-client/domains/user-interface';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createUserInterfaceClient({ token: accessToken });
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.openInformation({ targetId: 12345 });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -29,7 +43,7 @@ if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this autho
 const client = new EsiClient({ token: accessToken });
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.userInterface.postUiOpenwindowInformation({ targetId: 12345 });
+const data = await client.userInterface.openInformation({ targetId: 12345 });
 ```
 
 ## Generic-execution snippet
@@ -64,7 +78,7 @@ const response = await client.callOperation('PostUiOpenwindowInformation', argum
 
 - Request schema: `@evespace/esi-client/schemas` export `PostUiOpenwindowInformationRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.userInterface.withMetadata().postUiOpenwindowInformation(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.userInterface.withMetadata().openInformation(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

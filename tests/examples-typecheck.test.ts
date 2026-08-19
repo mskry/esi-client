@@ -13,13 +13,20 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 
 describe('generated example type-check project', () => {
   it('includes every generated TypeScript example', async () => {
-    const inspection = await inspectExamplesProject(root);
+    const [inspection, packageManifest] = await Promise.all([
+      inspectExamplesProject(root),
+      readFile(new URL('../package.json', import.meta.url), 'utf8').then(JSON.parse),
+    ]);
+    const domainExamples = Object.keys(packageManifest.exports)
+      .filter((subpath) => subpath.startsWith('./domains/'))
+      .map((subpath) => `examples/generated/domain-${subpath.slice('./domains/'.length)}.ts`);
 
     expect(inspection.projectFiles).toEqual(inspection.generatedFiles);
     expect(
       inspection.generatedFiles.map((path) => relative(root, path).replaceAll('\\', '/')),
     ).toEqual([
       'examples/generated/authenticated.ts',
+      ...domainExamples,
       'examples/generated/metadata.ts',
       'examples/generated/mutation-safety.ts',
       'examples/generated/paginated.ts',

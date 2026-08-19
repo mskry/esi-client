@@ -11,14 +11,31 @@ Get your project contribution
 
 - Stable ID: `GetCorporationsProjectsContribution`
 - HTTP: `GET /corporations/{corporation_id}/projects/{project_id}/contribution/{character_id}`
-- Domain method: `client.corporationProjects.getCorporationsProjectsContribution(corporationId, projectId, characterId, options?)`
+- Domain method: `client.corporationProjects.getContribution(corporationId, projectId, characterId, options?)`
 - Generic call: `client.callOperation("GetCorporationsProjectsContribution", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/corporation-projects`
 - Domain index: [corporationProjects](../domains/corporation-projects.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCorporationProjectsClient } from '@evespace/esi-client/domains/corporation-projects';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCorporationProjectsClient({ token: accessToken });
+
+const corporationId = 98000001;
+const projectId = "00000000-0000-4000-8000-000000000000";
+const characterId = 90000001;
+
+const data = await client.getContribution(corporationId, projectId, characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -32,7 +49,7 @@ const corporationId = 98000001;
 const projectId = "00000000-0000-4000-8000-000000000000";
 const characterId = 90000001;
 
-const data = await client.corporationProjects.getCorporationsProjectsContribution(corporationId, projectId, characterId);
+const data = await client.corporationProjects.getContribution(corporationId, projectId, characterId);
 ```
 
 ## Generic-execution snippet
@@ -70,7 +87,7 @@ const response = await client.callOperation('GetCorporationsProjectsContribution
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsProjectsContributionRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.corporationProjects.withMetadata().getCorporationsProjectsContribution(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.corporationProjects.withMetadata().getContribution(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

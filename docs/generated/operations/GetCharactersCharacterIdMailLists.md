@@ -11,14 +11,29 @@ Return mailing list subscriptions
 
 - Stable ID: `GetCharactersCharacterIdMailLists`
 - HTTP: `GET /characters/{character_id}/mail/lists`
-- Domain method: `client.mail.getCharactersCharacterIdMailLists(characterId, options?)`
+- Domain method: `client.mail.listMailingLists(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdMailLists", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/mail`
 - Domain index: [mail](../domains/mail.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMailClient } from '@evespace/esi-client/domains/mail';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMailClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listMailingLists(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.mail.getCharactersCharacterIdMailLists(characterId);
+const data = await client.mail.listMailingLists(characterId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCharactersCharacterIdMailLists',
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdMailListsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.mail.withMetadata().getCharactersCharacterIdMailLists(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.mail.withMetadata().listMailingLists(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

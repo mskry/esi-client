@@ -1,4 +1,1418 @@
 {
-  "schemaVersion": 1,
-  "overrides": []
+  "schemaVersion": 2,
+  "operations": [
+    {
+      "operationId": "DeleteCharactersCharacterIdContacts",
+      "domain": "contacts",
+      "method": "deleteCharacterContacts",
+      "reviewed": true
+    },
+    {
+      "operationId": "DeleteCharactersCharacterIdFittingsFittingId",
+      "domain": "fittings",
+      "method": "deleteFitting",
+      "reviewed": true,
+      "note": "Retains the resource noun because bare delete is a language-reserved identifier."
+    },
+    {
+      "operationId": "DeleteCharactersCharacterIdMailLabelsLabelId",
+      "domain": "mail",
+      "method": "deleteLabel",
+      "reviewed": true
+    },
+    {
+      "operationId": "DeleteCharactersCharacterIdMailMailId",
+      "domain": "mail",
+      "method": "deleteMail",
+      "reviewed": true,
+      "note": "Retains the resource noun because bare delete is a language-reserved identifier."
+    },
+    {
+      "operationId": "DeleteFleetsFleetIdMembersMemberId",
+      "domain": "fleets",
+      "method": "removeMember",
+      "reviewed": true,
+      "note": "Uses remove rather than delete because the ESI action kicks a member from the fleet."
+    },
+    {
+      "operationId": "DeleteFleetsFleetIdSquadsSquadId",
+      "domain": "fleets",
+      "method": "deleteSquad",
+      "reviewed": true
+    },
+    {
+      "operationId": "DeleteFleetsFleetIdWingsWingId",
+      "domain": "fleets",
+      "method": "deleteWing",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetAlliances",
+      "domain": "alliance",
+      "method": "list",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetAlliancesAllianceId",
+      "domain": "alliance",
+      "method": "getPublicInfo",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetAlliancesAllianceIdContacts",
+      "domain": "contacts",
+      "method": "listAllianceContacts",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetAlliancesAllianceIdContactsLabels",
+      "domain": "contacts",
+      "method": "listAllianceContactLabels",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetAlliancesAllianceIdCorporations",
+      "domain": "alliance",
+      "method": "listCorporations",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetAlliancesAllianceIdIcons",
+      "domain": "alliance",
+      "method": "getIcon",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersAccessListsDetail",
+      "domain": "accessList",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersAccessListsListing",
+      "domain": "accessList",
+      "method": "list",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdAgentsResearch",
+      "domain": "character",
+      "method": "agentsResearch",
+      "reviewed": true,
+      "note": "Retains the concise noun phrase established by the design example."
+    },
+    {
+      "operationId": "GetCharactersCharacterIdAssets",
+      "domain": "assets",
+      "method": "listCharacterAssets",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdAttributes",
+      "domain": "skills",
+      "method": "getAttributes",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdBlueprints",
+      "domain": "character",
+      "method": "listBlueprints",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdCalendar",
+      "domain": "calendar",
+      "method": "listEvents",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdCalendarEventId",
+      "domain": "calendar",
+      "method": "getEvent",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdCalendarEventIdAttendees",
+      "domain": "calendar",
+      "method": "listEventAttendees",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdClones",
+      "domain": "clones",
+      "method": "getState",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdContacts",
+      "domain": "contacts",
+      "method": "listCharacterContacts",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdContactsLabels",
+      "domain": "contacts",
+      "method": "listCharacterContactLabels",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdContracts",
+      "domain": "contracts",
+      "method": "listCharacterContracts",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdContractsContractIdBids",
+      "domain": "contracts",
+      "method": "listCharacterContractBids",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdContractsContractIdItems",
+      "domain": "contracts",
+      "method": "listCharacterContractItems",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdCorporationhistory",
+      "domain": "character",
+      "method": "listCorporationHistory",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdFatigue",
+      "domain": "character",
+      "method": "getJumpFatigue",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdFittings",
+      "domain": "fittings",
+      "method": "list",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdFleet",
+      "domain": "fleets",
+      "method": "getCharacterFleet",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdFwStats",
+      "domain": "factionWarfare",
+      "method": "getCharacterStats",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdImplants",
+      "domain": "clones",
+      "method": "listActiveImplants",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdIndustryJobs",
+      "domain": "industry",
+      "method": "listCharacterJobs",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdKillmailsRecent",
+      "domain": "killmails",
+      "method": "listRecentForCharacter",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdLocation",
+      "domain": "location",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdLoyaltyPoints",
+      "domain": "loyalty",
+      "method": "listPoints",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdMail",
+      "domain": "mail",
+      "method": "listHeaders",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdMailLabels",
+      "domain": "mail",
+      "method": "listLabels",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdMailLists",
+      "domain": "mail",
+      "method": "listMailingLists",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdMailMailId",
+      "domain": "mail",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdMedals",
+      "domain": "character",
+      "method": "listMedals",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdMining",
+      "domain": "industry",
+      "method": "listCharacterMiningLedger",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdNotifications",
+      "domain": "character",
+      "method": "listNotifications",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdNotificationsContacts",
+      "domain": "character",
+      "method": "listContactNotifications",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdOnline",
+      "domain": "location",
+      "method": "getOnlineStatus",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdOrders",
+      "domain": "market",
+      "method": "listCharacterOrders",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdOrdersHistory",
+      "domain": "market",
+      "method": "listCharacterOrderHistory",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdPlanets",
+      "domain": "planetaryInteraction",
+      "method": "listColonies",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdPlanetsPlanetId",
+      "domain": "planetaryInteraction",
+      "method": "getColonyLayout",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdPortrait",
+      "domain": "character",
+      "method": "getPortrait",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdRoles",
+      "domain": "character",
+      "method": "getCorporationRoles",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdSearch",
+      "domain": "search",
+      "method": "search",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdShip",
+      "domain": "location",
+      "method": "getCurrentShip",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdSkillqueue",
+      "domain": "skills",
+      "method": "getSkillQueue",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdSkills",
+      "domain": "skills",
+      "method": "getSkills",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdStandings",
+      "domain": "character",
+      "method": "listStandings",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdTitles",
+      "domain": "character",
+      "method": "listCorporationTitles",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdWallet",
+      "domain": "wallet",
+      "method": "getCharacterBalance",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdWalletJournal",
+      "domain": "wallet",
+      "method": "listCharacterJournal",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCharacterIdWalletTransactions",
+      "domain": "wallet",
+      "method": "listCharacterTransactions",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCosmeticsSkinr",
+      "domain": "cosmetics",
+      "method": "listSkinrLicenses",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersCosmeticsSkinrComponents",
+      "domain": "cosmetics",
+      "method": "listSkinrComponentLicenses",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersDetail",
+      "domain": "character",
+      "method": "getPublicInfo",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersFreelanceJobsListing",
+      "domain": "freelanceJobs",
+      "method": "listCharacterJobs",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersFreelanceJobsParticipation",
+      "domain": "freelanceJobs",
+      "method": "getCharacterParticipation",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersMercenaryTacticalOperationsDetail",
+      "domain": "activities",
+      "method": "getMercenaryTacticalOperation",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersMercenaryTacticalOperationsListing",
+      "domain": "activities",
+      "method": "listMercenaryTacticalOperations",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersMilitaryCampaignsObjectivesListing",
+      "domain": "militaryCampaigns",
+      "method": "listCharacterObjectiveParticipations",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersMilitaryCampaignsObjectivesParticipation",
+      "domain": "militaryCampaigns",
+      "method": "getCharacterObjectiveParticipation",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersParagonHubSkinr",
+      "domain": "paragonHub",
+      "method": "listPostedListings",
+      "reviewed": true,
+      "note": "Distinguishes listings posted by a character from listings targeted at a character."
+    },
+    {
+      "operationId": "GetCharactersStructuresMercenaryDensDetail",
+      "domain": "structures",
+      "method": "getMercenaryDen",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCharactersStructuresMercenaryDensListing",
+      "domain": "structures",
+      "method": "listMercenaryDens",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetContractsPublicBidsContractId",
+      "domain": "contracts",
+      "method": "listPublicContractBids",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetContractsPublicItemsContractId",
+      "domain": "contracts",
+      "method": "listPublicContractItems",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetContractsPublicRegionId",
+      "domain": "contracts",
+      "method": "listPublicContracts",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationCorporationIdMiningExtractions",
+      "domain": "industry",
+      "method": "listMoonExtractionTimers",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationCorporationIdMiningObservers",
+      "domain": "industry",
+      "method": "listMiningObservers",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationCorporationIdMiningObserversObserverId",
+      "domain": "industry",
+      "method": "listObservedMining",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationId",
+      "domain": "corporation",
+      "method": "getPublicInfo",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdAlliancehistory",
+      "domain": "corporation",
+      "method": "listAllianceHistory",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdAssets",
+      "domain": "assets",
+      "method": "listCorporationAssets",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdBlueprints",
+      "domain": "corporation",
+      "method": "listBlueprints",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdContacts",
+      "domain": "contacts",
+      "method": "listCorporationContacts",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdContactsLabels",
+      "domain": "contacts",
+      "method": "listCorporationContactLabels",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdContainersLogs",
+      "domain": "corporation",
+      "method": "listAuditLogSecureContainerLogs",
+      "reviewed": true,
+      "note": "Spells out the upstream ALSC acronym so the resource is recognizable."
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdContracts",
+      "domain": "contracts",
+      "method": "listCorporationContracts",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdContractsContractIdBids",
+      "domain": "contracts",
+      "method": "listCorporationContractBids",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdContractsContractIdItems",
+      "domain": "contracts",
+      "method": "listCorporationContractItems",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdCustomsOffices",
+      "domain": "planetaryInteraction",
+      "method": "listCustomsOffices",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdDivisions",
+      "domain": "corporation",
+      "method": "listDivisions",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdFacilities",
+      "domain": "corporation",
+      "method": "listFacilities",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdFwStats",
+      "domain": "factionWarfare",
+      "method": "getCorporationStats",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdIcons",
+      "domain": "corporation",
+      "method": "getIcon",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdIndustryJobs",
+      "domain": "industry",
+      "method": "listCorporationJobs",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdKillmailsRecent",
+      "domain": "killmails",
+      "method": "listRecentForCorporation",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdMedals",
+      "domain": "corporation",
+      "method": "listMedals",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdMedalsIssued",
+      "domain": "corporation",
+      "method": "listIssuedMedals",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdMembers",
+      "domain": "corporation",
+      "method": "listMembers",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdMembersLimit",
+      "domain": "corporation",
+      "method": "getMemberLimit",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdMembersTitles",
+      "domain": "corporation",
+      "method": "listMemberTitles",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdMembertracking",
+      "domain": "corporation",
+      "method": "listMemberTracking",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdOrders",
+      "domain": "market",
+      "method": "listCorporationOrders",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdOrdersHistory",
+      "domain": "market",
+      "method": "listCorporationOrderHistory",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdRoles",
+      "domain": "corporation",
+      "method": "listMemberRoles",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdRolesHistory",
+      "domain": "corporation",
+      "method": "listMemberRoleHistory",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdShareholders",
+      "domain": "corporation",
+      "method": "listShareholders",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdStandings",
+      "domain": "corporation",
+      "method": "listStandings",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdStarbases",
+      "domain": "corporation",
+      "method": "listStarbases",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdStarbasesStarbaseId",
+      "domain": "corporation",
+      "method": "getStarbase",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdStructures",
+      "domain": "corporation",
+      "method": "listStructures",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdTitles",
+      "domain": "corporation",
+      "method": "listTitles",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdWallets",
+      "domain": "wallet",
+      "method": "listCorporationBalances",
+      "reviewed": true,
+      "note": "Uses list because the response contains one balance per wallet division."
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdWalletsDivisionJournal",
+      "domain": "wallet",
+      "method": "listCorporationDivisionJournal",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsCorporationIdWalletsDivisionTransactions",
+      "domain": "wallet",
+      "method": "listCorporationDivisionTransactions",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsFreelanceJobsListing",
+      "domain": "freelanceJobs",
+      "method": "listCorporationJobs",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsFreelanceJobsParticipants",
+      "domain": "freelanceJobs",
+      "method": "listParticipants",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsNpccorps",
+      "domain": "corporation",
+      "method": "listNpcCorporations",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsProjectsContribution",
+      "domain": "corporationProjects",
+      "method": "getContribution",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsProjectsContributors",
+      "domain": "corporationProjects",
+      "method": "listContributors",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsProjectsDetail",
+      "domain": "corporationProjects",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsProjectsListing",
+      "domain": "corporationProjects",
+      "method": "list",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsStructuresSkyhooksDetail",
+      "domain": "structures",
+      "method": "getSkyhook",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsStructuresSkyhooksListing",
+      "domain": "structures",
+      "method": "listSkyhooks",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsStructuresSovereigntyHubsDetail",
+      "domain": "structures",
+      "method": "getSovereigntyHub",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCorporationsStructuresSovereigntyHubsListing",
+      "domain": "structures",
+      "method": "listSovereigntyHubs",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetCosmeticsSkinr",
+      "domain": "cosmetics",
+      "method": "getSkinrLicense",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetDogmaAttributes",
+      "domain": "dogma",
+      "method": "listAttributes",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetDogmaAttributesAttributeId",
+      "domain": "dogma",
+      "method": "getAttribute",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetDogmaDynamicItemsTypeIdItemId",
+      "domain": "dogma",
+      "method": "getDynamicItem",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetDogmaEffects",
+      "domain": "dogma",
+      "method": "listEffects",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetDogmaEffectsEffectId",
+      "domain": "dogma",
+      "method": "getEffect",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFleetsFleetId",
+      "domain": "fleets",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFleetsFleetIdMembers",
+      "domain": "fleets",
+      "method": "listMembers",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFleetsFleetIdWings",
+      "domain": "fleets",
+      "method": "listWings",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFreelanceJobsDetail",
+      "domain": "freelanceJobs",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFreelanceJobsListing",
+      "domain": "freelanceJobs",
+      "method": "listPublic",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFwLeaderboards",
+      "domain": "factionWarfare",
+      "method": "getFactionLeaderboards",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFwLeaderboardsCharacters",
+      "domain": "factionWarfare",
+      "method": "getCharacterLeaderboards",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFwLeaderboardsCorporations",
+      "domain": "factionWarfare",
+      "method": "getCorporationLeaderboards",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFwStats",
+      "domain": "factionWarfare",
+      "method": "listFactionStats",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFwSystems",
+      "domain": "factionWarfare",
+      "method": "listSystems",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetFwWars",
+      "domain": "factionWarfare",
+      "method": "listWars",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetIncursions",
+      "domain": "incursions",
+      "method": "list",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetIndustryFacilities",
+      "domain": "industry",
+      "method": "listFacilities",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetIndustrySystems",
+      "domain": "industry",
+      "method": "listSystemCostIndices",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetInsurancePrices",
+      "domain": "insurance",
+      "method": "listPrices",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetKillmailsKillmailIdKillmailHash",
+      "domain": "killmails",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetLoyaltyStoresCorporationIdOffers",
+      "domain": "loyalty",
+      "method": "listStoreOffers",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMarketsGroups",
+      "domain": "market",
+      "method": "listGroups",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMarketsGroupsMarketGroupId",
+      "domain": "market",
+      "method": "getGroup",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMarketsPrices",
+      "domain": "market",
+      "method": "listPrices",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMarketsRegionIdHistory",
+      "domain": "market",
+      "method": "listRegionHistory",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMarketsRegionIdOrders",
+      "domain": "market",
+      "method": "listRegionOrders",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMarketsRegionIdTypes",
+      "domain": "market",
+      "method": "listRegionTypes",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMarketsStructuresStructureId",
+      "domain": "market",
+      "method": "listStructureOrders",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMetaChangelog",
+      "domain": "meta",
+      "method": "getChangelog",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMetaCompatibilityDates",
+      "domain": "meta",
+      "method": "listCompatibilityDates",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMetaName",
+      "domain": "meta",
+      "method": "getName",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMetaStatus",
+      "domain": "meta",
+      "method": "getHealthStatus",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMilitaryCampaignsDetail",
+      "domain": "militaryCampaigns",
+      "method": "getCampaign",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMilitaryCampaignsListing",
+      "domain": "militaryCampaigns",
+      "method": "listCampaigns",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMilitaryCampaignsObjectivesDetail",
+      "domain": "militaryCampaigns",
+      "method": "getObjective",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetMilitaryCampaignsObjectivesListing",
+      "domain": "militaryCampaigns",
+      "method": "listObjectives",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetParagonHubSkinr",
+      "domain": "paragonHub",
+      "method": "listPublicListings",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetParagonHubSkinrAlliances",
+      "domain": "paragonHub",
+      "method": "listListingsForAlliance",
+      "reviewed": true,
+      "note": "Alliance-targeted listings; listPostedListings covers the distinct owner view."
+    },
+    {
+      "operationId": "GetParagonHubSkinrCharacters",
+      "domain": "paragonHub",
+      "method": "listListingsForCharacter",
+      "reviewed": true,
+      "note": "Character-targeted listings; listPostedListings covers the distinct owner view."
+    },
+    {
+      "operationId": "GetParagonHubSkinrCorporations",
+      "domain": "paragonHub",
+      "method": "listListingsForCorporation",
+      "reviewed": true,
+      "note": "Corporation-targeted listings; listPostedListings covers the distinct owner view."
+    },
+    {
+      "operationId": "GetSkyhooksRaidable",
+      "domain": "activities",
+      "method": "listRaidableSkyhooks",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetSovereigntyCampaigns",
+      "domain": "sovereignty",
+      "method": "listCampaigns",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetSovereigntySystems",
+      "domain": "sovereignty",
+      "method": "listSystems",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetStatus",
+      "domain": "status",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseAncestries",
+      "domain": "universe",
+      "method": "listAncestries",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseAsteroidBeltsAsteroidBeltId",
+      "domain": "universe",
+      "method": "getAsteroidBelt",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseBloodlines",
+      "domain": "universe",
+      "method": "listBloodlines",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseCategories",
+      "domain": "universe",
+      "method": "listItemCategories",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseCategoriesCategoryId",
+      "domain": "universe",
+      "method": "getItemCategory",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseConstellations",
+      "domain": "universe",
+      "method": "listConstellations",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseConstellationsConstellationId",
+      "domain": "universe",
+      "method": "getConstellation",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseFactions",
+      "domain": "universe",
+      "method": "listFactions",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseGraphics",
+      "domain": "universe",
+      "method": "listGraphics",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseGraphicsGraphicId",
+      "domain": "universe",
+      "method": "getGraphic",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseGroups",
+      "domain": "universe",
+      "method": "listItemGroups",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseGroupsGroupId",
+      "domain": "universe",
+      "method": "getItemGroup",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseMoonsMoonId",
+      "domain": "universe",
+      "method": "getMoon",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniversePlanetsPlanetId",
+      "domain": "universe",
+      "method": "getPlanet",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseRaces",
+      "domain": "universe",
+      "method": "listRaces",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseRegions",
+      "domain": "universe",
+      "method": "listRegions",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseRegionsRegionId",
+      "domain": "universe",
+      "method": "getRegion",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseSchematicsSchematicId",
+      "domain": "planetaryInteraction",
+      "method": "getSchematic",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseStargatesStargateId",
+      "domain": "universe",
+      "method": "getStargate",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseStarsStarId",
+      "domain": "universe",
+      "method": "getStar",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseStationsStationId",
+      "domain": "universe",
+      "method": "getStation",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseStructures",
+      "domain": "universe",
+      "method": "listPublicStructures",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseStructuresStructureId",
+      "domain": "universe",
+      "method": "getStructure",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseSystemJumps",
+      "domain": "universe",
+      "method": "listSystemJumps",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseSystemKills",
+      "domain": "universe",
+      "method": "listSystemKills",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseSystems",
+      "domain": "universe",
+      "method": "listSolarSystems",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseSystemsSystemId",
+      "domain": "universe",
+      "method": "getSolarSystem",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseTypes",
+      "domain": "universe",
+      "method": "listTypes",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetUniverseTypesTypeId",
+      "domain": "universe",
+      "method": "getType",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetWars",
+      "domain": "wars",
+      "method": "list",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetWarsWarId",
+      "domain": "wars",
+      "method": "get",
+      "reviewed": true
+    },
+    {
+      "operationId": "GetWarsWarIdKillmails",
+      "domain": "wars",
+      "method": "listKillmails",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersAffiliation",
+      "domain": "character",
+      "method": "lookupAffiliations",
+      "reviewed": true,
+      "note": "Uses lookup because this is a bulk query despite its POST transport."
+    },
+    {
+      "operationId": "PostCharactersCharacterIdAssetsLocations",
+      "domain": "assets",
+      "method": "lookupCharacterLocations",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdAssetsNames",
+      "domain": "assets",
+      "method": "lookupCharacterNames",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdContacts",
+      "domain": "contacts",
+      "method": "addCharacterContacts",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdCspa",
+      "domain": "character",
+      "method": "calculateCspaCharge",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdFittings",
+      "domain": "fittings",
+      "method": "create",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdMail",
+      "domain": "mail",
+      "method": "send",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdMailLabels",
+      "domain": "mail",
+      "method": "createLabel",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCorporationsCorporationIdAssetsLocations",
+      "domain": "assets",
+      "method": "lookupCorporationLocations",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCorporationsCorporationIdAssetsNames",
+      "domain": "assets",
+      "method": "lookupCorporationNames",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostFleetsFleetIdMembers",
+      "domain": "fleets",
+      "method": "inviteMember",
+      "reviewed": true,
+      "note": "Uses the ESI semantic verb because this creates an invitation rather than a member directly."
+    },
+    {
+      "operationId": "PostFleetsFleetIdWings",
+      "domain": "fleets",
+      "method": "createWing",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostFleetsFleetIdWingsWingIdSquads",
+      "domain": "fleets",
+      "method": "createSquad",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostRoute",
+      "domain": "routes",
+      "method": "calculate",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUiAutopilotWaypoint",
+      "domain": "userInterface",
+      "method": "setAutopilotWaypoint",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUiOpenwindowContract",
+      "domain": "userInterface",
+      "method": "openContract",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUiOpenwindowInformation",
+      "domain": "userInterface",
+      "method": "openInformation",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUiOpenwindowMarketdetails",
+      "domain": "userInterface",
+      "method": "openMarketDetails",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUiOpenwindowNewmail",
+      "domain": "userInterface",
+      "method": "openNewMail",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUniverseIds",
+      "domain": "universe",
+      "method": "resolveIds",
+      "reviewed": true,
+      "note": "Resolves names to IDs; paired with resolveNames for the inverse operation."
+    },
+    {
+      "operationId": "PostUniverseNames",
+      "domain": "universe",
+      "method": "resolveNames",
+      "reviewed": true,
+      "note": "Resolves IDs to names; paired with resolveIds for the inverse operation."
+    },
+    {
+      "operationId": "PutCharactersCharacterIdCalendarEventId",
+      "domain": "calendar",
+      "method": "respondToEvent",
+      "reviewed": true,
+      "note": "Uses the ESI semantic action rather than generic update."
+    },
+    {
+      "operationId": "PutCharactersCharacterIdContacts",
+      "domain": "contacts",
+      "method": "updateCharacterContacts",
+      "reviewed": true
+    },
+    {
+      "operationId": "PutCharactersCharacterIdMailMailId",
+      "domain": "mail",
+      "method": "update",
+      "reviewed": true
+    },
+    {
+      "operationId": "PutFleetsFleetId",
+      "domain": "fleets",
+      "method": "update",
+      "reviewed": true
+    },
+    {
+      "operationId": "PutFleetsFleetIdMembersMemberId",
+      "domain": "fleets",
+      "method": "moveMember",
+      "reviewed": true
+    },
+    {
+      "operationId": "PutFleetsFleetIdSquadsSquadId",
+      "domain": "fleets",
+      "method": "renameSquad",
+      "reviewed": true
+    },
+    {
+      "operationId": "PutFleetsFleetIdWingsWingId",
+      "domain": "fleets",
+      "method": "renameWing",
+      "reviewed": true
+    }
+  ]
 }

@@ -11,14 +11,30 @@ Get corporation contract bids
 
 - Stable ID: `GetCorporationsCorporationIdContractsContractIdBids`
 - HTTP: `GET /corporations/{corporation_id}/contracts/{contract_id}/bids`
-- Domain method: `client.contracts.getCorporationsCorporationIdContractsContractIdBids(corporationId, contractId, options?)`
+- Domain method: `client.contracts.listCorporationContractBids(corporationId, contractId, options?)`
 - Generic call: `client.callOperation("GetCorporationsCorporationIdContractsContractIdBids", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/contracts`
 - Domain index: [contracts](../domains/contracts.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createContractsClient } from '@evespace/esi-client/domains/contracts';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createContractsClient({ token: accessToken });
+
+const corporationId = 98000001;
+const contractId = 12345;
+
+const data = await client.listCorporationContractBids(corporationId, contractId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -31,7 +47,7 @@ const client = new EsiClient({ token: accessToken });
 const corporationId = 98000001;
 const contractId = 12345;
 
-const data = await client.contracts.getCorporationsCorporationIdContractsContractIdBids(corporationId, contractId);
+const data = await client.contracts.listCorporationContractBids(corporationId, contractId);
 ```
 
 ## Generic-execution snippet
@@ -68,7 +84,7 @@ const response = await client.callOperation('GetCorporationsCorporationIdContrac
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsCorporationIdContractsContractIdBidsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.contracts.withMetadata().getCorporationsCorporationIdContractsContractIdBids(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.contracts.withMetadata().listCorporationContractBids(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

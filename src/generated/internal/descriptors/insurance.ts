@@ -9,7 +9,7 @@ import {
   GetInsurancePricesStatus200SuccessResponseSchema,
   type GetInsurancePricesInput,
   type GetInsurancePricesOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/insurance.js';
 
 export const GetInsurancePricesDescriptor: OperationExecutionDescriptor<GetInsurancePricesInput, GetInsurancePricesOutput> = {
   operationId: "GetInsurancePrices",

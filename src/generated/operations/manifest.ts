@@ -125,7 +125,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Bulk delete contacts",
       "facade": {
         "domain": "contacts",
-        "method": "deleteCharactersCharacterIdContacts"
+        "method": "deleteCharacterContacts"
       },
       "http": {
         "method": "DELETE",
@@ -265,7 +265,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Delete a fitting from a character",
       "facade": {
         "domain": "fittings",
-        "method": "deleteCharactersCharacterIdFittingsFittingId"
+        "method": "deleteFitting"
       },
       "http": {
         "method": "DELETE",
@@ -400,7 +400,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Delete a mail label",
       "facade": {
         "domain": "mail",
-        "method": "deleteCharactersCharacterIdMailLabelsLabelId"
+        "method": "deleteLabel"
       },
       "http": {
         "method": "DELETE",
@@ -535,7 +535,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Delete a mail",
       "facade": {
         "domain": "mail",
-        "method": "deleteCharactersCharacterIdMailMailId"
+        "method": "deleteMail"
       },
       "http": {
         "method": "DELETE",
@@ -670,7 +670,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Kick a fleet member",
       "facade": {
         "domain": "fleets",
-        "method": "deleteFleetsFleetIdMembersMemberId"
+        "method": "removeMember"
       },
       "http": {
         "method": "DELETE",
@@ -807,7 +807,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Delete a fleet squad, only empty squads can be deleted",
       "facade": {
         "domain": "fleets",
-        "method": "deleteFleetsFleetIdSquadsSquadId"
+        "method": "deleteSquad"
       },
       "http": {
         "method": "DELETE",
@@ -944,7 +944,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Delete a fleet wing, only empty wings can be deleted. The wing may contain squads, but the squads must be empty",
       "facade": {
         "domain": "fleets",
-        "method": "deleteFleetsFleetIdWingsWingId"
+        "method": "deleteWing"
       },
       "http": {
         "method": "DELETE",
@@ -1084,7 +1084,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List all active player alliances",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliances"
+        "method": "list"
       },
       "http": {
         "method": "GET",
@@ -1202,7 +1202,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Public information about an alliance",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliancesAllianceId"
+        "method": "getPublicInfo"
       },
       "http": {
         "method": "GET",
@@ -1335,7 +1335,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return contacts of an alliance",
       "facade": {
         "domain": "contacts",
-        "method": "getAlliancesAllianceIdContacts"
+        "method": "listAllianceContacts"
       },
       "http": {
         "method": "GET",
@@ -1487,7 +1487,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return custom labels for an alliance's contacts",
       "facade": {
         "domain": "contacts",
-        "method": "getAlliancesAllianceIdContactsLabels"
+        "method": "listAllianceContactLabels"
       },
       "http": {
         "method": "GET",
@@ -1617,7 +1617,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List all current member corporations of an alliance",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliancesAllianceIdCorporations"
+        "method": "listCorporations"
       },
       "http": {
         "method": "GET",
@@ -1742,7 +1742,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the icon urls for a alliance\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliancesAllianceIdIcons"
+        "method": "getIcon"
       },
       "http": {
         "method": "GET",
@@ -1874,7 +1874,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of an Access List.",
       "facade": {
         "domain": "accessList",
-        "method": "getCharactersAccessListsDetail"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -2021,7 +2021,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Lists all Access Lists the character is Manager or Admin of.",
       "facade": {
         "domain": "accessList",
-        "method": "getCharactersAccessListsListing"
+        "method": "list"
       },
       "http": {
         "method": "GET",
@@ -2154,7 +2154,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of agents research information for a character. The formula for finding the current research points with an agent is: currentPoints = remainderPoints + pointsPerDay * days(currentTime - researchStartDate)",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdAgentsResearch"
+        "method": "agentsResearch"
       },
       "http": {
         "method": "GET",
@@ -2286,7 +2286,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of the characters assets",
       "facade": {
         "domain": "assets",
-        "method": "getCharactersCharacterIdAssets"
+        "method": "listCharacterAssets"
       },
       "http": {
         "method": "GET",
@@ -2438,7 +2438,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return attributes of a character",
       "facade": {
         "domain": "skills",
-        "method": "getCharactersCharacterIdAttributes"
+        "method": "getAttributes"
       },
       "http": {
         "method": "GET",
@@ -2570,7 +2570,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of blueprints the character owns",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdBlueprints"
+        "method": "listBlueprints"
       },
       "http": {
         "method": "GET",
@@ -2722,7 +2722,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get 50 event summaries from the calendar. If no from_event ID is given, the resource will return the next 50 chronological event summaries from now. If a from_event ID is specified, it will return the next 50 chronological event summaries from after that event",
       "facade": {
         "domain": "calendar",
-        "method": "getCharactersCharacterIdCalendar"
+        "method": "listEvents"
       },
       "http": {
         "method": "GET",
@@ -2869,7 +2869,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get all the information for a specific event",
       "facade": {
         "domain": "calendar",
-        "method": "getCharactersCharacterIdCalendarEventId"
+        "method": "getEvent"
       },
       "http": {
         "method": "GET",
@@ -3016,7 +3016,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get all invited attendees for a given event",
       "facade": {
         "domain": "calendar",
-        "method": "getCharactersCharacterIdCalendarEventIdAttendees"
+        "method": "listEventAttendees"
       },
       "http": {
         "method": "GET",
@@ -3163,7 +3163,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "A list of the character's clones",
       "facade": {
         "domain": "clones",
-        "method": "getCharactersCharacterIdClones"
+        "method": "getState"
       },
       "http": {
         "method": "GET",
@@ -3295,7 +3295,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return contacts of a character",
       "facade": {
         "domain": "contacts",
-        "method": "getCharactersCharacterIdContacts"
+        "method": "listCharacterContacts"
       },
       "http": {
         "method": "GET",
@@ -3447,7 +3447,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return custom labels for a character's contacts",
       "facade": {
         "domain": "contacts",
-        "method": "getCharactersCharacterIdContactsLabels"
+        "method": "listCharacterContactLabels"
       },
       "http": {
         "method": "GET",
@@ -3579,7 +3579,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns contracts available to a character, only if the character is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is \"in_progress\".",
       "facade": {
         "domain": "contracts",
-        "method": "getCharactersCharacterIdContracts"
+        "method": "listCharacterContracts"
       },
       "http": {
         "method": "GET",
@@ -3731,7 +3731,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Lists bids on a particular auction contract",
       "facade": {
         "domain": "contracts",
-        "method": "getCharactersCharacterIdContractsContractIdBids"
+        "method": "listCharacterContractBids"
       },
       "http": {
         "method": "GET",
@@ -3878,7 +3878,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Lists items of a particular contract",
       "facade": {
         "domain": "contracts",
-        "method": "getCharactersCharacterIdContractsContractIdItems"
+        "method": "listCharacterContractItems"
       },
       "http": {
         "method": "GET",
@@ -4023,7 +4023,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of all the corporations a character has been a member of",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdCorporationhistory"
+        "method": "listCorporationHistory"
       },
       "http": {
         "method": "GET",
@@ -4155,7 +4155,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a character's jump activation and fatigue information",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdFatigue"
+        "method": "getJumpFatigue"
       },
       "http": {
         "method": "GET",
@@ -4287,7 +4287,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return fittings of a character",
       "facade": {
         "domain": "fittings",
-        "method": "getCharactersCharacterIdFittings"
+        "method": "list"
       },
       "http": {
         "method": "GET",
@@ -4419,7 +4419,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return the fleet ID the character is in, if any.",
       "facade": {
         "domain": "fleets",
-        "method": "getCharactersCharacterIdFleet"
+        "method": "getCharacterFleet"
       },
       "http": {
         "method": "GET",
@@ -4546,7 +4546,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Statistical overview of a character involved in faction warfare\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getCharactersCharacterIdFwStats"
+        "method": "getCharacterStats"
       },
       "http": {
         "method": "GET",
@@ -4678,7 +4678,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return implants on the active clone of a character",
       "facade": {
         "domain": "clones",
-        "method": "getCharactersCharacterIdImplants"
+        "method": "listActiveImplants"
       },
       "http": {
         "method": "GET",
@@ -4810,7 +4810,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List industry jobs placed by a character",
       "facade": {
         "domain": "industry",
-        "method": "getCharactersCharacterIdIndustryJobs"
+        "method": "listCharacterJobs"
       },
       "http": {
         "method": "GET",
@@ -4956,7 +4956,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of a character's kills and losses going back 90 days",
       "facade": {
         "domain": "killmails",
-        "method": "getCharactersCharacterIdKillmailsRecent"
+        "method": "listRecentForCharacter"
       },
       "http": {
         "method": "GET",
@@ -5108,7 +5108,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable",
       "facade": {
         "domain": "location",
-        "method": "getCharactersCharacterIdLocation"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -5240,7 +5240,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of loyalty points for all corporations the character has worked for",
       "facade": {
         "domain": "loyalty",
-        "method": "getCharactersCharacterIdLoyaltyPoints"
+        "method": "listPoints"
       },
       "http": {
         "method": "GET",
@@ -5372,7 +5372,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return the 50 most recent mail headers belonging to the character that match the query criteria. Queries can be filtered by label, and last_mail_id can be used to paginate backwards",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMail"
+        "method": "listHeaders"
       },
       "http": {
         "method": "GET",
@@ -5540,7 +5540,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of the users mail labels, unread counts for each label and a total unread count.",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMailLabels"
+        "method": "listLabels"
       },
       "http": {
         "method": "GET",
@@ -5672,7 +5672,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return all mailing lists that the character is subscribed to",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMailLists"
+        "method": "listMailingLists"
       },
       "http": {
         "method": "GET",
@@ -5804,7 +5804,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return the contents of an EVE mail",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMailMailId"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -5951,7 +5951,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of medals the character has",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdMedals"
+        "method": "listMedals"
       },
       "http": {
         "method": "GET",
@@ -6083,7 +6083,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Paginated record of all mining done by a character for the past 30 days",
       "facade": {
         "domain": "industry",
-        "method": "getCharactersCharacterIdMining"
+        "method": "listCharacterMiningLedger"
       },
       "http": {
         "method": "GET",
@@ -6235,7 +6235,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return character notifications",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdNotifications"
+        "method": "listNotifications"
       },
       "http": {
         "method": "GET",
@@ -6367,7 +6367,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return notifications about having been added to someone's contact list",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdNotificationsContacts"
+        "method": "listContactNotifications"
       },
       "http": {
         "method": "GET",
@@ -6499,7 +6499,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Checks if the character is currently online",
       "facade": {
         "domain": "location",
-        "method": "getCharactersCharacterIdOnline"
+        "method": "getOnlineStatus"
       },
       "http": {
         "method": "GET",
@@ -6631,7 +6631,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List open market orders placed by a character",
       "facade": {
         "domain": "market",
-        "method": "getCharactersCharacterIdOrders"
+        "method": "listCharacterOrders"
       },
       "http": {
         "method": "GET",
@@ -6763,7 +6763,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List cancelled and expired market orders placed by a character up to 90 days in the past.",
       "facade": {
         "domain": "market",
-        "method": "getCharactersCharacterIdOrdersHistory"
+        "method": "listCharacterOrderHistory"
       },
       "http": {
         "method": "GET",
@@ -6915,7 +6915,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a list of all planetary colonies owned by a character.",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getCharactersCharacterIdPlanets"
+        "method": "listColonies"
       },
       "http": {
         "method": "GET",
@@ -7047,7 +7047,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns full details on the layout of a single planetary colony, including links, pins and routes. Note: Planetary information is only recalculated when the colony is viewed through the client. Information will not update until this criteria is met.",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getCharactersCharacterIdPlanetsPlanetId"
+        "method": "getColonyLayout"
       },
       "http": {
         "method": "GET",
@@ -7187,7 +7187,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get portrait urls for a character\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdPortrait"
+        "method": "getPortrait"
       },
       "http": {
         "method": "GET",
@@ -7319,7 +7319,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a character's corporation roles",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdRoles"
+        "method": "getCorporationRoles"
       },
       "http": {
         "method": "GET",
@@ -7451,7 +7451,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Search for entities that match a given sub-string.",
       "facade": {
         "domain": "search",
-        "method": "getCharactersCharacterIdSearch"
+        "method": "search"
       },
       "http": {
         "method": "GET",
@@ -7646,7 +7646,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the current ship type, name and id",
       "facade": {
         "domain": "location",
-        "method": "getCharactersCharacterIdShip"
+        "method": "getCurrentShip"
       },
       "http": {
         "method": "GET",
@@ -7778,7 +7778,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List the configured skill queue for the given character.\n\nEntries that have their finish time in the past are completed, but aren't updated in the \"/skills\" route\nyet. This will happen the next time the character logs in.",
       "facade": {
         "domain": "skills",
-        "method": "getCharactersCharacterIdSkillqueue"
+        "method": "getSkillQueue"
       },
       "http": {
         "method": "GET",
@@ -7914,7 +7914,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List all trained skills for the given character.\n\nSkills returned by this route can be out-of-date if the character hasn't logged in since one or more skills\ncompleted training. Use the /skillqueue route to check for skills that completed training. Entries that are\nin the past need to be applied on top of this list to get an accurate view of the character's current skills.",
       "facade": {
         "domain": "skills",
-        "method": "getCharactersCharacterIdSkills"
+        "method": "getSkills"
       },
       "http": {
         "method": "GET",
@@ -8047,7 +8047,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return character standings from agents, NPC corporations, and factions",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdStandings"
+        "method": "listStandings"
       },
       "http": {
         "method": "GET",
@@ -8179,7 +8179,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a character's titles",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdTitles"
+        "method": "listCorporationTitles"
       },
       "http": {
         "method": "GET",
@@ -8311,7 +8311,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a character's wallet balance",
       "facade": {
         "domain": "wallet",
-        "method": "getCharactersCharacterIdWallet"
+        "method": "getCharacterBalance"
       },
       "http": {
         "method": "GET",
@@ -8443,7 +8443,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Retrieve the given character's wallet journal going 30 days back",
       "facade": {
         "domain": "wallet",
-        "method": "getCharactersCharacterIdWalletJournal"
+        "method": "listCharacterJournal"
       },
       "http": {
         "method": "GET",
@@ -8595,7 +8595,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get wallet transactions of a character",
       "facade": {
         "domain": "wallet",
-        "method": "getCharactersCharacterIdWalletTransactions"
+        "method": "listCharacterTransactions"
       },
       "http": {
         "method": "GET",
@@ -8742,7 +8742,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all SKINR licenses you own",
       "facade": {
         "domain": "cosmetics",
-        "method": "getCharactersCosmeticsSkinr"
+        "method": "listSkinrLicenses"
       },
       "http": {
         "method": "GET",
@@ -8875,7 +8875,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all SKINR component licenses you own",
       "facade": {
         "domain": "cosmetics",
-        "method": "getCharactersCosmeticsSkinrComponents"
+        "method": "listSkinrComponentLicenses"
       },
       "http": {
         "method": "GET",
@@ -9007,7 +9007,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Public information about a character",
       "facade": {
         "domain": "character",
-        "method": "getCharactersDetail"
+        "method": "getPublicInfo"
       },
       "http": {
         "method": "GET",
@@ -9140,7 +9140,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all freelance jobs you are actively participating in.",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCharactersFreelanceJobsListing"
+        "method": "listCharacterJobs"
       },
       "http": {
         "method": "GET",
@@ -9273,7 +9273,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Show your participation in a freelance job.",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCharactersFreelanceJobsParticipation"
+        "method": "getCharacterParticipation"
       },
       "http": {
         "method": "GET",
@@ -9420,7 +9420,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of a Mercenary Tactical Operation.",
       "facade": {
         "domain": "activities",
-        "method": "getCharactersMercenaryTacticalOperationsDetail"
+        "method": "getMercenaryTacticalOperation"
       },
       "http": {
         "method": "GET",
@@ -9567,7 +9567,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all Mercenary Tactical Operations for the character.",
       "facade": {
         "domain": "activities",
-        "method": "getCharactersMercenaryTacticalOperationsListing"
+        "method": "listMercenaryTacticalOperations"
       },
       "http": {
         "method": "GET",
@@ -9700,7 +9700,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of the military campaign objectives the character has participated in.",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getCharactersMilitaryCampaignsObjectivesListing"
+        "method": "listCharacterObjectiveParticipations"
       },
       "http": {
         "method": "GET",
@@ -9879,7 +9879,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Show your participation in a military campaign objective.",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getCharactersMilitaryCampaignsObjectivesParticipation"
+        "method": "getCharacterObjectiveParticipation"
       },
       "http": {
         "method": "GET",
@@ -10024,7 +10024,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List the SKINR listings a character has posted on the Paragon Hub.",
       "facade": {
         "domain": "paragonHub",
-        "method": "getCharactersParagonHubSkinr"
+        "method": "listPostedListings"
       },
       "http": {
         "method": "GET",
@@ -10203,7 +10203,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of a Mercenary Den.",
       "facade": {
         "domain": "structures",
-        "method": "getCharactersStructuresMercenaryDensDetail"
+        "method": "getMercenaryDen"
       },
       "http": {
         "method": "GET",
@@ -10350,7 +10350,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all Mercenary Dens.",
       "facade": {
         "domain": "structures",
-        "method": "getCharactersStructuresMercenaryDensListing"
+        "method": "listMercenaryDens"
       },
       "http": {
         "method": "GET",
@@ -10481,7 +10481,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Lists bids on a public auction contract",
       "facade": {
         "domain": "contracts",
-        "method": "getContractsPublicBidsContractId"
+        "method": "listPublicContractBids"
       },
       "http": {
         "method": "GET",
@@ -10643,7 +10643,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Lists items of a public contract",
       "facade": {
         "domain": "contracts",
-        "method": "getContractsPublicItemsContractId"
+        "method": "listPublicContractItems"
       },
       "http": {
         "method": "GET",
@@ -10805,7 +10805,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a paginated list of all public contracts in the given region",
       "facade": {
         "domain": "contracts",
-        "method": "getContractsPublicRegionId"
+        "method": "listPublicContracts"
       },
       "http": {
         "method": "GET",
@@ -10959,7 +10959,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Extraction timers for all moon chunks being extracted by refineries belonging to a corporation.",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationCorporationIdMiningExtractions"
+        "method": "listMoonExtractionTimers"
       },
       "http": {
         "method": "GET",
@@ -11111,7 +11111,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Paginated list of all entities capable of observing and recording mining for a corporation",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationCorporationIdMiningObservers"
+        "method": "listMiningObservers"
       },
       "http": {
         "method": "GET",
@@ -11263,7 +11263,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Paginated record of all mining seen by an observer",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationCorporationIdMiningObserversObserverId"
+        "method": "listObservedMining"
       },
       "http": {
         "method": "GET",
@@ -11429,7 +11429,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Public information about a corporation",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationId"
+        "method": "getPublicInfo"
       },
       "http": {
         "method": "GET",
@@ -11560,7 +11560,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of all the alliances a corporation has been a member of",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdAlliancehistory"
+        "method": "listAllianceHistory"
       },
       "http": {
         "method": "GET",
@@ -11692,7 +11692,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of the corporation assets",
       "facade": {
         "domain": "assets",
-        "method": "getCorporationsCorporationIdAssets"
+        "method": "listCorporationAssets"
       },
       "http": {
         "method": "GET",
@@ -11844,7 +11844,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a list of blueprints the corporation owns",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdBlueprints"
+        "method": "listBlueprints"
       },
       "http": {
         "method": "GET",
@@ -11996,7 +11996,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return contacts of a corporation",
       "facade": {
         "domain": "contacts",
-        "method": "getCorporationsCorporationIdContacts"
+        "method": "listCorporationContacts"
       },
       "http": {
         "method": "GET",
@@ -12148,7 +12148,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return custom labels for a corporation's contacts",
       "facade": {
         "domain": "contacts",
-        "method": "getCorporationsCorporationIdContactsLabels"
+        "method": "listCorporationContactLabels"
       },
       "http": {
         "method": "GET",
@@ -12280,7 +12280,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdContainersLogs"
+        "method": "listAuditLogSecureContainerLogs"
       },
       "http": {
         "method": "GET",
@@ -12432,7 +12432,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns contracts available to a corporation, only if the corporation is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is \"in_progress\".",
       "facade": {
         "domain": "contracts",
-        "method": "getCorporationsCorporationIdContracts"
+        "method": "listCorporationContracts"
       },
       "http": {
         "method": "GET",
@@ -12584,7 +12584,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Lists bids on a particular auction contract",
       "facade": {
         "domain": "contracts",
-        "method": "getCorporationsCorporationIdContractsContractIdBids"
+        "method": "listCorporationContractBids"
       },
       "http": {
         "method": "GET",
@@ -12751,7 +12751,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Lists items of a particular contract",
       "facade": {
         "domain": "contracts",
-        "method": "getCorporationsCorporationIdContractsContractIdItems"
+        "method": "listCorporationContractItems"
       },
       "http": {
         "method": "GET",
@@ -12898,7 +12898,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List customs offices owned by a corporation",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getCorporationsCorporationIdCustomsOffices"
+        "method": "listCustomsOffices"
       },
       "http": {
         "method": "GET",
@@ -13050,7 +13050,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return corporation hangar and wallet division names, only show if a division is not using the default name",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdDivisions"
+        "method": "listDivisions"
       },
       "http": {
         "method": "GET",
@@ -13182,7 +13182,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a corporation's facilities",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdFacilities"
+        "method": "listFacilities"
       },
       "http": {
         "method": "GET",
@@ -13309,7 +13309,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Statistics about a corporation involved in faction warfare\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getCorporationsCorporationIdFwStats"
+        "method": "getCorporationStats"
       },
       "http": {
         "method": "GET",
@@ -13439,7 +13439,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the icon urls for a corporation",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdIcons"
+        "method": "getIcon"
       },
       "http": {
         "method": "GET",
@@ -13571,7 +13571,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List industry jobs run by a corporation",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationsCorporationIdIndustryJobs"
+        "method": "listCorporationJobs"
       },
       "http": {
         "method": "GET",
@@ -13738,7 +13738,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of a corporation's kills and losses going back 90 days",
       "facade": {
         "domain": "killmails",
-        "method": "getCorporationsCorporationIdKillmailsRecent"
+        "method": "listRecentForCorporation"
       },
       "http": {
         "method": "GET",
@@ -13890,7 +13890,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a corporation's medals",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMedals"
+        "method": "listMedals"
       },
       "http": {
         "method": "GET",
@@ -14042,7 +14042,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns medals issued by a corporation",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMedalsIssued"
+        "method": "listIssuedMedals"
       },
       "http": {
         "method": "GET",
@@ -14194,7 +14194,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return the current member list of a corporation, the token's character need to be a member of the corporation.",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembers"
+        "method": "listMembers"
       },
       "http": {
         "method": "GET",
@@ -14326,7 +14326,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a corporation's member limit, not including CEO himself",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembersLimit"
+        "method": "getMemberLimit"
       },
       "http": {
         "method": "GET",
@@ -14458,7 +14458,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a corporation's members' titles",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembersTitles"
+        "method": "listMemberTitles"
       },
       "http": {
         "method": "GET",
@@ -14590,7 +14590,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns additional information about a corporation's members which helps tracking their activities",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembertracking"
+        "method": "listMemberTracking"
       },
       "http": {
         "method": "GET",
@@ -14722,7 +14722,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List open market orders placed on behalf of a corporation",
       "facade": {
         "domain": "market",
-        "method": "getCorporationsCorporationIdOrders"
+        "method": "listCorporationOrders"
       },
       "http": {
         "method": "GET",
@@ -14874,7 +14874,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List cancelled and expired market orders placed on behalf of a corporation up to 90 days in the past.",
       "facade": {
         "domain": "market",
-        "method": "getCorporationsCorporationIdOrdersHistory"
+        "method": "listCorporationOrderHistory"
       },
       "http": {
         "method": "GET",
@@ -15026,7 +15026,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return the roles of all members if the character has the personnel manager role or any grantable role.",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdRoles"
+        "method": "listMemberRoles"
       },
       "http": {
         "method": "GET",
@@ -15158,7 +15158,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return how roles have changed for a coporation's members, up to a month",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdRolesHistory"
+        "method": "listMemberRoleHistory"
       },
       "http": {
         "method": "GET",
@@ -15310,7 +15310,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return the current shareholders of a corporation.",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdShareholders"
+        "method": "listShareholders"
       },
       "http": {
         "method": "GET",
@@ -15462,7 +15462,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return corporation standings from agents, NPC corporations, and factions",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStandings"
+        "method": "listStandings"
       },
       "http": {
         "method": "GET",
@@ -15614,7 +15614,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns list of corporation starbases (POSes)",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStarbases"
+        "method": "listStarbases"
       },
       "http": {
         "method": "GET",
@@ -15766,7 +15766,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns various settings and fuels of a starbase (POS)",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStarbasesStarbaseId"
+        "method": "getStarbase"
       },
       "http": {
         "method": "GET",
@@ -15928,7 +15928,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of corporation structures. This route's version includes the changes to structures detailed in this blog: https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStructures"
+        "method": "listStructures"
       },
       "http": {
         "method": "GET",
@@ -16080,7 +16080,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns a corporation's titles",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdTitles"
+        "method": "listTitles"
       },
       "http": {
         "method": "GET",
@@ -16212,7 +16212,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a corporation's wallets",
       "facade": {
         "domain": "wallet",
-        "method": "getCorporationsCorporationIdWallets"
+        "method": "listCorporationBalances"
       },
       "http": {
         "method": "GET",
@@ -16344,7 +16344,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Retrieve the given corporation's wallet journal for the given division going 30 days back",
       "facade": {
         "domain": "wallet",
-        "method": "getCorporationsCorporationIdWalletsDivisionJournal"
+        "method": "listCorporationDivisionJournal"
       },
       "http": {
         "method": "GET",
@@ -16511,7 +16511,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get wallet transactions of a corporation",
       "facade": {
         "domain": "wallet",
-        "method": "getCorporationsCorporationIdWalletsDivisionTransactions"
+        "method": "listCorporationDivisionTransactions"
       },
       "http": {
         "method": "GET",
@@ -16671,7 +16671,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all freelance jobs for your corporation.",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCorporationsFreelanceJobsListing"
+        "method": "listCorporationJobs"
       },
       "http": {
         "method": "GET",
@@ -16848,7 +16848,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all participants of a freelance job.",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCorporationsFreelanceJobsParticipants"
+        "method": "listParticipants"
       },
       "http": {
         "method": "GET",
@@ -17034,7 +17034,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of npc corporations\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsNpccorps"
+        "method": "listNpcCorporations"
       },
       "http": {
         "method": "GET",
@@ -17153,7 +17153,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Show your contribution to a corporation project.",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsContribution"
+        "method": "getContribution"
       },
       "http": {
         "method": "GET",
@@ -17312,7 +17312,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all contributors to a corporation project.",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsContributors"
+        "method": "listContributors"
       },
       "http": {
         "method": "GET",
@@ -17505,7 +17505,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of a corporation project.",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsDetail"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -17650,7 +17650,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all (active) corporation projects.",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsListing"
+        "method": "list"
       },
       "http": {
         "method": "GET",
@@ -17852,7 +17852,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of a Skyhook.",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSkyhooksDetail"
+        "method": "getSkyhook"
       },
       "http": {
         "method": "GET",
@@ -17999,7 +17999,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all Skyhooks.",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSkyhooksListing"
+        "method": "listSkyhooks"
       },
       "http": {
         "method": "GET",
@@ -18132,7 +18132,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of a Sovereignty Hub.",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSovereigntyHubsDetail"
+        "method": "getSovereigntyHub"
       },
       "http": {
         "method": "GET",
@@ -18279,7 +18279,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all Sovereignty Hubs.",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSovereigntyHubsListing"
+        "method": "listSovereigntyHubs"
       },
       "http": {
         "method": "GET",
@@ -18411,7 +18411,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "All attributes of a SKINR license",
       "facade": {
         "domain": "cosmetics",
-        "method": "getCosmeticsSkinr"
+        "method": "getSkinrLicense"
       },
       "http": {
         "method": "GET",
@@ -18537,7 +18537,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of dogma attribute ids\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaAttributes"
+        "method": "listAttributes"
       },
       "http": {
         "method": "GET",
@@ -18649,7 +18649,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a dogma attribute\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaAttributesAttributeId"
+        "method": "getAttribute"
       },
       "http": {
         "method": "GET",
@@ -18776,7 +18776,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns info about a dynamic item resulting from mutation with a mutaplasmid.\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaDynamicItemsTypeIdItemId"
+        "method": "getDynamicItem"
       },
       "http": {
         "method": "GET",
@@ -18916,7 +18916,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of dogma effect ids\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaEffects"
+        "method": "listEffects"
       },
       "http": {
         "method": "GET",
@@ -19028,7 +19028,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a dogma effect\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaEffectsEffectId"
+        "method": "getEffect"
       },
       "http": {
         "method": "GET",
@@ -19162,7 +19162,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return details about a fleet",
       "facade": {
         "domain": "fleets",
-        "method": "getFleetsFleetId"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -19296,7 +19296,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return information about fleet members",
       "facade": {
         "domain": "fleets",
-        "method": "getFleetsFleetIdMembers"
+        "method": "listMembers"
       },
       "http": {
         "method": "GET",
@@ -19430,7 +19430,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return information about wings in a fleet",
       "facade": {
         "domain": "fleets",
-        "method": "getFleetsFleetIdWings"
+        "method": "listWings"
       },
       "http": {
         "method": "GET",
@@ -19562,7 +19562,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of a freelance job.\n\nJobs without an ACL (public jobs) does not require authentication.\n\nJobs with an ACL requires authentication, and requires that the character is:\n- An active participant of the job, or\n- A freelance job manager for the corporation that owns the job.",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getFreelanceJobsDetail"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -19691,7 +19691,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all public freelance jobs.",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getFreelanceJobsListing"
+        "method": "listPublic"
       },
       "http": {
         "method": "GET",
@@ -19863,7 +19863,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Top 4 leaderboard of factions for kills and victory points separated by total, last week and yesterday\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwLeaderboards"
+        "method": "getFactionLeaderboards"
       },
       "http": {
         "method": "GET",
@@ -19975,7 +19975,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Top 100 leaderboard of pilots for kills and victory points separated by total, last week and yesterday\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwLeaderboardsCharacters"
+        "method": "getCharacterLeaderboards"
       },
       "http": {
         "method": "GET",
@@ -20087,7 +20087,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Top 10 leaderboard of corporations for kills and victory points separated by total, last week and yesterday\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwLeaderboardsCorporations"
+        "method": "getCorporationLeaderboards"
       },
       "http": {
         "method": "GET",
@@ -20199,7 +20199,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Statistical overviews of factions involved in faction warfare\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwStats"
+        "method": "listFactionStats"
       },
       "http": {
         "method": "GET",
@@ -20316,7 +20316,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "An overview of the current ownership of faction warfare solar systems",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwSystems"
+        "method": "listSystems"
       },
       "http": {
         "method": "GET",
@@ -20428,7 +20428,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Data about which NPC factions are at war\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwWars"
+        "method": "listWars"
       },
       "http": {
         "method": "GET",
@@ -20545,7 +20545,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of current incursions",
       "facade": {
         "domain": "incursions",
-        "method": "getIncursions"
+        "method": "list"
       },
       "http": {
         "method": "GET",
@@ -20662,7 +20662,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of industry facilities",
       "facade": {
         "domain": "industry",
-        "method": "getIndustryFacilities"
+        "method": "listFacilities"
       },
       "http": {
         "method": "GET",
@@ -20779,7 +20779,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return cost indices for solar systems",
       "facade": {
         "domain": "industry",
-        "method": "getIndustrySystems"
+        "method": "listSystemCostIndices"
       },
       "http": {
         "method": "GET",
@@ -20896,7 +20896,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return available insurance levels for all ship types",
       "facade": {
         "domain": "insurance",
-        "method": "getInsurancePrices"
+        "method": "listPrices"
       },
       "http": {
         "method": "GET",
@@ -21013,7 +21013,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a single killmail from its ID and hash",
       "facade": {
         "domain": "killmails",
-        "method": "getKillmailsKillmailIdKillmailHash"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -21154,7 +21154,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of offers from a specific corporation's loyalty store\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "loyalty",
-        "method": "getLoyaltyStoresCorporationIdOffers"
+        "method": "listStoreOffers"
       },
       "http": {
         "method": "GET",
@@ -21279,7 +21279,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of item groups\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "market",
-        "method": "getMarketsGroups"
+        "method": "listGroups"
       },
       "http": {
         "method": "GET",
@@ -21391,7 +21391,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on an item group\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "market",
-        "method": "getMarketsGroupsMarketGroupId"
+        "method": "getGroup"
       },
       "http": {
         "method": "GET",
@@ -21523,7 +21523,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of prices",
       "facade": {
         "domain": "market",
-        "method": "getMarketsPrices"
+        "method": "listPrices"
       },
       "http": {
         "method": "GET",
@@ -21635,7 +21635,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of historical market statistics for the specified type in a region\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "market",
-        "method": "getMarketsRegionIdHistory"
+        "method": "listRegionHistory"
       },
       "http": {
         "method": "GET",
@@ -21782,7 +21782,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of orders in a region",
       "facade": {
         "domain": "market",
-        "method": "getMarketsRegionIdOrders"
+        "method": "listRegionOrders"
       },
       "http": {
         "method": "GET",
@@ -21969,7 +21969,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of type IDs that have active orders in the region, for efficient market indexing.",
       "facade": {
         "domain": "market",
-        "method": "getMarketsRegionIdTypes"
+        "method": "listRegionTypes"
       },
       "http": {
         "method": "GET",
@@ -22123,7 +22123,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return all orders in a structure",
       "facade": {
         "domain": "market",
-        "method": "getMarketsStructuresStructureId"
+        "method": "listStructureOrders"
       },
       "http": {
         "method": "GET",
@@ -22275,7 +22275,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the changelog of this API.",
       "facade": {
         "domain": "meta",
-        "method": "getMetaChangelog"
+        "method": "getChangelog"
       },
       "http": {
         "method": "GET",
@@ -22392,7 +22392,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of compatibility dates.",
       "facade": {
         "domain": "meta",
-        "method": "getMetaCompatibilityDates"
+        "method": "listCompatibilityDates"
       },
       "http": {
         "method": "GET",
@@ -22509,7 +22509,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the name ESI is currently going by, plus the full and glorious history of every name it has ever had. The three letters have never once meant the same thing twice.",
       "facade": {
         "domain": "meta",
-        "method": "getMetaName"
+        "method": "getName"
       },
       "http": {
         "method": "GET",
@@ -22624,7 +22624,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the health status of each API route.",
       "facade": {
         "domain": "meta",
-        "method": "getMetaStatus"
+        "method": "getHealthStatus"
       },
       "http": {
         "method": "GET",
@@ -22741,7 +22741,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of a military campaign.",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsDetail"
+        "method": "getCampaign"
       },
       "http": {
         "method": "GET",
@@ -22872,7 +22872,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all active military campaigns.",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsListing"
+        "method": "listCampaigns"
       },
       "http": {
         "method": "GET",
@@ -22989,7 +22989,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the details of an objective of a military campaign.",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsObjectivesDetail"
+        "method": "getObjective"
       },
       "http": {
         "method": "GET",
@@ -23134,7 +23134,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all active, completed or expired objectives of a military campaign.",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsObjectivesListing"
+        "method": "listObjectives"
       },
       "http": {
         "method": "GET",
@@ -23309,7 +23309,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Browse the SKINR listings publicly available on the Paragon Hub.",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinr"
+        "method": "listPublicListings"
       },
       "http": {
         "method": "GET",
@@ -23472,7 +23472,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Browse the SKINR listings on the Paragon Hub that are visible to the given alliance.",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinrAlliances"
+        "method": "listListingsForAlliance"
       },
       "http": {
         "method": "GET",
@@ -23649,7 +23649,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Browse the SKINR listings on the Paragon Hub that are visible to the given character.",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinrCharacters"
+        "method": "listListingsForCharacter"
       },
       "http": {
         "method": "GET",
@@ -23826,7 +23826,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Browse the SKINR listings on the Paragon Hub that are visible to the given corporation.",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinrCorporations"
+        "method": "listListingsForCorporation"
       },
       "http": {
         "method": "GET",
@@ -24004,7 +24004,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of all Skyhooks that currently or will shortly be raidable.",
       "facade": {
         "domain": "activities",
-        "method": "getSkyhooksRaidable"
+        "method": "listRaidableSkyhooks"
       },
       "http": {
         "method": "GET",
@@ -24121,7 +24121,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Shows sovereignty data for campaigns.",
       "facade": {
         "domain": "sovereignty",
-        "method": "getSovereigntyCampaigns"
+        "method": "listCampaigns"
       },
       "http": {
         "method": "GET",
@@ -24239,7 +24239,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Listing of sovereignty details for all K-space systems in New Eden.",
       "facade": {
         "domain": "sovereignty",
-        "method": "getSovereigntySystems"
+        "method": "listSystems"
       },
       "http": {
         "method": "GET",
@@ -24357,7 +24357,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Current status of the EVE Online cluster",
       "facade": {
         "domain": "status",
-        "method": "getStatus"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -24469,7 +24469,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get all character ancestries\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseAncestries"
+        "method": "listAncestries"
       },
       "http": {
         "method": "GET",
@@ -24581,7 +24581,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on an asteroid belt\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseAsteroidBeltsAsteroidBeltId"
+        "method": "getAsteroidBelt"
       },
       "http": {
         "method": "GET",
@@ -24707,7 +24707,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of bloodlines\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseBloodlines"
+        "method": "listBloodlines"
       },
       "http": {
         "method": "GET",
@@ -24819,7 +24819,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of item categories\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseCategories"
+        "method": "listItemCategories"
       },
       "http": {
         "method": "GET",
@@ -24931,7 +24931,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information of an item category\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseCategoriesCategoryId"
+        "method": "getItemCategory"
       },
       "http": {
         "method": "GET",
@@ -25058,7 +25058,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of constellations\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseConstellations"
+        "method": "listConstellations"
       },
       "http": {
         "method": "GET",
@@ -25170,7 +25170,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a constellation\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseConstellationsConstellationId"
+        "method": "getConstellation"
       },
       "http": {
         "method": "GET",
@@ -25296,7 +25296,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of factions\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseFactions"
+        "method": "listFactions"
       },
       "http": {
         "method": "GET",
@@ -25408,7 +25408,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of graphics\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGraphics"
+        "method": "listGraphics"
       },
       "http": {
         "method": "GET",
@@ -25520,7 +25520,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a graphic\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGraphicsGraphicId"
+        "method": "getGraphic"
       },
       "http": {
         "method": "GET",
@@ -25646,7 +25646,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of item groups\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGroups"
+        "method": "listItemGroups"
       },
       "http": {
         "method": "GET",
@@ -25778,7 +25778,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on an item group\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGroupsGroupId"
+        "method": "getItemGroup"
       },
       "http": {
         "method": "GET",
@@ -25905,7 +25905,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a moon\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseMoonsMoonId"
+        "method": "getMoon"
       },
       "http": {
         "method": "GET",
@@ -26031,7 +26031,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a planet\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniversePlanetsPlanetId"
+        "method": "getPlanet"
       },
       "http": {
         "method": "GET",
@@ -26157,7 +26157,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of character races\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseRaces"
+        "method": "listRaces"
       },
       "http": {
         "method": "GET",
@@ -26269,7 +26269,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of regions\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseRegions"
+        "method": "listRegions"
       },
       "http": {
         "method": "GET",
@@ -26381,7 +26381,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a region\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseRegionsRegionId"
+        "method": "getRegion"
       },
       "http": {
         "method": "GET",
@@ -26512,7 +26512,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a planetary factory schematic",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getUniverseSchematicsSchematicId"
+        "method": "getSchematic"
       },
       "http": {
         "method": "GET",
@@ -26639,7 +26639,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a stargate\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStargatesStargateId"
+        "method": "getStargate"
       },
       "http": {
         "method": "GET",
@@ -26765,7 +26765,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a star\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStarsStarId"
+        "method": "getStar"
       },
       "http": {
         "method": "GET",
@@ -26891,7 +26891,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a station\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStationsStationId"
+        "method": "getStation"
       },
       "http": {
         "method": "GET",
@@ -27022,7 +27022,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "List all public structures",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStructures"
+        "method": "listPublicStructures"
       },
       "http": {
         "method": "GET",
@@ -27159,7 +27159,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Returns information on requested structure if you are on the ACL. Otherwise, returns \"Forbidden\" for all inputs.",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStructuresStructureId"
+        "method": "getStructure"
       },
       "http": {
         "method": "GET",
@@ -27291,7 +27291,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the number of jumps in solar systems within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with jumps will be listed",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystemJumps"
+        "method": "listSystemJumps"
       },
       "http": {
         "method": "GET",
@@ -27408,7 +27408,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get the number of ship, pod and NPC kills per solar system within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with kills will be listed",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystemKills"
+        "method": "listSystemKills"
       },
       "http": {
         "method": "GET",
@@ -27520,7 +27520,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of solar systems\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystems"
+        "method": "listSolarSystems"
       },
       "http": {
         "method": "GET",
@@ -27632,7 +27632,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a solar system.\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystemsSystemId"
+        "method": "getSolarSystem"
       },
       "http": {
         "method": "GET",
@@ -27758,7 +27758,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get a list of type ids\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseTypes"
+        "method": "listTypes"
       },
       "http": {
         "method": "GET",
@@ -27890,7 +27890,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Get information on a type\n\nThis route expires daily at 11:05",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseTypesTypeId"
+        "method": "getType"
       },
       "http": {
         "method": "GET",
@@ -28022,7 +28022,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of wars",
       "facade": {
         "domain": "wars",
-        "method": "getWars"
+        "method": "list"
       },
       "http": {
         "method": "GET",
@@ -28154,7 +28154,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return details about a war",
       "facade": {
         "domain": "wars",
-        "method": "getWarsWarId"
+        "method": "get"
       },
       "http": {
         "method": "GET",
@@ -28286,7 +28286,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return a list of kills related to a war",
       "facade": {
         "domain": "wars",
-        "method": "getWarsWarIdKillmails"
+        "method": "listKillmails"
       },
       "http": {
         "method": "GET",
@@ -28438,7 +28438,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Bulk lookup of character IDs to corporation, alliance and faction",
       "facade": {
         "domain": "character",
-        "method": "postCharactersAffiliation"
+        "method": "lookupAffiliations"
       },
       "http": {
         "method": "POST",
@@ -28574,7 +28574,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return locations for a set of item ids, which you can get from character assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)",
       "facade": {
         "domain": "assets",
-        "method": "postCharactersCharacterIdAssetsLocations"
+        "method": "lookupCharacterLocations"
       },
       "http": {
         "method": "POST",
@@ -28723,7 +28723,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return names for a set of item ids, which you can get from character assets endpoint. Typically used for items that can customize names, like containers or ships.",
       "facade": {
         "domain": "assets",
-        "method": "postCharactersCharacterIdAssetsNames"
+        "method": "lookupCharacterNames"
       },
       "http": {
         "method": "POST",
@@ -28872,7 +28872,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Bulk add contacts with same settings",
       "facade": {
         "domain": "contacts",
-        "method": "postCharactersCharacterIdContacts"
+        "method": "addCharacterContacts"
       },
       "http": {
         "method": "POST",
@@ -29066,7 +29066,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost",
       "facade": {
         "domain": "character",
-        "method": "postCharactersCharacterIdCspa"
+        "method": "calculateCspaCharge"
       },
       "http": {
         "method": "POST",
@@ -29215,7 +29215,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Save a new fitting for a character",
       "facade": {
         "domain": "fittings",
-        "method": "postCharactersCharacterIdFittings"
+        "method": "create"
       },
       "http": {
         "method": "POST",
@@ -29447,7 +29447,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Create and send a new mail",
       "facade": {
         "domain": "mail",
-        "method": "postCharactersCharacterIdMail"
+        "method": "send"
       },
       "http": {
         "method": "POST",
@@ -29633,7 +29633,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Create a mail label",
       "facade": {
         "domain": "mail",
-        "method": "postCharactersCharacterIdMailLabels"
+        "method": "createLabel"
       },
       "http": {
         "method": "POST",
@@ -29806,7 +29806,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return locations for a set of item ids, which you can get from corporation assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)",
       "facade": {
         "domain": "assets",
-        "method": "postCorporationsCorporationIdAssetsLocations"
+        "method": "lookupCorporationLocations"
       },
       "http": {
         "method": "POST",
@@ -29955,7 +29955,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Return names for a set of item ids, which you can get from corporation assets endpoint. Only valid for items that can customize names, like containers or ships",
       "facade": {
         "domain": "assets",
-        "method": "postCorporationsCorporationIdAssetsNames"
+        "method": "lookupCorporationNames"
       },
       "http": {
         "method": "POST",
@@ -30104,7 +30104,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Invite a character into the fleet. If a character has a CSPA charge set it is not possible to invite them to the fleet using ESI",
       "facade": {
         "domain": "fleets",
-        "method": "postFleetsFleetIdMembers"
+        "method": "inviteMember"
       },
       "http": {
         "method": "POST",
@@ -30266,7 +30266,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Create a new wing in a fleet",
       "facade": {
         "domain": "fleets",
-        "method": "postFleetsFleetIdWings"
+        "method": "createWing"
       },
       "http": {
         "method": "POST",
@@ -30395,7 +30395,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Create a new squad in a fleet",
       "facade": {
         "domain": "fleets",
-        "method": "postFleetsFleetIdWingsWingIdSquads"
+        "method": "createSquad"
       },
       "http": {
         "method": "POST",
@@ -30540,7 +30540,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Calculate the systems between the given origin and destination.",
       "facade": {
         "domain": "routes",
-        "method": "postRoute"
+        "method": "calculate"
       },
       "http": {
         "method": "POST",
@@ -30696,7 +30696,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Set a solar system as autopilot waypoint",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiAutopilotWaypoint"
+        "method": "setAutopilotWaypoint"
       },
       "http": {
         "method": "POST",
@@ -30848,7 +30848,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Open the contract window inside the client",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowContract"
+        "method": "openContract"
       },
       "http": {
         "method": "POST",
@@ -30970,7 +30970,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Open the information window for a character, corporation or alliance inside the client",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowInformation"
+        "method": "openInformation"
       },
       "http": {
         "method": "POST",
@@ -31092,7 +31092,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Open the market details window for a specific typeID inside the client",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowMarketdetails"
+        "method": "openMarketDetails"
       },
       "http": {
         "method": "POST",
@@ -31214,7 +31214,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Open the New Mail window, according to settings from the request if applicable",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowNewmail"
+        "method": "openNewMail"
       },
       "http": {
         "method": "POST",
@@ -31364,7 +31364,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Resolve a set of names to IDs in the following categories: agents, alliances, characters, constellations, corporations factions, inventory_types, regions, stations, and systems. Only exact matches will be returned. All names searched for are cached for 12 hours",
       "facade": {
         "domain": "universe",
-        "method": "postUniverseIds"
+        "method": "resolveIds"
       },
       "http": {
         "method": "POST",
@@ -31499,7 +31499,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Resolve a set of IDs to names and categories. Supported ID's for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types, Factions",
       "facade": {
         "domain": "universe",
-        "method": "postUniverseNames"
+        "method": "resolveNames"
       },
       "http": {
         "method": "POST",
@@ -31640,7 +31640,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Set your response status to an event",
       "facade": {
         "domain": "calendar",
-        "method": "putCharactersCharacterIdCalendarEventId"
+        "method": "respondToEvent"
       },
       "http": {
         "method": "PUT",
@@ -31799,7 +31799,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Bulk edit contacts with same settings",
       "facade": {
         "domain": "contacts",
-        "method": "putCharactersCharacterIdContacts"
+        "method": "updateCharacterContacts"
       },
       "http": {
         "method": "PUT",
@@ -31986,7 +31986,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Update metadata about a mail",
       "facade": {
         "domain": "mail",
-        "method": "putCharactersCharacterIdMailMailId"
+        "method": "update"
       },
       "http": {
         "method": "PUT",
@@ -32149,7 +32149,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Update settings about a fleet",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetId"
+        "method": "update"
       },
       "http": {
         "method": "PUT",
@@ -32292,7 +32292,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Move a fleet member around",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetIdMembersMemberId"
+        "method": "moveMember"
       },
       "http": {
         "method": "PUT",
@@ -32463,7 +32463,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Rename a fleet squad",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetIdSquadsSquadId"
+        "method": "renameSquad"
       },
       "http": {
         "method": "PUT",
@@ -32620,7 +32620,7 @@ export const operationManifest: SerializableOperationManifest = deepFreeze<Seria
       "description": "Rename a fleet wing",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetIdWingsWingId"
+        "method": "renameWing"
       },
       "http": {
         "method": "PUT",

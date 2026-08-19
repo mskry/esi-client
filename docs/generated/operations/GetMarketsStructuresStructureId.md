@@ -11,14 +11,29 @@ List orders in a structure
 
 - Stable ID: `GetMarketsStructuresStructureId`
 - HTTP: `GET /markets/structures/{structure_id}`
-- Domain method: `client.market.getMarketsStructuresStructureId(structureId, options?)`
+- Domain method: `client.market.listStructureOrders(structureId, options?)`
 - Generic call: `client.callOperation("GetMarketsStructuresStructureId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/market`
 - Domain index: [market](../domains/market.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMarketClient } from '@evespace/esi-client/domains/market';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMarketClient({ token: accessToken });
+
+const structureId = 1020000000000;
+
+const data = await client.listStructureOrders(structureId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const structureId = 1020000000000;
 
-const data = await client.market.getMarketsStructuresStructureId(structureId);
+const data = await client.market.listStructureOrders(structureId);
 ```
 
 ## Generic-execution snippet
@@ -65,7 +80,7 @@ const response = await client.callOperation('GetMarketsStructuresStructureId', a
 
 - Request schema: `@evespace/esi-client/schemas` export `GetMarketsStructuresStructureIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.market.withMetadata().getMarketsStructuresStructureId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.market.withMetadata().listStructureOrders(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

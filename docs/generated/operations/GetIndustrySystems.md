@@ -11,21 +11,31 @@ List solar system cost indices
 
 - Stable ID: `GetIndustrySystems`
 - HTTP: `GET /industry/systems`
-- Domain method: `client.industry.getIndustrySystems(options?)`
+- Domain method: `client.industry.listSystemCostIndices(options?)`
 - Generic call: `client.callOperation("GetIndustrySystems", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/industry`
 - Domain index: [industry](../domains/industry.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createIndustryClient } from '@evespace/esi-client/domains/industry';
+
+const client = createIndustryClient();
+
+const data = await client.listSystemCostIndices();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.industry.getIndustrySystems();
+const data = await client.industry.listSystemCostIndices();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetIndustrySystems', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetIndustrySystemsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.industry.withMetadata().getIndustrySystems(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.industry.withMetadata().listSystemCostIndices(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

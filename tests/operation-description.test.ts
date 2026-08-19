@@ -30,7 +30,7 @@ describe('operation descriptions', () => {
     expect(description).toBe(manifestEntry);
     expect(description).toMatchObject({
       operationId: 'GetStatus',
-      facade: { domain: 'status', method: 'getStatus' },
+      facade: { domain: 'status', method: 'get' },
       http: { method: 'GET', path: '/status' },
       requestSchema: {
         module: '@evespace/esi-client/schemas',

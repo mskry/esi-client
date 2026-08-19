@@ -11,14 +11,26 @@ Get solar system information
 
 - Stable ID: `GetUniverseSystemsSystemId`
 - HTTP: `GET /universe/systems/{system_id}`
-- Domain method: `client.universe.getUniverseSystemsSystemId(systemId, options?)`
+- Domain method: `client.universe.getSolarSystem(systemId, options?)`
 - Generic call: `client.callOperation("GetUniverseSystemsSystemId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/universe`
 - Domain index: [universe](../domains/universe.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createUniverseClient } from '@evespace/esi-client/domains/universe';
+
+const client = createUniverseClient();
+
+const systemId = 30000142;
+
+const data = await client.getSolarSystem(systemId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const systemId = 30000142;
 
-const data = await client.universe.getUniverseSystemsSystemId(systemId);
+const data = await client.universe.getSolarSystem(systemId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetUniverseSystemsSystemId', argume
 
 - Request schema: `@evespace/esi-client/schemas` export `GetUniverseSystemsSystemIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.universe.withMetadata().getUniverseSystemsSystemId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.universe.withMetadata().getSolarSystem(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

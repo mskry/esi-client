@@ -13,14 +13,48 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdFwStats`](../operations/GetCharactersCharacterIdFwStats.md) | `GET` | `getCharactersCharacterIdFwStats` | required | none | read | Overview of a character involved in faction warfare |
-| [`GetCorporationsCorporationIdFwStats`](../operations/GetCorporationsCorporationIdFwStats.md) | `GET` | `getCorporationsCorporationIdFwStats` | required | none | read | Overview of a corporation involved in faction warfare |
-| [`GetFwLeaderboards`](../operations/GetFwLeaderboards.md) | `GET` | `getFwLeaderboards` | public | none | read | List of the top factions in faction warfare |
-| [`GetFwLeaderboardsCharacters`](../operations/GetFwLeaderboardsCharacters.md) | `GET` | `getFwLeaderboardsCharacters` | public | none | read | List of the top pilots in faction warfare |
-| [`GetFwLeaderboardsCorporations`](../operations/GetFwLeaderboardsCorporations.md) | `GET` | `getFwLeaderboardsCorporations` | public | none | read | List of the top corporations in faction warfare |
-| [`GetFwStats`](../operations/GetFwStats.md) | `GET` | `getFwStats` | public | none | read | An overview of statistics about factions involved in faction warfare |
-| [`GetFwSystems`](../operations/GetFwSystems.md) | `GET` | `getFwSystems` | public | none | read | Ownership of faction warfare systems |
-| [`GetFwWars`](../operations/GetFwWars.md) | `GET` | `getFwWars` | public | none | read | Data about which NPC factions are at war |
+| [`GetCharactersCharacterIdFwStats`](../operations/GetCharactersCharacterIdFwStats.md) | `GET` | `getCharacterStats` | required | none | read | Overview of a character involved in faction warfare |
+| [`GetCorporationsCorporationIdFwStats`](../operations/GetCorporationsCorporationIdFwStats.md) | `GET` | `getCorporationStats` | required | none | read | Overview of a corporation involved in faction warfare |
+| [`GetFwLeaderboards`](../operations/GetFwLeaderboards.md) | `GET` | `getFactionLeaderboards` | public | none | read | List of the top factions in faction warfare |
+| [`GetFwLeaderboardsCharacters`](../operations/GetFwLeaderboardsCharacters.md) | `GET` | `getCharacterLeaderboards` | public | none | read | List of the top pilots in faction warfare |
+| [`GetFwLeaderboardsCorporations`](../operations/GetFwLeaderboardsCorporations.md) | `GET` | `getCorporationLeaderboards` | public | none | read | List of the top corporations in faction warfare |
+| [`GetFwStats`](../operations/GetFwStats.md) | `GET` | `listFactionStats` | public | none | read | An overview of statistics about factions involved in faction warfare |
+| [`GetFwSystems`](../operations/GetFwSystems.md) | `GET` | `listSystems` | public | none | read | Ownership of faction warfare systems |
+| [`GetFwWars`](../operations/GetFwWars.md) | `GET` | `listWars` | public | none | read | Data about which NPC factions are at war |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createFactionWarfareClient } from '@evespace/esi-client/domains/faction-warfare';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFactionWarfareClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.getCharacterStats(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.factionWarfare.getCharacterStats(characterId);
+```
 
 ## Shared concepts
 

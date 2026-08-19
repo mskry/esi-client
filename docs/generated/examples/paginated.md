@@ -18,7 +18,7 @@ import { EsiClient } from '@evespace/esi-client';
 const client = new EsiClient();
 
 export async function getUniverseGroupPage(page = 1) {
-  const response = await client.universe.withMetadata().getUniverseGroups({ page });
+  const response = await client.universe.withMetadata().listItemGroups({ page });
   return {
     groupIds: response.data,
     page,

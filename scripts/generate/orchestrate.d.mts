@@ -20,12 +20,20 @@ export interface GenerationProvenance {
   readonly sha256: string;
   readonly sourceSha256: string;
   readonly specificationUrl: string;
+  readonly facadeCatalog: GenerationProvenanceArtifact;
+  readonly facadeReviewReport: GenerationProvenanceArtifact;
+}
+
+export interface GenerationProvenanceArtifact {
+  readonly path: string;
+  readonly sha256: string;
 }
 
 export interface EmitterContext {
   readonly compatibilityDate: string;
   readonly correctedDocument: Readonly<Record<string, unknown>>;
   readonly normalizedModel: NormalizedOpenApiModel;
+  readonly namingReviewReport: string;
   readonly operationMetadata: readonly ResolvedOperationMetadata[];
   readonly outputDirectory: string;
   readonly provenance: GenerationProvenance;

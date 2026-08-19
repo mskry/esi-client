@@ -11,21 +11,31 @@ List incursions
 
 - Stable ID: `GetIncursions`
 - HTTP: `GET /incursions`
-- Domain method: `client.incursions.getIncursions(options?)`
+- Domain method: `client.incursions.list(options?)`
 - Generic call: `client.callOperation("GetIncursions", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/incursions`
 - Domain index: [incursions](../domains/incursions.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createIncursionsClient } from '@evespace/esi-client/domains/incursions';
+
+const client = createIncursionsClient();
+
+const data = await client.list();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.incursions.getIncursions();
+const data = await client.incursions.list();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetIncursions', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetIncursionsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.incursions.withMetadata().getIncursions(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.incursions.withMetadata().list(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

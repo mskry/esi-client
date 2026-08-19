@@ -37,7 +37,25 @@ import {
   type GetFwSystemsOutput,
   type GetFwWarsInput,
   type GetFwWarsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/faction-warfare.js';
+
+export const GetFwLeaderboardsCharactersDescriptor: OperationExecutionDescriptor<GetFwLeaderboardsCharactersInput, GetFwLeaderboardsCharactersOutput> = {
+  operationId: "GetFwLeaderboardsCharacters",
+  method: "GET",
+  path: "/fw/leaderboards/characters",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetFwLeaderboardsCharactersRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetFwLeaderboardsCharactersStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
 
 export const GetCharactersCharacterIdFwStatsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdFwStatsInput, GetCharactersCharacterIdFwStatsOutput> = {
   operationId: "GetCharactersCharacterIdFwStats",
@@ -54,6 +72,24 @@ export const GetCharactersCharacterIdFwStatsDescriptor: OperationExecutionDescri
   authentication: { scopes: ["esi-characters.read_fw_stats.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersCharacterIdFwStatsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetFwLeaderboardsCorporationsDescriptor: OperationExecutionDescriptor<GetFwLeaderboardsCorporationsInput, GetFwLeaderboardsCorporationsOutput> = {
+  operationId: "GetFwLeaderboardsCorporations",
+  method: "GET",
+  path: "/fw/leaderboards/corporations",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetFwLeaderboardsCorporationsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetFwLeaderboardsCorporationsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -91,42 +127,6 @@ export const GetFwLeaderboardsDescriptor: OperationExecutionDescriptor<GetFwLead
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetFwLeaderboardsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetFwLeaderboardsCharactersDescriptor: OperationExecutionDescriptor<GetFwLeaderboardsCharactersInput, GetFwLeaderboardsCharactersOutput> = {
-  operationId: "GetFwLeaderboardsCharacters",
-  method: "GET",
-  path: "/fw/leaderboards/characters",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetFwLeaderboardsCharactersRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetFwLeaderboardsCharactersStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetFwLeaderboardsCorporationsDescriptor: OperationExecutionDescriptor<GetFwLeaderboardsCorporationsInput, GetFwLeaderboardsCorporationsOutput> = {
-  operationId: "GetFwLeaderboardsCorporations",
-  method: "GET",
-  path: "/fw/leaderboards/corporations",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetFwLeaderboardsCorporationsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetFwLeaderboardsCorporationsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

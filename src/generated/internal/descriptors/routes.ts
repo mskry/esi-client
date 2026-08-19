@@ -9,7 +9,7 @@ import {
   PostRouteStatus200SuccessResponseSchema,
   type PostRouteInput,
   type PostRouteOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/routes.js';
 
 export const PostRouteDescriptor: OperationExecutionDescriptor<PostRouteInput, PostRouteOutput> = {
   operationId: "PostRoute",

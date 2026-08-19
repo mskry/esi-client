@@ -11,14 +11,27 @@ Get names and categories for a set of IDs
 
 - Stable ID: `PostUniverseNames`
 - HTTP: `POST /universe/names`
-- Domain method: `client.universe.postUniverseNames(options)`
+- Domain method: `client.universe.resolveNames(options)`
 - Generic call: `client.callOperation("PostUniverseNames", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/universe`
 - Domain index: [universe](../domains/universe.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createUniverseClient } from '@evespace/esi-client/domains/universe';
+import type { PostUniverseNamesOptions } from '@evespace/esi-client/domains/universe';
+
+const client = createUniverseClient();
+
+declare const requestBody: NonNullable<PostUniverseNamesOptions['body']>;
+
+const data = await client.resolveNames({ body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -28,7 +41,7 @@ const client = new EsiClient();
 
 declare const requestBody: NonNullable<PostUniverseNamesOptions['body']>;
 
-const data = await client.universe.postUniverseNames({ body: requestBody });
+const data = await client.universe.resolveNames({ body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -59,7 +72,7 @@ const response = await client.callOperation('PostUniverseNames', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `PostUniverseNamesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.universe.withMetadata().postUniverseNames(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.universe.withMetadata().resolveNames(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

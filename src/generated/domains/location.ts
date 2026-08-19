@@ -3,92 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetCharactersCharacterIdLocationDescriptor,
-  GetCharactersCharacterIdOnlineDescriptor,
-  GetCharactersCharacterIdShipDescriptor,
-} from '../internal/descriptors/location.js';
-import type {
-  GetCharactersCharacterIdLocationInput,
-  GetCharactersCharacterIdLocationOutput,
-  GetCharactersCharacterIdOnlineInput,
-  GetCharactersCharacterIdOnlineOutput,
-  GetCharactersCharacterIdShipInput,
-  GetCharactersCharacterIdShipOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindLocationDomainClient } from '../internal/domains/location.js';
+import type { LocationDomainClient } from '../internal/domains/location-contract.js';
 
-export interface GetCharactersCharacterIdLocationOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdLocationInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdLocationInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdLocationInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/location-contract.js';
 
-export interface GetCharactersCharacterIdOnlineOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdOnlineInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdOnlineInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdOnlineInput["header"]>["X-Tenant"];
-}
-
-export interface GetCharactersCharacterIdShipOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdShipInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdShipInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdShipInput["header"]>["X-Tenant"];
-}
-
-export class LocationDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdLocation(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<GetCharactersCharacterIdLocationOutput> {
-    const arguments_: GetCharactersCharacterIdLocationInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdLocationDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCharactersCharacterIdOnline(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<GetCharactersCharacterIdOnlineOutput> {
-    const arguments_: GetCharactersCharacterIdOnlineInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdOnlineDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCharactersCharacterIdShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<GetCharactersCharacterIdShipOutput> {
-    const arguments_: GetCharactersCharacterIdShipInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdShipDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): LocationDomainClientWithMetadata {
-    return new LocationDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class LocationDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdLocation(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<EsiResponse<GetCharactersCharacterIdLocationOutput>> {
-    const arguments_: GetCharactersCharacterIdLocationInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdLocationDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCharactersCharacterIdOnline(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<EsiResponse<GetCharactersCharacterIdOnlineOutput>> {
-    const arguments_: GetCharactersCharacterIdOnlineInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdOnlineDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCharactersCharacterIdShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<EsiResponse<GetCharactersCharacterIdShipOutput>> {
-    const arguments_: GetCharactersCharacterIdShipInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdShipDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createLocationClient(options: EsiClientOptions = {}): LocationDomainClient {
+  return bindLocationDomainClient(new EsiClientConfiguration(options));
 }

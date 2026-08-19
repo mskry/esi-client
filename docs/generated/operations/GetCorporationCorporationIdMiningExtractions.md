@@ -11,14 +11,29 @@ Moon extraction timers
 
 - Stable ID: `GetCorporationCorporationIdMiningExtractions`
 - HTTP: `GET /corporation/{corporation_id}/mining/extractions`
-- Domain method: `client.industry.getCorporationCorporationIdMiningExtractions(corporationId, options?)`
+- Domain method: `client.industry.listMoonExtractionTimers(corporationId, options?)`
 - Generic call: `client.callOperation("GetCorporationCorporationIdMiningExtractions", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/industry`
 - Domain index: [industry](../domains/industry.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createIndustryClient } from '@evespace/esi-client/domains/industry';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createIndustryClient({ token: accessToken });
+
+const corporationId = 98000001;
+
+const data = await client.listMoonExtractionTimers(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const corporationId = 98000001;
 
-const data = await client.industry.getCorporationCorporationIdMiningExtractions(corporationId);
+const data = await client.industry.listMoonExtractionTimers(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -65,7 +80,7 @@ const response = await client.callOperation('GetCorporationCorporationIdMiningEx
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationCorporationIdMiningExtractionsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.industry.withMetadata().getCorporationCorporationIdMiningExtractions(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.industry.withMetadata().listMoonExtractionTimers(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

@@ -13,14 +13,48 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdIndustryJobs`](../operations/GetCharactersCharacterIdIndustryJobs.md) | `GET` | `getCharactersCharacterIdIndustryJobs` | required | none | read | List character industry jobs |
-| [`GetCharactersCharacterIdMining`](../operations/GetCharactersCharacterIdMining.md) | `GET` | `getCharactersCharacterIdMining` | required | offset | read | Character mining ledger |
-| [`GetCorporationCorporationIdMiningExtractions`](../operations/GetCorporationCorporationIdMiningExtractions.md) | `GET` | `getCorporationCorporationIdMiningExtractions` | required | offset | read | Moon extraction timers |
-| [`GetCorporationCorporationIdMiningObservers`](../operations/GetCorporationCorporationIdMiningObservers.md) | `GET` | `getCorporationCorporationIdMiningObservers` | required | offset | read | Corporation mining observers |
-| [`GetCorporationCorporationIdMiningObserversObserverId`](../operations/GetCorporationCorporationIdMiningObserversObserverId.md) | `GET` | `getCorporationCorporationIdMiningObserversObserverId` | required | offset | read | Observed corporation mining |
-| [`GetCorporationsCorporationIdIndustryJobs`](../operations/GetCorporationsCorporationIdIndustryJobs.md) | `GET` | `getCorporationsCorporationIdIndustryJobs` | required | offset | read | List corporation industry jobs |
-| [`GetIndustryFacilities`](../operations/GetIndustryFacilities.md) | `GET` | `getIndustryFacilities` | public | none | read | List industry facilities |
-| [`GetIndustrySystems`](../operations/GetIndustrySystems.md) | `GET` | `getIndustrySystems` | public | none | read | List solar system cost indices |
+| [`GetCharactersCharacterIdIndustryJobs`](../operations/GetCharactersCharacterIdIndustryJobs.md) | `GET` | `listCharacterJobs` | required | none | read | List character industry jobs |
+| [`GetCharactersCharacterIdMining`](../operations/GetCharactersCharacterIdMining.md) | `GET` | `listCharacterMiningLedger` | required | offset | read | Character mining ledger |
+| [`GetCorporationCorporationIdMiningExtractions`](../operations/GetCorporationCorporationIdMiningExtractions.md) | `GET` | `listMoonExtractionTimers` | required | offset | read | Moon extraction timers |
+| [`GetCorporationCorporationIdMiningObservers`](../operations/GetCorporationCorporationIdMiningObservers.md) | `GET` | `listMiningObservers` | required | offset | read | Corporation mining observers |
+| [`GetCorporationCorporationIdMiningObserversObserverId`](../operations/GetCorporationCorporationIdMiningObserversObserverId.md) | `GET` | `listObservedMining` | required | offset | read | Observed corporation mining |
+| [`GetCorporationsCorporationIdIndustryJobs`](../operations/GetCorporationsCorporationIdIndustryJobs.md) | `GET` | `listCorporationJobs` | required | offset | read | List corporation industry jobs |
+| [`GetIndustryFacilities`](../operations/GetIndustryFacilities.md) | `GET` | `listFacilities` | public | none | read | List industry facilities |
+| [`GetIndustrySystems`](../operations/GetIndustrySystems.md) | `GET` | `listSystemCostIndices` | public | none | read | List solar system cost indices |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createIndustryClient } from '@evespace/esi-client/domains/industry';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createIndustryClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listCharacterJobs(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.industry.listCharacterJobs(characterId);
+```
 
 ## Shared concepts
 

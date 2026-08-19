@@ -11,14 +11,26 @@ List loyalty store offers
 
 - Stable ID: `GetLoyaltyStoresCorporationIdOffers`
 - HTTP: `GET /loyalty/stores/{corporation_id}/offers`
-- Domain method: `client.loyalty.getLoyaltyStoresCorporationIdOffers(corporationId, options?)`
+- Domain method: `client.loyalty.listStoreOffers(corporationId, options?)`
 - Generic call: `client.callOperation("GetLoyaltyStoresCorporationIdOffers", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/loyalty`
 - Domain index: [loyalty](../domains/loyalty.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createLoyaltyClient } from '@evespace/esi-client/domains/loyalty';
+
+const client = createLoyaltyClient();
+
+const corporationId = 98000001;
+
+const data = await client.listStoreOffers(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const corporationId = 98000001;
 
-const data = await client.loyalty.getLoyaltyStoresCorporationIdOffers(corporationId);
+const data = await client.loyalty.listStoreOffers(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetLoyaltyStoresCorporationIdOffers
 
 - Request schema: `@evespace/esi-client/schemas` export `GetLoyaltyStoresCorporationIdOffersRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.loyalty.withMetadata().getLoyaltyStoresCorporationIdOffers(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.loyalty.withMetadata().listStoreOffers(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

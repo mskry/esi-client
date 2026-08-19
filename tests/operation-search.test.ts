@@ -22,7 +22,9 @@ describe('operation search', () => {
   });
 
   it('searches facade, HTTP, authentication, scope, and classification fields', () => {
-    expect(searchOperations({ query: 'getStatus' })[0]?.operationId).toBe('GetStatus');
+    expect(searchOperations({ query: 'agentsResearch' })[0]?.operationId).toBe(
+      'GetCharactersCharacterIdAgentsResearch',
+    );
     expect(
       searchOperations({ query: 'public', limit: 100 }).every((result) => !result.authenticated),
     ).toBe(true);

@@ -9,7 +9,7 @@ export type {
   EsiLanguage,
   EsiTokenProvider,
   SerializedEsiClientConfiguration,
-} from './client/configuration.js';
+} from './client/options.js';
 export * from './client/errors.js';
 export type {
   EsiCacheMetadata,

@@ -11,14 +11,29 @@ Get fittings
 
 - Stable ID: `GetCharactersCharacterIdFittings`
 - HTTP: `GET /characters/{character_id}/fittings`
-- Domain method: `client.fittings.getCharactersCharacterIdFittings(characterId, options?)`
+- Domain method: `client.fittings.list(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdFittings", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/fittings`
 - Domain index: [fittings](../domains/fittings.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFittingsClient } from '@evespace/esi-client/domains/fittings';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFittingsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.list(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.fittings.getCharactersCharacterIdFittings(characterId);
+const data = await client.fittings.list(characterId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCharactersCharacterIdFittings', 
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdFittingsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.fittings.withMetadata().getCharactersCharacterIdFittings(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.fittings.withMetadata().list(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

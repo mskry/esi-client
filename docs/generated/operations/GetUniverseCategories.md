@@ -11,21 +11,31 @@ Get item categories
 
 - Stable ID: `GetUniverseCategories`
 - HTTP: `GET /universe/categories`
-- Domain method: `client.universe.getUniverseCategories(options?)`
+- Domain method: `client.universe.listItemCategories(options?)`
 - Generic call: `client.callOperation("GetUniverseCategories", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/universe`
 - Domain index: [universe](../domains/universe.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createUniverseClient } from '@evespace/esi-client/domains/universe';
+
+const client = createUniverseClient();
+
+const data = await client.listItemCategories();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.universe.getUniverseCategories();
+const data = await client.universe.listItemCategories();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetUniverseCategories', arguments_)
 
 - Request schema: `@evespace/esi-client/schemas` export `GetUniverseCategoriesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.universe.withMetadata().getUniverseCategories(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.universe.withMetadata().listItemCategories(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

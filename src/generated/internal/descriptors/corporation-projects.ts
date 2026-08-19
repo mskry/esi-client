@@ -21,7 +21,27 @@ import {
   type GetCorporationsProjectsDetailOutput,
   type GetCorporationsProjectsListingInput,
   type GetCorporationsProjectsListingOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/corporation-projects.js';
+
+export const GetCorporationsProjectsDetailDescriptor: OperationExecutionDescriptor<GetCorporationsProjectsDetailInput, GetCorporationsProjectsDetailOutput> = {
+  operationId: "GetCorporationsProjectsDetail",
+  method: "GET",
+  path: "/corporations/{corporation_id}/projects/{project_id}",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "project_id", placement: "path", required: true, schema: { type: "string" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsProjectsDetailRequestSchema,
+  authentication: { scopes: ["esi-corporations.read_projects.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsProjectsDetailStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
 
 export const GetCorporationsProjectsContributionDescriptor: OperationExecutionDescriptor<GetCorporationsProjectsContributionInput, GetCorporationsProjectsContributionOutput> = {
   operationId: "GetCorporationsProjectsContribution",
@@ -40,49 +60,6 @@ export const GetCorporationsProjectsContributionDescriptor: OperationExecutionDe
   authentication: { scopes: ["esi-corporations.read_projects.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsProjectsContributionStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsProjectsContributorsDescriptor: OperationExecutionDescriptor<GetCorporationsProjectsContributorsInput, GetCorporationsProjectsContributorsOutput> = {
-  operationId: "GetCorporationsProjectsContributors",
-  method: "GET",
-  path: "/corporations/{corporation_id}/projects/{project_id}/contributors",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "project_id", placement: "path", required: true, schema: { type: "string" } },
-    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsProjectsContributorsRequestSchema,
-  authentication: { scopes: ["esi-corporations.read_projects.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsProjectsContributorsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsProjectsDetailDescriptor: OperationExecutionDescriptor<GetCorporationsProjectsDetailInput, GetCorporationsProjectsDetailOutput> = {
-  operationId: "GetCorporationsProjectsDetail",
-  method: "GET",
-  path: "/corporations/{corporation_id}/projects/{project_id}",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "project_id", placement: "path", required: true, schema: { type: "string" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsProjectsDetailRequestSchema,
-  authentication: { scopes: ["esi-corporations.read_projects.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsProjectsDetailStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -106,6 +83,29 @@ export const GetCorporationsProjectsListingDescriptor: OperationExecutionDescrip
   authentication: { scopes: ["esi-corporations.read_projects.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCorporationsProjectsListingStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsProjectsContributorsDescriptor: OperationExecutionDescriptor<GetCorporationsProjectsContributorsInput, GetCorporationsProjectsContributorsOutput> = {
+  operationId: "GetCorporationsProjectsContributors",
+  method: "GET",
+  path: "/corporations/{corporation_id}/projects/{project_id}/contributors",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "project_id", placement: "path", required: true, schema: { type: "string" } },
+    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsProjectsContributorsRequestSchema,
+  authentication: { scopes: ["esi-corporations.read_projects.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsProjectsContributorsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

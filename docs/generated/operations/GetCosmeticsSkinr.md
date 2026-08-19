@@ -11,14 +11,26 @@ Get SKINR attributes
 
 - Stable ID: `GetCosmeticsSkinr`
 - HTTP: `GET /cosmetics/skinr/{skinr_id}`
-- Domain method: `client.cosmetics.getCosmeticsSkinr(skinrId, options?)`
+- Domain method: `client.cosmetics.getSkinrLicense(skinrId, options?)`
 - Generic call: `client.callOperation("GetCosmeticsSkinr", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/cosmetics`
 - Domain index: [cosmetics](../domains/cosmetics.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCosmeticsClient } from '@evespace/esi-client/domains/cosmetics';
+
+const client = createCosmeticsClient();
+
+const skinrId = "example-skinr-id";
+
+const data = await client.getSkinrLicense(skinrId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const skinrId = "example-skinr-id";
 
-const data = await client.cosmetics.getCosmeticsSkinr(skinrId);
+const data = await client.cosmetics.getSkinrLicense(skinrId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetCosmeticsSkinr', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCosmeticsSkinrRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.cosmetics.withMetadata().getCosmeticsSkinr(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.cosmetics.withMetadata().getSkinrLicense(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

@@ -11,21 +11,31 @@ List public Paragon Hub SKINR listings
 
 - Stable ID: `GetParagonHubSkinr`
 - HTTP: `GET /paragon-hub/skinr`
-- Domain method: `client.paragonHub.getParagonHubSkinr(options?)`
+- Domain method: `client.paragonHub.listPublicListings(options?)`
 - Generic call: `client.callOperation("GetParagonHubSkinr", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/paragon-hub`
 - Domain index: [paragonHub](../domains/paragon-hub.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createParagonHubClient } from '@evespace/esi-client/domains/paragon-hub';
+
+const client = createParagonHubClient();
+
+const data = await client.listPublicListings();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.paragonHub.getParagonHubSkinr();
+const data = await client.paragonHub.listPublicListings();
 ```
 
 ## Generic-execution snippet
@@ -56,7 +66,7 @@ const response = await client.callOperation('GetParagonHubSkinr', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetParagonHubSkinrRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.paragonHub.withMetadata().getParagonHubSkinr(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.paragonHub.withMetadata().listPublicListings(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

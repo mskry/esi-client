@@ -64,19 +64,36 @@ export function renderDomainClientArtifacts(model, operationMetadata, provenance
   for (const [domain, entries] of indexed.domains) {
     const fileName = domainFileName(domain);
     const className = `${capitalize(domain)}DomainClient`;
+    const metadataClassName = `${className}WithMetadata`;
     domains.push({
+      binderName: `bind${className}`,
       className,
       descriptorSource: renderDescriptorModule(entries, indexed.modelsByPointer, provenance),
       domain,
-      domainSource: renderDomainModule(domain, className, entries, provenance),
       entries,
+      factoryName: `create${capitalize(domain)}Client`,
       fileName,
-      metadataClassName: `${className}WithMetadata`,
+      metadataClassName,
+      contractSource: renderDomainContractModule(
+        domain,
+        className,
+        metadataClassName,
+        entries,
+        provenance,
+      ),
+      domainSource: renderDomainModule(domain, className, provenance),
+      implementationSource: renderDomainImplementationModule(
+        domain,
+        className,
+        metadataClassName,
+        entries,
+        provenance,
+      ),
     });
   }
   validateGeneratedNames(domains);
 
-  return Object.freeze({
+  const artifacts = Object.freeze({
     clientSource: renderEsiClientModule(domains, provenance),
     contractsSource: renderContractsModule(domains, provenance),
     domains: Object.freeze(domains),
@@ -89,6 +106,8 @@ export function renderDomainClientArtifacts(model, operationMetadata, provenance
       provenance,
     ),
   });
+  validateDomainClientArtifacts(artifacts);
+  return artifacts;
 }
 
 export async function emitDomainClientSource(context, sourceDirectory) {
@@ -105,9 +124,11 @@ export async function emitDomainClientSource(context, sourceDirectory) {
   );
   const domainsDirectory = join(sourceDirectory, 'domains');
   const descriptorsDirectory = join(sourceDirectory, 'internal/descriptors');
+  const implementationsDirectory = join(sourceDirectory, 'internal/domains');
   await Promise.all([
     mkdir(domainsDirectory, { recursive: true }),
     mkdir(descriptorsDirectory, { recursive: true }),
+    mkdir(implementationsDirectory, { recursive: true }),
   ]);
   const outputs = [
     'domains/index.ts',
@@ -124,10 +145,14 @@ export async function emitDomainClientSource(context, sourceDirectory) {
   for (const domain of artifacts.domains) {
     const domainPath = `domains/${domain.fileName}.ts`;
     const descriptorPath = `internal/descriptors/${domain.fileName}.ts`;
-    outputs.push(domainPath, descriptorPath);
+    const contractPath = `internal/domains/${domain.fileName}-contract.ts`;
+    const implementationPath = `internal/domains/${domain.fileName}.ts`;
+    outputs.push(domainPath, descriptorPath, contractPath, implementationPath);
     writes.push(
       writeFile(join(sourceDirectory, domainPath), domain.domainSource),
       writeFile(join(sourceDirectory, descriptorPath), domain.descriptorSource),
+      writeFile(join(sourceDirectory, contractPath), domain.contractSource),
+      writeFile(join(sourceDirectory, implementationPath), domain.implementationSource),
     );
   }
   await Promise.all(writes);
@@ -219,7 +244,7 @@ function createOperationEntry(operation, metadata) {
     metadata,
     operation,
     optionFields,
-    optionsName: `${capitalize(metadata.method)}Options`,
+    optionsName: `${schemaName}Options`,
     parameters,
     pathParameters,
     requestTypeName: `${schemaName}Input`,
@@ -343,7 +368,7 @@ ${[...schemaImports]
   .toSorted(compareText)
   .map((name) => `  ${name},`)
   .join('\n')}
-} from '../../schemas/operations.js';`;
+} from '../../schemas/operations/${domainFileName(entries[0].metadata.domain)}.js';`;
   return `${createProvenanceHeader(provenance, 'typescript')}\n${imports}\n\n${declarations.join('\n\n')}\n`;
 }
 
@@ -457,35 +482,103 @@ export function resolveOperationAuthentication(operation) {
   return Object.freeze({ scopes: Object.freeze(scopes) });
 }
 
-function renderDomainModule(domain, className, entries, provenance) {
-  const metadataClassName = `${className}WithMetadata`;
+function renderDomainContractModule(domain, className, metadataClassName, entries, provenance) {
   const schemaTypeNames = entries.flatMap((entry) => [
     entry.requestTypeName,
     entry.responseTypeName,
   ]);
-  const descriptorNames = entries.map(({ descriptorName }) => descriptorName);
   const options = entries
     .filter(({ optionFields }) => optionFields.length > 0)
     .map(renderOptionsInterface);
-  const regularMethods = entries.map((entry) => renderMethod(entry, false));
-  const metadataMethods = entries.map((entry) => renderMethod(entry, true));
-  const source = `import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-${descriptorNames.map((name) => `  ${name},`).join('\n')}
-} from '../internal/descriptors/${domainFileName(domain)}.js';
+  const regularMethods = entries.map((entry) => renderAbstractMethod(entry, false));
+  const metadataMethods = entries.map((entry) => renderAbstractMethod(entry, true));
+  const source = `import type { EsiResponse } from '../../../client/response.js';
 import type {
 ${[...new Set(schemaTypeNames)]
   .toSorted(compareText)
   .map((name) => `  ${name},`)
   .join('\n')}
-} from '../schemas/operations.js';
+} from '../../schemas/operations/${domainFileName(domain)}.js';
 
-${options.join('\n\n')}${options.length > 0 ? '\n\n' : ''}export class ${className} {
+${options.join('\n\n')}${options.length > 0 ? '\n\n' : ''}export abstract class ${className} {
+  protected constructor() {}
+
+${indent(regularMethods.join('\n\n'), 2)}
+
+  abstract withMetadata(): ${metadataClassName};
+}
+
+export abstract class ${metadataClassName} {
+  protected constructor() {}
+
+${indent(metadataMethods.join('\n\n'), 2)}
+}
+`;
+  return `${createProvenanceHeader(provenance, 'typescript')}\n${source}`;
+}
+
+function renderDomainModule(domain, className, provenance) {
+  const factoryName = `create${capitalize(domain)}Client`;
+  const binderName = `bind${className}`;
+  const fileName = domainFileName(domain);
+  const source = `import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { ${binderName} } from '../internal/domains/${fileName}.js';
+import type { ${className} } from '../internal/domains/${fileName}-contract.js';
+
+export * from '../internal/domains/${fileName}-contract.js';
+
+export function ${factoryName}(options: EsiClientOptions = {}): ${className} {
+  return ${binderName}(new EsiClientConfiguration(options));
+}
+`;
+  return `${createProvenanceHeader(provenance, 'typescript')}\n${source}`;
+}
+
+function renderDomainImplementationModule(
+  domain,
+  className,
+  metadataClassName,
+  entries,
+  provenance,
+) {
+  const fileName = domainFileName(domain);
+  const descriptorNames = entries.map(({ descriptorName }) => descriptorName);
+  const schemaTypeNames = entries.flatMap((entry) => [
+    entry.requestTypeName,
+    entry.responseTypeName,
+  ]);
+  const regularMethods = entries.map((entry) => renderMethod(entry, false));
+  const metadataMethods = entries.map((entry) => renderMethod(entry, true));
+  const implementationName = `${className}Implementation`;
+  const metadataImplementationName = `${metadataClassName}Implementation`;
+  const binderName = `bind${className}`;
+  const source = `import type { EsiClientConfiguration } from '../../../client/configuration.js';
+import { executeOperation } from '../../../client/execute.js';
+import type { EsiResponse } from '../../../client/response.js';
+import {
+${descriptorNames.map((name) => `  ${name},`).join('\n')}
+} from '../descriptors/${fileName}.js';
+import {
+  ${className},
+  ${metadataClassName},
+${entries
+  .filter(({ optionFields }) => optionFields.length > 0)
+  .map(({ optionsName }) => `  type ${optionsName},`)
+  .join('\n')}
+} from './${fileName}-contract.js';
+import type {
+${[...new Set(schemaTypeNames)]
+  .toSorted(compareText)
+  .map((name) => `  ${name},`)
+  .join('\n')}
+} from '../../schemas/operations/${fileName}.js';
+
+class ${implementationName} extends ${className} {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
+    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -493,19 +586,24 @@ ${options.join('\n\n')}${options.length > 0 ? '\n\n' : ''}export class ${classNa
 ${indent(regularMethods.join('\n\n'), 2)}
 
   withMetadata(): ${metadataClassName} {
-    return new ${metadataClassName}(this.#configuration);
+    return new ${metadataImplementationName}(this.#configuration);
   }
 }
 
-export class ${metadataClassName} {
+class ${metadataImplementationName} extends ${metadataClassName} {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
+    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
 
 ${indent(metadataMethods.join('\n\n'), 2)}
+}
+
+export function ${binderName}(configuration: EsiClientConfiguration): ${className} {
+  return new ${implementationName}(configuration);
 }
 `;
   return `${createProvenanceHeader(provenance, 'typescript')}\n${source}`;
@@ -523,6 +621,18 @@ function optionFieldType(entry, field) {
   if (field.kind === 'compatibilityDate') return 'string';
   if (field.kind === 'body') return `${entry.requestTypeName}['body']`;
   return `NonNullable<${entry.requestTypeName}[${JSON.stringify(field.kind)}]>[${JSON.stringify(field.wireName)}]`;
+}
+
+function renderAbstractMethod(entry, metadata) {
+  const parameters = entry.pathParameters.map(
+    ({ identifier, parameter }) =>
+      `${identifier}: NonNullable<${entry.requestTypeName}['path']>[${JSON.stringify(parameter.name)}]`,
+  );
+  if (entry.optionFields.length > 0) {
+    parameters.push(`options${entry.requiredOptions ? '' : '?'}: ${entry.optionsName}`);
+  }
+  const resultType = metadata ? `EsiResponse<${entry.responseTypeName}>` : entry.responseTypeName;
+  return `abstract ${entry.metadata.method}(${parameters.join(', ')}): Promise<${resultType}>;`;
 }
 
 function renderMethod(entry, metadata) {
@@ -581,14 +691,15 @@ function renderRequestArguments(entry) {
 
 function renderContractsModule(domains, provenance) {
   const domainImports = [];
-  const operationImports = new Set();
+  const operationImports = [];
   const coverage = [];
   const assertions = [];
   for (const domain of domains) {
-    const imported = new Set([domain.className, domain.metadataClassName]);
+    const imported = new Set([domain.className, domain.factoryName, domain.metadataClassName]);
+    const domainOperationImports = new Set();
     for (const entry of domain.entries) {
-      operationImports.add(entry.requestTypeName);
-      operationImports.add(entry.responseTypeName);
+      domainOperationImports.add(entry.requestTypeName);
+      domainOperationImports.add(entry.responseTypeName);
       if (entry.optionFields.length > 0) imported.add(entry.optionsName);
       const parameters = entry.pathParameters.map(
         ({ parameter }, index) =>
@@ -602,6 +713,16 @@ function renderContractsModule(domains, provenance) {
         `type ${assertionName}DomainMethodAssertion = Assert<IsExact<${domain.className}[${JSON.stringify(entry.metadata.method)}], (${parameters.join(', ')}) => Promise<${entry.responseTypeName}>>>;`,
         `type ${assertionName}MetadataMethodAssertion = Assert<IsExact<${domain.metadataClassName}[${JSON.stringify(entry.metadata.method)}], (${parameters.join(', ')}) => Promise<EsiResponse<${entry.responseTypeName}>>>>;`,
       );
+      if (entry.optionFields.length > 0) {
+        assertions.push(
+          `type ${assertionName}OptionsAssertion = Assert<IsExact<${entry.optionsName}, {\n${entry.optionFields
+            .map(
+              (field) =>
+                `  readonly ${JSON.stringify(field.name)}${field.required ? '' : '?'}: ${optionFieldType(entry, field)};`,
+            )
+            .join('\n')}\n}>>;`,
+        );
+      }
       coverage.push(`  readonly ${JSON.stringify(entry.operation.operationId)}: {
     readonly domain: ${JSON.stringify(domain.domain)};
     readonly method: ${JSON.stringify(entry.metadata.method)};
@@ -615,15 +736,21 @@ ${[...imported]
   .map((name) => (name.endsWith('Options') ? `  type ${name},` : `  ${name},`))
   .join('\n')}
 } from './${domain.fileName}.js';`);
-  }
-  const source = `import type { EsiResponse } from '../../client/response.js';
-import type { GeneratedOperationSignatures } from '../schemas/contracts.js';
-import type {
-${[...operationImports]
+    operationImports.push(`import type {
+${[...domainOperationImports]
   .toSorted(compareText)
   .map((name) => `  ${name},`)
   .join('\n')}
-} from '../schemas/operations.js';
+} from '../schemas/operations/${domain.fileName}.js';`);
+    assertions.push(
+      `type ${domain.className}FactoryAssertion = Assert<IsExact<typeof ${domain.factoryName}, (options?: EsiClientOptions) => ${domain.className}>>;`,
+      `type ${domain.className}MetadataViewAssertion = Assert<IsExact<${domain.className}['withMetadata'], () => ${domain.metadataClassName}>>;`,
+    );
+  }
+  const source = `import type { EsiClientOptions } from '../../client/options.js';
+import type { EsiResponse } from '../../client/response.js';
+import type { GeneratedOperationSignatures } from '../schemas/contracts.js';
+${operationImports.join('\n')}
 ${domainImports.join('\n')}
 
 type IsExact<Left, Right> =
@@ -650,7 +777,10 @@ ${assertions.join('\n')}
 
 function renderEsiClientModule(domains, provenance) {
   const imports = domains
-    .map(({ className, fileName }) => `import { ${className} } from './domains/${fileName}.js';`)
+    .map(
+      ({ binderName, className, fileName }) =>
+        `import type { ${className} } from './internal/domains/${fileName}-contract.js';\nimport { ${binderName} } from './internal/domains/${fileName}.js';`,
+    )
     .join('\n');
   const properties = domains
     .map(
@@ -659,9 +789,9 @@ function renderEsiClientModule(domains, provenance) {
     )
     .join('\n\n');
   const assignments = domains
-    .map(({ className, domain }) => `    this.${domain} = new ${className}(this.configuration);`)
+    .map(({ binderName, domain }) => `    this.${domain} = ${binderName}(this.configuration);`)
     .join('\n');
-  const source = `import type { EsiClientOptions } from '../client/configuration.js';
+  const source = `import type { EsiClientOptions } from '../client/options.js';
 import { EsiClientBase } from '../client/esi-client.js';
 ${imports}
 
@@ -676,6 +806,32 @@ ${assignments}
 }
 `;
   return `${createProvenanceHeader(provenance, 'typescript')}\n${source}`;
+}
+
+export function validateDomainClientArtifacts(artifacts) {
+  if (!isObject(artifacts) || !Array.isArray(artifacts.domains)) {
+    throw new TypeError('Generated domain client artifacts are invalid');
+  }
+  for (const domain of artifacts.domains) {
+    if (!domain.domainSource.includes(`export function ${domain.factoryName}(`)) {
+      throw new Error(`Missing domain factory: ${domain.factoryName}`);
+    }
+    if (!domain.contractSource.includes(`export abstract class ${domain.className}`)) {
+      throw new Error(`Missing abstract domain contract: ${domain.className}`);
+    }
+    if (!domain.implementationSource.includes(`export function ${domain.binderName}(`)) {
+      throw new Error(`Missing internal domain binder: ${domain.binderName}`);
+    }
+    const expectedSchemaModule = `../../schemas/operations/${domain.fileName}.js`;
+    const imports = [
+      ...domain.descriptorSource.matchAll(/from ['"]([^'"]*schemas\/operations\/[^'"]+)['"]/gu),
+    ].map((match) => match[1]);
+    if (imports.length !== 1 || imports[0] !== expectedSchemaModule) {
+      throw new Error(
+        `Descriptor for ${domain.domain} imports an operation-schema module outside its domain`,
+      );
+    }
+  }
 }
 
 function validateGeneratedNames(domains) {

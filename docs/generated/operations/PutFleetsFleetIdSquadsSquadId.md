@@ -11,14 +11,33 @@ Rename fleet squad
 
 - Stable ID: `PutFleetsFleetIdSquadsSquadId`
 - HTTP: `PUT /fleets/{fleet_id}/squads/{squad_id}`
-- Domain method: `client.fleets.putFleetsFleetIdSquadsSquadId(fleetId, squadId, options)`
+- Domain method: `client.fleets.renameSquad(fleetId, squadId, options)`
 - Generic call: `client.callOperation("PutFleetsFleetIdSquadsSquadId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/fleets`
 - Domain index: [fleets](../domains/fleets.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFleetsClient } from '@evespace/esi-client/domains/fleets';
+import type { PutFleetsFleetIdSquadsSquadIdOptions } from '@evespace/esi-client/domains/fleets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFleetsClient({ token: accessToken });
+
+const fleetId = 12345;
+const squadId = 12345;
+declare const requestBody: NonNullable<PutFleetsFleetIdSquadsSquadIdOptions['body']>;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.renameSquad(fleetId, squadId, { body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -34,7 +53,7 @@ const squadId = 12345;
 declare const requestBody: NonNullable<PutFleetsFleetIdSquadsSquadIdOptions['body']>;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.fleets.putFleetsFleetIdSquadsSquadId(fleetId, squadId, { body: requestBody });
+const data = await client.fleets.renameSquad(fleetId, squadId, { body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -75,7 +94,7 @@ const response = await client.callOperation('PutFleetsFleetIdSquadsSquadId', arg
 
 - Request schema: `@evespace/esi-client/schemas` export `PutFleetsFleetIdSquadsSquadIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.fleets.withMetadata().putFleetsFleetIdSquadsSquadId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.fleets.withMetadata().renameSquad(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

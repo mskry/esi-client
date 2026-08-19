@@ -5,6 +5,7 @@ import {
   EsiHttpError,
   GetStatusSuccessResponseSchema,
   StatusDomainClient,
+  createStatusClient,
 } from '../src/index';
 import * as sdk from '../src/index';
 
@@ -23,9 +24,14 @@ describe('root client surface', () => {
         ),
     );
     const client = new EsiClient({ baseUrl: 'https://example.test', fetch: fetchApi });
+    const standalone = createStatusClient({
+      baseUrl: 'https://example.test',
+      fetch: fetchApi,
+    });
 
     expect(client.status).toBeInstanceOf(StatusDomainClient);
-    const status = await client.status.getStatus({ compatibilityDate: '2020-01-01' });
+    expect(standalone).toBeInstanceOf(StatusDomainClient);
+    const status = await client.status.get({ compatibilityDate: '2020-01-01' });
 
     expect(fetchApi).toHaveBeenCalledOnce();
     const [url, init] = fetchApi.mock.calls[0];
@@ -47,7 +53,7 @@ describe('root client surface', () => {
       fetch: async () => new Response('unavailable', { status: 503 }),
     });
 
-    const error = await client.status.getStatus().catch((caught: unknown) => caught);
+    const error = await client.status.get().catch((caught: unknown) => caught);
 
     expect(error).toBeInstanceOf(EsiHttpError);
     if (!(error instanceof EsiHttpError)) throw error;

@@ -13,12 +13,46 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersFreelanceJobsListing`](../operations/GetCharactersFreelanceJobsListing.md) | `GET` | `getCharactersFreelanceJobsListing` | required | none | read | List character freelance jobs |
-| [`GetCharactersFreelanceJobsParticipation`](../operations/GetCharactersFreelanceJobsParticipation.md) | `GET` | `getCharactersFreelanceJobsParticipation` | required | none | read | Get character freelance job participation |
-| [`GetCorporationsFreelanceJobsListing`](../operations/GetCorporationsFreelanceJobsListing.md) | `GET` | `getCorporationsFreelanceJobsListing` | required | none | read | List corporation freelance jobs |
-| [`GetCorporationsFreelanceJobsParticipants`](../operations/GetCorporationsFreelanceJobsParticipants.md) | `GET` | `getCorporationsFreelanceJobsParticipants` | required | none | read | List participants of a freelance job |
-| [`GetFreelanceJobsDetail`](../operations/GetFreelanceJobsDetail.md) | `GET` | `getFreelanceJobsDetail` | public | none | read | Get freelance job details |
-| [`GetFreelanceJobsListing`](../operations/GetFreelanceJobsListing.md) | `GET` | `getFreelanceJobsListing` | public | none | read | List freelance jobs |
+| [`GetCharactersFreelanceJobsListing`](../operations/GetCharactersFreelanceJobsListing.md) | `GET` | `listCharacterJobs` | required | none | read | List character freelance jobs |
+| [`GetCharactersFreelanceJobsParticipation`](../operations/GetCharactersFreelanceJobsParticipation.md) | `GET` | `getCharacterParticipation` | required | none | read | Get character freelance job participation |
+| [`GetCorporationsFreelanceJobsListing`](../operations/GetCorporationsFreelanceJobsListing.md) | `GET` | `listCorporationJobs` | required | none | read | List corporation freelance jobs |
+| [`GetCorporationsFreelanceJobsParticipants`](../operations/GetCorporationsFreelanceJobsParticipants.md) | `GET` | `listParticipants` | required | none | read | List participants of a freelance job |
+| [`GetFreelanceJobsDetail`](../operations/GetFreelanceJobsDetail.md) | `GET` | `get` | public | none | read | Get freelance job details |
+| [`GetFreelanceJobsListing`](../operations/GetFreelanceJobsListing.md) | `GET` | `listPublic` | public | none | read | List freelance jobs |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createFreelanceJobsClient } from '@evespace/esi-client/domains/freelance-jobs';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFreelanceJobsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listCharacterJobs(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.freelanceJobs.listCharacterJobs(characterId);
+```
 
 ## Shared concepts
 

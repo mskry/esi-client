@@ -13,10 +13,44 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdCalendar`](../operations/GetCharactersCharacterIdCalendar.md) | `GET` | `getCharactersCharacterIdCalendar` | required | none | read | List calendar event summaries |
-| [`GetCharactersCharacterIdCalendarEventId`](../operations/GetCharactersCharacterIdCalendarEventId.md) | `GET` | `getCharactersCharacterIdCalendarEventId` | required | none | read | Get an event |
-| [`GetCharactersCharacterIdCalendarEventIdAttendees`](../operations/GetCharactersCharacterIdCalendarEventIdAttendees.md) | `GET` | `getCharactersCharacterIdCalendarEventIdAttendees` | required | none | read | Get attendees |
-| [`PutCharactersCharacterIdCalendarEventId`](../operations/PutCharactersCharacterIdCalendarEventId.md) | `PUT` | `putCharactersCharacterIdCalendarEventId` | required | none | mutation | Respond to an event |
+| [`GetCharactersCharacterIdCalendar`](../operations/GetCharactersCharacterIdCalendar.md) | `GET` | `listEvents` | required | none | read | List calendar event summaries |
+| [`GetCharactersCharacterIdCalendarEventId`](../operations/GetCharactersCharacterIdCalendarEventId.md) | `GET` | `getEvent` | required | none | read | Get an event |
+| [`GetCharactersCharacterIdCalendarEventIdAttendees`](../operations/GetCharactersCharacterIdCalendarEventIdAttendees.md) | `GET` | `listEventAttendees` | required | none | read | Get attendees |
+| [`PutCharactersCharacterIdCalendarEventId`](../operations/PutCharactersCharacterIdCalendarEventId.md) | `PUT` | `respondToEvent` | required | none | mutation | Respond to an event |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createCalendarClient } from '@evespace/esi-client/domains/calendar';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCalendarClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listEvents(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.calendar.listEvents(characterId);
+```
 
 ## Shared concepts
 

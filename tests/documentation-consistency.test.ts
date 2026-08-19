@@ -48,6 +48,19 @@ describe('documentation consistency validation', () => {
     );
   });
 
+  it('rejects a missing standalone operation snippet', async () => {
+    const inspection = await inspectDocumentationConsistency();
+    const operationId = inspection.operationIds[0];
+    const path = `docs/generated/operations/${operationId}.md`;
+    const documents = replaceArtifact(inspection.documents, path, (content) =>
+      content.replace('## Standalone domain-factory snippet', '## Removed standalone snippet'),
+    );
+
+    expect(() => validateDocumentationConsistency({ ...inspection, documents })).toThrow(
+      `${operationId} standalone domain snippet`,
+    );
+  });
+
   it('rejects provenance that differs from openapi/generated/provenance', async () => {
     const inspection = await inspectDocumentationConsistency();
     const path = inspection.examples.keys().next().value;

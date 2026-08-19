@@ -17,7 +17,7 @@ import {
   type GetCharactersCharacterIdOnlineOutput,
   type GetCharactersCharacterIdShipInput,
   type GetCharactersCharacterIdShipOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/location.js';
 
 export const GetCharactersCharacterIdLocationDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdLocationInput, GetCharactersCharacterIdLocationOutput> = {
   operationId: "GetCharactersCharacterIdLocation",
@@ -38,25 +38,6 @@ export const GetCharactersCharacterIdLocationDescriptor: OperationExecutionDescr
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCharactersCharacterIdOnlineDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdOnlineInput, GetCharactersCharacterIdOnlineOutput> = {
-  operationId: "GetCharactersCharacterIdOnline",
-  method: "GET",
-  path: "/characters/{character_id}/online",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdOnlineRequestSchema,
-  authentication: { scopes: ["esi-location.read_online.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdOnlineStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetCharactersCharacterIdShipDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdShipInput, GetCharactersCharacterIdShipOutput> = {
   operationId: "GetCharactersCharacterIdShip",
   method: "GET",
@@ -72,6 +53,25 @@ export const GetCharactersCharacterIdShipDescriptor: OperationExecutionDescripto
   authentication: { scopes: ["esi-location.read_ship_type.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersCharacterIdShipStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdOnlineDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdOnlineInput, GetCharactersCharacterIdOnlineOutput> = {
+  operationId: "GetCharactersCharacterIdOnline",
+  method: "GET",
+  path: "/characters/{character_id}/online",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdOnlineRequestSchema,
+  authentication: { scopes: ["esi-location.read_online.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdOnlineStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

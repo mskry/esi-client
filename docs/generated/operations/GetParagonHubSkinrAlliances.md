@@ -11,14 +11,29 @@ List Paragon Hub SKINR listings targeted at an alliance
 
 - Stable ID: `GetParagonHubSkinrAlliances`
 - HTTP: `GET /paragon-hub/skinr/alliances/{alliance_id}`
-- Domain method: `client.paragonHub.getParagonHubSkinrAlliances(allianceId, options?)`
+- Domain method: `client.paragonHub.listListingsForAlliance(allianceId, options?)`
 - Generic call: `client.callOperation("GetParagonHubSkinrAlliances", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/paragon-hub`
 - Domain index: [paragonHub](../domains/paragon-hub.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createParagonHubClient } from '@evespace/esi-client/domains/paragon-hub';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createParagonHubClient({ token: accessToken });
+
+const allianceId = 99000001;
+
+const data = await client.listListingsForAlliance(allianceId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const allianceId = 99000001;
 
-const data = await client.paragonHub.getParagonHubSkinrAlliances(allianceId);
+const data = await client.paragonHub.listListingsForAlliance(allianceId);
 ```
 
 ## Generic-execution snippet
@@ -67,7 +82,7 @@ const response = await client.callOperation('GetParagonHubSkinrAlliances', argum
 
 - Request schema: `@evespace/esi-client/schemas` export `GetParagonHubSkinrAlliancesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.paragonHub.withMetadata().getParagonHubSkinrAlliances(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.paragonHub.withMetadata().listListingsForAlliance(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

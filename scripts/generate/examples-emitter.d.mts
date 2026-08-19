@@ -7,6 +7,7 @@ import type { EmitterContext, GeneratedOutputEmitter } from './orchestrate.mjs';
 
 export interface OperationSnippets {
   readonly domainMethod: string;
+  readonly standaloneDomainMethod: string;
   readonly genericExecution: string;
   readonly standaloneExamples: readonly string[];
 }
@@ -20,6 +21,7 @@ export function renderOperationSnippets(
   manifest: SerializableOperationManifest,
 ): ReadonlyMap<SerializableOperationManifestEntry['operationId'], OperationSnippets>;
 export function renderStandaloneExamples(
+  manifest: SerializableOperationManifest,
   provenance: ArtifactProvenance,
 ): ReadonlyMap<string, string>;
 export function renderStandaloneExampleDocumentation(

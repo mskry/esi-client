@@ -13,20 +13,54 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdAgentsResearch`](../operations/GetCharactersCharacterIdAgentsResearch.md) | `GET` | `getCharactersCharacterIdAgentsResearch` | required | none | read | Get agents research |
-| [`GetCharactersCharacterIdBlueprints`](../operations/GetCharactersCharacterIdBlueprints.md) | `GET` | `getCharactersCharacterIdBlueprints` | required | offset | read | Get blueprints |
-| [`GetCharactersCharacterIdCorporationhistory`](../operations/GetCharactersCharacterIdCorporationhistory.md) | `GET` | `getCharactersCharacterIdCorporationhistory` | public | none | read | Get corporation history |
-| [`GetCharactersCharacterIdFatigue`](../operations/GetCharactersCharacterIdFatigue.md) | `GET` | `getCharactersCharacterIdFatigue` | required | none | read | Get jump fatigue |
-| [`GetCharactersCharacterIdMedals`](../operations/GetCharactersCharacterIdMedals.md) | `GET` | `getCharactersCharacterIdMedals` | required | none | read | Get medals |
-| [`GetCharactersCharacterIdNotifications`](../operations/GetCharactersCharacterIdNotifications.md) | `GET` | `getCharactersCharacterIdNotifications` | required | none | read | Get character notifications |
-| [`GetCharactersCharacterIdNotificationsContacts`](../operations/GetCharactersCharacterIdNotificationsContacts.md) | `GET` | `getCharactersCharacterIdNotificationsContacts` | required | none | read | Get new contact notifications |
-| [`GetCharactersCharacterIdPortrait`](../operations/GetCharactersCharacterIdPortrait.md) | `GET` | `getCharactersCharacterIdPortrait` | public | none | read | Get character portraits |
-| [`GetCharactersCharacterIdRoles`](../operations/GetCharactersCharacterIdRoles.md) | `GET` | `getCharactersCharacterIdRoles` | required | none | read | Get character corporation roles |
-| [`GetCharactersCharacterIdStandings`](../operations/GetCharactersCharacterIdStandings.md) | `GET` | `getCharactersCharacterIdStandings` | required | none | read | Get standings |
-| [`GetCharactersCharacterIdTitles`](../operations/GetCharactersCharacterIdTitles.md) | `GET` | `getCharactersCharacterIdTitles` | required | none | read | Get character corporation titles |
-| [`GetCharactersDetail`](../operations/GetCharactersDetail.md) | `GET` | `getCharactersDetail` | public | none | read | Get character's public information |
-| [`PostCharactersAffiliation`](../operations/PostCharactersAffiliation.md) | `POST` | `postCharactersAffiliation` | public | none | read | Character affiliation |
-| [`PostCharactersCharacterIdCspa`](../operations/PostCharactersCharacterIdCspa.md) | `POST` | `postCharactersCharacterIdCspa` | required | none | read | Calculate a CSPA charge cost |
+| [`GetCharactersCharacterIdAgentsResearch`](../operations/GetCharactersCharacterIdAgentsResearch.md) | `GET` | `agentsResearch` | required | none | read | Get agents research |
+| [`GetCharactersCharacterIdBlueprints`](../operations/GetCharactersCharacterIdBlueprints.md) | `GET` | `listBlueprints` | required | offset | read | Get blueprints |
+| [`GetCharactersCharacterIdCorporationhistory`](../operations/GetCharactersCharacterIdCorporationhistory.md) | `GET` | `listCorporationHistory` | public | none | read | Get corporation history |
+| [`GetCharactersCharacterIdFatigue`](../operations/GetCharactersCharacterIdFatigue.md) | `GET` | `getJumpFatigue` | required | none | read | Get jump fatigue |
+| [`GetCharactersCharacterIdMedals`](../operations/GetCharactersCharacterIdMedals.md) | `GET` | `listMedals` | required | none | read | Get medals |
+| [`GetCharactersCharacterIdNotifications`](../operations/GetCharactersCharacterIdNotifications.md) | `GET` | `listNotifications` | required | none | read | Get character notifications |
+| [`GetCharactersCharacterIdNotificationsContacts`](../operations/GetCharactersCharacterIdNotificationsContacts.md) | `GET` | `listContactNotifications` | required | none | read | Get new contact notifications |
+| [`GetCharactersCharacterIdPortrait`](../operations/GetCharactersCharacterIdPortrait.md) | `GET` | `getPortrait` | public | none | read | Get character portraits |
+| [`GetCharactersCharacterIdRoles`](../operations/GetCharactersCharacterIdRoles.md) | `GET` | `getCorporationRoles` | required | none | read | Get character corporation roles |
+| [`GetCharactersCharacterIdStandings`](../operations/GetCharactersCharacterIdStandings.md) | `GET` | `listStandings` | required | none | read | Get standings |
+| [`GetCharactersCharacterIdTitles`](../operations/GetCharactersCharacterIdTitles.md) | `GET` | `listCorporationTitles` | required | none | read | Get character corporation titles |
+| [`GetCharactersDetail`](../operations/GetCharactersDetail.md) | `GET` | `getPublicInfo` | public | none | read | Get character's public information |
+| [`PostCharactersAffiliation`](../operations/PostCharactersAffiliation.md) | `POST` | `lookupAffiliations` | public | none | read | Character affiliation |
+| [`PostCharactersCharacterIdCspa`](../operations/PostCharactersCharacterIdCspa.md) | `POST` | `calculateCspaCharge` | required | none | read | Calculate a CSPA charge cost |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createCharacterClient } from '@evespace/esi-client/domains/character';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCharacterClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.agentsResearch(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.character.agentsResearch(characterId);
+```
 
 ## Shared concepts
 

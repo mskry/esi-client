@@ -9,7 +9,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "contacts",
-        "method": "deleteCharactersCharacterIdContacts"
+        "method": "deleteCharacterContacts"
       },
       "operationId": "DeleteCharactersCharacterIdContacts",
       "status": "generated"
@@ -18,7 +18,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fittings",
-        "method": "deleteCharactersCharacterIdFittingsFittingId"
+        "method": "deleteFitting"
       },
       "operationId": "DeleteCharactersCharacterIdFittingsFittingId",
       "status": "generated"
@@ -27,7 +27,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "mail",
-        "method": "deleteCharactersCharacterIdMailLabelsLabelId"
+        "method": "deleteLabel"
       },
       "operationId": "DeleteCharactersCharacterIdMailLabelsLabelId",
       "status": "generated"
@@ -36,7 +36,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "mail",
-        "method": "deleteCharactersCharacterIdMailMailId"
+        "method": "deleteMail"
       },
       "operationId": "DeleteCharactersCharacterIdMailMailId",
       "status": "generated"
@@ -45,7 +45,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "deleteFleetsFleetIdMembersMemberId"
+        "method": "removeMember"
       },
       "operationId": "DeleteFleetsFleetIdMembersMemberId",
       "status": "generated"
@@ -54,7 +54,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "deleteFleetsFleetIdSquadsSquadId"
+        "method": "deleteSquad"
       },
       "operationId": "DeleteFleetsFleetIdSquadsSquadId",
       "status": "generated"
@@ -63,7 +63,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "deleteFleetsFleetIdWingsWingId"
+        "method": "deleteWing"
       },
       "operationId": "DeleteFleetsFleetIdWingsWingId",
       "status": "generated"
@@ -72,7 +72,7 @@
       "classification": "read",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliances"
+        "method": "list"
       },
       "operationId": "GetAlliances",
       "status": "generated"
@@ -81,7 +81,7 @@
       "classification": "read",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliancesAllianceId"
+        "method": "getPublicInfo"
       },
       "operationId": "GetAlliancesAllianceId",
       "status": "generated"
@@ -90,7 +90,7 @@
       "classification": "read",
       "facade": {
         "domain": "contacts",
-        "method": "getAlliancesAllianceIdContacts"
+        "method": "listAllianceContacts"
       },
       "operationId": "GetAlliancesAllianceIdContacts",
       "status": "generated"
@@ -99,7 +99,7 @@
       "classification": "read",
       "facade": {
         "domain": "contacts",
-        "method": "getAlliancesAllianceIdContactsLabels"
+        "method": "listAllianceContactLabels"
       },
       "operationId": "GetAlliancesAllianceIdContactsLabels",
       "status": "generated"
@@ -108,7 +108,7 @@
       "classification": "read",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliancesAllianceIdCorporations"
+        "method": "listCorporations"
       },
       "operationId": "GetAlliancesAllianceIdCorporations",
       "status": "generated"
@@ -117,7 +117,7 @@
       "classification": "read",
       "facade": {
         "domain": "alliance",
-        "method": "getAlliancesAllianceIdIcons"
+        "method": "getIcon"
       },
       "operationId": "GetAlliancesAllianceIdIcons",
       "status": "generated"
@@ -126,7 +126,7 @@
       "classification": "read",
       "facade": {
         "domain": "accessList",
-        "method": "getCharactersAccessListsDetail"
+        "method": "get"
       },
       "operationId": "GetCharactersAccessListsDetail",
       "status": "generated"
@@ -135,7 +135,7 @@
       "classification": "read",
       "facade": {
         "domain": "accessList",
-        "method": "getCharactersAccessListsListing"
+        "method": "list"
       },
       "operationId": "GetCharactersAccessListsListing",
       "status": "generated"
@@ -144,7 +144,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdAgentsResearch"
+        "method": "agentsResearch"
       },
       "operationId": "GetCharactersCharacterIdAgentsResearch",
       "status": "generated"
@@ -153,7 +153,7 @@
       "classification": "read",
       "facade": {
         "domain": "assets",
-        "method": "getCharactersCharacterIdAssets"
+        "method": "listCharacterAssets"
       },
       "operationId": "GetCharactersCharacterIdAssets",
       "status": "generated"
@@ -162,7 +162,7 @@
       "classification": "read",
       "facade": {
         "domain": "skills",
-        "method": "getCharactersCharacterIdAttributes"
+        "method": "getAttributes"
       },
       "operationId": "GetCharactersCharacterIdAttributes",
       "status": "generated"
@@ -171,7 +171,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdBlueprints"
+        "method": "listBlueprints"
       },
       "operationId": "GetCharactersCharacterIdBlueprints",
       "status": "generated"
@@ -180,7 +180,7 @@
       "classification": "read",
       "facade": {
         "domain": "calendar",
-        "method": "getCharactersCharacterIdCalendar"
+        "method": "listEvents"
       },
       "operationId": "GetCharactersCharacterIdCalendar",
       "status": "generated"
@@ -189,7 +189,7 @@
       "classification": "read",
       "facade": {
         "domain": "calendar",
-        "method": "getCharactersCharacterIdCalendarEventId"
+        "method": "getEvent"
       },
       "operationId": "GetCharactersCharacterIdCalendarEventId",
       "status": "generated"
@@ -198,7 +198,7 @@
       "classification": "read",
       "facade": {
         "domain": "calendar",
-        "method": "getCharactersCharacterIdCalendarEventIdAttendees"
+        "method": "listEventAttendees"
       },
       "operationId": "GetCharactersCharacterIdCalendarEventIdAttendees",
       "status": "generated"
@@ -207,7 +207,7 @@
       "classification": "read",
       "facade": {
         "domain": "clones",
-        "method": "getCharactersCharacterIdClones"
+        "method": "getState"
       },
       "operationId": "GetCharactersCharacterIdClones",
       "status": "generated"
@@ -216,7 +216,7 @@
       "classification": "read",
       "facade": {
         "domain": "contacts",
-        "method": "getCharactersCharacterIdContacts"
+        "method": "listCharacterContacts"
       },
       "operationId": "GetCharactersCharacterIdContacts",
       "status": "generated"
@@ -225,7 +225,7 @@
       "classification": "read",
       "facade": {
         "domain": "contacts",
-        "method": "getCharactersCharacterIdContactsLabels"
+        "method": "listCharacterContactLabels"
       },
       "operationId": "GetCharactersCharacterIdContactsLabels",
       "status": "generated"
@@ -234,7 +234,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getCharactersCharacterIdContracts"
+        "method": "listCharacterContracts"
       },
       "operationId": "GetCharactersCharacterIdContracts",
       "status": "generated"
@@ -243,7 +243,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getCharactersCharacterIdContractsContractIdBids"
+        "method": "listCharacterContractBids"
       },
       "operationId": "GetCharactersCharacterIdContractsContractIdBids",
       "status": "generated"
@@ -252,7 +252,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getCharactersCharacterIdContractsContractIdItems"
+        "method": "listCharacterContractItems"
       },
       "operationId": "GetCharactersCharacterIdContractsContractIdItems",
       "status": "generated"
@@ -261,7 +261,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdCorporationhistory"
+        "method": "listCorporationHistory"
       },
       "operationId": "GetCharactersCharacterIdCorporationhistory",
       "status": "generated"
@@ -270,7 +270,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdFatigue"
+        "method": "getJumpFatigue"
       },
       "operationId": "GetCharactersCharacterIdFatigue",
       "status": "generated"
@@ -279,7 +279,7 @@
       "classification": "read",
       "facade": {
         "domain": "fittings",
-        "method": "getCharactersCharacterIdFittings"
+        "method": "list"
       },
       "operationId": "GetCharactersCharacterIdFittings",
       "status": "generated"
@@ -288,7 +288,7 @@
       "classification": "read",
       "facade": {
         "domain": "fleets",
-        "method": "getCharactersCharacterIdFleet"
+        "method": "getCharacterFleet"
       },
       "operationId": "GetCharactersCharacterIdFleet",
       "status": "generated"
@@ -297,7 +297,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getCharactersCharacterIdFwStats"
+        "method": "getCharacterStats"
       },
       "operationId": "GetCharactersCharacterIdFwStats",
       "status": "generated"
@@ -306,7 +306,7 @@
       "classification": "read",
       "facade": {
         "domain": "clones",
-        "method": "getCharactersCharacterIdImplants"
+        "method": "listActiveImplants"
       },
       "operationId": "GetCharactersCharacterIdImplants",
       "status": "generated"
@@ -315,7 +315,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getCharactersCharacterIdIndustryJobs"
+        "method": "listCharacterJobs"
       },
       "operationId": "GetCharactersCharacterIdIndustryJobs",
       "status": "generated"
@@ -324,7 +324,7 @@
       "classification": "read",
       "facade": {
         "domain": "killmails",
-        "method": "getCharactersCharacterIdKillmailsRecent"
+        "method": "listRecentForCharacter"
       },
       "operationId": "GetCharactersCharacterIdKillmailsRecent",
       "status": "generated"
@@ -333,7 +333,7 @@
       "classification": "read",
       "facade": {
         "domain": "location",
-        "method": "getCharactersCharacterIdLocation"
+        "method": "get"
       },
       "operationId": "GetCharactersCharacterIdLocation",
       "status": "generated"
@@ -342,7 +342,7 @@
       "classification": "read",
       "facade": {
         "domain": "loyalty",
-        "method": "getCharactersCharacterIdLoyaltyPoints"
+        "method": "listPoints"
       },
       "operationId": "GetCharactersCharacterIdLoyaltyPoints",
       "status": "generated"
@@ -351,7 +351,7 @@
       "classification": "read",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMail"
+        "method": "listHeaders"
       },
       "operationId": "GetCharactersCharacterIdMail",
       "status": "generated"
@@ -360,7 +360,7 @@
       "classification": "read",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMailLabels"
+        "method": "listLabels"
       },
       "operationId": "GetCharactersCharacterIdMailLabels",
       "status": "generated"
@@ -369,7 +369,7 @@
       "classification": "read",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMailLists"
+        "method": "listMailingLists"
       },
       "operationId": "GetCharactersCharacterIdMailLists",
       "status": "generated"
@@ -378,7 +378,7 @@
       "classification": "read",
       "facade": {
         "domain": "mail",
-        "method": "getCharactersCharacterIdMailMailId"
+        "method": "get"
       },
       "operationId": "GetCharactersCharacterIdMailMailId",
       "status": "generated"
@@ -387,7 +387,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdMedals"
+        "method": "listMedals"
       },
       "operationId": "GetCharactersCharacterIdMedals",
       "status": "generated"
@@ -396,7 +396,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getCharactersCharacterIdMining"
+        "method": "listCharacterMiningLedger"
       },
       "operationId": "GetCharactersCharacterIdMining",
       "status": "generated"
@@ -405,7 +405,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdNotifications"
+        "method": "listNotifications"
       },
       "operationId": "GetCharactersCharacterIdNotifications",
       "status": "generated"
@@ -414,7 +414,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdNotificationsContacts"
+        "method": "listContactNotifications"
       },
       "operationId": "GetCharactersCharacterIdNotificationsContacts",
       "status": "generated"
@@ -423,7 +423,7 @@
       "classification": "read",
       "facade": {
         "domain": "location",
-        "method": "getCharactersCharacterIdOnline"
+        "method": "getOnlineStatus"
       },
       "operationId": "GetCharactersCharacterIdOnline",
       "status": "generated"
@@ -432,7 +432,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getCharactersCharacterIdOrders"
+        "method": "listCharacterOrders"
       },
       "operationId": "GetCharactersCharacterIdOrders",
       "status": "generated"
@@ -441,7 +441,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getCharactersCharacterIdOrdersHistory"
+        "method": "listCharacterOrderHistory"
       },
       "operationId": "GetCharactersCharacterIdOrdersHistory",
       "status": "generated"
@@ -450,7 +450,7 @@
       "classification": "read",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getCharactersCharacterIdPlanets"
+        "method": "listColonies"
       },
       "operationId": "GetCharactersCharacterIdPlanets",
       "status": "generated"
@@ -459,7 +459,7 @@
       "classification": "read",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getCharactersCharacterIdPlanetsPlanetId"
+        "method": "getColonyLayout"
       },
       "operationId": "GetCharactersCharacterIdPlanetsPlanetId",
       "status": "generated"
@@ -468,7 +468,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdPortrait"
+        "method": "getPortrait"
       },
       "operationId": "GetCharactersCharacterIdPortrait",
       "status": "generated"
@@ -477,7 +477,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdRoles"
+        "method": "getCorporationRoles"
       },
       "operationId": "GetCharactersCharacterIdRoles",
       "status": "generated"
@@ -486,7 +486,7 @@
       "classification": "read",
       "facade": {
         "domain": "search",
-        "method": "getCharactersCharacterIdSearch"
+        "method": "search"
       },
       "operationId": "GetCharactersCharacterIdSearch",
       "status": "generated"
@@ -495,7 +495,7 @@
       "classification": "read",
       "facade": {
         "domain": "location",
-        "method": "getCharactersCharacterIdShip"
+        "method": "getCurrentShip"
       },
       "operationId": "GetCharactersCharacterIdShip",
       "status": "generated"
@@ -504,7 +504,7 @@
       "classification": "read",
       "facade": {
         "domain": "skills",
-        "method": "getCharactersCharacterIdSkillqueue"
+        "method": "getSkillQueue"
       },
       "operationId": "GetCharactersCharacterIdSkillqueue",
       "status": "generated"
@@ -513,7 +513,7 @@
       "classification": "read",
       "facade": {
         "domain": "skills",
-        "method": "getCharactersCharacterIdSkills"
+        "method": "getSkills"
       },
       "operationId": "GetCharactersCharacterIdSkills",
       "status": "generated"
@@ -522,7 +522,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdStandings"
+        "method": "listStandings"
       },
       "operationId": "GetCharactersCharacterIdStandings",
       "status": "generated"
@@ -531,7 +531,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersCharacterIdTitles"
+        "method": "listCorporationTitles"
       },
       "operationId": "GetCharactersCharacterIdTitles",
       "status": "generated"
@@ -540,7 +540,7 @@
       "classification": "read",
       "facade": {
         "domain": "wallet",
-        "method": "getCharactersCharacterIdWallet"
+        "method": "getCharacterBalance"
       },
       "operationId": "GetCharactersCharacterIdWallet",
       "status": "generated"
@@ -549,7 +549,7 @@
       "classification": "read",
       "facade": {
         "domain": "wallet",
-        "method": "getCharactersCharacterIdWalletJournal"
+        "method": "listCharacterJournal"
       },
       "operationId": "GetCharactersCharacterIdWalletJournal",
       "status": "generated"
@@ -558,7 +558,7 @@
       "classification": "read",
       "facade": {
         "domain": "wallet",
-        "method": "getCharactersCharacterIdWalletTransactions"
+        "method": "listCharacterTransactions"
       },
       "operationId": "GetCharactersCharacterIdWalletTransactions",
       "status": "generated"
@@ -567,7 +567,7 @@
       "classification": "read",
       "facade": {
         "domain": "cosmetics",
-        "method": "getCharactersCosmeticsSkinr"
+        "method": "listSkinrLicenses"
       },
       "operationId": "GetCharactersCosmeticsSkinr",
       "status": "generated"
@@ -576,7 +576,7 @@
       "classification": "read",
       "facade": {
         "domain": "cosmetics",
-        "method": "getCharactersCosmeticsSkinrComponents"
+        "method": "listSkinrComponentLicenses"
       },
       "operationId": "GetCharactersCosmeticsSkinrComponents",
       "status": "generated"
@@ -585,7 +585,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "getCharactersDetail"
+        "method": "getPublicInfo"
       },
       "operationId": "GetCharactersDetail",
       "status": "generated"
@@ -594,7 +594,7 @@
       "classification": "read",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCharactersFreelanceJobsListing"
+        "method": "listCharacterJobs"
       },
       "operationId": "GetCharactersFreelanceJobsListing",
       "status": "generated"
@@ -603,7 +603,7 @@
       "classification": "read",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCharactersFreelanceJobsParticipation"
+        "method": "getCharacterParticipation"
       },
       "operationId": "GetCharactersFreelanceJobsParticipation",
       "status": "generated"
@@ -612,7 +612,7 @@
       "classification": "read",
       "facade": {
         "domain": "activities",
-        "method": "getCharactersMercenaryTacticalOperationsDetail"
+        "method": "getMercenaryTacticalOperation"
       },
       "operationId": "GetCharactersMercenaryTacticalOperationsDetail",
       "status": "generated"
@@ -621,7 +621,7 @@
       "classification": "read",
       "facade": {
         "domain": "activities",
-        "method": "getCharactersMercenaryTacticalOperationsListing"
+        "method": "listMercenaryTacticalOperations"
       },
       "operationId": "GetCharactersMercenaryTacticalOperationsListing",
       "status": "generated"
@@ -630,7 +630,7 @@
       "classification": "read",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getCharactersMilitaryCampaignsObjectivesListing"
+        "method": "listCharacterObjectiveParticipations"
       },
       "operationId": "GetCharactersMilitaryCampaignsObjectivesListing",
       "status": "generated"
@@ -639,7 +639,7 @@
       "classification": "read",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getCharactersMilitaryCampaignsObjectivesParticipation"
+        "method": "getCharacterObjectiveParticipation"
       },
       "operationId": "GetCharactersMilitaryCampaignsObjectivesParticipation",
       "status": "generated"
@@ -648,7 +648,7 @@
       "classification": "read",
       "facade": {
         "domain": "paragonHub",
-        "method": "getCharactersParagonHubSkinr"
+        "method": "listPostedListings"
       },
       "operationId": "GetCharactersParagonHubSkinr",
       "status": "generated"
@@ -657,7 +657,7 @@
       "classification": "read",
       "facade": {
         "domain": "structures",
-        "method": "getCharactersStructuresMercenaryDensDetail"
+        "method": "getMercenaryDen"
       },
       "operationId": "GetCharactersStructuresMercenaryDensDetail",
       "status": "generated"
@@ -666,7 +666,7 @@
       "classification": "read",
       "facade": {
         "domain": "structures",
-        "method": "getCharactersStructuresMercenaryDensListing"
+        "method": "listMercenaryDens"
       },
       "operationId": "GetCharactersStructuresMercenaryDensListing",
       "status": "generated"
@@ -675,7 +675,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getContractsPublicBidsContractId"
+        "method": "listPublicContractBids"
       },
       "operationId": "GetContractsPublicBidsContractId",
       "status": "generated"
@@ -684,7 +684,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getContractsPublicItemsContractId"
+        "method": "listPublicContractItems"
       },
       "operationId": "GetContractsPublicItemsContractId",
       "status": "generated"
@@ -693,7 +693,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getContractsPublicRegionId"
+        "method": "listPublicContracts"
       },
       "operationId": "GetContractsPublicRegionId",
       "status": "generated"
@@ -702,7 +702,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationCorporationIdMiningExtractions"
+        "method": "listMoonExtractionTimers"
       },
       "operationId": "GetCorporationCorporationIdMiningExtractions",
       "status": "generated"
@@ -711,7 +711,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationCorporationIdMiningObservers"
+        "method": "listMiningObservers"
       },
       "operationId": "GetCorporationCorporationIdMiningObservers",
       "status": "generated"
@@ -720,7 +720,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationCorporationIdMiningObserversObserverId"
+        "method": "listObservedMining"
       },
       "operationId": "GetCorporationCorporationIdMiningObserversObserverId",
       "status": "generated"
@@ -729,7 +729,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationId"
+        "method": "getPublicInfo"
       },
       "operationId": "GetCorporationsCorporationId",
       "status": "generated"
@@ -738,7 +738,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdAlliancehistory"
+        "method": "listAllianceHistory"
       },
       "operationId": "GetCorporationsCorporationIdAlliancehistory",
       "status": "generated"
@@ -747,7 +747,7 @@
       "classification": "read",
       "facade": {
         "domain": "assets",
-        "method": "getCorporationsCorporationIdAssets"
+        "method": "listCorporationAssets"
       },
       "operationId": "GetCorporationsCorporationIdAssets",
       "status": "generated"
@@ -756,7 +756,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdBlueprints"
+        "method": "listBlueprints"
       },
       "operationId": "GetCorporationsCorporationIdBlueprints",
       "status": "generated"
@@ -765,7 +765,7 @@
       "classification": "read",
       "facade": {
         "domain": "contacts",
-        "method": "getCorporationsCorporationIdContacts"
+        "method": "listCorporationContacts"
       },
       "operationId": "GetCorporationsCorporationIdContacts",
       "status": "generated"
@@ -774,7 +774,7 @@
       "classification": "read",
       "facade": {
         "domain": "contacts",
-        "method": "getCorporationsCorporationIdContactsLabels"
+        "method": "listCorporationContactLabels"
       },
       "operationId": "GetCorporationsCorporationIdContactsLabels",
       "status": "generated"
@@ -783,7 +783,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdContainersLogs"
+        "method": "listAuditLogSecureContainerLogs"
       },
       "operationId": "GetCorporationsCorporationIdContainersLogs",
       "status": "generated"
@@ -792,7 +792,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getCorporationsCorporationIdContracts"
+        "method": "listCorporationContracts"
       },
       "operationId": "GetCorporationsCorporationIdContracts",
       "status": "generated"
@@ -801,7 +801,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getCorporationsCorporationIdContractsContractIdBids"
+        "method": "listCorporationContractBids"
       },
       "operationId": "GetCorporationsCorporationIdContractsContractIdBids",
       "status": "generated"
@@ -810,7 +810,7 @@
       "classification": "read",
       "facade": {
         "domain": "contracts",
-        "method": "getCorporationsCorporationIdContractsContractIdItems"
+        "method": "listCorporationContractItems"
       },
       "operationId": "GetCorporationsCorporationIdContractsContractIdItems",
       "status": "generated"
@@ -819,7 +819,7 @@
       "classification": "read",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getCorporationsCorporationIdCustomsOffices"
+        "method": "listCustomsOffices"
       },
       "operationId": "GetCorporationsCorporationIdCustomsOffices",
       "status": "generated"
@@ -828,7 +828,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdDivisions"
+        "method": "listDivisions"
       },
       "operationId": "GetCorporationsCorporationIdDivisions",
       "status": "generated"
@@ -837,7 +837,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdFacilities"
+        "method": "listFacilities"
       },
       "operationId": "GetCorporationsCorporationIdFacilities",
       "status": "generated"
@@ -846,7 +846,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getCorporationsCorporationIdFwStats"
+        "method": "getCorporationStats"
       },
       "operationId": "GetCorporationsCorporationIdFwStats",
       "status": "generated"
@@ -855,7 +855,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdIcons"
+        "method": "getIcon"
       },
       "operationId": "GetCorporationsCorporationIdIcons",
       "status": "generated"
@@ -864,7 +864,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getCorporationsCorporationIdIndustryJobs"
+        "method": "listCorporationJobs"
       },
       "operationId": "GetCorporationsCorporationIdIndustryJobs",
       "status": "generated"
@@ -873,7 +873,7 @@
       "classification": "read",
       "facade": {
         "domain": "killmails",
-        "method": "getCorporationsCorporationIdKillmailsRecent"
+        "method": "listRecentForCorporation"
       },
       "operationId": "GetCorporationsCorporationIdKillmailsRecent",
       "status": "generated"
@@ -882,7 +882,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMedals"
+        "method": "listMedals"
       },
       "operationId": "GetCorporationsCorporationIdMedals",
       "status": "generated"
@@ -891,7 +891,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMedalsIssued"
+        "method": "listIssuedMedals"
       },
       "operationId": "GetCorporationsCorporationIdMedalsIssued",
       "status": "generated"
@@ -900,7 +900,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembers"
+        "method": "listMembers"
       },
       "operationId": "GetCorporationsCorporationIdMembers",
       "status": "generated"
@@ -909,7 +909,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembersLimit"
+        "method": "getMemberLimit"
       },
       "operationId": "GetCorporationsCorporationIdMembersLimit",
       "status": "generated"
@@ -918,7 +918,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembersTitles"
+        "method": "listMemberTitles"
       },
       "operationId": "GetCorporationsCorporationIdMembersTitles",
       "status": "generated"
@@ -927,7 +927,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdMembertracking"
+        "method": "listMemberTracking"
       },
       "operationId": "GetCorporationsCorporationIdMembertracking",
       "status": "generated"
@@ -936,7 +936,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getCorporationsCorporationIdOrders"
+        "method": "listCorporationOrders"
       },
       "operationId": "GetCorporationsCorporationIdOrders",
       "status": "generated"
@@ -945,7 +945,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getCorporationsCorporationIdOrdersHistory"
+        "method": "listCorporationOrderHistory"
       },
       "operationId": "GetCorporationsCorporationIdOrdersHistory",
       "status": "generated"
@@ -954,7 +954,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdRoles"
+        "method": "listMemberRoles"
       },
       "operationId": "GetCorporationsCorporationIdRoles",
       "status": "generated"
@@ -963,7 +963,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdRolesHistory"
+        "method": "listMemberRoleHistory"
       },
       "operationId": "GetCorporationsCorporationIdRolesHistory",
       "status": "generated"
@@ -972,7 +972,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdShareholders"
+        "method": "listShareholders"
       },
       "operationId": "GetCorporationsCorporationIdShareholders",
       "status": "generated"
@@ -981,7 +981,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStandings"
+        "method": "listStandings"
       },
       "operationId": "GetCorporationsCorporationIdStandings",
       "status": "generated"
@@ -990,7 +990,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStarbases"
+        "method": "listStarbases"
       },
       "operationId": "GetCorporationsCorporationIdStarbases",
       "status": "generated"
@@ -999,7 +999,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStarbasesStarbaseId"
+        "method": "getStarbase"
       },
       "operationId": "GetCorporationsCorporationIdStarbasesStarbaseId",
       "status": "generated"
@@ -1008,7 +1008,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdStructures"
+        "method": "listStructures"
       },
       "operationId": "GetCorporationsCorporationIdStructures",
       "status": "generated"
@@ -1017,7 +1017,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsCorporationIdTitles"
+        "method": "listTitles"
       },
       "operationId": "GetCorporationsCorporationIdTitles",
       "status": "generated"
@@ -1026,7 +1026,7 @@
       "classification": "read",
       "facade": {
         "domain": "wallet",
-        "method": "getCorporationsCorporationIdWallets"
+        "method": "listCorporationBalances"
       },
       "operationId": "GetCorporationsCorporationIdWallets",
       "status": "generated"
@@ -1035,7 +1035,7 @@
       "classification": "read",
       "facade": {
         "domain": "wallet",
-        "method": "getCorporationsCorporationIdWalletsDivisionJournal"
+        "method": "listCorporationDivisionJournal"
       },
       "operationId": "GetCorporationsCorporationIdWalletsDivisionJournal",
       "status": "generated"
@@ -1044,7 +1044,7 @@
       "classification": "read",
       "facade": {
         "domain": "wallet",
-        "method": "getCorporationsCorporationIdWalletsDivisionTransactions"
+        "method": "listCorporationDivisionTransactions"
       },
       "operationId": "GetCorporationsCorporationIdWalletsDivisionTransactions",
       "status": "generated"
@@ -1053,7 +1053,7 @@
       "classification": "read",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCorporationsFreelanceJobsListing"
+        "method": "listCorporationJobs"
       },
       "operationId": "GetCorporationsFreelanceJobsListing",
       "status": "generated"
@@ -1062,7 +1062,7 @@
       "classification": "read",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getCorporationsFreelanceJobsParticipants"
+        "method": "listParticipants"
       },
       "operationId": "GetCorporationsFreelanceJobsParticipants",
       "status": "generated"
@@ -1071,7 +1071,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporation",
-        "method": "getCorporationsNpccorps"
+        "method": "listNpcCorporations"
       },
       "operationId": "GetCorporationsNpccorps",
       "status": "generated"
@@ -1080,7 +1080,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsContribution"
+        "method": "getContribution"
       },
       "operationId": "GetCorporationsProjectsContribution",
       "status": "generated"
@@ -1089,7 +1089,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsContributors"
+        "method": "listContributors"
       },
       "operationId": "GetCorporationsProjectsContributors",
       "status": "generated"
@@ -1098,7 +1098,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsDetail"
+        "method": "get"
       },
       "operationId": "GetCorporationsProjectsDetail",
       "status": "generated"
@@ -1107,7 +1107,7 @@
       "classification": "read",
       "facade": {
         "domain": "corporationProjects",
-        "method": "getCorporationsProjectsListing"
+        "method": "list"
       },
       "operationId": "GetCorporationsProjectsListing",
       "status": "generated"
@@ -1116,7 +1116,7 @@
       "classification": "read",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSkyhooksDetail"
+        "method": "getSkyhook"
       },
       "operationId": "GetCorporationsStructuresSkyhooksDetail",
       "status": "generated"
@@ -1125,7 +1125,7 @@
       "classification": "read",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSkyhooksListing"
+        "method": "listSkyhooks"
       },
       "operationId": "GetCorporationsStructuresSkyhooksListing",
       "status": "generated"
@@ -1134,7 +1134,7 @@
       "classification": "read",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSovereigntyHubsDetail"
+        "method": "getSovereigntyHub"
       },
       "operationId": "GetCorporationsStructuresSovereigntyHubsDetail",
       "status": "generated"
@@ -1143,7 +1143,7 @@
       "classification": "read",
       "facade": {
         "domain": "structures",
-        "method": "getCorporationsStructuresSovereigntyHubsListing"
+        "method": "listSovereigntyHubs"
       },
       "operationId": "GetCorporationsStructuresSovereigntyHubsListing",
       "status": "generated"
@@ -1152,7 +1152,7 @@
       "classification": "read",
       "facade": {
         "domain": "cosmetics",
-        "method": "getCosmeticsSkinr"
+        "method": "getSkinrLicense"
       },
       "operationId": "GetCosmeticsSkinr",
       "status": "generated"
@@ -1161,7 +1161,7 @@
       "classification": "read",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaAttributes"
+        "method": "listAttributes"
       },
       "operationId": "GetDogmaAttributes",
       "status": "generated"
@@ -1170,7 +1170,7 @@
       "classification": "read",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaAttributesAttributeId"
+        "method": "getAttribute"
       },
       "operationId": "GetDogmaAttributesAttributeId",
       "status": "generated"
@@ -1179,7 +1179,7 @@
       "classification": "read",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaDynamicItemsTypeIdItemId"
+        "method": "getDynamicItem"
       },
       "operationId": "GetDogmaDynamicItemsTypeIdItemId",
       "status": "generated"
@@ -1188,7 +1188,7 @@
       "classification": "read",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaEffects"
+        "method": "listEffects"
       },
       "operationId": "GetDogmaEffects",
       "status": "generated"
@@ -1197,7 +1197,7 @@
       "classification": "read",
       "facade": {
         "domain": "dogma",
-        "method": "getDogmaEffectsEffectId"
+        "method": "getEffect"
       },
       "operationId": "GetDogmaEffectsEffectId",
       "status": "generated"
@@ -1206,7 +1206,7 @@
       "classification": "read",
       "facade": {
         "domain": "fleets",
-        "method": "getFleetsFleetId"
+        "method": "get"
       },
       "operationId": "GetFleetsFleetId",
       "status": "generated"
@@ -1215,7 +1215,7 @@
       "classification": "read",
       "facade": {
         "domain": "fleets",
-        "method": "getFleetsFleetIdMembers"
+        "method": "listMembers"
       },
       "operationId": "GetFleetsFleetIdMembers",
       "status": "generated"
@@ -1224,7 +1224,7 @@
       "classification": "read",
       "facade": {
         "domain": "fleets",
-        "method": "getFleetsFleetIdWings"
+        "method": "listWings"
       },
       "operationId": "GetFleetsFleetIdWings",
       "status": "generated"
@@ -1233,7 +1233,7 @@
       "classification": "read",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getFreelanceJobsDetail"
+        "method": "get"
       },
       "operationId": "GetFreelanceJobsDetail",
       "status": "generated"
@@ -1242,7 +1242,7 @@
       "classification": "read",
       "facade": {
         "domain": "freelanceJobs",
-        "method": "getFreelanceJobsListing"
+        "method": "listPublic"
       },
       "operationId": "GetFreelanceJobsListing",
       "status": "generated"
@@ -1251,7 +1251,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwLeaderboards"
+        "method": "getFactionLeaderboards"
       },
       "operationId": "GetFwLeaderboards",
       "status": "generated"
@@ -1260,7 +1260,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwLeaderboardsCharacters"
+        "method": "getCharacterLeaderboards"
       },
       "operationId": "GetFwLeaderboardsCharacters",
       "status": "generated"
@@ -1269,7 +1269,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwLeaderboardsCorporations"
+        "method": "getCorporationLeaderboards"
       },
       "operationId": "GetFwLeaderboardsCorporations",
       "status": "generated"
@@ -1278,7 +1278,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwStats"
+        "method": "listFactionStats"
       },
       "operationId": "GetFwStats",
       "status": "generated"
@@ -1287,7 +1287,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwSystems"
+        "method": "listSystems"
       },
       "operationId": "GetFwSystems",
       "status": "generated"
@@ -1296,7 +1296,7 @@
       "classification": "read",
       "facade": {
         "domain": "factionWarfare",
-        "method": "getFwWars"
+        "method": "listWars"
       },
       "operationId": "GetFwWars",
       "status": "generated"
@@ -1305,7 +1305,7 @@
       "classification": "read",
       "facade": {
         "domain": "incursions",
-        "method": "getIncursions"
+        "method": "list"
       },
       "operationId": "GetIncursions",
       "status": "generated"
@@ -1314,7 +1314,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getIndustryFacilities"
+        "method": "listFacilities"
       },
       "operationId": "GetIndustryFacilities",
       "status": "generated"
@@ -1323,7 +1323,7 @@
       "classification": "read",
       "facade": {
         "domain": "industry",
-        "method": "getIndustrySystems"
+        "method": "listSystemCostIndices"
       },
       "operationId": "GetIndustrySystems",
       "status": "generated"
@@ -1332,7 +1332,7 @@
       "classification": "read",
       "facade": {
         "domain": "insurance",
-        "method": "getInsurancePrices"
+        "method": "listPrices"
       },
       "operationId": "GetInsurancePrices",
       "status": "generated"
@@ -1341,7 +1341,7 @@
       "classification": "read",
       "facade": {
         "domain": "killmails",
-        "method": "getKillmailsKillmailIdKillmailHash"
+        "method": "get"
       },
       "operationId": "GetKillmailsKillmailIdKillmailHash",
       "status": "generated"
@@ -1350,7 +1350,7 @@
       "classification": "read",
       "facade": {
         "domain": "loyalty",
-        "method": "getLoyaltyStoresCorporationIdOffers"
+        "method": "listStoreOffers"
       },
       "operationId": "GetLoyaltyStoresCorporationIdOffers",
       "status": "generated"
@@ -1359,7 +1359,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getMarketsGroups"
+        "method": "listGroups"
       },
       "operationId": "GetMarketsGroups",
       "status": "generated"
@@ -1368,7 +1368,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getMarketsGroupsMarketGroupId"
+        "method": "getGroup"
       },
       "operationId": "GetMarketsGroupsMarketGroupId",
       "status": "generated"
@@ -1377,7 +1377,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getMarketsPrices"
+        "method": "listPrices"
       },
       "operationId": "GetMarketsPrices",
       "status": "generated"
@@ -1386,7 +1386,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getMarketsRegionIdHistory"
+        "method": "listRegionHistory"
       },
       "operationId": "GetMarketsRegionIdHistory",
       "status": "generated"
@@ -1395,7 +1395,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getMarketsRegionIdOrders"
+        "method": "listRegionOrders"
       },
       "operationId": "GetMarketsRegionIdOrders",
       "status": "generated"
@@ -1404,7 +1404,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getMarketsRegionIdTypes"
+        "method": "listRegionTypes"
       },
       "operationId": "GetMarketsRegionIdTypes",
       "status": "generated"
@@ -1413,7 +1413,7 @@
       "classification": "read",
       "facade": {
         "domain": "market",
-        "method": "getMarketsStructuresStructureId"
+        "method": "listStructureOrders"
       },
       "operationId": "GetMarketsStructuresStructureId",
       "status": "generated"
@@ -1422,7 +1422,7 @@
       "classification": "read",
       "facade": {
         "domain": "meta",
-        "method": "getMetaChangelog"
+        "method": "getChangelog"
       },
       "operationId": "GetMetaChangelog",
       "status": "generated"
@@ -1431,7 +1431,7 @@
       "classification": "read",
       "facade": {
         "domain": "meta",
-        "method": "getMetaCompatibilityDates"
+        "method": "listCompatibilityDates"
       },
       "operationId": "GetMetaCompatibilityDates",
       "status": "generated"
@@ -1440,7 +1440,7 @@
       "classification": "read",
       "facade": {
         "domain": "meta",
-        "method": "getMetaName"
+        "method": "getName"
       },
       "operationId": "GetMetaName",
       "status": "generated"
@@ -1449,7 +1449,7 @@
       "classification": "read",
       "facade": {
         "domain": "meta",
-        "method": "getMetaStatus"
+        "method": "getHealthStatus"
       },
       "operationId": "GetMetaStatus",
       "status": "generated"
@@ -1458,7 +1458,7 @@
       "classification": "read",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsDetail"
+        "method": "getCampaign"
       },
       "operationId": "GetMilitaryCampaignsDetail",
       "status": "generated"
@@ -1467,7 +1467,7 @@
       "classification": "read",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsListing"
+        "method": "listCampaigns"
       },
       "operationId": "GetMilitaryCampaignsListing",
       "status": "generated"
@@ -1476,7 +1476,7 @@
       "classification": "read",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsObjectivesDetail"
+        "method": "getObjective"
       },
       "operationId": "GetMilitaryCampaignsObjectivesDetail",
       "status": "generated"
@@ -1485,7 +1485,7 @@
       "classification": "read",
       "facade": {
         "domain": "militaryCampaigns",
-        "method": "getMilitaryCampaignsObjectivesListing"
+        "method": "listObjectives"
       },
       "operationId": "GetMilitaryCampaignsObjectivesListing",
       "status": "generated"
@@ -1494,7 +1494,7 @@
       "classification": "read",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinr"
+        "method": "listPublicListings"
       },
       "operationId": "GetParagonHubSkinr",
       "status": "generated"
@@ -1503,7 +1503,7 @@
       "classification": "read",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinrAlliances"
+        "method": "listListingsForAlliance"
       },
       "operationId": "GetParagonHubSkinrAlliances",
       "status": "generated"
@@ -1512,7 +1512,7 @@
       "classification": "read",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinrCharacters"
+        "method": "listListingsForCharacter"
       },
       "operationId": "GetParagonHubSkinrCharacters",
       "status": "generated"
@@ -1521,7 +1521,7 @@
       "classification": "read",
       "facade": {
         "domain": "paragonHub",
-        "method": "getParagonHubSkinrCorporations"
+        "method": "listListingsForCorporation"
       },
       "operationId": "GetParagonHubSkinrCorporations",
       "status": "generated"
@@ -1530,7 +1530,7 @@
       "classification": "read",
       "facade": {
         "domain": "activities",
-        "method": "getSkyhooksRaidable"
+        "method": "listRaidableSkyhooks"
       },
       "operationId": "GetSkyhooksRaidable",
       "status": "generated"
@@ -1539,7 +1539,7 @@
       "classification": "read",
       "facade": {
         "domain": "sovereignty",
-        "method": "getSovereigntyCampaigns"
+        "method": "listCampaigns"
       },
       "operationId": "GetSovereigntyCampaigns",
       "status": "generated"
@@ -1548,7 +1548,7 @@
       "classification": "read",
       "facade": {
         "domain": "sovereignty",
-        "method": "getSovereigntySystems"
+        "method": "listSystems"
       },
       "operationId": "GetSovereigntySystems",
       "status": "generated"
@@ -1557,7 +1557,7 @@
       "classification": "read",
       "facade": {
         "domain": "status",
-        "method": "getStatus"
+        "method": "get"
       },
       "operationId": "GetStatus",
       "status": "generated"
@@ -1566,7 +1566,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseAncestries"
+        "method": "listAncestries"
       },
       "operationId": "GetUniverseAncestries",
       "status": "generated"
@@ -1575,7 +1575,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseAsteroidBeltsAsteroidBeltId"
+        "method": "getAsteroidBelt"
       },
       "operationId": "GetUniverseAsteroidBeltsAsteroidBeltId",
       "status": "generated"
@@ -1584,7 +1584,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseBloodlines"
+        "method": "listBloodlines"
       },
       "operationId": "GetUniverseBloodlines",
       "status": "generated"
@@ -1593,7 +1593,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseCategories"
+        "method": "listItemCategories"
       },
       "operationId": "GetUniverseCategories",
       "status": "generated"
@@ -1602,7 +1602,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseCategoriesCategoryId"
+        "method": "getItemCategory"
       },
       "operationId": "GetUniverseCategoriesCategoryId",
       "status": "generated"
@@ -1611,7 +1611,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseConstellations"
+        "method": "listConstellations"
       },
       "operationId": "GetUniverseConstellations",
       "status": "generated"
@@ -1620,7 +1620,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseConstellationsConstellationId"
+        "method": "getConstellation"
       },
       "operationId": "GetUniverseConstellationsConstellationId",
       "status": "generated"
@@ -1629,7 +1629,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseFactions"
+        "method": "listFactions"
       },
       "operationId": "GetUniverseFactions",
       "status": "generated"
@@ -1638,7 +1638,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGraphics"
+        "method": "listGraphics"
       },
       "operationId": "GetUniverseGraphics",
       "status": "generated"
@@ -1647,7 +1647,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGraphicsGraphicId"
+        "method": "getGraphic"
       },
       "operationId": "GetUniverseGraphicsGraphicId",
       "status": "generated"
@@ -1656,7 +1656,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGroups"
+        "method": "listItemGroups"
       },
       "operationId": "GetUniverseGroups",
       "status": "generated"
@@ -1665,7 +1665,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseGroupsGroupId"
+        "method": "getItemGroup"
       },
       "operationId": "GetUniverseGroupsGroupId",
       "status": "generated"
@@ -1674,7 +1674,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseMoonsMoonId"
+        "method": "getMoon"
       },
       "operationId": "GetUniverseMoonsMoonId",
       "status": "generated"
@@ -1683,7 +1683,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniversePlanetsPlanetId"
+        "method": "getPlanet"
       },
       "operationId": "GetUniversePlanetsPlanetId",
       "status": "generated"
@@ -1692,7 +1692,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseRaces"
+        "method": "listRaces"
       },
       "operationId": "GetUniverseRaces",
       "status": "generated"
@@ -1701,7 +1701,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseRegions"
+        "method": "listRegions"
       },
       "operationId": "GetUniverseRegions",
       "status": "generated"
@@ -1710,7 +1710,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseRegionsRegionId"
+        "method": "getRegion"
       },
       "operationId": "GetUniverseRegionsRegionId",
       "status": "generated"
@@ -1719,7 +1719,7 @@
       "classification": "read",
       "facade": {
         "domain": "planetaryInteraction",
-        "method": "getUniverseSchematicsSchematicId"
+        "method": "getSchematic"
       },
       "operationId": "GetUniverseSchematicsSchematicId",
       "status": "generated"
@@ -1728,7 +1728,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStargatesStargateId"
+        "method": "getStargate"
       },
       "operationId": "GetUniverseStargatesStargateId",
       "status": "generated"
@@ -1737,7 +1737,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStarsStarId"
+        "method": "getStar"
       },
       "operationId": "GetUniverseStarsStarId",
       "status": "generated"
@@ -1746,7 +1746,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStationsStationId"
+        "method": "getStation"
       },
       "operationId": "GetUniverseStationsStationId",
       "status": "generated"
@@ -1755,7 +1755,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStructures"
+        "method": "listPublicStructures"
       },
       "operationId": "GetUniverseStructures",
       "status": "generated"
@@ -1764,7 +1764,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseStructuresStructureId"
+        "method": "getStructure"
       },
       "operationId": "GetUniverseStructuresStructureId",
       "status": "generated"
@@ -1773,7 +1773,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystemJumps"
+        "method": "listSystemJumps"
       },
       "operationId": "GetUniverseSystemJumps",
       "status": "generated"
@@ -1782,7 +1782,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystemKills"
+        "method": "listSystemKills"
       },
       "operationId": "GetUniverseSystemKills",
       "status": "generated"
@@ -1791,7 +1791,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystems"
+        "method": "listSolarSystems"
       },
       "operationId": "GetUniverseSystems",
       "status": "generated"
@@ -1800,7 +1800,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseSystemsSystemId"
+        "method": "getSolarSystem"
       },
       "operationId": "GetUniverseSystemsSystemId",
       "status": "generated"
@@ -1809,7 +1809,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseTypes"
+        "method": "listTypes"
       },
       "operationId": "GetUniverseTypes",
       "status": "generated"
@@ -1818,7 +1818,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "getUniverseTypesTypeId"
+        "method": "getType"
       },
       "operationId": "GetUniverseTypesTypeId",
       "status": "generated"
@@ -1827,7 +1827,7 @@
       "classification": "read",
       "facade": {
         "domain": "wars",
-        "method": "getWars"
+        "method": "list"
       },
       "operationId": "GetWars",
       "status": "generated"
@@ -1836,7 +1836,7 @@
       "classification": "read",
       "facade": {
         "domain": "wars",
-        "method": "getWarsWarId"
+        "method": "get"
       },
       "operationId": "GetWarsWarId",
       "status": "generated"
@@ -1845,7 +1845,7 @@
       "classification": "read",
       "facade": {
         "domain": "wars",
-        "method": "getWarsWarIdKillmails"
+        "method": "listKillmails"
       },
       "operationId": "GetWarsWarIdKillmails",
       "status": "generated"
@@ -1854,7 +1854,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "postCharactersAffiliation"
+        "method": "lookupAffiliations"
       },
       "operationId": "PostCharactersAffiliation",
       "status": "generated"
@@ -1863,7 +1863,7 @@
       "classification": "read",
       "facade": {
         "domain": "assets",
-        "method": "postCharactersCharacterIdAssetsLocations"
+        "method": "lookupCharacterLocations"
       },
       "operationId": "PostCharactersCharacterIdAssetsLocations",
       "status": "generated"
@@ -1872,7 +1872,7 @@
       "classification": "read",
       "facade": {
         "domain": "assets",
-        "method": "postCharactersCharacterIdAssetsNames"
+        "method": "lookupCharacterNames"
       },
       "operationId": "PostCharactersCharacterIdAssetsNames",
       "status": "generated"
@@ -1881,7 +1881,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "contacts",
-        "method": "postCharactersCharacterIdContacts"
+        "method": "addCharacterContacts"
       },
       "operationId": "PostCharactersCharacterIdContacts",
       "status": "generated"
@@ -1890,7 +1890,7 @@
       "classification": "read",
       "facade": {
         "domain": "character",
-        "method": "postCharactersCharacterIdCspa"
+        "method": "calculateCspaCharge"
       },
       "operationId": "PostCharactersCharacterIdCspa",
       "status": "generated"
@@ -1899,7 +1899,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fittings",
-        "method": "postCharactersCharacterIdFittings"
+        "method": "create"
       },
       "operationId": "PostCharactersCharacterIdFittings",
       "status": "generated"
@@ -1908,7 +1908,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "mail",
-        "method": "postCharactersCharacterIdMail"
+        "method": "send"
       },
       "operationId": "PostCharactersCharacterIdMail",
       "status": "generated"
@@ -1917,7 +1917,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "mail",
-        "method": "postCharactersCharacterIdMailLabels"
+        "method": "createLabel"
       },
       "operationId": "PostCharactersCharacterIdMailLabels",
       "status": "generated"
@@ -1926,7 +1926,7 @@
       "classification": "read",
       "facade": {
         "domain": "assets",
-        "method": "postCorporationsCorporationIdAssetsLocations"
+        "method": "lookupCorporationLocations"
       },
       "operationId": "PostCorporationsCorporationIdAssetsLocations",
       "status": "generated"
@@ -1935,7 +1935,7 @@
       "classification": "read",
       "facade": {
         "domain": "assets",
-        "method": "postCorporationsCorporationIdAssetsNames"
+        "method": "lookupCorporationNames"
       },
       "operationId": "PostCorporationsCorporationIdAssetsNames",
       "status": "generated"
@@ -1944,7 +1944,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "postFleetsFleetIdMembers"
+        "method": "inviteMember"
       },
       "operationId": "PostFleetsFleetIdMembers",
       "status": "generated"
@@ -1953,7 +1953,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "postFleetsFleetIdWings"
+        "method": "createWing"
       },
       "operationId": "PostFleetsFleetIdWings",
       "status": "generated"
@@ -1962,7 +1962,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "postFleetsFleetIdWingsWingIdSquads"
+        "method": "createSquad"
       },
       "operationId": "PostFleetsFleetIdWingsWingIdSquads",
       "status": "generated"
@@ -1971,7 +1971,7 @@
       "classification": "read",
       "facade": {
         "domain": "routes",
-        "method": "postRoute"
+        "method": "calculate"
       },
       "operationId": "PostRoute",
       "status": "generated"
@@ -1980,7 +1980,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiAutopilotWaypoint"
+        "method": "setAutopilotWaypoint"
       },
       "operationId": "PostUiAutopilotWaypoint",
       "status": "generated"
@@ -1989,7 +1989,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowContract"
+        "method": "openContract"
       },
       "operationId": "PostUiOpenwindowContract",
       "status": "generated"
@@ -1998,7 +1998,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowInformation"
+        "method": "openInformation"
       },
       "operationId": "PostUiOpenwindowInformation",
       "status": "generated"
@@ -2007,7 +2007,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowMarketdetails"
+        "method": "openMarketDetails"
       },
       "operationId": "PostUiOpenwindowMarketdetails",
       "status": "generated"
@@ -2016,7 +2016,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "userInterface",
-        "method": "postUiOpenwindowNewmail"
+        "method": "openNewMail"
       },
       "operationId": "PostUiOpenwindowNewmail",
       "status": "generated"
@@ -2025,7 +2025,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "postUniverseIds"
+        "method": "resolveIds"
       },
       "operationId": "PostUniverseIds",
       "status": "generated"
@@ -2034,7 +2034,7 @@
       "classification": "read",
       "facade": {
         "domain": "universe",
-        "method": "postUniverseNames"
+        "method": "resolveNames"
       },
       "operationId": "PostUniverseNames",
       "status": "generated"
@@ -2043,7 +2043,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "calendar",
-        "method": "putCharactersCharacterIdCalendarEventId"
+        "method": "respondToEvent"
       },
       "operationId": "PutCharactersCharacterIdCalendarEventId",
       "status": "generated"
@@ -2052,7 +2052,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "contacts",
-        "method": "putCharactersCharacterIdContacts"
+        "method": "updateCharacterContacts"
       },
       "operationId": "PutCharactersCharacterIdContacts",
       "status": "generated"
@@ -2061,7 +2061,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "mail",
-        "method": "putCharactersCharacterIdMailMailId"
+        "method": "update"
       },
       "operationId": "PutCharactersCharacterIdMailMailId",
       "status": "generated"
@@ -2070,7 +2070,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetId"
+        "method": "update"
       },
       "operationId": "PutFleetsFleetId",
       "status": "generated"
@@ -2079,7 +2079,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetIdMembersMemberId"
+        "method": "moveMember"
       },
       "operationId": "PutFleetsFleetIdMembersMemberId",
       "status": "generated"
@@ -2088,7 +2088,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetIdSquadsSquadId"
+        "method": "renameSquad"
       },
       "operationId": "PutFleetsFleetIdSquadsSquadId",
       "status": "generated"
@@ -2097,7 +2097,7 @@
       "classification": "mutation",
       "facade": {
         "domain": "fleets",
-        "method": "putFleetsFleetIdWingsWingId"
+        "method": "renameWing"
       },
       "operationId": "PutFleetsFleetIdWingsWingId",
       "status": "generated"

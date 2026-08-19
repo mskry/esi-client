@@ -11,21 +11,31 @@ List all alliances
 
 - Stable ID: `GetAlliances`
 - HTTP: `GET /alliances`
-- Domain method: `client.alliance.getAlliances(options?)`
+- Domain method: `client.alliance.list(options?)`
 - Generic call: `client.callOperation("GetAlliances", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/alliance`
 - Domain index: [alliance](../domains/alliance.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createAllianceClient } from '@evespace/esi-client/domains/alliance';
+
+const client = createAllianceClient();
+
+const data = await client.list();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.alliance.getAlliances();
+const data = await client.alliance.list();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetAlliances', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetAlliancesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.alliance.withMetadata().getAlliances(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.alliance.withMetadata().list(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

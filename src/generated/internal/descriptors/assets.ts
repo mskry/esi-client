@@ -29,7 +29,7 @@ import {
   type PostCorporationsCorporationIdAssetsLocationsOutput,
   type PostCorporationsCorporationIdAssetsNamesInput,
   type PostCorporationsCorporationIdAssetsNamesOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/assets.js';
 
 export const GetCharactersCharacterIdAssetsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdAssetsInput, GetCharactersCharacterIdAssetsOutput> = {
   operationId: "GetCharactersCharacterIdAssets",

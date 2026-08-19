@@ -8,5 +8,5 @@ import { EsiClient } from '@evespace/esi-client';
 const client = new EsiClient();
 
 export async function getPublicStatus() {
-  return client.status.getStatus();
+  return client.status.get();
 }

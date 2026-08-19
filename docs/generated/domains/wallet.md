@@ -13,12 +13,46 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdWallet`](../operations/GetCharactersCharacterIdWallet.md) | `GET` | `getCharactersCharacterIdWallet` | required | none | read | Get a character's wallet balance |
-| [`GetCharactersCharacterIdWalletJournal`](../operations/GetCharactersCharacterIdWalletJournal.md) | `GET` | `getCharactersCharacterIdWalletJournal` | required | offset | read | Get character wallet journal |
-| [`GetCharactersCharacterIdWalletTransactions`](../operations/GetCharactersCharacterIdWalletTransactions.md) | `GET` | `getCharactersCharacterIdWalletTransactions` | required | none | read | Get wallet transactions |
-| [`GetCorporationsCorporationIdWallets`](../operations/GetCorporationsCorporationIdWallets.md) | `GET` | `getCorporationsCorporationIdWallets` | required | none | read | Returns a corporation's wallet balance |
-| [`GetCorporationsCorporationIdWalletsDivisionJournal`](../operations/GetCorporationsCorporationIdWalletsDivisionJournal.md) | `GET` | `getCorporationsCorporationIdWalletsDivisionJournal` | required | offset | read | Get corporation wallet journal |
-| [`GetCorporationsCorporationIdWalletsDivisionTransactions`](../operations/GetCorporationsCorporationIdWalletsDivisionTransactions.md) | `GET` | `getCorporationsCorporationIdWalletsDivisionTransactions` | required | none | read | Get corporation wallet transactions |
+| [`GetCharactersCharacterIdWallet`](../operations/GetCharactersCharacterIdWallet.md) | `GET` | `getCharacterBalance` | required | none | read | Get a character's wallet balance |
+| [`GetCharactersCharacterIdWalletJournal`](../operations/GetCharactersCharacterIdWalletJournal.md) | `GET` | `listCharacterJournal` | required | offset | read | Get character wallet journal |
+| [`GetCharactersCharacterIdWalletTransactions`](../operations/GetCharactersCharacterIdWalletTransactions.md) | `GET` | `listCharacterTransactions` | required | none | read | Get wallet transactions |
+| [`GetCorporationsCorporationIdWallets`](../operations/GetCorporationsCorporationIdWallets.md) | `GET` | `listCorporationBalances` | required | none | read | Returns a corporation's wallet balance |
+| [`GetCorporationsCorporationIdWalletsDivisionJournal`](../operations/GetCorporationsCorporationIdWalletsDivisionJournal.md) | `GET` | `listCorporationDivisionJournal` | required | offset | read | Get corporation wallet journal |
+| [`GetCorporationsCorporationIdWalletsDivisionTransactions`](../operations/GetCorporationsCorporationIdWalletsDivisionTransactions.md) | `GET` | `listCorporationDivisionTransactions` | required | none | read | Get corporation wallet transactions |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createWalletClient } from '@evespace/esi-client/domains/wallet';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createWalletClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.getCharacterBalance(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.wallet.getCharacterBalance(characterId);
+```
 
 ## Shared concepts
 

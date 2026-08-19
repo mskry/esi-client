@@ -11,14 +11,26 @@ Get military campaign details
 
 - Stable ID: `GetMilitaryCampaignsDetail`
 - HTTP: `GET /military-campaigns/{campaign_id}`
-- Domain method: `client.militaryCampaigns.getMilitaryCampaignsDetail(campaignId, options?)`
+- Domain method: `client.militaryCampaigns.getCampaign(campaignId, options?)`
 - Generic call: `client.callOperation("GetMilitaryCampaignsDetail", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/military-campaigns`
 - Domain index: [militaryCampaigns](../domains/military-campaigns.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMilitaryCampaignsClient } from '@evespace/esi-client/domains/military-campaigns';
+
+const client = createMilitaryCampaignsClient();
+
+const campaignId = "00000000-0000-4000-8000-000000000000";
+
+const data = await client.getCampaign(campaignId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const campaignId = "00000000-0000-4000-8000-000000000000";
 
-const data = await client.militaryCampaigns.getMilitaryCampaignsDetail(campaignId);
+const data = await client.militaryCampaigns.getCampaign(campaignId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetMilitaryCampaignsDetail', argume
 
 - Request schema: `@evespace/esi-client/schemas` export `GetMilitaryCampaignsDetailRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.militaryCampaigns.withMetadata().getMilitaryCampaignsDetail(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.militaryCampaigns.withMetadata().getCampaign(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

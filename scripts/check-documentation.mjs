@@ -97,7 +97,16 @@ export function validateDocumentationConsistency(inspection) {
       `Stable ID: \`${operationId}\``,
       `${operationId} stable reference`,
     );
-    assertSingleOccurrence(content, '## Domain-method snippet', `${operationId} domain snippet`);
+    assertSingleOccurrence(
+      content,
+      '## Standalone domain-factory snippet',
+      `${operationId} standalone domain snippet`,
+    );
+    assertSingleOccurrence(
+      content,
+      '## Aggregate EsiClient snippet',
+      `${operationId} aggregate domain snippet`,
+    );
     assertSingleOccurrence(
       content,
       '## Generic-execution snippet',

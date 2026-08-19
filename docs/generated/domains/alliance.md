@@ -13,10 +13,34 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetAlliances`](../operations/GetAlliances.md) | `GET` | `getAlliances` | public | none | read | List all alliances |
-| [`GetAlliancesAllianceId`](../operations/GetAlliancesAllianceId.md) | `GET` | `getAlliancesAllianceId` | public | none | read | Get alliance's public information |
-| [`GetAlliancesAllianceIdCorporations`](../operations/GetAlliancesAllianceIdCorporations.md) | `GET` | `getAlliancesAllianceIdCorporations` | public | none | read | List alliance's corporations |
-| [`GetAlliancesAllianceIdIcons`](../operations/GetAlliancesAllianceIdIcons.md) | `GET` | `getAlliancesAllianceIdIcons` | public | none | read | Get alliance icon |
+| [`GetAlliances`](../operations/GetAlliances.md) | `GET` | `list` | public | none | read | List all alliances |
+| [`GetAlliancesAllianceId`](../operations/GetAlliancesAllianceId.md) | `GET` | `getPublicInfo` | public | none | read | Get alliance's public information |
+| [`GetAlliancesAllianceIdCorporations`](../operations/GetAlliancesAllianceIdCorporations.md) | `GET` | `listCorporations` | public | none | read | List alliance's corporations |
+| [`GetAlliancesAllianceIdIcons`](../operations/GetAlliancesAllianceIdIcons.md) | `GET` | `getIcon` | public | none | read | Get alliance icon |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createAllianceClient } from '@evespace/esi-client/domains/alliance';
+
+const client = createAllianceClient();
+
+const data = await client.list();
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const data = await client.alliance.list();
+```
 
 ## Shared concepts
 

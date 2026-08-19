@@ -43,27 +43,7 @@ import {
   type GetCorporationsCorporationIdContractsContractIdItemsOutput,
   type GetCorporationsCorporationIdContractsInput,
   type GetCorporationsCorporationIdContractsOutput,
-} from '../../schemas/operations.js';
-
-export const GetCharactersCharacterIdContractsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdContractsInput, GetCharactersCharacterIdContractsOutput> = {
-  operationId: "GetCharactersCharacterIdContracts",
-  method: "GET",
-  path: "/characters/{character_id}/contracts",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdContractsRequestSchema,
-  authentication: { scopes: ["esi-contracts.read_character_contracts.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdContractsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/contracts.js';
 
 export const GetCharactersCharacterIdContractsContractIdBidsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdContractsContractIdBidsInput, GetCharactersCharacterIdContractsContractIdBidsOutput> = {
   operationId: "GetCharactersCharacterIdContractsContractIdBids",
@@ -101,6 +81,87 @@ export const GetCharactersCharacterIdContractsContractIdItemsDescriptor: Operati
   authentication: { scopes: ["esi-contracts.read_character_contracts.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersCharacterIdContractsContractIdItemsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdContractsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdContractsInput, GetCharactersCharacterIdContractsOutput> = {
+  operationId: "GetCharactersCharacterIdContracts",
+  method: "GET",
+  path: "/characters/{character_id}/contracts",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdContractsRequestSchema,
+  authentication: { scopes: ["esi-contracts.read_character_contracts.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdContractsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsCorporationIdContractsContractIdBidsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContractsContractIdBidsInput, GetCorporationsCorporationIdContractsContractIdBidsOutput> = {
+  operationId: "GetCorporationsCorporationIdContractsContractIdBids",
+  method: "GET",
+  path: "/corporations/{corporation_id}/contracts/{contract_id}/bids",
+  parameters: [
+    { name: "contract_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdContractsContractIdBidsRequestSchema,
+  authentication: { scopes: ["esi-contracts.read_corporation_contracts.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContractsContractIdBidsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsCorporationIdContractsContractIdItemsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContractsContractIdItemsInput, GetCorporationsCorporationIdContractsContractIdItemsOutput> = {
+  operationId: "GetCorporationsCorporationIdContractsContractIdItems",
+  method: "GET",
+  path: "/corporations/{corporation_id}/contracts/{contract_id}/items",
+  parameters: [
+    { name: "contract_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdContractsContractIdItemsRequestSchema,
+  authentication: { scopes: ["esi-contracts.read_corporation_contracts.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContractsContractIdItemsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCorporationsCorporationIdContractsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContractsInput, GetCorporationsCorporationIdContractsOutput> = {
+  operationId: "GetCorporationsCorporationIdContracts",
+  method: "GET",
+  path: "/corporations/{corporation_id}/contracts",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdContractsRequestSchema,
+  authentication: { scopes: ["esi-contracts.read_corporation_contracts.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContractsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -163,67 +224,6 @@ export const GetContractsPublicRegionIdDescriptor: OperationExecutionDescriptor<
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetContractsPublicRegionIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsCorporationIdContractsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContractsInput, GetCorporationsCorporationIdContractsOutput> = {
-  operationId: "GetCorporationsCorporationIdContracts",
-  method: "GET",
-  path: "/corporations/{corporation_id}/contracts",
-  parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsCorporationIdContractsRequestSchema,
-  authentication: { scopes: ["esi-contracts.read_corporation_contracts.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContractsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsCorporationIdContractsContractIdBidsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContractsContractIdBidsInput, GetCorporationsCorporationIdContractsContractIdBidsOutput> = {
-  operationId: "GetCorporationsCorporationIdContractsContractIdBids",
-  method: "GET",
-  path: "/corporations/{corporation_id}/contracts/{contract_id}/bids",
-  parameters: [
-    { name: "contract_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsCorporationIdContractsContractIdBidsRequestSchema,
-  authentication: { scopes: ["esi-contracts.read_corporation_contracts.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContractsContractIdBidsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCorporationsCorporationIdContractsContractIdItemsDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdContractsContractIdItemsInput, GetCorporationsCorporationIdContractsContractIdItemsOutput> = {
-  operationId: "GetCorporationsCorporationIdContractsContractIdItems",
-  method: "GET",
-  path: "/corporations/{corporation_id}/contracts/{contract_id}/items",
-  parameters: [
-    { name: "contract_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCorporationsCorporationIdContractsContractIdItemsRequestSchema,
-  authentication: { scopes: ["esi-contracts.read_corporation_contracts.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdContractsContractIdItemsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

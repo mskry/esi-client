@@ -61,24 +61,43 @@ import {
   type PutFleetsFleetIdSquadsSquadIdOutput,
   type PutFleetsFleetIdWingsWingIdInput,
   type PutFleetsFleetIdWingsWingIdOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/fleets.js';
 
-export const DeleteFleetsFleetIdMembersMemberIdDescriptor: OperationExecutionDescriptor<DeleteFleetsFleetIdMembersMemberIdInput, DeleteFleetsFleetIdMembersMemberIdOutput> = {
-  operationId: "DeleteFleetsFleetIdMembersMemberId",
-  method: "DELETE",
-  path: "/fleets/{fleet_id}/members/{member_id}",
+export const PostFleetsFleetIdWingsWingIdSquadsDescriptor: OperationExecutionDescriptor<PostFleetsFleetIdWingsWingIdSquadsInput, PostFleetsFleetIdWingsWingIdSquadsOutput> = {
+  operationId: "PostFleetsFleetIdWingsWingIdSquads",
+  method: "POST",
+  path: "/fleets/{fleet_id}/wings/{wing_id}/squads",
   parameters: [
     { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "member_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "wing_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: DeleteFleetsFleetIdMembersMemberIdRequestSchema,
+  requestSchema: PostFleetsFleetIdWingsWingIdSquadsRequestSchema,
   authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
   successResponses: [
-    { status: 204, body: 'none' },
+    { status: 201, body: 'json', schema: PostFleetsFleetIdWingsWingIdSquadsStatus201SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const PostFleetsFleetIdWingsDescriptor: OperationExecutionDescriptor<PostFleetsFleetIdWingsInput, PostFleetsFleetIdWingsOutput> = {
+  operationId: "PostFleetsFleetIdWings",
+  method: "POST",
+  path: "/fleets/{fleet_id}/wings",
+  parameters: [
+    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: PostFleetsFleetIdWingsRequestSchema,
+  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
+  successResponses: [
+    { status: 201, body: 'json', schema: PostFleetsFleetIdWingsStatus201SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -123,6 +142,25 @@ export const DeleteFleetsFleetIdWingsWingIdDescriptor: OperationExecutionDescrip
   transport: { compatibilityDateOverride: true },
 };
 
+export const GetFleetsFleetIdDescriptor: OperationExecutionDescriptor<GetFleetsFleetIdInput, GetFleetsFleetIdOutput> = {
+  operationId: "GetFleetsFleetId",
+  method: "GET",
+  path: "/fleets/{fleet_id}",
+  parameters: [
+    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetFleetsFleetIdRequestSchema,
+  authentication: { scopes: ["esi-fleets.read_fleet.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetFleetsFleetIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
 export const GetCharactersCharacterIdFleetDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdFleetInput, GetCharactersCharacterIdFleetOutput> = {
   operationId: "GetCharactersCharacterIdFleet",
   method: "GET",
@@ -142,21 +180,21 @@ export const GetCharactersCharacterIdFleetDescriptor: OperationExecutionDescript
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetFleetsFleetIdDescriptor: OperationExecutionDescriptor<GetFleetsFleetIdInput, GetFleetsFleetIdOutput> = {
-  operationId: "GetFleetsFleetId",
-  method: "GET",
-  path: "/fleets/{fleet_id}",
+export const PostFleetsFleetIdMembersDescriptor: OperationExecutionDescriptor<PostFleetsFleetIdMembersInput, PostFleetsFleetIdMembersOutput> = {
+  operationId: "PostFleetsFleetIdMembers",
+  method: "POST",
+  path: "/fleets/{fleet_id}/members",
   parameters: [
     { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
-  requestBody: null,
-  requestSchema: GetFleetsFleetIdRequestSchema,
-  authentication: { scopes: ["esi-fleets.read_fleet.v1"] },
+  requestBody: { required: true, mediaType: 'application/json' },
+  requestSchema: PostFleetsFleetIdMembersRequestSchema,
+  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetFleetsFleetIdStatus200SuccessResponseSchema },
+    { status: 204, body: 'none' },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -199,83 +237,6 @@ export const GetFleetsFleetIdWingsDescriptor: OperationExecutionDescriptor<GetFl
   transport: { compatibilityDateOverride: true },
 };
 
-export const PostFleetsFleetIdMembersDescriptor: OperationExecutionDescriptor<PostFleetsFleetIdMembersInput, PostFleetsFleetIdMembersOutput> = {
-  operationId: "PostFleetsFleetIdMembers",
-  method: "POST",
-  path: "/fleets/{fleet_id}/members",
-  parameters: [
-    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: { required: true, mediaType: 'application/json' },
-  requestSchema: PostFleetsFleetIdMembersRequestSchema,
-  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
-  successResponses: [
-    { status: 204, body: 'none' },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const PostFleetsFleetIdWingsDescriptor: OperationExecutionDescriptor<PostFleetsFleetIdWingsInput, PostFleetsFleetIdWingsOutput> = {
-  operationId: "PostFleetsFleetIdWings",
-  method: "POST",
-  path: "/fleets/{fleet_id}/wings",
-  parameters: [
-    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: PostFleetsFleetIdWingsRequestSchema,
-  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
-  successResponses: [
-    { status: 201, body: 'json', schema: PostFleetsFleetIdWingsStatus201SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const PostFleetsFleetIdWingsWingIdSquadsDescriptor: OperationExecutionDescriptor<PostFleetsFleetIdWingsWingIdSquadsInput, PostFleetsFleetIdWingsWingIdSquadsOutput> = {
-  operationId: "PostFleetsFleetIdWingsWingIdSquads",
-  method: "POST",
-  path: "/fleets/{fleet_id}/wings/{wing_id}/squads",
-  parameters: [
-    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "wing_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: PostFleetsFleetIdWingsWingIdSquadsRequestSchema,
-  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
-  successResponses: [
-    { status: 201, body: 'json', schema: PostFleetsFleetIdWingsWingIdSquadsStatus201SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const PutFleetsFleetIdDescriptor: OperationExecutionDescriptor<PutFleetsFleetIdInput, PutFleetsFleetIdOutput> = {
-  operationId: "PutFleetsFleetId",
-  method: "PUT",
-  path: "/fleets/{fleet_id}",
-  parameters: [
-    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: { required: true, mediaType: 'application/json' },
-  requestSchema: PutFleetsFleetIdRequestSchema,
-  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
-  successResponses: [
-    { status: 204, body: 'none' },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const PutFleetsFleetIdMembersMemberIdDescriptor: OperationExecutionDescriptor<PutFleetsFleetIdMembersMemberIdInput, PutFleetsFleetIdMembersMemberIdOutput> = {
   operationId: "PutFleetsFleetIdMembersMemberId",
   method: "PUT",
@@ -289,6 +250,26 @@ export const PutFleetsFleetIdMembersMemberIdDescriptor: OperationExecutionDescri
   ],
   requestBody: { required: true, mediaType: 'application/json' },
   requestSchema: PutFleetsFleetIdMembersMemberIdRequestSchema,
+  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
+  successResponses: [
+    { status: 204, body: 'none' },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const DeleteFleetsFleetIdMembersMemberIdDescriptor: OperationExecutionDescriptor<DeleteFleetsFleetIdMembersMemberIdInput, DeleteFleetsFleetIdMembersMemberIdOutput> = {
+  operationId: "DeleteFleetsFleetIdMembersMemberId",
+  method: "DELETE",
+  path: "/fleets/{fleet_id}/members/{member_id}",
+  parameters: [
+    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "member_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: DeleteFleetsFleetIdMembersMemberIdRequestSchema,
   authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
   successResponses: [
     { status: 204, body: 'none' },
@@ -329,6 +310,25 @@ export const PutFleetsFleetIdWingsWingIdDescriptor: OperationExecutionDescriptor
   ],
   requestBody: { required: true, mediaType: 'application/json' },
   requestSchema: PutFleetsFleetIdWingsWingIdRequestSchema,
+  authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
+  successResponses: [
+    { status: 204, body: 'none' },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const PutFleetsFleetIdDescriptor: OperationExecutionDescriptor<PutFleetsFleetIdInput, PutFleetsFleetIdOutput> = {
+  operationId: "PutFleetsFleetId",
+  method: "PUT",
+  path: "/fleets/{fleet_id}",
+  parameters: [
+    { name: "fleet_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: { required: true, mediaType: 'application/json' },
+  requestSchema: PutFleetsFleetIdRequestSchema,
   authentication: { scopes: ["esi-fleets.write_fleet.v1"] },
   successResponses: [
     { status: 204, body: 'none' },

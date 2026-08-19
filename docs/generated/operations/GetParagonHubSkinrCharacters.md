@@ -11,14 +11,29 @@ List Paragon Hub SKINR listings targeted at a character
 
 - Stable ID: `GetParagonHubSkinrCharacters`
 - HTTP: `GET /paragon-hub/skinr/characters/{character_id}`
-- Domain method: `client.paragonHub.getParagonHubSkinrCharacters(characterId, options?)`
+- Domain method: `client.paragonHub.listListingsForCharacter(characterId, options?)`
 - Generic call: `client.callOperation("GetParagonHubSkinrCharacters", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/paragon-hub`
 - Domain index: [paragonHub](../domains/paragon-hub.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createParagonHubClient } from '@evespace/esi-client/domains/paragon-hub';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createParagonHubClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listListingsForCharacter(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.paragonHub.getParagonHubSkinrCharacters(characterId);
+const data = await client.paragonHub.listListingsForCharacter(characterId);
 ```
 
 ## Generic-execution snippet
@@ -67,7 +82,7 @@ const response = await client.callOperation('GetParagonHubSkinrCharacters', argu
 
 - Request schema: `@evespace/esi-client/schemas` export `GetParagonHubSkinrCharactersRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.paragonHub.withMetadata().getParagonHubSkinrCharacters(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.paragonHub.withMetadata().listListingsForCharacter(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

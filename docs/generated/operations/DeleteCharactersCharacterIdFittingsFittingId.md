@@ -11,14 +11,31 @@ Delete fitting
 
 - Stable ID: `DeleteCharactersCharacterIdFittingsFittingId`
 - HTTP: `DELETE /characters/{character_id}/fittings/{fitting_id}`
-- Domain method: `client.fittings.deleteCharactersCharacterIdFittingsFittingId(characterId, fittingId, options?)`
+- Domain method: `client.fittings.deleteFitting(characterId, fittingId, options?)`
 - Generic call: `client.callOperation("DeleteCharactersCharacterIdFittingsFittingId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/fittings`
 - Domain index: [fittings](../domains/fittings.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFittingsClient } from '@evespace/esi-client/domains/fittings';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFittingsClient({ token: accessToken });
+
+const characterId = 90000001;
+const fittingId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.deleteFitting(characterId, fittingId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -32,7 +49,7 @@ const characterId = 90000001;
 const fittingId = 12345;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.fittings.deleteCharactersCharacterIdFittingsFittingId(characterId, fittingId);
+const data = await client.fittings.deleteFitting(characterId, fittingId);
 ```
 
 ## Generic-execution snippet
@@ -71,7 +88,7 @@ const response = await client.callOperation('DeleteCharactersCharacterIdFittings
 
 - Request schema: `@evespace/esi-client/schemas` export `DeleteCharactersCharacterIdFittingsFittingIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.fittings.withMetadata().deleteCharactersCharacterIdFittingsFittingId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.fittings.withMetadata().deleteFitting(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

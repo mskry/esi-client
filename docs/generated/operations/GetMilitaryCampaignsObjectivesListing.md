@@ -11,14 +11,26 @@ List military campaign objectives
 
 - Stable ID: `GetMilitaryCampaignsObjectivesListing`
 - HTTP: `GET /military-campaigns/{campaign_id}/objectives`
-- Domain method: `client.militaryCampaigns.getMilitaryCampaignsObjectivesListing(campaignId, options?)`
+- Domain method: `client.militaryCampaigns.listObjectives(campaignId, options?)`
 - Generic call: `client.callOperation("GetMilitaryCampaignsObjectivesListing", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/military-campaigns`
 - Domain index: [militaryCampaigns](../domains/military-campaigns.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMilitaryCampaignsClient } from '@evespace/esi-client/domains/military-campaigns';
+
+const client = createMilitaryCampaignsClient();
+
+const campaignId = "00000000-0000-4000-8000-000000000000";
+
+const data = await client.listObjectives(campaignId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const campaignId = "00000000-0000-4000-8000-000000000000";
 
-const data = await client.militaryCampaigns.getMilitaryCampaignsObjectivesListing(campaignId);
+const data = await client.militaryCampaigns.listObjectives(campaignId);
 ```
 
 ## Generic-execution snippet
@@ -61,7 +73,7 @@ const response = await client.callOperation('GetMilitaryCampaignsObjectivesListi
 
 - Request schema: `@evespace/esi-client/schemas` export `GetMilitaryCampaignsObjectivesListingRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.militaryCampaigns.withMetadata().getMilitaryCampaignsObjectivesListing(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.militaryCampaigns.withMetadata().listObjectives(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

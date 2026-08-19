@@ -11,14 +11,26 @@ Get corporation history
 
 - Stable ID: `GetCharactersCharacterIdCorporationhistory`
 - HTTP: `GET /characters/{character_id}/corporationhistory`
-- Domain method: `client.character.getCharactersCharacterIdCorporationhistory(characterId, options?)`
+- Domain method: `client.character.listCorporationHistory(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdCorporationhistory", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/character`
 - Domain index: [character](../domains/character.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCharacterClient } from '@evespace/esi-client/domains/character';
+
+const client = createCharacterClient();
+
+const characterId = 90000001;
+
+const data = await client.listCorporationHistory(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const characterId = 90000001;
 
-const data = await client.character.getCharactersCharacterIdCorporationhistory(characterId);
+const data = await client.character.listCorporationHistory(characterId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetCharactersCharacterIdCorporation
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdCorporationhistoryRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.character.withMetadata().getCharactersCharacterIdCorporationhistory(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.character.withMetadata().listCorporationHistory(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

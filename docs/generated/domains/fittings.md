@@ -13,9 +13,47 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`DeleteCharactersCharacterIdFittingsFittingId`](../operations/DeleteCharactersCharacterIdFittingsFittingId.md) | `DELETE` | `deleteCharactersCharacterIdFittingsFittingId` | required | none | mutation | Delete fitting |
-| [`GetCharactersCharacterIdFittings`](../operations/GetCharactersCharacterIdFittings.md) | `GET` | `getCharactersCharacterIdFittings` | required | none | read | Get fittings |
-| [`PostCharactersCharacterIdFittings`](../operations/PostCharactersCharacterIdFittings.md) | `POST` | `postCharactersCharacterIdFittings` | required | none | mutation | Create fitting |
+| [`DeleteCharactersCharacterIdFittingsFittingId`](../operations/DeleteCharactersCharacterIdFittingsFittingId.md) | `DELETE` | `deleteFitting` | required | none | mutation | Delete fitting |
+| [`GetCharactersCharacterIdFittings`](../operations/GetCharactersCharacterIdFittings.md) | `GET` | `list` | required | none | read | Get fittings |
+| [`PostCharactersCharacterIdFittings`](../operations/PostCharactersCharacterIdFittings.md) | `POST` | `create` | required | none | mutation | Create fitting |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createFittingsClient } from '@evespace/esi-client/domains/fittings';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFittingsClient({ token: accessToken });
+
+const characterId = 90000001;
+const fittingId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.deleteFitting(characterId, fittingId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+const fittingId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.fittings.deleteFitting(characterId, fittingId);
+```
 
 ## Shared concepts
 

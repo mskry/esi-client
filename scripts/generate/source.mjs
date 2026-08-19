@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { applySpecificationCorrections } from './corrections.mjs';
@@ -8,8 +8,13 @@ import { createOperationAccountingReport, renderGeneratedJson } from './artifact
 import { generatedDocumentationEmitter } from './documentation-emitter.mjs';
 import { generatedExamplesEmitter } from './examples-emitter.mjs';
 import { normalizeOpenApiDocument } from './normalize.mjs';
+import { namingReviewReportPath, renderNamingReviewReport } from './naming-review.mjs';
 import { defaultSpecificationUrl, stageOpenApiSnapshot } from './openapi.mjs';
-import { resolveOperationMetadata } from './operation-metadata.mjs';
+import {
+  defaultFacadeCatalogPath,
+  loadFacadeCatalog,
+  resolveOperationMetadata,
+} from './operation-metadata.mjs';
 import { generatedPaths } from './paths.mjs';
 import { generatedSourceEmitter } from './source-emitter.mjs';
 import { generatedTestsEmitter } from './test-emitter.mjs';
@@ -32,18 +37,39 @@ try {
   stagedSnapshot = input.stagedSnapshot;
 
   const normalizedModel = await normalizeOpenApiDocument(input.document);
-  const operationMetadata = await resolveOperationMetadata(normalizedModel);
-  const provenance = Object.freeze({
+  const [facadeCatalogSource, facadeCatalog, operationMetadata] = await Promise.all([
+    readFile(defaultFacadeCatalogPath, 'utf8'),
+    loadFacadeCatalog(normalizedModel),
+    resolveOperationMetadata(normalizedModel),
+  ]);
+  const provenanceWithoutReport = Object.freeze({
     appliedCorrections: input.provenance.appliedCorrections,
     compatibilityDate: input.provenance.compatibilityDate,
+    facadeCatalog: {
+      path: repositoryPath(defaultFacadeCatalogPath),
+      sha256: hashText(facadeCatalogSource),
+    },
     sha256: input.provenance.sha256,
     sourceSha256: input.provenance.sourceSha256,
     specificationUrl: input.provenance.specificationUrl,
+  });
+  const namingReviewReport = renderNamingReviewReport(
+    normalizedModel,
+    facadeCatalog,
+    provenanceWithoutReport,
+  );
+  const provenance = Object.freeze({
+    ...provenanceWithoutReport,
+    facadeReviewReport: {
+      path: namingReviewReportPath,
+      sha256: hashText(namingReviewReport),
+    },
   });
   const context = Object.freeze({
     compatibilityDate: provenance.compatibilityDate,
     correctedDocument: input.document,
     normalizedModel,
+    namingReviewReport,
     operationMetadata,
     outputDirectory: workspace,
     outputPath: (target) => join(workspace, target),
@@ -267,6 +293,14 @@ function assertProvenance(value) {
 
 function serializeJson(value) {
   return `${JSON.stringify(sortJsonValue(value), null, 2)}\n`;
+}
+
+function hashText(value) {
+  return createHash('sha256').update(value).digest('hex');
+}
+
+function repositoryPath(path) {
+  return relative(root, path).replaceAll('\\', '/');
 }
 
 function sortJsonValue(value) {

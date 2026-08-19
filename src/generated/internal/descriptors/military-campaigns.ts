@@ -29,26 +29,23 @@ import {
   type GetMilitaryCampaignsObjectivesDetailOutput,
   type GetMilitaryCampaignsObjectivesListingInput,
   type GetMilitaryCampaignsObjectivesListingOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/military-campaigns.js';
 
-export const GetCharactersMilitaryCampaignsObjectivesListingDescriptor: OperationExecutionDescriptor<GetCharactersMilitaryCampaignsObjectivesListingInput, GetCharactersMilitaryCampaignsObjectivesListingOutput> = {
-  operationId: "GetCharactersMilitaryCampaignsObjectivesListing",
+export const GetMilitaryCampaignsDetailDescriptor: OperationExecutionDescriptor<GetMilitaryCampaignsDetailInput, GetMilitaryCampaignsDetailOutput> = {
+  operationId: "GetMilitaryCampaignsDetail",
   method: "GET",
-  path: "/characters/{character_id}/military-campaigns/objectives",
+  path: "/military-campaigns/{campaign_id}",
   parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
-    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
+    { name: "campaign_id", placement: "path", required: true, schema: { type: "string" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCharactersMilitaryCampaignsObjectivesListingRequestSchema,
-  authentication: { scopes: ["esi.activity.char:read"] },
+  requestSchema: GetMilitaryCampaignsDetailRequestSchema,
+  authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersMilitaryCampaignsObjectivesListingStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetMilitaryCampaignsDetailStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -73,21 +70,22 @@ export const GetCharactersMilitaryCampaignsObjectivesParticipationDescriptor: Op
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetMilitaryCampaignsDetailDescriptor: OperationExecutionDescriptor<GetMilitaryCampaignsDetailInput, GetMilitaryCampaignsDetailOutput> = {
-  operationId: "GetMilitaryCampaignsDetail",
+export const GetMilitaryCampaignsObjectivesDetailDescriptor: OperationExecutionDescriptor<GetMilitaryCampaignsObjectivesDetailInput, GetMilitaryCampaignsObjectivesDetailOutput> = {
+  operationId: "GetMilitaryCampaignsObjectivesDetail",
   method: "GET",
-  path: "/military-campaigns/{campaign_id}",
+  path: "/military-campaigns/{campaign_id}/objectives/{objective_id}",
   parameters: [
     { name: "campaign_id", placement: "path", required: true, schema: { type: "string" } },
+    { name: "objective_id", placement: "path", required: true, schema: { type: "string" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetMilitaryCampaignsDetailRequestSchema,
+  requestSchema: GetMilitaryCampaignsObjectivesDetailRequestSchema,
   authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetMilitaryCampaignsDetailStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetMilitaryCampaignsObjectivesDetailStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -110,22 +108,24 @@ export const GetMilitaryCampaignsListingDescriptor: OperationExecutionDescriptor
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetMilitaryCampaignsObjectivesDetailDescriptor: OperationExecutionDescriptor<GetMilitaryCampaignsObjectivesDetailInput, GetMilitaryCampaignsObjectivesDetailOutput> = {
-  operationId: "GetMilitaryCampaignsObjectivesDetail",
+export const GetCharactersMilitaryCampaignsObjectivesListingDescriptor: OperationExecutionDescriptor<GetCharactersMilitaryCampaignsObjectivesListingInput, GetCharactersMilitaryCampaignsObjectivesListingOutput> = {
+  operationId: "GetCharactersMilitaryCampaignsObjectivesListing",
   method: "GET",
-  path: "/military-campaigns/{campaign_id}/objectives/{objective_id}",
+  path: "/characters/{character_id}/military-campaigns/objectives",
   parameters: [
-    { name: "campaign_id", placement: "path", required: true, schema: { type: "string" } },
-    { name: "objective_id", placement: "path", required: true, schema: { type: "string" } },
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "after", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "before", placement: "query", required: false, schema: { type: "string" }, explode: false },
+    { name: "limit", placement: "query", required: false, schema: { type: "integer" }, explode: false },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetMilitaryCampaignsObjectivesDetailRequestSchema,
-  authentication: null,
+  requestSchema: GetCharactersMilitaryCampaignsObjectivesListingRequestSchema,
+  authentication: { scopes: ["esi.activity.char:read"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetMilitaryCampaignsObjectivesDetailStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCharactersMilitaryCampaignsObjectivesListingStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

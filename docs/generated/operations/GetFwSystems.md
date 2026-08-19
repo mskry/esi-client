@@ -11,21 +11,31 @@ Ownership of faction warfare systems
 
 - Stable ID: `GetFwSystems`
 - HTTP: `GET /fw/systems`
-- Domain method: `client.factionWarfare.getFwSystems(options?)`
+- Domain method: `client.factionWarfare.listSystems(options?)`
 - Generic call: `client.callOperation("GetFwSystems", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/faction-warfare`
 - Domain index: [factionWarfare](../domains/faction-warfare.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFactionWarfareClient } from '@evespace/esi-client/domains/faction-warfare';
+
+const client = createFactionWarfareClient();
+
+const data = await client.listSystems();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.factionWarfare.getFwSystems();
+const data = await client.factionWarfare.listSystems();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetFwSystems', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetFwSystemsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.factionWarfare.withMetadata().getFwSystems(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.factionWarfare.withMetadata().listSystems(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

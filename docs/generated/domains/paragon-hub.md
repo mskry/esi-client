@@ -13,11 +13,45 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersParagonHubSkinr`](../operations/GetCharactersParagonHubSkinr.md) | `GET` | `getCharactersParagonHubSkinr` | required | none | read | List a character's Paragon Hub SKINR listings |
-| [`GetParagonHubSkinr`](../operations/GetParagonHubSkinr.md) | `GET` | `getParagonHubSkinr` | public | none | read | List public Paragon Hub SKINR listings |
-| [`GetParagonHubSkinrAlliances`](../operations/GetParagonHubSkinrAlliances.md) | `GET` | `getParagonHubSkinrAlliances` | required | none | read | List Paragon Hub SKINR listings targeted at an alliance |
-| [`GetParagonHubSkinrCharacters`](../operations/GetParagonHubSkinrCharacters.md) | `GET` | `getParagonHubSkinrCharacters` | required | none | read | List Paragon Hub SKINR listings targeted at a character |
-| [`GetParagonHubSkinrCorporations`](../operations/GetParagonHubSkinrCorporations.md) | `GET` | `getParagonHubSkinrCorporations` | required | none | read | List Paragon Hub SKINR listings targeted at a corporation |
+| [`GetCharactersParagonHubSkinr`](../operations/GetCharactersParagonHubSkinr.md) | `GET` | `listPostedListings` | required | none | read | List a character's Paragon Hub SKINR listings |
+| [`GetParagonHubSkinr`](../operations/GetParagonHubSkinr.md) | `GET` | `listPublicListings` | public | none | read | List public Paragon Hub SKINR listings |
+| [`GetParagonHubSkinrAlliances`](../operations/GetParagonHubSkinrAlliances.md) | `GET` | `listListingsForAlliance` | required | none | read | List Paragon Hub SKINR listings targeted at an alliance |
+| [`GetParagonHubSkinrCharacters`](../operations/GetParagonHubSkinrCharacters.md) | `GET` | `listListingsForCharacter` | required | none | read | List Paragon Hub SKINR listings targeted at a character |
+| [`GetParagonHubSkinrCorporations`](../operations/GetParagonHubSkinrCorporations.md) | `GET` | `listListingsForCorporation` | required | none | read | List Paragon Hub SKINR listings targeted at a corporation |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createParagonHubClient } from '@evespace/esi-client/domains/paragon-hub';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createParagonHubClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listPostedListings(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.paragonHub.listPostedListings(characterId);
+```
 
 ## Shared concepts
 

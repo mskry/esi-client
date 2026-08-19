@@ -13,7 +13,41 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdSearch`](../operations/GetCharactersCharacterIdSearch.md) | `GET` | `getCharactersCharacterIdSearch` | required | none | read | Search on a string |
+| [`GetCharactersCharacterIdSearch`](../operations/GetCharactersCharacterIdSearch.md) | `GET` | `search` | required | none | read | Search on a string |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createSearchClient } from '@evespace/esi-client/domains/search';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createSearchClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.search(characterId, { categories: ["agent"], search: "example-search" });
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.search.search(characterId, { categories: ["agent"], search: "example-search" });
+```
 
 ## Shared concepts
 

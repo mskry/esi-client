@@ -13,7 +13,7 @@ export async function deleteFittingWithTypedIntent(authorizationApproved: boolea
   const client = new EsiClient({ token: requiredAccessToken() });
 
   // Selecting this named typed mutation is explicit intent; generic gates do not apply.
-  return client.fittings.deleteCharactersCharacterIdFittingsFittingId(characterId, fittingId);
+  return client.fittings.deleteFitting(characterId, fittingId);
 }
 
 export async function deleteFittingGenerically(authorizationApproved: boolean) {

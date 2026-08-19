@@ -11,14 +11,31 @@ Open New Mail Window
 
 - Stable ID: `PostUiOpenwindowNewmail`
 - HTTP: `POST /ui/openwindow/newmail`
-- Domain method: `client.userInterface.postUiOpenwindowNewmail(options)`
+- Domain method: `client.userInterface.openNewMail(options)`
 - Generic call: `client.callOperation("PostUiOpenwindowNewmail", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/user-interface`
 - Domain index: [userInterface](../domains/user-interface.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createUserInterfaceClient } from '@evespace/esi-client/domains/user-interface';
+import type { PostUiOpenwindowNewmailOptions } from '@evespace/esi-client/domains/user-interface';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createUserInterfaceClient({ token: accessToken });
+
+declare const requestBody: NonNullable<PostUiOpenwindowNewmailOptions['body']>;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.openNewMail({ body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -32,7 +49,7 @@ const client = new EsiClient({ token: accessToken });
 declare const requestBody: NonNullable<PostUiOpenwindowNewmailOptions['body']>;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.userInterface.postUiOpenwindowNewmail({ body: requestBody });
+const data = await client.userInterface.openNewMail({ body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -69,7 +86,7 @@ const response = await client.callOperation('PostUiOpenwindowNewmail', arguments
 
 - Request schema: `@evespace/esi-client/schemas` export `PostUiOpenwindowNewmailRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.userInterface.withMetadata().postUiOpenwindowNewmail(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.userInterface.withMetadata().openNewMail(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

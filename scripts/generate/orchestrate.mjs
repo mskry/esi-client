@@ -1,13 +1,18 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { cp, lstat, mkdir, mkdtemp, rename, rm, writeFile } from 'node:fs/promises';
+import { cp, lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { basename, dirname, join, resolve } from 'node:path';
+import { basename, dirname, join, relative, resolve } from 'node:path';
 
 import { applySpecificationCorrections } from './corrections.mjs';
 import { createOperationAccountingReport, renderGeneratedJson } from './artifacts.mjs';
+import { namingReviewReportPath, renderNamingReviewReport } from './naming-review.mjs';
 import { normalizeOpenApiDocument } from './normalize.mjs';
 import { defaultSpecificationUrl, stageOpenApiSnapshot } from './openapi.mjs';
-import { resolveOperationMetadata } from './operation-metadata.mjs';
+import {
+  defaultFacadeCatalogPath,
+  loadFacadeCatalog,
+  resolveOperationMetadata,
+} from './operation-metadata.mjs';
 import { generatedReplacementTargets, repositoryRoot } from './paths.mjs';
 
 const generatedTargetKinds = new Map([
@@ -53,17 +58,37 @@ export async function orchestrateGeneration(options = {}) {
 
     const snapshot = serializeJson(corrected.document);
     const sha256 = createHash('sha256').update(snapshot).digest('hex');
-    const provenance = Object.freeze({
+    const facadeCatalogPath = resolve(
+      options.operationMetadata?.facadeCatalogPath ?? defaultFacadeCatalogPath,
+    );
+    const [facadeCatalogSource, facadeCatalog, operationMetadata] = await Promise.all([
+      readFile(facadeCatalogPath, 'utf8'),
+      loadFacadeCatalog(normalizedModel, facadeCatalogPath),
+      resolveOperationMetadata(normalizedModel, options.operationMetadata),
+    ]);
+    const provenanceWithoutReport = Object.freeze({
       appliedCorrections: corrected.appliedCorrections,
       compatibilityDate: stagedSnapshot.compatibilityDate,
+      facadeCatalog: {
+        path: relative(projectRoot, facadeCatalogPath).replaceAll('\\', '/'),
+        sha256: hash(facadeCatalogSource),
+      },
       sha256,
       sourceSha256: stagedSnapshot.sha256,
       specificationUrl: options.openapi?.specificationUrl ?? defaultSpecificationUrl,
     });
-    const operationMetadata = await resolveOperationMetadata(
+    const namingReviewReport = renderNamingReviewReport(
       normalizedModel,
-      options.operationMetadata,
+      facadeCatalog,
+      provenanceWithoutReport,
     );
+    const provenance = Object.freeze({
+      ...provenanceWithoutReport,
+      facadeReviewReport: {
+        path: namingReviewReportPath,
+        sha256: hash(namingReviewReport),
+      },
+    });
     const accountingReport = createOperationAccountingReport(normalizedModel, operationMetadata);
     await writeOpenApiOutput(
       outputDirectory,
@@ -83,6 +108,7 @@ export async function orchestrateGeneration(options = {}) {
       compatibilityDate: stagedSnapshot.compatibilityDate,
       correctedDocument: corrected.document,
       normalizedModel,
+      namingReviewReport,
       operationMetadata,
       outputDirectory,
       outputPath,
@@ -326,6 +352,10 @@ async function pathExists(path) {
 
 function serializeJson(value) {
   return `${JSON.stringify(sortJsonValue(value), null, 2)}\n`;
+}
+
+function hash(value) {
+  return createHash('sha256').update(value).digest('hex');
 }
 
 function sortJsonValue(value) {

@@ -29,7 +29,7 @@ import {
   type GetCorporationsCorporationIdWalletsDivisionTransactionsOutput,
   type GetCorporationsCorporationIdWalletsInput,
   type GetCorporationsCorporationIdWalletsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/wallet.js';
 
 export const GetCharactersCharacterIdWalletDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdWalletInput, GetCharactersCharacterIdWalletOutput> = {
   operationId: "GetCharactersCharacterIdWallet",

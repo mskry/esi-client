@@ -11,14 +11,33 @@ Update metadata about a mail
 
 - Stable ID: `PutCharactersCharacterIdMailMailId`
 - HTTP: `PUT /characters/{character_id}/mail/{mail_id}`
-- Domain method: `client.mail.putCharactersCharacterIdMailMailId(characterId, mailId, options)`
+- Domain method: `client.mail.update(characterId, mailId, options)`
 - Generic call: `client.callOperation("PutCharactersCharacterIdMailMailId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/mail`
 - Domain index: [mail](../domains/mail.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMailClient } from '@evespace/esi-client/domains/mail';
+import type { PutCharactersCharacterIdMailMailIdOptions } from '@evespace/esi-client/domains/mail';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMailClient({ token: accessToken });
+
+const characterId = 90000001;
+const mailId = 12345;
+declare const requestBody: NonNullable<PutCharactersCharacterIdMailMailIdOptions['body']>;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.update(characterId, mailId, { body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -34,7 +53,7 @@ const mailId = 12345;
 declare const requestBody: NonNullable<PutCharactersCharacterIdMailMailIdOptions['body']>;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.mail.putCharactersCharacterIdMailMailId(characterId, mailId, { body: requestBody });
+const data = await client.mail.update(characterId, mailId, { body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -75,7 +94,7 @@ const response = await client.callOperation('PutCharactersCharacterIdMailMailId'
 
 - Request schema: `@evespace/esi-client/schemas` export `PutCharactersCharacterIdMailMailIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.mail.withMetadata().putCharactersCharacterIdMailMailId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.mail.withMetadata().update(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

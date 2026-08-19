@@ -61,7 +61,7 @@ import {
   type PostCharactersAffiliationOutput,
   type PostCharactersCharacterIdCspaInput,
   type PostCharactersCharacterIdCspaOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/character.js';
 
 export const GetCharactersCharacterIdAgentsResearchDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdAgentsResearchInput, GetCharactersCharacterIdAgentsResearchOutput> = {
   operationId: "GetCharactersCharacterIdAgentsResearch",
@@ -78,6 +78,101 @@ export const GetCharactersCharacterIdAgentsResearchDescriptor: OperationExecutio
   authentication: { scopes: ["esi-characters.read_agents_research.v1"] },
   successResponses: [
     { status: 200, body: 'json', schema: GetCharactersCharacterIdAgentsResearchStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const PostCharactersCharacterIdCspaDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdCspaInput, PostCharactersCharacterIdCspaOutput> = {
+  operationId: "PostCharactersCharacterIdCspa",
+  method: "POST",
+  path: "/characters/{character_id}/cspa",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: { required: true, mediaType: 'application/json' },
+  requestSchema: PostCharactersCharacterIdCspaRequestSchema,
+  authentication: { scopes: ["esi-characters.read_contacts.v1"] },
+  successResponses: [
+    { status: 201, body: 'json', schema: PostCharactersCharacterIdCspaStatus201SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdRolesDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdRolesInput, GetCharactersCharacterIdRolesOutput> = {
+  operationId: "GetCharactersCharacterIdRoles",
+  method: "GET",
+  path: "/characters/{character_id}/roles",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdRolesRequestSchema,
+  authentication: { scopes: ["esi-characters.read_corporation_roles.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdRolesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdFatigueDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdFatigueInput, GetCharactersCharacterIdFatigueOutput> = {
+  operationId: "GetCharactersCharacterIdFatigue",
+  method: "GET",
+  path: "/characters/{character_id}/fatigue",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdFatigueRequestSchema,
+  authentication: { scopes: ["esi-characters.read_fatigue.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdFatigueStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersCharacterIdPortraitDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdPortraitInput, GetCharactersCharacterIdPortraitOutput> = {
+  operationId: "GetCharactersCharacterIdPortrait",
+  method: "GET",
+  path: "/characters/{character_id}/portrait",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdPortraitRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdPortraitStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetCharactersDetailDescriptor: OperationExecutionDescriptor<GetCharactersDetailInput, GetCharactersDetailOutput> = {
+  operationId: "GetCharactersDetail",
+  method: "GET",
+  path: "/characters/{character_id}",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersDetailRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersDetailStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -102,6 +197,25 @@ export const GetCharactersCharacterIdBlueprintsDescriptor: OperationExecutionDes
   transport: { compatibilityDateOverride: true },
 };
 
+export const GetCharactersCharacterIdNotificationsContactsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdNotificationsContactsInput, GetCharactersCharacterIdNotificationsContactsOutput> = {
+  operationId: "GetCharactersCharacterIdNotificationsContacts",
+  method: "GET",
+  path: "/characters/{character_id}/notifications/contacts",
+  parameters: [
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCharactersCharacterIdNotificationsContactsRequestSchema,
+  authentication: { scopes: ["esi-characters.read_notifications.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdNotificationsContactsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
 export const GetCharactersCharacterIdCorporationhistoryDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdCorporationhistoryInput, GetCharactersCharacterIdCorporationhistoryOutput> = {
   operationId: "GetCharactersCharacterIdCorporationhistory",
   method: "GET",
@@ -121,10 +235,10 @@ export const GetCharactersCharacterIdCorporationhistoryDescriptor: OperationExec
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCharactersCharacterIdFatigueDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdFatigueInput, GetCharactersCharacterIdFatigueOutput> = {
-  operationId: "GetCharactersCharacterIdFatigue",
+export const GetCharactersCharacterIdTitlesDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdTitlesInput, GetCharactersCharacterIdTitlesOutput> = {
+  operationId: "GetCharactersCharacterIdTitles",
   method: "GET",
-  path: "/characters/{character_id}/fatigue",
+  path: "/characters/{character_id}/titles",
   parameters: [
     { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
@@ -132,10 +246,10 @@ export const GetCharactersCharacterIdFatigueDescriptor: OperationExecutionDescri
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCharactersCharacterIdFatigueRequestSchema,
-  authentication: { scopes: ["esi-characters.read_fatigue.v1"] },
+  requestSchema: GetCharactersCharacterIdTitlesRequestSchema,
+  authentication: { scopes: ["esi-characters.read_titles.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdFatigueStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdTitlesStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -178,63 +292,6 @@ export const GetCharactersCharacterIdNotificationsDescriptor: OperationExecution
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCharactersCharacterIdNotificationsContactsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdNotificationsContactsInput, GetCharactersCharacterIdNotificationsContactsOutput> = {
-  operationId: "GetCharactersCharacterIdNotificationsContacts",
-  method: "GET",
-  path: "/characters/{character_id}/notifications/contacts",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdNotificationsContactsRequestSchema,
-  authentication: { scopes: ["esi-characters.read_notifications.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdNotificationsContactsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCharactersCharacterIdPortraitDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdPortraitInput, GetCharactersCharacterIdPortraitOutput> = {
-  operationId: "GetCharactersCharacterIdPortrait",
-  method: "GET",
-  path: "/characters/{character_id}/portrait",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdPortraitRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdPortraitStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCharactersCharacterIdRolesDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdRolesInput, GetCharactersCharacterIdRolesOutput> = {
-  operationId: "GetCharactersCharacterIdRoles",
-  method: "GET",
-  path: "/characters/{character_id}/roles",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdRolesRequestSchema,
-  authentication: { scopes: ["esi-characters.read_corporation_roles.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdRolesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetCharactersCharacterIdStandingsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdStandingsInput, GetCharactersCharacterIdStandingsOutput> = {
   operationId: "GetCharactersCharacterIdStandings",
   method: "GET",
@@ -254,44 +311,6 @@ export const GetCharactersCharacterIdStandingsDescriptor: OperationExecutionDesc
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCharactersCharacterIdTitlesDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdTitlesInput, GetCharactersCharacterIdTitlesOutput> = {
-  operationId: "GetCharactersCharacterIdTitles",
-  method: "GET",
-  path: "/characters/{character_id}/titles",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersCharacterIdTitlesRequestSchema,
-  authentication: { scopes: ["esi-characters.read_titles.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdTitlesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetCharactersDetailDescriptor: OperationExecutionDescriptor<GetCharactersDetailInput, GetCharactersDetailOutput> = {
-  operationId: "GetCharactersDetail",
-  method: "GET",
-  path: "/characters/{character_id}",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetCharactersDetailRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersDetailStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const PostCharactersAffiliationDescriptor: OperationExecutionDescriptor<PostCharactersAffiliationInput, PostCharactersAffiliationOutput> = {
   operationId: "PostCharactersAffiliation",
   method: "POST",
@@ -306,25 +325,6 @@ export const PostCharactersAffiliationDescriptor: OperationExecutionDescriptor<P
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: PostCharactersAffiliationStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const PostCharactersCharacterIdCspaDescriptor: OperationExecutionDescriptor<PostCharactersCharacterIdCspaInput, PostCharactersCharacterIdCspaOutput> = {
-  operationId: "PostCharactersCharacterIdCspa",
-  method: "POST",
-  path: "/characters/{character_id}/cspa",
-  parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: { required: true, mediaType: 'application/json' },
-  requestSchema: PostCharactersCharacterIdCspaRequestSchema,
-  authentication: { scopes: ["esi-characters.read_contacts.v1"] },
-  successResponses: [
-    { status: 201, body: 'json', schema: PostCharactersCharacterIdCspaStatus201SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

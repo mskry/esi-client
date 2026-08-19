@@ -49,23 +49,23 @@ import {
   type GetMarketsRegionIdTypesOutput,
   type GetMarketsStructuresStructureIdInput,
   type GetMarketsStructuresStructureIdOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/market.js';
 
-export const GetCharactersCharacterIdOrdersDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdOrdersInput, GetCharactersCharacterIdOrdersOutput> = {
-  operationId: "GetCharactersCharacterIdOrders",
+export const GetMarketsGroupsMarketGroupIdDescriptor: OperationExecutionDescriptor<GetMarketsGroupsMarketGroupIdInput, GetMarketsGroupsMarketGroupIdOutput> = {
+  operationId: "GetMarketsGroupsMarketGroupId",
   method: "GET",
-  path: "/characters/{character_id}/orders",
+  path: "/markets/groups/{market_group_id}",
   parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "market_group_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCharactersCharacterIdOrdersRequestSchema,
-  authentication: { scopes: ["esi-markets.read_character_orders.v1"] },
+  requestSchema: GetMarketsGroupsMarketGroupIdRequestSchema,
+  authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCharacterIdOrdersStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetMarketsGroupsMarketGroupIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -90,22 +90,21 @@ export const GetCharactersCharacterIdOrdersHistoryDescriptor: OperationExecution
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCorporationsCorporationIdOrdersDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdOrdersInput, GetCorporationsCorporationIdOrdersOutput> = {
-  operationId: "GetCorporationsCorporationIdOrders",
+export const GetCharactersCharacterIdOrdersDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdOrdersInput, GetCharactersCharacterIdOrdersOutput> = {
+  operationId: "GetCharactersCharacterIdOrders",
   method: "GET",
-  path: "/corporations/{corporation_id}/orders",
+  path: "/characters/{character_id}/orders",
   parameters: [
-    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCorporationsCorporationIdOrdersRequestSchema,
-  authentication: { scopes: ["esi-markets.read_corporation_orders.v1"] },
+  requestSchema: GetCharactersCharacterIdOrdersRequestSchema,
+  authentication: { scopes: ["esi-markets.read_character_orders.v1"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCorporationsCorporationIdOrdersStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCharactersCharacterIdOrdersStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -130,6 +129,26 @@ export const GetCorporationsCorporationIdOrdersHistoryDescriptor: OperationExecu
   transport: { compatibilityDateOverride: true },
 };
 
+export const GetCorporationsCorporationIdOrdersDescriptor: OperationExecutionDescriptor<GetCorporationsCorporationIdOrdersInput, GetCorporationsCorporationIdOrdersOutput> = {
+  operationId: "GetCorporationsCorporationIdOrders",
+  method: "GET",
+  path: "/corporations/{corporation_id}/orders",
+  parameters: [
+    { name: "corporation_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetCorporationsCorporationIdOrdersRequestSchema,
+  authentication: { scopes: ["esi-markets.read_corporation_orders.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetCorporationsCorporationIdOrdersStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
 export const GetMarketsGroupsDescriptor: OperationExecutionDescriptor<GetMarketsGroupsInput, GetMarketsGroupsOutput> = {
   operationId: "GetMarketsGroups",
   method: "GET",
@@ -144,25 +163,6 @@ export const GetMarketsGroupsDescriptor: OperationExecutionDescriptor<GetMarkets
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetMarketsGroupsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetMarketsGroupsMarketGroupIdDescriptor: OperationExecutionDescriptor<GetMarketsGroupsMarketGroupIdInput, GetMarketsGroupsMarketGroupIdOutput> = {
-  operationId: "GetMarketsGroupsMarketGroupId",
-  method: "GET",
-  path: "/markets/groups/{market_group_id}",
-  parameters: [
-    { name: "market_group_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetMarketsGroupsMarketGroupIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetMarketsGroupsMarketGroupIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

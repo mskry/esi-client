@@ -3,119 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetCorporationsProjectsContributionDescriptor,
-  GetCorporationsProjectsContributorsDescriptor,
-  GetCorporationsProjectsDetailDescriptor,
-  GetCorporationsProjectsListingDescriptor,
-} from '../internal/descriptors/corporation-projects.js';
-import type {
-  GetCorporationsProjectsContributionInput,
-  GetCorporationsProjectsContributionOutput,
-  GetCorporationsProjectsContributorsInput,
-  GetCorporationsProjectsContributorsOutput,
-  GetCorporationsProjectsDetailInput,
-  GetCorporationsProjectsDetailOutput,
-  GetCorporationsProjectsListingInput,
-  GetCorporationsProjectsListingOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindCorporationProjectsDomainClient } from '../internal/domains/corporation-projects.js';
+import type { CorporationProjectsDomainClient } from '../internal/domains/corporation-projects-contract.js';
 
-export interface GetCorporationsProjectsContributionOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsContributionInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsContributionInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCorporationsProjectsContributionInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/corporation-projects-contract.js';
 
-export interface GetCorporationsProjectsContributorsOptions {
-  readonly "after"?: NonNullable<GetCorporationsProjectsContributorsInput["query"]>["after"];
-  readonly "before"?: NonNullable<GetCorporationsProjectsContributorsInput["query"]>["before"];
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsContributorsInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsContributorsInput["header"]>["If-None-Match"];
-  readonly "limit"?: NonNullable<GetCorporationsProjectsContributorsInput["query"]>["limit"];
-  readonly "xTenant"?: NonNullable<GetCorporationsProjectsContributorsInput["header"]>["X-Tenant"];
-}
-
-export interface GetCorporationsProjectsDetailOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsDetailInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsDetailInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCorporationsProjectsDetailInput["header"]>["X-Tenant"];
-}
-
-export interface GetCorporationsProjectsListingOptions {
-  readonly "after"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["after"];
-  readonly "before"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["before"];
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCorporationsProjectsListingInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCorporationsProjectsListingInput["header"]>["If-None-Match"];
-  readonly "limit"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["limit"];
-  readonly "state"?: NonNullable<GetCorporationsProjectsListingInput["query"]>["state"];
-  readonly "xTenant"?: NonNullable<GetCorporationsProjectsListingInput["header"]>["X-Tenant"];
-}
-
-export class CorporationProjectsDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCorporationsProjectsContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<GetCorporationsProjectsContributionOutput> {
-    const arguments_: GetCorporationsProjectsContributionInput = { path: { "corporation_id": corporationId, "project_id": projectId, "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsContributionDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCorporationsProjectsContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<GetCorporationsProjectsContributorsOutput> {
-    const arguments_: GetCorporationsProjectsContributorsInput = { path: { "corporation_id": corporationId, "project_id": projectId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsContributorsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCorporationsProjectsDetail(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<GetCorporationsProjectsDetailOutput> {
-    const arguments_: GetCorporationsProjectsDetailInput = { path: { "corporation_id": corporationId, "project_id": projectId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCorporationsProjectsListing(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<GetCorporationsProjectsListingOutput> {
-    const arguments_: GetCorporationsProjectsListingInput = { path: { "corporation_id": corporationId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"], "state": options?.["state"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): CorporationProjectsDomainClientWithMetadata {
-    return new CorporationProjectsDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class CorporationProjectsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCorporationsProjectsContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<EsiResponse<GetCorporationsProjectsContributionOutput>> {
-    const arguments_: GetCorporationsProjectsContributionInput = { path: { "corporation_id": corporationId, "project_id": projectId, "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsContributionDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCorporationsProjectsContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<EsiResponse<GetCorporationsProjectsContributorsOutput>> {
-    const arguments_: GetCorporationsProjectsContributorsInput = { path: { "corporation_id": corporationId, "project_id": projectId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsContributorsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCorporationsProjectsDetail(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<EsiResponse<GetCorporationsProjectsDetailOutput>> {
-    const arguments_: GetCorporationsProjectsDetailInput = { path: { "corporation_id": corporationId, "project_id": projectId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCorporationsProjectsListing(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<EsiResponse<GetCorporationsProjectsListingOutput>> {
-    const arguments_: GetCorporationsProjectsListingInput = { path: { "corporation_id": corporationId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"], "state": options?.["state"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createCorporationProjectsClient(options: EsiClientOptions = {}): CorporationProjectsDomainClient {
+  return bindCorporationProjectsDomainClient(new EsiClientConfiguration(options));
 }

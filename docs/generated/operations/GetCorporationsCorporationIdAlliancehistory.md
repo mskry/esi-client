@@ -11,14 +11,26 @@ Get alliance history
 
 - Stable ID: `GetCorporationsCorporationIdAlliancehistory`
 - HTTP: `GET /corporations/{corporation_id}/alliancehistory`
-- Domain method: `client.corporation.getCorporationsCorporationIdAlliancehistory(corporationId, options?)`
+- Domain method: `client.corporation.listAllianceHistory(corporationId, options?)`
 - Generic call: `client.callOperation("GetCorporationsCorporationIdAlliancehistory", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/corporation`
 - Domain index: [corporation](../domains/corporation.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCorporationClient } from '@evespace/esi-client/domains/corporation';
+
+const client = createCorporationClient();
+
+const corporationId = 98000001;
+
+const data = await client.listAllianceHistory(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const corporationId = 98000001;
 
-const data = await client.corporation.getCorporationsCorporationIdAlliancehistory(corporationId);
+const data = await client.corporation.listAllianceHistory(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetCorporationsCorporationIdAllianc
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsCorporationIdAlliancehistoryRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.corporation.withMetadata().getCorporationsCorporationIdAlliancehistory(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.corporation.withMetadata().listAllianceHistory(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

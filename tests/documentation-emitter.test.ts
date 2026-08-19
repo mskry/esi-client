@@ -8,7 +8,11 @@ import {
   renderGeneratedDocumentation,
 } from '../scripts/generate/documentation-emitter.mjs';
 import type { NormalizedOpenApiModel } from '../scripts/generate/normalize.mjs';
-import { resolveOperationMetadata } from '../scripts/generate/operation-metadata.mjs';
+import { renderNamingReviewReport } from '../scripts/generate/naming-review.mjs';
+import {
+  loadFacadeCatalog,
+  resolveOperationMetadata,
+} from '../scripts/generate/operation-metadata.mjs';
 import {
   createSerializableOperationManifest,
   type SerializableOperationManifest,
@@ -40,19 +44,27 @@ const examplePaths = [
 describe('generated LLM documentation', () => {
   it('renders deterministic progressive documentation from all serializable operations', async () => {
     const fixture = await loadFixture();
-    const first = renderGeneratedDocumentation(fixture.manifest, fixture.provenance);
+    const first = renderGeneratedDocumentation(
+      fixture.manifest,
+      fixture.provenance,
+      fixture.namingReviewReport,
+    );
     const reorderedManifest: SerializableOperationManifest = {
       ...fixture.manifest,
       operations: reversed(fixture.manifest.operations),
     };
-    const second = renderGeneratedDocumentation(reorderedManifest, fixture.provenance);
+    const second = renderGeneratedDocumentation(
+      reorderedManifest,
+      fixture.provenance,
+      fixture.namingReviewReport,
+    );
 
     expect(second.llmsText).toBe(first.llmsText);
     expect([...second.generatedFiles]).toEqual([...first.generatedFiles]);
     expect(first.llmsText.length).toBeLessThan(12_000);
     expect(first.llmsText).not.toContain('## Parameters');
     expect(first.generatedFiles.size).toBe(
-      conceptPaths.length + examplePaths.length + domainCount + operationCount,
+      conceptPaths.length + examplePaths.length + domainCount + operationCount + 1,
     );
 
     const operationPaths = [...first.generatedFiles.keys()].filter((path) =>
@@ -74,8 +86,10 @@ describe('generated LLM documentation', () => {
       expect(page).toContain(`Stable ID: \`${operation.operationId}\``);
       expect(page).toContain(`client.${operation.facade.domain}.${operation.facade.method}(`);
       expect(page).toContain(`client.callOperation("${operation.operationId}"`);
-      expect(page).toContain('## Domain-method snippet');
+      expect(page).toContain('## Standalone domain-factory snippet');
+      expect(page).toContain('## Aggregate EsiClient snippet');
       expect(page).toContain('## Generic-execution snippet');
+      expect(page).toContain("from '@evespace/esi-client/domains/");
       expect(page).toContain("import { EsiClient } from '@evespace/esi-client';");
       expect(page).toContain("from '@evespace/esi-client/operations';");
       expect(page).toContain(operation.requestSchema.export);
@@ -88,6 +102,15 @@ describe('generated LLM documentation', () => {
       for (const scope of operation.authentication.scopes) expect(page).toContain(scope);
       for (const response of operation.responses) expect(page).toContain(response.schema.export);
     }
+
+    for (const path of domainPaths) {
+      const page = first.generatedFiles.get(path);
+      if (page === undefined) throw new Error(`Missing domain documentation: ${path}`);
+      expect(page).toContain('## Standalone domain factory');
+      expect(page).toContain('## Aggregate client');
+      expect(page).toContain("from '@evespace/esi-client/domains/");
+      expect(page).toContain("import { EsiClient } from '@evespace/esi-client';");
+    }
   });
 
   it('emits isolated documentation claims and identical repository/site llms.txt files', async () => {
@@ -97,6 +120,7 @@ describe('generated LLM documentation', () => {
       compatibilityDate: fixture.provenance.compatibilityDate,
       correctedDocument: {},
       normalizedModel: fixture.model,
+      namingReviewReport: fixture.namingReviewReport,
       operationMetadata: fixture.metadata,
       outputDirectory,
       outputPath: (target) => join(outputDirectory, target),
@@ -114,13 +138,18 @@ describe('generated LLM documentation', () => {
     ]);
     expect(siteLlms).toBe(repositoryLlms);
     expect(repositoryLlms).toBe(
-      renderGeneratedDocumentation(fixture.manifest, fixture.provenance).llmsText,
+      renderGeneratedDocumentation(fixture.manifest, fixture.provenance, fixture.namingReviewReport)
+        .llmsText,
     );
   });
 
   it('matches every materialized repository documentation output without stale files', async () => {
     const fixture = await loadFixture();
-    const rendered = renderGeneratedDocumentation(fixture.manifest, fixture.provenance);
+    const rendered = renderGeneratedDocumentation(
+      fixture.manifest,
+      fixture.provenance,
+      fixture.namingReviewReport,
+    );
     const generatedRoot = new URL('../docs/generated/', import.meta.url);
     const materializedPaths = await listRelativeFiles(generatedRoot);
 
@@ -142,7 +171,11 @@ describe('generated LLM documentation', () => {
 
   it('uses valid repository-root links and matching provenance on every document', async () => {
     const fixture = await loadFixture();
-    const rendered = renderGeneratedDocumentation(fixture.manifest, fixture.provenance);
+    const rendered = renderGeneratedDocumentation(
+      fixture.manifest,
+      fixture.provenance,
+      fixture.namingReviewReport,
+    );
     const documents = new Map<string, string>([
       ['llms.txt', rendered.llmsText],
       ['docs/llms.txt', rendered.llmsText],
@@ -182,12 +215,12 @@ describe('generated LLM documentation', () => {
       operations: [operation, { ...operation, operationId: operation.operationId.toLowerCase() }],
     };
 
-    expect(() => renderGeneratedDocumentation(unsafe, fixture.provenance)).toThrow(
-      'Unsafe documentation operation ID path segment',
-    );
-    expect(() => renderGeneratedDocumentation(colliding, fixture.provenance)).toThrow(
-      'Documentation operation path collision',
-    );
+    expect(() =>
+      renderGeneratedDocumentation(unsafe, fixture.provenance, fixture.namingReviewReport),
+    ).toThrow('Unsafe documentation operation ID path segment');
+    expect(() =>
+      renderGeneratedDocumentation(colliding, fixture.provenance, fixture.namingReviewReport),
+    ).toThrow('Documentation operation path collision');
   });
 });
 
@@ -195,6 +228,7 @@ interface DocumentationFixture {
   readonly manifest: SerializableOperationManifest;
   readonly metadata: EmitterContext['operationMetadata'];
   readonly model: NormalizedOpenApiModel;
+  readonly namingReviewReport: string;
   readonly provenance: GenerationProvenance;
 }
 
@@ -209,11 +243,15 @@ async function loadFixture(): Promise<DocumentationFixture> {
   ]);
   assertModel(modelValue);
   assertProvenance(provenanceValue);
-  const metadata = await resolveOperationMetadata(modelValue);
+  const [facadeCatalog, metadata] = await Promise.all([
+    loadFacadeCatalog(modelValue),
+    resolveOperationMetadata(modelValue),
+  ]);
   return {
     manifest: createSerializableOperationManifest(modelValue, metadata, provenanceValue),
     metadata,
     model: modelValue,
+    namingReviewReport: renderNamingReviewReport(modelValue, facadeCatalog, provenanceValue),
     provenance: provenanceValue,
   };
 }
@@ -230,6 +268,10 @@ function assertProvenance(value: unknown): asserts value is GenerationProvenance
     typeof value !== 'object' ||
     !('compatibilityDate' in value) ||
     typeof value.compatibilityDate !== 'string' ||
+    !('facadeCatalog' in value) ||
+    !isProvenanceArtifact(value.facadeCatalog) ||
+    !('facadeReviewReport' in value) ||
+    !isProvenanceArtifact(value.facadeReviewReport) ||
     !('sha256' in value) ||
     typeof value.sha256 !== 'string' ||
     !('sourceSha256' in value) ||
@@ -241,6 +283,17 @@ function assertProvenance(value: unknown): asserts value is GenerationProvenance
   ) {
     throw new TypeError('Invalid committed generation provenance');
   }
+}
+
+function isProvenanceArtifact(value: unknown): value is GenerationProvenance['facadeCatalog'] {
+  return (
+    value !== null &&
+    typeof value === 'object' &&
+    'path' in value &&
+    typeof value.path === 'string' &&
+    'sha256' in value &&
+    typeof value.sha256 === 'string'
+  );
 }
 
 function markdownLinks(content: string): string[] {

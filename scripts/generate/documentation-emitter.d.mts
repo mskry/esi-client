@@ -10,6 +10,7 @@ export interface RenderedGeneratedDocumentation {
 export function renderGeneratedDocumentation(
   manifest: SerializableOperationManifest,
   provenance: ArtifactProvenance,
+  namingReviewReport: string,
 ): RenderedGeneratedDocumentation;
 export function emitGeneratedDocumentation(
   context: EmitterContext,

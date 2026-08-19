@@ -11,14 +11,29 @@ List Skyhooks
 
 - Stable ID: `GetCorporationsStructuresSkyhooksListing`
 - HTTP: `GET /corporations/{corporation_id}/structures/skyhooks`
-- Domain method: `client.structures.getCorporationsStructuresSkyhooksListing(corporationId, options?)`
+- Domain method: `client.structures.listSkyhooks(corporationId, options?)`
 - Generic call: `client.callOperation("GetCorporationsStructuresSkyhooksListing", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/structures`
 - Domain index: [structures](../domains/structures.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createStructuresClient } from '@evespace/esi-client/domains/structures';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createStructuresClient({ token: accessToken });
+
+const corporationId = 98000001;
+
+const data = await client.listSkyhooks(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const corporationId = 98000001;
 
-const data = await client.structures.getCorporationsStructuresSkyhooksListing(corporationId);
+const data = await client.structures.listSkyhooks(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCorporationsStructuresSkyhooksLi
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsStructuresSkyhooksListingRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.structures.withMetadata().getCorporationsStructuresSkyhooksListing(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.structures.withMetadata().listSkyhooks(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

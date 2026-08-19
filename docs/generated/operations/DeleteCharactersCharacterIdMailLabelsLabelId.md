@@ -11,14 +11,31 @@ Delete a mail label
 
 - Stable ID: `DeleteCharactersCharacterIdMailLabelsLabelId`
 - HTTP: `DELETE /characters/{character_id}/mail/labels/{label_id}`
-- Domain method: `client.mail.deleteCharactersCharacterIdMailLabelsLabelId(characterId, labelId, options?)`
+- Domain method: `client.mail.deleteLabel(characterId, labelId, options?)`
 - Generic call: `client.callOperation("DeleteCharactersCharacterIdMailLabelsLabelId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/mail`
 - Domain index: [mail](../domains/mail.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createMailClient } from '@evespace/esi-client/domains/mail';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createMailClient({ token: accessToken });
+
+const characterId = 90000001;
+const labelId = 12345;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.deleteLabel(characterId, labelId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -32,7 +49,7 @@ const characterId = 90000001;
 const labelId = 12345;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.mail.deleteCharactersCharacterIdMailLabelsLabelId(characterId, labelId);
+const data = await client.mail.deleteLabel(characterId, labelId);
 ```
 
 ## Generic-execution snippet
@@ -71,7 +88,7 @@ const response = await client.callOperation('DeleteCharactersCharacterIdMailLabe
 
 - Request schema: `@evespace/esi-client/schemas` export `DeleteCharactersCharacterIdMailLabelsLabelIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.mail.withMetadata().deleteCharactersCharacterIdMailLabelsLabelId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.mail.withMetadata().deleteLabel(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

@@ -2,11 +2,12 @@ import type { NormalizedOpenApiModel, NormalizedOperation } from './normalize.mj
 
 export type OperationSafetyClassification = 'read' | 'mutation';
 
-export interface FacadeNamingOverride {
+export interface FacadeCatalogEntry {
   readonly operationId: string;
   readonly domain: string;
   readonly method: string;
   readonly reviewed: true;
+  readonly note?: string;
 }
 
 export interface OperationSafetyOverride {
@@ -25,17 +26,17 @@ export interface ResolvedOperationMetadata {
 }
 
 export interface OperationMetadataOptions {
-  namingOverridesPath?: string;
+  facadeCatalogPath?: string;
   safetyOverridesPath?: string;
 }
 
-export const defaultNamingOverridesPath: string;
+export const defaultFacadeCatalogPath: string;
 export const defaultSafetyOverridesPath: string;
 
-export function loadNamingOverrides(
+export function loadFacadeCatalog(
   model: NormalizedOpenApiModel,
   path?: string,
-): Promise<readonly FacadeNamingOverride[]>;
+): Promise<readonly FacadeCatalogEntry[]>;
 export function loadSafetyOverrides(
   model: NormalizedOpenApiModel,
   path?: string,
@@ -44,5 +45,7 @@ export function resolveOperationMetadata(
   model: NormalizedOpenApiModel,
   options?: OperationMetadataOptions,
 ): Promise<readonly ResolvedOperationMetadata[]>;
+/** Derives an unreviewed candidate domain for review tooling and synthetic tests only. */
 export function defaultDomainName(operation: NormalizedOperation): string;
+/** Derives an unreviewed candidate method for review tooling and synthetic tests only. */
 export function defaultMethodName(operationId: string): string;

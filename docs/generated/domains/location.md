@@ -13,9 +13,43 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdLocation`](../operations/GetCharactersCharacterIdLocation.md) | `GET` | `getCharactersCharacterIdLocation` | required | none | read | Get character location |
-| [`GetCharactersCharacterIdOnline`](../operations/GetCharactersCharacterIdOnline.md) | `GET` | `getCharactersCharacterIdOnline` | required | none | read | Get character online |
-| [`GetCharactersCharacterIdShip`](../operations/GetCharactersCharacterIdShip.md) | `GET` | `getCharactersCharacterIdShip` | required | none | read | Get current ship |
+| [`GetCharactersCharacterIdLocation`](../operations/GetCharactersCharacterIdLocation.md) | `GET` | `get` | required | none | read | Get character location |
+| [`GetCharactersCharacterIdOnline`](../operations/GetCharactersCharacterIdOnline.md) | `GET` | `getOnlineStatus` | required | none | read | Get character online |
+| [`GetCharactersCharacterIdShip`](../operations/GetCharactersCharacterIdShip.md) | `GET` | `getCurrentShip` | required | none | read | Get current ship |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createLocationClient } from '@evespace/esi-client/domains/location';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createLocationClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.get(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.location.get(characterId);
+```
 
 ## Shared concepts
 

@@ -11,21 +11,31 @@ List (upcoming) raidable Skyhooks
 
 - Stable ID: `GetSkyhooksRaidable`
 - HTTP: `GET /skyhooks/raidable`
-- Domain method: `client.activities.getSkyhooksRaidable(options?)`
+- Domain method: `client.activities.listRaidableSkyhooks(options?)`
 - Generic call: `client.callOperation("GetSkyhooksRaidable", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/activities`
 - Domain index: [activities](../domains/activities.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createActivitiesClient } from '@evespace/esi-client/domains/activities';
+
+const client = createActivitiesClient();
+
+const data = await client.listRaidableSkyhooks();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.activities.getSkyhooksRaidable();
+const data = await client.activities.listRaidableSkyhooks();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetSkyhooksRaidable', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetSkyhooksRaidableRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.activities.withMetadata().getSkyhooksRaidable(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.activities.withMetadata().listRaidableSkyhooks(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

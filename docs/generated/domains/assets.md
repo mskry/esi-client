@@ -13,12 +13,46 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdAssets`](../operations/GetCharactersCharacterIdAssets.md) | `GET` | `getCharactersCharacterIdAssets` | required | offset | read | Get character assets |
-| [`GetCorporationsCorporationIdAssets`](../operations/GetCorporationsCorporationIdAssets.md) | `GET` | `getCorporationsCorporationIdAssets` | required | offset | read | Get corporation assets |
-| [`PostCharactersCharacterIdAssetsLocations`](../operations/PostCharactersCharacterIdAssetsLocations.md) | `POST` | `postCharactersCharacterIdAssetsLocations` | required | none | read | Get character asset locations |
-| [`PostCharactersCharacterIdAssetsNames`](../operations/PostCharactersCharacterIdAssetsNames.md) | `POST` | `postCharactersCharacterIdAssetsNames` | required | none | read | Get character asset names |
-| [`PostCorporationsCorporationIdAssetsLocations`](../operations/PostCorporationsCorporationIdAssetsLocations.md) | `POST` | `postCorporationsCorporationIdAssetsLocations` | required | none | read | Get corporation asset locations |
-| [`PostCorporationsCorporationIdAssetsNames`](../operations/PostCorporationsCorporationIdAssetsNames.md) | `POST` | `postCorporationsCorporationIdAssetsNames` | required | none | read | Get corporation asset names |
+| [`GetCharactersCharacterIdAssets`](../operations/GetCharactersCharacterIdAssets.md) | `GET` | `listCharacterAssets` | required | offset | read | Get character assets |
+| [`GetCorporationsCorporationIdAssets`](../operations/GetCorporationsCorporationIdAssets.md) | `GET` | `listCorporationAssets` | required | offset | read | Get corporation assets |
+| [`PostCharactersCharacterIdAssetsLocations`](../operations/PostCharactersCharacterIdAssetsLocations.md) | `POST` | `lookupCharacterLocations` | required | none | read | Get character asset locations |
+| [`PostCharactersCharacterIdAssetsNames`](../operations/PostCharactersCharacterIdAssetsNames.md) | `POST` | `lookupCharacterNames` | required | none | read | Get character asset names |
+| [`PostCorporationsCorporationIdAssetsLocations`](../operations/PostCorporationsCorporationIdAssetsLocations.md) | `POST` | `lookupCorporationLocations` | required | none | read | Get corporation asset locations |
+| [`PostCorporationsCorporationIdAssetsNames`](../operations/PostCorporationsCorporationIdAssetsNames.md) | `POST` | `lookupCorporationNames` | required | none | read | Get corporation asset names |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createAssetsClient } from '@evespace/esi-client/domains/assets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createAssetsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listCharacterAssets(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.assets.listCharacterAssets(characterId);
+```
 
 ## Shared concepts
 

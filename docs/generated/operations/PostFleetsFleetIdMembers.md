@@ -11,14 +11,32 @@ Create fleet invitation
 
 - Stable ID: `PostFleetsFleetIdMembers`
 - HTTP: `POST /fleets/{fleet_id}/members`
-- Domain method: `client.fleets.postFleetsFleetIdMembers(fleetId, options)`
+- Domain method: `client.fleets.inviteMember(fleetId, options)`
 - Generic call: `client.callOperation("PostFleetsFleetIdMembers", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/fleets`
 - Domain index: [fleets](../domains/fleets.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFleetsClient } from '@evespace/esi-client/domains/fleets';
+import type { PostFleetsFleetIdMembersOptions } from '@evespace/esi-client/domains/fleets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFleetsClient({ token: accessToken });
+
+const fleetId = 12345;
+declare const requestBody: NonNullable<PostFleetsFleetIdMembersOptions['body']>;
+
+// This named typed mutation expresses explicit intent. Verify authorization before calling it.
+const data = await client.inviteMember(fleetId, { body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -33,7 +51,7 @@ const fleetId = 12345;
 declare const requestBody: NonNullable<PostFleetsFleetIdMembersOptions['body']>;
 
 // This named typed mutation expresses explicit intent. Verify authorization before calling it.
-const data = await client.fleets.postFleetsFleetIdMembers(fleetId, { body: requestBody });
+const data = await client.fleets.inviteMember(fleetId, { body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -72,7 +90,7 @@ const response = await client.callOperation('PostFleetsFleetIdMembers', argument
 
 - Request schema: `@evespace/esi-client/schemas` export `PostFleetsFleetIdMembersRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.fleets.withMetadata().postFleetsFleetIdMembers(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.fleets.withMetadata().inviteMember(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

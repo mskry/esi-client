@@ -11,14 +11,29 @@ Get corporation member roles
 
 - Stable ID: `GetCorporationsCorporationIdRoles`
 - HTTP: `GET /corporations/{corporation_id}/roles`
-- Domain method: `client.corporation.getCorporationsCorporationIdRoles(corporationId, options?)`
+- Domain method: `client.corporation.listMemberRoles(corporationId, options?)`
 - Generic call: `client.callOperation("GetCorporationsCorporationIdRoles", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/corporation`
 - Domain index: [corporation](../domains/corporation.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCorporationClient } from '@evespace/esi-client/domains/corporation';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCorporationClient({ token: accessToken });
+
+const corporationId = 98000001;
+
+const data = await client.listMemberRoles(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const corporationId = 98000001;
 
-const data = await client.corporation.getCorporationsCorporationIdRoles(corporationId);
+const data = await client.corporation.listMemberRoles(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCorporationsCorporationIdRoles',
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsCorporationIdRolesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.corporation.withMetadata().getCorporationsCorporationIdRoles(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.corporation.withMetadata().listMemberRoles(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

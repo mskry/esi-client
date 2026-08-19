@@ -13,9 +13,43 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersCharacterIdAttributes`](../operations/GetCharactersCharacterIdAttributes.md) | `GET` | `getCharactersCharacterIdAttributes` | required | none | read | Get character attributes |
-| [`GetCharactersCharacterIdSkillqueue`](../operations/GetCharactersCharacterIdSkillqueue.md) | `GET` | `getCharactersCharacterIdSkillqueue` | required | none | read | Get character's skill queue |
-| [`GetCharactersCharacterIdSkills`](../operations/GetCharactersCharacterIdSkills.md) | `GET` | `getCharactersCharacterIdSkills` | required | none | read | Get character skills |
+| [`GetCharactersCharacterIdAttributes`](../operations/GetCharactersCharacterIdAttributes.md) | `GET` | `getAttributes` | required | none | read | Get character attributes |
+| [`GetCharactersCharacterIdSkillqueue`](../operations/GetCharactersCharacterIdSkillqueue.md) | `GET` | `getSkillQueue` | required | none | read | Get character's skill queue |
+| [`GetCharactersCharacterIdSkills`](../operations/GetCharactersCharacterIdSkills.md) | `GET` | `getSkills` | required | none | read | Get character skills |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createSkillsClient } from '@evespace/esi-client/domains/skills';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createSkillsClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.getAttributes(characterId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.skills.getAttributes(characterId);
+```
 
 ## Shared concepts
 

@@ -11,14 +11,30 @@ Get starbase (POS) detail
 
 - Stable ID: `GetCorporationsCorporationIdStarbasesStarbaseId`
 - HTTP: `GET /corporations/{corporation_id}/starbases/{starbase_id}`
-- Domain method: `client.corporation.getCorporationsCorporationIdStarbasesStarbaseId(corporationId, starbaseId, options)`
+- Domain method: `client.corporation.getStarbase(corporationId, starbaseId, options)`
 - Generic call: `client.callOperation("GetCorporationsCorporationIdStarbasesStarbaseId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/corporation`
 - Domain index: [corporation](../domains/corporation.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCorporationClient } from '@evespace/esi-client/domains/corporation';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCorporationClient({ token: accessToken });
+
+const corporationId = 98000001;
+const starbaseId = 12345;
+
+const data = await client.getStarbase(corporationId, starbaseId, { systemId: 30000142 });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -31,7 +47,7 @@ const client = new EsiClient({ token: accessToken });
 const corporationId = 98000001;
 const starbaseId = 12345;
 
-const data = await client.corporation.getCorporationsCorporationIdStarbasesStarbaseId(corporationId, starbaseId, { systemId: 30000142 });
+const data = await client.corporation.getStarbase(corporationId, starbaseId, { systemId: 30000142 });
 ```
 
 ## Generic-execution snippet
@@ -68,7 +84,7 @@ const response = await client.callOperation('GetCorporationsCorporationIdStarbas
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsCorporationIdStarbasesStarbaseIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.corporation.withMetadata().getCorporationsCorporationIdStarbasesStarbaseId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.corporation.withMetadata().getStarbase(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

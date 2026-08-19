@@ -11,14 +11,27 @@ Get a single killmail
 
 - Stable ID: `GetKillmailsKillmailIdKillmailHash`
 - HTTP: `GET /killmails/{killmail_id}/{killmail_hash}`
-- Domain method: `client.killmails.getKillmailsKillmailIdKillmailHash(killmailId, killmailHash, options?)`
+- Domain method: `client.killmails.get(killmailId, killmailHash, options?)`
 - Generic call: `client.callOperation("GetKillmailsKillmailIdKillmailHash", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/killmails`
 - Domain index: [killmails](../domains/killmails.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createKillmailsClient } from '@evespace/esi-client/domains/killmails';
+
+const client = createKillmailsClient();
+
+const killmailId = 12345;
+const killmailHash = "0000000000000000000000000000000000000000";
+
+const data = await client.get(killmailId, killmailHash);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -28,7 +41,7 @@ const client = new EsiClient();
 const killmailId = 12345;
 const killmailHash = "0000000000000000000000000000000000000000";
 
-const data = await client.killmails.getKillmailsKillmailIdKillmailHash(killmailId, killmailHash);
+const data = await client.killmails.get(killmailId, killmailHash);
 ```
 
 ## Generic-execution snippet
@@ -61,7 +74,7 @@ const response = await client.callOperation('GetKillmailsKillmailIdKillmailHash'
 
 - Request schema: `@evespace/esi-client/schemas` export `GetKillmailsKillmailIdKillmailHashRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.killmails.withMetadata().getKillmailsKillmailIdKillmailHash(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.killmails.withMetadata().get(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

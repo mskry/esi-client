@@ -17,23 +17,23 @@ import {
   type GetCharactersCosmeticsSkinrOutput,
   type GetCosmeticsSkinrInput,
   type GetCosmeticsSkinrOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/cosmetics.js';
 
-export const GetCharactersCosmeticsSkinrDescriptor: OperationExecutionDescriptor<GetCharactersCosmeticsSkinrInput, GetCharactersCosmeticsSkinrOutput> = {
-  operationId: "GetCharactersCosmeticsSkinr",
+export const GetCosmeticsSkinrDescriptor: OperationExecutionDescriptor<GetCosmeticsSkinrInput, GetCosmeticsSkinrOutput> = {
+  operationId: "GetCosmeticsSkinr",
   method: "GET",
-  path: "/characters/{character_id}/cosmetics/skinr",
+  path: "/cosmetics/skinr/{skinr_id}",
   parameters: [
-    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "skinr_id", placement: "path", required: true, schema: { type: "string" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCharactersCosmeticsSkinrRequestSchema,
-  authentication: { scopes: ["esi.cosmetic.char:read"] },
+  requestSchema: GetCosmeticsSkinrRequestSchema,
+  authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetCharactersCosmeticsSkinrStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCosmeticsSkinrStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -57,21 +57,21 @@ export const GetCharactersCosmeticsSkinrComponentsDescriptor: OperationExecution
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetCosmeticsSkinrDescriptor: OperationExecutionDescriptor<GetCosmeticsSkinrInput, GetCosmeticsSkinrOutput> = {
-  operationId: "GetCosmeticsSkinr",
+export const GetCharactersCosmeticsSkinrDescriptor: OperationExecutionDescriptor<GetCharactersCosmeticsSkinrInput, GetCharactersCosmeticsSkinrOutput> = {
+  operationId: "GetCharactersCosmeticsSkinr",
   method: "GET",
-  path: "/cosmetics/skinr/{skinr_id}",
+  path: "/characters/{character_id}/cosmetics/skinr",
   parameters: [
-    { name: "skinr_id", placement: "path", required: true, schema: { type: "string" } },
+    { name: "character_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetCosmeticsSkinrRequestSchema,
-  authentication: null,
+  requestSchema: GetCharactersCosmeticsSkinrRequestSchema,
+  authentication: { scopes: ["esi.cosmetic.char:read"] },
   successResponses: [
-    { status: 200, body: 'json', schema: GetCosmeticsSkinrStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetCharactersCosmeticsSkinrStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

@@ -19,7 +19,7 @@ const characterId = 90000001;
 
 export async function getAuthenticatedCharacterLocation() {
   const client = new EsiClient({ token: requiredAccessToken() });
-  return client.location.getCharactersCharacterIdLocation(characterId);
+  return client.location.get(characterId);
 }
 
 function requiredAccessToken(): string {

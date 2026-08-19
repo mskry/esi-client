@@ -11,14 +11,26 @@ Get planet information
 
 - Stable ID: `GetUniversePlanetsPlanetId`
 - HTTP: `GET /universe/planets/{planet_id}`
-- Domain method: `client.universe.getUniversePlanetsPlanetId(planetId, options?)`
+- Domain method: `client.universe.getPlanet(planetId, options?)`
 - Generic call: `client.callOperation("GetUniversePlanetsPlanetId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/universe`
 - Domain index: [universe](../domains/universe.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createUniverseClient } from '@evespace/esi-client/domains/universe';
+
+const client = createUniverseClient();
+
+const planetId = 12345;
+
+const data = await client.getPlanet(planetId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const planetId = 12345;
 
-const data = await client.universe.getUniversePlanetsPlanetId(planetId);
+const data = await client.universe.getPlanet(planetId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetUniversePlanetsPlanetId', argume
 
 - Request schema: `@evespace/esi-client/schemas` export `GetUniversePlanetsPlanetIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.universe.withMetadata().getUniversePlanetsPlanetId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.universe.withMetadata().getPlanet(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

@@ -3,94 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetWarsDescriptor,
-  GetWarsWarIdDescriptor,
-  GetWarsWarIdKillmailsDescriptor,
-} from '../internal/descriptors/wars.js';
-import type {
-  GetWarsInput,
-  GetWarsOutput,
-  GetWarsWarIdInput,
-  GetWarsWarIdKillmailsInput,
-  GetWarsWarIdKillmailsOutput,
-  GetWarsWarIdOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindWarsDomainClient } from '../internal/domains/wars.js';
+import type { WarsDomainClient } from '../internal/domains/wars-contract.js';
 
-export interface GetWarsOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetWarsInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetWarsInput["header"]>["If-None-Match"];
-  readonly "maxWarId"?: NonNullable<GetWarsInput["query"]>["max_war_id"];
-  readonly "xTenant"?: NonNullable<GetWarsInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/wars-contract.js';
 
-export interface GetWarsWarIdOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetWarsWarIdInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetWarsWarIdInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetWarsWarIdInput["header"]>["X-Tenant"];
-}
-
-export interface GetWarsWarIdKillmailsOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetWarsWarIdKillmailsInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetWarsWarIdKillmailsInput["header"]>["If-None-Match"];
-  readonly "page"?: NonNullable<GetWarsWarIdKillmailsInput["query"]>["page"];
-  readonly "xTenant"?: NonNullable<GetWarsWarIdKillmailsInput["header"]>["X-Tenant"];
-}
-
-export class WarsDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getWars(options?: GetWarsOptions): Promise<GetWarsOutput> {
-    const arguments_: GetWarsInput = { query: { "max_war_id": options?.["maxWarId"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getWarsWarId(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<GetWarsWarIdOutput> {
-    const arguments_: GetWarsWarIdInput = { path: { "war_id": warId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsWarIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getWarsWarIdKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<GetWarsWarIdKillmailsOutput> {
-    const arguments_: GetWarsWarIdKillmailsInput = { path: { "war_id": warId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsWarIdKillmailsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): WarsDomainClientWithMetadata {
-    return new WarsDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class WarsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getWars(options?: GetWarsOptions): Promise<EsiResponse<GetWarsOutput>> {
-    const arguments_: GetWarsInput = { query: { "max_war_id": options?.["maxWarId"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getWarsWarId(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<EsiResponse<GetWarsWarIdOutput>> {
-    const arguments_: GetWarsWarIdInput = { path: { "war_id": warId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsWarIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getWarsWarIdKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<EsiResponse<GetWarsWarIdKillmailsOutput>> {
-    const arguments_: GetWarsWarIdKillmailsInput = { path: { "war_id": warId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsWarIdKillmailsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createWarsClient(options: EsiClientOptions = {}): WarsDomainClient {
+  return bindWarsDomainClient(new EsiClientConfiguration(options));
 }

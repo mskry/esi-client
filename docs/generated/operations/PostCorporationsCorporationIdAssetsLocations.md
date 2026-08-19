@@ -11,14 +11,31 @@ Get corporation asset locations
 
 - Stable ID: `PostCorporationsCorporationIdAssetsLocations`
 - HTTP: `POST /corporations/{corporation_id}/assets/locations`
-- Domain method: `client.assets.postCorporationsCorporationIdAssetsLocations(corporationId, options)`
+- Domain method: `client.assets.lookupCorporationLocations(corporationId, options)`
 - Generic call: `client.callOperation("PostCorporationsCorporationIdAssetsLocations", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/assets`
 - Domain index: [assets](../domains/assets.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createAssetsClient } from '@evespace/esi-client/domains/assets';
+import type { PostCorporationsCorporationIdAssetsLocationsOptions } from '@evespace/esi-client/domains/assets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createAssetsClient({ token: accessToken });
+
+const corporationId = 98000001;
+declare const requestBody: NonNullable<PostCorporationsCorporationIdAssetsLocationsOptions['body']>;
+
+const data = await client.lookupCorporationLocations(corporationId, { body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -32,7 +49,7 @@ const client = new EsiClient({ token: accessToken });
 const corporationId = 98000001;
 declare const requestBody: NonNullable<PostCorporationsCorporationIdAssetsLocationsOptions['body']>;
 
-const data = await client.assets.postCorporationsCorporationIdAssetsLocations(corporationId, { body: requestBody });
+const data = await client.assets.lookupCorporationLocations(corporationId, { body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -68,7 +85,7 @@ const response = await client.callOperation('PostCorporationsCorporationIdAssets
 
 - Request schema: `@evespace/esi-client/schemas` export `PostCorporationsCorporationIdAssetsLocationsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.assets.withMetadata().postCorporationsCorporationIdAssetsLocations(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.assets.withMetadata().lookupCorporationLocations(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

@@ -7,8 +7,9 @@ import { pathToFileURL } from 'node:url';
 import { createOperationAccountingReport, renderGeneratedJson } from './artifacts.mjs';
 import { generatedDocumentationEmitter } from './documentation-emitter.mjs';
 import { generatedExamplesEmitter } from './examples-emitter.mjs';
+import { namingReviewReportPath, renderNamingReviewReport } from './naming-review.mjs';
 import { normalizeOpenApiDocument } from './normalize.mjs';
-import { resolveOperationMetadata } from './operation-metadata.mjs';
+import { loadFacadeCatalog, resolveOperationMetadata } from './operation-metadata.mjs';
 import { generatedPaths, repositoryRoot } from './paths.mjs';
 import { generatedSourceEmitter } from './source-emitter.mjs';
 import { generatedTestsEmitter } from './test-emitter.mjs';
@@ -27,28 +28,36 @@ export async function checkGeneratedOutputs(root = repositoryRoot) {
 
   try {
     const generatedDirectory = join(projectRoot, 'openapi/generated');
-    const [snapshotSource, provenance, compatibilityDate] = await Promise.all([
+    const facadeCatalogPath = join(projectRoot, 'openapi/config/naming-overrides.json');
+    const [snapshotSource, provenance, compatibilityDate, facadeCatalogSource] = await Promise.all([
       readFile(join(generatedDirectory, 'esi-openapi.json'), 'utf8'),
       readFile(join(generatedDirectory, 'provenance.json'), 'utf8').then(JSON.parse),
       readFile(join(projectRoot, 'openapi/compatibility-date.txt'), 'utf8').then((value) =>
         value.trim(),
       ),
+      readFile(facadeCatalogPath, 'utf8'),
     ]);
     const correctedDocument = JSON.parse(snapshotSource);
     const canonicalSnapshot = serializeJson(correctedDocument);
-    assertCommittedProvenance(provenance, compatibilityDate, canonicalSnapshot);
+    assertCommittedSnapshotProvenance(provenance, compatibilityDate, canonicalSnapshot);
 
     const normalizedModel = await normalizeOpenApiDocument(correctedDocument, {
       exclusionsPath: join(projectRoot, 'openapi/config/exclusions.json'),
     });
-    const operationMetadata = await resolveOperationMetadata(normalizedModel, {
-      namingOverridesPath: join(projectRoot, 'openapi/config/naming-overrides.json'),
-      safetyOverridesPath: join(projectRoot, 'openapi/config/safety-overrides.json'),
-    });
+    const [facadeCatalog, operationMetadata] = await Promise.all([
+      loadFacadeCatalog(normalizedModel, facadeCatalogPath),
+      resolveOperationMetadata(normalizedModel, {
+        facadeCatalogPath,
+        safetyOverridesPath: join(projectRoot, 'openapi/config/safety-overrides.json'),
+      }),
+    ]);
+    const namingReviewReport = renderNamingReviewReport(normalizedModel, facadeCatalog, provenance);
+    assertNamingProvenance(provenance, facadeCatalogSource, namingReviewReport);
     const context = Object.freeze({
       compatibilityDate,
       correctedDocument,
       normalizedModel,
+      namingReviewReport,
       operationMetadata,
       outputDirectory: workspace,
       outputPath: (target) => join(workspace, target),
@@ -127,7 +136,7 @@ async function writeOpenApiOutputs(
   ]);
 }
 
-function assertCommittedProvenance(provenance, compatibilityDate, snapshot) {
+function assertCommittedSnapshotProvenance(provenance, compatibilityDate, snapshot) {
   const sha256 = createHash('sha256').update(snapshot).digest('hex');
   if (
     provenance === null ||
@@ -140,6 +149,23 @@ function assertCommittedProvenance(provenance, compatibilityDate, snapshot) {
   ) {
     throw new Error('Committed OpenAPI snapshot and provenance are inconsistent');
   }
+}
+
+function assertNamingProvenance(provenance, facadeCatalogSource, namingReviewReport) {
+  if (
+    provenance.facadeCatalog?.path !== 'openapi/config/naming-overrides.json' ||
+    provenance.facadeCatalog?.sha256 !== hashText(facadeCatalogSource) ||
+    provenance.facadeReviewReport?.path !== namingReviewReportPath ||
+    provenance.facadeReviewReport?.sha256 !== hashText(namingReviewReport)
+  ) {
+    throw new Error(
+      'Committed facade catalog, naming review report, and provenance are inconsistent',
+    );
+  }
+}
+
+function hashText(value) {
+  return createHash('sha256').update(value).digest('hex');
 }
 
 async function snapshotPaths(root, targets) {

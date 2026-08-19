@@ -13,12 +13,48 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersStructuresMercenaryDensDetail`](../operations/GetCharactersStructuresMercenaryDensDetail.md) | `GET` | `getCharactersStructuresMercenaryDensDetail` | required | none | read | Get Mercenary Den details |
-| [`GetCharactersStructuresMercenaryDensListing`](../operations/GetCharactersStructuresMercenaryDensListing.md) | `GET` | `getCharactersStructuresMercenaryDensListing` | required | none | read | List Mercenary Dens |
-| [`GetCorporationsStructuresSkyhooksDetail`](../operations/GetCorporationsStructuresSkyhooksDetail.md) | `GET` | `getCorporationsStructuresSkyhooksDetail` | required | none | read | Get Skyhook details |
-| [`GetCorporationsStructuresSkyhooksListing`](../operations/GetCorporationsStructuresSkyhooksListing.md) | `GET` | `getCorporationsStructuresSkyhooksListing` | required | none | read | List Skyhooks |
-| [`GetCorporationsStructuresSovereigntyHubsDetail`](../operations/GetCorporationsStructuresSovereigntyHubsDetail.md) | `GET` | `getCorporationsStructuresSovereigntyHubsDetail` | required | none | read | Get Sovereignty Hub details |
-| [`GetCorporationsStructuresSovereigntyHubsListing`](../operations/GetCorporationsStructuresSovereigntyHubsListing.md) | `GET` | `getCorporationsStructuresSovereigntyHubsListing` | required | none | read | List Sovereignty Hubs |
+| [`GetCharactersStructuresMercenaryDensDetail`](../operations/GetCharactersStructuresMercenaryDensDetail.md) | `GET` | `getMercenaryDen` | required | none | read | Get Mercenary Den details |
+| [`GetCharactersStructuresMercenaryDensListing`](../operations/GetCharactersStructuresMercenaryDensListing.md) | `GET` | `listMercenaryDens` | required | none | read | List Mercenary Dens |
+| [`GetCorporationsStructuresSkyhooksDetail`](../operations/GetCorporationsStructuresSkyhooksDetail.md) | `GET` | `getSkyhook` | required | none | read | Get Skyhook details |
+| [`GetCorporationsStructuresSkyhooksListing`](../operations/GetCorporationsStructuresSkyhooksListing.md) | `GET` | `listSkyhooks` | required | none | read | List Skyhooks |
+| [`GetCorporationsStructuresSovereigntyHubsDetail`](../operations/GetCorporationsStructuresSovereigntyHubsDetail.md) | `GET` | `getSovereigntyHub` | required | none | read | Get Sovereignty Hub details |
+| [`GetCorporationsStructuresSovereigntyHubsListing`](../operations/GetCorporationsStructuresSovereigntyHubsListing.md) | `GET` | `listSovereigntyHubs` | required | none | read | List Sovereignty Hubs |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createStructuresClient } from '@evespace/esi-client/domains/structures';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createStructuresClient({ token: accessToken });
+
+const characterId = 90000001;
+const mercenaryDenId = 1000000000001;
+
+const data = await client.getMercenaryDen(characterId, mercenaryDenId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+const mercenaryDenId = 1000000000001;
+
+const data = await client.structures.getMercenaryDen(characterId, mercenaryDenId);
+```
 
 ## Shared concepts
 

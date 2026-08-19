@@ -11,14 +11,29 @@ Overview of a corporation involved in faction warfare
 
 - Stable ID: `GetCorporationsCorporationIdFwStats`
 - HTTP: `GET /corporations/{corporation_id}/fw/stats`
-- Domain method: `client.factionWarfare.getCorporationsCorporationIdFwStats(corporationId, options?)`
+- Domain method: `client.factionWarfare.getCorporationStats(corporationId, options?)`
 - Generic call: `client.callOperation("GetCorporationsCorporationIdFwStats", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/faction-warfare`
 - Domain index: [factionWarfare](../domains/faction-warfare.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createFactionWarfareClient } from '@evespace/esi-client/domains/faction-warfare';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createFactionWarfareClient({ token: accessToken });
+
+const corporationId = 98000001;
+
+const data = await client.getCorporationStats(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const corporationId = 98000001;
 
-const data = await client.factionWarfare.getCorporationsCorporationIdFwStats(corporationId);
+const data = await client.factionWarfare.getCorporationStats(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCorporationsCorporationIdFwStats
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsCorporationIdFwStatsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.factionWarfare.withMetadata().getCorporationsCorporationIdFwStats(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.factionWarfare.withMetadata().getCorporationStats(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

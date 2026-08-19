@@ -13,11 +13,35 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetDogmaAttributes`](../operations/GetDogmaAttributes.md) | `GET` | `getDogmaAttributes` | public | none | read | Get attributes |
-| [`GetDogmaAttributesAttributeId`](../operations/GetDogmaAttributesAttributeId.md) | `GET` | `getDogmaAttributesAttributeId` | public | none | read | Get attribute information |
-| [`GetDogmaDynamicItemsTypeIdItemId`](../operations/GetDogmaDynamicItemsTypeIdItemId.md) | `GET` | `getDogmaDynamicItemsTypeIdItemId` | public | none | read | Get dynamic item information |
-| [`GetDogmaEffects`](../operations/GetDogmaEffects.md) | `GET` | `getDogmaEffects` | public | none | read | Get effects |
-| [`GetDogmaEffectsEffectId`](../operations/GetDogmaEffectsEffectId.md) | `GET` | `getDogmaEffectsEffectId` | public | none | read | Get effect information |
+| [`GetDogmaAttributes`](../operations/GetDogmaAttributes.md) | `GET` | `listAttributes` | public | none | read | Get attributes |
+| [`GetDogmaAttributesAttributeId`](../operations/GetDogmaAttributesAttributeId.md) | `GET` | `getAttribute` | public | none | read | Get attribute information |
+| [`GetDogmaDynamicItemsTypeIdItemId`](../operations/GetDogmaDynamicItemsTypeIdItemId.md) | `GET` | `getDynamicItem` | public | none | read | Get dynamic item information |
+| [`GetDogmaEffects`](../operations/GetDogmaEffects.md) | `GET` | `listEffects` | public | none | read | Get effects |
+| [`GetDogmaEffectsEffectId`](../operations/GetDogmaEffectsEffectId.md) | `GET` | `getEffect` | public | none | read | Get effect information |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createDogmaClient } from '@evespace/esi-client/domains/dogma';
+
+const client = createDogmaClient();
+
+const data = await client.listAttributes();
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const data = await client.dogma.listAttributes();
+```
 
 ## Shared concepts
 

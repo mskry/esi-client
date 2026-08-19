@@ -13,7 +13,7 @@ import {
   type GetCharactersCharacterIdLoyaltyPointsOutput,
   type GetLoyaltyStoresCorporationIdOffersInput,
   type GetLoyaltyStoresCorporationIdOffersOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/loyalty.js';
 
 export const GetCharactersCharacterIdLoyaltyPointsDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdLoyaltyPointsInput, GetCharactersCharacterIdLoyaltyPointsOutput> = {
   operationId: "GetCharactersCharacterIdLoyaltyPoints",

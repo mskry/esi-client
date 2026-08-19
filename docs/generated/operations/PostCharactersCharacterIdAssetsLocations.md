@@ -11,14 +11,31 @@ Get character asset locations
 
 - Stable ID: `PostCharactersCharacterIdAssetsLocations`
 - HTTP: `POST /characters/{character_id}/assets/locations`
-- Domain method: `client.assets.postCharactersCharacterIdAssetsLocations(characterId, options)`
+- Domain method: `client.assets.lookupCharacterLocations(characterId, options)`
 - Generic call: `client.callOperation("PostCharactersCharacterIdAssetsLocations", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/assets`
 - Domain index: [assets](../domains/assets.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createAssetsClient } from '@evespace/esi-client/domains/assets';
+import type { PostCharactersCharacterIdAssetsLocationsOptions } from '@evespace/esi-client/domains/assets';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createAssetsClient({ token: accessToken });
+
+const characterId = 90000001;
+declare const requestBody: NonNullable<PostCharactersCharacterIdAssetsLocationsOptions['body']>;
+
+const data = await client.lookupCharacterLocations(characterId, { body: requestBody });
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -32,7 +49,7 @@ const client = new EsiClient({ token: accessToken });
 const characterId = 90000001;
 declare const requestBody: NonNullable<PostCharactersCharacterIdAssetsLocationsOptions['body']>;
 
-const data = await client.assets.postCharactersCharacterIdAssetsLocations(characterId, { body: requestBody });
+const data = await client.assets.lookupCharacterLocations(characterId, { body: requestBody });
 ```
 
 ## Generic-execution snippet
@@ -68,7 +85,7 @@ const response = await client.callOperation('PostCharactersCharacterIdAssetsLoca
 
 - Request schema: `@evespace/esi-client/schemas` export `PostCharactersCharacterIdAssetsLocationsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.assets.withMetadata().postCharactersCharacterIdAssetsLocations(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.assets.withMetadata().lookupCharacterLocations(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

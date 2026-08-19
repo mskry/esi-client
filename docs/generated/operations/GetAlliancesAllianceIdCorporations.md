@@ -11,14 +11,26 @@ List alliance's corporations
 
 - Stable ID: `GetAlliancesAllianceIdCorporations`
 - HTTP: `GET /alliances/{alliance_id}/corporations`
-- Domain method: `client.alliance.getAlliancesAllianceIdCorporations(allianceId, options?)`
+- Domain method: `client.alliance.listCorporations(allianceId, options?)`
 - Generic call: `client.callOperation("GetAlliancesAllianceIdCorporations", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/alliance`
 - Domain index: [alliance](../domains/alliance.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createAllianceClient } from '@evespace/esi-client/domains/alliance';
+
+const client = createAllianceClient();
+
+const allianceId = 99000001;
+
+const data = await client.listCorporations(allianceId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const allianceId = 99000001;
 
-const data = await client.alliance.getAlliancesAllianceIdCorporations(allianceId);
+const data = await client.alliance.listCorporations(allianceId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetAlliancesAllianceIdCorporations'
 
 - Request schema: `@evespace/esi-client/schemas` export `GetAlliancesAllianceIdCorporationsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.alliance.withMetadata().getAlliancesAllianceIdCorporations(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.alliance.withMetadata().listCorporations(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

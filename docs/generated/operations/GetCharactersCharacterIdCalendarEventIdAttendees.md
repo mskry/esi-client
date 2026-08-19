@@ -11,14 +11,30 @@ Get attendees
 
 - Stable ID: `GetCharactersCharacterIdCalendarEventIdAttendees`
 - HTTP: `GET /characters/{character_id}/calendar/{event_id}/attendees`
-- Domain method: `client.calendar.getCharactersCharacterIdCalendarEventIdAttendees(characterId, eventId, options?)`
+- Domain method: `client.calendar.listEventAttendees(characterId, eventId, options?)`
 - Generic call: `client.callOperation("GetCharactersCharacterIdCalendarEventIdAttendees", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/calendar`
 - Domain index: [calendar](../domains/calendar.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCalendarClient } from '@evespace/esi-client/domains/calendar';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCalendarClient({ token: accessToken });
+
+const characterId = 90000001;
+const eventId = 12345;
+
+const data = await client.listEventAttendees(characterId, eventId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -31,7 +47,7 @@ const client = new EsiClient({ token: accessToken });
 const characterId = 90000001;
 const eventId = 12345;
 
-const data = await client.calendar.getCharactersCharacterIdCalendarEventIdAttendees(characterId, eventId);
+const data = await client.calendar.listEventAttendees(characterId, eventId);
 ```
 
 ## Generic-execution snippet
@@ -67,7 +83,7 @@ const response = await client.callOperation('GetCharactersCharacterIdCalendarEve
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersCharacterIdCalendarEventIdAttendeesRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.calendar.withMetadata().getCharactersCharacterIdCalendarEventIdAttendees(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.calendar.withMetadata().listEventAttendees(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

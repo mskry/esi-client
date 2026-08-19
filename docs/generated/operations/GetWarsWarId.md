@@ -11,14 +11,26 @@ Get war information
 
 - Stable ID: `GetWarsWarId`
 - HTTP: `GET /wars/{war_id}`
-- Domain method: `client.wars.getWarsWarId(warId, options?)`
+- Domain method: `client.wars.get(warId, options?)`
 - Generic call: `client.callOperation("GetWarsWarId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/wars`
 - Domain index: [wars](../domains/wars.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createWarsClient } from '@evespace/esi-client/domains/wars';
+
+const client = createWarsClient();
+
+const warId = 12345;
+
+const data = await client.get(warId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const warId = 12345;
 
-const data = await client.wars.getWarsWarId(warId);
+const data = await client.wars.get(warId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetWarsWarId', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetWarsWarIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.wars.withMetadata().getWarsWarId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.wars.withMetadata().get(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

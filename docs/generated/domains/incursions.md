@@ -13,7 +13,31 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetIncursions`](../operations/GetIncursions.md) | `GET` | `getIncursions` | public | none | read | List incursions |
+| [`GetIncursions`](../operations/GetIncursions.md) | `GET` | `list` | public | none | read | List incursions |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createIncursionsClient } from '@evespace/esi-client/domains/incursions';
+
+const client = createIncursionsClient();
+
+const data = await client.list();
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const client = new EsiClient();
+
+const data = await client.incursions.list();
+```
 
 ## Shared concepts
 

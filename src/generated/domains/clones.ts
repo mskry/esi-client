@@ -3,72 +3,13 @@
 // Specification SHA-256: d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599.
 // DO NOT EDIT.
 
-import type { EsiClientConfiguration } from '../../client/configuration.js';
-import { executeOperation } from '../../client/execute.js';
-import type { EsiResponse } from '../../client/response.js';
-import {
-  GetCharactersCharacterIdClonesDescriptor,
-  GetCharactersCharacterIdImplantsDescriptor,
-} from '../internal/descriptors/clones.js';
-import type {
-  GetCharactersCharacterIdClonesInput,
-  GetCharactersCharacterIdClonesOutput,
-  GetCharactersCharacterIdImplantsInput,
-  GetCharactersCharacterIdImplantsOutput,
-} from '../schemas/operations.js';
+import { EsiClientConfiguration } from '../../client/configuration.js';
+import type { EsiClientOptions } from '../../client/options.js';
+import { bindClonesDomainClient } from '../internal/domains/clones.js';
+import type { ClonesDomainClient } from '../internal/domains/clones-contract.js';
 
-export interface GetCharactersCharacterIdClonesOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdClonesInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdClonesInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdClonesInput["header"]>["X-Tenant"];
-}
+export * from '../internal/domains/clones-contract.js';
 
-export interface GetCharactersCharacterIdImplantsOptions {
-  readonly "compatibilityDate"?: string;
-  readonly "ifModifiedSince"?: NonNullable<GetCharactersCharacterIdImplantsInput["header"]>["If-Modified-Since"];
-  readonly "ifNoneMatch"?: NonNullable<GetCharactersCharacterIdImplantsInput["header"]>["If-None-Match"];
-  readonly "xTenant"?: NonNullable<GetCharactersCharacterIdImplantsInput["header"]>["X-Tenant"];
-}
-
-export class ClonesDomainClient {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdClones(characterId: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions): Promise<GetCharactersCharacterIdClonesOutput> {
-    const arguments_: GetCharactersCharacterIdClonesInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdClonesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCharactersCharacterIdImplants(characterId: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions): Promise<GetCharactersCharacterIdImplantsOutput> {
-    const arguments_: GetCharactersCharacterIdImplantsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdImplantsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): ClonesDomainClientWithMetadata {
-    return new ClonesDomainClientWithMetadata(this.#configuration);
-  }
-}
-
-export class ClonesDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharactersCharacterIdClones(characterId: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions): Promise<EsiResponse<GetCharactersCharacterIdClonesOutput>> {
-    const arguments_: GetCharactersCharacterIdClonesInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdClonesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
-
-  getCharactersCharacterIdImplants(characterId: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions): Promise<EsiResponse<GetCharactersCharacterIdImplantsOutput>> {
-    const arguments_: GetCharactersCharacterIdImplantsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdImplantsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
-  }
+export function createClonesClient(options: EsiClientOptions = {}): ClonesDomainClient {
+  return bindClonesDomainClient(new EsiClientConfiguration(options));
 }

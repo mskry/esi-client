@@ -11,14 +11,26 @@ Get schematic information
 
 - Stable ID: `GetUniverseSchematicsSchematicId`
 - HTTP: `GET /universe/schematics/{schematic_id}`
-- Domain method: `client.planetaryInteraction.getUniverseSchematicsSchematicId(schematicId, options?)`
+- Domain method: `client.planetaryInteraction.getSchematic(schematicId, options?)`
 - Generic call: `client.callOperation("GetUniverseSchematicsSchematicId", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/planetary-interaction`
 - Domain index: [planetaryInteraction](../domains/planetary-interaction.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createPlanetaryInteractionClient } from '@evespace/esi-client/domains/planetary-interaction';
+
+const client = createPlanetaryInteractionClient();
+
+const schematicId = 12345;
+
+const data = await client.getSchematic(schematicId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -27,7 +39,7 @@ const client = new EsiClient();
 
 const schematicId = 12345;
 
-const data = await client.planetaryInteraction.getUniverseSchematicsSchematicId(schematicId);
+const data = await client.planetaryInteraction.getSchematic(schematicId);
 ```
 
 ## Generic-execution snippet
@@ -58,7 +70,7 @@ const response = await client.callOperation('GetUniverseSchematicsSchematicId', 
 
 - Request schema: `@evespace/esi-client/schemas` export `GetUniverseSchematicsSchematicIdRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.planetaryInteraction.withMetadata().getUniverseSchematicsSchematicId(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.planetaryInteraction.withMetadata().getSchematic(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

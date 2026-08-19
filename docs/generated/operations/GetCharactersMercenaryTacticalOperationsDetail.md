@@ -11,14 +11,30 @@ Get Mercenary Tactical Operation details
 
 - Stable ID: `GetCharactersMercenaryTacticalOperationsDetail`
 - HTTP: `GET /characters/{character_id}/mercenary-tactical-operations/{operation_id}`
-- Domain method: `client.activities.getCharactersMercenaryTacticalOperationsDetail(characterId, operationId, options?)`
+- Domain method: `client.activities.getMercenaryTacticalOperation(characterId, operationId, options?)`
 - Generic call: `client.callOperation("GetCharactersMercenaryTacticalOperationsDetail", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/activities`
 - Domain index: [activities](../domains/activities.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createActivitiesClient } from '@evespace/esi-client/domains/activities';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createActivitiesClient({ token: accessToken });
+
+const characterId = 90000001;
+const operationId = "00000000-0000-4000-8000-000000000000";
+
+const data = await client.getMercenaryTacticalOperation(characterId, operationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -31,7 +47,7 @@ const client = new EsiClient({ token: accessToken });
 const characterId = 90000001;
 const operationId = "00000000-0000-4000-8000-000000000000";
 
-const data = await client.activities.getCharactersMercenaryTacticalOperationsDetail(characterId, operationId);
+const data = await client.activities.getMercenaryTacticalOperation(characterId, operationId);
 ```
 
 ## Generic-execution snippet
@@ -67,7 +83,7 @@ const response = await client.callOperation('GetCharactersMercenaryTacticalOpera
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersMercenaryTacticalOperationsDetailRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.activities.withMetadata().getCharactersMercenaryTacticalOperationsDetail(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.activities.withMetadata().getMercenaryTacticalOperation(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

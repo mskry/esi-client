@@ -18,7 +18,7 @@ import { EsiClient } from '@evespace/esi-client';
 const client = new EsiClient();
 
 export async function getMarketPricesWithMetadata() {
-  const response = await client.market.withMetadata().getMarketsPrices();
+  const response = await client.market.withMetadata().listPrices();
   return {
     prices: response.data,
     status: response.meta.status,

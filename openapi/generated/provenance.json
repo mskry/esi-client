@@ -4,6 +4,14 @@
     "contracts-public-items-204-content"
   ],
   "compatibilityDate": "2026-08-18",
+  "facadeCatalog": {
+    "path": "openapi/config/naming-overrides.json",
+    "sha256": "9a11ed7f34891dba7a3a77419cb26729c92837a001a6d6102b55a252381d73fd"
+  },
+  "facadeReviewReport": {
+    "path": "docs/generated/facade-naming-review.md",
+    "sha256": "b18b6a4c46fb09220b9eae4fd539a400fd34db7a610a2c40d44c4f83a6f1d110"
+  },
   "sha256": "d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599",
   "sourceSha256": "d1da68ddc104ff09412f161c21eb1e8cdf9d08261a72b2cac842f2a5e8ba74e9",
   "specificationUrl": "https://esi.evetech.net/meta/openapi.json"

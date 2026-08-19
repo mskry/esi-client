@@ -14,9 +14,11 @@ import type {
 import type { EmitterContext } from '../scripts/generate/orchestrate.mjs';
 import { createGeneratedSourceEmitter } from '../scripts/generate/source-emitter.mjs';
 import {
+  createSchemaDependencyModel,
   emitZodSchemaSource,
   emitZodSchemaExpression,
   renderZodOperationSchemaModule,
+  renderZodModelDependencyModule,
   renderZodSchemaContractsModule,
   renderZodSchemaModule,
   ZodSchemaEmissionError,
@@ -267,6 +269,67 @@ describe('Zod schema emitter', () => {
     expect(first).toContain('"body": z.string().optional()');
   });
 
+  it('computes deterministic transitive model and domain dependency closures', () => {
+    const models = [
+      model('Leaf', { type: 'string' }),
+      model('Branch', {
+        type: 'object',
+        properties: { leaf: { $ref: '#/components/schemas/Leaf' } },
+      }),
+      model('Root', {
+        type: 'array',
+        items: { $ref: '#/components/schemas/Branch' },
+      }),
+    ];
+    const operation = makeOperation('get_tree', {
+      successResponses: [response('200', { $ref: '#/components/schemas/Root' })],
+    });
+    const metadata = [
+      {
+        operationId: 'get_tree',
+        domain: 'trees',
+        method: 'get',
+        classification: 'read' as const,
+        safetyOverrideReason: null,
+      },
+    ];
+
+    const first = createSchemaDependencyModel(models, [operation], metadata);
+    const second = createSchemaDependencyModel(
+      [models[2], models[1], models[0]],
+      [operation],
+      metadata,
+    );
+
+    expect(second).toEqual(first);
+    expect(first.models.find(({ model: entry }) => entry.name === 'Root')).toMatchObject({
+      dependencies: ['Branch', 'Leaf'],
+      directDependencies: ['Branch'],
+      fileName: 'root',
+    });
+    expect(first.operations[0]).toMatchObject({
+      dependencies: ['Branch', 'Leaf', 'Root'],
+      directDependencies: ['Root'],
+      domain: 'trees',
+    });
+    expect(first.domains[0]).toMatchObject({
+      dependencies: ['Branch', 'Leaf', 'Root'],
+      fileName: 'trees',
+    });
+    expect(renderZodModelDependencyModule(models[2], models, provenance)).toContain(
+      "from './branch.js'",
+    );
+  });
+
+  it('rejects unresolved granular dependencies and duplicate operation exports', () => {
+    expect(() =>
+      createSchemaDependencyModel([model('Broken', { $ref: '#/components/schemas/Missing' })], []),
+    ).toThrow('Unresolved local component reference');
+    expect(() =>
+      createSchemaDependencyModel([], [makeOperation('get-item'), makeOperation('get item')]),
+    ).toThrow('Operation schema name collision');
+  });
+
   it.each([
     [
       'conflicting JSON request representations',
@@ -332,11 +395,17 @@ describe('Zod schema emitter', () => {
       compatibilityDate: provenance.compatibilityDate,
       correctedDocument: {},
       normalizedModel: normalized,
+      namingReviewReport: 'test naming review\n',
       operationMetadata,
       outputDirectory,
       provenance: {
         ...provenance,
         appliedCorrections: [],
+        facadeCatalog: { path: 'openapi/config/naming-overrides.json', sha256: 'd'.repeat(64) },
+        facadeReviewReport: {
+          path: 'docs/generated/facade-naming-review.md',
+          sha256: 'e'.repeat(64),
+        },
         sourceSha256: 'c'.repeat(64),
         specificationUrl: 'https://example.test/openapi.json',
       },
@@ -356,9 +425,15 @@ describe('Zod schema emitter', () => {
     ]);
     await expect(
       readFile(join(outputDirectory, 'src/generated/schemas/models.ts'), 'utf8'),
+    ).resolves.toContain("export * from './models/item.js';");
+    await expect(
+      readFile(join(outputDirectory, 'src/generated/schemas/models/item.ts'), 'utf8'),
     ).resolves.toContain('export const ItemSchema');
     await expect(
       readFile(join(outputDirectory, 'src/generated/schemas/operations.ts'), 'utf8'),
+    ).resolves.toContain("export * from './operations/items.js';");
+    await expect(
+      readFile(join(outputDirectory, 'src/generated/schemas/operations/items.ts'), 'utf8'),
     ).resolves.toContain('export const ListItemsRequestSchema');
     await expect(
       readFile(join(outputDirectory, 'src/generated/schemas/index.ts'), 'utf8'),
@@ -372,12 +447,16 @@ describe('Zod schema emitter', () => {
 
     const directDirectory = join(directory, 'direct');
     await mkdir(directDirectory, { recursive: true });
-    await expect(emitZodSchemaSource(context, directDirectory)).resolves.toEqual([
-      'schemas/contracts.ts',
-      'schemas/index.ts',
-      'schemas/models.ts',
-      'schemas/operations.ts',
-    ]);
+    await expect(emitZodSchemaSource(context, directDirectory)).resolves.toEqual(
+      expect.arrayContaining([
+        'schemas/contracts.ts',
+        'schemas/index.ts',
+        'schemas/models/item.ts',
+        'schemas/models.ts',
+        'schemas/operations/items.ts',
+        'schemas/operations.ts',
+      ]),
+    );
     await expectIsolatedDeclarationsCompilation(directDirectory);
 
     await writeFile(

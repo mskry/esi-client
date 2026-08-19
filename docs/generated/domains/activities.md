@@ -13,9 +13,45 @@ DO NOT EDIT.
 
 | Stable ID | HTTP | Domain method | Auth | Pagination | Safety | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| [`GetCharactersMercenaryTacticalOperationsDetail`](../operations/GetCharactersMercenaryTacticalOperationsDetail.md) | `GET` | `getCharactersMercenaryTacticalOperationsDetail` | required | none | read | Get Mercenary Tactical Operation details |
-| [`GetCharactersMercenaryTacticalOperationsListing`](../operations/GetCharactersMercenaryTacticalOperationsListing.md) | `GET` | `getCharactersMercenaryTacticalOperationsListing` | required | none | read | List Mercenary Tactical Operations |
-| [`GetSkyhooksRaidable`](../operations/GetSkyhooksRaidable.md) | `GET` | `getSkyhooksRaidable` | public | none | read | List (upcoming) raidable Skyhooks |
+| [`GetCharactersMercenaryTacticalOperationsDetail`](../operations/GetCharactersMercenaryTacticalOperationsDetail.md) | `GET` | `getMercenaryTacticalOperation` | required | none | read | Get Mercenary Tactical Operation details |
+| [`GetCharactersMercenaryTacticalOperationsListing`](../operations/GetCharactersMercenaryTacticalOperationsListing.md) | `GET` | `listMercenaryTacticalOperations` | required | none | read | List Mercenary Tactical Operations |
+| [`GetSkyhooksRaidable`](../operations/GetSkyhooksRaidable.md) | `GET` | `listRaidableSkyhooks` | public | none | read | List (upcoming) raidable Skyhooks |
+
+## Standalone domain factory
+
+Use the domain subpath when this is the only ESI domain the module needs:
+
+```ts
+import { createActivitiesClient } from '@evespace/esi-client/domains/activities';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createActivitiesClient({ token: accessToken });
+
+const characterId = 90000001;
+const operationId = "00000000-0000-4000-8000-000000000000";
+
+const data = await client.getMercenaryTacticalOperation(characterId, operationId);
+```
+
+## Aggregate client
+
+Use the root client when one configuration should serve multiple domains:
+
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+
+const characterId = 90000001;
+const operationId = "00000000-0000-4000-8000-000000000000";
+
+const data = await client.activities.getMercenaryTacticalOperation(characterId, operationId);
+```
 
 ## Shared concepts
 

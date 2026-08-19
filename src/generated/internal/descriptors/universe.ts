@@ -125,25 +125,7 @@ import {
   type PostUniverseIdsOutput,
   type PostUniverseNamesInput,
   type PostUniverseNamesOutput,
-} from '../../schemas/operations.js';
-
-export const GetUniverseAncestriesDescriptor: OperationExecutionDescriptor<GetUniverseAncestriesInput, GetUniverseAncestriesOutput> = {
-  operationId: "GetUniverseAncestries",
-  method: "GET",
-  path: "/universe/ancestries",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseAncestriesRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseAncestriesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
+} from '../../schemas/operations/universe.js';
 
 export const GetUniverseAsteroidBeltsAsteroidBeltIdDescriptor: OperationExecutionDescriptor<GetUniverseAsteroidBeltsAsteroidBeltIdInput, GetUniverseAsteroidBeltsAsteroidBeltIdOutput> = {
   operationId: "GetUniverseAsteroidBeltsAsteroidBeltId",
@@ -160,79 +142,6 @@ export const GetUniverseAsteroidBeltsAsteroidBeltIdDescriptor: OperationExecutio
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetUniverseAsteroidBeltsAsteroidBeltIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseBloodlinesDescriptor: OperationExecutionDescriptor<GetUniverseBloodlinesInput, GetUniverseBloodlinesOutput> = {
-  operationId: "GetUniverseBloodlines",
-  method: "GET",
-  path: "/universe/bloodlines",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseBloodlinesRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseBloodlinesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseCategoriesDescriptor: OperationExecutionDescriptor<GetUniverseCategoriesInput, GetUniverseCategoriesOutput> = {
-  operationId: "GetUniverseCategories",
-  method: "GET",
-  path: "/universe/categories",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseCategoriesRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseCategoriesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseCategoriesCategoryIdDescriptor: OperationExecutionDescriptor<GetUniverseCategoriesCategoryIdInput, GetUniverseCategoriesCategoryIdOutput> = {
-  operationId: "GetUniverseCategoriesCategoryId",
-  method: "GET",
-  path: "/universe/categories/{category_id}",
-  parameters: [
-    { name: "category_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseCategoriesCategoryIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseCategoriesCategoryIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseConstellationsDescriptor: OperationExecutionDescriptor<GetUniverseConstellationsInput, GetUniverseConstellationsOutput> = {
-  operationId: "GetUniverseConstellations",
-  method: "GET",
-  path: "/universe/constellations",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseConstellationsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseConstellationsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -256,42 +165,6 @@ export const GetUniverseConstellationsConstellationIdDescriptor: OperationExecut
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetUniverseFactionsDescriptor: OperationExecutionDescriptor<GetUniverseFactionsInput, GetUniverseFactionsOutput> = {
-  operationId: "GetUniverseFactions",
-  method: "GET",
-  path: "/universe/factions",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseFactionsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseFactionsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseGraphicsDescriptor: OperationExecutionDescriptor<GetUniverseGraphicsInput, GetUniverseGraphicsOutput> = {
-  operationId: "GetUniverseGraphics",
-  method: "GET",
-  path: "/universe/graphics",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseGraphicsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseGraphicsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetUniverseGraphicsGraphicIdDescriptor: OperationExecutionDescriptor<GetUniverseGraphicsGraphicIdInput, GetUniverseGraphicsGraphicIdOutput> = {
   operationId: "GetUniverseGraphicsGraphicId",
   method: "GET",
@@ -311,21 +184,21 @@ export const GetUniverseGraphicsGraphicIdDescriptor: OperationExecutionDescripto
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetUniverseGroupsDescriptor: OperationExecutionDescriptor<GetUniverseGroupsInput, GetUniverseGroupsOutput> = {
-  operationId: "GetUniverseGroups",
+export const GetUniverseCategoriesCategoryIdDescriptor: OperationExecutionDescriptor<GetUniverseCategoriesCategoryIdInput, GetUniverseCategoriesCategoryIdOutput> = {
+  operationId: "GetUniverseCategoriesCategoryId",
   method: "GET",
-  path: "/universe/groups",
+  path: "/universe/categories/{category_id}",
   parameters: [
-    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "category_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetUniverseGroupsRequestSchema,
+  requestSchema: GetUniverseCategoriesCategoryIdRequestSchema,
   authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseGroupsStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetUniverseCategoriesCategoryIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -387,6 +260,285 @@ export const GetUniversePlanetsPlanetIdDescriptor: OperationExecutionDescriptor<
   transport: { compatibilityDateOverride: true },
 };
 
+export const GetUniverseRegionsRegionIdDescriptor: OperationExecutionDescriptor<GetUniverseRegionsRegionIdInput, GetUniverseRegionsRegionIdOutput> = {
+  operationId: "GetUniverseRegionsRegionId",
+  method: "GET",
+  path: "/universe/regions/{region_id}",
+  parameters: [
+    { name: "region_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseRegionsRegionIdRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseRegionsRegionIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseSystemsSystemIdDescriptor: OperationExecutionDescriptor<GetUniverseSystemsSystemIdInput, GetUniverseSystemsSystemIdOutput> = {
+  operationId: "GetUniverseSystemsSystemId",
+  method: "GET",
+  path: "/universe/systems/{system_id}",
+  parameters: [
+    { name: "system_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseSystemsSystemIdRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseSystemsSystemIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseStarsStarIdDescriptor: OperationExecutionDescriptor<GetUniverseStarsStarIdInput, GetUniverseStarsStarIdOutput> = {
+  operationId: "GetUniverseStarsStarId",
+  method: "GET",
+  path: "/universe/stars/{star_id}",
+  parameters: [
+    { name: "star_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseStarsStarIdRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseStarsStarIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseStargatesStargateIdDescriptor: OperationExecutionDescriptor<GetUniverseStargatesStargateIdInput, GetUniverseStargatesStargateIdOutput> = {
+  operationId: "GetUniverseStargatesStargateId",
+  method: "GET",
+  path: "/universe/stargates/{stargate_id}",
+  parameters: [
+    { name: "stargate_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseStargatesStargateIdRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseStargatesStargateIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseStationsStationIdDescriptor: OperationExecutionDescriptor<GetUniverseStationsStationIdInput, GetUniverseStationsStationIdOutput> = {
+  operationId: "GetUniverseStationsStationId",
+  method: "GET",
+  path: "/universe/stations/{station_id}",
+  parameters: [
+    { name: "station_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseStationsStationIdRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseStationsStationIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseStructuresStructureIdDescriptor: OperationExecutionDescriptor<GetUniverseStructuresStructureIdInput, GetUniverseStructuresStructureIdOutput> = {
+  operationId: "GetUniverseStructuresStructureId",
+  method: "GET",
+  path: "/universe/structures/{structure_id}",
+  parameters: [
+    { name: "structure_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseStructuresStructureIdRequestSchema,
+  authentication: { scopes: ["esi-universe.read_structures.v1"] },
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseStructuresStructureIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseTypesTypeIdDescriptor: OperationExecutionDescriptor<GetUniverseTypesTypeIdInput, GetUniverseTypesTypeIdOutput> = {
+  operationId: "GetUniverseTypesTypeId",
+  method: "GET",
+  path: "/universe/types/{type_id}",
+  parameters: [
+    { name: "type_id", placement: "path", required: true, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseTypesTypeIdRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseTypesTypeIdStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseAncestriesDescriptor: OperationExecutionDescriptor<GetUniverseAncestriesInput, GetUniverseAncestriesOutput> = {
+  operationId: "GetUniverseAncestries",
+  method: "GET",
+  path: "/universe/ancestries",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseAncestriesRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseAncestriesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseBloodlinesDescriptor: OperationExecutionDescriptor<GetUniverseBloodlinesInput, GetUniverseBloodlinesOutput> = {
+  operationId: "GetUniverseBloodlines",
+  method: "GET",
+  path: "/universe/bloodlines",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseBloodlinesRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseBloodlinesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseConstellationsDescriptor: OperationExecutionDescriptor<GetUniverseConstellationsInput, GetUniverseConstellationsOutput> = {
+  operationId: "GetUniverseConstellations",
+  method: "GET",
+  path: "/universe/constellations",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseConstellationsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseConstellationsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseFactionsDescriptor: OperationExecutionDescriptor<GetUniverseFactionsInput, GetUniverseFactionsOutput> = {
+  operationId: "GetUniverseFactions",
+  method: "GET",
+  path: "/universe/factions",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseFactionsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseFactionsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseGraphicsDescriptor: OperationExecutionDescriptor<GetUniverseGraphicsInput, GetUniverseGraphicsOutput> = {
+  operationId: "GetUniverseGraphics",
+  method: "GET",
+  path: "/universe/graphics",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseGraphicsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseGraphicsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseCategoriesDescriptor: OperationExecutionDescriptor<GetUniverseCategoriesInput, GetUniverseCategoriesOutput> = {
+  operationId: "GetUniverseCategories",
+  method: "GET",
+  path: "/universe/categories",
+  parameters: [
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseCategoriesRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseCategoriesStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseGroupsDescriptor: OperationExecutionDescriptor<GetUniverseGroupsInput, GetUniverseGroupsOutput> = {
+  operationId: "GetUniverseGroups",
+  method: "GET",
+  path: "/universe/groups",
+  parameters: [
+    { name: "page", placement: "query", required: false, schema: { type: "integer" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseGroupsRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseGroupsStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
+export const GetUniverseStructuresDescriptor: OperationExecutionDescriptor<GetUniverseStructuresInput, GetUniverseStructuresOutput> = {
+  operationId: "GetUniverseStructures",
+  method: "GET",
+  path: "/universe/structures",
+  parameters: [
+    { name: "filter", placement: "query", required: false, schema: { type: "string" } },
+    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
+    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
+    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
+  ],
+  requestBody: null,
+  requestSchema: GetUniverseStructuresRequestSchema,
+  authentication: null,
+  successResponses: [
+    { status: 200, body: 'json', schema: GetUniverseStructuresStatus200SuccessResponseSchema },
+  ],
+  transport: { compatibilityDateOverride: true },
+};
+
 export const GetUniverseRacesDescriptor: OperationExecutionDescriptor<GetUniverseRacesInput, GetUniverseRacesOutput> = {
   operationId: "GetUniverseRaces",
   method: "GET",
@@ -423,116 +575,20 @@ export const GetUniverseRegionsDescriptor: OperationExecutionDescriptor<GetUnive
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetUniverseRegionsRegionIdDescriptor: OperationExecutionDescriptor<GetUniverseRegionsRegionIdInput, GetUniverseRegionsRegionIdOutput> = {
-  operationId: "GetUniverseRegionsRegionId",
+export const GetUniverseSystemsDescriptor: OperationExecutionDescriptor<GetUniverseSystemsInput, GetUniverseSystemsOutput> = {
+  operationId: "GetUniverseSystems",
   method: "GET",
-  path: "/universe/regions/{region_id}",
+  path: "/universe/systems",
   parameters: [
-    { name: "region_id", placement: "path", required: true, schema: { type: "integer" } },
     { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
     { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
     { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
   ],
   requestBody: null,
-  requestSchema: GetUniverseRegionsRegionIdRequestSchema,
+  requestSchema: GetUniverseSystemsRequestSchema,
   authentication: null,
   successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseRegionsRegionIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseStargatesStargateIdDescriptor: OperationExecutionDescriptor<GetUniverseStargatesStargateIdInput, GetUniverseStargatesStargateIdOutput> = {
-  operationId: "GetUniverseStargatesStargateId",
-  method: "GET",
-  path: "/universe/stargates/{stargate_id}",
-  parameters: [
-    { name: "stargate_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseStargatesStargateIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseStargatesStargateIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseStarsStarIdDescriptor: OperationExecutionDescriptor<GetUniverseStarsStarIdInput, GetUniverseStarsStarIdOutput> = {
-  operationId: "GetUniverseStarsStarId",
-  method: "GET",
-  path: "/universe/stars/{star_id}",
-  parameters: [
-    { name: "star_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseStarsStarIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseStarsStarIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseStationsStationIdDescriptor: OperationExecutionDescriptor<GetUniverseStationsStationIdInput, GetUniverseStationsStationIdOutput> = {
-  operationId: "GetUniverseStationsStationId",
-  method: "GET",
-  path: "/universe/stations/{station_id}",
-  parameters: [
-    { name: "station_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseStationsStationIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseStationsStationIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseStructuresDescriptor: OperationExecutionDescriptor<GetUniverseStructuresInput, GetUniverseStructuresOutput> = {
-  operationId: "GetUniverseStructures",
-  method: "GET",
-  path: "/universe/structures",
-  parameters: [
-    { name: "filter", placement: "query", required: false, schema: { type: "string" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseStructuresRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseStructuresStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseStructuresStructureIdDescriptor: OperationExecutionDescriptor<GetUniverseStructuresStructureIdInput, GetUniverseStructuresStructureIdOutput> = {
-  operationId: "GetUniverseStructuresStructureId",
-  method: "GET",
-  path: "/universe/structures/{structure_id}",
-  parameters: [
-    { name: "structure_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseStructuresStructureIdRequestSchema,
-  authentication: { scopes: ["esi-universe.read_structures.v1"] },
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseStructuresStructureIdStatus200SuccessResponseSchema },
+    { status: 200, body: 'json', schema: GetUniverseSystemsStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };
@@ -573,43 +629,6 @@ export const GetUniverseSystemKillsDescriptor: OperationExecutionDescriptor<GetU
   transport: { compatibilityDateOverride: true },
 };
 
-export const GetUniverseSystemsDescriptor: OperationExecutionDescriptor<GetUniverseSystemsInput, GetUniverseSystemsOutput> = {
-  operationId: "GetUniverseSystems",
-  method: "GET",
-  path: "/universe/systems",
-  parameters: [
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseSystemsRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseSystemsStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseSystemsSystemIdDescriptor: OperationExecutionDescriptor<GetUniverseSystemsSystemIdInput, GetUniverseSystemsSystemIdOutput> = {
-  operationId: "GetUniverseSystemsSystemId",
-  method: "GET",
-  path: "/universe/systems/{system_id}",
-  parameters: [
-    { name: "system_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseSystemsSystemIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseSystemsSystemIdStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
 export const GetUniverseTypesDescriptor: OperationExecutionDescriptor<GetUniverseTypesInput, GetUniverseTypesOutput> = {
   operationId: "GetUniverseTypes",
   method: "GET",
@@ -625,25 +644,6 @@ export const GetUniverseTypesDescriptor: OperationExecutionDescriptor<GetUnivers
   authentication: null,
   successResponses: [
     { status: 200, body: 'json', schema: GetUniverseTypesStatus200SuccessResponseSchema },
-  ],
-  transport: { compatibilityDateOverride: true },
-};
-
-export const GetUniverseTypesTypeIdDescriptor: OperationExecutionDescriptor<GetUniverseTypesTypeIdInput, GetUniverseTypesTypeIdOutput> = {
-  operationId: "GetUniverseTypesTypeId",
-  method: "GET",
-  path: "/universe/types/{type_id}",
-  parameters: [
-    { name: "type_id", placement: "path", required: true, schema: { type: "integer" } },
-    { name: "If-Modified-Since", placement: "header", required: false, schema: { type: "string" } },
-    { name: "If-None-Match", placement: "header", required: false, schema: { type: "string" } },
-    { name: "X-Tenant", placement: "header", required: false, schema: { type: "string" } },
-  ],
-  requestBody: null,
-  requestSchema: GetUniverseTypesTypeIdRequestSchema,
-  authentication: null,
-  successResponses: [
-    { status: 200, body: 'json', schema: GetUniverseTypesTypeIdStatus200SuccessResponseSchema },
   ],
   transport: { compatibilityDateOverride: true },
 };

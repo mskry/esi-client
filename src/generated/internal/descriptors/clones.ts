@@ -13,7 +13,7 @@ import {
   type GetCharactersCharacterIdClonesOutput,
   type GetCharactersCharacterIdImplantsInput,
   type GetCharactersCharacterIdImplantsOutput,
-} from '../../schemas/operations.js';
+} from '../../schemas/operations/clones.js';
 
 export const GetCharactersCharacterIdClonesDescriptor: OperationExecutionDescriptor<GetCharactersCharacterIdClonesInput, GetCharactersCharacterIdClonesOutput> = {
   operationId: "GetCharactersCharacterIdClones",

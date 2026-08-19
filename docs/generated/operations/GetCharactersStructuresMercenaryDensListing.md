@@ -11,14 +11,29 @@ List Mercenary Dens
 
 - Stable ID: `GetCharactersStructuresMercenaryDensListing`
 - HTTP: `GET /characters/{character_id}/structures/mercenary-dens`
-- Domain method: `client.structures.getCharactersStructuresMercenaryDensListing(characterId, options?)`
+- Domain method: `client.structures.listMercenaryDens(characterId, options?)`
 - Generic call: `client.callOperation("GetCharactersStructuresMercenaryDensListing", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/structures`
 - Domain index: [structures](../domains/structures.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createStructuresClient } from '@evespace/esi-client/domains/structures';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createStructuresClient({ token: accessToken });
+
+const characterId = 90000001;
+
+const data = await client.listMercenaryDens(characterId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const characterId = 90000001;
 
-const data = await client.structures.getCharactersStructuresMercenaryDensListing(characterId);
+const data = await client.structures.listMercenaryDens(characterId);
 ```
 
 ## Generic-execution snippet
@@ -64,7 +79,7 @@ const response = await client.callOperation('GetCharactersStructuresMercenaryDen
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCharactersStructuresMercenaryDensListingRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.structures.withMetadata().getCharactersStructuresMercenaryDensListing(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.structures.withMetadata().listMercenaryDens(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

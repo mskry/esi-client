@@ -11,21 +11,31 @@ Get the server's status
 
 - Stable ID: `GetStatus`
 - HTTP: `GET /status`
-- Domain method: `client.status.getStatus(options?)`
+- Domain method: `client.status.get(options?)`
 - Generic call: `client.callOperation("GetStatus", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/status`
 - Domain index: [status](../domains/status.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createStatusClient } from '@evespace/esi-client/domains/status';
+
+const client = createStatusClient();
+
+const data = await client.get();
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
 
 const client = new EsiClient();
 
-const data = await client.status.getStatus();
+const data = await client.status.get();
 ```
 
 ## Generic-execution snippet
@@ -53,7 +63,7 @@ const response = await client.callOperation('GetStatus', arguments_);
 
 - Request schema: `@evespace/esi-client/schemas` export `GetStatusRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.status.withMetadata().getStatus(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.status.withMetadata().get(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |

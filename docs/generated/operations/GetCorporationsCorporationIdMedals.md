@@ -11,14 +11,29 @@ Get corporation medals
 
 - Stable ID: `GetCorporationsCorporationIdMedals`
 - HTTP: `GET /corporations/{corporation_id}/medals`
-- Domain method: `client.corporation.getCorporationsCorporationIdMedals(corporationId, options?)`
+- Domain method: `client.corporation.listMedals(corporationId, options?)`
 - Generic call: `client.callOperation("GetCorporationsCorporationIdMedals", arguments, callOptions?)`
 - Domain import: `@evespace/esi-client/domains/corporation`
 - Domain index: [corporation](../domains/corporation.md)
 
 Required path identifiers are positional in the domain method. Other request values and an available compatibility-date override are fields in its final options object. Generic arguments use `path`, `query`, `header`, and `body` groups matching the parameter table.
 
-## Domain-method snippet
+## Standalone domain-factory snippet
+
+```ts
+import { createCorporationClient } from '@evespace/esi-client/domains/corporation';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = createCorporationClient({ token: accessToken });
+
+const corporationId = 98000001;
+
+const data = await client.listMedals(corporationId);
+```
+
+## Aggregate EsiClient snippet
 
 ```ts
 import { EsiClient } from '@evespace/esi-client';
@@ -30,7 +45,7 @@ const client = new EsiClient({ token: accessToken });
 
 const corporationId = 98000001;
 
-const data = await client.corporation.getCorporationsCorporationIdMedals(corporationId);
+const data = await client.corporation.listMedals(corporationId);
 ```
 
 ## Generic-execution snippet
@@ -65,7 +80,7 @@ const response = await client.callOperation('GetCorporationsCorporationIdMedals'
 
 - Request schema: `@evespace/esi-client/schemas` export `GetCorporationsCorporationIdMedalsRequestSchema`
 - Domain result: bare validated success data; a no-content response resolves to `undefined`.
-- Metadata result: `client.corporation.withMetadata().getCorporationsCorporationIdMedals(...)` returns `EsiResponse<T>`.
+- Metadata result: `client.corporation.withMetadata().listMedals(...)` returns `EsiResponse<T>`.
 - Generic result: `callOperation` returns one serializable `EsiResponse<T>` envelope.
 
 | Status | Body | Schema module | Schema export | Description |
