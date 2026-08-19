@@ -52,16 +52,31 @@ export async function checkPackage({ built = false } = {}) {
 function run(name, command, arguments_) {
   process.stdout.write(`\n> ${name}\n${command} ${arguments_.join(' ')}\n`);
   return new Promise((resolvePromise, reject) => {
+    let output = '';
     const child = spawn(command, arguments_, {
       cwd: root,
       shell: usesWindowsCommandShell(command),
-      stdio: 'inherit',
+      stdio: ['inherit', 'pipe', 'pipe'],
+    });
+    child.stdout.on('data', (chunk) => {
+      output += chunk;
+      process.stdout.write(chunk);
+    });
+    child.stderr.on('data', (chunk) => {
+      output += chunk;
+      process.stderr.write(chunk);
     });
     child.once('error', reject);
     child.once('exit', (code, signal) => {
       if (code === 0) resolvePromise();
-      else
-        reject(new Error(`${name} failed with ${signal === null ? `exit code ${code}` : signal}`));
+      else {
+        const details = output.trim();
+        reject(
+          new Error(
+            `${name} failed with ${signal === null ? `exit code ${code}` : signal}${details ? `\n\n${details}` : ''}`,
+          ),
+        );
+      }
     });
   });
 }
