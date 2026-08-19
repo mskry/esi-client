@@ -68,5 +68,19 @@ function run(name, command, arguments_) {
 
 const entryPath = process.argv[1];
 if (entryPath !== undefined && import.meta.url === pathToFileURL(resolve(entryPath)).href) {
-  await checkPackage({ built: process.argv.includes('--built') });
+  try {
+    await checkPackage({ built: process.argv.includes('--built') });
+  } catch (error) {
+    if (process.env.GITHUB_ACTIONS === 'true') {
+      const message = error instanceof Error ? (error.stack ?? error.message) : String(error);
+      process.stderr.write(
+        `::error title=Package validation failed::${escapeWorkflowData(message)}\n`,
+      );
+    }
+    throw error;
+  }
+}
+
+function escapeWorkflowData(value) {
+  return value.replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');
 }
