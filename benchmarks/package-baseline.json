@@ -1,0 +1,712 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "byteHeadroomPercent": 2,
+    "fileCountHeadroom": 0,
+    "description": "Byte maxima are accepted measurements plus 2%; file count and packed paths have no headroom, so every new artifact requires review."
+  },
+  "totals": {
+    "compressedBytes": {
+      "measured": 331159,
+      "maximum": 337783
+    },
+    "unpackedBytes": {
+      "measured": 4124614,
+      "maximum": 4207107
+    },
+    "javascriptBytes": {
+      "measured": 2194098,
+      "maximum": 2237980
+    },
+    "declarationBytes": {
+      "measured": 1914740,
+      "maximum": 1953035
+    },
+    "fileCount": {
+      "measured": 174,
+      "maximum": 174
+    }
+  },
+  "publicEntries": {
+    ".": {
+      "javascript": {
+        "path": "dist/root.js",
+        "measuredBytes": 158520,
+        "maximumBytes": 161691
+      },
+      "declaration": {
+        "path": "dist/root.d.ts",
+        "measuredBytes": 336264,
+        "maximumBytes": 342990
+      }
+    },
+    "./schemas": {
+      "javascript": {
+        "path": "dist/schemas.js",
+        "measuredBytes": 140848,
+        "maximumBytes": 143665
+      },
+      "declaration": {
+        "path": "dist/schemas.d.ts",
+        "measuredBytes": 235249,
+        "maximumBytes": 239954
+      }
+    },
+    "./operations": {
+      "javascript": {
+        "path": "dist/operations/index.js",
+        "measuredBytes": 252,
+        "maximumBytes": 258
+      },
+      "declaration": {
+        "path": "dist/operations/index.d.ts",
+        "measuredBytes": 3249,
+        "maximumBytes": 3314
+      }
+    },
+    "./domains/access-list": {
+      "javascript": {
+        "path": "dist/domains/access-list.js",
+        "measuredBytes": 2667,
+        "maximumBytes": 2721
+      },
+      "declaration": {
+        "path": "dist/domains/access-list.d.ts",
+        "measuredBytes": 344,
+        "maximumBytes": 351
+      }
+    },
+    "./domains/activities": {
+      "javascript": {
+        "path": "dist/domains/activities.js",
+        "measuredBytes": 3593,
+        "maximumBytes": 3665
+      },
+      "declaration": {
+        "path": "dist/domains/activities.d.ts",
+        "measuredBytes": 468,
+        "maximumBytes": 478
+      }
+    },
+    "./domains/alliance": {
+      "javascript": {
+        "path": "dist/domains/alliance.js",
+        "measuredBytes": 4179,
+        "maximumBytes": 4263
+      },
+      "declaration": {
+        "path": "dist/domains/alliance.d.ts",
+        "measuredBytes": 447,
+        "maximumBytes": 456
+      }
+    },
+    "./domains/assets": {
+      "javascript": {
+        "path": "dist/domains/assets.js",
+        "measuredBytes": 6998,
+        "maximumBytes": 7138
+      },
+      "declaration": {
+        "path": "dist/domains/assets.d.ts",
+        "measuredBytes": 741,
+        "maximumBytes": 756
+      }
+    },
+    "./domains/calendar": {
+      "javascript": {
+        "path": "dist/domains/calendar.js",
+        "measuredBytes": 5046,
+        "maximumBytes": 5147
+      },
+      "declaration": {
+        "path": "dist/domains/calendar.d.ts",
+        "measuredBytes": 573,
+        "maximumBytes": 585
+      }
+    },
+    "./domains/character": {
+      "javascript": {
+        "path": "dist/domains/character.js",
+        "measuredBytes": 14301,
+        "maximumBytes": 14588
+      },
+      "declaration": {
+        "path": "dist/domains/character.d.ts",
+        "measuredBytes": 1400,
+        "maximumBytes": 1428
+      }
+    },
+    "./domains/clones": {
+      "javascript": {
+        "path": "dist/domains/clones.js",
+        "measuredBytes": 2528,
+        "maximumBytes": 2579
+      },
+      "declaration": {
+        "path": "dist/domains/clones.d.ts",
+        "measuredBytes": 325,
+        "maximumBytes": 332
+      }
+    },
+    "./domains/contacts": {
+      "javascript": {
+        "path": "dist/domains/contacts.js",
+        "measuredBytes": 10475,
+        "maximumBytes": 10685
+      },
+      "declaration": {
+        "path": "dist/domains/contacts.d.ts",
+        "measuredBytes": 1000,
+        "maximumBytes": 1020
+      }
+    },
+    "./domains/contracts": {
+      "javascript": {
+        "path": "dist/domains/contracts.js",
+        "measuredBytes": 10595,
+        "maximumBytes": 10807
+      },
+      "declaration": {
+        "path": "dist/domains/contracts.d.ts",
+        "measuredBytes": 1095,
+        "maximumBytes": 1117
+      }
+    },
+    "./domains/corporation-projects": {
+      "javascript": {
+        "path": "dist/domains/corporation-projects.js",
+        "measuredBytes": 5534,
+        "maximumBytes": 5645
+      },
+      "declaration": {
+        "path": "dist/domains/corporation-projects.d.ts",
+        "measuredBytes": 571,
+        "maximumBytes": 583
+      }
+    },
+    "./domains/corporation": {
+      "javascript": {
+        "path": "dist/domains/corporation.js",
+        "measuredBytes": 23595,
+        "maximumBytes": 24067
+      },
+      "declaration": {
+        "path": "dist/domains/corporation.d.ts",
+        "measuredBytes": 2326,
+        "maximumBytes": 2373
+      }
+    },
+    "./domains/cosmetics": {
+      "javascript": {
+        "path": "dist/domains/cosmetics.js",
+        "measuredBytes": 3429,
+        "maximumBytes": 3498
+      },
+      "declaration": {
+        "path": "dist/domains/cosmetics.d.ts",
+        "measuredBytes": 401,
+        "maximumBytes": 410
+      }
+    },
+    "./domains/dogma": {
+      "javascript": {
+        "path": "dist/domains/dogma.js",
+        "measuredBytes": 4995,
+        "maximumBytes": 5095
+      },
+      "declaration": {
+        "path": "dist/domains/dogma.d.ts",
+        "measuredBytes": 499,
+        "maximumBytes": 509
+      }
+    },
+    "./domains/faction-warfare": {
+      "javascript": {
+        "path": "dist/domains/faction-warfare.js",
+        "measuredBytes": 7224,
+        "maximumBytes": 7369
+      },
+      "declaration": {
+        "path": "dist/domains/faction-warfare.d.ts",
+        "measuredBytes": 720,
+        "maximumBytes": 735
+      }
+    },
+    "./domains/fittings": {
+      "javascript": {
+        "path": "dist/domains/fittings.js",
+        "measuredBytes": 3736,
+        "maximumBytes": 3811
+      },
+      "declaration": {
+        "path": "dist/domains/fittings.d.ts",
+        "measuredBytes": 452,
+        "maximumBytes": 462
+      }
+    },
+    "./domains/fleets": {
+      "javascript": {
+        "path": "dist/domains/fleets.js",
+        "measuredBytes": 14302,
+        "maximumBytes": 14589
+      },
+      "declaration": {
+        "path": "dist/domains/fleets.d.ts",
+        "measuredBytes": 1213,
+        "maximumBytes": 1238
+      }
+    },
+    "./domains/freelance-jobs": {
+      "javascript": {
+        "path": "dist/domains/freelance-jobs.js",
+        "measuredBytes": 7291,
+        "maximumBytes": 7437
+      },
+      "declaration": {
+        "path": "dist/domains/freelance-jobs.d.ts",
+        "measuredBytes": 713,
+        "maximumBytes": 728
+      }
+    },
+    "./domains/incursions": {
+      "javascript": {
+        "path": "dist/domains/incursions.js",
+        "measuredBytes": 1374,
+        "maximumBytes": 1402
+      },
+      "declaration": {
+        "path": "dist/domains/incursions.d.ts",
+        "measuredBytes": 224,
+        "maximumBytes": 229
+      }
+    },
+    "./domains/industry": {
+      "javascript": {
+        "path": "dist/domains/industry.js",
+        "measuredBytes": 9061,
+        "maximumBytes": 9243
+      },
+      "declaration": {
+        "path": "dist/domains/industry.d.ts",
+        "measuredBytes": 915,
+        "maximumBytes": 934
+      }
+    },
+    "./domains/insurance": {
+      "javascript": {
+        "path": "dist/domains/insurance.js",
+        "measuredBytes": 1392,
+        "maximumBytes": 1420
+      },
+      "declaration": {
+        "path": "dist/domains/insurance.d.ts",
+        "measuredBytes": 229,
+        "maximumBytes": 234
+      }
+    },
+    "./domains/killmails": {
+      "javascript": {
+        "path": "dist/domains/killmails.js",
+        "measuredBytes": 3910,
+        "maximumBytes": 3989
+      },
+      "declaration": {
+        "path": "dist/domains/killmails.d.ts",
+        "measuredBytes": 471,
+        "maximumBytes": 481
+      }
+    },
+    "./domains/location": {
+      "javascript": {
+        "path": "dist/domains/location.js",
+        "measuredBytes": 3491,
+        "maximumBytes": 3561
+      },
+      "declaration": {
+        "path": "dist/domains/location.d.ts",
+        "measuredBytes": 414,
+        "maximumBytes": 423
+      }
+    },
+    "./domains/loyalty": {
+      "javascript": {
+        "path": "dist/domains/loyalty.js",
+        "measuredBytes": 2597,
+        "maximumBytes": 2649
+      },
+      "declaration": {
+        "path": "dist/domains/loyalty.d.ts",
+        "measuredBytes": 350,
+        "maximumBytes": 357
+      }
+    },
+    "./domains/mail": {
+      "javascript": {
+        "path": "dist/domains/mail.js",
+        "measuredBytes": 10079,
+        "maximumBytes": 10281
+      },
+      "declaration": {
+        "path": "dist/domains/mail.d.ts",
+        "measuredBytes": 968,
+        "maximumBytes": 988
+      }
+    },
+    "./domains/market": {
+      "javascript": {
+        "path": "dist/domains/market.js",
+        "measuredBytes": 11511,
+        "maximumBytes": 11742
+      },
+      "declaration": {
+        "path": "dist/domains/market.d.ts",
+        "measuredBytes": 1020,
+        "maximumBytes": 1041
+      }
+    },
+    "./domains/meta": {
+      "javascript": {
+        "path": "dist/domains/meta.js",
+        "measuredBytes": 3635,
+        "maximumBytes": 3708
+      },
+      "declaration": {
+        "path": "dist/domains/meta.d.ts",
+        "measuredBytes": 367,
+        "maximumBytes": 375
+      }
+    },
+    "./domains/military-campaigns": {
+      "javascript": {
+        "path": "dist/domains/military-campaigns.js",
+        "measuredBytes": 7201,
+        "maximumBytes": 7346
+      },
+      "declaration": {
+        "path": "dist/domains/military-campaigns.d.ts",
+        "measuredBytes": 801,
+        "maximumBytes": 818
+      }
+    },
+    "./domains/paragon-hub": {
+      "javascript": {
+        "path": "dist/domains/paragon-hub.js",
+        "measuredBytes": 6406,
+        "maximumBytes": 6535
+      },
+      "declaration": {
+        "path": "dist/domains/paragon-hub.d.ts",
+        "measuredBytes": 553,
+        "maximumBytes": 565
+      }
+    },
+    "./domains/planetary-interaction": {
+      "javascript": {
+        "path": "dist/domains/planetary-interaction.js",
+        "measuredBytes": 4838,
+        "maximumBytes": 4935
+      },
+      "declaration": {
+        "path": "dist/domains/planetary-interaction.d.ts",
+        "measuredBytes": 606,
+        "maximumBytes": 619
+      }
+    },
+    "./domains/routes": {
+      "javascript": {
+        "path": "dist/domains/routes.js",
+        "measuredBytes": 1686,
+        "maximumBytes": 1720
+      },
+      "declaration": {
+        "path": "dist/domains/routes.d.ts",
+        "measuredBytes": 196,
+        "maximumBytes": 200
+      }
+    },
+    "./domains/search": {
+      "javascript": {
+        "path": "dist/domains/search.js",
+        "measuredBytes": 1819,
+        "maximumBytes": 1856
+      },
+      "declaration": {
+        "path": "dist/domains/search.d.ts",
+        "measuredBytes": 238,
+        "maximumBytes": 243
+      }
+    },
+    "./domains/skills": {
+      "javascript": {
+        "path": "dist/domains/skills.js",
+        "measuredBytes": 3517,
+        "maximumBytes": 3588
+      },
+      "declaration": {
+        "path": "dist/domains/skills.d.ts",
+        "measuredBytes": 420,
+        "maximumBytes": 429
+      }
+    },
+    "./domains/sovereignty": {
+      "javascript": {
+        "path": "dist/domains/sovereignty.js",
+        "measuredBytes": 2217,
+        "maximumBytes": 2262
+      },
+      "declaration": {
+        "path": "dist/domains/sovereignty.d.ts",
+        "measuredBytes": 314,
+        "maximumBytes": 321
+      }
+    },
+    "./domains/status": {
+      "javascript": {
+        "path": "dist/domains/status.js",
+        "measuredBytes": 1326,
+        "maximumBytes": 1353
+      },
+      "declaration": {
+        "path": "dist/domains/status.d.ts",
+        "measuredBytes": 196,
+        "maximumBytes": 200
+      }
+    },
+    "./domains/structures": {
+      "javascript": {
+        "path": "dist/domains/structures.js",
+        "measuredBytes": 7173,
+        "maximumBytes": 7317
+      },
+      "declaration": {
+        "path": "dist/domains/structures.d.ts",
+        "measuredBytes": 827,
+        "maximumBytes": 844
+      }
+    },
+    "./domains/universe": {
+      "javascript": {
+        "path": "dist/domains/universe.js",
+        "measuredBytes": 26647,
+        "maximumBytes": 27180
+      },
+      "declaration": {
+        "path": "dist/domains/universe.d.ts",
+        "measuredBytes": 2261,
+        "maximumBytes": 2307
+      }
+    },
+    "./domains/user-interface": {
+      "javascript": {
+        "path": "dist/domains/user-interface.js",
+        "measuredBytes": 5498,
+        "maximumBytes": 5608
+      },
+      "declaration": {
+        "path": "dist/domains/user-interface.d.ts",
+        "measuredBytes": 558,
+        "maximumBytes": 570
+      }
+    },
+    "./domains/wallet": {
+      "javascript": {
+        "path": "dist/domains/wallet.js",
+        "measuredBytes": 7255,
+        "maximumBytes": 7401
+      },
+      "declaration": {
+        "path": "dist/domains/wallet.d.ts",
+        "measuredBytes": 791,
+        "maximumBytes": 807
+      }
+    },
+    "./domains/wars": {
+      "javascript": {
+        "path": "dist/domains/wars.js",
+        "measuredBytes": 3215,
+        "maximumBytes": 3280
+      },
+      "declaration": {
+        "path": "dist/domains/wars.d.ts",
+        "measuredBytes": 294,
+        "maximumBytes": 300
+      }
+    }
+  },
+  "allowedFiles": [
+    "dist/access-list.d.ts",
+    "dist/access-list.js",
+    "dist/activities.d.ts",
+    "dist/activities.js",
+    "dist/alliance.d.ts",
+    "dist/alliance.js",
+    "dist/assets.d.ts",
+    "dist/assets.js",
+    "dist/calendar.d.ts",
+    "dist/calendar.js",
+    "dist/character.d.ts",
+    "dist/character.js",
+    "dist/clones.d.ts",
+    "dist/clones.js",
+    "dist/configuration.d.ts",
+    "dist/contacts.d.ts",
+    "dist/contacts.js",
+    "dist/contracts.d.ts",
+    "dist/contracts.js",
+    "dist/contracts2.d.ts",
+    "dist/corporation-projects.d.ts",
+    "dist/corporation-projects.js",
+    "dist/corporation.d.ts",
+    "dist/corporation.js",
+    "dist/cosmetics.d.ts",
+    "dist/cosmetics.js",
+    "dist/dogma.d.ts",
+    "dist/dogma.js",
+    "dist/domains/access-list.d.ts",
+    "dist/domains/access-list.js",
+    "dist/domains/activities.d.ts",
+    "dist/domains/activities.js",
+    "dist/domains/alliance.d.ts",
+    "dist/domains/alliance.js",
+    "dist/domains/assets.d.ts",
+    "dist/domains/assets.js",
+    "dist/domains/calendar.d.ts",
+    "dist/domains/calendar.js",
+    "dist/domains/character.d.ts",
+    "dist/domains/character.js",
+    "dist/domains/clones.d.ts",
+    "dist/domains/clones.js",
+    "dist/domains/contacts.d.ts",
+    "dist/domains/contacts.js",
+    "dist/domains/contracts.d.ts",
+    "dist/domains/contracts.js",
+    "dist/domains/corporation-projects.d.ts",
+    "dist/domains/corporation-projects.js",
+    "dist/domains/corporation.d.ts",
+    "dist/domains/corporation.js",
+    "dist/domains/cosmetics.d.ts",
+    "dist/domains/cosmetics.js",
+    "dist/domains/dogma.d.ts",
+    "dist/domains/dogma.js",
+    "dist/domains/faction-warfare.d.ts",
+    "dist/domains/faction-warfare.js",
+    "dist/domains/fittings.d.ts",
+    "dist/domains/fittings.js",
+    "dist/domains/fleets.d.ts",
+    "dist/domains/fleets.js",
+    "dist/domains/freelance-jobs.d.ts",
+    "dist/domains/freelance-jobs.js",
+    "dist/domains/incursions.d.ts",
+    "dist/domains/incursions.js",
+    "dist/domains/industry.d.ts",
+    "dist/domains/industry.js",
+    "dist/domains/insurance.d.ts",
+    "dist/domains/insurance.js",
+    "dist/domains/killmails.d.ts",
+    "dist/domains/killmails.js",
+    "dist/domains/location.d.ts",
+    "dist/domains/location.js",
+    "dist/domains/loyalty.d.ts",
+    "dist/domains/loyalty.js",
+    "dist/domains/mail.d.ts",
+    "dist/domains/mail.js",
+    "dist/domains/market.d.ts",
+    "dist/domains/market.js",
+    "dist/domains/meta.d.ts",
+    "dist/domains/meta.js",
+    "dist/domains/military-campaigns.d.ts",
+    "dist/domains/military-campaigns.js",
+    "dist/domains/paragon-hub.d.ts",
+    "dist/domains/paragon-hub.js",
+    "dist/domains/planetary-interaction.d.ts",
+    "dist/domains/planetary-interaction.js",
+    "dist/domains/routes.d.ts",
+    "dist/domains/routes.js",
+    "dist/domains/search.d.ts",
+    "dist/domains/search.js",
+    "dist/domains/skills.d.ts",
+    "dist/domains/skills.js",
+    "dist/domains/sovereignty.d.ts",
+    "dist/domains/sovereignty.js",
+    "dist/domains/status.d.ts",
+    "dist/domains/status.js",
+    "dist/domains/structures.d.ts",
+    "dist/domains/structures.js",
+    "dist/domains/universe.d.ts",
+    "dist/domains/universe.js",
+    "dist/domains/user-interface.d.ts",
+    "dist/domains/user-interface.js",
+    "dist/domains/wallet.d.ts",
+    "dist/domains/wallet.js",
+    "dist/domains/wars.d.ts",
+    "dist/domains/wars.js",
+    "dist/execute.js",
+    "dist/faction-warfare.d.ts",
+    "dist/faction-warfare.js",
+    "dist/fittings.d.ts",
+    "dist/fittings.js",
+    "dist/fleets.d.ts",
+    "dist/fleets.js",
+    "dist/freelance-jobs.d.ts",
+    "dist/freelance-jobs.js",
+    "dist/incursions.d.ts",
+    "dist/incursions.js",
+    "dist/index.d.ts",
+    "dist/industry.d.ts",
+    "dist/industry.js",
+    "dist/insurance.d.ts",
+    "dist/insurance.js",
+    "dist/killmails.d.ts",
+    "dist/killmails.js",
+    "dist/location.d.ts",
+    "dist/location.js",
+    "dist/loyalty.d.ts",
+    "dist/loyalty.js",
+    "dist/mail.d.ts",
+    "dist/mail.js",
+    "dist/market.d.ts",
+    "dist/market.js",
+    "dist/meta.d.ts",
+    "dist/meta.js",
+    "dist/military-campaigns.d.ts",
+    "dist/military-campaigns.js",
+    "dist/operations.d.ts",
+    "dist/operations.js",
+    "dist/operations/index.d.ts",
+    "dist/operations/index.js",
+    "dist/operations2.d.ts",
+    "dist/operations2.js",
+    "dist/paragon-hub.d.ts",
+    "dist/paragon-hub.js",
+    "dist/planetary-interaction.d.ts",
+    "dist/planetary-interaction.js",
+    "dist/response.d.ts",
+    "dist/root.d.ts",
+    "dist/root.js",
+    "dist/routes.d.ts",
+    "dist/routes.js",
+    "dist/schemas.d.ts",
+    "dist/schemas.js",
+    "dist/search.d.ts",
+    "dist/search.js",
+    "dist/skills.d.ts",
+    "dist/skills.js",
+    "dist/sovereignty.d.ts",
+    "dist/sovereignty.js",
+    "dist/status.d.ts",
+    "dist/status.js",
+    "dist/structures.d.ts",
+    "dist/structures.js",
+    "dist/universe.d.ts",
+    "dist/universe.js",
+    "dist/user-interface.d.ts",
+    "dist/user-interface.js",
+    "dist/wallet.d.ts",
+    "dist/wallet.js",
+    "dist/wars.d.ts",
+    "dist/wars.js",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ]
+}

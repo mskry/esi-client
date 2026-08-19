@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "corrections": [
+    {
+      "id": "contracts-public-bids-204-content",
+      "patch": "contracts-public-bids-204-content.json",
+      "reason": "HTTP 204 responses cannot contain a response body; ESI declares an empty application/json schema for this no-content result.",
+      "from": "2020-01-01",
+      "through": "2026-08-18"
+    },
+    {
+      "id": "contracts-public-items-204-content",
+      "patch": "contracts-public-items-204-content.json",
+      "reason": "HTTP 204 responses cannot contain a response body; ESI declares an empty application/json schema for this no-content result.",
+      "from": "2020-01-01",
+      "through": "2026-08-18"
+    }
+  ],
+  "reviewedLegacyWorkarounds": [
+    {
+      "id": "openapi-generator-duplicate-header-enums",
+      "source": "scripts/fix-api-enums.mjs",
+      "disposition": "generator-only",
+      "reason": "The prototype workaround repaired omitted TypeScript enum declarations without changing ESI request semantics. The replacement generator models shared header parameters directly, so no specification correction is required."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "overrides": [
+    {
+      "operationId": "PostCharactersAffiliation",
+      "classification": "read",
+      "reason": "Bulk-resolves character affiliations without changing server state.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdAssetsLocations",
+      "classification": "read",
+      "reason": "Bulk-returns locations for existing character asset item IDs without changing assets or server state.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdAssetsNames",
+      "classification": "read",
+      "reason": "Bulk-returns names for existing character asset item IDs without changing assets or server state.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCharactersCharacterIdCspa",
+      "classification": "read",
+      "reason": "Calculates CSPA charges for target character IDs without sending mail or changing server state.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCorporationsCorporationIdAssetsLocations",
+      "classification": "read",
+      "reason": "Bulk-returns locations for existing corporation asset item IDs without changing assets or server state.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostCorporationsCorporationIdAssetsNames",
+      "classification": "read",
+      "reason": "Bulk-returns names for existing corporation asset item IDs without changing assets or server state.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostRoute",
+      "classification": "read",
+      "reason": "Calculates a route from supplied systems and avoidance data without setting waypoints or changing server state.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUniverseIds",
+      "classification": "read",
+      "reason": "Bulk-resolves exact names to IDs without creating or changing universe entities.",
+      "reviewed": true
+    },
+    {
+      "operationId": "PostUniverseNames",
+      "classification": "read",
+      "reason": "Bulk-resolves IDs to names and categories without changing server state.",
+      "reviewed": true
+    }
+  ]
+}

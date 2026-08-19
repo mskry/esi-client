@@ -1,45 +1,74 @@
-# ESI TypeScript Client
+# @evespace/esi-client
 
-A TypeScript client for the ESI (EVE Swagger Interface) API.
+An ESM-only TypeScript SDK for EVE Online ESI, centered on `EsiClient` and generated from a pinned, corrected OpenAPI specification.
 
-## Installation
+```ts
+import { EsiClient } from '@evespace/esi-client';
 
-```bash
-npm install @evespace/esi-client
+const client = new EsiClient();
+const status = await client.status.getStatus();
 ```
 
-## Usage
+`new EsiClient()` uses the standard ESI base URL and the package's pinned compatibility date, **2026-08-18**.
 
-```typescript
-import {
-    CharacterApi,
-    Configuration,
-    GetCharactersCharacterIdXCompatibilityDateEnum,
-} from '@evespace/esi-client';
+## Install
 
-const config = new Configuration({
-    basePath: 'https://esi.evetech.net/latest',
-});
-
-const api = new CharacterApi(config);
-
-// Example: Get character information
-const characterInfo = await api.getCharactersCharacterId({
-    characterId: 12345,
-    xCompatibilityDate: GetCharactersCharacterIdXCompatibilityDateEnum._20200101,
-});
+```sh
+npm install @evespace/esi-client zod
 ```
 
-## Features
+Zod `^4.0.0` is a required peer dependency. The package requires Node.js 22.18 or newer and publishes ESM only: use `import`, not CommonJS `require`.
 
-- Full TypeScript support with type definitions
-- Complete coverage of EVE Online ESI API endpoints
-- Built with fetch API
-- ESM and CommonJS support
+## Authenticated Domain Call
 
-## Documentation
+Configure either `token` or an asynchronous `tokenProvider`. Credentials are resolved only for authenticated requests and are excluded from metadata and structured errors.
 
-This client was regenerated on 2026-08-18 from the OpenAPI 3.1 specification published in the [EVE Online API Explorer](https://developers.eveonline.com/api-explorer).
+```ts
+import { EsiClient } from '@evespace/esi-client';
+
+const accessToken = process.env.ESI_ACCESS_TOKEN;
+if (!accessToken) throw new Error('Set ESI_ACCESS_TOKEN before making this authorized request.');
+
+const client = new EsiClient({ token: accessToken });
+const characterId = 90000001;
+const location = await client.location.getCharactersCharacterIdLocation(characterId);
+```
+
+Required path identifiers are positional. Optional query and header values, including a per-operation compatibility-date override, are grouped in a final typed options object.
+
+## Runtime Behavior
+
+- Date and date-time values remain their JSON wire-format strings. The SDK does not transform them into JavaScript `Date` objects.
+- Successful JSON responses are validated with generated Zod schemas by default. Set `validateResponses: false` to opt out.
+- Typed request validation is off by default; opt in with `validateRequests: true`. Generic operation arguments are always validated before network activity.
+- Domain methods return bare validated data. Use `client.<domain>.withMetadata().<method>(...)` for an `EsiResponse<T>` containing status, headers, request ID, pagination, cache, and ESI error-limit metadata.
+- Compatibility date `2026-08-18` is pinned by default. Override it on the client with `new EsiClient({ compatibilityDate: 'YYYY-MM-DD' })` or in a domain method's final options object.
+
+## Discovery And Generic Execution
+
+Import `searchOperations` and `describeOperation` from `@evespace/esi-client/operations` to discover stable operation IDs and serializable contracts. Execute one validated request with `client.callOperation(stableId, arguments)`; generic execution always returns an `EsiResponse<T>` and never follows pagination automatically.
+
+Generic mutations are denied by default. They require both `allowGenericMutations: true` when constructing the client and `{ confirmMutation: true }` on the individual `callOperation`. Named typed mutation methods express explicit caller intent and do not use these generic gates.
+
+## Imports And Documentation
+
+The root export is the convenient entry point. ESM subpaths provide narrower imports:
+
+- `@evespace/esi-client/operations` for discovery, descriptors, and generic execution types
+- `@evespace/esi-client/schemas` for generated Zod schemas and inferred types
+- `@evespace/esi-client/domains/<domain>` for one generated domain client
+
+Start with the repository [`llms.txt`](llms.txt), then retrieve only the documentation needed:
+
+- Concepts: [client configuration](docs/generated/concepts/client.md), [validation](docs/generated/concepts/validation.md), [metadata and pagination](docs/generated/concepts/metadata-pagination.md), and [mutation safety](docs/generated/concepts/mutation-safety.md)
+- Domain: [location](docs/generated/domains/location.md)
+- Operation: [`GetCharactersCharacterIdLocation`](docs/generated/operations/GetCharactersCharacterIdLocation.md)
+
+The generated domain indexes link focused references for every supported operation; there is intentionally no monolithic endpoint list here.
+
+## Development
+
+Development uses Node.js 22.18+ and pnpm 11.21.0. Run `pnpm validate` for generation reproducibility, documentation and example checks, formatting, linting, type checking, tests, build and package validation, installed-package smoke tests, and artifact inspection.
 
 ## License
 

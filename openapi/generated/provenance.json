@@ -1,0 +1,10 @@
+{
+  "appliedCorrections": [
+    "contracts-public-bids-204-content",
+    "contracts-public-items-204-content"
+  ],
+  "compatibilityDate": "2026-08-18",
+  "sha256": "d109f3a545525dd98ac0d8237c7838b3bfcb30cb1d971166959b633bac22d599",
+  "sourceSha256": "d1da68ddc104ff09412f161c21eb1e8cdf9d08261a72b2cac842f2a5e8ba74e9",
+  "specificationUrl": "https://esi.evetech.net/meta/openapi.json"
+}

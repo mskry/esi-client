@@ -1,0 +1,63 @@
+export {
+  callOperation,
+  type CallOperationArguments,
+  type CallOperationOptions,
+  type CallOperationResult,
+  type EsiOperationCaller,
+  type StableOperationId,
+} from './client/call-operation.js';
+export type {
+  JsonOperationSuccessResponse,
+  NoContentOperationSuccessResponse,
+  OperationAuthentication,
+  OperationExecutionDescriptor,
+  OperationExecutionOptions,
+  OperationSuccessResponse,
+  OperationSuccessStatus,
+  OperationTransportDescriptor,
+} from './client/execute.js';
+export type {
+  ArrayParameterSchema,
+  BooleanParameterSchema,
+  ConstructedOperationRequest,
+  ExecutableOperationDescriptor,
+  HeaderOperationParameterDescriptor,
+  IntegerParameterSchema,
+  JsonObject,
+  JsonPrimitive,
+  JsonRequestBodyDescriptor,
+  JsonValue,
+  NumberParameterSchema,
+  OperationHttpMethod,
+  OperationParameterDescriptor,
+  OperationParameterPlacement,
+  OperationParameterSchema,
+  OperationRequestArguments,
+  OperationSchema,
+  OperationSchemaIssue,
+  OperationSchemaResult,
+  PathOperationParameterDescriptor,
+  QueryOperationParameterDescriptor,
+  ScalarParameterSchema,
+  StringParameterSchema,
+} from './client/request.js';
+export {
+  searchOperations,
+  type OperationSearchClassification,
+  type OperationSearchResult,
+  type SearchOperationsOptions,
+} from './operation-search.js';
+export { describeOperation } from './operation-description.js';
+export {
+  operationManifest,
+  operationRegistry,
+  type ExecutableOperationRegistry,
+  type ExecutableOperationRegistryEntry,
+  type OperationSchemaReference,
+  type SerializableOperationContent,
+  type SerializableOperationManifest,
+  type SerializableOperationManifestEntry,
+  type SerializableOperationParameter,
+  type SerializableOperationRequestBody,
+  type SerializableOperationResponse,
+} from './generated/operations/index.js';

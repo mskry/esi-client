@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "isolatedDeclarations": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "paths": {
+      "@evespace/esi-client": ["./src/index.ts"],
+      "@evespace/esi-client/domains/*": ["./src/generated/domains/*"],
+      "@evespace/esi-client/operations": ["./src/operations.ts"],
+      "@evespace/esi-client/schemas": ["./src/generated/schemas/index.ts"]
+    },
+    "types": ["node"]
+  },
+  "include": ["examples/generated/*.ts"],
+  "exclude": []
+}

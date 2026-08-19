@@ -1,0 +1,34 @@
+name: ESI Specification Drift
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Without --date, the reporter resolves ESI's latest advertised compatibility date.
+      - run: pnpm drift:report --output drift-report/esi-specification-drift.json
+      - name: Publish drift report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: esi-specification-drift
+          path: drift-report/esi-specification-drift.json
+          if-no-files-found: error
+          retention-days: 30

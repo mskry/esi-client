@@ -1,0 +1,20 @@
+[
+  {
+    "op": "test",
+    "path": "/paths/~1contracts~1public~1items~1{contract_id}/get/responses/204/description",
+    "value": "Contract expired or recently accepted by player"
+  },
+  {
+    "op": "test",
+    "path": "/paths/~1contracts~1public~1items~1{contract_id}/get/responses/204/content",
+    "value": {
+      "application/json": {
+        "schema": {}
+      }
+    }
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1contracts~1public~1items~1{contract_id}/get/responses/204/content"
+  }
+]

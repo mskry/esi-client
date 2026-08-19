@@ -10,6 +10,10 @@ build
 # Testing
 coverage
 
+# OpenSpec
+openspec/
+.opencode/
+
 # Logs
 *.log
 npm-debug.log*
