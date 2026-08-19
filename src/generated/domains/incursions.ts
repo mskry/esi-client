@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindIncursionsDomainClient } from '../internal/domains/incursions.js';
 import type { IncursionsDomainClient } from '../internal/domains/incursions-contract.js';
 
-export * from '../internal/domains/incursions-contract.js';
+export type * from '../internal/domains/incursions-contract.js';
 
 export function createIncursionsClient(options: EsiClientOptions = {}): IncursionsDomainClient {
   return bindIncursionsDomainClient(new EsiClientConfiguration(options));

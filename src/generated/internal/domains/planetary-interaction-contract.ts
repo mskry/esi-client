@@ -44,28 +44,24 @@ export interface GetCorporationsCorporationIdCustomsOfficesOptions {
   readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput["header"]>["X-Tenant"];
 }
 
-export abstract class PlanetaryInteractionDomainClient {
-  protected constructor() {}
+export interface PlanetaryInteractionDomainClient {
+  getColonyLayout(characterId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], planetId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions): Promise<GetCharactersCharacterIdPlanetsPlanetIdOutput>;
 
-  abstract getColonyLayout(characterId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], planetId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions): Promise<GetCharactersCharacterIdPlanetsPlanetIdOutput>;
+  getSchematic(schematicId: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions): Promise<GetUniverseSchematicsSchematicIdOutput>;
 
-  abstract getSchematic(schematicId: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions): Promise<GetUniverseSchematicsSchematicIdOutput>;
+  listColonies(characterId: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions): Promise<GetCharactersCharacterIdPlanetsOutput>;
 
-  abstract listColonies(characterId: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions): Promise<GetCharactersCharacterIdPlanetsOutput>;
+  listCustomsOffices(corporationId: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions): Promise<GetCorporationsCorporationIdCustomsOfficesOutput>;
 
-  abstract listCustomsOffices(corporationId: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions): Promise<GetCorporationsCorporationIdCustomsOfficesOutput>;
-
-  abstract withMetadata(): PlanetaryInteractionDomainClientWithMetadata;
+  withMetadata(): PlanetaryInteractionDomainClientWithMetadata;
 }
 
-export abstract class PlanetaryInteractionDomainClientWithMetadata {
-  protected constructor() {}
+export interface PlanetaryInteractionDomainClientWithMetadata {
+  getColonyLayout(characterId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], planetId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions): Promise<EsiResponse<GetCharactersCharacterIdPlanetsPlanetIdOutput>>;
 
-  abstract getColonyLayout(characterId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["character_id"], planetId: NonNullable<GetCharactersCharacterIdPlanetsPlanetIdInput['path']>["planet_id"], options?: GetCharactersCharacterIdPlanetsPlanetIdOptions): Promise<EsiResponse<GetCharactersCharacterIdPlanetsPlanetIdOutput>>;
+  getSchematic(schematicId: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions): Promise<EsiResponse<GetUniverseSchematicsSchematicIdOutput>>;
 
-  abstract getSchematic(schematicId: NonNullable<GetUniverseSchematicsSchematicIdInput['path']>["schematic_id"], options?: GetUniverseSchematicsSchematicIdOptions): Promise<EsiResponse<GetUniverseSchematicsSchematicIdOutput>>;
+  listColonies(characterId: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions): Promise<EsiResponse<GetCharactersCharacterIdPlanetsOutput>>;
 
-  abstract listColonies(characterId: NonNullable<GetCharactersCharacterIdPlanetsInput['path']>["character_id"], options?: GetCharactersCharacterIdPlanetsOptions): Promise<EsiResponse<GetCharactersCharacterIdPlanetsOutput>>;
-
-  abstract listCustomsOffices(corporationId: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions): Promise<EsiResponse<GetCorporationsCorporationIdCustomsOfficesOutput>>;
+  listCustomsOffices(corporationId: NonNullable<GetCorporationsCorporationIdCustomsOfficesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdCustomsOfficesOptions): Promise<EsiResponse<GetCorporationsCorporationIdCustomsOfficesOutput>>;
 }

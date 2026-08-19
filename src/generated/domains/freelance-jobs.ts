@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindFreelanceJobsDomainClient } from '../internal/domains/freelance-jobs.js';
 import type { FreelanceJobsDomainClient } from '../internal/domains/freelance-jobs-contract.js';
 
-export * from '../internal/domains/freelance-jobs-contract.js';
+export type * from '../internal/domains/freelance-jobs-contract.js';
 
 export function createFreelanceJobsClient(options: EsiClientOptions = {}): FreelanceJobsDomainClient {
   return bindFreelanceJobsDomainClient(new EsiClientConfiguration(options));

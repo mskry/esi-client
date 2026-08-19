@@ -8,7 +8,7 @@ import {
 } from '../src/index.js';
 import { createContactsClient } from '../src/generated/domains/contacts.js';
 import { createLocationClient } from '../src/generated/domains/location.js';
-import { createStatusClient, StatusDomainClient } from '../src/generated/domains/status.js';
+import { createStatusClient } from '../src/generated/domains/status.js';
 
 describe('standalone domain parity', () => {
   it('matches aggregate request construction, compatibility dates, data, and metadata', async () => {
@@ -28,7 +28,7 @@ describe('standalone domain parity', () => {
       xTenant: 'tranquility',
     } as const;
 
-    expect(standalone).toBeInstanceOf(StatusDomainClient);
+    expect(standalone).toEqual(expect.objectContaining({ get: expect.any(Function) }));
     await expect(standalone.get(options)).resolves.toEqual(await aggregate.status.get(options));
     expect(requestSnapshot(standaloneRequests[0])).toEqual(requestSnapshot(aggregateRequests[0]));
     expect(standaloneRequests[0]?.headers.get('x-compatibility-date')).toBe('2026-08-19');

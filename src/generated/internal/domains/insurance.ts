@@ -9,40 +9,20 @@ import type { EsiResponse } from '../../../client/response.js';
 import {
   GetInsurancePricesDescriptor,
 } from '../descriptors/insurance.js';
-import {
+import type {
   InsuranceDomainClient,
   InsuranceDomainClientWithMetadata,
-  type GetInsurancePricesOptions,
+  GetInsurancePricesOptions,
 } from './insurance-contract.js';
 import type {
   GetInsurancePricesInput,
   GetInsurancePricesOutput,
 } from '../../schemas/operations/insurance.js';
 
-class InsuranceDomainClientImplementation extends InsuranceDomainClient {
+class InsuranceDomainClientWithMetadataImplementation implements InsuranceDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  listPrices(options?: GetInsurancePricesOptions): Promise<GetInsurancePricesOutput> {
-    const arguments_: GetInsurancePricesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetInsurancePricesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): InsuranceDomainClientWithMetadata {
-    return new InsuranceDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class InsuranceDomainClientWithMetadataImplementation extends InsuranceDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -50,6 +30,23 @@ class InsuranceDomainClientWithMetadataImplementation extends InsuranceDomainCli
   listPrices(options?: GetInsurancePricesOptions): Promise<EsiResponse<GetInsurancePricesOutput>> {
     const arguments_: GetInsurancePricesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetInsurancePricesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class InsuranceDomainClientImplementation implements InsuranceDomainClient {
+  readonly #metadata: InsuranceDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new InsuranceDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  listPrices(options?: GetInsurancePricesOptions): Promise<GetInsurancePricesOutput> {
+    return this.#metadata.listPrices(options).then((response) => response.data);
+  }
+
+  withMetadata(): InsuranceDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

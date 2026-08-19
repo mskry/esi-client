@@ -30,31 +30,31 @@ import {
   GetCorporationsCorporationIdStructuresDescriptor,
   GetCorporationsCorporationIdTitlesDescriptor,
 } from '../descriptors/corporation.js';
-import {
+import type {
   CorporationDomainClient,
   CorporationDomainClientWithMetadata,
-  type GetCorporationsCorporationIdIconsOptions,
-  type GetCorporationsCorporationIdMembersLimitOptions,
-  type GetCorporationsCorporationIdOptions,
-  type GetCorporationsCorporationIdStarbasesStarbaseIdOptions,
-  type GetCorporationsCorporationIdAlliancehistoryOptions,
-  type GetCorporationsCorporationIdContainersLogsOptions,
-  type GetCorporationsCorporationIdBlueprintsOptions,
-  type GetCorporationsCorporationIdDivisionsOptions,
-  type GetCorporationsCorporationIdFacilitiesOptions,
-  type GetCorporationsCorporationIdMedalsIssuedOptions,
-  type GetCorporationsCorporationIdMedalsOptions,
-  type GetCorporationsCorporationIdRolesHistoryOptions,
-  type GetCorporationsCorporationIdRolesOptions,
-  type GetCorporationsCorporationIdMembersTitlesOptions,
-  type GetCorporationsCorporationIdMembertrackingOptions,
-  type GetCorporationsCorporationIdMembersOptions,
-  type GetCorporationsNpccorpsOptions,
-  type GetCorporationsCorporationIdShareholdersOptions,
-  type GetCorporationsCorporationIdStandingsOptions,
-  type GetCorporationsCorporationIdStarbasesOptions,
-  type GetCorporationsCorporationIdStructuresOptions,
-  type GetCorporationsCorporationIdTitlesOptions,
+  GetCorporationsCorporationIdIconsOptions,
+  GetCorporationsCorporationIdMembersLimitOptions,
+  GetCorporationsCorporationIdOptions,
+  GetCorporationsCorporationIdStarbasesStarbaseIdOptions,
+  GetCorporationsCorporationIdAlliancehistoryOptions,
+  GetCorporationsCorporationIdContainersLogsOptions,
+  GetCorporationsCorporationIdBlueprintsOptions,
+  GetCorporationsCorporationIdDivisionsOptions,
+  GetCorporationsCorporationIdFacilitiesOptions,
+  GetCorporationsCorporationIdMedalsIssuedOptions,
+  GetCorporationsCorporationIdMedalsOptions,
+  GetCorporationsCorporationIdRolesHistoryOptions,
+  GetCorporationsCorporationIdRolesOptions,
+  GetCorporationsCorporationIdMembersTitlesOptions,
+  GetCorporationsCorporationIdMembertrackingOptions,
+  GetCorporationsCorporationIdMembersOptions,
+  GetCorporationsNpccorpsOptions,
+  GetCorporationsCorporationIdShareholdersOptions,
+  GetCorporationsCorporationIdStandingsOptions,
+  GetCorporationsCorporationIdStarbasesOptions,
+  GetCorporationsCorporationIdStructuresOptions,
+  GetCorporationsCorporationIdTitlesOptions,
 } from './corporation-contract.js';
 import type {
   GetCorporationsCorporationIdAlliancehistoryInput,
@@ -103,135 +103,10 @@ import type {
   GetCorporationsNpccorpsOutput,
 } from '../../schemas/operations/corporation.js';
 
-class CorporationDomainClientImplementation extends CorporationDomainClient {
+class CorporationDomainClientWithMetadataImplementation implements CorporationDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getIcon(corporationId: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions): Promise<GetCorporationsCorporationIdIconsOutput> {
-    const arguments_: GetCorporationsCorporationIdIconsInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdIconsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getMemberLimit(corporationId: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions): Promise<GetCorporationsCorporationIdMembersLimitOutput> {
-    const arguments_: GetCorporationsCorporationIdMembersLimitInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdMembersLimitDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getPublicInfo(corporationId: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions): Promise<GetCorporationsCorporationIdOutput> {
-    const arguments_: GetCorporationsCorporationIdInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getStarbase(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], starbaseId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions): Promise<GetCorporationsCorporationIdStarbasesStarbaseIdOutput> {
-    const arguments_: GetCorporationsCorporationIdStarbasesStarbaseIdInput = { path: { "corporation_id": corporationId, "starbase_id": starbaseId }, query: { "system_id": options?.["systemId"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdStarbasesStarbaseIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listAllianceHistory(corporationId: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions): Promise<GetCorporationsCorporationIdAlliancehistoryOutput> {
-    const arguments_: GetCorporationsCorporationIdAlliancehistoryInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdAlliancehistoryDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listAuditLogSecureContainerLogs(corporationId: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions): Promise<GetCorporationsCorporationIdContainersLogsOutput> {
-    const arguments_: GetCorporationsCorporationIdContainersLogsInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdContainersLogsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listBlueprints(corporationId: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions): Promise<GetCorporationsCorporationIdBlueprintsOutput> {
-    const arguments_: GetCorporationsCorporationIdBlueprintsInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdBlueprintsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listDivisions(corporationId: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions): Promise<GetCorporationsCorporationIdDivisionsOutput> {
-    const arguments_: GetCorporationsCorporationIdDivisionsInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdDivisionsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listFacilities(corporationId: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions): Promise<GetCorporationsCorporationIdFacilitiesOutput> {
-    const arguments_: GetCorporationsCorporationIdFacilitiesInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdFacilitiesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listIssuedMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions): Promise<GetCorporationsCorporationIdMedalsIssuedOutput> {
-    const arguments_: GetCorporationsCorporationIdMedalsIssuedInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdMedalsIssuedDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions): Promise<GetCorporationsCorporationIdMedalsOutput> {
-    const arguments_: GetCorporationsCorporationIdMedalsInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdMedalsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMemberRoleHistory(corporationId: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions): Promise<GetCorporationsCorporationIdRolesHistoryOutput> {
-    const arguments_: GetCorporationsCorporationIdRolesHistoryInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdRolesHistoryDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMemberRoles(corporationId: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions): Promise<GetCorporationsCorporationIdRolesOutput> {
-    const arguments_: GetCorporationsCorporationIdRolesInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdRolesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMemberTitles(corporationId: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions): Promise<GetCorporationsCorporationIdMembersTitlesOutput> {
-    const arguments_: GetCorporationsCorporationIdMembersTitlesInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdMembersTitlesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMemberTracking(corporationId: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions): Promise<GetCorporationsCorporationIdMembertrackingOutput> {
-    const arguments_: GetCorporationsCorporationIdMembertrackingInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdMembertrackingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMembers(corporationId: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions): Promise<GetCorporationsCorporationIdMembersOutput> {
-    const arguments_: GetCorporationsCorporationIdMembersInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdMembersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listNpcCorporations(options?: GetCorporationsNpccorpsOptions): Promise<GetCorporationsNpccorpsOutput> {
-    const arguments_: GetCorporationsNpccorpsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsNpccorpsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listShareholders(corporationId: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions): Promise<GetCorporationsCorporationIdShareholdersOutput> {
-    const arguments_: GetCorporationsCorporationIdShareholdersInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdShareholdersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listStandings(corporationId: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions): Promise<GetCorporationsCorporationIdStandingsOutput> {
-    const arguments_: GetCorporationsCorporationIdStandingsInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdStandingsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listStarbases(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions): Promise<GetCorporationsCorporationIdStarbasesOutput> {
-    const arguments_: GetCorporationsCorporationIdStarbasesInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdStarbasesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listStructures(corporationId: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions): Promise<GetCorporationsCorporationIdStructuresOutput> {
-    const arguments_: GetCorporationsCorporationIdStructuresInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdStructuresDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listTitles(corporationId: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions): Promise<GetCorporationsCorporationIdTitlesOutput> {
-    const arguments_: GetCorporationsCorporationIdTitlesInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdTitlesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): CorporationDomainClientWithMetadata {
-    return new CorporationDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class CorporationDomainClientWithMetadataImplementation extends CorporationDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -344,6 +219,107 @@ class CorporationDomainClientWithMetadataImplementation extends CorporationDomai
   listTitles(corporationId: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions): Promise<EsiResponse<GetCorporationsCorporationIdTitlesOutput>> {
     const arguments_: GetCorporationsCorporationIdTitlesInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCorporationsCorporationIdTitlesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class CorporationDomainClientImplementation implements CorporationDomainClient {
+  readonly #metadata: CorporationDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new CorporationDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getIcon(corporationId: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions): Promise<GetCorporationsCorporationIdIconsOutput> {
+    return this.#metadata.getIcon(corporationId, options).then((response) => response.data);
+  }
+
+  getMemberLimit(corporationId: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions): Promise<GetCorporationsCorporationIdMembersLimitOutput> {
+    return this.#metadata.getMemberLimit(corporationId, options).then((response) => response.data);
+  }
+
+  getPublicInfo(corporationId: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions): Promise<GetCorporationsCorporationIdOutput> {
+    return this.#metadata.getPublicInfo(corporationId, options).then((response) => response.data);
+  }
+
+  getStarbase(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], starbaseId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions): Promise<GetCorporationsCorporationIdStarbasesStarbaseIdOutput> {
+    return this.#metadata.getStarbase(corporationId, starbaseId, options).then((response) => response.data);
+  }
+
+  listAllianceHistory(corporationId: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions): Promise<GetCorporationsCorporationIdAlliancehistoryOutput> {
+    return this.#metadata.listAllianceHistory(corporationId, options).then((response) => response.data);
+  }
+
+  listAuditLogSecureContainerLogs(corporationId: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions): Promise<GetCorporationsCorporationIdContainersLogsOutput> {
+    return this.#metadata.listAuditLogSecureContainerLogs(corporationId, options).then((response) => response.data);
+  }
+
+  listBlueprints(corporationId: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions): Promise<GetCorporationsCorporationIdBlueprintsOutput> {
+    return this.#metadata.listBlueprints(corporationId, options).then((response) => response.data);
+  }
+
+  listDivisions(corporationId: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions): Promise<GetCorporationsCorporationIdDivisionsOutput> {
+    return this.#metadata.listDivisions(corporationId, options).then((response) => response.data);
+  }
+
+  listFacilities(corporationId: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions): Promise<GetCorporationsCorporationIdFacilitiesOutput> {
+    return this.#metadata.listFacilities(corporationId, options).then((response) => response.data);
+  }
+
+  listIssuedMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions): Promise<GetCorporationsCorporationIdMedalsIssuedOutput> {
+    return this.#metadata.listIssuedMedals(corporationId, options).then((response) => response.data);
+  }
+
+  listMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions): Promise<GetCorporationsCorporationIdMedalsOutput> {
+    return this.#metadata.listMedals(corporationId, options).then((response) => response.data);
+  }
+
+  listMemberRoleHistory(corporationId: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions): Promise<GetCorporationsCorporationIdRolesHistoryOutput> {
+    return this.#metadata.listMemberRoleHistory(corporationId, options).then((response) => response.data);
+  }
+
+  listMemberRoles(corporationId: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions): Promise<GetCorporationsCorporationIdRolesOutput> {
+    return this.#metadata.listMemberRoles(corporationId, options).then((response) => response.data);
+  }
+
+  listMemberTitles(corporationId: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions): Promise<GetCorporationsCorporationIdMembersTitlesOutput> {
+    return this.#metadata.listMemberTitles(corporationId, options).then((response) => response.data);
+  }
+
+  listMemberTracking(corporationId: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions): Promise<GetCorporationsCorporationIdMembertrackingOutput> {
+    return this.#metadata.listMemberTracking(corporationId, options).then((response) => response.data);
+  }
+
+  listMembers(corporationId: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions): Promise<GetCorporationsCorporationIdMembersOutput> {
+    return this.#metadata.listMembers(corporationId, options).then((response) => response.data);
+  }
+
+  listNpcCorporations(options?: GetCorporationsNpccorpsOptions): Promise<GetCorporationsNpccorpsOutput> {
+    return this.#metadata.listNpcCorporations(options).then((response) => response.data);
+  }
+
+  listShareholders(corporationId: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions): Promise<GetCorporationsCorporationIdShareholdersOutput> {
+    return this.#metadata.listShareholders(corporationId, options).then((response) => response.data);
+  }
+
+  listStandings(corporationId: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions): Promise<GetCorporationsCorporationIdStandingsOutput> {
+    return this.#metadata.listStandings(corporationId, options).then((response) => response.data);
+  }
+
+  listStarbases(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions): Promise<GetCorporationsCorporationIdStarbasesOutput> {
+    return this.#metadata.listStarbases(corporationId, options).then((response) => response.data);
+  }
+
+  listStructures(corporationId: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions): Promise<GetCorporationsCorporationIdStructuresOutput> {
+    return this.#metadata.listStructures(corporationId, options).then((response) => response.data);
+  }
+
+  listTitles(corporationId: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions): Promise<GetCorporationsCorporationIdTitlesOutput> {
+    return this.#metadata.listTitles(corporationId, options).then((response) => response.data);
+  }
+
+  withMetadata(): CorporationDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

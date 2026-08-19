@@ -14,15 +14,15 @@ import {
   PostCorporationsCorporationIdAssetsLocationsDescriptor,
   PostCorporationsCorporationIdAssetsNamesDescriptor,
 } from '../descriptors/assets.js';
-import {
+import type {
   AssetsDomainClient,
   AssetsDomainClientWithMetadata,
-  type GetCharactersCharacterIdAssetsOptions,
-  type GetCorporationsCorporationIdAssetsOptions,
-  type PostCharactersCharacterIdAssetsLocationsOptions,
-  type PostCharactersCharacterIdAssetsNamesOptions,
-  type PostCorporationsCorporationIdAssetsLocationsOptions,
-  type PostCorporationsCorporationIdAssetsNamesOptions,
+  GetCharactersCharacterIdAssetsOptions,
+  GetCorporationsCorporationIdAssetsOptions,
+  PostCharactersCharacterIdAssetsLocationsOptions,
+  PostCharactersCharacterIdAssetsNamesOptions,
+  PostCorporationsCorporationIdAssetsLocationsOptions,
+  PostCorporationsCorporationIdAssetsNamesOptions,
 } from './assets-contract.js';
 import type {
   GetCharactersCharacterIdAssetsInput,
@@ -39,55 +39,10 @@ import type {
   PostCorporationsCorporationIdAssetsNamesOutput,
 } from '../../schemas/operations/assets.js';
 
-class AssetsDomainClientImplementation extends AssetsDomainClient {
+class AssetsDomainClientWithMetadataImplementation implements AssetsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  listCharacterAssets(characterId: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions): Promise<GetCharactersCharacterIdAssetsOutput> {
-    const arguments_: GetCharactersCharacterIdAssetsInput = { path: { "character_id": characterId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdAssetsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCorporationAssets(corporationId: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions): Promise<GetCorporationsCorporationIdAssetsOutput> {
-    const arguments_: GetCorporationsCorporationIdAssetsInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdAssetsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  lookupCharacterLocations(characterId: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions): Promise<PostCharactersCharacterIdAssetsLocationsOutput> {
-    const arguments_: PostCharactersCharacterIdAssetsLocationsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersCharacterIdAssetsLocationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  lookupCharacterNames(characterId: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions): Promise<PostCharactersCharacterIdAssetsNamesOutput> {
-    const arguments_: PostCharactersCharacterIdAssetsNamesInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersCharacterIdAssetsNamesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  lookupCorporationLocations(corporationId: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions): Promise<PostCorporationsCorporationIdAssetsLocationsOutput> {
-    const arguments_: PostCorporationsCorporationIdAssetsLocationsInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCorporationsCorporationIdAssetsLocationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  lookupCorporationNames(corporationId: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions): Promise<PostCorporationsCorporationIdAssetsNamesOutput> {
-    const arguments_: PostCorporationsCorporationIdAssetsNamesInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCorporationsCorporationIdAssetsNamesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): AssetsDomainClientWithMetadata {
-    return new AssetsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class AssetsDomainClientWithMetadataImplementation extends AssetsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -120,6 +75,43 @@ class AssetsDomainClientWithMetadataImplementation extends AssetsDomainClientWit
   lookupCorporationNames(corporationId: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions): Promise<EsiResponse<PostCorporationsCorporationIdAssetsNamesOutput>> {
     const arguments_: PostCorporationsCorporationIdAssetsNamesInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
     return executeOperation(this.#configuration, PostCorporationsCorporationIdAssetsNamesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class AssetsDomainClientImplementation implements AssetsDomainClient {
+  readonly #metadata: AssetsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new AssetsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  listCharacterAssets(characterId: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions): Promise<GetCharactersCharacterIdAssetsOutput> {
+    return this.#metadata.listCharacterAssets(characterId, options).then((response) => response.data);
+  }
+
+  listCorporationAssets(corporationId: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions): Promise<GetCorporationsCorporationIdAssetsOutput> {
+    return this.#metadata.listCorporationAssets(corporationId, options).then((response) => response.data);
+  }
+
+  lookupCharacterLocations(characterId: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions): Promise<PostCharactersCharacterIdAssetsLocationsOutput> {
+    return this.#metadata.lookupCharacterLocations(characterId, options).then((response) => response.data);
+  }
+
+  lookupCharacterNames(characterId: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions): Promise<PostCharactersCharacterIdAssetsNamesOutput> {
+    return this.#metadata.lookupCharacterNames(characterId, options).then((response) => response.data);
+  }
+
+  lookupCorporationLocations(corporationId: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions): Promise<PostCorporationsCorporationIdAssetsLocationsOutput> {
+    return this.#metadata.lookupCorporationLocations(corporationId, options).then((response) => response.data);
+  }
+
+  lookupCorporationNames(corporationId: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions): Promise<PostCorporationsCorporationIdAssetsNamesOutput> {
+    return this.#metadata.lookupCorporationNames(corporationId, options).then((response) => response.data);
+  }
+
+  withMetadata(): AssetsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

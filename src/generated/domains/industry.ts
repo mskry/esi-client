@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindIndustryDomainClient } from '../internal/domains/industry.js';
 import type { IndustryDomainClient } from '../internal/domains/industry-contract.js';
 
-export * from '../internal/domains/industry-contract.js';
+export type * from '../internal/domains/industry-contract.js';
 
 export function createIndustryClient(options: EsiClientOptions = {}): IndustryDomainClient {
   return bindIndustryDomainClient(new EsiClientConfiguration(options));

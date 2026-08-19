@@ -71,36 +71,32 @@ export interface GetFreelanceJobsListingOptions {
   readonly "xTenant"?: NonNullable<GetFreelanceJobsListingInput["header"]>["X-Tenant"];
 }
 
-export abstract class FreelanceJobsDomainClient {
-  protected constructor() {}
+export interface FreelanceJobsDomainClient {
+  get(jobId: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions): Promise<GetFreelanceJobsDetailOutput>;
 
-  abstract get(jobId: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions): Promise<GetFreelanceJobsDetailOutput>;
+  getCharacterParticipation(characterId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], jobId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions): Promise<GetCharactersFreelanceJobsParticipationOutput>;
 
-  abstract getCharacterParticipation(characterId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], jobId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions): Promise<GetCharactersFreelanceJobsParticipationOutput>;
+  listCharacterJobs(characterId: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions): Promise<GetCharactersFreelanceJobsListingOutput>;
 
-  abstract listCharacterJobs(characterId: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions): Promise<GetCharactersFreelanceJobsListingOutput>;
+  listCorporationJobs(corporationId: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions): Promise<GetCorporationsFreelanceJobsListingOutput>;
 
-  abstract listCorporationJobs(corporationId: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions): Promise<GetCorporationsFreelanceJobsListingOutput>;
+  listParticipants(corporationId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], jobId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions): Promise<GetCorporationsFreelanceJobsParticipantsOutput>;
 
-  abstract listParticipants(corporationId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], jobId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions): Promise<GetCorporationsFreelanceJobsParticipantsOutput>;
+  listPublic(options?: GetFreelanceJobsListingOptions): Promise<GetFreelanceJobsListingOutput>;
 
-  abstract listPublic(options?: GetFreelanceJobsListingOptions): Promise<GetFreelanceJobsListingOutput>;
-
-  abstract withMetadata(): FreelanceJobsDomainClientWithMetadata;
+  withMetadata(): FreelanceJobsDomainClientWithMetadata;
 }
 
-export abstract class FreelanceJobsDomainClientWithMetadata {
-  protected constructor() {}
+export interface FreelanceJobsDomainClientWithMetadata {
+  get(jobId: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions): Promise<EsiResponse<GetFreelanceJobsDetailOutput>>;
 
-  abstract get(jobId: NonNullable<GetFreelanceJobsDetailInput['path']>["job_id"], options?: GetFreelanceJobsDetailOptions): Promise<EsiResponse<GetFreelanceJobsDetailOutput>>;
+  getCharacterParticipation(characterId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], jobId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions): Promise<EsiResponse<GetCharactersFreelanceJobsParticipationOutput>>;
 
-  abstract getCharacterParticipation(characterId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["character_id"], jobId: NonNullable<GetCharactersFreelanceJobsParticipationInput['path']>["job_id"], options?: GetCharactersFreelanceJobsParticipationOptions): Promise<EsiResponse<GetCharactersFreelanceJobsParticipationOutput>>;
+  listCharacterJobs(characterId: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions): Promise<EsiResponse<GetCharactersFreelanceJobsListingOutput>>;
 
-  abstract listCharacterJobs(characterId: NonNullable<GetCharactersFreelanceJobsListingInput['path']>["character_id"], options?: GetCharactersFreelanceJobsListingOptions): Promise<EsiResponse<GetCharactersFreelanceJobsListingOutput>>;
+  listCorporationJobs(corporationId: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions): Promise<EsiResponse<GetCorporationsFreelanceJobsListingOutput>>;
 
-  abstract listCorporationJobs(corporationId: NonNullable<GetCorporationsFreelanceJobsListingInput['path']>["corporation_id"], options?: GetCorporationsFreelanceJobsListingOptions): Promise<EsiResponse<GetCorporationsFreelanceJobsListingOutput>>;
+  listParticipants(corporationId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], jobId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions): Promise<EsiResponse<GetCorporationsFreelanceJobsParticipantsOutput>>;
 
-  abstract listParticipants(corporationId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["corporation_id"], jobId: NonNullable<GetCorporationsFreelanceJobsParticipantsInput['path']>["job_id"], options?: GetCorporationsFreelanceJobsParticipantsOptions): Promise<EsiResponse<GetCorporationsFreelanceJobsParticipantsOutput>>;
-
-  abstract listPublic(options?: GetFreelanceJobsListingOptions): Promise<EsiResponse<GetFreelanceJobsListingOutput>>;
+  listPublic(options?: GetFreelanceJobsListingOptions): Promise<EsiResponse<GetFreelanceJobsListingOutput>>;
 }

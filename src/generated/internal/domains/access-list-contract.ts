@@ -25,20 +25,16 @@ export interface GetCharactersAccessListsListingOptions {
   readonly "xTenant"?: NonNullable<GetCharactersAccessListsListingInput["header"]>["X-Tenant"];
 }
 
-export abstract class AccessListDomainClient {
-  protected constructor() {}
+export interface AccessListDomainClient {
+  get(characterId: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], accessListId: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions): Promise<GetCharactersAccessListsDetailOutput>;
 
-  abstract get(characterId: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], accessListId: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions): Promise<GetCharactersAccessListsDetailOutput>;
+  list(characterId: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions): Promise<GetCharactersAccessListsListingOutput>;
 
-  abstract list(characterId: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions): Promise<GetCharactersAccessListsListingOutput>;
-
-  abstract withMetadata(): AccessListDomainClientWithMetadata;
+  withMetadata(): AccessListDomainClientWithMetadata;
 }
 
-export abstract class AccessListDomainClientWithMetadata {
-  protected constructor() {}
+export interface AccessListDomainClientWithMetadata {
+  get(characterId: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], accessListId: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions): Promise<EsiResponse<GetCharactersAccessListsDetailOutput>>;
 
-  abstract get(characterId: NonNullable<GetCharactersAccessListsDetailInput['path']>["character_id"], accessListId: NonNullable<GetCharactersAccessListsDetailInput['path']>["access_list_id"], options?: GetCharactersAccessListsDetailOptions): Promise<EsiResponse<GetCharactersAccessListsDetailOutput>>;
-
-  abstract list(characterId: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions): Promise<EsiResponse<GetCharactersAccessListsListingOutput>>;
+  list(characterId: NonNullable<GetCharactersAccessListsListingInput['path']>["character_id"], options?: GetCharactersAccessListsListingOptions): Promise<EsiResponse<GetCharactersAccessListsListingOutput>>;
 }

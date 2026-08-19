@@ -16,16 +16,12 @@ export interface GetInsurancePricesOptions {
   readonly "xTenant"?: NonNullable<GetInsurancePricesInput["header"]>["X-Tenant"];
 }
 
-export abstract class InsuranceDomainClient {
-  protected constructor() {}
+export interface InsuranceDomainClient {
+  listPrices(options?: GetInsurancePricesOptions): Promise<GetInsurancePricesOutput>;
 
-  abstract listPrices(options?: GetInsurancePricesOptions): Promise<GetInsurancePricesOutput>;
-
-  abstract withMetadata(): InsuranceDomainClientWithMetadata;
+  withMetadata(): InsuranceDomainClientWithMetadata;
 }
 
-export abstract class InsuranceDomainClientWithMetadata {
-  protected constructor() {}
-
-  abstract listPrices(options?: GetInsurancePricesOptions): Promise<EsiResponse<GetInsurancePricesOutput>>;
+export interface InsuranceDomainClientWithMetadata {
+  listPrices(options?: GetInsurancePricesOptions): Promise<EsiResponse<GetInsurancePricesOutput>>;
 }

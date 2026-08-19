@@ -12,13 +12,13 @@ import {
   GetCorporationsProjectsListingDescriptor,
   GetCorporationsProjectsContributorsDescriptor,
 } from '../descriptors/corporation-projects.js';
-import {
+import type {
   CorporationProjectsDomainClient,
   CorporationProjectsDomainClientWithMetadata,
-  type GetCorporationsProjectsDetailOptions,
-  type GetCorporationsProjectsContributionOptions,
-  type GetCorporationsProjectsListingOptions,
-  type GetCorporationsProjectsContributorsOptions,
+  GetCorporationsProjectsDetailOptions,
+  GetCorporationsProjectsContributionOptions,
+  GetCorporationsProjectsListingOptions,
+  GetCorporationsProjectsContributorsOptions,
 } from './corporation-projects-contract.js';
 import type {
   GetCorporationsProjectsContributionInput,
@@ -31,45 +31,10 @@ import type {
   GetCorporationsProjectsListingOutput,
 } from '../../schemas/operations/corporation-projects.js';
 
-class CorporationProjectsDomainClientImplementation extends CorporationProjectsDomainClient {
+class CorporationProjectsDomainClientWithMetadataImplementation implements CorporationProjectsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  get(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<GetCorporationsProjectsDetailOutput> {
-    const arguments_: GetCorporationsProjectsDetailInput = { path: { "corporation_id": corporationId, "project_id": projectId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<GetCorporationsProjectsContributionOutput> {
-    const arguments_: GetCorporationsProjectsContributionInput = { path: { "corporation_id": corporationId, "project_id": projectId, "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsContributionDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  list(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<GetCorporationsProjectsListingOutput> {
-    const arguments_: GetCorporationsProjectsListingInput = { path: { "corporation_id": corporationId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"], "state": options?.["state"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<GetCorporationsProjectsContributorsOutput> {
-    const arguments_: GetCorporationsProjectsContributorsInput = { path: { "corporation_id": corporationId, "project_id": projectId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsProjectsContributorsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): CorporationProjectsDomainClientWithMetadata {
-    return new CorporationProjectsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class CorporationProjectsDomainClientWithMetadataImplementation extends CorporationProjectsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -92,6 +57,35 @@ class CorporationProjectsDomainClientWithMetadataImplementation extends Corporat
   listContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<EsiResponse<GetCorporationsProjectsContributorsOutput>> {
     const arguments_: GetCorporationsProjectsContributorsInput = { path: { "corporation_id": corporationId, "project_id": projectId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCorporationsProjectsContributorsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class CorporationProjectsDomainClientImplementation implements CorporationProjectsDomainClient {
+  readonly #metadata: CorporationProjectsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new CorporationProjectsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  get(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<GetCorporationsProjectsDetailOutput> {
+    return this.#metadata.get(corporationId, projectId, options).then((response) => response.data);
+  }
+
+  getContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<GetCorporationsProjectsContributionOutput> {
+    return this.#metadata.getContribution(corporationId, projectId, characterId, options).then((response) => response.data);
+  }
+
+  list(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<GetCorporationsProjectsListingOutput> {
+    return this.#metadata.list(corporationId, options).then((response) => response.data);
+  }
+
+  listContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<GetCorporationsProjectsContributorsOutput> {
+    return this.#metadata.listContributors(corporationId, projectId, options).then((response) => response.data);
+  }
+
+  withMetadata(): CorporationProjectsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

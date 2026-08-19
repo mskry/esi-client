@@ -34,24 +34,20 @@ export interface GetCharactersCharacterIdOnlineOptions {
   readonly "xTenant"?: NonNullable<GetCharactersCharacterIdOnlineInput["header"]>["X-Tenant"];
 }
 
-export abstract class LocationDomainClient {
-  protected constructor() {}
+export interface LocationDomainClient {
+  get(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<GetCharactersCharacterIdLocationOutput>;
 
-  abstract get(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<GetCharactersCharacterIdLocationOutput>;
+  getCurrentShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<GetCharactersCharacterIdShipOutput>;
 
-  abstract getCurrentShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<GetCharactersCharacterIdShipOutput>;
+  getOnlineStatus(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<GetCharactersCharacterIdOnlineOutput>;
 
-  abstract getOnlineStatus(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<GetCharactersCharacterIdOnlineOutput>;
-
-  abstract withMetadata(): LocationDomainClientWithMetadata;
+  withMetadata(): LocationDomainClientWithMetadata;
 }
 
-export abstract class LocationDomainClientWithMetadata {
-  protected constructor() {}
+export interface LocationDomainClientWithMetadata {
+  get(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<EsiResponse<GetCharactersCharacterIdLocationOutput>>;
 
-  abstract get(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<EsiResponse<GetCharactersCharacterIdLocationOutput>>;
+  getCurrentShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<EsiResponse<GetCharactersCharacterIdShipOutput>>;
 
-  abstract getCurrentShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<EsiResponse<GetCharactersCharacterIdShipOutput>>;
-
-  abstract getOnlineStatus(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<EsiResponse<GetCharactersCharacterIdOnlineOutput>>;
+  getOnlineStatus(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<EsiResponse<GetCharactersCharacterIdOnlineOutput>>;
 }

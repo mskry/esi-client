@@ -52,32 +52,28 @@ export interface GetDogmaEffectsOptions {
   readonly "xTenant"?: NonNullable<GetDogmaEffectsInput["header"]>["X-Tenant"];
 }
 
-export abstract class DogmaDomainClient {
-  protected constructor() {}
+export interface DogmaDomainClient {
+  getAttribute(attributeId: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions): Promise<GetDogmaAttributesAttributeIdOutput>;
 
-  abstract getAttribute(attributeId: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions): Promise<GetDogmaAttributesAttributeIdOutput>;
+  getDynamicItem(typeId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], itemId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions): Promise<GetDogmaDynamicItemsTypeIdItemIdOutput>;
 
-  abstract getDynamicItem(typeId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], itemId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions): Promise<GetDogmaDynamicItemsTypeIdItemIdOutput>;
+  getEffect(effectId: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions): Promise<GetDogmaEffectsEffectIdOutput>;
 
-  abstract getEffect(effectId: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions): Promise<GetDogmaEffectsEffectIdOutput>;
+  listAttributes(options?: GetDogmaAttributesOptions): Promise<GetDogmaAttributesOutput>;
 
-  abstract listAttributes(options?: GetDogmaAttributesOptions): Promise<GetDogmaAttributesOutput>;
+  listEffects(options?: GetDogmaEffectsOptions): Promise<GetDogmaEffectsOutput>;
 
-  abstract listEffects(options?: GetDogmaEffectsOptions): Promise<GetDogmaEffectsOutput>;
-
-  abstract withMetadata(): DogmaDomainClientWithMetadata;
+  withMetadata(): DogmaDomainClientWithMetadata;
 }
 
-export abstract class DogmaDomainClientWithMetadata {
-  protected constructor() {}
+export interface DogmaDomainClientWithMetadata {
+  getAttribute(attributeId: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions): Promise<EsiResponse<GetDogmaAttributesAttributeIdOutput>>;
 
-  abstract getAttribute(attributeId: NonNullable<GetDogmaAttributesAttributeIdInput['path']>["attribute_id"], options?: GetDogmaAttributesAttributeIdOptions): Promise<EsiResponse<GetDogmaAttributesAttributeIdOutput>>;
+  getDynamicItem(typeId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], itemId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions): Promise<EsiResponse<GetDogmaDynamicItemsTypeIdItemIdOutput>>;
 
-  abstract getDynamicItem(typeId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["type_id"], itemId: NonNullable<GetDogmaDynamicItemsTypeIdItemIdInput['path']>["item_id"], options?: GetDogmaDynamicItemsTypeIdItemIdOptions): Promise<EsiResponse<GetDogmaDynamicItemsTypeIdItemIdOutput>>;
+  getEffect(effectId: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions): Promise<EsiResponse<GetDogmaEffectsEffectIdOutput>>;
 
-  abstract getEffect(effectId: NonNullable<GetDogmaEffectsEffectIdInput['path']>["effect_id"], options?: GetDogmaEffectsEffectIdOptions): Promise<EsiResponse<GetDogmaEffectsEffectIdOutput>>;
+  listAttributes(options?: GetDogmaAttributesOptions): Promise<EsiResponse<GetDogmaAttributesOutput>>;
 
-  abstract listAttributes(options?: GetDogmaAttributesOptions): Promise<EsiResponse<GetDogmaAttributesOutput>>;
-
-  abstract listEffects(options?: GetDogmaEffectsOptions): Promise<EsiResponse<GetDogmaEffectsOutput>>;
+  listEffects(options?: GetDogmaEffectsOptions): Promise<EsiResponse<GetDogmaEffectsOutput>>;
 }

@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindWarsDomainClient } from '../internal/domains/wars.js';
 import type { WarsDomainClient } from '../internal/domains/wars-contract.js';
 
-export * from '../internal/domains/wars-contract.js';
+export type * from '../internal/domains/wars-contract.js';
 
 export function createWarsClient(options: EsiClientOptions = {}): WarsDomainClient {
   return bindWarsDomainClient(new EsiClientConfiguration(options));

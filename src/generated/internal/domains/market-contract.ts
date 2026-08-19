@@ -115,56 +115,52 @@ export interface GetMarketsStructuresStructureIdOptions {
   readonly "xTenant"?: NonNullable<GetMarketsStructuresStructureIdInput["header"]>["X-Tenant"];
 }
 
-export abstract class MarketDomainClient {
-  protected constructor() {}
+export interface MarketDomainClient {
+  getGroup(marketGroupId: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions): Promise<GetMarketsGroupsMarketGroupIdOutput>;
 
-  abstract getGroup(marketGroupId: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions): Promise<GetMarketsGroupsMarketGroupIdOutput>;
+  listCharacterOrderHistory(characterId: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions): Promise<GetCharactersCharacterIdOrdersHistoryOutput>;
 
-  abstract listCharacterOrderHistory(characterId: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions): Promise<GetCharactersCharacterIdOrdersHistoryOutput>;
+  listCharacterOrders(characterId: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions): Promise<GetCharactersCharacterIdOrdersOutput>;
 
-  abstract listCharacterOrders(characterId: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions): Promise<GetCharactersCharacterIdOrdersOutput>;
+  listCorporationOrderHistory(corporationId: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions): Promise<GetCorporationsCorporationIdOrdersHistoryOutput>;
 
-  abstract listCorporationOrderHistory(corporationId: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions): Promise<GetCorporationsCorporationIdOrdersHistoryOutput>;
+  listCorporationOrders(corporationId: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions): Promise<GetCorporationsCorporationIdOrdersOutput>;
 
-  abstract listCorporationOrders(corporationId: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions): Promise<GetCorporationsCorporationIdOrdersOutput>;
+  listGroups(options?: GetMarketsGroupsOptions): Promise<GetMarketsGroupsOutput>;
 
-  abstract listGroups(options?: GetMarketsGroupsOptions): Promise<GetMarketsGroupsOutput>;
+  listPrices(options?: GetMarketsPricesOptions): Promise<GetMarketsPricesOutput>;
 
-  abstract listPrices(options?: GetMarketsPricesOptions): Promise<GetMarketsPricesOutput>;
+  listRegionHistory(regionId: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions): Promise<GetMarketsRegionIdHistoryOutput>;
 
-  abstract listRegionHistory(regionId: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions): Promise<GetMarketsRegionIdHistoryOutput>;
+  listRegionOrders(regionId: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions): Promise<GetMarketsRegionIdOrdersOutput>;
 
-  abstract listRegionOrders(regionId: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions): Promise<GetMarketsRegionIdOrdersOutput>;
+  listRegionTypes(regionId: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions): Promise<GetMarketsRegionIdTypesOutput>;
 
-  abstract listRegionTypes(regionId: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions): Promise<GetMarketsRegionIdTypesOutput>;
+  listStructureOrders(structureId: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions): Promise<GetMarketsStructuresStructureIdOutput>;
 
-  abstract listStructureOrders(structureId: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions): Promise<GetMarketsStructuresStructureIdOutput>;
-
-  abstract withMetadata(): MarketDomainClientWithMetadata;
+  withMetadata(): MarketDomainClientWithMetadata;
 }
 
-export abstract class MarketDomainClientWithMetadata {
-  protected constructor() {}
+export interface MarketDomainClientWithMetadata {
+  getGroup(marketGroupId: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions): Promise<EsiResponse<GetMarketsGroupsMarketGroupIdOutput>>;
 
-  abstract getGroup(marketGroupId: NonNullable<GetMarketsGroupsMarketGroupIdInput['path']>["market_group_id"], options?: GetMarketsGroupsMarketGroupIdOptions): Promise<EsiResponse<GetMarketsGroupsMarketGroupIdOutput>>;
+  listCharacterOrderHistory(characterId: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions): Promise<EsiResponse<GetCharactersCharacterIdOrdersHistoryOutput>>;
 
-  abstract listCharacterOrderHistory(characterId: NonNullable<GetCharactersCharacterIdOrdersHistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersHistoryOptions): Promise<EsiResponse<GetCharactersCharacterIdOrdersHistoryOutput>>;
+  listCharacterOrders(characterId: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions): Promise<EsiResponse<GetCharactersCharacterIdOrdersOutput>>;
 
-  abstract listCharacterOrders(characterId: NonNullable<GetCharactersCharacterIdOrdersInput['path']>["character_id"], options?: GetCharactersCharacterIdOrdersOptions): Promise<EsiResponse<GetCharactersCharacterIdOrdersOutput>>;
+  listCorporationOrderHistory(corporationId: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions): Promise<EsiResponse<GetCorporationsCorporationIdOrdersHistoryOutput>>;
 
-  abstract listCorporationOrderHistory(corporationId: NonNullable<GetCorporationsCorporationIdOrdersHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersHistoryOptions): Promise<EsiResponse<GetCorporationsCorporationIdOrdersHistoryOutput>>;
+  listCorporationOrders(corporationId: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions): Promise<EsiResponse<GetCorporationsCorporationIdOrdersOutput>>;
 
-  abstract listCorporationOrders(corporationId: NonNullable<GetCorporationsCorporationIdOrdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOrdersOptions): Promise<EsiResponse<GetCorporationsCorporationIdOrdersOutput>>;
+  listGroups(options?: GetMarketsGroupsOptions): Promise<EsiResponse<GetMarketsGroupsOutput>>;
 
-  abstract listGroups(options?: GetMarketsGroupsOptions): Promise<EsiResponse<GetMarketsGroupsOutput>>;
+  listPrices(options?: GetMarketsPricesOptions): Promise<EsiResponse<GetMarketsPricesOutput>>;
 
-  abstract listPrices(options?: GetMarketsPricesOptions): Promise<EsiResponse<GetMarketsPricesOutput>>;
+  listRegionHistory(regionId: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions): Promise<EsiResponse<GetMarketsRegionIdHistoryOutput>>;
 
-  abstract listRegionHistory(regionId: NonNullable<GetMarketsRegionIdHistoryInput['path']>["region_id"], options: GetMarketsRegionIdHistoryOptions): Promise<EsiResponse<GetMarketsRegionIdHistoryOutput>>;
+  listRegionOrders(regionId: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions): Promise<EsiResponse<GetMarketsRegionIdOrdersOutput>>;
 
-  abstract listRegionOrders(regionId: NonNullable<GetMarketsRegionIdOrdersInput['path']>["region_id"], options: GetMarketsRegionIdOrdersOptions): Promise<EsiResponse<GetMarketsRegionIdOrdersOutput>>;
+  listRegionTypes(regionId: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions): Promise<EsiResponse<GetMarketsRegionIdTypesOutput>>;
 
-  abstract listRegionTypes(regionId: NonNullable<GetMarketsRegionIdTypesInput['path']>["region_id"], options?: GetMarketsRegionIdTypesOptions): Promise<EsiResponse<GetMarketsRegionIdTypesOutput>>;
-
-  abstract listStructureOrders(structureId: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions): Promise<EsiResponse<GetMarketsStructuresStructureIdOutput>>;
+  listStructureOrders(structureId: NonNullable<GetMarketsStructuresStructureIdInput['path']>["structure_id"], options?: GetMarketsStructuresStructureIdOptions): Promise<EsiResponse<GetMarketsStructuresStructureIdOutput>>;
 }

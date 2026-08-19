@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindMailDomainClient } from '../internal/domains/mail.js';
 import type { MailDomainClient } from '../internal/domains/mail-contract.js';
 
-export * from '../internal/domains/mail-contract.js';
+export type * from '../internal/domains/mail-contract.js';
 
 export function createMailClient(options: EsiClientOptions = {}): MailDomainClient {
   return bindMailDomainClient(new EsiClientConfiguration(options));

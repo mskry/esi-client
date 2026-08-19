@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindLocationDomainClient } from '../internal/domains/location.js';
 import type { LocationDomainClient } from '../internal/domains/location-contract.js';
 
-export * from '../internal/domains/location-contract.js';
+export type * from '../internal/domains/location-contract.js';
 
 export function createLocationClient(options: EsiClientOptions = {}): LocationDomainClient {
   return bindLocationDomainClient(new EsiClientConfiguration(options));

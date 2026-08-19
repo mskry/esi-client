@@ -38,39 +38,39 @@ import {
   PostUniverseIdsDescriptor,
   PostUniverseNamesDescriptor,
 } from '../descriptors/universe.js';
-import {
+import type {
   UniverseDomainClient,
   UniverseDomainClientWithMetadata,
-  type GetUniverseAsteroidBeltsAsteroidBeltIdOptions,
-  type GetUniverseConstellationsConstellationIdOptions,
-  type GetUniverseGraphicsGraphicIdOptions,
-  type GetUniverseCategoriesCategoryIdOptions,
-  type GetUniverseGroupsGroupIdOptions,
-  type GetUniverseMoonsMoonIdOptions,
-  type GetUniversePlanetsPlanetIdOptions,
-  type GetUniverseRegionsRegionIdOptions,
-  type GetUniverseSystemsSystemIdOptions,
-  type GetUniverseStarsStarIdOptions,
-  type GetUniverseStargatesStargateIdOptions,
-  type GetUniverseStationsStationIdOptions,
-  type GetUniverseStructuresStructureIdOptions,
-  type GetUniverseTypesTypeIdOptions,
-  type GetUniverseAncestriesOptions,
-  type GetUniverseBloodlinesOptions,
-  type GetUniverseConstellationsOptions,
-  type GetUniverseFactionsOptions,
-  type GetUniverseGraphicsOptions,
-  type GetUniverseCategoriesOptions,
-  type GetUniverseGroupsOptions,
-  type GetUniverseStructuresOptions,
-  type GetUniverseRacesOptions,
-  type GetUniverseRegionsOptions,
-  type GetUniverseSystemsOptions,
-  type GetUniverseSystemJumpsOptions,
-  type GetUniverseSystemKillsOptions,
-  type GetUniverseTypesOptions,
-  type PostUniverseIdsOptions,
-  type PostUniverseNamesOptions,
+  GetUniverseAsteroidBeltsAsteroidBeltIdOptions,
+  GetUniverseConstellationsConstellationIdOptions,
+  GetUniverseGraphicsGraphicIdOptions,
+  GetUniverseCategoriesCategoryIdOptions,
+  GetUniverseGroupsGroupIdOptions,
+  GetUniverseMoonsMoonIdOptions,
+  GetUniversePlanetsPlanetIdOptions,
+  GetUniverseRegionsRegionIdOptions,
+  GetUniverseSystemsSystemIdOptions,
+  GetUniverseStarsStarIdOptions,
+  GetUniverseStargatesStargateIdOptions,
+  GetUniverseStationsStationIdOptions,
+  GetUniverseStructuresStructureIdOptions,
+  GetUniverseTypesTypeIdOptions,
+  GetUniverseAncestriesOptions,
+  GetUniverseBloodlinesOptions,
+  GetUniverseConstellationsOptions,
+  GetUniverseFactionsOptions,
+  GetUniverseGraphicsOptions,
+  GetUniverseCategoriesOptions,
+  GetUniverseGroupsOptions,
+  GetUniverseStructuresOptions,
+  GetUniverseRacesOptions,
+  GetUniverseRegionsOptions,
+  GetUniverseSystemsOptions,
+  GetUniverseSystemJumpsOptions,
+  GetUniverseSystemKillsOptions,
+  GetUniverseTypesOptions,
+  PostUniverseIdsOptions,
+  PostUniverseNamesOptions,
 } from './universe-contract.js';
 import type {
   GetUniverseAncestriesInput,
@@ -135,175 +135,10 @@ import type {
   PostUniverseNamesOutput,
 } from '../../schemas/operations/universe.js';
 
-class UniverseDomainClientImplementation extends UniverseDomainClient {
+class UniverseDomainClientWithMetadataImplementation implements UniverseDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getAsteroidBelt(asteroidBeltId: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions): Promise<GetUniverseAsteroidBeltsAsteroidBeltIdOutput> {
-    const arguments_: GetUniverseAsteroidBeltsAsteroidBeltIdInput = { path: { "asteroid_belt_id": asteroidBeltId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseAsteroidBeltsAsteroidBeltIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getConstellation(constellationId: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions): Promise<GetUniverseConstellationsConstellationIdOutput> {
-    const arguments_: GetUniverseConstellationsConstellationIdInput = { path: { "constellation_id": constellationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseConstellationsConstellationIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getGraphic(graphicId: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions): Promise<GetUniverseGraphicsGraphicIdOutput> {
-    const arguments_: GetUniverseGraphicsGraphicIdInput = { path: { "graphic_id": graphicId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseGraphicsGraphicIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getItemCategory(categoryId: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions): Promise<GetUniverseCategoriesCategoryIdOutput> {
-    const arguments_: GetUniverseCategoriesCategoryIdInput = { path: { "category_id": categoryId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseCategoriesCategoryIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getItemGroup(groupId: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions): Promise<GetUniverseGroupsGroupIdOutput> {
-    const arguments_: GetUniverseGroupsGroupIdInput = { path: { "group_id": groupId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseGroupsGroupIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getMoon(moonId: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions): Promise<GetUniverseMoonsMoonIdOutput> {
-    const arguments_: GetUniverseMoonsMoonIdInput = { path: { "moon_id": moonId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseMoonsMoonIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getPlanet(planetId: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions): Promise<GetUniversePlanetsPlanetIdOutput> {
-    const arguments_: GetUniversePlanetsPlanetIdInput = { path: { "planet_id": planetId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniversePlanetsPlanetIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getRegion(regionId: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions): Promise<GetUniverseRegionsRegionIdOutput> {
-    const arguments_: GetUniverseRegionsRegionIdInput = { path: { "region_id": regionId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseRegionsRegionIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getSolarSystem(systemId: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions): Promise<GetUniverseSystemsSystemIdOutput> {
-    const arguments_: GetUniverseSystemsSystemIdInput = { path: { "system_id": systemId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseSystemsSystemIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getStar(starId: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions): Promise<GetUniverseStarsStarIdOutput> {
-    const arguments_: GetUniverseStarsStarIdInput = { path: { "star_id": starId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseStarsStarIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getStargate(stargateId: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions): Promise<GetUniverseStargatesStargateIdOutput> {
-    const arguments_: GetUniverseStargatesStargateIdInput = { path: { "stargate_id": stargateId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseStargatesStargateIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getStation(stationId: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions): Promise<GetUniverseStationsStationIdOutput> {
-    const arguments_: GetUniverseStationsStationIdInput = { path: { "station_id": stationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseStationsStationIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getStructure(structureId: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions): Promise<GetUniverseStructuresStructureIdOutput> {
-    const arguments_: GetUniverseStructuresStructureIdInput = { path: { "structure_id": structureId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseStructuresStructureIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getType(typeId: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions): Promise<GetUniverseTypesTypeIdOutput> {
-    const arguments_: GetUniverseTypesTypeIdInput = { path: { "type_id": typeId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseTypesTypeIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listAncestries(options?: GetUniverseAncestriesOptions): Promise<GetUniverseAncestriesOutput> {
-    const arguments_: GetUniverseAncestriesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseAncestriesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listBloodlines(options?: GetUniverseBloodlinesOptions): Promise<GetUniverseBloodlinesOutput> {
-    const arguments_: GetUniverseBloodlinesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseBloodlinesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listConstellations(options?: GetUniverseConstellationsOptions): Promise<GetUniverseConstellationsOutput> {
-    const arguments_: GetUniverseConstellationsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseConstellationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listFactions(options?: GetUniverseFactionsOptions): Promise<GetUniverseFactionsOutput> {
-    const arguments_: GetUniverseFactionsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseFactionsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listGraphics(options?: GetUniverseGraphicsOptions): Promise<GetUniverseGraphicsOutput> {
-    const arguments_: GetUniverseGraphicsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseGraphicsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listItemCategories(options?: GetUniverseCategoriesOptions): Promise<GetUniverseCategoriesOutput> {
-    const arguments_: GetUniverseCategoriesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseCategoriesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listItemGroups(options?: GetUniverseGroupsOptions): Promise<GetUniverseGroupsOutput> {
-    const arguments_: GetUniverseGroupsInput = { query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseGroupsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listPublicStructures(options?: GetUniverseStructuresOptions): Promise<GetUniverseStructuresOutput> {
-    const arguments_: GetUniverseStructuresInput = { query: { "filter": options?.["filter"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseStructuresDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listRaces(options?: GetUniverseRacesOptions): Promise<GetUniverseRacesOutput> {
-    const arguments_: GetUniverseRacesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseRacesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listRegions(options?: GetUniverseRegionsOptions): Promise<GetUniverseRegionsOutput> {
-    const arguments_: GetUniverseRegionsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseRegionsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSolarSystems(options?: GetUniverseSystemsOptions): Promise<GetUniverseSystemsOutput> {
-    const arguments_: GetUniverseSystemsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseSystemsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSystemJumps(options?: GetUniverseSystemJumpsOptions): Promise<GetUniverseSystemJumpsOutput> {
-    const arguments_: GetUniverseSystemJumpsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseSystemJumpsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSystemKills(options?: GetUniverseSystemKillsOptions): Promise<GetUniverseSystemKillsOutput> {
-    const arguments_: GetUniverseSystemKillsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseSystemKillsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listTypes(options?: GetUniverseTypesOptions): Promise<GetUniverseTypesOutput> {
-    const arguments_: GetUniverseTypesInput = { query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetUniverseTypesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  resolveIds(options: PostUniverseIdsOptions): Promise<PostUniverseIdsOutput> {
-    const arguments_: PostUniverseIdsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostUniverseIdsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  resolveNames(options: PostUniverseNamesOptions): Promise<PostUniverseNamesOutput> {
-    const arguments_: PostUniverseNamesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostUniverseNamesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): UniverseDomainClientWithMetadata {
-    return new UniverseDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class UniverseDomainClientWithMetadataImplementation extends UniverseDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -456,6 +291,139 @@ class UniverseDomainClientWithMetadataImplementation extends UniverseDomainClien
   resolveNames(options: PostUniverseNamesOptions): Promise<EsiResponse<PostUniverseNamesOutput>> {
     const arguments_: PostUniverseNamesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
     return executeOperation(this.#configuration, PostUniverseNamesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class UniverseDomainClientImplementation implements UniverseDomainClient {
+  readonly #metadata: UniverseDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new UniverseDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getAsteroidBelt(asteroidBeltId: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions): Promise<GetUniverseAsteroidBeltsAsteroidBeltIdOutput> {
+    return this.#metadata.getAsteroidBelt(asteroidBeltId, options).then((response) => response.data);
+  }
+
+  getConstellation(constellationId: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions): Promise<GetUniverseConstellationsConstellationIdOutput> {
+    return this.#metadata.getConstellation(constellationId, options).then((response) => response.data);
+  }
+
+  getGraphic(graphicId: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions): Promise<GetUniverseGraphicsGraphicIdOutput> {
+    return this.#metadata.getGraphic(graphicId, options).then((response) => response.data);
+  }
+
+  getItemCategory(categoryId: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions): Promise<GetUniverseCategoriesCategoryIdOutput> {
+    return this.#metadata.getItemCategory(categoryId, options).then((response) => response.data);
+  }
+
+  getItemGroup(groupId: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions): Promise<GetUniverseGroupsGroupIdOutput> {
+    return this.#metadata.getItemGroup(groupId, options).then((response) => response.data);
+  }
+
+  getMoon(moonId: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions): Promise<GetUniverseMoonsMoonIdOutput> {
+    return this.#metadata.getMoon(moonId, options).then((response) => response.data);
+  }
+
+  getPlanet(planetId: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions): Promise<GetUniversePlanetsPlanetIdOutput> {
+    return this.#metadata.getPlanet(planetId, options).then((response) => response.data);
+  }
+
+  getRegion(regionId: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions): Promise<GetUniverseRegionsRegionIdOutput> {
+    return this.#metadata.getRegion(regionId, options).then((response) => response.data);
+  }
+
+  getSolarSystem(systemId: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions): Promise<GetUniverseSystemsSystemIdOutput> {
+    return this.#metadata.getSolarSystem(systemId, options).then((response) => response.data);
+  }
+
+  getStar(starId: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions): Promise<GetUniverseStarsStarIdOutput> {
+    return this.#metadata.getStar(starId, options).then((response) => response.data);
+  }
+
+  getStargate(stargateId: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions): Promise<GetUniverseStargatesStargateIdOutput> {
+    return this.#metadata.getStargate(stargateId, options).then((response) => response.data);
+  }
+
+  getStation(stationId: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions): Promise<GetUniverseStationsStationIdOutput> {
+    return this.#metadata.getStation(stationId, options).then((response) => response.data);
+  }
+
+  getStructure(structureId: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions): Promise<GetUniverseStructuresStructureIdOutput> {
+    return this.#metadata.getStructure(structureId, options).then((response) => response.data);
+  }
+
+  getType(typeId: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions): Promise<GetUniverseTypesTypeIdOutput> {
+    return this.#metadata.getType(typeId, options).then((response) => response.data);
+  }
+
+  listAncestries(options?: GetUniverseAncestriesOptions): Promise<GetUniverseAncestriesOutput> {
+    return this.#metadata.listAncestries(options).then((response) => response.data);
+  }
+
+  listBloodlines(options?: GetUniverseBloodlinesOptions): Promise<GetUniverseBloodlinesOutput> {
+    return this.#metadata.listBloodlines(options).then((response) => response.data);
+  }
+
+  listConstellations(options?: GetUniverseConstellationsOptions): Promise<GetUniverseConstellationsOutput> {
+    return this.#metadata.listConstellations(options).then((response) => response.data);
+  }
+
+  listFactions(options?: GetUniverseFactionsOptions): Promise<GetUniverseFactionsOutput> {
+    return this.#metadata.listFactions(options).then((response) => response.data);
+  }
+
+  listGraphics(options?: GetUniverseGraphicsOptions): Promise<GetUniverseGraphicsOutput> {
+    return this.#metadata.listGraphics(options).then((response) => response.data);
+  }
+
+  listItemCategories(options?: GetUniverseCategoriesOptions): Promise<GetUniverseCategoriesOutput> {
+    return this.#metadata.listItemCategories(options).then((response) => response.data);
+  }
+
+  listItemGroups(options?: GetUniverseGroupsOptions): Promise<GetUniverseGroupsOutput> {
+    return this.#metadata.listItemGroups(options).then((response) => response.data);
+  }
+
+  listPublicStructures(options?: GetUniverseStructuresOptions): Promise<GetUniverseStructuresOutput> {
+    return this.#metadata.listPublicStructures(options).then((response) => response.data);
+  }
+
+  listRaces(options?: GetUniverseRacesOptions): Promise<GetUniverseRacesOutput> {
+    return this.#metadata.listRaces(options).then((response) => response.data);
+  }
+
+  listRegions(options?: GetUniverseRegionsOptions): Promise<GetUniverseRegionsOutput> {
+    return this.#metadata.listRegions(options).then((response) => response.data);
+  }
+
+  listSolarSystems(options?: GetUniverseSystemsOptions): Promise<GetUniverseSystemsOutput> {
+    return this.#metadata.listSolarSystems(options).then((response) => response.data);
+  }
+
+  listSystemJumps(options?: GetUniverseSystemJumpsOptions): Promise<GetUniverseSystemJumpsOutput> {
+    return this.#metadata.listSystemJumps(options).then((response) => response.data);
+  }
+
+  listSystemKills(options?: GetUniverseSystemKillsOptions): Promise<GetUniverseSystemKillsOutput> {
+    return this.#metadata.listSystemKills(options).then((response) => response.data);
+  }
+
+  listTypes(options?: GetUniverseTypesOptions): Promise<GetUniverseTypesOutput> {
+    return this.#metadata.listTypes(options).then((response) => response.data);
+  }
+
+  resolveIds(options: PostUniverseIdsOptions): Promise<PostUniverseIdsOutput> {
+    return this.#metadata.resolveIds(options).then((response) => response.data);
+  }
+
+  resolveNames(options: PostUniverseNamesOptions): Promise<PostUniverseNamesOutput> {
+    return this.#metadata.resolveNames(options).then((response) => response.data);
+  }
+
+  withMetadata(): UniverseDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

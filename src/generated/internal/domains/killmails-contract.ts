@@ -36,24 +36,20 @@ export interface GetCorporationsCorporationIdKillmailsRecentOptions {
   readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput["header"]>["X-Tenant"];
 }
 
-export abstract class KillmailsDomainClient {
-  protected constructor() {}
+export interface KillmailsDomainClient {
+  get(killmailId: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], killmailHash: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions): Promise<GetKillmailsKillmailIdKillmailHashOutput>;
 
-  abstract get(killmailId: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], killmailHash: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions): Promise<GetKillmailsKillmailIdKillmailHashOutput>;
+  listRecentForCharacter(characterId: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions): Promise<GetCharactersCharacterIdKillmailsRecentOutput>;
 
-  abstract listRecentForCharacter(characterId: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions): Promise<GetCharactersCharacterIdKillmailsRecentOutput>;
+  listRecentForCorporation(corporationId: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions): Promise<GetCorporationsCorporationIdKillmailsRecentOutput>;
 
-  abstract listRecentForCorporation(corporationId: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions): Promise<GetCorporationsCorporationIdKillmailsRecentOutput>;
-
-  abstract withMetadata(): KillmailsDomainClientWithMetadata;
+  withMetadata(): KillmailsDomainClientWithMetadata;
 }
 
-export abstract class KillmailsDomainClientWithMetadata {
-  protected constructor() {}
+export interface KillmailsDomainClientWithMetadata {
+  get(killmailId: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], killmailHash: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions): Promise<EsiResponse<GetKillmailsKillmailIdKillmailHashOutput>>;
 
-  abstract get(killmailId: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], killmailHash: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions): Promise<EsiResponse<GetKillmailsKillmailIdKillmailHashOutput>>;
+  listRecentForCharacter(characterId: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions): Promise<EsiResponse<GetCharactersCharacterIdKillmailsRecentOutput>>;
 
-  abstract listRecentForCharacter(characterId: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions): Promise<EsiResponse<GetCharactersCharacterIdKillmailsRecentOutput>>;
-
-  abstract listRecentForCorporation(corporationId: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions): Promise<EsiResponse<GetCorporationsCorporationIdKillmailsRecentOutput>>;
+  listRecentForCorporation(corporationId: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions): Promise<EsiResponse<GetCorporationsCorporationIdKillmailsRecentOutput>>;
 }

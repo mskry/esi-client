@@ -79,44 +79,40 @@ export interface GetFwWarsOptions {
   readonly "xTenant"?: NonNullable<GetFwWarsInput["header"]>["X-Tenant"];
 }
 
-export abstract class FactionWarfareDomainClient {
-  protected constructor() {}
+export interface FactionWarfareDomainClient {
+  getCharacterLeaderboards(options?: GetFwLeaderboardsCharactersOptions): Promise<GetFwLeaderboardsCharactersOutput>;
 
-  abstract getCharacterLeaderboards(options?: GetFwLeaderboardsCharactersOptions): Promise<GetFwLeaderboardsCharactersOutput>;
+  getCharacterStats(characterId: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions): Promise<GetCharactersCharacterIdFwStatsOutput>;
 
-  abstract getCharacterStats(characterId: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions): Promise<GetCharactersCharacterIdFwStatsOutput>;
+  getCorporationLeaderboards(options?: GetFwLeaderboardsCorporationsOptions): Promise<GetFwLeaderboardsCorporationsOutput>;
 
-  abstract getCorporationLeaderboards(options?: GetFwLeaderboardsCorporationsOptions): Promise<GetFwLeaderboardsCorporationsOutput>;
+  getCorporationStats(corporationId: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions): Promise<GetCorporationsCorporationIdFwStatsOutput>;
 
-  abstract getCorporationStats(corporationId: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions): Promise<GetCorporationsCorporationIdFwStatsOutput>;
+  getFactionLeaderboards(options?: GetFwLeaderboardsOptions): Promise<GetFwLeaderboardsOutput>;
 
-  abstract getFactionLeaderboards(options?: GetFwLeaderboardsOptions): Promise<GetFwLeaderboardsOutput>;
+  listFactionStats(options?: GetFwStatsOptions): Promise<GetFwStatsOutput>;
 
-  abstract listFactionStats(options?: GetFwStatsOptions): Promise<GetFwStatsOutput>;
+  listSystems(options?: GetFwSystemsOptions): Promise<GetFwSystemsOutput>;
 
-  abstract listSystems(options?: GetFwSystemsOptions): Promise<GetFwSystemsOutput>;
+  listWars(options?: GetFwWarsOptions): Promise<GetFwWarsOutput>;
 
-  abstract listWars(options?: GetFwWarsOptions): Promise<GetFwWarsOutput>;
-
-  abstract withMetadata(): FactionWarfareDomainClientWithMetadata;
+  withMetadata(): FactionWarfareDomainClientWithMetadata;
 }
 
-export abstract class FactionWarfareDomainClientWithMetadata {
-  protected constructor() {}
+export interface FactionWarfareDomainClientWithMetadata {
+  getCharacterLeaderboards(options?: GetFwLeaderboardsCharactersOptions): Promise<EsiResponse<GetFwLeaderboardsCharactersOutput>>;
 
-  abstract getCharacterLeaderboards(options?: GetFwLeaderboardsCharactersOptions): Promise<EsiResponse<GetFwLeaderboardsCharactersOutput>>;
+  getCharacterStats(characterId: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions): Promise<EsiResponse<GetCharactersCharacterIdFwStatsOutput>>;
 
-  abstract getCharacterStats(characterId: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions): Promise<EsiResponse<GetCharactersCharacterIdFwStatsOutput>>;
+  getCorporationLeaderboards(options?: GetFwLeaderboardsCorporationsOptions): Promise<EsiResponse<GetFwLeaderboardsCorporationsOutput>>;
 
-  abstract getCorporationLeaderboards(options?: GetFwLeaderboardsCorporationsOptions): Promise<EsiResponse<GetFwLeaderboardsCorporationsOutput>>;
+  getCorporationStats(corporationId: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions): Promise<EsiResponse<GetCorporationsCorporationIdFwStatsOutput>>;
 
-  abstract getCorporationStats(corporationId: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions): Promise<EsiResponse<GetCorporationsCorporationIdFwStatsOutput>>;
+  getFactionLeaderboards(options?: GetFwLeaderboardsOptions): Promise<EsiResponse<GetFwLeaderboardsOutput>>;
 
-  abstract getFactionLeaderboards(options?: GetFwLeaderboardsOptions): Promise<EsiResponse<GetFwLeaderboardsOutput>>;
+  listFactionStats(options?: GetFwStatsOptions): Promise<EsiResponse<GetFwStatsOutput>>;
 
-  abstract listFactionStats(options?: GetFwStatsOptions): Promise<EsiResponse<GetFwStatsOutput>>;
+  listSystems(options?: GetFwSystemsOptions): Promise<EsiResponse<GetFwSystemsOutput>>;
 
-  abstract listSystems(options?: GetFwSystemsOptions): Promise<EsiResponse<GetFwSystemsOutput>>;
-
-  abstract listWars(options?: GetFwWarsOptions): Promise<EsiResponse<GetFwWarsOutput>>;
+  listWars(options?: GetFwWarsOptions): Promise<EsiResponse<GetFwWarsOutput>>;
 }

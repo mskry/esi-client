@@ -16,16 +16,12 @@ export interface GetIncursionsOptions {
   readonly "xTenant"?: NonNullable<GetIncursionsInput["header"]>["X-Tenant"];
 }
 
-export abstract class IncursionsDomainClient {
-  protected constructor() {}
+export interface IncursionsDomainClient {
+  list(options?: GetIncursionsOptions): Promise<GetIncursionsOutput>;
 
-  abstract list(options?: GetIncursionsOptions): Promise<GetIncursionsOutput>;
-
-  abstract withMetadata(): IncursionsDomainClientWithMetadata;
+  withMetadata(): IncursionsDomainClientWithMetadata;
 }
 
-export abstract class IncursionsDomainClientWithMetadata {
-  protected constructor() {}
-
-  abstract list(options?: GetIncursionsOptions): Promise<EsiResponse<GetIncursionsOutput>>;
+export interface IncursionsDomainClientWithMetadata {
+  list(options?: GetIncursionsOptions): Promise<EsiResponse<GetIncursionsOutput>>;
 }

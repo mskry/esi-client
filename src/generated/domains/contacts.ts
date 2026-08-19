@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindContactsDomainClient } from '../internal/domains/contacts.js';
 import type { ContactsDomainClient } from '../internal/domains/contacts-contract.js';
 
-export * from '../internal/domains/contacts-contract.js';
+export type * from '../internal/domains/contacts-contract.js';
 
 export function createContactsClient(options: EsiClientOptions = {}): ContactsDomainClient {
   return bindContactsDomainClient(new EsiClientConfiguration(options));

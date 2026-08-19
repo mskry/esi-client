@@ -138,68 +138,64 @@ export interface PutFleetsFleetIdOptions {
   readonly "xTenant"?: NonNullable<PutFleetsFleetIdInput["header"]>["X-Tenant"];
 }
 
-export abstract class FleetsDomainClient {
-  protected constructor() {}
+export interface FleetsDomainClient {
+  createSquad(fleetId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], wingId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions): Promise<PostFleetsFleetIdWingsWingIdSquadsOutput>;
 
-  abstract createSquad(fleetId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], wingId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions): Promise<PostFleetsFleetIdWingsWingIdSquadsOutput>;
+  createWing(fleetId: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions): Promise<PostFleetsFleetIdWingsOutput>;
 
-  abstract createWing(fleetId: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions): Promise<PostFleetsFleetIdWingsOutput>;
+  deleteSquad(fleetId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions): Promise<DeleteFleetsFleetIdSquadsSquadIdOutput>;
 
-  abstract deleteSquad(fleetId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions): Promise<DeleteFleetsFleetIdSquadsSquadIdOutput>;
+  deleteWing(fleetId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions): Promise<DeleteFleetsFleetIdWingsWingIdOutput>;
 
-  abstract deleteWing(fleetId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions): Promise<DeleteFleetsFleetIdWingsWingIdOutput>;
+  get(fleetId: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions): Promise<GetFleetsFleetIdOutput>;
 
-  abstract get(fleetId: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions): Promise<GetFleetsFleetIdOutput>;
+  getCharacterFleet(characterId: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions): Promise<GetCharactersCharacterIdFleetOutput>;
 
-  abstract getCharacterFleet(characterId: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions): Promise<GetCharactersCharacterIdFleetOutput>;
+  inviteMember(fleetId: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions): Promise<PostFleetsFleetIdMembersOutput>;
 
-  abstract inviteMember(fleetId: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions): Promise<PostFleetsFleetIdMembersOutput>;
+  listMembers(fleetId: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions): Promise<GetFleetsFleetIdMembersOutput>;
 
-  abstract listMembers(fleetId: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions): Promise<GetFleetsFleetIdMembersOutput>;
+  listWings(fleetId: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions): Promise<GetFleetsFleetIdWingsOutput>;
 
-  abstract listWings(fleetId: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions): Promise<GetFleetsFleetIdWingsOutput>;
+  moveMember(fleetId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions): Promise<PutFleetsFleetIdMembersMemberIdOutput>;
 
-  abstract moveMember(fleetId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions): Promise<PutFleetsFleetIdMembersMemberIdOutput>;
+  removeMember(fleetId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions): Promise<DeleteFleetsFleetIdMembersMemberIdOutput>;
 
-  abstract removeMember(fleetId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions): Promise<DeleteFleetsFleetIdMembersMemberIdOutput>;
+  renameSquad(fleetId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions): Promise<PutFleetsFleetIdSquadsSquadIdOutput>;
 
-  abstract renameSquad(fleetId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions): Promise<PutFleetsFleetIdSquadsSquadIdOutput>;
+  renameWing(fleetId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions): Promise<PutFleetsFleetIdWingsWingIdOutput>;
 
-  abstract renameWing(fleetId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions): Promise<PutFleetsFleetIdWingsWingIdOutput>;
+  update(fleetId: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions): Promise<PutFleetsFleetIdOutput>;
 
-  abstract update(fleetId: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions): Promise<PutFleetsFleetIdOutput>;
-
-  abstract withMetadata(): FleetsDomainClientWithMetadata;
+  withMetadata(): FleetsDomainClientWithMetadata;
 }
 
-export abstract class FleetsDomainClientWithMetadata {
-  protected constructor() {}
+export interface FleetsDomainClientWithMetadata {
+  createSquad(fleetId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], wingId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions): Promise<EsiResponse<PostFleetsFleetIdWingsWingIdSquadsOutput>>;
 
-  abstract createSquad(fleetId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["fleet_id"], wingId: NonNullable<PostFleetsFleetIdWingsWingIdSquadsInput['path']>["wing_id"], options?: PostFleetsFleetIdWingsWingIdSquadsOptions): Promise<EsiResponse<PostFleetsFleetIdWingsWingIdSquadsOutput>>;
+  createWing(fleetId: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions): Promise<EsiResponse<PostFleetsFleetIdWingsOutput>>;
 
-  abstract createWing(fleetId: NonNullable<PostFleetsFleetIdWingsInput['path']>["fleet_id"], options?: PostFleetsFleetIdWingsOptions): Promise<EsiResponse<PostFleetsFleetIdWingsOutput>>;
+  deleteSquad(fleetId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions): Promise<EsiResponse<DeleteFleetsFleetIdSquadsSquadIdOutput>>;
 
-  abstract deleteSquad(fleetId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<DeleteFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options?: DeleteFleetsFleetIdSquadsSquadIdOptions): Promise<EsiResponse<DeleteFleetsFleetIdSquadsSquadIdOutput>>;
+  deleteWing(fleetId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions): Promise<EsiResponse<DeleteFleetsFleetIdWingsWingIdOutput>>;
 
-  abstract deleteWing(fleetId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<DeleteFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options?: DeleteFleetsFleetIdWingsWingIdOptions): Promise<EsiResponse<DeleteFleetsFleetIdWingsWingIdOutput>>;
+  get(fleetId: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions): Promise<EsiResponse<GetFleetsFleetIdOutput>>;
 
-  abstract get(fleetId: NonNullable<GetFleetsFleetIdInput['path']>["fleet_id"], options?: GetFleetsFleetIdOptions): Promise<EsiResponse<GetFleetsFleetIdOutput>>;
+  getCharacterFleet(characterId: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions): Promise<EsiResponse<GetCharactersCharacterIdFleetOutput>>;
 
-  abstract getCharacterFleet(characterId: NonNullable<GetCharactersCharacterIdFleetInput['path']>["character_id"], options?: GetCharactersCharacterIdFleetOptions): Promise<EsiResponse<GetCharactersCharacterIdFleetOutput>>;
+  inviteMember(fleetId: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions): Promise<EsiResponse<PostFleetsFleetIdMembersOutput>>;
 
-  abstract inviteMember(fleetId: NonNullable<PostFleetsFleetIdMembersInput['path']>["fleet_id"], options: PostFleetsFleetIdMembersOptions): Promise<EsiResponse<PostFleetsFleetIdMembersOutput>>;
+  listMembers(fleetId: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions): Promise<EsiResponse<GetFleetsFleetIdMembersOutput>>;
 
-  abstract listMembers(fleetId: NonNullable<GetFleetsFleetIdMembersInput['path']>["fleet_id"], options?: GetFleetsFleetIdMembersOptions): Promise<EsiResponse<GetFleetsFleetIdMembersOutput>>;
+  listWings(fleetId: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions): Promise<EsiResponse<GetFleetsFleetIdWingsOutput>>;
 
-  abstract listWings(fleetId: NonNullable<GetFleetsFleetIdWingsInput['path']>["fleet_id"], options?: GetFleetsFleetIdWingsOptions): Promise<EsiResponse<GetFleetsFleetIdWingsOutput>>;
+  moveMember(fleetId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions): Promise<EsiResponse<PutFleetsFleetIdMembersMemberIdOutput>>;
 
-  abstract moveMember(fleetId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<PutFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options: PutFleetsFleetIdMembersMemberIdOptions): Promise<EsiResponse<PutFleetsFleetIdMembersMemberIdOutput>>;
+  removeMember(fleetId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions): Promise<EsiResponse<DeleteFleetsFleetIdMembersMemberIdOutput>>;
 
-  abstract removeMember(fleetId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["fleet_id"], memberId: NonNullable<DeleteFleetsFleetIdMembersMemberIdInput['path']>["member_id"], options?: DeleteFleetsFleetIdMembersMemberIdOptions): Promise<EsiResponse<DeleteFleetsFleetIdMembersMemberIdOutput>>;
+  renameSquad(fleetId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions): Promise<EsiResponse<PutFleetsFleetIdSquadsSquadIdOutput>>;
 
-  abstract renameSquad(fleetId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["fleet_id"], squadId: NonNullable<PutFleetsFleetIdSquadsSquadIdInput['path']>["squad_id"], options: PutFleetsFleetIdSquadsSquadIdOptions): Promise<EsiResponse<PutFleetsFleetIdSquadsSquadIdOutput>>;
+  renameWing(fleetId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions): Promise<EsiResponse<PutFleetsFleetIdWingsWingIdOutput>>;
 
-  abstract renameWing(fleetId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["fleet_id"], wingId: NonNullable<PutFleetsFleetIdWingsWingIdInput['path']>["wing_id"], options: PutFleetsFleetIdWingsWingIdOptions): Promise<EsiResponse<PutFleetsFleetIdWingsWingIdOutput>>;
-
-  abstract update(fleetId: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions): Promise<EsiResponse<PutFleetsFleetIdOutput>>;
+  update(fleetId: NonNullable<PutFleetsFleetIdInput['path']>["fleet_id"], options: PutFleetsFleetIdOptions): Promise<EsiResponse<PutFleetsFleetIdOutput>>;
 }

@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindStructuresDomainClient } from '../internal/domains/structures.js';
 import type { StructuresDomainClient } from '../internal/domains/structures-contract.js';
 
-export * from '../internal/domains/structures-contract.js';
+export type * from '../internal/domains/structures-contract.js';
 
 export function createStructuresClient(options: EsiClientOptions = {}): StructuresDomainClient {
   return bindStructuresDomainClient(new EsiClientConfiguration(options));

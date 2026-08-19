@@ -100,48 +100,44 @@ export interface PutCharactersCharacterIdContactsOptions {
   readonly "xTenant"?: NonNullable<PutCharactersCharacterIdContactsInput["header"]>["X-Tenant"];
 }
 
-export abstract class ContactsDomainClient {
-  protected constructor() {}
+export interface ContactsDomainClient {
+  addCharacterContacts(characterId: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions): Promise<PostCharactersCharacterIdContactsOutput>;
 
-  abstract addCharacterContacts(characterId: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions): Promise<PostCharactersCharacterIdContactsOutput>;
+  deleteCharacterContacts(characterId: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions): Promise<DeleteCharactersCharacterIdContactsOutput>;
 
-  abstract deleteCharacterContacts(characterId: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions): Promise<DeleteCharactersCharacterIdContactsOutput>;
+  listAllianceContactLabels(allianceId: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions): Promise<GetAlliancesAllianceIdContactsLabelsOutput>;
 
-  abstract listAllianceContactLabels(allianceId: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions): Promise<GetAlliancesAllianceIdContactsLabelsOutput>;
+  listAllianceContacts(allianceId: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions): Promise<GetAlliancesAllianceIdContactsOutput>;
 
-  abstract listAllianceContacts(allianceId: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions): Promise<GetAlliancesAllianceIdContactsOutput>;
+  listCharacterContactLabels(characterId: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions): Promise<GetCharactersCharacterIdContactsLabelsOutput>;
 
-  abstract listCharacterContactLabels(characterId: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions): Promise<GetCharactersCharacterIdContactsLabelsOutput>;
+  listCharacterContacts(characterId: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions): Promise<GetCharactersCharacterIdContactsOutput>;
 
-  abstract listCharacterContacts(characterId: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions): Promise<GetCharactersCharacterIdContactsOutput>;
+  listCorporationContactLabels(corporationId: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions): Promise<GetCorporationsCorporationIdContactsLabelsOutput>;
 
-  abstract listCorporationContactLabels(corporationId: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions): Promise<GetCorporationsCorporationIdContactsLabelsOutput>;
+  listCorporationContacts(corporationId: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions): Promise<GetCorporationsCorporationIdContactsOutput>;
 
-  abstract listCorporationContacts(corporationId: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions): Promise<GetCorporationsCorporationIdContactsOutput>;
+  updateCharacterContacts(characterId: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions): Promise<PutCharactersCharacterIdContactsOutput>;
 
-  abstract updateCharacterContacts(characterId: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions): Promise<PutCharactersCharacterIdContactsOutput>;
-
-  abstract withMetadata(): ContactsDomainClientWithMetadata;
+  withMetadata(): ContactsDomainClientWithMetadata;
 }
 
-export abstract class ContactsDomainClientWithMetadata {
-  protected constructor() {}
+export interface ContactsDomainClientWithMetadata {
+  addCharacterContacts(characterId: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions): Promise<EsiResponse<PostCharactersCharacterIdContactsOutput>>;
 
-  abstract addCharacterContacts(characterId: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions): Promise<EsiResponse<PostCharactersCharacterIdContactsOutput>>;
+  deleteCharacterContacts(characterId: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions): Promise<EsiResponse<DeleteCharactersCharacterIdContactsOutput>>;
 
-  abstract deleteCharacterContacts(characterId: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions): Promise<EsiResponse<DeleteCharactersCharacterIdContactsOutput>>;
+  listAllianceContactLabels(allianceId: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions): Promise<EsiResponse<GetAlliancesAllianceIdContactsLabelsOutput>>;
 
-  abstract listAllianceContactLabels(allianceId: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions): Promise<EsiResponse<GetAlliancesAllianceIdContactsLabelsOutput>>;
+  listAllianceContacts(allianceId: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions): Promise<EsiResponse<GetAlliancesAllianceIdContactsOutput>>;
 
-  abstract listAllianceContacts(allianceId: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions): Promise<EsiResponse<GetAlliancesAllianceIdContactsOutput>>;
+  listCharacterContactLabels(characterId: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions): Promise<EsiResponse<GetCharactersCharacterIdContactsLabelsOutput>>;
 
-  abstract listCharacterContactLabels(characterId: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions): Promise<EsiResponse<GetCharactersCharacterIdContactsLabelsOutput>>;
+  listCharacterContacts(characterId: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions): Promise<EsiResponse<GetCharactersCharacterIdContactsOutput>>;
 
-  abstract listCharacterContacts(characterId: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions): Promise<EsiResponse<GetCharactersCharacterIdContactsOutput>>;
+  listCorporationContactLabels(corporationId: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContactsLabelsOutput>>;
 
-  abstract listCorporationContactLabels(corporationId: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContactsLabelsOutput>>;
+  listCorporationContacts(corporationId: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContactsOutput>>;
 
-  abstract listCorporationContacts(corporationId: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContactsOutput>>;
-
-  abstract updateCharacterContacts(characterId: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions): Promise<EsiResponse<PutCharactersCharacterIdContactsOutput>>;
+  updateCharacterContacts(characterId: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions): Promise<EsiResponse<PutCharactersCharacterIdContactsOutput>>;
 }

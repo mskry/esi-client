@@ -67,32 +67,28 @@ export interface GetParagonHubSkinrOptions {
   readonly "xTenant"?: NonNullable<GetParagonHubSkinrInput["header"]>["X-Tenant"];
 }
 
-export abstract class ParagonHubDomainClient {
-  protected constructor() {}
+export interface ParagonHubDomainClient {
+  listListingsForAlliance(allianceId: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions): Promise<GetParagonHubSkinrAlliancesOutput>;
 
-  abstract listListingsForAlliance(allianceId: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions): Promise<GetParagonHubSkinrAlliancesOutput>;
+  listListingsForCharacter(characterId: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions): Promise<GetParagonHubSkinrCharactersOutput>;
 
-  abstract listListingsForCharacter(characterId: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions): Promise<GetParagonHubSkinrCharactersOutput>;
+  listListingsForCorporation(corporationId: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions): Promise<GetParagonHubSkinrCorporationsOutput>;
 
-  abstract listListingsForCorporation(corporationId: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions): Promise<GetParagonHubSkinrCorporationsOutput>;
+  listPostedListings(characterId: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions): Promise<GetCharactersParagonHubSkinrOutput>;
 
-  abstract listPostedListings(characterId: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions): Promise<GetCharactersParagonHubSkinrOutput>;
+  listPublicListings(options?: GetParagonHubSkinrOptions): Promise<GetParagonHubSkinrOutput>;
 
-  abstract listPublicListings(options?: GetParagonHubSkinrOptions): Promise<GetParagonHubSkinrOutput>;
-
-  abstract withMetadata(): ParagonHubDomainClientWithMetadata;
+  withMetadata(): ParagonHubDomainClientWithMetadata;
 }
 
-export abstract class ParagonHubDomainClientWithMetadata {
-  protected constructor() {}
+export interface ParagonHubDomainClientWithMetadata {
+  listListingsForAlliance(allianceId: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions): Promise<EsiResponse<GetParagonHubSkinrAlliancesOutput>>;
 
-  abstract listListingsForAlliance(allianceId: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions): Promise<EsiResponse<GetParagonHubSkinrAlliancesOutput>>;
+  listListingsForCharacter(characterId: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions): Promise<EsiResponse<GetParagonHubSkinrCharactersOutput>>;
 
-  abstract listListingsForCharacter(characterId: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions): Promise<EsiResponse<GetParagonHubSkinrCharactersOutput>>;
+  listListingsForCorporation(corporationId: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions): Promise<EsiResponse<GetParagonHubSkinrCorporationsOutput>>;
 
-  abstract listListingsForCorporation(corporationId: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions): Promise<EsiResponse<GetParagonHubSkinrCorporationsOutput>>;
+  listPostedListings(characterId: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions): Promise<EsiResponse<GetCharactersParagonHubSkinrOutput>>;
 
-  abstract listPostedListings(characterId: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions): Promise<EsiResponse<GetCharactersParagonHubSkinrOutput>>;
-
-  abstract listPublicListings(options?: GetParagonHubSkinrOptions): Promise<EsiResponse<GetParagonHubSkinrOutput>>;
+  listPublicListings(options?: GetParagonHubSkinrOptions): Promise<EsiResponse<GetParagonHubSkinrOutput>>;
 }

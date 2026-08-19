@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindSkillsDomainClient } from '../internal/domains/skills.js';
 import type { SkillsDomainClient } from '../internal/domains/skills-contract.js';
 
-export * from '../internal/domains/skills-contract.js';
+export type * from '../internal/domains/skills-contract.js';
 
 export function createSkillsClient(options: EsiClientOptions = {}): SkillsDomainClient {
   return bindSkillsDomainClient(new EsiClientConfiguration(options));

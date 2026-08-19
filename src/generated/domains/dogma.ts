@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindDogmaDomainClient } from '../internal/domains/dogma.js';
 import type { DogmaDomainClient } from '../internal/domains/dogma-contract.js';
 
-export * from '../internal/domains/dogma-contract.js';
+export type * from '../internal/domains/dogma-contract.js';
 
 export function createDogmaClient(options: EsiClientOptions = {}): DogmaDomainClient {
   return bindDogmaDomainClient(new EsiClientConfiguration(options));

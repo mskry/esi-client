@@ -17,7 +17,7 @@ const publicCodeSpecifiers = Object.entries(packageJson.exports)
     subpath === '.' ? packageJson.name : `${packageJson.name}${subpath.slice(1)}`,
   );
 const generatedDomains = (await readdir(join(root, 'src/generated/domains')))
-  .filter((file) => file.endsWith('.ts') && file !== 'index.ts' && file !== 'operation-coverage.ts')
+  .filter((file) => file.endsWith('.ts') && file !== 'index.ts')
   .map((file) => file.slice(0, -3))
   .toSorted();
 const exportedDomains = Object.keys(packageJson.exports)
@@ -56,7 +56,7 @@ try {
     { cwd: consumerDirectory },
   );
 
-  const standaloneRuntimeSource = `import { createStatusClient, StatusDomainClient } from '@evespace/esi-client/domains/status';
+  const standaloneRuntimeSource = `import { createStatusClient } from '@evespace/esi-client/domains/status';
 
 const requests = [];
 const client = createStatusClient({
@@ -75,7 +75,7 @@ const client = createStatusClient({
   },
 });
 
-if (!(client instanceof StatusDomainClient)) throw new Error('Invalid standalone status domain');
+if (typeof client.get !== 'function') throw new Error('Invalid standalone status domain');
 const status = await client.get({ compatibilityDate: '2020-01-01' });
 const response = await client.withMetadata().get({ compatibilityDate: '2020-01-01' });
 if (requests.length !== 2) throw new Error('Standalone status did not make two requests');
@@ -151,7 +151,6 @@ import {
 import * as operations from '@evespace/esi-client/operations';
 import { describeOperation, operationManifest, operationRegistry, searchOperations } from '@evespace/esi-client/operations';
 import { GetStatusSuccessResponseSchema } from '@evespace/esi-client/schemas';
-import { StatusDomainClient } from '@evespace/esi-client/domains/status';
 
 for (const specifier of ${JSON.stringify(publicCodeSpecifiers)}) await import(specifier);
 const packageMetadata = (await import('@evespace/esi-client/package.json', { with: { type: 'json' } })).default;
@@ -203,7 +202,7 @@ const client = new EsiClient({
     }), { status: 200, headers: { 'content-type': 'application/json' } });
   },
 });
-if (!(client.status instanceof StatusDomainClient)) throw new Error('Missing status domain');
+if (typeof client.status.get !== 'function') throw new Error('Missing status domain');
 const status = await client.status.get({ compatibilityDate: '2020-01-01' });
 if (request.input !== 'https://example.test/status') throw new Error('Unexpected request URL');
 if (request.init.method !== 'GET') throw new Error('Unexpected request method');
@@ -224,7 +223,7 @@ if ('Configuration' in sdk || 'StatusApi' in sdk) throw new Error('Prototype exp
     .map(({ domain, factoryName }) => {
       const extra =
         domain === 'status'
-          ? ', StatusDomainClient, type GetStatusOptions'
+          ? ', type StatusDomainClient, type GetStatusOptions'
           : domain === 'location'
             ? ', type GetCharactersCharacterIdLocationOptions'
             : '';
@@ -275,8 +274,10 @@ void locationResult;
 import {
   EsiClient,
   EsiHttpError,
+  type EsiClientConfiguration,
   type EsiClientOptions,
   type EsiResponse,
+  type SerializedEsiClientConfiguration,
 } from '@evespace/esi-client';
 import {
   describeOperation,
@@ -296,12 +297,14 @@ import {
 } from '@evespace/esi-client/schemas';
 import {
   createStatusClient,
-  StatusDomainClient,
+  type StatusDomainClient,
   type GetStatusOptions,
 } from '@evespace/esi-client/domains/status';
 
 const options: EsiClientOptions = { compatibilityDate: '2026-08-18' };
 const client = new EsiClient(options);
+const configuration: EsiClientConfiguration = client.configuration;
+const serializedConfiguration: SerializedEsiClientConfiguration = configuration.toJSON();
 const domain: StatusDomainClient = client.status;
 const status: Promise<GetStatusOutput> = domain.get();
 const statusOptions: GetStatusOptions = { compatibilityDate: '2026-08-18' };
@@ -331,6 +334,7 @@ void registry;
 void manifest;
 void searchResults;
 void description;
+void serializedConfiguration;
 ${publicCodeSpecifiers
   .map((_, index) => `void (undefined as typeof PublicExport${index} | undefined);`)
   .join('\n')}

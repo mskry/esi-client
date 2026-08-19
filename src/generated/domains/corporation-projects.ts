@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindCorporationProjectsDomainClient } from '../internal/domains/corporation-projects.js';
 import type { CorporationProjectsDomainClient } from '../internal/domains/corporation-projects-contract.js';
 
-export * from '../internal/domains/corporation-projects-contract.js';
+export type * from '../internal/domains/corporation-projects-contract.js';
 
 export function createCorporationProjectsClient(options: EsiClientOptions = {}): CorporationProjectsDomainClient {
   return bindCorporationProjectsDomainClient(new EsiClientConfiguration(options));

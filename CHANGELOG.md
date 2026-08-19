@@ -12,7 +12,7 @@ Version 2.0 replaces the previous OpenAPI Generator surface with a maintained, E
 - `Configuration`, generated `*Api` classes, and the previous root model exports have been removed.
 - Date and date-time values remain JSON strings instead of being converted to `Date` objects.
 - Generated domain methods now use reviewed contextual names instead of raw operation-ID transliterations; the replaced raw methods are not retained as aliases. Exported option interfaces remain traceable through stable-operation-ID names.
-- Direct domain-class construction is replaced by options-based `create<Domain>Client` factories. Domain classes remain abstract contracts and `instanceof` values, while configuration objects stay internal.
+- Direct domain-class construction is replaced by options-based `create<Domain>Client` factories. Domain contracts are type-only interfaces, while configuration objects stay internal.
 
 ### Added
 

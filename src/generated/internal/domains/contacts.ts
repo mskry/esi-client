@@ -17,18 +17,18 @@ import {
   GetCorporationsCorporationIdContactsDescriptor,
   PutCharactersCharacterIdContactsDescriptor,
 } from '../descriptors/contacts.js';
-import {
+import type {
   ContactsDomainClient,
   ContactsDomainClientWithMetadata,
-  type PostCharactersCharacterIdContactsOptions,
-  type DeleteCharactersCharacterIdContactsOptions,
-  type GetAlliancesAllianceIdContactsLabelsOptions,
-  type GetAlliancesAllianceIdContactsOptions,
-  type GetCharactersCharacterIdContactsLabelsOptions,
-  type GetCharactersCharacterIdContactsOptions,
-  type GetCorporationsCorporationIdContactsLabelsOptions,
-  type GetCorporationsCorporationIdContactsOptions,
-  type PutCharactersCharacterIdContactsOptions,
+  PostCharactersCharacterIdContactsOptions,
+  DeleteCharactersCharacterIdContactsOptions,
+  GetAlliancesAllianceIdContactsLabelsOptions,
+  GetAlliancesAllianceIdContactsOptions,
+  GetCharactersCharacterIdContactsLabelsOptions,
+  GetCharactersCharacterIdContactsOptions,
+  GetCorporationsCorporationIdContactsLabelsOptions,
+  GetCorporationsCorporationIdContactsOptions,
+  PutCharactersCharacterIdContactsOptions,
 } from './contacts-contract.js';
 import type {
   DeleteCharactersCharacterIdContactsInput,
@@ -51,70 +51,10 @@ import type {
   PutCharactersCharacterIdContactsOutput,
 } from '../../schemas/operations/contacts.js';
 
-class ContactsDomainClientImplementation extends ContactsDomainClient {
+class ContactsDomainClientWithMetadataImplementation implements ContactsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  addCharacterContacts(characterId: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions): Promise<PostCharactersCharacterIdContactsOutput> {
-    const arguments_: PostCharactersCharacterIdContactsInput = { path: { "character_id": characterId }, query: { "label_ids": options?.["labelIds"], "standing": options?.["standing"], "watched": options?.["watched"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersCharacterIdContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  deleteCharacterContacts(characterId: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions): Promise<DeleteCharactersCharacterIdContactsOutput> {
-    const arguments_: DeleteCharactersCharacterIdContactsInput = { path: { "character_id": characterId }, query: { "contact_ids": options?.["contactIds"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, DeleteCharactersCharacterIdContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listAllianceContactLabels(allianceId: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions): Promise<GetAlliancesAllianceIdContactsLabelsOutput> {
-    const arguments_: GetAlliancesAllianceIdContactsLabelsInput = { path: { "alliance_id": allianceId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetAlliancesAllianceIdContactsLabelsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listAllianceContacts(allianceId: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions): Promise<GetAlliancesAllianceIdContactsOutput> {
-    const arguments_: GetAlliancesAllianceIdContactsInput = { path: { "alliance_id": allianceId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetAlliancesAllianceIdContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCharacterContactLabels(characterId: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions): Promise<GetCharactersCharacterIdContactsLabelsOutput> {
-    const arguments_: GetCharactersCharacterIdContactsLabelsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdContactsLabelsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCharacterContacts(characterId: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions): Promise<GetCharactersCharacterIdContactsOutput> {
-    const arguments_: GetCharactersCharacterIdContactsInput = { path: { "character_id": characterId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCorporationContactLabels(corporationId: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions): Promise<GetCorporationsCorporationIdContactsLabelsOutput> {
-    const arguments_: GetCorporationsCorporationIdContactsLabelsInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdContactsLabelsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCorporationContacts(corporationId: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions): Promise<GetCorporationsCorporationIdContactsOutput> {
-    const arguments_: GetCorporationsCorporationIdContactsInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  updateCharacterContacts(characterId: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions): Promise<PutCharactersCharacterIdContactsOutput> {
-    const arguments_: PutCharactersCharacterIdContactsInput = { path: { "character_id": characterId }, query: { "label_ids": options?.["labelIds"], "standing": options?.["standing"], "watched": options?.["watched"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PutCharactersCharacterIdContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): ContactsDomainClientWithMetadata {
-    return new ContactsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class ContactsDomainClientWithMetadataImplementation extends ContactsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -162,6 +102,55 @@ class ContactsDomainClientWithMetadataImplementation extends ContactsDomainClien
   updateCharacterContacts(characterId: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions): Promise<EsiResponse<PutCharactersCharacterIdContactsOutput>> {
     const arguments_: PutCharactersCharacterIdContactsInput = { path: { "character_id": characterId }, query: { "label_ids": options?.["labelIds"], "standing": options?.["standing"], "watched": options?.["watched"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
     return executeOperation(this.#configuration, PutCharactersCharacterIdContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class ContactsDomainClientImplementation implements ContactsDomainClient {
+  readonly #metadata: ContactsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new ContactsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  addCharacterContacts(characterId: NonNullable<PostCharactersCharacterIdContactsInput['path']>["character_id"], options: PostCharactersCharacterIdContactsOptions): Promise<PostCharactersCharacterIdContactsOutput> {
+    return this.#metadata.addCharacterContacts(characterId, options).then((response) => response.data);
+  }
+
+  deleteCharacterContacts(characterId: NonNullable<DeleteCharactersCharacterIdContactsInput['path']>["character_id"], options: DeleteCharactersCharacterIdContactsOptions): Promise<DeleteCharactersCharacterIdContactsOutput> {
+    return this.#metadata.deleteCharacterContacts(characterId, options).then((response) => response.data);
+  }
+
+  listAllianceContactLabels(allianceId: NonNullable<GetAlliancesAllianceIdContactsLabelsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsLabelsOptions): Promise<GetAlliancesAllianceIdContactsLabelsOutput> {
+    return this.#metadata.listAllianceContactLabels(allianceId, options).then((response) => response.data);
+  }
+
+  listAllianceContacts(allianceId: NonNullable<GetAlliancesAllianceIdContactsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdContactsOptions): Promise<GetAlliancesAllianceIdContactsOutput> {
+    return this.#metadata.listAllianceContacts(allianceId, options).then((response) => response.data);
+  }
+
+  listCharacterContactLabels(characterId: NonNullable<GetCharactersCharacterIdContactsLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsLabelsOptions): Promise<GetCharactersCharacterIdContactsLabelsOutput> {
+    return this.#metadata.listCharacterContactLabels(characterId, options).then((response) => response.data);
+  }
+
+  listCharacterContacts(characterId: NonNullable<GetCharactersCharacterIdContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdContactsOptions): Promise<GetCharactersCharacterIdContactsOutput> {
+    return this.#metadata.listCharacterContacts(characterId, options).then((response) => response.data);
+  }
+
+  listCorporationContactLabels(corporationId: NonNullable<GetCorporationsCorporationIdContactsLabelsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsLabelsOptions): Promise<GetCorporationsCorporationIdContactsLabelsOutput> {
+    return this.#metadata.listCorporationContactLabels(corporationId, options).then((response) => response.data);
+  }
+
+  listCorporationContacts(corporationId: NonNullable<GetCorporationsCorporationIdContactsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContactsOptions): Promise<GetCorporationsCorporationIdContactsOutput> {
+    return this.#metadata.listCorporationContacts(corporationId, options).then((response) => response.data);
+  }
+
+  updateCharacterContacts(characterId: NonNullable<PutCharactersCharacterIdContactsInput['path']>["character_id"], options: PutCharactersCharacterIdContactsOptions): Promise<PutCharactersCharacterIdContactsOutput> {
+    return this.#metadata.updateCharacterContacts(characterId, options).then((response) => response.data);
+  }
+
+  withMetadata(): ContactsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

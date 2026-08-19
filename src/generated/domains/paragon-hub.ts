@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindParagonHubDomainClient } from '../internal/domains/paragon-hub.js';
 import type { ParagonHubDomainClient } from '../internal/domains/paragon-hub-contract.js';
 
-export * from '../internal/domains/paragon-hub-contract.js';
+export type * from '../internal/domains/paragon-hub-contract.js';
 
 export function createParagonHubClient(options: EsiClientOptions = {}): ParagonHubDomainClient {
   return bindParagonHubDomainClient(new EsiClientConfiguration(options));

@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindCosmeticsDomainClient } from '../internal/domains/cosmetics.js';
 import type { CosmeticsDomainClient } from '../internal/domains/cosmetics-contract.js';
 
-export * from '../internal/domains/cosmetics-contract.js';
+export type * from '../internal/domains/cosmetics-contract.js';
 
 export function createCosmeticsClient(options: EsiClientOptions = {}): CosmeticsDomainClient {
   return bindCosmeticsDomainClient(new EsiClientConfiguration(options));

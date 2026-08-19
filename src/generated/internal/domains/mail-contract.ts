@@ -93,48 +93,44 @@ export interface PutCharactersCharacterIdMailMailIdOptions {
   readonly "xTenant"?: NonNullable<PutCharactersCharacterIdMailMailIdInput["header"]>["X-Tenant"];
 }
 
-export abstract class MailDomainClient {
-  protected constructor() {}
+export interface MailDomainClient {
+  createLabel(characterId: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions): Promise<PostCharactersCharacterIdMailLabelsOutput>;
 
-  abstract createLabel(characterId: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions): Promise<PostCharactersCharacterIdMailLabelsOutput>;
+  deleteLabel(characterId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], labelId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions): Promise<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>;
 
-  abstract deleteLabel(characterId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], labelId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions): Promise<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>;
+  deleteMail(characterId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions): Promise<DeleteCharactersCharacterIdMailMailIdOutput>;
 
-  abstract deleteMail(characterId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions): Promise<DeleteCharactersCharacterIdMailMailIdOutput>;
+  get(characterId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions): Promise<GetCharactersCharacterIdMailMailIdOutput>;
 
-  abstract get(characterId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions): Promise<GetCharactersCharacterIdMailMailIdOutput>;
+  listHeaders(characterId: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions): Promise<GetCharactersCharacterIdMailOutput>;
 
-  abstract listHeaders(characterId: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions): Promise<GetCharactersCharacterIdMailOutput>;
+  listLabels(characterId: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions): Promise<GetCharactersCharacterIdMailLabelsOutput>;
 
-  abstract listLabels(characterId: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions): Promise<GetCharactersCharacterIdMailLabelsOutput>;
+  listMailingLists(characterId: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions): Promise<GetCharactersCharacterIdMailListsOutput>;
 
-  abstract listMailingLists(characterId: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions): Promise<GetCharactersCharacterIdMailListsOutput>;
+  send(characterId: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions): Promise<PostCharactersCharacterIdMailOutput>;
 
-  abstract send(characterId: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions): Promise<PostCharactersCharacterIdMailOutput>;
+  update(characterId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions): Promise<PutCharactersCharacterIdMailMailIdOutput>;
 
-  abstract update(characterId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions): Promise<PutCharactersCharacterIdMailMailIdOutput>;
-
-  abstract withMetadata(): MailDomainClientWithMetadata;
+  withMetadata(): MailDomainClientWithMetadata;
 }
 
-export abstract class MailDomainClientWithMetadata {
-  protected constructor() {}
+export interface MailDomainClientWithMetadata {
+  createLabel(characterId: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions): Promise<EsiResponse<PostCharactersCharacterIdMailLabelsOutput>>;
 
-  abstract createLabel(characterId: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions): Promise<EsiResponse<PostCharactersCharacterIdMailLabelsOutput>>;
+  deleteLabel(characterId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], labelId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions): Promise<EsiResponse<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>>;
 
-  abstract deleteLabel(characterId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], labelId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions): Promise<EsiResponse<DeleteCharactersCharacterIdMailLabelsLabelIdOutput>>;
+  deleteMail(characterId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions): Promise<EsiResponse<DeleteCharactersCharacterIdMailMailIdOutput>>;
 
-  abstract deleteMail(characterId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions): Promise<EsiResponse<DeleteCharactersCharacterIdMailMailIdOutput>>;
+  get(characterId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions): Promise<EsiResponse<GetCharactersCharacterIdMailMailIdOutput>>;
 
-  abstract get(characterId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions): Promise<EsiResponse<GetCharactersCharacterIdMailMailIdOutput>>;
+  listHeaders(characterId: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions): Promise<EsiResponse<GetCharactersCharacterIdMailOutput>>;
 
-  abstract listHeaders(characterId: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions): Promise<EsiResponse<GetCharactersCharacterIdMailOutput>>;
+  listLabels(characterId: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions): Promise<EsiResponse<GetCharactersCharacterIdMailLabelsOutput>>;
 
-  abstract listLabels(characterId: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions): Promise<EsiResponse<GetCharactersCharacterIdMailLabelsOutput>>;
+  listMailingLists(characterId: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions): Promise<EsiResponse<GetCharactersCharacterIdMailListsOutput>>;
 
-  abstract listMailingLists(characterId: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions): Promise<EsiResponse<GetCharactersCharacterIdMailListsOutput>>;
+  send(characterId: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions): Promise<EsiResponse<PostCharactersCharacterIdMailOutput>>;
 
-  abstract send(characterId: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions): Promise<EsiResponse<PostCharactersCharacterIdMailOutput>>;
-
-  abstract update(characterId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions): Promise<EsiResponse<PutCharactersCharacterIdMailMailIdOutput>>;
+  update(characterId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions): Promise<EsiResponse<PutCharactersCharacterIdMailMailIdOutput>>;
 }

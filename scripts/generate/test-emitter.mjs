@@ -3,6 +3,7 @@ import { isAbsolute, join, normalize } from 'node:path';
 
 import { format } from 'oxfmt';
 
+import { domainClientTestsComponent } from './domain-client.mjs';
 import { generatedOperationContractTestsComponent } from './operation-contract-test-emitter.mjs';
 import { generatedSchemaTestsComponent } from './schema-test-emitter.mjs';
 
@@ -72,6 +73,7 @@ export function createGeneratedTestsEmitter(components) {
 export const generatedTestsEmitter = createGeneratedTestsEmitter([
   generatedSchemaTestsComponent,
   generatedOperationContractTestsComponent,
+  domainClientTestsComponent,
 ]);
 
 function validateRelativeOutputPath(path, componentName) {

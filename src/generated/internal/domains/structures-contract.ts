@@ -61,36 +61,32 @@ export interface GetCorporationsStructuresSovereigntyHubsListingOptions {
   readonly "xTenant"?: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput["header"]>["X-Tenant"];
 }
 
-export abstract class StructuresDomainClient {
-  protected constructor() {}
+export interface StructuresDomainClient {
+  getMercenaryDen(characterId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], mercenaryDenId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions): Promise<GetCharactersStructuresMercenaryDensDetailOutput>;
 
-  abstract getMercenaryDen(characterId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], mercenaryDenId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions): Promise<GetCharactersStructuresMercenaryDensDetailOutput>;
+  getSkyhook(corporationId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], skyhookId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions): Promise<GetCorporationsStructuresSkyhooksDetailOutput>;
 
-  abstract getSkyhook(corporationId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], skyhookId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions): Promise<GetCorporationsStructuresSkyhooksDetailOutput>;
+  getSovereigntyHub(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], sovereigntyHubId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions): Promise<GetCorporationsStructuresSovereigntyHubsDetailOutput>;
 
-  abstract getSovereigntyHub(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], sovereigntyHubId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions): Promise<GetCorporationsStructuresSovereigntyHubsDetailOutput>;
+  listMercenaryDens(characterId: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions): Promise<GetCharactersStructuresMercenaryDensListingOutput>;
 
-  abstract listMercenaryDens(characterId: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions): Promise<GetCharactersStructuresMercenaryDensListingOutput>;
+  listSkyhooks(corporationId: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions): Promise<GetCorporationsStructuresSkyhooksListingOutput>;
 
-  abstract listSkyhooks(corporationId: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions): Promise<GetCorporationsStructuresSkyhooksListingOutput>;
+  listSovereigntyHubs(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions): Promise<GetCorporationsStructuresSovereigntyHubsListingOutput>;
 
-  abstract listSovereigntyHubs(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions): Promise<GetCorporationsStructuresSovereigntyHubsListingOutput>;
-
-  abstract withMetadata(): StructuresDomainClientWithMetadata;
+  withMetadata(): StructuresDomainClientWithMetadata;
 }
 
-export abstract class StructuresDomainClientWithMetadata {
-  protected constructor() {}
+export interface StructuresDomainClientWithMetadata {
+  getMercenaryDen(characterId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], mercenaryDenId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions): Promise<EsiResponse<GetCharactersStructuresMercenaryDensDetailOutput>>;
 
-  abstract getMercenaryDen(characterId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], mercenaryDenId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions): Promise<EsiResponse<GetCharactersStructuresMercenaryDensDetailOutput>>;
+  getSkyhook(corporationId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], skyhookId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions): Promise<EsiResponse<GetCorporationsStructuresSkyhooksDetailOutput>>;
 
-  abstract getSkyhook(corporationId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], skyhookId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions): Promise<EsiResponse<GetCorporationsStructuresSkyhooksDetailOutput>>;
+  getSovereigntyHub(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], sovereigntyHubId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions): Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsDetailOutput>>;
 
-  abstract getSovereigntyHub(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], sovereigntyHubId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions): Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsDetailOutput>>;
+  listMercenaryDens(characterId: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions): Promise<EsiResponse<GetCharactersStructuresMercenaryDensListingOutput>>;
 
-  abstract listMercenaryDens(characterId: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions): Promise<EsiResponse<GetCharactersStructuresMercenaryDensListingOutput>>;
+  listSkyhooks(corporationId: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions): Promise<EsiResponse<GetCorporationsStructuresSkyhooksListingOutput>>;
 
-  abstract listSkyhooks(corporationId: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions): Promise<EsiResponse<GetCorporationsStructuresSkyhooksListingOutput>>;
-
-  abstract listSovereigntyHubs(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions): Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsListingOutput>>;
+  listSovereigntyHubs(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions): Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsListingOutput>>;
 }

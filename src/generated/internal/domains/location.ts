@@ -11,12 +11,12 @@ import {
   GetCharactersCharacterIdShipDescriptor,
   GetCharactersCharacterIdOnlineDescriptor,
 } from '../descriptors/location.js';
-import {
+import type {
   LocationDomainClient,
   LocationDomainClientWithMetadata,
-  type GetCharactersCharacterIdLocationOptions,
-  type GetCharactersCharacterIdShipOptions,
-  type GetCharactersCharacterIdOnlineOptions,
+  GetCharactersCharacterIdLocationOptions,
+  GetCharactersCharacterIdShipOptions,
+  GetCharactersCharacterIdOnlineOptions,
 } from './location-contract.js';
 import type {
   GetCharactersCharacterIdLocationInput,
@@ -27,40 +27,10 @@ import type {
   GetCharactersCharacterIdShipOutput,
 } from '../../schemas/operations/location.js';
 
-class LocationDomainClientImplementation extends LocationDomainClient {
+class LocationDomainClientWithMetadataImplementation implements LocationDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  get(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<GetCharactersCharacterIdLocationOutput> {
-    const arguments_: GetCharactersCharacterIdLocationInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdLocationDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCurrentShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<GetCharactersCharacterIdShipOutput> {
-    const arguments_: GetCharactersCharacterIdShipInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdShipDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getOnlineStatus(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<GetCharactersCharacterIdOnlineOutput> {
-    const arguments_: GetCharactersCharacterIdOnlineInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdOnlineDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): LocationDomainClientWithMetadata {
-    return new LocationDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class LocationDomainClientWithMetadataImplementation extends LocationDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -78,6 +48,31 @@ class LocationDomainClientWithMetadataImplementation extends LocationDomainClien
   getOnlineStatus(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<EsiResponse<GetCharactersCharacterIdOnlineOutput>> {
     const arguments_: GetCharactersCharacterIdOnlineInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCharactersCharacterIdOnlineDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class LocationDomainClientImplementation implements LocationDomainClient {
+  readonly #metadata: LocationDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new LocationDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  get(characterId: NonNullable<GetCharactersCharacterIdLocationInput['path']>["character_id"], options?: GetCharactersCharacterIdLocationOptions): Promise<GetCharactersCharacterIdLocationOutput> {
+    return this.#metadata.get(characterId, options).then((response) => response.data);
+  }
+
+  getCurrentShip(characterId: NonNullable<GetCharactersCharacterIdShipInput['path']>["character_id"], options?: GetCharactersCharacterIdShipOptions): Promise<GetCharactersCharacterIdShipOutput> {
+    return this.#metadata.getCurrentShip(characterId, options).then((response) => response.data);
+  }
+
+  getOnlineStatus(characterId: NonNullable<GetCharactersCharacterIdOnlineInput['path']>["character_id"], options?: GetCharactersCharacterIdOnlineOptions): Promise<GetCharactersCharacterIdOnlineOutput> {
+    return this.#metadata.getOnlineStatus(characterId, options).then((response) => response.data);
+  }
+
+  withMetadata(): LocationDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

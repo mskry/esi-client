@@ -22,23 +22,23 @@ import {
   GetCharactersCharacterIdStandingsDescriptor,
   PostCharactersAffiliationDescriptor,
 } from '../descriptors/character.js';
-import {
+import type {
   CharacterDomainClient,
   CharacterDomainClientWithMetadata,
-  type GetCharactersCharacterIdAgentsResearchOptions,
-  type PostCharactersCharacterIdCspaOptions,
-  type GetCharactersCharacterIdRolesOptions,
-  type GetCharactersCharacterIdFatigueOptions,
-  type GetCharactersCharacterIdPortraitOptions,
-  type GetCharactersDetailOptions,
-  type GetCharactersCharacterIdBlueprintsOptions,
-  type GetCharactersCharacterIdNotificationsContactsOptions,
-  type GetCharactersCharacterIdCorporationhistoryOptions,
-  type GetCharactersCharacterIdTitlesOptions,
-  type GetCharactersCharacterIdMedalsOptions,
-  type GetCharactersCharacterIdNotificationsOptions,
-  type GetCharactersCharacterIdStandingsOptions,
-  type PostCharactersAffiliationOptions,
+  GetCharactersCharacterIdAgentsResearchOptions,
+  PostCharactersCharacterIdCspaOptions,
+  GetCharactersCharacterIdRolesOptions,
+  GetCharactersCharacterIdFatigueOptions,
+  GetCharactersCharacterIdPortraitOptions,
+  GetCharactersDetailOptions,
+  GetCharactersCharacterIdBlueprintsOptions,
+  GetCharactersCharacterIdNotificationsContactsOptions,
+  GetCharactersCharacterIdCorporationhistoryOptions,
+  GetCharactersCharacterIdTitlesOptions,
+  GetCharactersCharacterIdMedalsOptions,
+  GetCharactersCharacterIdNotificationsOptions,
+  GetCharactersCharacterIdStandingsOptions,
+  PostCharactersAffiliationOptions,
 } from './character-contract.js';
 import type {
   GetCharactersCharacterIdAgentsResearchInput,
@@ -71,95 +71,10 @@ import type {
   PostCharactersCharacterIdCspaOutput,
 } from '../../schemas/operations/character.js';
 
-class CharacterDomainClientImplementation extends CharacterDomainClient {
+class CharacterDomainClientWithMetadataImplementation implements CharacterDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  agentsResearch(characterId: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions): Promise<GetCharactersCharacterIdAgentsResearchOutput> {
-    const arguments_: GetCharactersCharacterIdAgentsResearchInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdAgentsResearchDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  calculateCspaCharge(characterId: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions): Promise<PostCharactersCharacterIdCspaOutput> {
-    const arguments_: PostCharactersCharacterIdCspaInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersCharacterIdCspaDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCorporationRoles(characterId: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions): Promise<GetCharactersCharacterIdRolesOutput> {
-    const arguments_: GetCharactersCharacterIdRolesInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdRolesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getJumpFatigue(characterId: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions): Promise<GetCharactersCharacterIdFatigueOutput> {
-    const arguments_: GetCharactersCharacterIdFatigueInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdFatigueDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getPortrait(characterId: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions): Promise<GetCharactersCharacterIdPortraitOutput> {
-    const arguments_: GetCharactersCharacterIdPortraitInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdPortraitDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getPublicInfo(characterId: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions): Promise<GetCharactersDetailOutput> {
-    const arguments_: GetCharactersDetailInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listBlueprints(characterId: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions): Promise<GetCharactersCharacterIdBlueprintsOutput> {
-    const arguments_: GetCharactersCharacterIdBlueprintsInput = { path: { "character_id": characterId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdBlueprintsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listContactNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions): Promise<GetCharactersCharacterIdNotificationsContactsOutput> {
-    const arguments_: GetCharactersCharacterIdNotificationsContactsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdNotificationsContactsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCorporationHistory(characterId: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions): Promise<GetCharactersCharacterIdCorporationhistoryOutput> {
-    const arguments_: GetCharactersCharacterIdCorporationhistoryInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdCorporationhistoryDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCorporationTitles(characterId: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions): Promise<GetCharactersCharacterIdTitlesOutput> {
-    const arguments_: GetCharactersCharacterIdTitlesInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdTitlesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMedals(characterId: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions): Promise<GetCharactersCharacterIdMedalsOutput> {
-    const arguments_: GetCharactersCharacterIdMedalsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdMedalsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions): Promise<GetCharactersCharacterIdNotificationsOutput> {
-    const arguments_: GetCharactersCharacterIdNotificationsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdNotificationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listStandings(characterId: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions): Promise<GetCharactersCharacterIdStandingsOutput> {
-    const arguments_: GetCharactersCharacterIdStandingsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdStandingsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  lookupAffiliations(options: PostCharactersAffiliationOptions): Promise<PostCharactersAffiliationOutput> {
-    const arguments_: PostCharactersAffiliationInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersAffiliationDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): CharacterDomainClientWithMetadata {
-    return new CharacterDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class CharacterDomainClientWithMetadataImplementation extends CharacterDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -232,6 +147,75 @@ class CharacterDomainClientWithMetadataImplementation extends CharacterDomainCli
   lookupAffiliations(options: PostCharactersAffiliationOptions): Promise<EsiResponse<PostCharactersAffiliationOutput>> {
     const arguments_: PostCharactersAffiliationInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
     return executeOperation(this.#configuration, PostCharactersAffiliationDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class CharacterDomainClientImplementation implements CharacterDomainClient {
+  readonly #metadata: CharacterDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new CharacterDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  agentsResearch(characterId: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions): Promise<GetCharactersCharacterIdAgentsResearchOutput> {
+    return this.#metadata.agentsResearch(characterId, options).then((response) => response.data);
+  }
+
+  calculateCspaCharge(characterId: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions): Promise<PostCharactersCharacterIdCspaOutput> {
+    return this.#metadata.calculateCspaCharge(characterId, options).then((response) => response.data);
+  }
+
+  getCorporationRoles(characterId: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions): Promise<GetCharactersCharacterIdRolesOutput> {
+    return this.#metadata.getCorporationRoles(characterId, options).then((response) => response.data);
+  }
+
+  getJumpFatigue(characterId: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions): Promise<GetCharactersCharacterIdFatigueOutput> {
+    return this.#metadata.getJumpFatigue(characterId, options).then((response) => response.data);
+  }
+
+  getPortrait(characterId: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions): Promise<GetCharactersCharacterIdPortraitOutput> {
+    return this.#metadata.getPortrait(characterId, options).then((response) => response.data);
+  }
+
+  getPublicInfo(characterId: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions): Promise<GetCharactersDetailOutput> {
+    return this.#metadata.getPublicInfo(characterId, options).then((response) => response.data);
+  }
+
+  listBlueprints(characterId: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions): Promise<GetCharactersCharacterIdBlueprintsOutput> {
+    return this.#metadata.listBlueprints(characterId, options).then((response) => response.data);
+  }
+
+  listContactNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions): Promise<GetCharactersCharacterIdNotificationsContactsOutput> {
+    return this.#metadata.listContactNotifications(characterId, options).then((response) => response.data);
+  }
+
+  listCorporationHistory(characterId: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions): Promise<GetCharactersCharacterIdCorporationhistoryOutput> {
+    return this.#metadata.listCorporationHistory(characterId, options).then((response) => response.data);
+  }
+
+  listCorporationTitles(characterId: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions): Promise<GetCharactersCharacterIdTitlesOutput> {
+    return this.#metadata.listCorporationTitles(characterId, options).then((response) => response.data);
+  }
+
+  listMedals(characterId: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions): Promise<GetCharactersCharacterIdMedalsOutput> {
+    return this.#metadata.listMedals(characterId, options).then((response) => response.data);
+  }
+
+  listNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions): Promise<GetCharactersCharacterIdNotificationsOutput> {
+    return this.#metadata.listNotifications(characterId, options).then((response) => response.data);
+  }
+
+  listStandings(characterId: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions): Promise<GetCharactersCharacterIdStandingsOutput> {
+    return this.#metadata.listStandings(characterId, options).then((response) => response.data);
+  }
+
+  lookupAffiliations(options: PostCharactersAffiliationOptions): Promise<PostCharactersAffiliationOutput> {
+    return this.#metadata.lookupAffiliations(options).then((response) => response.data);
+  }
+
+  withMetadata(): CharacterDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

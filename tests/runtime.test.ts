@@ -4,7 +4,6 @@ import {
   EsiClient,
   EsiHttpError,
   GetStatusSuccessResponseSchema,
-  StatusDomainClient,
   createStatusClient,
 } from '../src/index';
 import * as sdk from '../src/index';
@@ -29,8 +28,8 @@ describe('root client surface', () => {
       fetch: fetchApi,
     });
 
-    expect(client.status).toBeInstanceOf(StatusDomainClient);
-    expect(standalone).toBeInstanceOf(StatusDomainClient);
+    expect(client.status).toEqual(expect.objectContaining({ get: expect.any(Function) }));
+    expect(standalone).toEqual(expect.objectContaining({ get: expect.any(Function) }));
     const status = await client.status.get({ compatibilityDate: '2020-01-01' });
 
     expect(fetchApi).toHaveBeenCalledOnce();

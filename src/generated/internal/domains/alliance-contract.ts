@@ -43,28 +43,24 @@ export interface GetAlliancesAllianceIdCorporationsOptions {
   readonly "xTenant"?: NonNullable<GetAlliancesAllianceIdCorporationsInput["header"]>["X-Tenant"];
 }
 
-export abstract class AllianceDomainClient {
-  protected constructor() {}
+export interface AllianceDomainClient {
+  getIcon(allianceId: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions): Promise<GetAlliancesAllianceIdIconsOutput>;
 
-  abstract getIcon(allianceId: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions): Promise<GetAlliancesAllianceIdIconsOutput>;
+  getPublicInfo(allianceId: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions): Promise<GetAlliancesAllianceIdOutput>;
 
-  abstract getPublicInfo(allianceId: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions): Promise<GetAlliancesAllianceIdOutput>;
+  list(options?: GetAlliancesOptions): Promise<GetAlliancesOutput>;
 
-  abstract list(options?: GetAlliancesOptions): Promise<GetAlliancesOutput>;
+  listCorporations(allianceId: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions): Promise<GetAlliancesAllianceIdCorporationsOutput>;
 
-  abstract listCorporations(allianceId: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions): Promise<GetAlliancesAllianceIdCorporationsOutput>;
-
-  abstract withMetadata(): AllianceDomainClientWithMetadata;
+  withMetadata(): AllianceDomainClientWithMetadata;
 }
 
-export abstract class AllianceDomainClientWithMetadata {
-  protected constructor() {}
+export interface AllianceDomainClientWithMetadata {
+  getIcon(allianceId: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions): Promise<EsiResponse<GetAlliancesAllianceIdIconsOutput>>;
 
-  abstract getIcon(allianceId: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions): Promise<EsiResponse<GetAlliancesAllianceIdIconsOutput>>;
+  getPublicInfo(allianceId: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions): Promise<EsiResponse<GetAlliancesAllianceIdOutput>>;
 
-  abstract getPublicInfo(allianceId: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions): Promise<EsiResponse<GetAlliancesAllianceIdOutput>>;
+  list(options?: GetAlliancesOptions): Promise<EsiResponse<GetAlliancesOutput>>;
 
-  abstract list(options?: GetAlliancesOptions): Promise<EsiResponse<GetAlliancesOutput>>;
-
-  abstract listCorporations(allianceId: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions): Promise<EsiResponse<GetAlliancesAllianceIdCorporationsOutput>>;
+  listCorporations(allianceId: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions): Promise<EsiResponse<GetAlliancesAllianceIdCorporationsOutput>>;
 }

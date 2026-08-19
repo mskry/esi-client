@@ -16,16 +16,12 @@ export interface GetStatusOptions {
   readonly "xTenant"?: NonNullable<GetStatusInput["header"]>["X-Tenant"];
 }
 
-export abstract class StatusDomainClient {
-  protected constructor() {}
+export interface StatusDomainClient {
+  get(options?: GetStatusOptions): Promise<GetStatusOutput>;
 
-  abstract get(options?: GetStatusOptions): Promise<GetStatusOutput>;
-
-  abstract withMetadata(): StatusDomainClientWithMetadata;
+  withMetadata(): StatusDomainClientWithMetadata;
 }
 
-export abstract class StatusDomainClientWithMetadata {
-  protected constructor() {}
-
-  abstract get(options?: GetStatusOptions): Promise<EsiResponse<GetStatusOutput>>;
+export interface StatusDomainClientWithMetadata {
+  get(options?: GetStatusOptions): Promise<EsiResponse<GetStatusOutput>>;
 }

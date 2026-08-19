@@ -11,12 +11,12 @@ import {
   GetCharactersCosmeticsSkinrComponentsDescriptor,
   GetCharactersCosmeticsSkinrDescriptor,
 } from '../descriptors/cosmetics.js';
-import {
+import type {
   CosmeticsDomainClient,
   CosmeticsDomainClientWithMetadata,
-  type GetCosmeticsSkinrOptions,
-  type GetCharactersCosmeticsSkinrComponentsOptions,
-  type GetCharactersCosmeticsSkinrOptions,
+  GetCosmeticsSkinrOptions,
+  GetCharactersCosmeticsSkinrComponentsOptions,
+  GetCharactersCosmeticsSkinrOptions,
 } from './cosmetics-contract.js';
 import type {
   GetCharactersCosmeticsSkinrComponentsInput,
@@ -27,40 +27,10 @@ import type {
   GetCosmeticsSkinrOutput,
 } from '../../schemas/operations/cosmetics.js';
 
-class CosmeticsDomainClientImplementation extends CosmeticsDomainClient {
+class CosmeticsDomainClientWithMetadataImplementation implements CosmeticsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getSkinrLicense(skinrId: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions): Promise<GetCosmeticsSkinrOutput> {
-    const arguments_: GetCosmeticsSkinrInput = { path: { "skinr_id": skinrId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCosmeticsSkinrDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSkinrComponentLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions): Promise<GetCharactersCosmeticsSkinrComponentsOutput> {
-    const arguments_: GetCharactersCosmeticsSkinrComponentsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCosmeticsSkinrComponentsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSkinrLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions): Promise<GetCharactersCosmeticsSkinrOutput> {
-    const arguments_: GetCharactersCosmeticsSkinrInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCosmeticsSkinrDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): CosmeticsDomainClientWithMetadata {
-    return new CosmeticsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class CosmeticsDomainClientWithMetadataImplementation extends CosmeticsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -78,6 +48,31 @@ class CosmeticsDomainClientWithMetadataImplementation extends CosmeticsDomainCli
   listSkinrLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions): Promise<EsiResponse<GetCharactersCosmeticsSkinrOutput>> {
     const arguments_: GetCharactersCosmeticsSkinrInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCharactersCosmeticsSkinrDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class CosmeticsDomainClientImplementation implements CosmeticsDomainClient {
+  readonly #metadata: CosmeticsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new CosmeticsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getSkinrLicense(skinrId: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions): Promise<GetCosmeticsSkinrOutput> {
+    return this.#metadata.getSkinrLicense(skinrId, options).then((response) => response.data);
+  }
+
+  listSkinrComponentLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions): Promise<GetCharactersCosmeticsSkinrComponentsOutput> {
+    return this.#metadata.listSkinrComponentLicenses(characterId, options).then((response) => response.data);
+  }
+
+  listSkinrLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions): Promise<GetCharactersCosmeticsSkinrOutput> {
+    return this.#metadata.listSkinrLicenses(characterId, options).then((response) => response.data);
+  }
+
+  withMetadata(): CosmeticsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

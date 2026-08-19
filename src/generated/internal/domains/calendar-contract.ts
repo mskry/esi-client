@@ -45,28 +45,24 @@ export interface PutCharactersCharacterIdCalendarEventIdOptions {
   readonly "xTenant"?: NonNullable<PutCharactersCharacterIdCalendarEventIdInput["header"]>["X-Tenant"];
 }
 
-export abstract class CalendarDomainClient {
-  protected constructor() {}
+export interface CalendarDomainClient {
+  getEvent(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions): Promise<GetCharactersCharacterIdCalendarEventIdOutput>;
 
-  abstract getEvent(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions): Promise<GetCharactersCharacterIdCalendarEventIdOutput>;
+  listEventAttendees(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions): Promise<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>;
 
-  abstract listEventAttendees(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions): Promise<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>;
+  listEvents(characterId: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions): Promise<GetCharactersCharacterIdCalendarOutput>;
 
-  abstract listEvents(characterId: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions): Promise<GetCharactersCharacterIdCalendarOutput>;
+  respondToEvent(characterId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions): Promise<PutCharactersCharacterIdCalendarEventIdOutput>;
 
-  abstract respondToEvent(characterId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions): Promise<PutCharactersCharacterIdCalendarEventIdOutput>;
-
-  abstract withMetadata(): CalendarDomainClientWithMetadata;
+  withMetadata(): CalendarDomainClientWithMetadata;
 }
 
-export abstract class CalendarDomainClientWithMetadata {
-  protected constructor() {}
+export interface CalendarDomainClientWithMetadata {
+  getEvent(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions): Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdOutput>>;
 
-  abstract getEvent(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions): Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdOutput>>;
+  listEventAttendees(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions): Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>>;
 
-  abstract listEventAttendees(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions): Promise<EsiResponse<GetCharactersCharacterIdCalendarEventIdAttendeesOutput>>;
+  listEvents(characterId: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions): Promise<EsiResponse<GetCharactersCharacterIdCalendarOutput>>;
 
-  abstract listEvents(characterId: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions): Promise<EsiResponse<GetCharactersCharacterIdCalendarOutput>>;
-
-  abstract respondToEvent(characterId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions): Promise<EsiResponse<PutCharactersCharacterIdCalendarEventIdOutput>>;
+  respondToEvent(characterId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions): Promise<EsiResponse<PutCharactersCharacterIdCalendarEventIdOutput>>;
 }

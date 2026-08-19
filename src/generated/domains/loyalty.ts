@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindLoyaltyDomainClient } from '../internal/domains/loyalty.js';
 import type { LoyaltyDomainClient } from '../internal/domains/loyalty-contract.js';
 
-export * from '../internal/domains/loyalty-contract.js';
+export type * from '../internal/domains/loyalty-contract.js';
 
 export function createLoyaltyClient(options: EsiClientOptions = {}): LoyaltyDomainClient {
   return bindLoyaltyDomainClient(new EsiClientConfiguration(options));

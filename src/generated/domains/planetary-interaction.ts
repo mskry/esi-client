@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindPlanetaryInteractionDomainClient } from '../internal/domains/planetary-interaction.js';
 import type { PlanetaryInteractionDomainClient } from '../internal/domains/planetary-interaction-contract.js';
 
-export * from '../internal/domains/planetary-interaction-contract.js';
+export type * from '../internal/domains/planetary-interaction-contract.js';
 
 export function createPlanetaryInteractionClient(options: EsiClientOptions = {}): PlanetaryInteractionDomainClient {
   return bindPlanetaryInteractionDomainClient(new EsiClientConfiguration(options));

@@ -40,7 +40,7 @@ export async function checkPackage({ built = false } = {}) {
       ],
       'pack:inspect': [
         process.execPath,
-        [join(root, 'scripts/inspect-pack.mjs'), '--pack-json', packJson],
+        [join(root, 'scripts/inspect-pack.mjs'), '--pack-json', packJson, '--tarball', tarball],
       ],
     };
 

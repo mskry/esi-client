@@ -43,28 +43,24 @@ export interface GetMetaCompatibilityDatesOptions {
   readonly "xTenant"?: NonNullable<GetMetaCompatibilityDatesInput["header"]>["X-Tenant"];
 }
 
-export abstract class MetaDomainClient {
-  protected constructor() {}
+export interface MetaDomainClient {
+  getChangelog(options?: GetMetaChangelogOptions): Promise<GetMetaChangelogOutput>;
 
-  abstract getChangelog(options?: GetMetaChangelogOptions): Promise<GetMetaChangelogOutput>;
+  getHealthStatus(options?: GetMetaStatusOptions): Promise<GetMetaStatusOutput>;
 
-  abstract getHealthStatus(options?: GetMetaStatusOptions): Promise<GetMetaStatusOutput>;
+  getName(options?: GetMetaNameOptions): Promise<GetMetaNameOutput>;
 
-  abstract getName(options?: GetMetaNameOptions): Promise<GetMetaNameOutput>;
+  listCompatibilityDates(options?: GetMetaCompatibilityDatesOptions): Promise<GetMetaCompatibilityDatesOutput>;
 
-  abstract listCompatibilityDates(options?: GetMetaCompatibilityDatesOptions): Promise<GetMetaCompatibilityDatesOutput>;
-
-  abstract withMetadata(): MetaDomainClientWithMetadata;
+  withMetadata(): MetaDomainClientWithMetadata;
 }
 
-export abstract class MetaDomainClientWithMetadata {
-  protected constructor() {}
+export interface MetaDomainClientWithMetadata {
+  getChangelog(options?: GetMetaChangelogOptions): Promise<EsiResponse<GetMetaChangelogOutput>>;
 
-  abstract getChangelog(options?: GetMetaChangelogOptions): Promise<EsiResponse<GetMetaChangelogOutput>>;
+  getHealthStatus(options?: GetMetaStatusOptions): Promise<EsiResponse<GetMetaStatusOutput>>;
 
-  abstract getHealthStatus(options?: GetMetaStatusOptions): Promise<EsiResponse<GetMetaStatusOutput>>;
+  getName(options?: GetMetaNameOptions): Promise<EsiResponse<GetMetaNameOutput>>;
 
-  abstract getName(options?: GetMetaNameOptions): Promise<EsiResponse<GetMetaNameOutput>>;
-
-  abstract listCompatibilityDates(options?: GetMetaCompatibilityDatesOptions): Promise<EsiResponse<GetMetaCompatibilityDatesOutput>>;
+  listCompatibilityDates(options?: GetMetaCompatibilityDatesOptions): Promise<EsiResponse<GetMetaCompatibilityDatesOutput>>;
 }

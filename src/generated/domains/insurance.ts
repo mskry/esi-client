@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindInsuranceDomainClient } from '../internal/domains/insurance.js';
 import type { InsuranceDomainClient } from '../internal/domains/insurance-contract.js';
 
-export * from '../internal/domains/insurance-contract.js';
+export type * from '../internal/domains/insurance-contract.js';
 
 export function createInsuranceClient(options: EsiClientOptions = {}): InsuranceDomainClient {
   return bindInsuranceDomainClient(new EsiClientConfiguration(options));

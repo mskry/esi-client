@@ -34,24 +34,20 @@ export interface GetCharactersCosmeticsSkinrOptions {
   readonly "xTenant"?: NonNullable<GetCharactersCosmeticsSkinrInput["header"]>["X-Tenant"];
 }
 
-export abstract class CosmeticsDomainClient {
-  protected constructor() {}
+export interface CosmeticsDomainClient {
+  getSkinrLicense(skinrId: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions): Promise<GetCosmeticsSkinrOutput>;
 
-  abstract getSkinrLicense(skinrId: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions): Promise<GetCosmeticsSkinrOutput>;
+  listSkinrComponentLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions): Promise<GetCharactersCosmeticsSkinrComponentsOutput>;
 
-  abstract listSkinrComponentLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions): Promise<GetCharactersCosmeticsSkinrComponentsOutput>;
+  listSkinrLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions): Promise<GetCharactersCosmeticsSkinrOutput>;
 
-  abstract listSkinrLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions): Promise<GetCharactersCosmeticsSkinrOutput>;
-
-  abstract withMetadata(): CosmeticsDomainClientWithMetadata;
+  withMetadata(): CosmeticsDomainClientWithMetadata;
 }
 
-export abstract class CosmeticsDomainClientWithMetadata {
-  protected constructor() {}
+export interface CosmeticsDomainClientWithMetadata {
+  getSkinrLicense(skinrId: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions): Promise<EsiResponse<GetCosmeticsSkinrOutput>>;
 
-  abstract getSkinrLicense(skinrId: NonNullable<GetCosmeticsSkinrInput['path']>["skinr_id"], options?: GetCosmeticsSkinrOptions): Promise<EsiResponse<GetCosmeticsSkinrOutput>>;
+  listSkinrComponentLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions): Promise<EsiResponse<GetCharactersCosmeticsSkinrComponentsOutput>>;
 
-  abstract listSkinrComponentLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrComponentsInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrComponentsOptions): Promise<EsiResponse<GetCharactersCosmeticsSkinrComponentsOutput>>;
-
-  abstract listSkinrLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions): Promise<EsiResponse<GetCharactersCosmeticsSkinrOutput>>;
+  listSkinrLicenses(characterId: NonNullable<GetCharactersCosmeticsSkinrInput['path']>["character_id"], options?: GetCharactersCosmeticsSkinrOptions): Promise<EsiResponse<GetCharactersCosmeticsSkinrOutput>>;
 }

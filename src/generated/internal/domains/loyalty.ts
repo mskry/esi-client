@@ -10,11 +10,11 @@ import {
   GetCharactersCharacterIdLoyaltyPointsDescriptor,
   GetLoyaltyStoresCorporationIdOffersDescriptor,
 } from '../descriptors/loyalty.js';
-import {
+import type {
   LoyaltyDomainClient,
   LoyaltyDomainClientWithMetadata,
-  type GetCharactersCharacterIdLoyaltyPointsOptions,
-  type GetLoyaltyStoresCorporationIdOffersOptions,
+  GetCharactersCharacterIdLoyaltyPointsOptions,
+  GetLoyaltyStoresCorporationIdOffersOptions,
 } from './loyalty-contract.js';
 import type {
   GetCharactersCharacterIdLoyaltyPointsInput,
@@ -23,35 +23,10 @@ import type {
   GetLoyaltyStoresCorporationIdOffersOutput,
 } from '../../schemas/operations/loyalty.js';
 
-class LoyaltyDomainClientImplementation extends LoyaltyDomainClient {
+class LoyaltyDomainClientWithMetadataImplementation implements LoyaltyDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  listPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<GetCharactersCharacterIdLoyaltyPointsOutput> {
-    const arguments_: GetCharactersCharacterIdLoyaltyPointsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdLoyaltyPointsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listStoreOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<GetLoyaltyStoresCorporationIdOffersOutput> {
-    const arguments_: GetLoyaltyStoresCorporationIdOffersInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetLoyaltyStoresCorporationIdOffersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): LoyaltyDomainClientWithMetadata {
-    return new LoyaltyDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class LoyaltyDomainClientWithMetadataImplementation extends LoyaltyDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -64,6 +39,27 @@ class LoyaltyDomainClientWithMetadataImplementation extends LoyaltyDomainClientW
   listStoreOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<EsiResponse<GetLoyaltyStoresCorporationIdOffersOutput>> {
     const arguments_: GetLoyaltyStoresCorporationIdOffersInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetLoyaltyStoresCorporationIdOffersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class LoyaltyDomainClientImplementation implements LoyaltyDomainClient {
+  readonly #metadata: LoyaltyDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new LoyaltyDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  listPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<GetCharactersCharacterIdLoyaltyPointsOutput> {
+    return this.#metadata.listPoints(characterId, options).then((response) => response.data);
+  }
+
+  listStoreOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<GetLoyaltyStoresCorporationIdOffersOutput> {
+    return this.#metadata.listStoreOffers(corporationId, options).then((response) => response.data);
+  }
+
+  withMetadata(): LoyaltyDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

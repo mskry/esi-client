@@ -13,14 +13,14 @@ import {
   GetCharactersParagonHubSkinrDescriptor,
   GetParagonHubSkinrDescriptor,
 } from '../descriptors/paragon-hub.js';
-import {
+import type {
   ParagonHubDomainClient,
   ParagonHubDomainClientWithMetadata,
-  type GetParagonHubSkinrAlliancesOptions,
-  type GetParagonHubSkinrCharactersOptions,
-  type GetParagonHubSkinrCorporationsOptions,
-  type GetCharactersParagonHubSkinrOptions,
-  type GetParagonHubSkinrOptions,
+  GetParagonHubSkinrAlliancesOptions,
+  GetParagonHubSkinrCharactersOptions,
+  GetParagonHubSkinrCorporationsOptions,
+  GetCharactersParagonHubSkinrOptions,
+  GetParagonHubSkinrOptions,
 } from './paragon-hub-contract.js';
 import type {
   GetCharactersParagonHubSkinrInput,
@@ -35,50 +35,10 @@ import type {
   GetParagonHubSkinrOutput,
 } from '../../schemas/operations/paragon-hub.js';
 
-class ParagonHubDomainClientImplementation extends ParagonHubDomainClient {
+class ParagonHubDomainClientWithMetadataImplementation implements ParagonHubDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  listListingsForAlliance(allianceId: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions): Promise<GetParagonHubSkinrAlliancesOutput> {
-    const arguments_: GetParagonHubSkinrAlliancesInput = { path: { "alliance_id": allianceId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetParagonHubSkinrAlliancesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listListingsForCharacter(characterId: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions): Promise<GetParagonHubSkinrCharactersOutput> {
-    const arguments_: GetParagonHubSkinrCharactersInput = { path: { "character_id": characterId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetParagonHubSkinrCharactersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listListingsForCorporation(corporationId: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions): Promise<GetParagonHubSkinrCorporationsOutput> {
-    const arguments_: GetParagonHubSkinrCorporationsInput = { path: { "corporation_id": corporationId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetParagonHubSkinrCorporationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listPostedListings(characterId: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions): Promise<GetCharactersParagonHubSkinrOutput> {
-    const arguments_: GetCharactersParagonHubSkinrInput = { path: { "character_id": characterId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersParagonHubSkinrDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listPublicListings(options?: GetParagonHubSkinrOptions): Promise<GetParagonHubSkinrOutput> {
-    const arguments_: GetParagonHubSkinrInput = { query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetParagonHubSkinrDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): ParagonHubDomainClientWithMetadata {
-    return new ParagonHubDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class ParagonHubDomainClientWithMetadataImplementation extends ParagonHubDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -106,6 +66,39 @@ class ParagonHubDomainClientWithMetadataImplementation extends ParagonHubDomainC
   listPublicListings(options?: GetParagonHubSkinrOptions): Promise<EsiResponse<GetParagonHubSkinrOutput>> {
     const arguments_: GetParagonHubSkinrInput = { query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetParagonHubSkinrDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class ParagonHubDomainClientImplementation implements ParagonHubDomainClient {
+  readonly #metadata: ParagonHubDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new ParagonHubDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  listListingsForAlliance(allianceId: NonNullable<GetParagonHubSkinrAlliancesInput['path']>["alliance_id"], options?: GetParagonHubSkinrAlliancesOptions): Promise<GetParagonHubSkinrAlliancesOutput> {
+    return this.#metadata.listListingsForAlliance(allianceId, options).then((response) => response.data);
+  }
+
+  listListingsForCharacter(characterId: NonNullable<GetParagonHubSkinrCharactersInput['path']>["character_id"], options?: GetParagonHubSkinrCharactersOptions): Promise<GetParagonHubSkinrCharactersOutput> {
+    return this.#metadata.listListingsForCharacter(characterId, options).then((response) => response.data);
+  }
+
+  listListingsForCorporation(corporationId: NonNullable<GetParagonHubSkinrCorporationsInput['path']>["corporation_id"], options?: GetParagonHubSkinrCorporationsOptions): Promise<GetParagonHubSkinrCorporationsOutput> {
+    return this.#metadata.listListingsForCorporation(corporationId, options).then((response) => response.data);
+  }
+
+  listPostedListings(characterId: NonNullable<GetCharactersParagonHubSkinrInput['path']>["character_id"], options?: GetCharactersParagonHubSkinrOptions): Promise<GetCharactersParagonHubSkinrOutput> {
+    return this.#metadata.listPostedListings(characterId, options).then((response) => response.data);
+  }
+
+  listPublicListings(options?: GetParagonHubSkinrOptions): Promise<GetParagonHubSkinrOutput> {
+    return this.#metadata.listPublicListings(options).then((response) => response.data);
+  }
+
+  withMetadata(): ParagonHubDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

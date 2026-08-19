@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindRoutesDomainClient } from '../internal/domains/routes.js';
 import type { RoutesDomainClient } from '../internal/domains/routes-contract.js';
 
-export * from '../internal/domains/routes-contract.js';
+export type * from '../internal/domains/routes-contract.js';
 
 export function createRoutesClient(options: EsiClientOptions = {}): RoutesDomainClient {
   return bindRoutesDomainClient(new EsiClientConfiguration(options));

@@ -282,132 +282,128 @@ export interface PostUniverseNamesOptions {
   readonly "xTenant"?: NonNullable<PostUniverseNamesInput["header"]>["X-Tenant"];
 }
 
-export abstract class UniverseDomainClient {
-  protected constructor() {}
+export interface UniverseDomainClient {
+  getAsteroidBelt(asteroidBeltId: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions): Promise<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>;
 
-  abstract getAsteroidBelt(asteroidBeltId: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions): Promise<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>;
+  getConstellation(constellationId: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions): Promise<GetUniverseConstellationsConstellationIdOutput>;
 
-  abstract getConstellation(constellationId: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions): Promise<GetUniverseConstellationsConstellationIdOutput>;
+  getGraphic(graphicId: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions): Promise<GetUniverseGraphicsGraphicIdOutput>;
 
-  abstract getGraphic(graphicId: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions): Promise<GetUniverseGraphicsGraphicIdOutput>;
+  getItemCategory(categoryId: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions): Promise<GetUniverseCategoriesCategoryIdOutput>;
 
-  abstract getItemCategory(categoryId: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions): Promise<GetUniverseCategoriesCategoryIdOutput>;
+  getItemGroup(groupId: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions): Promise<GetUniverseGroupsGroupIdOutput>;
 
-  abstract getItemGroup(groupId: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions): Promise<GetUniverseGroupsGroupIdOutput>;
+  getMoon(moonId: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions): Promise<GetUniverseMoonsMoonIdOutput>;
 
-  abstract getMoon(moonId: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions): Promise<GetUniverseMoonsMoonIdOutput>;
+  getPlanet(planetId: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions): Promise<GetUniversePlanetsPlanetIdOutput>;
 
-  abstract getPlanet(planetId: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions): Promise<GetUniversePlanetsPlanetIdOutput>;
+  getRegion(regionId: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions): Promise<GetUniverseRegionsRegionIdOutput>;
 
-  abstract getRegion(regionId: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions): Promise<GetUniverseRegionsRegionIdOutput>;
+  getSolarSystem(systemId: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions): Promise<GetUniverseSystemsSystemIdOutput>;
 
-  abstract getSolarSystem(systemId: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions): Promise<GetUniverseSystemsSystemIdOutput>;
+  getStar(starId: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions): Promise<GetUniverseStarsStarIdOutput>;
 
-  abstract getStar(starId: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions): Promise<GetUniverseStarsStarIdOutput>;
+  getStargate(stargateId: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions): Promise<GetUniverseStargatesStargateIdOutput>;
 
-  abstract getStargate(stargateId: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions): Promise<GetUniverseStargatesStargateIdOutput>;
+  getStation(stationId: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions): Promise<GetUniverseStationsStationIdOutput>;
 
-  abstract getStation(stationId: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions): Promise<GetUniverseStationsStationIdOutput>;
+  getStructure(structureId: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions): Promise<GetUniverseStructuresStructureIdOutput>;
 
-  abstract getStructure(structureId: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions): Promise<GetUniverseStructuresStructureIdOutput>;
+  getType(typeId: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions): Promise<GetUniverseTypesTypeIdOutput>;
 
-  abstract getType(typeId: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions): Promise<GetUniverseTypesTypeIdOutput>;
+  listAncestries(options?: GetUniverseAncestriesOptions): Promise<GetUniverseAncestriesOutput>;
 
-  abstract listAncestries(options?: GetUniverseAncestriesOptions): Promise<GetUniverseAncestriesOutput>;
+  listBloodlines(options?: GetUniverseBloodlinesOptions): Promise<GetUniverseBloodlinesOutput>;
 
-  abstract listBloodlines(options?: GetUniverseBloodlinesOptions): Promise<GetUniverseBloodlinesOutput>;
+  listConstellations(options?: GetUniverseConstellationsOptions): Promise<GetUniverseConstellationsOutput>;
 
-  abstract listConstellations(options?: GetUniverseConstellationsOptions): Promise<GetUniverseConstellationsOutput>;
+  listFactions(options?: GetUniverseFactionsOptions): Promise<GetUniverseFactionsOutput>;
 
-  abstract listFactions(options?: GetUniverseFactionsOptions): Promise<GetUniverseFactionsOutput>;
+  listGraphics(options?: GetUniverseGraphicsOptions): Promise<GetUniverseGraphicsOutput>;
 
-  abstract listGraphics(options?: GetUniverseGraphicsOptions): Promise<GetUniverseGraphicsOutput>;
+  listItemCategories(options?: GetUniverseCategoriesOptions): Promise<GetUniverseCategoriesOutput>;
 
-  abstract listItemCategories(options?: GetUniverseCategoriesOptions): Promise<GetUniverseCategoriesOutput>;
+  listItemGroups(options?: GetUniverseGroupsOptions): Promise<GetUniverseGroupsOutput>;
 
-  abstract listItemGroups(options?: GetUniverseGroupsOptions): Promise<GetUniverseGroupsOutput>;
+  listPublicStructures(options?: GetUniverseStructuresOptions): Promise<GetUniverseStructuresOutput>;
 
-  abstract listPublicStructures(options?: GetUniverseStructuresOptions): Promise<GetUniverseStructuresOutput>;
+  listRaces(options?: GetUniverseRacesOptions): Promise<GetUniverseRacesOutput>;
 
-  abstract listRaces(options?: GetUniverseRacesOptions): Promise<GetUniverseRacesOutput>;
+  listRegions(options?: GetUniverseRegionsOptions): Promise<GetUniverseRegionsOutput>;
 
-  abstract listRegions(options?: GetUniverseRegionsOptions): Promise<GetUniverseRegionsOutput>;
+  listSolarSystems(options?: GetUniverseSystemsOptions): Promise<GetUniverseSystemsOutput>;
 
-  abstract listSolarSystems(options?: GetUniverseSystemsOptions): Promise<GetUniverseSystemsOutput>;
+  listSystemJumps(options?: GetUniverseSystemJumpsOptions): Promise<GetUniverseSystemJumpsOutput>;
 
-  abstract listSystemJumps(options?: GetUniverseSystemJumpsOptions): Promise<GetUniverseSystemJumpsOutput>;
+  listSystemKills(options?: GetUniverseSystemKillsOptions): Promise<GetUniverseSystemKillsOutput>;
 
-  abstract listSystemKills(options?: GetUniverseSystemKillsOptions): Promise<GetUniverseSystemKillsOutput>;
+  listTypes(options?: GetUniverseTypesOptions): Promise<GetUniverseTypesOutput>;
 
-  abstract listTypes(options?: GetUniverseTypesOptions): Promise<GetUniverseTypesOutput>;
+  resolveIds(options: PostUniverseIdsOptions): Promise<PostUniverseIdsOutput>;
 
-  abstract resolveIds(options: PostUniverseIdsOptions): Promise<PostUniverseIdsOutput>;
+  resolveNames(options: PostUniverseNamesOptions): Promise<PostUniverseNamesOutput>;
 
-  abstract resolveNames(options: PostUniverseNamesOptions): Promise<PostUniverseNamesOutput>;
-
-  abstract withMetadata(): UniverseDomainClientWithMetadata;
+  withMetadata(): UniverseDomainClientWithMetadata;
 }
 
-export abstract class UniverseDomainClientWithMetadata {
-  protected constructor() {}
+export interface UniverseDomainClientWithMetadata {
+  getAsteroidBelt(asteroidBeltId: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions): Promise<EsiResponse<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>>;
 
-  abstract getAsteroidBelt(asteroidBeltId: NonNullable<GetUniverseAsteroidBeltsAsteroidBeltIdInput['path']>["asteroid_belt_id"], options?: GetUniverseAsteroidBeltsAsteroidBeltIdOptions): Promise<EsiResponse<GetUniverseAsteroidBeltsAsteroidBeltIdOutput>>;
+  getConstellation(constellationId: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions): Promise<EsiResponse<GetUniverseConstellationsConstellationIdOutput>>;
 
-  abstract getConstellation(constellationId: NonNullable<GetUniverseConstellationsConstellationIdInput['path']>["constellation_id"], options?: GetUniverseConstellationsConstellationIdOptions): Promise<EsiResponse<GetUniverseConstellationsConstellationIdOutput>>;
+  getGraphic(graphicId: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions): Promise<EsiResponse<GetUniverseGraphicsGraphicIdOutput>>;
 
-  abstract getGraphic(graphicId: NonNullable<GetUniverseGraphicsGraphicIdInput['path']>["graphic_id"], options?: GetUniverseGraphicsGraphicIdOptions): Promise<EsiResponse<GetUniverseGraphicsGraphicIdOutput>>;
+  getItemCategory(categoryId: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions): Promise<EsiResponse<GetUniverseCategoriesCategoryIdOutput>>;
 
-  abstract getItemCategory(categoryId: NonNullable<GetUniverseCategoriesCategoryIdInput['path']>["category_id"], options?: GetUniverseCategoriesCategoryIdOptions): Promise<EsiResponse<GetUniverseCategoriesCategoryIdOutput>>;
+  getItemGroup(groupId: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions): Promise<EsiResponse<GetUniverseGroupsGroupIdOutput>>;
 
-  abstract getItemGroup(groupId: NonNullable<GetUniverseGroupsGroupIdInput['path']>["group_id"], options?: GetUniverseGroupsGroupIdOptions): Promise<EsiResponse<GetUniverseGroupsGroupIdOutput>>;
+  getMoon(moonId: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions): Promise<EsiResponse<GetUniverseMoonsMoonIdOutput>>;
 
-  abstract getMoon(moonId: NonNullable<GetUniverseMoonsMoonIdInput['path']>["moon_id"], options?: GetUniverseMoonsMoonIdOptions): Promise<EsiResponse<GetUniverseMoonsMoonIdOutput>>;
+  getPlanet(planetId: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions): Promise<EsiResponse<GetUniversePlanetsPlanetIdOutput>>;
 
-  abstract getPlanet(planetId: NonNullable<GetUniversePlanetsPlanetIdInput['path']>["planet_id"], options?: GetUniversePlanetsPlanetIdOptions): Promise<EsiResponse<GetUniversePlanetsPlanetIdOutput>>;
+  getRegion(regionId: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions): Promise<EsiResponse<GetUniverseRegionsRegionIdOutput>>;
 
-  abstract getRegion(regionId: NonNullable<GetUniverseRegionsRegionIdInput['path']>["region_id"], options?: GetUniverseRegionsRegionIdOptions): Promise<EsiResponse<GetUniverseRegionsRegionIdOutput>>;
+  getSolarSystem(systemId: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions): Promise<EsiResponse<GetUniverseSystemsSystemIdOutput>>;
 
-  abstract getSolarSystem(systemId: NonNullable<GetUniverseSystemsSystemIdInput['path']>["system_id"], options?: GetUniverseSystemsSystemIdOptions): Promise<EsiResponse<GetUniverseSystemsSystemIdOutput>>;
+  getStar(starId: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions): Promise<EsiResponse<GetUniverseStarsStarIdOutput>>;
 
-  abstract getStar(starId: NonNullable<GetUniverseStarsStarIdInput['path']>["star_id"], options?: GetUniverseStarsStarIdOptions): Promise<EsiResponse<GetUniverseStarsStarIdOutput>>;
+  getStargate(stargateId: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions): Promise<EsiResponse<GetUniverseStargatesStargateIdOutput>>;
 
-  abstract getStargate(stargateId: NonNullable<GetUniverseStargatesStargateIdInput['path']>["stargate_id"], options?: GetUniverseStargatesStargateIdOptions): Promise<EsiResponse<GetUniverseStargatesStargateIdOutput>>;
+  getStation(stationId: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions): Promise<EsiResponse<GetUniverseStationsStationIdOutput>>;
 
-  abstract getStation(stationId: NonNullable<GetUniverseStationsStationIdInput['path']>["station_id"], options?: GetUniverseStationsStationIdOptions): Promise<EsiResponse<GetUniverseStationsStationIdOutput>>;
+  getStructure(structureId: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions): Promise<EsiResponse<GetUniverseStructuresStructureIdOutput>>;
 
-  abstract getStructure(structureId: NonNullable<GetUniverseStructuresStructureIdInput['path']>["structure_id"], options?: GetUniverseStructuresStructureIdOptions): Promise<EsiResponse<GetUniverseStructuresStructureIdOutput>>;
+  getType(typeId: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions): Promise<EsiResponse<GetUniverseTypesTypeIdOutput>>;
 
-  abstract getType(typeId: NonNullable<GetUniverseTypesTypeIdInput['path']>["type_id"], options?: GetUniverseTypesTypeIdOptions): Promise<EsiResponse<GetUniverseTypesTypeIdOutput>>;
+  listAncestries(options?: GetUniverseAncestriesOptions): Promise<EsiResponse<GetUniverseAncestriesOutput>>;
 
-  abstract listAncestries(options?: GetUniverseAncestriesOptions): Promise<EsiResponse<GetUniverseAncestriesOutput>>;
+  listBloodlines(options?: GetUniverseBloodlinesOptions): Promise<EsiResponse<GetUniverseBloodlinesOutput>>;
 
-  abstract listBloodlines(options?: GetUniverseBloodlinesOptions): Promise<EsiResponse<GetUniverseBloodlinesOutput>>;
+  listConstellations(options?: GetUniverseConstellationsOptions): Promise<EsiResponse<GetUniverseConstellationsOutput>>;
 
-  abstract listConstellations(options?: GetUniverseConstellationsOptions): Promise<EsiResponse<GetUniverseConstellationsOutput>>;
+  listFactions(options?: GetUniverseFactionsOptions): Promise<EsiResponse<GetUniverseFactionsOutput>>;
 
-  abstract listFactions(options?: GetUniverseFactionsOptions): Promise<EsiResponse<GetUniverseFactionsOutput>>;
+  listGraphics(options?: GetUniverseGraphicsOptions): Promise<EsiResponse<GetUniverseGraphicsOutput>>;
 
-  abstract listGraphics(options?: GetUniverseGraphicsOptions): Promise<EsiResponse<GetUniverseGraphicsOutput>>;
+  listItemCategories(options?: GetUniverseCategoriesOptions): Promise<EsiResponse<GetUniverseCategoriesOutput>>;
 
-  abstract listItemCategories(options?: GetUniverseCategoriesOptions): Promise<EsiResponse<GetUniverseCategoriesOutput>>;
+  listItemGroups(options?: GetUniverseGroupsOptions): Promise<EsiResponse<GetUniverseGroupsOutput>>;
 
-  abstract listItemGroups(options?: GetUniverseGroupsOptions): Promise<EsiResponse<GetUniverseGroupsOutput>>;
+  listPublicStructures(options?: GetUniverseStructuresOptions): Promise<EsiResponse<GetUniverseStructuresOutput>>;
 
-  abstract listPublicStructures(options?: GetUniverseStructuresOptions): Promise<EsiResponse<GetUniverseStructuresOutput>>;
+  listRaces(options?: GetUniverseRacesOptions): Promise<EsiResponse<GetUniverseRacesOutput>>;
 
-  abstract listRaces(options?: GetUniverseRacesOptions): Promise<EsiResponse<GetUniverseRacesOutput>>;
+  listRegions(options?: GetUniverseRegionsOptions): Promise<EsiResponse<GetUniverseRegionsOutput>>;
 
-  abstract listRegions(options?: GetUniverseRegionsOptions): Promise<EsiResponse<GetUniverseRegionsOutput>>;
+  listSolarSystems(options?: GetUniverseSystemsOptions): Promise<EsiResponse<GetUniverseSystemsOutput>>;
 
-  abstract listSolarSystems(options?: GetUniverseSystemsOptions): Promise<EsiResponse<GetUniverseSystemsOutput>>;
+  listSystemJumps(options?: GetUniverseSystemJumpsOptions): Promise<EsiResponse<GetUniverseSystemJumpsOutput>>;
 
-  abstract listSystemJumps(options?: GetUniverseSystemJumpsOptions): Promise<EsiResponse<GetUniverseSystemJumpsOutput>>;
+  listSystemKills(options?: GetUniverseSystemKillsOptions): Promise<EsiResponse<GetUniverseSystemKillsOutput>>;
 
-  abstract listSystemKills(options?: GetUniverseSystemKillsOptions): Promise<EsiResponse<GetUniverseSystemKillsOutput>>;
+  listTypes(options?: GetUniverseTypesOptions): Promise<EsiResponse<GetUniverseTypesOutput>>;
 
-  abstract listTypes(options?: GetUniverseTypesOptions): Promise<EsiResponse<GetUniverseTypesOutput>>;
+  resolveIds(options: PostUniverseIdsOptions): Promise<EsiResponse<PostUniverseIdsOutput>>;
 
-  abstract resolveIds(options: PostUniverseIdsOptions): Promise<EsiResponse<PostUniverseIdsOutput>>;
-
-  abstract resolveNames(options: PostUniverseNamesOptions): Promise<EsiResponse<PostUniverseNamesOutput>>;
+  resolveNames(options: PostUniverseNamesOptions): Promise<EsiResponse<PostUniverseNamesOutput>>;
 }

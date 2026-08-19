@@ -11,12 +11,12 @@ import {
   GetWarsDescriptor,
   GetWarsWarIdKillmailsDescriptor,
 } from '../descriptors/wars.js';
-import {
+import type {
   WarsDomainClient,
   WarsDomainClientWithMetadata,
-  type GetWarsWarIdOptions,
-  type GetWarsOptions,
-  type GetWarsWarIdKillmailsOptions,
+  GetWarsWarIdOptions,
+  GetWarsOptions,
+  GetWarsWarIdKillmailsOptions,
 } from './wars-contract.js';
 import type {
   GetWarsInput,
@@ -27,40 +27,10 @@ import type {
   GetWarsWarIdOutput,
 } from '../../schemas/operations/wars.js';
 
-class WarsDomainClientImplementation extends WarsDomainClient {
+class WarsDomainClientWithMetadataImplementation implements WarsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  get(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<GetWarsWarIdOutput> {
-    const arguments_: GetWarsWarIdInput = { path: { "war_id": warId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsWarIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  list(options?: GetWarsOptions): Promise<GetWarsOutput> {
-    const arguments_: GetWarsInput = { query: { "max_war_id": options?.["maxWarId"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<GetWarsWarIdKillmailsOutput> {
-    const arguments_: GetWarsWarIdKillmailsInput = { path: { "war_id": warId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetWarsWarIdKillmailsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): WarsDomainClientWithMetadata {
-    return new WarsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class WarsDomainClientWithMetadataImplementation extends WarsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -78,6 +48,31 @@ class WarsDomainClientWithMetadataImplementation extends WarsDomainClientWithMet
   listKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<EsiResponse<GetWarsWarIdKillmailsOutput>> {
     const arguments_: GetWarsWarIdKillmailsInput = { path: { "war_id": warId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetWarsWarIdKillmailsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class WarsDomainClientImplementation implements WarsDomainClient {
+  readonly #metadata: WarsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new WarsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  get(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<GetWarsWarIdOutput> {
+    return this.#metadata.get(warId, options).then((response) => response.data);
+  }
+
+  list(options?: GetWarsOptions): Promise<GetWarsOutput> {
+    return this.#metadata.list(options).then((response) => response.data);
+  }
+
+  listKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<GetWarsWarIdKillmailsOutput> {
+    return this.#metadata.listKillmails(warId, options).then((response) => response.data);
+  }
+
+  withMetadata(): WarsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

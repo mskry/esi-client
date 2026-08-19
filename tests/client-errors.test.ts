@@ -42,6 +42,42 @@ describe('ESI structured errors', () => {
     expect(unconfirmed.code).toBe('ESI_GENERIC_MUTATION_UNCONFIRMED');
   });
 
+  it('skips malformed collection entries without discarding later valid entries', () => {
+    const authentication = new EsiAuthenticationRequiredError({
+      operationId,
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+      scopes: ['before', 123, 'after'] as unknown as string[],
+    });
+    const response = new EsiResponseParseError({
+      operationId,
+      status: 200,
+      metadata: {
+        // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+        headers: {
+          before: 'first',
+          malformed: 123,
+          after: 'last',
+        } as unknown as Record<string, string>,
+      },
+    });
+    const validation = new EsiRequestValidationError({
+      operationId,
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+      issues: [
+        { path: ['before'], message: 'first', code: 'first' },
+        null,
+        { path: ['after'], message: 'last', code: 'last' },
+      ] as unknown as ConstructorParameters<typeof EsiRequestValidationError>[0]['issues'],
+    });
+
+    expect(authentication.scopes).toEqual(['before', 'after']);
+    expect(response.metadata.headers).toEqual({ before: 'first', after: 'last' });
+    expect(validation.issues).toEqual([
+      { path: ['before'], message: 'first', code: 'first' },
+      { path: ['after'], message: 'last', code: 'last' },
+    ]);
+  });
+
   it('serializes only allowlisted immutable fields and never serializes causes', () => {
     const secret = 'cause-secret-credential';
     const cause = new Error(`provider failed with ${secret}`);

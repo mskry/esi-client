@@ -67,36 +67,32 @@ export interface GetMilitaryCampaignsObjectivesListingOptions {
   readonly "xTenant"?: NonNullable<GetMilitaryCampaignsObjectivesListingInput["header"]>["X-Tenant"];
 }
 
-export abstract class MilitaryCampaignsDomainClient {
-  protected constructor() {}
+export interface MilitaryCampaignsDomainClient {
+  getCampaign(campaignId: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions): Promise<GetMilitaryCampaignsDetailOutput>;
 
-  abstract getCampaign(campaignId: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions): Promise<GetMilitaryCampaignsDetailOutput>;
+  getCharacterObjectiveParticipation(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], objectiveId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions): Promise<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>;
 
-  abstract getCharacterObjectiveParticipation(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], objectiveId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions): Promise<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>;
+  getObjective(campaignId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], objectiveId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions): Promise<GetMilitaryCampaignsObjectivesDetailOutput>;
 
-  abstract getObjective(campaignId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], objectiveId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions): Promise<GetMilitaryCampaignsObjectivesDetailOutput>;
+  listCampaigns(options?: GetMilitaryCampaignsListingOptions): Promise<GetMilitaryCampaignsListingOutput>;
 
-  abstract listCampaigns(options?: GetMilitaryCampaignsListingOptions): Promise<GetMilitaryCampaignsListingOutput>;
+  listCharacterObjectiveParticipations(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions): Promise<GetCharactersMilitaryCampaignsObjectivesListingOutput>;
 
-  abstract listCharacterObjectiveParticipations(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions): Promise<GetCharactersMilitaryCampaignsObjectivesListingOutput>;
+  listObjectives(campaignId: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions): Promise<GetMilitaryCampaignsObjectivesListingOutput>;
 
-  abstract listObjectives(campaignId: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions): Promise<GetMilitaryCampaignsObjectivesListingOutput>;
-
-  abstract withMetadata(): MilitaryCampaignsDomainClientWithMetadata;
+  withMetadata(): MilitaryCampaignsDomainClientWithMetadata;
 }
 
-export abstract class MilitaryCampaignsDomainClientWithMetadata {
-  protected constructor() {}
+export interface MilitaryCampaignsDomainClientWithMetadata {
+  getCampaign(campaignId: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions): Promise<EsiResponse<GetMilitaryCampaignsDetailOutput>>;
 
-  abstract getCampaign(campaignId: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions): Promise<EsiResponse<GetMilitaryCampaignsDetailOutput>>;
+  getCharacterObjectiveParticipation(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], objectiveId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions): Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>>;
 
-  abstract getCharacterObjectiveParticipation(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], objectiveId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions): Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesParticipationOutput>>;
+  getObjective(campaignId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], objectiveId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions): Promise<EsiResponse<GetMilitaryCampaignsObjectivesDetailOutput>>;
 
-  abstract getObjective(campaignId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], objectiveId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions): Promise<EsiResponse<GetMilitaryCampaignsObjectivesDetailOutput>>;
+  listCampaigns(options?: GetMilitaryCampaignsListingOptions): Promise<EsiResponse<GetMilitaryCampaignsListingOutput>>;
 
-  abstract listCampaigns(options?: GetMilitaryCampaignsListingOptions): Promise<EsiResponse<GetMilitaryCampaignsListingOutput>>;
+  listCharacterObjectiveParticipations(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions): Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesListingOutput>>;
 
-  abstract listCharacterObjectiveParticipations(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions): Promise<EsiResponse<GetCharactersMilitaryCampaignsObjectivesListingOutput>>;
-
-  abstract listObjectives(campaignId: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions): Promise<EsiResponse<GetMilitaryCampaignsObjectivesListingOutput>>;
+  listObjectives(campaignId: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions): Promise<EsiResponse<GetMilitaryCampaignsObjectivesListingOutput>>;
 }

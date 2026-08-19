@@ -50,28 +50,24 @@ export interface GetCorporationsProjectsContributorsOptions {
   readonly "xTenant"?: NonNullable<GetCorporationsProjectsContributorsInput["header"]>["X-Tenant"];
 }
 
-export abstract class CorporationProjectsDomainClient {
-  protected constructor() {}
+export interface CorporationProjectsDomainClient {
+  get(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<GetCorporationsProjectsDetailOutput>;
 
-  abstract get(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<GetCorporationsProjectsDetailOutput>;
+  getContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<GetCorporationsProjectsContributionOutput>;
 
-  abstract getContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<GetCorporationsProjectsContributionOutput>;
+  list(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<GetCorporationsProjectsListingOutput>;
 
-  abstract list(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<GetCorporationsProjectsListingOutput>;
+  listContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<GetCorporationsProjectsContributorsOutput>;
 
-  abstract listContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<GetCorporationsProjectsContributorsOutput>;
-
-  abstract withMetadata(): CorporationProjectsDomainClientWithMetadata;
+  withMetadata(): CorporationProjectsDomainClientWithMetadata;
 }
 
-export abstract class CorporationProjectsDomainClientWithMetadata {
-  protected constructor() {}
+export interface CorporationProjectsDomainClientWithMetadata {
+  get(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<EsiResponse<GetCorporationsProjectsDetailOutput>>;
 
-  abstract get(corporationId: NonNullable<GetCorporationsProjectsDetailInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsDetailInput['path']>["project_id"], options?: GetCorporationsProjectsDetailOptions): Promise<EsiResponse<GetCorporationsProjectsDetailOutput>>;
+  getContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<EsiResponse<GetCorporationsProjectsContributionOutput>>;
 
-  abstract getContribution(corporationId: NonNullable<GetCorporationsProjectsContributionInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributionInput['path']>["project_id"], characterId: NonNullable<GetCorporationsProjectsContributionInput['path']>["character_id"], options?: GetCorporationsProjectsContributionOptions): Promise<EsiResponse<GetCorporationsProjectsContributionOutput>>;
+  list(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<EsiResponse<GetCorporationsProjectsListingOutput>>;
 
-  abstract list(corporationId: NonNullable<GetCorporationsProjectsListingInput['path']>["corporation_id"], options?: GetCorporationsProjectsListingOptions): Promise<EsiResponse<GetCorporationsProjectsListingOutput>>;
-
-  abstract listContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<EsiResponse<GetCorporationsProjectsContributorsOutput>>;
+  listContributors(corporationId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["corporation_id"], projectId: NonNullable<GetCorporationsProjectsContributorsInput['path']>["project_id"], options?: GetCorporationsProjectsContributorsOptions): Promise<EsiResponse<GetCorporationsProjectsContributorsOutput>>;
 }

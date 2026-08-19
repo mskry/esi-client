@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindCalendarDomainClient } from '../internal/domains/calendar.js';
 import type { CalendarDomainClient } from '../internal/domains/calendar-contract.js';
 
-export * from '../internal/domains/calendar-contract.js';
+export type * from '../internal/domains/calendar-contract.js';
 
 export function createCalendarClient(options: EsiClientOptions = {}): CalendarDomainClient {
   return bindCalendarDomainClient(new EsiClientConfiguration(options));

@@ -9,40 +9,20 @@ import type { EsiResponse } from '../../../client/response.js';
 import {
   GetStatusDescriptor,
 } from '../descriptors/status.js';
-import {
+import type {
   StatusDomainClient,
   StatusDomainClientWithMetadata,
-  type GetStatusOptions,
+  GetStatusOptions,
 } from './status-contract.js';
 import type {
   GetStatusInput,
   GetStatusOutput,
 } from '../../schemas/operations/status.js';
 
-class StatusDomainClientImplementation extends StatusDomainClient {
+class StatusDomainClientWithMetadataImplementation implements StatusDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  get(options?: GetStatusOptions): Promise<GetStatusOutput> {
-    const arguments_: GetStatusInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetStatusDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): StatusDomainClientWithMetadata {
-    return new StatusDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class StatusDomainClientWithMetadataImplementation extends StatusDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -50,6 +30,23 @@ class StatusDomainClientWithMetadataImplementation extends StatusDomainClientWit
   get(options?: GetStatusOptions): Promise<EsiResponse<GetStatusOutput>> {
     const arguments_: GetStatusInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetStatusDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class StatusDomainClientImplementation implements StatusDomainClient {
+  readonly #metadata: StatusDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new StatusDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  get(options?: GetStatusOptions): Promise<GetStatusOutput> {
+    return this.#metadata.get(options).then((response) => response.data);
+  }
+
+  withMetadata(): StatusDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

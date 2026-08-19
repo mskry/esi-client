@@ -72,7 +72,7 @@ The root export is the convenient entry point. ESM subpaths provide narrower imp
 
 Method option interfaces use stable operation IDs, for example `GetAlliancesAllianceIdIconsOptions`, matching the operation's generated input, output, schemas, descriptor, manifest entry, and discovery identity. Their globally unique names are available from both the package root and corresponding domain subpath.
 
-Every domain subpath exports a `create<Domain>Client` factory, such as `createStatusClient`. Factories accept the same client options applicable to `EsiClient`; direct domain-class construction is unsupported because configuration plumbing is internal. The classes remain available as abstract contracts and runtime `instanceof` values.
+Every domain subpath exports a `create<Domain>Client` factory, such as `createStatusClient`. Factories accept the same client options applicable to `EsiClient`; domain client contracts are exported as TypeScript interfaces while configuration plumbing remains internal.
 
 Domain subpaths reduce the runtime and TypeScript declaration graph reached by an import. They do not reduce npm installation size: the installed tarball still contains all domains, aggregate discovery metadata, and shared schemas.
 

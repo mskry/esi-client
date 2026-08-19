@@ -35,24 +35,20 @@ export interface GetCharactersCharacterIdFittingsOptions {
   readonly "xTenant"?: NonNullable<GetCharactersCharacterIdFittingsInput["header"]>["X-Tenant"];
 }
 
-export abstract class FittingsDomainClient {
-  protected constructor() {}
+export interface FittingsDomainClient {
+  create(characterId: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions): Promise<PostCharactersCharacterIdFittingsOutput>;
 
-  abstract create(characterId: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions): Promise<PostCharactersCharacterIdFittingsOutput>;
+  deleteFitting(characterId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], fittingId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions): Promise<DeleteCharactersCharacterIdFittingsFittingIdOutput>;
 
-  abstract deleteFitting(characterId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], fittingId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions): Promise<DeleteCharactersCharacterIdFittingsFittingIdOutput>;
+  list(characterId: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions): Promise<GetCharactersCharacterIdFittingsOutput>;
 
-  abstract list(characterId: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions): Promise<GetCharactersCharacterIdFittingsOutput>;
-
-  abstract withMetadata(): FittingsDomainClientWithMetadata;
+  withMetadata(): FittingsDomainClientWithMetadata;
 }
 
-export abstract class FittingsDomainClientWithMetadata {
-  protected constructor() {}
+export interface FittingsDomainClientWithMetadata {
+  create(characterId: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions): Promise<EsiResponse<PostCharactersCharacterIdFittingsOutput>>;
 
-  abstract create(characterId: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions): Promise<EsiResponse<PostCharactersCharacterIdFittingsOutput>>;
+  deleteFitting(characterId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], fittingId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions): Promise<EsiResponse<DeleteCharactersCharacterIdFittingsFittingIdOutput>>;
 
-  abstract deleteFitting(characterId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], fittingId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions): Promise<EsiResponse<DeleteCharactersCharacterIdFittingsFittingIdOutput>>;
-
-  abstract list(characterId: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions): Promise<EsiResponse<GetCharactersCharacterIdFittingsOutput>>;
+  list(characterId: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions): Promise<EsiResponse<GetCharactersCharacterIdFittingsOutput>>;
 }

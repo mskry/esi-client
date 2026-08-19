@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindAssetsDomainClient } from '../internal/domains/assets.js';
 import type { AssetsDomainClient } from '../internal/domains/assets-contract.js';
 
-export * from '../internal/domains/assets-contract.js';
+export type * from '../internal/domains/assets-contract.js';
 
 export function createAssetsClient(options: EsiClientOptions = {}): AssetsDomainClient {
   return bindAssetsDomainClient(new EsiClientConfiguration(options));

@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindStatusDomainClient } from '../internal/domains/status.js';
 import type { StatusDomainClient } from '../internal/domains/status-contract.js';
 
-export * from '../internal/domains/status-contract.js';
+export type * from '../internal/domains/status-contract.js';
 
 export function createStatusClient(options: EsiClientOptions = {}): StatusDomainClient {
   return bindStatusDomainClient(new EsiClientConfiguration(options));

@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindSovereigntyDomainClient } from '../internal/domains/sovereignty.js';
 import type { SovereigntyDomainClient } from '../internal/domains/sovereignty-contract.js';
 
-export * from '../internal/domains/sovereignty-contract.js';
+export type * from '../internal/domains/sovereignty-contract.js';
 
 export function createSovereigntyClient(options: EsiClientOptions = {}): SovereigntyDomainClient {
   return bindSovereigntyDomainClient(new EsiClientConfiguration(options));

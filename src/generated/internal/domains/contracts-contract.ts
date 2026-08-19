@@ -94,48 +94,44 @@ export interface GetContractsPublicRegionIdOptions {
   readonly "xTenant"?: NonNullable<GetContractsPublicRegionIdInput["header"]>["X-Tenant"];
 }
 
-export abstract class ContractsDomainClient {
-  protected constructor() {}
+export interface ContractsDomainClient {
+  listCharacterContractBids(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions): Promise<GetCharactersCharacterIdContractsContractIdBidsOutput>;
 
-  abstract listCharacterContractBids(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions): Promise<GetCharactersCharacterIdContractsContractIdBidsOutput>;
+  listCharacterContractItems(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions): Promise<GetCharactersCharacterIdContractsContractIdItemsOutput>;
 
-  abstract listCharacterContractItems(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions): Promise<GetCharactersCharacterIdContractsContractIdItemsOutput>;
+  listCharacterContracts(characterId: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions): Promise<GetCharactersCharacterIdContractsOutput>;
 
-  abstract listCharacterContracts(characterId: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions): Promise<GetCharactersCharacterIdContractsOutput>;
+  listCorporationContractBids(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions): Promise<GetCorporationsCorporationIdContractsContractIdBidsOutput>;
 
-  abstract listCorporationContractBids(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions): Promise<GetCorporationsCorporationIdContractsContractIdBidsOutput>;
+  listCorporationContractItems(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions): Promise<GetCorporationsCorporationIdContractsContractIdItemsOutput>;
 
-  abstract listCorporationContractItems(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions): Promise<GetCorporationsCorporationIdContractsContractIdItemsOutput>;
+  listCorporationContracts(corporationId: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions): Promise<GetCorporationsCorporationIdContractsOutput>;
 
-  abstract listCorporationContracts(corporationId: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions): Promise<GetCorporationsCorporationIdContractsOutput>;
+  listPublicContractBids(contractId: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions): Promise<GetContractsPublicBidsContractIdOutput>;
 
-  abstract listPublicContractBids(contractId: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions): Promise<GetContractsPublicBidsContractIdOutput>;
+  listPublicContractItems(contractId: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions): Promise<GetContractsPublicItemsContractIdOutput>;
 
-  abstract listPublicContractItems(contractId: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions): Promise<GetContractsPublicItemsContractIdOutput>;
+  listPublicContracts(regionId: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions): Promise<GetContractsPublicRegionIdOutput>;
 
-  abstract listPublicContracts(regionId: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions): Promise<GetContractsPublicRegionIdOutput>;
-
-  abstract withMetadata(): ContractsDomainClientWithMetadata;
+  withMetadata(): ContractsDomainClientWithMetadata;
 }
 
-export abstract class ContractsDomainClientWithMetadata {
-  protected constructor() {}
+export interface ContractsDomainClientWithMetadata {
+  listCharacterContractBids(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions): Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdBidsOutput>>;
 
-  abstract listCharacterContractBids(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdBidsOptions): Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdBidsOutput>>;
+  listCharacterContractItems(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions): Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdItemsOutput>>;
 
-  abstract listCharacterContractItems(characterId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["character_id"], contractId: NonNullable<GetCharactersCharacterIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCharactersCharacterIdContractsContractIdItemsOptions): Promise<EsiResponse<GetCharactersCharacterIdContractsContractIdItemsOutput>>;
+  listCharacterContracts(characterId: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions): Promise<EsiResponse<GetCharactersCharacterIdContractsOutput>>;
 
-  abstract listCharacterContracts(characterId: NonNullable<GetCharactersCharacterIdContractsInput['path']>["character_id"], options?: GetCharactersCharacterIdContractsOptions): Promise<EsiResponse<GetCharactersCharacterIdContractsOutput>>;
+  listCorporationContractBids(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdBidsOutput>>;
 
-  abstract listCorporationContractBids(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdBidsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdBidsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdBidsOutput>>;
+  listCorporationContractItems(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdItemsOutput>>;
 
-  abstract listCorporationContractItems(corporationId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["corporation_id"], contractId: NonNullable<GetCorporationsCorporationIdContractsContractIdItemsInput['path']>["contract_id"], options?: GetCorporationsCorporationIdContractsContractIdItemsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContractsContractIdItemsOutput>>;
+  listCorporationContracts(corporationId: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContractsOutput>>;
 
-  abstract listCorporationContracts(corporationId: NonNullable<GetCorporationsCorporationIdContractsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContractsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContractsOutput>>;
+  listPublicContractBids(contractId: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions): Promise<EsiResponse<GetContractsPublicBidsContractIdOutput>>;
 
-  abstract listPublicContractBids(contractId: NonNullable<GetContractsPublicBidsContractIdInput['path']>["contract_id"], options?: GetContractsPublicBidsContractIdOptions): Promise<EsiResponse<GetContractsPublicBidsContractIdOutput>>;
+  listPublicContractItems(contractId: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions): Promise<EsiResponse<GetContractsPublicItemsContractIdOutput>>;
 
-  abstract listPublicContractItems(contractId: NonNullable<GetContractsPublicItemsContractIdInput['path']>["contract_id"], options?: GetContractsPublicItemsContractIdOptions): Promise<EsiResponse<GetContractsPublicItemsContractIdOutput>>;
-
-  abstract listPublicContracts(regionId: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions): Promise<EsiResponse<GetContractsPublicRegionIdOutput>>;
+  listPublicContracts(regionId: NonNullable<GetContractsPublicRegionIdInput['path']>["region_id"], options?: GetContractsPublicRegionIdOptions): Promise<EsiResponse<GetContractsPublicRegionIdOutput>>;
 }

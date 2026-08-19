@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindMarketDomainClient } from '../internal/domains/market.js';
 import type { MarketDomainClient } from '../internal/domains/market-contract.js';
 
-export * from '../internal/domains/market-contract.js';
+export type * from '../internal/domains/market-contract.js';
 
 export function createMarketClient(options: EsiClientOptions = {}): MarketDomainClient {
   return bindMarketDomainClient(new EsiClientConfiguration(options));

@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindWalletDomainClient } from '../internal/domains/wallet.js';
 import type { WalletDomainClient } from '../internal/domains/wallet-contract.js';
 
-export * from '../internal/domains/wallet-contract.js';
+export type * from '../internal/domains/wallet-contract.js';
 
 export function createWalletClient(options: EsiClientOptions = {}): WalletDomainClient {
   return bindWalletDomainClient(new EsiClientConfiguration(options));

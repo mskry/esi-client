@@ -12,13 +12,13 @@ import {
   GetCharactersCharacterIdCalendarDescriptor,
   PutCharactersCharacterIdCalendarEventIdDescriptor,
 } from '../descriptors/calendar.js';
-import {
+import type {
   CalendarDomainClient,
   CalendarDomainClientWithMetadata,
-  type GetCharactersCharacterIdCalendarEventIdOptions,
-  type GetCharactersCharacterIdCalendarEventIdAttendeesOptions,
-  type GetCharactersCharacterIdCalendarOptions,
-  type PutCharactersCharacterIdCalendarEventIdOptions,
+  GetCharactersCharacterIdCalendarEventIdOptions,
+  GetCharactersCharacterIdCalendarEventIdAttendeesOptions,
+  GetCharactersCharacterIdCalendarOptions,
+  PutCharactersCharacterIdCalendarEventIdOptions,
 } from './calendar-contract.js';
 import type {
   GetCharactersCharacterIdCalendarEventIdAttendeesInput,
@@ -31,45 +31,10 @@ import type {
   PutCharactersCharacterIdCalendarEventIdOutput,
 } from '../../schemas/operations/calendar.js';
 
-class CalendarDomainClientImplementation extends CalendarDomainClient {
+class CalendarDomainClientWithMetadataImplementation implements CalendarDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getEvent(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions): Promise<GetCharactersCharacterIdCalendarEventIdOutput> {
-    const arguments_: GetCharactersCharacterIdCalendarEventIdInput = { path: { "character_id": characterId, "event_id": eventId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdCalendarEventIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listEventAttendees(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions): Promise<GetCharactersCharacterIdCalendarEventIdAttendeesOutput> {
-    const arguments_: GetCharactersCharacterIdCalendarEventIdAttendeesInput = { path: { "character_id": characterId, "event_id": eventId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdCalendarEventIdAttendeesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listEvents(characterId: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions): Promise<GetCharactersCharacterIdCalendarOutput> {
-    const arguments_: GetCharactersCharacterIdCalendarInput = { path: { "character_id": characterId }, query: { "from_event": options?.["fromEvent"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdCalendarDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  respondToEvent(characterId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions): Promise<PutCharactersCharacterIdCalendarEventIdOutput> {
-    const arguments_: PutCharactersCharacterIdCalendarEventIdInput = { path: { "character_id": characterId, "event_id": eventId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PutCharactersCharacterIdCalendarEventIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): CalendarDomainClientWithMetadata {
-    return new CalendarDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class CalendarDomainClientWithMetadataImplementation extends CalendarDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -92,6 +57,35 @@ class CalendarDomainClientWithMetadataImplementation extends CalendarDomainClien
   respondToEvent(characterId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions): Promise<EsiResponse<PutCharactersCharacterIdCalendarEventIdOutput>> {
     const arguments_: PutCharactersCharacterIdCalendarEventIdInput = { path: { "character_id": characterId, "event_id": eventId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
     return executeOperation(this.#configuration, PutCharactersCharacterIdCalendarEventIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class CalendarDomainClientImplementation implements CalendarDomainClient {
+  readonly #metadata: CalendarDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new CalendarDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getEvent(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdOptions): Promise<GetCharactersCharacterIdCalendarEventIdOutput> {
+    return this.#metadata.getEvent(characterId, eventId, options).then((response) => response.data);
+  }
+
+  listEventAttendees(characterId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["character_id"], eventId: NonNullable<GetCharactersCharacterIdCalendarEventIdAttendeesInput['path']>["event_id"], options?: GetCharactersCharacterIdCalendarEventIdAttendeesOptions): Promise<GetCharactersCharacterIdCalendarEventIdAttendeesOutput> {
+    return this.#metadata.listEventAttendees(characterId, eventId, options).then((response) => response.data);
+  }
+
+  listEvents(characterId: NonNullable<GetCharactersCharacterIdCalendarInput['path']>["character_id"], options?: GetCharactersCharacterIdCalendarOptions): Promise<GetCharactersCharacterIdCalendarOutput> {
+    return this.#metadata.listEvents(characterId, options).then((response) => response.data);
+  }
+
+  respondToEvent(characterId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["character_id"], eventId: NonNullable<PutCharactersCharacterIdCalendarEventIdInput['path']>["event_id"], options: PutCharactersCharacterIdCalendarEventIdOptions): Promise<PutCharactersCharacterIdCalendarEventIdOutput> {
+    return this.#metadata.respondToEvent(characterId, eventId, options).then((response) => response.data);
+  }
+
+  withMetadata(): CalendarDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

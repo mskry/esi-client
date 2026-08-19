@@ -59,32 +59,28 @@ export interface PostUiAutopilotWaypointOptions {
   readonly "xTenant"?: NonNullable<PostUiAutopilotWaypointInput["header"]>["X-Tenant"];
 }
 
-export abstract class UserInterfaceDomainClient {
-  protected constructor() {}
+export interface UserInterfaceDomainClient {
+  openContract(options: PostUiOpenwindowContractOptions): Promise<PostUiOpenwindowContractOutput>;
 
-  abstract openContract(options: PostUiOpenwindowContractOptions): Promise<PostUiOpenwindowContractOutput>;
+  openInformation(options: PostUiOpenwindowInformationOptions): Promise<PostUiOpenwindowInformationOutput>;
 
-  abstract openInformation(options: PostUiOpenwindowInformationOptions): Promise<PostUiOpenwindowInformationOutput>;
+  openMarketDetails(options: PostUiOpenwindowMarketdetailsOptions): Promise<PostUiOpenwindowMarketdetailsOutput>;
 
-  abstract openMarketDetails(options: PostUiOpenwindowMarketdetailsOptions): Promise<PostUiOpenwindowMarketdetailsOutput>;
+  openNewMail(options: PostUiOpenwindowNewmailOptions): Promise<PostUiOpenwindowNewmailOutput>;
 
-  abstract openNewMail(options: PostUiOpenwindowNewmailOptions): Promise<PostUiOpenwindowNewmailOutput>;
+  setAutopilotWaypoint(options: PostUiAutopilotWaypointOptions): Promise<PostUiAutopilotWaypointOutput>;
 
-  abstract setAutopilotWaypoint(options: PostUiAutopilotWaypointOptions): Promise<PostUiAutopilotWaypointOutput>;
-
-  abstract withMetadata(): UserInterfaceDomainClientWithMetadata;
+  withMetadata(): UserInterfaceDomainClientWithMetadata;
 }
 
-export abstract class UserInterfaceDomainClientWithMetadata {
-  protected constructor() {}
+export interface UserInterfaceDomainClientWithMetadata {
+  openContract(options: PostUiOpenwindowContractOptions): Promise<EsiResponse<PostUiOpenwindowContractOutput>>;
 
-  abstract openContract(options: PostUiOpenwindowContractOptions): Promise<EsiResponse<PostUiOpenwindowContractOutput>>;
+  openInformation(options: PostUiOpenwindowInformationOptions): Promise<EsiResponse<PostUiOpenwindowInformationOutput>>;
 
-  abstract openInformation(options: PostUiOpenwindowInformationOptions): Promise<EsiResponse<PostUiOpenwindowInformationOutput>>;
+  openMarketDetails(options: PostUiOpenwindowMarketdetailsOptions): Promise<EsiResponse<PostUiOpenwindowMarketdetailsOutput>>;
 
-  abstract openMarketDetails(options: PostUiOpenwindowMarketdetailsOptions): Promise<EsiResponse<PostUiOpenwindowMarketdetailsOutput>>;
+  openNewMail(options: PostUiOpenwindowNewmailOptions): Promise<EsiResponse<PostUiOpenwindowNewmailOutput>>;
 
-  abstract openNewMail(options: PostUiOpenwindowNewmailOptions): Promise<EsiResponse<PostUiOpenwindowNewmailOutput>>;
-
-  abstract setAutopilotWaypoint(options: PostUiAutopilotWaypointOptions): Promise<EsiResponse<PostUiAutopilotWaypointOutput>>;
+  setAutopilotWaypoint(options: PostUiAutopilotWaypointOptions): Promise<EsiResponse<PostUiAutopilotWaypointOutput>>;
 }

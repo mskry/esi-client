@@ -11,12 +11,12 @@ import {
   DeleteCharactersCharacterIdFittingsFittingIdDescriptor,
   GetCharactersCharacterIdFittingsDescriptor,
 } from '../descriptors/fittings.js';
-import {
+import type {
   FittingsDomainClient,
   FittingsDomainClientWithMetadata,
-  type PostCharactersCharacterIdFittingsOptions,
-  type DeleteCharactersCharacterIdFittingsFittingIdOptions,
-  type GetCharactersCharacterIdFittingsOptions,
+  PostCharactersCharacterIdFittingsOptions,
+  DeleteCharactersCharacterIdFittingsFittingIdOptions,
+  GetCharactersCharacterIdFittingsOptions,
 } from './fittings-contract.js';
 import type {
   DeleteCharactersCharacterIdFittingsFittingIdInput,
@@ -27,40 +27,10 @@ import type {
   PostCharactersCharacterIdFittingsOutput,
 } from '../../schemas/operations/fittings.js';
 
-class FittingsDomainClientImplementation extends FittingsDomainClient {
+class FittingsDomainClientWithMetadataImplementation implements FittingsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  create(characterId: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions): Promise<PostCharactersCharacterIdFittingsOutput> {
-    const arguments_: PostCharactersCharacterIdFittingsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersCharacterIdFittingsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  deleteFitting(characterId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], fittingId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions): Promise<DeleteCharactersCharacterIdFittingsFittingIdOutput> {
-    const arguments_: DeleteCharactersCharacterIdFittingsFittingIdInput = { path: { "character_id": characterId, "fitting_id": fittingId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, DeleteCharactersCharacterIdFittingsFittingIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  list(characterId: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions): Promise<GetCharactersCharacterIdFittingsOutput> {
-    const arguments_: GetCharactersCharacterIdFittingsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdFittingsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): FittingsDomainClientWithMetadata {
-    return new FittingsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class FittingsDomainClientWithMetadataImplementation extends FittingsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -78,6 +48,31 @@ class FittingsDomainClientWithMetadataImplementation extends FittingsDomainClien
   list(characterId: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions): Promise<EsiResponse<GetCharactersCharacterIdFittingsOutput>> {
     const arguments_: GetCharactersCharacterIdFittingsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCharactersCharacterIdFittingsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class FittingsDomainClientImplementation implements FittingsDomainClient {
+  readonly #metadata: FittingsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new FittingsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  create(characterId: NonNullable<PostCharactersCharacterIdFittingsInput['path']>["character_id"], options: PostCharactersCharacterIdFittingsOptions): Promise<PostCharactersCharacterIdFittingsOutput> {
+    return this.#metadata.create(characterId, options).then((response) => response.data);
+  }
+
+  deleteFitting(characterId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["character_id"], fittingId: NonNullable<DeleteCharactersCharacterIdFittingsFittingIdInput['path']>["fitting_id"], options?: DeleteCharactersCharacterIdFittingsFittingIdOptions): Promise<DeleteCharactersCharacterIdFittingsFittingIdOutput> {
+    return this.#metadata.deleteFitting(characterId, fittingId, options).then((response) => response.data);
+  }
+
+  list(characterId: NonNullable<GetCharactersCharacterIdFittingsInput['path']>["character_id"], options?: GetCharactersCharacterIdFittingsOptions): Promise<GetCharactersCharacterIdFittingsOutput> {
+    return this.#metadata.list(characterId, options).then((response) => response.data);
+  }
+
+  withMetadata(): FittingsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

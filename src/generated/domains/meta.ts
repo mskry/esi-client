@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindMetaDomainClient } from '../internal/domains/meta.js';
 import type { MetaDomainClient } from '../internal/domains/meta-contract.js';
 
-export * from '../internal/domains/meta-contract.js';
+export type * from '../internal/domains/meta-contract.js';
 
 export function createMetaClient(options: EsiClientOptions = {}): MetaDomainClient {
   return bindMetaDomainClient(new EsiClientConfiguration(options));

@@ -11,12 +11,12 @@ import {
   GetCharactersCharacterIdKillmailsRecentDescriptor,
   GetCorporationsCorporationIdKillmailsRecentDescriptor,
 } from '../descriptors/killmails.js';
-import {
+import type {
   KillmailsDomainClient,
   KillmailsDomainClientWithMetadata,
-  type GetKillmailsKillmailIdKillmailHashOptions,
-  type GetCharactersCharacterIdKillmailsRecentOptions,
-  type GetCorporationsCorporationIdKillmailsRecentOptions,
+  GetKillmailsKillmailIdKillmailHashOptions,
+  GetCharactersCharacterIdKillmailsRecentOptions,
+  GetCorporationsCorporationIdKillmailsRecentOptions,
 } from './killmails-contract.js';
 import type {
   GetCharactersCharacterIdKillmailsRecentInput,
@@ -27,40 +27,10 @@ import type {
   GetKillmailsKillmailIdKillmailHashOutput,
 } from '../../schemas/operations/killmails.js';
 
-class KillmailsDomainClientImplementation extends KillmailsDomainClient {
+class KillmailsDomainClientWithMetadataImplementation implements KillmailsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  get(killmailId: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], killmailHash: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions): Promise<GetKillmailsKillmailIdKillmailHashOutput> {
-    const arguments_: GetKillmailsKillmailIdKillmailHashInput = { path: { "killmail_id": killmailId, "killmail_hash": killmailHash }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetKillmailsKillmailIdKillmailHashDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listRecentForCharacter(characterId: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions): Promise<GetCharactersCharacterIdKillmailsRecentOutput> {
-    const arguments_: GetCharactersCharacterIdKillmailsRecentInput = { path: { "character_id": characterId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdKillmailsRecentDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listRecentForCorporation(corporationId: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions): Promise<GetCorporationsCorporationIdKillmailsRecentOutput> {
-    const arguments_: GetCorporationsCorporationIdKillmailsRecentInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdKillmailsRecentDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): KillmailsDomainClientWithMetadata {
-    return new KillmailsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class KillmailsDomainClientWithMetadataImplementation extends KillmailsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -78,6 +48,31 @@ class KillmailsDomainClientWithMetadataImplementation extends KillmailsDomainCli
   listRecentForCorporation(corporationId: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions): Promise<EsiResponse<GetCorporationsCorporationIdKillmailsRecentOutput>> {
     const arguments_: GetCorporationsCorporationIdKillmailsRecentInput = { path: { "corporation_id": corporationId }, query: { "page": options?.["page"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCorporationsCorporationIdKillmailsRecentDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class KillmailsDomainClientImplementation implements KillmailsDomainClient {
+  readonly #metadata: KillmailsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new KillmailsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  get(killmailId: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_id"], killmailHash: NonNullable<GetKillmailsKillmailIdKillmailHashInput['path']>["killmail_hash"], options?: GetKillmailsKillmailIdKillmailHashOptions): Promise<GetKillmailsKillmailIdKillmailHashOutput> {
+    return this.#metadata.get(killmailId, killmailHash, options).then((response) => response.data);
+  }
+
+  listRecentForCharacter(characterId: NonNullable<GetCharactersCharacterIdKillmailsRecentInput['path']>["character_id"], options?: GetCharactersCharacterIdKillmailsRecentOptions): Promise<GetCharactersCharacterIdKillmailsRecentOutput> {
+    return this.#metadata.listRecentForCharacter(characterId, options).then((response) => response.data);
+  }
+
+  listRecentForCorporation(corporationId: NonNullable<GetCorporationsCorporationIdKillmailsRecentInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdKillmailsRecentOptions): Promise<GetCorporationsCorporationIdKillmailsRecentOutput> {
+    return this.#metadata.listRecentForCorporation(corporationId, options).then((response) => response.data);
+  }
+
+  withMetadata(): KillmailsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

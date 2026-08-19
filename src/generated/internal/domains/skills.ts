@@ -11,12 +11,12 @@ import {
   GetCharactersCharacterIdSkillqueueDescriptor,
   GetCharactersCharacterIdSkillsDescriptor,
 } from '../descriptors/skills.js';
-import {
+import type {
   SkillsDomainClient,
   SkillsDomainClientWithMetadata,
-  type GetCharactersCharacterIdAttributesOptions,
-  type GetCharactersCharacterIdSkillqueueOptions,
-  type GetCharactersCharacterIdSkillsOptions,
+  GetCharactersCharacterIdAttributesOptions,
+  GetCharactersCharacterIdSkillqueueOptions,
+  GetCharactersCharacterIdSkillsOptions,
 } from './skills-contract.js';
 import type {
   GetCharactersCharacterIdAttributesInput,
@@ -27,40 +27,10 @@ import type {
   GetCharactersCharacterIdSkillsOutput,
 } from '../../schemas/operations/skills.js';
 
-class SkillsDomainClientImplementation extends SkillsDomainClient {
+class SkillsDomainClientWithMetadataImplementation implements SkillsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getAttributes(characterId: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions): Promise<GetCharactersCharacterIdAttributesOutput> {
-    const arguments_: GetCharactersCharacterIdAttributesInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdAttributesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getSkillQueue(characterId: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions): Promise<GetCharactersCharacterIdSkillqueueOutput> {
-    const arguments_: GetCharactersCharacterIdSkillqueueInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdSkillqueueDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getSkills(characterId: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions): Promise<GetCharactersCharacterIdSkillsOutput> {
-    const arguments_: GetCharactersCharacterIdSkillsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdSkillsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): SkillsDomainClientWithMetadata {
-    return new SkillsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class SkillsDomainClientWithMetadataImplementation extends SkillsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -78,6 +48,31 @@ class SkillsDomainClientWithMetadataImplementation extends SkillsDomainClientWit
   getSkills(characterId: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions): Promise<EsiResponse<GetCharactersCharacterIdSkillsOutput>> {
     const arguments_: GetCharactersCharacterIdSkillsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCharactersCharacterIdSkillsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class SkillsDomainClientImplementation implements SkillsDomainClient {
+  readonly #metadata: SkillsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new SkillsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getAttributes(characterId: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions): Promise<GetCharactersCharacterIdAttributesOutput> {
+    return this.#metadata.getAttributes(characterId, options).then((response) => response.data);
+  }
+
+  getSkillQueue(characterId: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions): Promise<GetCharactersCharacterIdSkillqueueOutput> {
+    return this.#metadata.getSkillQueue(characterId, options).then((response) => response.data);
+  }
+
+  getSkills(characterId: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions): Promise<GetCharactersCharacterIdSkillsOutput> {
+    return this.#metadata.getSkills(characterId, options).then((response) => response.data);
+  }
+
+  withMetadata(): SkillsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

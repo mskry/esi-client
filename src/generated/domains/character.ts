@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindCharacterDomainClient } from '../internal/domains/character.js';
 import type { CharacterDomainClient } from '../internal/domains/character-contract.js';
 
-export * from '../internal/domains/character-contract.js';
+export type * from '../internal/domains/character-contract.js';
 
 export function createCharacterClient(options: EsiClientOptions = {}): CharacterDomainClient {
   return bindCharacterDomainClient(new EsiClientConfiguration(options));

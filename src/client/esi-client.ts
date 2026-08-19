@@ -6,7 +6,7 @@ import type {
   StableOperationId,
 } from './call-operation.js';
 import { EsiClientConfiguration } from './configuration.js';
-import type { EsiClientOptions } from './configuration.js';
+import type { EsiClientOptions } from './options.js';
 import type { EsiResponse } from './response.js';
 
 export abstract class EsiClientBase {

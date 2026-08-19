@@ -11,12 +11,12 @@ import {
   GetCharactersMercenaryTacticalOperationsListingDescriptor,
   GetSkyhooksRaidableDescriptor,
 } from '../descriptors/activities.js';
-import {
+import type {
   ActivitiesDomainClient,
   ActivitiesDomainClientWithMetadata,
-  type GetCharactersMercenaryTacticalOperationsDetailOptions,
-  type GetCharactersMercenaryTacticalOperationsListingOptions,
-  type GetSkyhooksRaidableOptions,
+  GetCharactersMercenaryTacticalOperationsDetailOptions,
+  GetCharactersMercenaryTacticalOperationsListingOptions,
+  GetSkyhooksRaidableOptions,
 } from './activities-contract.js';
 import type {
   GetCharactersMercenaryTacticalOperationsDetailInput,
@@ -27,40 +27,10 @@ import type {
   GetSkyhooksRaidableOutput,
 } from '../../schemas/operations/activities.js';
 
-class ActivitiesDomainClientImplementation extends ActivitiesDomainClient {
+class ActivitiesDomainClientWithMetadataImplementation implements ActivitiesDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getMercenaryTacticalOperation(characterId: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["character_id"], operationId: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["operation_id"], options?: GetCharactersMercenaryTacticalOperationsDetailOptions): Promise<GetCharactersMercenaryTacticalOperationsDetailOutput> {
-    const arguments_: GetCharactersMercenaryTacticalOperationsDetailInput = { path: { "character_id": characterId, "operation_id": operationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersMercenaryTacticalOperationsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMercenaryTacticalOperations(characterId: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput['path']>["character_id"], options?: GetCharactersMercenaryTacticalOperationsListingOptions): Promise<GetCharactersMercenaryTacticalOperationsListingOutput> {
-    const arguments_: GetCharactersMercenaryTacticalOperationsListingInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersMercenaryTacticalOperationsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listRaidableSkyhooks(options?: GetSkyhooksRaidableOptions): Promise<GetSkyhooksRaidableOutput> {
-    const arguments_: GetSkyhooksRaidableInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetSkyhooksRaidableDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): ActivitiesDomainClientWithMetadata {
-    return new ActivitiesDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class ActivitiesDomainClientWithMetadataImplementation extends ActivitiesDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -78,6 +48,31 @@ class ActivitiesDomainClientWithMetadataImplementation extends ActivitiesDomainC
   listRaidableSkyhooks(options?: GetSkyhooksRaidableOptions): Promise<EsiResponse<GetSkyhooksRaidableOutput>> {
     const arguments_: GetSkyhooksRaidableInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetSkyhooksRaidableDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class ActivitiesDomainClientImplementation implements ActivitiesDomainClient {
+  readonly #metadata: ActivitiesDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new ActivitiesDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getMercenaryTacticalOperation(characterId: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["character_id"], operationId: NonNullable<GetCharactersMercenaryTacticalOperationsDetailInput['path']>["operation_id"], options?: GetCharactersMercenaryTacticalOperationsDetailOptions): Promise<GetCharactersMercenaryTacticalOperationsDetailOutput> {
+    return this.#metadata.getMercenaryTacticalOperation(characterId, operationId, options).then((response) => response.data);
+  }
+
+  listMercenaryTacticalOperations(characterId: NonNullable<GetCharactersMercenaryTacticalOperationsListingInput['path']>["character_id"], options?: GetCharactersMercenaryTacticalOperationsListingOptions): Promise<GetCharactersMercenaryTacticalOperationsListingOutput> {
+    return this.#metadata.listMercenaryTacticalOperations(characterId, options).then((response) => response.data);
+  }
+
+  listRaidableSkyhooks(options?: GetSkyhooksRaidableOptions): Promise<GetSkyhooksRaidableOutput> {
+    return this.#metadata.listRaidableSkyhooks(options).then((response) => response.data);
+  }
+
+  withMetadata(): ActivitiesDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

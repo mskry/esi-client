@@ -19,16 +19,12 @@ export interface GetCharactersCharacterIdSearchOptions {
   readonly "xTenant"?: NonNullable<GetCharactersCharacterIdSearchInput["header"]>["X-Tenant"];
 }
 
-export abstract class SearchDomainClient {
-  protected constructor() {}
+export interface SearchDomainClient {
+  search(characterId: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions): Promise<GetCharactersCharacterIdSearchOutput>;
 
-  abstract search(characterId: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions): Promise<GetCharactersCharacterIdSearchOutput>;
-
-  abstract withMetadata(): SearchDomainClientWithMetadata;
+  withMetadata(): SearchDomainClientWithMetadata;
 }
 
-export abstract class SearchDomainClientWithMetadata {
-  protected constructor() {}
-
-  abstract search(characterId: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions): Promise<EsiResponse<GetCharactersCharacterIdSearchOutput>>;
+export interface SearchDomainClientWithMetadata {
+  search(characterId: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions): Promise<EsiResponse<GetCharactersCharacterIdSearchOutput>>;
 }

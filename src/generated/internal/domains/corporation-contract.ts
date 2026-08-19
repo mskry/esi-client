@@ -215,100 +215,96 @@ export interface GetCorporationsCorporationIdTitlesOptions {
   readonly "xTenant"?: NonNullable<GetCorporationsCorporationIdTitlesInput["header"]>["X-Tenant"];
 }
 
-export abstract class CorporationDomainClient {
-  protected constructor() {}
+export interface CorporationDomainClient {
+  getIcon(corporationId: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions): Promise<GetCorporationsCorporationIdIconsOutput>;
 
-  abstract getIcon(corporationId: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions): Promise<GetCorporationsCorporationIdIconsOutput>;
+  getMemberLimit(corporationId: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions): Promise<GetCorporationsCorporationIdMembersLimitOutput>;
 
-  abstract getMemberLimit(corporationId: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions): Promise<GetCorporationsCorporationIdMembersLimitOutput>;
+  getPublicInfo(corporationId: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions): Promise<GetCorporationsCorporationIdOutput>;
 
-  abstract getPublicInfo(corporationId: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions): Promise<GetCorporationsCorporationIdOutput>;
+  getStarbase(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], starbaseId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions): Promise<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>;
 
-  abstract getStarbase(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], starbaseId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions): Promise<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>;
+  listAllianceHistory(corporationId: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions): Promise<GetCorporationsCorporationIdAlliancehistoryOutput>;
 
-  abstract listAllianceHistory(corporationId: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions): Promise<GetCorporationsCorporationIdAlliancehistoryOutput>;
+  listAuditLogSecureContainerLogs(corporationId: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions): Promise<GetCorporationsCorporationIdContainersLogsOutput>;
 
-  abstract listAuditLogSecureContainerLogs(corporationId: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions): Promise<GetCorporationsCorporationIdContainersLogsOutput>;
+  listBlueprints(corporationId: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions): Promise<GetCorporationsCorporationIdBlueprintsOutput>;
 
-  abstract listBlueprints(corporationId: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions): Promise<GetCorporationsCorporationIdBlueprintsOutput>;
+  listDivisions(corporationId: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions): Promise<GetCorporationsCorporationIdDivisionsOutput>;
 
-  abstract listDivisions(corporationId: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions): Promise<GetCorporationsCorporationIdDivisionsOutput>;
+  listFacilities(corporationId: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions): Promise<GetCorporationsCorporationIdFacilitiesOutput>;
 
-  abstract listFacilities(corporationId: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions): Promise<GetCorporationsCorporationIdFacilitiesOutput>;
+  listIssuedMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions): Promise<GetCorporationsCorporationIdMedalsIssuedOutput>;
 
-  abstract listIssuedMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions): Promise<GetCorporationsCorporationIdMedalsIssuedOutput>;
+  listMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions): Promise<GetCorporationsCorporationIdMedalsOutput>;
 
-  abstract listMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions): Promise<GetCorporationsCorporationIdMedalsOutput>;
+  listMemberRoleHistory(corporationId: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions): Promise<GetCorporationsCorporationIdRolesHistoryOutput>;
 
-  abstract listMemberRoleHistory(corporationId: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions): Promise<GetCorporationsCorporationIdRolesHistoryOutput>;
+  listMemberRoles(corporationId: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions): Promise<GetCorporationsCorporationIdRolesOutput>;
 
-  abstract listMemberRoles(corporationId: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions): Promise<GetCorporationsCorporationIdRolesOutput>;
+  listMemberTitles(corporationId: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions): Promise<GetCorporationsCorporationIdMembersTitlesOutput>;
 
-  abstract listMemberTitles(corporationId: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions): Promise<GetCorporationsCorporationIdMembersTitlesOutput>;
+  listMemberTracking(corporationId: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions): Promise<GetCorporationsCorporationIdMembertrackingOutput>;
 
-  abstract listMemberTracking(corporationId: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions): Promise<GetCorporationsCorporationIdMembertrackingOutput>;
+  listMembers(corporationId: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions): Promise<GetCorporationsCorporationIdMembersOutput>;
 
-  abstract listMembers(corporationId: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions): Promise<GetCorporationsCorporationIdMembersOutput>;
+  listNpcCorporations(options?: GetCorporationsNpccorpsOptions): Promise<GetCorporationsNpccorpsOutput>;
 
-  abstract listNpcCorporations(options?: GetCorporationsNpccorpsOptions): Promise<GetCorporationsNpccorpsOutput>;
+  listShareholders(corporationId: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions): Promise<GetCorporationsCorporationIdShareholdersOutput>;
 
-  abstract listShareholders(corporationId: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions): Promise<GetCorporationsCorporationIdShareholdersOutput>;
+  listStandings(corporationId: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions): Promise<GetCorporationsCorporationIdStandingsOutput>;
 
-  abstract listStandings(corporationId: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions): Promise<GetCorporationsCorporationIdStandingsOutput>;
+  listStarbases(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions): Promise<GetCorporationsCorporationIdStarbasesOutput>;
 
-  abstract listStarbases(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions): Promise<GetCorporationsCorporationIdStarbasesOutput>;
+  listStructures(corporationId: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions): Promise<GetCorporationsCorporationIdStructuresOutput>;
 
-  abstract listStructures(corporationId: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions): Promise<GetCorporationsCorporationIdStructuresOutput>;
+  listTitles(corporationId: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions): Promise<GetCorporationsCorporationIdTitlesOutput>;
 
-  abstract listTitles(corporationId: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions): Promise<GetCorporationsCorporationIdTitlesOutput>;
-
-  abstract withMetadata(): CorporationDomainClientWithMetadata;
+  withMetadata(): CorporationDomainClientWithMetadata;
 }
 
-export abstract class CorporationDomainClientWithMetadata {
-  protected constructor() {}
+export interface CorporationDomainClientWithMetadata {
+  getIcon(corporationId: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions): Promise<EsiResponse<GetCorporationsCorporationIdIconsOutput>>;
 
-  abstract getIcon(corporationId: NonNullable<GetCorporationsCorporationIdIconsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIconsOptions): Promise<EsiResponse<GetCorporationsCorporationIdIconsOutput>>;
+  getMemberLimit(corporationId: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembersLimitOutput>>;
 
-  abstract getMemberLimit(corporationId: NonNullable<GetCorporationsCorporationIdMembersLimitInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersLimitOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembersLimitOutput>>;
+  getPublicInfo(corporationId: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions): Promise<EsiResponse<GetCorporationsCorporationIdOutput>>;
 
-  abstract getPublicInfo(corporationId: NonNullable<GetCorporationsCorporationIdInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdOptions): Promise<EsiResponse<GetCorporationsCorporationIdOutput>>;
+  getStarbase(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], starbaseId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions): Promise<EsiResponse<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>>;
 
-  abstract getStarbase(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["corporation_id"], starbaseId: NonNullable<GetCorporationsCorporationIdStarbasesStarbaseIdInput['path']>["starbase_id"], options: GetCorporationsCorporationIdStarbasesStarbaseIdOptions): Promise<EsiResponse<GetCorporationsCorporationIdStarbasesStarbaseIdOutput>>;
+  listAllianceHistory(corporationId: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions): Promise<EsiResponse<GetCorporationsCorporationIdAlliancehistoryOutput>>;
 
-  abstract listAllianceHistory(corporationId: NonNullable<GetCorporationsCorporationIdAlliancehistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAlliancehistoryOptions): Promise<EsiResponse<GetCorporationsCorporationIdAlliancehistoryOutput>>;
+  listAuditLogSecureContainerLogs(corporationId: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContainersLogsOutput>>;
 
-  abstract listAuditLogSecureContainerLogs(corporationId: NonNullable<GetCorporationsCorporationIdContainersLogsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdContainersLogsOptions): Promise<EsiResponse<GetCorporationsCorporationIdContainersLogsOutput>>;
+  listBlueprints(corporationId: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions): Promise<EsiResponse<GetCorporationsCorporationIdBlueprintsOutput>>;
 
-  abstract listBlueprints(corporationId: NonNullable<GetCorporationsCorporationIdBlueprintsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdBlueprintsOptions): Promise<EsiResponse<GetCorporationsCorporationIdBlueprintsOutput>>;
+  listDivisions(corporationId: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions): Promise<EsiResponse<GetCorporationsCorporationIdDivisionsOutput>>;
 
-  abstract listDivisions(corporationId: NonNullable<GetCorporationsCorporationIdDivisionsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdDivisionsOptions): Promise<EsiResponse<GetCorporationsCorporationIdDivisionsOutput>>;
+  listFacilities(corporationId: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions): Promise<EsiResponse<GetCorporationsCorporationIdFacilitiesOutput>>;
 
-  abstract listFacilities(corporationId: NonNullable<GetCorporationsCorporationIdFacilitiesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFacilitiesOptions): Promise<EsiResponse<GetCorporationsCorporationIdFacilitiesOutput>>;
+  listIssuedMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions): Promise<EsiResponse<GetCorporationsCorporationIdMedalsIssuedOutput>>;
 
-  abstract listIssuedMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsIssuedInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsIssuedOptions): Promise<EsiResponse<GetCorporationsCorporationIdMedalsIssuedOutput>>;
+  listMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions): Promise<EsiResponse<GetCorporationsCorporationIdMedalsOutput>>;
 
-  abstract listMedals(corporationId: NonNullable<GetCorporationsCorporationIdMedalsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMedalsOptions): Promise<EsiResponse<GetCorporationsCorporationIdMedalsOutput>>;
+  listMemberRoleHistory(corporationId: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions): Promise<EsiResponse<GetCorporationsCorporationIdRolesHistoryOutput>>;
 
-  abstract listMemberRoleHistory(corporationId: NonNullable<GetCorporationsCorporationIdRolesHistoryInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesHistoryOptions): Promise<EsiResponse<GetCorporationsCorporationIdRolesHistoryOutput>>;
+  listMemberRoles(corporationId: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions): Promise<EsiResponse<GetCorporationsCorporationIdRolesOutput>>;
 
-  abstract listMemberRoles(corporationId: NonNullable<GetCorporationsCorporationIdRolesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdRolesOptions): Promise<EsiResponse<GetCorporationsCorporationIdRolesOutput>>;
+  listMemberTitles(corporationId: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembersTitlesOutput>>;
 
-  abstract listMemberTitles(corporationId: NonNullable<GetCorporationsCorporationIdMembersTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersTitlesOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembersTitlesOutput>>;
+  listMemberTracking(corporationId: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembertrackingOutput>>;
 
-  abstract listMemberTracking(corporationId: NonNullable<GetCorporationsCorporationIdMembertrackingInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembertrackingOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembertrackingOutput>>;
+  listMembers(corporationId: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembersOutput>>;
 
-  abstract listMembers(corporationId: NonNullable<GetCorporationsCorporationIdMembersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdMembersOptions): Promise<EsiResponse<GetCorporationsCorporationIdMembersOutput>>;
+  listNpcCorporations(options?: GetCorporationsNpccorpsOptions): Promise<EsiResponse<GetCorporationsNpccorpsOutput>>;
 
-  abstract listNpcCorporations(options?: GetCorporationsNpccorpsOptions): Promise<EsiResponse<GetCorporationsNpccorpsOutput>>;
+  listShareholders(corporationId: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions): Promise<EsiResponse<GetCorporationsCorporationIdShareholdersOutput>>;
 
-  abstract listShareholders(corporationId: NonNullable<GetCorporationsCorporationIdShareholdersInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdShareholdersOptions): Promise<EsiResponse<GetCorporationsCorporationIdShareholdersOutput>>;
+  listStandings(corporationId: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions): Promise<EsiResponse<GetCorporationsCorporationIdStandingsOutput>>;
 
-  abstract listStandings(corporationId: NonNullable<GetCorporationsCorporationIdStandingsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStandingsOptions): Promise<EsiResponse<GetCorporationsCorporationIdStandingsOutput>>;
+  listStarbases(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions): Promise<EsiResponse<GetCorporationsCorporationIdStarbasesOutput>>;
 
-  abstract listStarbases(corporationId: NonNullable<GetCorporationsCorporationIdStarbasesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStarbasesOptions): Promise<EsiResponse<GetCorporationsCorporationIdStarbasesOutput>>;
+  listStructures(corporationId: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions): Promise<EsiResponse<GetCorporationsCorporationIdStructuresOutput>>;
 
-  abstract listStructures(corporationId: NonNullable<GetCorporationsCorporationIdStructuresInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdStructuresOptions): Promise<EsiResponse<GetCorporationsCorporationIdStructuresOutput>>;
-
-  abstract listTitles(corporationId: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions): Promise<EsiResponse<GetCorporationsCorporationIdTitlesOutput>>;
+  listTitles(corporationId: NonNullable<GetCorporationsCorporationIdTitlesInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdTitlesOptions): Promise<EsiResponse<GetCorporationsCorporationIdTitlesOutput>>;
 }

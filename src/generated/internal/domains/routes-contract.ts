@@ -17,16 +17,12 @@ export interface PostRouteOptions {
   readonly "xTenant"?: NonNullable<PostRouteInput["header"]>["X-Tenant"];
 }
 
-export abstract class RoutesDomainClient {
-  protected constructor() {}
+export interface RoutesDomainClient {
+  calculate(originSystemId: NonNullable<PostRouteInput['path']>["origin_system_id"], destinationSystemId: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions): Promise<PostRouteOutput>;
 
-  abstract calculate(originSystemId: NonNullable<PostRouteInput['path']>["origin_system_id"], destinationSystemId: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions): Promise<PostRouteOutput>;
-
-  abstract withMetadata(): RoutesDomainClientWithMetadata;
+  withMetadata(): RoutesDomainClientWithMetadata;
 }
 
-export abstract class RoutesDomainClientWithMetadata {
-  protected constructor() {}
-
-  abstract calculate(originSystemId: NonNullable<PostRouteInput['path']>["origin_system_id"], destinationSystemId: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions): Promise<EsiResponse<PostRouteOutput>>;
+export interface RoutesDomainClientWithMetadata {
+  calculate(originSystemId: NonNullable<PostRouteInput['path']>["origin_system_id"], destinationSystemId: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions): Promise<EsiResponse<PostRouteOutput>>;
 }

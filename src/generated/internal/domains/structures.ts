@@ -14,15 +14,15 @@ import {
   GetCorporationsStructuresSkyhooksListingDescriptor,
   GetCorporationsStructuresSovereigntyHubsListingDescriptor,
 } from '../descriptors/structures.js';
-import {
+import type {
   StructuresDomainClient,
   StructuresDomainClientWithMetadata,
-  type GetCharactersStructuresMercenaryDensDetailOptions,
-  type GetCorporationsStructuresSkyhooksDetailOptions,
-  type GetCorporationsStructuresSovereigntyHubsDetailOptions,
-  type GetCharactersStructuresMercenaryDensListingOptions,
-  type GetCorporationsStructuresSkyhooksListingOptions,
-  type GetCorporationsStructuresSovereigntyHubsListingOptions,
+  GetCharactersStructuresMercenaryDensDetailOptions,
+  GetCorporationsStructuresSkyhooksDetailOptions,
+  GetCorporationsStructuresSovereigntyHubsDetailOptions,
+  GetCharactersStructuresMercenaryDensListingOptions,
+  GetCorporationsStructuresSkyhooksListingOptions,
+  GetCorporationsStructuresSovereigntyHubsListingOptions,
 } from './structures-contract.js';
 import type {
   GetCharactersStructuresMercenaryDensDetailInput,
@@ -39,55 +39,10 @@ import type {
   GetCorporationsStructuresSovereigntyHubsListingOutput,
 } from '../../schemas/operations/structures.js';
 
-class StructuresDomainClientImplementation extends StructuresDomainClient {
+class StructuresDomainClientWithMetadataImplementation implements StructuresDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getMercenaryDen(characterId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], mercenaryDenId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions): Promise<GetCharactersStructuresMercenaryDensDetailOutput> {
-    const arguments_: GetCharactersStructuresMercenaryDensDetailInput = { path: { "character_id": characterId, "mercenary_den_id": mercenaryDenId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersStructuresMercenaryDensDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getSkyhook(corporationId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], skyhookId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions): Promise<GetCorporationsStructuresSkyhooksDetailOutput> {
-    const arguments_: GetCorporationsStructuresSkyhooksDetailInput = { path: { "corporation_id": corporationId, "skyhook_id": skyhookId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsStructuresSkyhooksDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getSovereigntyHub(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], sovereigntyHubId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions): Promise<GetCorporationsStructuresSovereigntyHubsDetailOutput> {
-    const arguments_: GetCorporationsStructuresSovereigntyHubsDetailInput = { path: { "corporation_id": corporationId, "sovereignty_hub_id": sovereigntyHubId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsStructuresSovereigntyHubsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMercenaryDens(characterId: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions): Promise<GetCharactersStructuresMercenaryDensListingOutput> {
-    const arguments_: GetCharactersStructuresMercenaryDensListingInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersStructuresMercenaryDensListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSkyhooks(corporationId: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions): Promise<GetCorporationsStructuresSkyhooksListingOutput> {
-    const arguments_: GetCorporationsStructuresSkyhooksListingInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsStructuresSkyhooksListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSovereigntyHubs(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions): Promise<GetCorporationsStructuresSovereigntyHubsListingOutput> {
-    const arguments_: GetCorporationsStructuresSovereigntyHubsListingInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsStructuresSovereigntyHubsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): StructuresDomainClientWithMetadata {
-    return new StructuresDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class StructuresDomainClientWithMetadataImplementation extends StructuresDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -120,6 +75,43 @@ class StructuresDomainClientWithMetadataImplementation extends StructuresDomainC
   listSovereigntyHubs(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions): Promise<EsiResponse<GetCorporationsStructuresSovereigntyHubsListingOutput>> {
     const arguments_: GetCorporationsStructuresSovereigntyHubsListingInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCorporationsStructuresSovereigntyHubsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class StructuresDomainClientImplementation implements StructuresDomainClient {
+  readonly #metadata: StructuresDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new StructuresDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getMercenaryDen(characterId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["character_id"], mercenaryDenId: NonNullable<GetCharactersStructuresMercenaryDensDetailInput['path']>["mercenary_den_id"], options?: GetCharactersStructuresMercenaryDensDetailOptions): Promise<GetCharactersStructuresMercenaryDensDetailOutput> {
+    return this.#metadata.getMercenaryDen(characterId, mercenaryDenId, options).then((response) => response.data);
+  }
+
+  getSkyhook(corporationId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["corporation_id"], skyhookId: NonNullable<GetCorporationsStructuresSkyhooksDetailInput['path']>["skyhook_id"], options?: GetCorporationsStructuresSkyhooksDetailOptions): Promise<GetCorporationsStructuresSkyhooksDetailOutput> {
+    return this.#metadata.getSkyhook(corporationId, skyhookId, options).then((response) => response.data);
+  }
+
+  getSovereigntyHub(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["corporation_id"], sovereigntyHubId: NonNullable<GetCorporationsStructuresSovereigntyHubsDetailInput['path']>["sovereignty_hub_id"], options?: GetCorporationsStructuresSovereigntyHubsDetailOptions): Promise<GetCorporationsStructuresSovereigntyHubsDetailOutput> {
+    return this.#metadata.getSovereigntyHub(corporationId, sovereigntyHubId, options).then((response) => response.data);
+  }
+
+  listMercenaryDens(characterId: NonNullable<GetCharactersStructuresMercenaryDensListingInput['path']>["character_id"], options?: GetCharactersStructuresMercenaryDensListingOptions): Promise<GetCharactersStructuresMercenaryDensListingOutput> {
+    return this.#metadata.listMercenaryDens(characterId, options).then((response) => response.data);
+  }
+
+  listSkyhooks(corporationId: NonNullable<GetCorporationsStructuresSkyhooksListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSkyhooksListingOptions): Promise<GetCorporationsStructuresSkyhooksListingOutput> {
+    return this.#metadata.listSkyhooks(corporationId, options).then((response) => response.data);
+  }
+
+  listSovereigntyHubs(corporationId: NonNullable<GetCorporationsStructuresSovereigntyHubsListingInput['path']>["corporation_id"], options?: GetCorporationsStructuresSovereigntyHubsListingOptions): Promise<GetCorporationsStructuresSovereigntyHubsListingOutput> {
+    return this.#metadata.listSovereigntyHubs(corporationId, options).then((response) => response.data);
+  }
+
+  withMetadata(): StructuresDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

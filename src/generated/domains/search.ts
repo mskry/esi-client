@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindSearchDomainClient } from '../internal/domains/search.js';
 import type { SearchDomainClient } from '../internal/domains/search-contract.js';
 
-export * from '../internal/domains/search-contract.js';
+export type * from '../internal/domains/search-contract.js';
 
 export function createSearchClient(options: EsiClientOptions = {}): SearchDomainClient {
   return bindSearchDomainClient(new EsiClientConfiguration(options));

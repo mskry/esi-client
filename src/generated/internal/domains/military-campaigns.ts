@@ -14,15 +14,15 @@ import {
   GetCharactersMilitaryCampaignsObjectivesListingDescriptor,
   GetMilitaryCampaignsObjectivesListingDescriptor,
 } from '../descriptors/military-campaigns.js';
-import {
+import type {
   MilitaryCampaignsDomainClient,
   MilitaryCampaignsDomainClientWithMetadata,
-  type GetMilitaryCampaignsDetailOptions,
-  type GetCharactersMilitaryCampaignsObjectivesParticipationOptions,
-  type GetMilitaryCampaignsObjectivesDetailOptions,
-  type GetMilitaryCampaignsListingOptions,
-  type GetCharactersMilitaryCampaignsObjectivesListingOptions,
-  type GetMilitaryCampaignsObjectivesListingOptions,
+  GetMilitaryCampaignsDetailOptions,
+  GetCharactersMilitaryCampaignsObjectivesParticipationOptions,
+  GetMilitaryCampaignsObjectivesDetailOptions,
+  GetMilitaryCampaignsListingOptions,
+  GetCharactersMilitaryCampaignsObjectivesListingOptions,
+  GetMilitaryCampaignsObjectivesListingOptions,
 } from './military-campaigns-contract.js';
 import type {
   GetCharactersMilitaryCampaignsObjectivesListingInput,
@@ -39,55 +39,10 @@ import type {
   GetMilitaryCampaignsObjectivesListingOutput,
 } from '../../schemas/operations/military-campaigns.js';
 
-class MilitaryCampaignsDomainClientImplementation extends MilitaryCampaignsDomainClient {
+class MilitaryCampaignsDomainClientWithMetadataImplementation implements MilitaryCampaignsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCampaign(campaignId: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions): Promise<GetMilitaryCampaignsDetailOutput> {
-    const arguments_: GetMilitaryCampaignsDetailInput = { path: { "campaign_id": campaignId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMilitaryCampaignsDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCharacterObjectiveParticipation(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], objectiveId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions): Promise<GetCharactersMilitaryCampaignsObjectivesParticipationOutput> {
-    const arguments_: GetCharactersMilitaryCampaignsObjectivesParticipationInput = { path: { "character_id": characterId, "objective_id": objectiveId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersMilitaryCampaignsObjectivesParticipationDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getObjective(campaignId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], objectiveId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions): Promise<GetMilitaryCampaignsObjectivesDetailOutput> {
-    const arguments_: GetMilitaryCampaignsObjectivesDetailInput = { path: { "campaign_id": campaignId, "objective_id": objectiveId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMilitaryCampaignsObjectivesDetailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCampaigns(options?: GetMilitaryCampaignsListingOptions): Promise<GetMilitaryCampaignsListingOutput> {
-    const arguments_: GetMilitaryCampaignsListingInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMilitaryCampaignsListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCharacterObjectiveParticipations(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions): Promise<GetCharactersMilitaryCampaignsObjectivesListingOutput> {
-    const arguments_: GetCharactersMilitaryCampaignsObjectivesListingInput = { path: { "character_id": characterId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersMilitaryCampaignsObjectivesListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listObjectives(campaignId: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions): Promise<GetMilitaryCampaignsObjectivesListingOutput> {
-    const arguments_: GetMilitaryCampaignsObjectivesListingInput = { path: { "campaign_id": campaignId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetMilitaryCampaignsObjectivesListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): MilitaryCampaignsDomainClientWithMetadata {
-    return new MilitaryCampaignsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class MilitaryCampaignsDomainClientWithMetadataImplementation extends MilitaryCampaignsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -120,6 +75,43 @@ class MilitaryCampaignsDomainClientWithMetadataImplementation extends MilitaryCa
   listObjectives(campaignId: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions): Promise<EsiResponse<GetMilitaryCampaignsObjectivesListingOutput>> {
     const arguments_: GetMilitaryCampaignsObjectivesListingInput = { path: { "campaign_id": campaignId }, query: { "after": options?.["after"], "before": options?.["before"], "limit": options?.["limit"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetMilitaryCampaignsObjectivesListingDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class MilitaryCampaignsDomainClientImplementation implements MilitaryCampaignsDomainClient {
+  readonly #metadata: MilitaryCampaignsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new MilitaryCampaignsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getCampaign(campaignId: NonNullable<GetMilitaryCampaignsDetailInput['path']>["campaign_id"], options?: GetMilitaryCampaignsDetailOptions): Promise<GetMilitaryCampaignsDetailOutput> {
+    return this.#metadata.getCampaign(campaignId, options).then((response) => response.data);
+  }
+
+  getCharacterObjectiveParticipation(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["character_id"], objectiveId: NonNullable<GetCharactersMilitaryCampaignsObjectivesParticipationInput['path']>["objective_id"], options?: GetCharactersMilitaryCampaignsObjectivesParticipationOptions): Promise<GetCharactersMilitaryCampaignsObjectivesParticipationOutput> {
+    return this.#metadata.getCharacterObjectiveParticipation(characterId, objectiveId, options).then((response) => response.data);
+  }
+
+  getObjective(campaignId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["campaign_id"], objectiveId: NonNullable<GetMilitaryCampaignsObjectivesDetailInput['path']>["objective_id"], options?: GetMilitaryCampaignsObjectivesDetailOptions): Promise<GetMilitaryCampaignsObjectivesDetailOutput> {
+    return this.#metadata.getObjective(campaignId, objectiveId, options).then((response) => response.data);
+  }
+
+  listCampaigns(options?: GetMilitaryCampaignsListingOptions): Promise<GetMilitaryCampaignsListingOutput> {
+    return this.#metadata.listCampaigns(options).then((response) => response.data);
+  }
+
+  listCharacterObjectiveParticipations(characterId: NonNullable<GetCharactersMilitaryCampaignsObjectivesListingInput['path']>["character_id"], options?: GetCharactersMilitaryCampaignsObjectivesListingOptions): Promise<GetCharactersMilitaryCampaignsObjectivesListingOutput> {
+    return this.#metadata.listCharacterObjectiveParticipations(characterId, options).then((response) => response.data);
+  }
+
+  listObjectives(campaignId: NonNullable<GetMilitaryCampaignsObjectivesListingInput['path']>["campaign_id"], options?: GetMilitaryCampaignsObjectivesListingOptions): Promise<GetMilitaryCampaignsObjectivesListingOutput> {
+    return this.#metadata.listObjectives(campaignId, options).then((response) => response.data);
+  }
+
+  withMetadata(): MilitaryCampaignsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

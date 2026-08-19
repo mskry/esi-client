@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindClonesDomainClient } from '../internal/domains/clones.js';
 import type { ClonesDomainClient } from '../internal/domains/clones-contract.js';
 
-export * from '../internal/domains/clones-contract.js';
+export type * from '../internal/domains/clones-contract.js';
 
 export function createClonesClient(options: EsiClientOptions = {}): ClonesDomainClient {
   return bindClonesDomainClient(new EsiClientConfiguration(options));

@@ -1,43 +1,35 @@
+import type {
+  EsiClientOptions,
+  EsiFetch,
+  EsiLanguage,
+  EsiTokenProvider,
+  SerializedEsiClientConfiguration,
+} from './options.js';
+
+export type {
+  EsiClientOptions,
+  EsiFetch,
+  EsiLanguage,
+  EsiTokenProvider,
+  SerializedEsiClientConfiguration,
+} from './options.js';
+
 export const DEFAULT_ESI_BASE_URL: string = 'https://esi.evetech.net';
 export const PINNED_ESI_COMPATIBILITY_DATE: string = '2026-08-18';
 export const DEFAULT_ESI_LANGUAGE: EsiLanguage = 'en';
 
-export type EsiLanguage = 'de' | 'en' | 'es' | 'fr' | 'ja' | 'ko' | 'ru' | 'zh';
-export type EsiTokenProvider = () => Promise<string>;
-export type EsiFetch = typeof globalThis.fetch;
-
-export interface EsiClientOptions {
-  readonly baseUrl?: string;
-  readonly compatibilityDate?: string;
-  readonly language?: EsiLanguage;
-  readonly token?: string;
-  readonly tokenProvider?: EsiTokenProvider;
-  readonly fetch?: EsiFetch;
-  readonly validateResponses?: boolean;
-  readonly validateRequests?: boolean;
-  readonly allowGenericMutations?: boolean;
-}
-
-export interface SerializedEsiClientConfiguration {
-  readonly baseUrl: string;
-  readonly compatibilityDate: string;
-  readonly language: EsiLanguage;
-  readonly validateResponses: boolean;
-  readonly validateRequests: boolean;
-  readonly allowGenericMutations: boolean;
-}
-
-const optionNames: ReadonlySet<string> = new Set([
-  'baseUrl',
-  'compatibilityDate',
-  'language',
-  'token',
-  'tokenProvider',
-  'fetch',
-  'validateResponses',
-  'validateRequests',
-  'allowGenericMutations',
-]);
+const optionNameRecord = {
+  baseUrl: true,
+  compatibilityDate: true,
+  language: true,
+  token: true,
+  tokenProvider: true,
+  fetch: true,
+  validateResponses: true,
+  validateRequests: true,
+  allowGenericMutations: true,
+} satisfies Record<keyof EsiClientOptions, true>;
+const optionNames: ReadonlySet<string> = new Set(Object.keys(optionNameRecord));
 const esiLanguages: ReadonlySet<string> = new Set(['de', 'en', 'es', 'fr', 'ja', 'ko', 'ru', 'zh']);
 const compatibilityDatePattern: RegExp = /^\d{4}-\d{2}-\d{2}$/u;
 

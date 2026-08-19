@@ -25,20 +25,16 @@ export interface GetLoyaltyStoresCorporationIdOffersOptions {
   readonly "xTenant"?: NonNullable<GetLoyaltyStoresCorporationIdOffersInput["header"]>["X-Tenant"];
 }
 
-export abstract class LoyaltyDomainClient {
-  protected constructor() {}
+export interface LoyaltyDomainClient {
+  listPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<GetCharactersCharacterIdLoyaltyPointsOutput>;
 
-  abstract listPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<GetCharactersCharacterIdLoyaltyPointsOutput>;
+  listStoreOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<GetLoyaltyStoresCorporationIdOffersOutput>;
 
-  abstract listStoreOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<GetLoyaltyStoresCorporationIdOffersOutput>;
-
-  abstract withMetadata(): LoyaltyDomainClientWithMetadata;
+  withMetadata(): LoyaltyDomainClientWithMetadata;
 }
 
-export abstract class LoyaltyDomainClientWithMetadata {
-  protected constructor() {}
+export interface LoyaltyDomainClientWithMetadata {
+  listPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<EsiResponse<GetCharactersCharacterIdLoyaltyPointsOutput>>;
 
-  abstract listPoints(characterId: NonNullable<GetCharactersCharacterIdLoyaltyPointsInput['path']>["character_id"], options?: GetCharactersCharacterIdLoyaltyPointsOptions): Promise<EsiResponse<GetCharactersCharacterIdLoyaltyPointsOutput>>;
-
-  abstract listStoreOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<EsiResponse<GetLoyaltyStoresCorporationIdOffersOutput>>;
+  listStoreOffers(corporationId: NonNullable<GetLoyaltyStoresCorporationIdOffersInput['path']>["corporation_id"], options?: GetLoyaltyStoresCorporationIdOffersOptions): Promise<EsiResponse<GetLoyaltyStoresCorporationIdOffersOutput>>;
 }

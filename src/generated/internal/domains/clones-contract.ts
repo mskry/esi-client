@@ -25,20 +25,16 @@ export interface GetCharactersCharacterIdImplantsOptions {
   readonly "xTenant"?: NonNullable<GetCharactersCharacterIdImplantsInput["header"]>["X-Tenant"];
 }
 
-export abstract class ClonesDomainClient {
-  protected constructor() {}
+export interface ClonesDomainClient {
+  getState(characterId: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions): Promise<GetCharactersCharacterIdClonesOutput>;
 
-  abstract getState(characterId: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions): Promise<GetCharactersCharacterIdClonesOutput>;
+  listActiveImplants(characterId: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions): Promise<GetCharactersCharacterIdImplantsOutput>;
 
-  abstract listActiveImplants(characterId: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions): Promise<GetCharactersCharacterIdImplantsOutput>;
-
-  abstract withMetadata(): ClonesDomainClientWithMetadata;
+  withMetadata(): ClonesDomainClientWithMetadata;
 }
 
-export abstract class ClonesDomainClientWithMetadata {
-  protected constructor() {}
+export interface ClonesDomainClientWithMetadata {
+  getState(characterId: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions): Promise<EsiResponse<GetCharactersCharacterIdClonesOutput>>;
 
-  abstract getState(characterId: NonNullable<GetCharactersCharacterIdClonesInput['path']>["character_id"], options?: GetCharactersCharacterIdClonesOptions): Promise<EsiResponse<GetCharactersCharacterIdClonesOutput>>;
-
-  abstract listActiveImplants(characterId: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions): Promise<EsiResponse<GetCharactersCharacterIdImplantsOutput>>;
+  listActiveImplants(characterId: NonNullable<GetCharactersCharacterIdImplantsInput['path']>["character_id"], options?: GetCharactersCharacterIdImplantsOptions): Promise<EsiResponse<GetCharactersCharacterIdImplantsOutput>>;
 }

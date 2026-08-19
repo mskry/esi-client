@@ -17,18 +17,18 @@ import {
   PostCharactersCharacterIdMailDescriptor,
   PutCharactersCharacterIdMailMailIdDescriptor,
 } from '../descriptors/mail.js';
-import {
+import type {
   MailDomainClient,
   MailDomainClientWithMetadata,
-  type PostCharactersCharacterIdMailLabelsOptions,
-  type DeleteCharactersCharacterIdMailLabelsLabelIdOptions,
-  type DeleteCharactersCharacterIdMailMailIdOptions,
-  type GetCharactersCharacterIdMailMailIdOptions,
-  type GetCharactersCharacterIdMailOptions,
-  type GetCharactersCharacterIdMailLabelsOptions,
-  type GetCharactersCharacterIdMailListsOptions,
-  type PostCharactersCharacterIdMailOptions,
-  type PutCharactersCharacterIdMailMailIdOptions,
+  PostCharactersCharacterIdMailLabelsOptions,
+  DeleteCharactersCharacterIdMailLabelsLabelIdOptions,
+  DeleteCharactersCharacterIdMailMailIdOptions,
+  GetCharactersCharacterIdMailMailIdOptions,
+  GetCharactersCharacterIdMailOptions,
+  GetCharactersCharacterIdMailLabelsOptions,
+  GetCharactersCharacterIdMailListsOptions,
+  PostCharactersCharacterIdMailOptions,
+  PutCharactersCharacterIdMailMailIdOptions,
 } from './mail-contract.js';
 import type {
   DeleteCharactersCharacterIdMailLabelsLabelIdInput,
@@ -51,70 +51,10 @@ import type {
   PutCharactersCharacterIdMailMailIdOutput,
 } from '../../schemas/operations/mail.js';
 
-class MailDomainClientImplementation extends MailDomainClient {
+class MailDomainClientWithMetadataImplementation implements MailDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  createLabel(characterId: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions): Promise<PostCharactersCharacterIdMailLabelsOutput> {
-    const arguments_: PostCharactersCharacterIdMailLabelsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersCharacterIdMailLabelsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  deleteLabel(characterId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], labelId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions): Promise<DeleteCharactersCharacterIdMailLabelsLabelIdOutput> {
-    const arguments_: DeleteCharactersCharacterIdMailLabelsLabelIdInput = { path: { "character_id": characterId, "label_id": labelId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, DeleteCharactersCharacterIdMailLabelsLabelIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  deleteMail(characterId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions): Promise<DeleteCharactersCharacterIdMailMailIdOutput> {
-    const arguments_: DeleteCharactersCharacterIdMailMailIdInput = { path: { "character_id": characterId, "mail_id": mailId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, DeleteCharactersCharacterIdMailMailIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  get(characterId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions): Promise<GetCharactersCharacterIdMailMailIdOutput> {
-    const arguments_: GetCharactersCharacterIdMailMailIdInput = { path: { "character_id": characterId, "mail_id": mailId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdMailMailIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listHeaders(characterId: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions): Promise<GetCharactersCharacterIdMailOutput> {
-    const arguments_: GetCharactersCharacterIdMailInput = { path: { "character_id": characterId }, query: { "labels": options?.["labels"], "last_mail_id": options?.["lastMailId"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdMailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listLabels(characterId: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions): Promise<GetCharactersCharacterIdMailLabelsOutput> {
-    const arguments_: GetCharactersCharacterIdMailLabelsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdMailLabelsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listMailingLists(characterId: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions): Promise<GetCharactersCharacterIdMailListsOutput> {
-    const arguments_: GetCharactersCharacterIdMailListsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdMailListsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  send(characterId: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions): Promise<PostCharactersCharacterIdMailOutput> {
-    const arguments_: PostCharactersCharacterIdMailInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostCharactersCharacterIdMailDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  update(characterId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions): Promise<PutCharactersCharacterIdMailMailIdOutput> {
-    const arguments_: PutCharactersCharacterIdMailMailIdInput = { path: { "character_id": characterId, "mail_id": mailId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PutCharactersCharacterIdMailMailIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): MailDomainClientWithMetadata {
-    return new MailDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class MailDomainClientWithMetadataImplementation extends MailDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -162,6 +102,55 @@ class MailDomainClientWithMetadataImplementation extends MailDomainClientWithMet
   update(characterId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions): Promise<EsiResponse<PutCharactersCharacterIdMailMailIdOutput>> {
     const arguments_: PutCharactersCharacterIdMailMailIdInput = { path: { "character_id": characterId, "mail_id": mailId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
     return executeOperation(this.#configuration, PutCharactersCharacterIdMailMailIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class MailDomainClientImplementation implements MailDomainClient {
+  readonly #metadata: MailDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new MailDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  createLabel(characterId: NonNullable<PostCharactersCharacterIdMailLabelsInput['path']>["character_id"], options: PostCharactersCharacterIdMailLabelsOptions): Promise<PostCharactersCharacterIdMailLabelsOutput> {
+    return this.#metadata.createLabel(characterId, options).then((response) => response.data);
+  }
+
+  deleteLabel(characterId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["character_id"], labelId: NonNullable<DeleteCharactersCharacterIdMailLabelsLabelIdInput['path']>["label_id"], options?: DeleteCharactersCharacterIdMailLabelsLabelIdOptions): Promise<DeleteCharactersCharacterIdMailLabelsLabelIdOutput> {
+    return this.#metadata.deleteLabel(characterId, labelId, options).then((response) => response.data);
+  }
+
+  deleteMail(characterId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<DeleteCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: DeleteCharactersCharacterIdMailMailIdOptions): Promise<DeleteCharactersCharacterIdMailMailIdOutput> {
+    return this.#metadata.deleteMail(characterId, mailId, options).then((response) => response.data);
+  }
+
+  get(characterId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<GetCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options?: GetCharactersCharacterIdMailMailIdOptions): Promise<GetCharactersCharacterIdMailMailIdOutput> {
+    return this.#metadata.get(characterId, mailId, options).then((response) => response.data);
+  }
+
+  listHeaders(characterId: NonNullable<GetCharactersCharacterIdMailInput['path']>["character_id"], options?: GetCharactersCharacterIdMailOptions): Promise<GetCharactersCharacterIdMailOutput> {
+    return this.#metadata.listHeaders(characterId, options).then((response) => response.data);
+  }
+
+  listLabels(characterId: NonNullable<GetCharactersCharacterIdMailLabelsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailLabelsOptions): Promise<GetCharactersCharacterIdMailLabelsOutput> {
+    return this.#metadata.listLabels(characterId, options).then((response) => response.data);
+  }
+
+  listMailingLists(characterId: NonNullable<GetCharactersCharacterIdMailListsInput['path']>["character_id"], options?: GetCharactersCharacterIdMailListsOptions): Promise<GetCharactersCharacterIdMailListsOutput> {
+    return this.#metadata.listMailingLists(characterId, options).then((response) => response.data);
+  }
+
+  send(characterId: NonNullable<PostCharactersCharacterIdMailInput['path']>["character_id"], options: PostCharactersCharacterIdMailOptions): Promise<PostCharactersCharacterIdMailOutput> {
+    return this.#metadata.send(characterId, options).then((response) => response.data);
+  }
+
+  update(characterId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["character_id"], mailId: NonNullable<PutCharactersCharacterIdMailMailIdInput['path']>["mail_id"], options: PutCharactersCharacterIdMailMailIdOptions): Promise<PutCharactersCharacterIdMailMailIdOutput> {
+    return this.#metadata.update(characterId, mailId, options).then((response) => response.data);
+  }
+
+  withMetadata(): MailDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

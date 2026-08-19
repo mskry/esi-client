@@ -54,9 +54,8 @@ describe('generated domain clients', () => {
     expect(first.clientSource).toContain('readonly items: ItemsDomainClient;');
     expect(first.clientSource).toContain('this.items = bindItemsDomainClient(this.configuration);');
     expect(first.indexSource).toContain("export * from './items.js';");
-    expect(first.indexSource).toContain("export * from './operation-coverage.js';");
-    expect(first.domains[0]?.contractSource).toContain('export abstract class ItemsDomainClient');
-    expect(first.domains[0]?.contractSource).toContain('protected constructor() {}');
+    expect(first.indexSource).not.toContain('operation-coverage');
+    expect(first.domains[0]?.contractSource).toContain('export interface ItemsDomainClient');
     expect(first.domains[0]?.contractSource).toContain(
       'getItem(itemId: NonNullable<GetItemInput[\'path\']>["item_id"], options?: GetItemOptions)',
     );
@@ -78,7 +77,11 @@ describe('generated domain clients', () => {
       'export function bindItemsDomainClient(configuration: EsiClientConfiguration)',
     );
     expect(first.domains[0]?.implementationSource).toContain(
-      'class ItemsDomainClientImplementation extends ItemsDomainClient',
+      'class ItemsDomainClientImplementation implements ItemsDomainClient',
+    );
+    expect(first.domains[0]?.implementationSource.match(/const arguments_:/gu)).toHaveLength(2);
+    expect(first.domains[0]?.implementationSource).toContain(
+      'return this.#metadata.getItem(itemId, options).then((response) => response.data);',
     );
     expect(first.domains[0]?.descriptorSource).toContain(
       'transport: { compatibilityDateOverride: true }',
@@ -172,6 +175,7 @@ describe('generated domain clients', () => {
     expect(Object.isFrozen(client.configuration)).toBe(true);
     expect(Object.isFrozen(client.items)).toBe(true);
     expect(Object.isFrozen(client.items.withMetadata())).toBe(true);
+    expect(client.items.withMetadata()).toBe(client.items.withMetadata());
     expect(() => {
       (client as { items: RuntimeItemsDomainClient }).items = domainClient;
     }).toThrow(TypeError);
@@ -297,9 +301,6 @@ interface RuntimeDomainModule {
     readonly configuration: EsiClientConfiguration;
     readonly items: RuntimeItemsDomainClient;
   };
-  readonly ItemsDomainClient: new (
-    configuration: EsiClientConfiguration,
-  ) => RuntimeItemsDomainClient;
   readonly createItemsClient: (options?: {
     readonly fetch?: typeof fetch;
   }) => RuntimeItemsDomainClient;
@@ -311,8 +312,6 @@ function assertDomainModule(value: unknown): RuntimeDomainModule {
     typeof value !== 'object' ||
     !('EsiClient' in value) ||
     typeof value.EsiClient !== 'function' ||
-    !('ItemsDomainClient' in value) ||
-    typeof value.ItemsDomainClient !== 'function' ||
     !('createItemsClient' in value) ||
     typeof value.createItemsClient !== 'function'
   ) {

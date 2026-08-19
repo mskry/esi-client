@@ -16,17 +16,17 @@ import {
   GetFwSystemsDescriptor,
   GetFwWarsDescriptor,
 } from '../descriptors/faction-warfare.js';
-import {
+import type {
   FactionWarfareDomainClient,
   FactionWarfareDomainClientWithMetadata,
-  type GetFwLeaderboardsCharactersOptions,
-  type GetCharactersCharacterIdFwStatsOptions,
-  type GetFwLeaderboardsCorporationsOptions,
-  type GetCorporationsCorporationIdFwStatsOptions,
-  type GetFwLeaderboardsOptions,
-  type GetFwStatsOptions,
-  type GetFwSystemsOptions,
-  type GetFwWarsOptions,
+  GetFwLeaderboardsCharactersOptions,
+  GetCharactersCharacterIdFwStatsOptions,
+  GetFwLeaderboardsCorporationsOptions,
+  GetCorporationsCorporationIdFwStatsOptions,
+  GetFwLeaderboardsOptions,
+  GetFwStatsOptions,
+  GetFwSystemsOptions,
+  GetFwWarsOptions,
 } from './faction-warfare-contract.js';
 import type {
   GetCharactersCharacterIdFwStatsInput,
@@ -47,65 +47,10 @@ import type {
   GetFwWarsOutput,
 } from '../../schemas/operations/faction-warfare.js';
 
-class FactionWarfareDomainClientImplementation extends FactionWarfareDomainClient {
+class FactionWarfareDomainClientWithMetadataImplementation implements FactionWarfareDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getCharacterLeaderboards(options?: GetFwLeaderboardsCharactersOptions): Promise<GetFwLeaderboardsCharactersOutput> {
-    const arguments_: GetFwLeaderboardsCharactersInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetFwLeaderboardsCharactersDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCharacterStats(characterId: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions): Promise<GetCharactersCharacterIdFwStatsOutput> {
-    const arguments_: GetCharactersCharacterIdFwStatsInput = { path: { "character_id": characterId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdFwStatsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCorporationLeaderboards(options?: GetFwLeaderboardsCorporationsOptions): Promise<GetFwLeaderboardsCorporationsOutput> {
-    const arguments_: GetFwLeaderboardsCorporationsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetFwLeaderboardsCorporationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getCorporationStats(corporationId: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions): Promise<GetCorporationsCorporationIdFwStatsOutput> {
-    const arguments_: GetCorporationsCorporationIdFwStatsInput = { path: { "corporation_id": corporationId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCorporationsCorporationIdFwStatsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getFactionLeaderboards(options?: GetFwLeaderboardsOptions): Promise<GetFwLeaderboardsOutput> {
-    const arguments_: GetFwLeaderboardsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetFwLeaderboardsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listFactionStats(options?: GetFwStatsOptions): Promise<GetFwStatsOutput> {
-    const arguments_: GetFwStatsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetFwStatsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listSystems(options?: GetFwSystemsOptions): Promise<GetFwSystemsOutput> {
-    const arguments_: GetFwSystemsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetFwSystemsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listWars(options?: GetFwWarsOptions): Promise<GetFwWarsOutput> {
-    const arguments_: GetFwWarsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetFwWarsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): FactionWarfareDomainClientWithMetadata {
-    return new FactionWarfareDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class FactionWarfareDomainClientWithMetadataImplementation extends FactionWarfareDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -148,6 +93,51 @@ class FactionWarfareDomainClientWithMetadataImplementation extends FactionWarfar
   listWars(options?: GetFwWarsOptions): Promise<EsiResponse<GetFwWarsOutput>> {
     const arguments_: GetFwWarsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetFwWarsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class FactionWarfareDomainClientImplementation implements FactionWarfareDomainClient {
+  readonly #metadata: FactionWarfareDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new FactionWarfareDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getCharacterLeaderboards(options?: GetFwLeaderboardsCharactersOptions): Promise<GetFwLeaderboardsCharactersOutput> {
+    return this.#metadata.getCharacterLeaderboards(options).then((response) => response.data);
+  }
+
+  getCharacterStats(characterId: NonNullable<GetCharactersCharacterIdFwStatsInput['path']>["character_id"], options?: GetCharactersCharacterIdFwStatsOptions): Promise<GetCharactersCharacterIdFwStatsOutput> {
+    return this.#metadata.getCharacterStats(characterId, options).then((response) => response.data);
+  }
+
+  getCorporationLeaderboards(options?: GetFwLeaderboardsCorporationsOptions): Promise<GetFwLeaderboardsCorporationsOutput> {
+    return this.#metadata.getCorporationLeaderboards(options).then((response) => response.data);
+  }
+
+  getCorporationStats(corporationId: NonNullable<GetCorporationsCorporationIdFwStatsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdFwStatsOptions): Promise<GetCorporationsCorporationIdFwStatsOutput> {
+    return this.#metadata.getCorporationStats(corporationId, options).then((response) => response.data);
+  }
+
+  getFactionLeaderboards(options?: GetFwLeaderboardsOptions): Promise<GetFwLeaderboardsOutput> {
+    return this.#metadata.getFactionLeaderboards(options).then((response) => response.data);
+  }
+
+  listFactionStats(options?: GetFwStatsOptions): Promise<GetFwStatsOutput> {
+    return this.#metadata.listFactionStats(options).then((response) => response.data);
+  }
+
+  listSystems(options?: GetFwSystemsOptions): Promise<GetFwSystemsOutput> {
+    return this.#metadata.listSystems(options).then((response) => response.data);
+  }
+
+  listWars(options?: GetFwWarsOptions): Promise<GetFwWarsOutput> {
+    return this.#metadata.listWars(options).then((response) => response.data);
+  }
+
+  withMetadata(): FactionWarfareDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

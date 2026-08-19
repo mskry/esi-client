@@ -12,13 +12,13 @@ import {
   GetAlliancesDescriptor,
   GetAlliancesAllianceIdCorporationsDescriptor,
 } from '../descriptors/alliance.js';
-import {
+import type {
   AllianceDomainClient,
   AllianceDomainClientWithMetadata,
-  type GetAlliancesAllianceIdIconsOptions,
-  type GetAlliancesAllianceIdOptions,
-  type GetAlliancesOptions,
-  type GetAlliancesAllianceIdCorporationsOptions,
+  GetAlliancesAllianceIdIconsOptions,
+  GetAlliancesAllianceIdOptions,
+  GetAlliancesOptions,
+  GetAlliancesAllianceIdCorporationsOptions,
 } from './alliance-contract.js';
 import type {
   GetAlliancesAllianceIdCorporationsInput,
@@ -31,45 +31,10 @@ import type {
   GetAlliancesOutput,
 } from '../../schemas/operations/alliance.js';
 
-class AllianceDomainClientImplementation extends AllianceDomainClient {
+class AllianceDomainClientWithMetadataImplementation implements AllianceDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  getIcon(allianceId: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions): Promise<GetAlliancesAllianceIdIconsOutput> {
-    const arguments_: GetAlliancesAllianceIdIconsInput = { path: { "alliance_id": allianceId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetAlliancesAllianceIdIconsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  getPublicInfo(allianceId: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions): Promise<GetAlliancesAllianceIdOutput> {
-    const arguments_: GetAlliancesAllianceIdInput = { path: { "alliance_id": allianceId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetAlliancesAllianceIdDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  list(options?: GetAlliancesOptions): Promise<GetAlliancesOutput> {
-    const arguments_: GetAlliancesInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetAlliancesDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  listCorporations(allianceId: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions): Promise<GetAlliancesAllianceIdCorporationsOutput> {
-    const arguments_: GetAlliancesAllianceIdCorporationsInput = { path: { "alliance_id": allianceId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetAlliancesAllianceIdCorporationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): AllianceDomainClientWithMetadata {
-    return new AllianceDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class AllianceDomainClientWithMetadataImplementation extends AllianceDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -92,6 +57,35 @@ class AllianceDomainClientWithMetadataImplementation extends AllianceDomainClien
   listCorporations(allianceId: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions): Promise<EsiResponse<GetAlliancesAllianceIdCorporationsOutput>> {
     const arguments_: GetAlliancesAllianceIdCorporationsInput = { path: { "alliance_id": allianceId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetAlliancesAllianceIdCorporationsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class AllianceDomainClientImplementation implements AllianceDomainClient {
+  readonly #metadata: AllianceDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new AllianceDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  getIcon(allianceId: NonNullable<GetAlliancesAllianceIdIconsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdIconsOptions): Promise<GetAlliancesAllianceIdIconsOutput> {
+    return this.#metadata.getIcon(allianceId, options).then((response) => response.data);
+  }
+
+  getPublicInfo(allianceId: NonNullable<GetAlliancesAllianceIdInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdOptions): Promise<GetAlliancesAllianceIdOutput> {
+    return this.#metadata.getPublicInfo(allianceId, options).then((response) => response.data);
+  }
+
+  list(options?: GetAlliancesOptions): Promise<GetAlliancesOutput> {
+    return this.#metadata.list(options).then((response) => response.data);
+  }
+
+  listCorporations(allianceId: NonNullable<GetAlliancesAllianceIdCorporationsInput['path']>["alliance_id"], options?: GetAlliancesAllianceIdCorporationsOptions): Promise<GetAlliancesAllianceIdCorporationsOutput> {
+    return this.#metadata.listCorporations(allianceId, options).then((response) => response.data);
+  }
+
+  withMetadata(): AllianceDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

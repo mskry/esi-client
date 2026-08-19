@@ -9,40 +9,20 @@ import type { EsiResponse } from '../../../client/response.js';
 import {
   GetCharactersCharacterIdSearchDescriptor,
 } from '../descriptors/search.js';
-import {
+import type {
   SearchDomainClient,
   SearchDomainClientWithMetadata,
-  type GetCharactersCharacterIdSearchOptions,
+  GetCharactersCharacterIdSearchOptions,
 } from './search-contract.js';
 import type {
   GetCharactersCharacterIdSearchInput,
   GetCharactersCharacterIdSearchOutput,
 } from '../../schemas/operations/search.js';
 
-class SearchDomainClientImplementation extends SearchDomainClient {
+class SearchDomainClientWithMetadataImplementation implements SearchDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  search(characterId: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions): Promise<GetCharactersCharacterIdSearchOutput> {
-    const arguments_: GetCharactersCharacterIdSearchInput = { path: { "character_id": characterId }, query: { "categories": options?.["categories"], "search": options?.["search"], "strict": options?.["strict"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetCharactersCharacterIdSearchDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): SearchDomainClientWithMetadata {
-    return new SearchDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class SearchDomainClientWithMetadataImplementation extends SearchDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -50,6 +30,23 @@ class SearchDomainClientWithMetadataImplementation extends SearchDomainClientWit
   search(characterId: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions): Promise<EsiResponse<GetCharactersCharacterIdSearchOutput>> {
     const arguments_: GetCharactersCharacterIdSearchInput = { path: { "character_id": characterId }, query: { "categories": options?.["categories"], "search": options?.["search"], "strict": options?.["strict"] }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetCharactersCharacterIdSearchDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class SearchDomainClientImplementation implements SearchDomainClient {
+  readonly #metadata: SearchDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new SearchDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  search(characterId: NonNullable<GetCharactersCharacterIdSearchInput['path']>["character_id"], options: GetCharactersCharacterIdSearchOptions): Promise<GetCharactersCharacterIdSearchOutput> {
+    return this.#metadata.search(characterId, options).then((response) => response.data);
+  }
+
+  withMetadata(): SearchDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

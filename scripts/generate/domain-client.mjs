@@ -98,7 +98,7 @@ export function renderDomainClientArtifacts(model, operationMetadata, provenance
     contractsSource: renderContractsModule(domains, provenance),
     domains: Object.freeze(domains),
     indexSource: renderGeneratedBarrel(
-      ['./operation-coverage.js', ...domains.map(({ fileName }) => `./${fileName}.js`)],
+      domains.map(({ fileName }) => `./${fileName}.js`),
       provenance,
     ),
     rootIndexSource: renderGeneratedBarrel(
@@ -130,14 +130,8 @@ export async function emitDomainClientSource(context, sourceDirectory) {
     mkdir(descriptorsDirectory, { recursive: true }),
     mkdir(implementationsDirectory, { recursive: true }),
   ]);
-  const outputs = [
-    'domains/index.ts',
-    'domains/operation-coverage.ts',
-    'esi-client.ts',
-    'index.ts',
-  ];
+  const outputs = ['domains/index.ts', 'esi-client.ts', 'index.ts'];
   const writes = [
-    writeFile(join(domainsDirectory, 'operation-coverage.ts'), artifacts.contractsSource),
     writeFile(join(domainsDirectory, 'index.ts'), artifacts.indexSource),
     writeFile(join(sourceDirectory, 'esi-client.ts'), artifacts.clientSource),
     writeFile(join(sourceDirectory, 'index.ts'), artifacts.rootIndexSource),
@@ -162,6 +156,25 @@ export async function emitDomainClientSource(context, sourceDirectory) {
 export const domainClientSourceComponent = Object.freeze({
   name: 'domain-clients',
   emit: emitDomainClientSource,
+});
+
+export async function emitDomainClientTests(context, testsDirectory) {
+  if (!isObject(context) || !isObject(context.normalizedModel)) {
+    throw new TypeError('Domain client test context must contain a normalized model');
+  }
+  const artifacts = renderDomainClientArtifacts(
+    context.normalizedModel,
+    context.operationMetadata,
+    context.provenance,
+  );
+  const output = 'domain-operation-coverage.ts';
+  await writeFile(join(testsDirectory, output), artifacts.contractsSource);
+  return [output];
+}
+
+export const domainClientTestsComponent = Object.freeze({
+  name: 'domain-client-contracts',
+  emit: emitDomainClientTests,
 });
 
 function indexOperations(model, operationMetadata) {
@@ -490,8 +503,8 @@ function renderDomainContractModule(domain, className, metadataClassName, entrie
   const options = entries
     .filter(({ optionFields }) => optionFields.length > 0)
     .map(renderOptionsInterface);
-  const regularMethods = entries.map((entry) => renderAbstractMethod(entry, false));
-  const metadataMethods = entries.map((entry) => renderAbstractMethod(entry, true));
+  const regularMethods = entries.map((entry) => renderContractMethod(entry, false));
+  const metadataMethods = entries.map((entry) => renderContractMethod(entry, true));
   const source = `import type { EsiResponse } from '../../../client/response.js';
 import type {
 ${[...new Set(schemaTypeNames)]
@@ -500,17 +513,13 @@ ${[...new Set(schemaTypeNames)]
   .join('\n')}
 } from '../../schemas/operations/${domainFileName(domain)}.js';
 
-${options.join('\n\n')}${options.length > 0 ? '\n\n' : ''}export abstract class ${className} {
-  protected constructor() {}
-
+${options.join('\n\n')}${options.length > 0 ? '\n\n' : ''}export interface ${className} {
 ${indent(regularMethods.join('\n\n'), 2)}
 
-  abstract withMetadata(): ${metadataClassName};
+  withMetadata(): ${metadataClassName};
 }
 
-export abstract class ${metadataClassName} {
-  protected constructor() {}
-
+export interface ${metadataClassName} {
 ${indent(metadataMethods.join('\n\n'), 2)}
 }
 `;
@@ -526,7 +535,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { ${binderName} } from '../internal/domains/${fileName}.js';
 import type { ${className} } from '../internal/domains/${fileName}-contract.js';
 
-export * from '../internal/domains/${fileName}-contract.js';
+export type * from '../internal/domains/${fileName}-contract.js';
 
 export function ${factoryName}(options: EsiClientOptions = {}): ${className} {
   return ${binderName}(new EsiClientConfiguration(options));
@@ -548,8 +557,8 @@ function renderDomainImplementationModule(
     entry.requestTypeName,
     entry.responseTypeName,
   ]);
-  const regularMethods = entries.map((entry) => renderMethod(entry, false));
-  const metadataMethods = entries.map((entry) => renderMethod(entry, true));
+  const regularMethods = entries.map(renderRegularMethod);
+  const metadataMethods = entries.map(renderMetadataMethod);
   const implementationName = `${className}Implementation`;
   const metadataImplementationName = `${metadataClassName}Implementation`;
   const binderName = `bind${className}`;
@@ -559,12 +568,12 @@ import type { EsiResponse } from '../../../client/response.js';
 import {
 ${descriptorNames.map((name) => `  ${name},`).join('\n')}
 } from '../descriptors/${fileName}.js';
-import {
+import type {
   ${className},
   ${metadataClassName},
 ${entries
   .filter(({ optionFields }) => optionFields.length > 0)
-  .map(({ optionsName }) => `  type ${optionsName},`)
+  .map(({ optionsName }) => `  ${optionsName},`)
   .join('\n')}
 } from './${fileName}-contract.js';
 import type {
@@ -574,32 +583,30 @@ ${[...new Set(schemaTypeNames)]
   .join('\n')}
 } from '../../schemas/operations/${fileName}.js';
 
-class ${implementationName} extends ${className} {
+class ${metadataImplementationName} implements ${metadataClassName} {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
+    Object.freeze(this);
+  }
+
+${indent(metadataMethods.join('\n\n'), 2)}
+}
+
+class ${implementationName} implements ${className} {
+  readonly #metadata: ${metadataImplementationName};
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new ${metadataImplementationName}(configuration);
     Object.freeze(this);
   }
 
 ${indent(regularMethods.join('\n\n'), 2)}
 
   withMetadata(): ${metadataClassName} {
-    return new ${metadataImplementationName}(this.#configuration);
+    return this.#metadata;
   }
-}
-
-class ${metadataImplementationName} extends ${metadataClassName} {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-${indent(metadataMethods.join('\n\n'), 2)}
 }
 
 export function ${binderName}(configuration: EsiClientConfiguration): ${className} {
@@ -623,7 +630,7 @@ function optionFieldType(entry, field) {
   return `NonNullable<${entry.requestTypeName}[${JSON.stringify(field.kind)}]>[${JSON.stringify(field.wireName)}]`;
 }
 
-function renderAbstractMethod(entry, metadata) {
+function renderMethodParameters(entry) {
   const parameters = entry.pathParameters.map(
     ({ identifier, parameter }) =>
       `${identifier}: NonNullable<${entry.requestTypeName}['path']>[${JSON.stringify(parameter.name)}]`,
@@ -631,35 +638,35 @@ function renderAbstractMethod(entry, metadata) {
   if (entry.optionFields.length > 0) {
     parameters.push(`options${entry.requiredOptions ? '' : '?'}: ${entry.optionsName}`);
   }
-  const resultType = metadata ? `EsiResponse<${entry.responseTypeName}>` : entry.responseTypeName;
-  return `abstract ${entry.metadata.method}(${parameters.join(', ')}): Promise<${resultType}>;`;
+  return parameters;
 }
 
-function renderMethod(entry, metadata) {
-  const parameters = entry.pathParameters.map(
-    ({ identifier, parameter }) =>
-      `${identifier}: NonNullable<${entry.requestTypeName}['path']>[${JSON.stringify(parameter.name)}]`,
-  );
-  if (entry.optionFields.length > 0) {
-    parameters.push(`options${entry.requiredOptions ? '' : '?'}: ${entry.optionsName}`);
-  }
+function renderContractMethod(entry, metadata) {
   const resultType = metadata ? `EsiResponse<${entry.responseTypeName}>` : entry.responseTypeName;
+  return `${entry.metadata.method}(${renderMethodParameters(entry).join(', ')}): Promise<${resultType}>;`;
+}
+
+function renderRegularMethod(entry) {
+  const parameters = renderMethodParameters(entry);
+  const methodArguments = entry.pathParameters.map(({ identifier }) => identifier);
+  if (entry.optionFields.length > 0) methodArguments.push('options');
+  return `${entry.metadata.method}(${parameters.join(', ')}): Promise<${entry.responseTypeName}> {
+  return this.#metadata.${entry.metadata.method}(${methodArguments.join(', ')}).then((response) => response.data);
+}`;
+}
+
+function renderMetadataMethod(entry) {
+  const parameters = renderMethodParameters(entry);
   const lines = [
-    `${entry.metadata.method}(${parameters.join(', ')}): Promise<${resultType}> {`,
+    `${entry.metadata.method}(${parameters.join(', ')}): Promise<EsiResponse<${entry.responseTypeName}>> {`,
     `  const arguments_: ${entry.requestTypeName} = ${renderRequestArguments(entry)};`,
   ];
   const executionOptions = entry.compatibilityDateOverride
     ? ', { compatibilityDate: options?.compatibilityDate }'
     : '';
-  if (metadata) {
-    lines.push(
-      `  return executeOperation(this.#configuration, ${entry.descriptorName}, arguments_${executionOptions});`,
-    );
-  } else {
-    lines.push(
-      `  return executeOperation(this.#configuration, ${entry.descriptorName}, arguments_${executionOptions}).then((response) => response.data);`,
-    );
-  }
+  lines.push(
+    `  return executeOperation(this.#configuration, ${entry.descriptorName}, arguments_${executionOptions});`,
+  );
   lines.push('}');
   return lines.join('\n');
 }
@@ -702,20 +709,20 @@ function renderContractsModule(domains, provenance) {
       domainOperationImports.add(entry.responseTypeName);
       if (entry.optionFields.length > 0) imported.add(entry.optionsName);
       const parameters = entry.pathParameters.map(
-        ({ parameter }, index) =>
-          `identifier${index + 1}: NonNullable<${entry.requestTypeName}['path']>[${JSON.stringify(parameter.name)}]`,
+        ({ identifier, parameter }) =>
+          `${identifier}: NonNullable<${entry.requestTypeName}['path']>[${JSON.stringify(parameter.name)}]`,
       );
       if (entry.optionFields.length > 0) {
         parameters.push(`options${entry.requiredOptions ? '' : '?'}: ${entry.optionsName}`);
       }
       const assertionName = entry.schemaName;
       assertions.push(
-        `type ${assertionName}DomainMethodAssertion = Assert<IsExact<${domain.className}[${JSON.stringify(entry.metadata.method)}], (${parameters.join(', ')}) => Promise<${entry.responseTypeName}>>>;`,
-        `type ${assertionName}MetadataMethodAssertion = Assert<IsExact<${domain.metadataClassName}[${JSON.stringify(entry.metadata.method)}], (${parameters.join(', ')}) => Promise<EsiResponse<${entry.responseTypeName}>>>>;`,
+        `export type ${assertionName}DomainMethodAssertion = Assert<IsExact<${domain.className}[${JSON.stringify(entry.metadata.method)}], (${parameters.join(', ')}) => Promise<${entry.responseTypeName}>>>;`,
+        `export type ${assertionName}MetadataMethodAssertion = Assert<IsExact<${domain.metadataClassName}[${JSON.stringify(entry.metadata.method)}], (${parameters.join(', ')}) => Promise<EsiResponse<${entry.responseTypeName}>>>>;`,
       );
       if (entry.optionFields.length > 0) {
         assertions.push(
-          `type ${assertionName}OptionsAssertion = Assert<IsExact<${entry.optionsName}, {\n${entry.optionFields
+          `export type ${assertionName}OptionsAssertion = Assert<IsExact<${entry.optionsName}, {\n${entry.optionFields
             .map(
               (field) =>
                 `  readonly ${JSON.stringify(field.name)}${field.required ? '' : '?'}: ${optionFieldType(entry, field)};`,
@@ -733,26 +740,27 @@ function renderContractsModule(domains, provenance) {
     domainImports.push(`import {
 ${[...imported]
   .toSorted(compareText)
-  .map((name) => (name.endsWith('Options') ? `  type ${name},` : `  ${name},`))
+  .map((name) => (name === domain.factoryName ? `  ${name},` : `  type ${name},`))
   .join('\n')}
-} from './${domain.fileName}.js';`);
+} from '../../src/generated/domains/${domain.fileName}.js';`);
     operationImports.push(`import type {
 ${[...domainOperationImports]
   .toSorted(compareText)
   .map((name) => `  ${name},`)
   .join('\n')}
-} from '../schemas/operations/${domain.fileName}.js';`);
+} from '../../src/generated/schemas/operations/${domain.fileName}.js';`);
     assertions.push(
-      `type ${domain.className}FactoryAssertion = Assert<IsExact<typeof ${domain.factoryName}, (options?: EsiClientOptions) => ${domain.className}>>;`,
-      `type ${domain.className}MetadataViewAssertion = Assert<IsExact<${domain.className}['withMetadata'], () => ${domain.metadataClassName}>>;`,
+      `export type ${domain.className}FactoryAssertion = Assert<IsExact<typeof ${domain.factoryName}, (options?: EsiClientOptions) => ${domain.className}>>;`,
+      `export type ${domain.className}MetadataViewAssertion = Assert<IsExact<${domain.className}['withMetadata'], () => ${domain.metadataClassName}>>;`,
     );
   }
-  const source = `import type { EsiClientOptions } from '../../client/options.js';
-import type { EsiResponse } from '../../client/response.js';
-import type { GeneratedOperationSignatures } from '../schemas/contracts.js';
+  const source = `import type { EsiClientOptions } from '../../src/client/options.js';
+import type { EsiResponse } from '../../src/client/response.js';
+import type { GeneratedOperationSignatures } from '../../src/generated/schemas/contracts.js';
 ${operationImports.join('\n')}
 ${domainImports.join('\n')}
 
+/* oxlint-disable typescript/no-unnecessary-type-parameters */
 type IsExact<Left, Right> =
   (<Value>() => Value extends Left ? 1 : 2) extends <Value>() => Value extends Right ? 1 : 2
     ? (<Value>() => Value extends Right ? 1 : 2) extends <Value>() => Value extends Left ? 1 : 2
@@ -762,11 +770,11 @@ type IsExact<Left, Right> =
 
 type Assert<Value extends true> = Value;
 
-export interface GeneratedDomainOperationCoverage {
+interface GeneratedDomainOperationCoverage {
 ${coverage.join('\n')}
 }
 
-type GeneratedDomainOperationCoverageAssertion = Assert<
+export type GeneratedDomainOperationCoverageAssertion = Assert<
   IsExact<keyof GeneratedDomainOperationCoverage, keyof GeneratedOperationSignatures>
 >;
 
@@ -816,11 +824,24 @@ export function validateDomainClientArtifacts(artifacts) {
     if (!domain.domainSource.includes(`export function ${domain.factoryName}(`)) {
       throw new Error(`Missing domain factory: ${domain.factoryName}`);
     }
-    if (!domain.contractSource.includes(`export abstract class ${domain.className}`)) {
-      throw new Error(`Missing abstract domain contract: ${domain.className}`);
+    if (!domain.contractSource.includes(`export interface ${domain.className}`)) {
+      throw new Error(`Missing domain contract: ${domain.className}`);
     }
     if (!domain.implementationSource.includes(`export function ${domain.binderName}(`)) {
       throw new Error(`Missing internal domain binder: ${domain.binderName}`);
+    }
+    const marshallingBodies = domain.implementationSource.match(/const arguments_:/gu) ?? [];
+    if (marshallingBodies.length !== domain.entries.length) {
+      throw new Error(`Domain ${domain.domain} must emit one marshalling body per operation`);
+    }
+    for (const entry of domain.entries) {
+      for (const metadata of [false, true]) {
+        if (!domain.contractSource.includes(renderContractMethod(entry, metadata))) {
+          throw new Error(
+            `Domain ${domain.domain} contract has an invalid ${entry.metadata.method} signature`,
+          );
+        }
+      }
     }
     const expectedSchemaModule = `../../schemas/operations/${domain.fileName}.js`;
     const imports = [

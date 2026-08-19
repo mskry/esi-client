@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindUniverseDomainClient } from '../internal/domains/universe.js';
 import type { UniverseDomainClient } from '../internal/domains/universe-contract.js';
 
-export * from '../internal/domains/universe-contract.js';
+export type * from '../internal/domains/universe-contract.js';
 
 export function createUniverseClient(options: EsiClientOptions = {}): UniverseDomainClient {
   return bindUniverseDomainClient(new EsiClientConfiguration(options));

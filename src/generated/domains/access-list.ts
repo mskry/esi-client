@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindAccessListDomainClient } from '../internal/domains/access-list.js';
 import type { AccessListDomainClient } from '../internal/domains/access-list-contract.js';
 
-export * from '../internal/domains/access-list-contract.js';
+export type * from '../internal/domains/access-list-contract.js';
 
 export function createAccessListClient(options: EsiClientOptions = {}): AccessListDomainClient {
   return bindAccessListDomainClient(new EsiClientConfiguration(options));

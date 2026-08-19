@@ -9,40 +9,20 @@ import type { EsiResponse } from '../../../client/response.js';
 import {
   GetIncursionsDescriptor,
 } from '../descriptors/incursions.js';
-import {
+import type {
   IncursionsDomainClient,
   IncursionsDomainClientWithMetadata,
-  type GetIncursionsOptions,
+  GetIncursionsOptions,
 } from './incursions-contract.js';
 import type {
   GetIncursionsInput,
   GetIncursionsOutput,
 } from '../../schemas/operations/incursions.js';
 
-class IncursionsDomainClientImplementation extends IncursionsDomainClient {
+class IncursionsDomainClientWithMetadataImplementation implements IncursionsDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  list(options?: GetIncursionsOptions): Promise<GetIncursionsOutput> {
-    const arguments_: GetIncursionsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
-    return executeOperation(this.#configuration, GetIncursionsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): IncursionsDomainClientWithMetadata {
-    return new IncursionsDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class IncursionsDomainClientWithMetadataImplementation extends IncursionsDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -50,6 +30,23 @@ class IncursionsDomainClientWithMetadataImplementation extends IncursionsDomainC
   list(options?: GetIncursionsOptions): Promise<EsiResponse<GetIncursionsOutput>> {
     const arguments_: GetIncursionsInput = { header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] } };
     return executeOperation(this.#configuration, GetIncursionsDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class IncursionsDomainClientImplementation implements IncursionsDomainClient {
+  readonly #metadata: IncursionsDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new IncursionsDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  list(options?: GetIncursionsOptions): Promise<GetIncursionsOutput> {
+    return this.#metadata.list(options).then((response) => response.data);
+  }
+
+  withMetadata(): IncursionsDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 

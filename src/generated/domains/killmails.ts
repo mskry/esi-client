@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindKillmailsDomainClient } from '../internal/domains/killmails.js';
 import type { KillmailsDomainClient } from '../internal/domains/killmails-contract.js';
 
-export * from '../internal/domains/killmails-contract.js';
+export type * from '../internal/domains/killmails-contract.js';
 
 export function createKillmailsClient(options: EsiClientOptions = {}): KillmailsDomainClient {
   return bindKillmailsDomainClient(new EsiClientConfiguration(options));

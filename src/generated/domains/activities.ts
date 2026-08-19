@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindActivitiesDomainClient } from '../internal/domains/activities.js';
 import type { ActivitiesDomainClient } from '../internal/domains/activities-contract.js';
 
-export * from '../internal/domains/activities-contract.js';
+export type * from '../internal/domains/activities-contract.js';
 
 export function createActivitiesClient(options: EsiClientOptions = {}): ActivitiesDomainClient {
   return bindActivitiesDomainClient(new EsiClientConfiguration(options));

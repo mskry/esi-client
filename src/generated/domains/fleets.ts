@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindFleetsDomainClient } from '../internal/domains/fleets.js';
 import type { FleetsDomainClient } from '../internal/domains/fleets-contract.js';
 
-export * from '../internal/domains/fleets-contract.js';
+export type * from '../internal/domains/fleets-contract.js';
 
 export function createFleetsClient(options: EsiClientOptions = {}): FleetsDomainClient {
   return bindFleetsDomainClient(new EsiClientConfiguration(options));

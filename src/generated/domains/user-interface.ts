@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindUserInterfaceDomainClient } from '../internal/domains/user-interface.js';
 import type { UserInterfaceDomainClient } from '../internal/domains/user-interface-contract.js';
 
-export * from '../internal/domains/user-interface-contract.js';
+export type * from '../internal/domains/user-interface-contract.js';
 
 export function createUserInterfaceClient(options: EsiClientOptions = {}): UserInterfaceDomainClient {
   return bindUserInterfaceDomainClient(new EsiClientConfiguration(options));

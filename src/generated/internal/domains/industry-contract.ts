@@ -86,44 +86,40 @@ export interface GetIndustrySystemsOptions {
   readonly "xTenant"?: NonNullable<GetIndustrySystemsInput["header"]>["X-Tenant"];
 }
 
-export abstract class IndustryDomainClient {
-  protected constructor() {}
+export interface IndustryDomainClient {
+  listCharacterJobs(characterId: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions): Promise<GetCharactersCharacterIdIndustryJobsOutput>;
 
-  abstract listCharacterJobs(characterId: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions): Promise<GetCharactersCharacterIdIndustryJobsOutput>;
+  listCharacterMiningLedger(characterId: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions): Promise<GetCharactersCharacterIdMiningOutput>;
 
-  abstract listCharacterMiningLedger(characterId: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions): Promise<GetCharactersCharacterIdMiningOutput>;
+  listCorporationJobs(corporationId: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions): Promise<GetCorporationsCorporationIdIndustryJobsOutput>;
 
-  abstract listCorporationJobs(corporationId: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions): Promise<GetCorporationsCorporationIdIndustryJobsOutput>;
+  listFacilities(options?: GetIndustryFacilitiesOptions): Promise<GetIndustryFacilitiesOutput>;
 
-  abstract listFacilities(options?: GetIndustryFacilitiesOptions): Promise<GetIndustryFacilitiesOutput>;
+  listMiningObservers(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions): Promise<GetCorporationCorporationIdMiningObserversOutput>;
 
-  abstract listMiningObservers(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions): Promise<GetCorporationCorporationIdMiningObserversOutput>;
+  listMoonExtractionTimers(corporationId: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions): Promise<GetCorporationCorporationIdMiningExtractionsOutput>;
 
-  abstract listMoonExtractionTimers(corporationId: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions): Promise<GetCorporationCorporationIdMiningExtractionsOutput>;
+  listObservedMining(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], observerId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions): Promise<GetCorporationCorporationIdMiningObserversObserverIdOutput>;
 
-  abstract listObservedMining(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], observerId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions): Promise<GetCorporationCorporationIdMiningObserversObserverIdOutput>;
+  listSystemCostIndices(options?: GetIndustrySystemsOptions): Promise<GetIndustrySystemsOutput>;
 
-  abstract listSystemCostIndices(options?: GetIndustrySystemsOptions): Promise<GetIndustrySystemsOutput>;
-
-  abstract withMetadata(): IndustryDomainClientWithMetadata;
+  withMetadata(): IndustryDomainClientWithMetadata;
 }
 
-export abstract class IndustryDomainClientWithMetadata {
-  protected constructor() {}
+export interface IndustryDomainClientWithMetadata {
+  listCharacterJobs(characterId: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions): Promise<EsiResponse<GetCharactersCharacterIdIndustryJobsOutput>>;
 
-  abstract listCharacterJobs(characterId: NonNullable<GetCharactersCharacterIdIndustryJobsInput['path']>["character_id"], options?: GetCharactersCharacterIdIndustryJobsOptions): Promise<EsiResponse<GetCharactersCharacterIdIndustryJobsOutput>>;
+  listCharacterMiningLedger(characterId: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions): Promise<EsiResponse<GetCharactersCharacterIdMiningOutput>>;
 
-  abstract listCharacterMiningLedger(characterId: NonNullable<GetCharactersCharacterIdMiningInput['path']>["character_id"], options?: GetCharactersCharacterIdMiningOptions): Promise<EsiResponse<GetCharactersCharacterIdMiningOutput>>;
+  listCorporationJobs(corporationId: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions): Promise<EsiResponse<GetCorporationsCorporationIdIndustryJobsOutput>>;
 
-  abstract listCorporationJobs(corporationId: NonNullable<GetCorporationsCorporationIdIndustryJobsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdIndustryJobsOptions): Promise<EsiResponse<GetCorporationsCorporationIdIndustryJobsOutput>>;
+  listFacilities(options?: GetIndustryFacilitiesOptions): Promise<EsiResponse<GetIndustryFacilitiesOutput>>;
 
-  abstract listFacilities(options?: GetIndustryFacilitiesOptions): Promise<EsiResponse<GetIndustryFacilitiesOutput>>;
+  listMiningObservers(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions): Promise<EsiResponse<GetCorporationCorporationIdMiningObserversOutput>>;
 
-  abstract listMiningObservers(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningObserversOptions): Promise<EsiResponse<GetCorporationCorporationIdMiningObserversOutput>>;
+  listMoonExtractionTimers(corporationId: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions): Promise<EsiResponse<GetCorporationCorporationIdMiningExtractionsOutput>>;
 
-  abstract listMoonExtractionTimers(corporationId: NonNullable<GetCorporationCorporationIdMiningExtractionsInput['path']>["corporation_id"], options?: GetCorporationCorporationIdMiningExtractionsOptions): Promise<EsiResponse<GetCorporationCorporationIdMiningExtractionsOutput>>;
+  listObservedMining(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], observerId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions): Promise<EsiResponse<GetCorporationCorporationIdMiningObserversObserverIdOutput>>;
 
-  abstract listObservedMining(corporationId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["corporation_id"], observerId: NonNullable<GetCorporationCorporationIdMiningObserversObserverIdInput['path']>["observer_id"], options?: GetCorporationCorporationIdMiningObserversObserverIdOptions): Promise<EsiResponse<GetCorporationCorporationIdMiningObserversObserverIdOutput>>;
-
-  abstract listSystemCostIndices(options?: GetIndustrySystemsOptions): Promise<EsiResponse<GetIndustrySystemsOutput>>;
+  listSystemCostIndices(options?: GetIndustrySystemsOptions): Promise<EsiResponse<GetIndustrySystemsOutput>>;
 }

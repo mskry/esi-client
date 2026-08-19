@@ -247,7 +247,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "clean": "rm -rf dist .package-smoke .pack",
+    "clean": "node scripts/clean.mjs",
     "docs:check": "node scripts/check-documentation.mjs",
     "drift:report": "node scripts/drift-report.mjs",
     "examples:check": "node scripts/check-examples.mjs",

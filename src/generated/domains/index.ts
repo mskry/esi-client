@@ -30,7 +30,6 @@ export * from './mail.js';
 export * from './market.js';
 export * from './meta.js';
 export * from './military-campaigns.js';
-export * from './operation-coverage.js';
 export * from './paragon-hub.js';
 export * from './planetary-interaction.js';
 export * from './routes.js';

@@ -14,6 +14,7 @@ import { normalizeOpenApiDocument } from '../scripts/generate/normalize.mjs';
 import { resolveOperationMetadata } from '../scripts/generate/operation-metadata.mjs';
 import type { EmitterContext } from '../scripts/generate/orchestrate.mjs';
 import { generatedSourceEmitter } from '../scripts/generate/source-emitter.mjs';
+import { generatedTestsEmitter } from '../scripts/generate/test-emitter.mjs';
 import {
   renderZodModelSchemaModule,
   renderZodOperationSchemaModule,
@@ -95,6 +96,9 @@ it(
     await expect(generatedSourceEmitter.emit(context)).resolves.toEqual([
       { target: 'src/generated', kind: 'directory' },
     ]);
+    await expect(generatedTestsEmitter.emit(context)).resolves.toEqual([
+      { target: 'tests/generated', kind: 'directory' },
+    ]);
     await cp(join(process.cwd(), 'src/client'), join(directory, 'src/client'), {
       recursive: true,
     });
@@ -108,10 +112,10 @@ it(
     const clientSource = await readFile(join(sourceDirectory, 'esi-client.ts'), 'utf8');
     const rootIndexSource = await readFile(join(sourceDirectory, 'index.ts'), 'utf8');
     const contracts = await readFile(
-      join(sourceDirectory, 'domains/operation-coverage.ts'),
+      join(directory, 'tests/generated/domain-operation-coverage.ts'),
       'utf8',
     );
-    expect(domainFiles).toHaveLength(domainNames.size + 2);
+    expect(domainFiles).toHaveLength(domainNames.size + 1);
     expect(descriptorFiles).toHaveLength(domainNames.size);
     expect(implementationFiles).toHaveLength(domainNames.size * 2);
     expect(modelFiles).toHaveLength(model.models.length);
@@ -120,8 +124,10 @@ it(
     expect(
       clientSource.match(/^  readonly [A-Za-z][A-Za-z0-9]*: \w+DomainClient;$/gmu),
     ).toHaveLength(domainNames.size);
-    expect(contracts.match(/^  readonly "[^"]+": \{$/gmu)).toHaveLength(model.operations.length);
-    expect(contracts.match(/^type \w+DomainClientFactoryAssertion =/gmu)).toHaveLength(
+    expect(contracts.match(/^  readonly [A-Za-z][A-Za-z0-9]*: \{$/gmu)).toHaveLength(
+      model.operations.length,
+    );
+    expect(contracts.match(/^export type \w+DomainClientFactoryAssertion =/gmu)).toHaveLength(
       domainNames.size,
     );
     for (const domain of domainNames) {
@@ -142,14 +148,13 @@ it(
       expect(clientSource).toContain(`readonly ${domain}: ${className};`);
       expect(clientSource).toContain(`this.${domain} = bind${className}(this.configuration);`);
       expect(domainSource).toContain(`export function ${factoryName}(`);
-      expect(contractSource).toContain(`export abstract class ${className}`);
-      expect(contractSource).toContain('protected constructor() {}');
+      expect(contractSource).toContain(`export interface ${className}`);
       expect(descriptorSource).toContain(`from '../../schemas/operations/${fileName}.js';`);
     }
     for (const { domain, method, operationId } of operationMetadata) {
-      expect(contracts).toContain(`readonly ${JSON.stringify(operationId)}: {`);
-      expect(contracts).toContain(`readonly domain: ${JSON.stringify(domain)};`);
-      expect(contracts).toContain(`readonly method: ${JSON.stringify(method)};`);
+      expect(contracts).toContain(`readonly ${operationId}: {`);
+      expect(contracts).toContain(`readonly domain: '${domain}';`);
+      expect(contracts).toContain(`readonly method: '${method}';`);
     }
     await expectIsolatedDeclarationsCompilation(directory);
     const clientBundlePath = join(directory, 'client.mjs');
@@ -191,14 +196,12 @@ it(
     if (!isRecord(domainsModule)) throw new TypeError('Generated domains module is invalid');
     for (const domain of domainNames) {
       const domainName = capitalize(domain);
-      const className = `${domainName}DomainClient`;
       const factory = domainsModule[`create${domainName}Client`];
-      const contract = domainsModule[className];
-      if (typeof factory !== 'function' || typeof contract !== 'function') {
-        throw new TypeError(`Missing generated domain factory or contract: ${domain}`);
+      if (typeof factory !== 'function') {
+        throw new TypeError(`Missing generated domain factory: ${domain}`);
       }
       const standalone: unknown = factory();
-      expect(standalone).toBeInstanceOf(contract);
+      expect(standalone).toEqual(expect.objectContaining({ withMetadata: expect.any(Function) }));
       expect(Object.isFrozen(standalone)).toBe(true);
     }
   },

@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindMilitaryCampaignsDomainClient } from '../internal/domains/military-campaigns.js';
 import type { MilitaryCampaignsDomainClient } from '../internal/domains/military-campaigns-contract.js';
 
-export * from '../internal/domains/military-campaigns-contract.js';
+export type * from '../internal/domains/military-campaigns-contract.js';
 
 export function createMilitaryCampaignsClient(options: EsiClientOptions = {}): MilitaryCampaignsDomainClient {
   return bindMilitaryCampaignsDomainClient(new EsiClientConfiguration(options));

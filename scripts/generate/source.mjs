@@ -29,6 +29,7 @@ if (commandArguments.some((argument) => argument !== refreshSnapshotFlag)) {
 const refreshSnapshot = commandArguments.includes(refreshSnapshotFlag);
 const workspace = await mkdtemp(join(root, '.esi-source-generation-'));
 let stagedSnapshot;
+let generationError;
 
 try {
   const input = refreshSnapshot
@@ -97,9 +98,29 @@ try {
   process.stdout.write(
     `Generated source, documentation, examples, and OpenAPI artifacts for ESI compatibility date ${provenance.compatibilityDate} (${provenance.sha256}).\n`,
   );
-} finally {
-  await stagedSnapshot?.cleanup();
-  await rm(workspace, { force: true, recursive: true });
+} catch (error) {
+  generationError = error;
+}
+
+const cleanupResults = await Promise.allSettled([
+  stagedSnapshot?.cleanup(),
+  rm(workspace, { force: true, recursive: true }),
+]);
+const cleanupErrors = cleanupResults
+  .filter((result) => result.status === 'rejected')
+  .map((result) => result.reason);
+if (generationError !== undefined) {
+  if (cleanupErrors.length > 0) {
+    throw new AggregateError(
+      [generationError, ...cleanupErrors],
+      'Source generation and cleanup failed',
+      { cause: generationError },
+    );
+  }
+  throw generationError;
+}
+if (cleanupErrors.length > 0) {
+  throw new AggregateError(cleanupErrors, 'Source generation cleanup failed');
 }
 
 async function emitOfflineArtifacts(context) {

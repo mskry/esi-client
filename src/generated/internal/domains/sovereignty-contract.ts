@@ -25,20 +25,16 @@ export interface GetSovereigntySystemsOptions {
   readonly "xTenant"?: NonNullable<GetSovereigntySystemsInput["header"]>["X-Tenant"];
 }
 
-export abstract class SovereigntyDomainClient {
-  protected constructor() {}
+export interface SovereigntyDomainClient {
+  listCampaigns(options?: GetSovereigntyCampaignsOptions): Promise<GetSovereigntyCampaignsOutput>;
 
-  abstract listCampaigns(options?: GetSovereigntyCampaignsOptions): Promise<GetSovereigntyCampaignsOutput>;
+  listSystems(options?: GetSovereigntySystemsOptions): Promise<GetSovereigntySystemsOutput>;
 
-  abstract listSystems(options?: GetSovereigntySystemsOptions): Promise<GetSovereigntySystemsOutput>;
-
-  abstract withMetadata(): SovereigntyDomainClientWithMetadata;
+  withMetadata(): SovereigntyDomainClientWithMetadata;
 }
 
-export abstract class SovereigntyDomainClientWithMetadata {
-  protected constructor() {}
+export interface SovereigntyDomainClientWithMetadata {
+  listCampaigns(options?: GetSovereigntyCampaignsOptions): Promise<EsiResponse<GetSovereigntyCampaignsOutput>>;
 
-  abstract listCampaigns(options?: GetSovereigntyCampaignsOptions): Promise<EsiResponse<GetSovereigntyCampaignsOutput>>;
-
-  abstract listSystems(options?: GetSovereigntySystemsOptions): Promise<EsiResponse<GetSovereigntySystemsOutput>>;
+  listSystems(options?: GetSovereigntySystemsOptions): Promise<EsiResponse<GetSovereigntySystemsOutput>>;
 }

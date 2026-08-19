@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindFactionWarfareDomainClient } from '../internal/domains/faction-warfare.js';
 import type { FactionWarfareDomainClient } from '../internal/domains/faction-warfare-contract.js';
 
-export * from '../internal/domains/faction-warfare-contract.js';
+export type * from '../internal/domains/faction-warfare-contract.js';
 
 export function createFactionWarfareClient(options: EsiClientOptions = {}): FactionWarfareDomainClient {
   return bindFactionWarfareDomainClient(new EsiClientConfiguration(options));

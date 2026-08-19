@@ -503,7 +503,8 @@ function normalizeHeaders(
   const result: Record<string, string> = {};
   let count = 0;
   for (const [rawName, rawValue] of Object.entries(headers ?? {})) {
-    if (count >= MAX_HEADER_COUNT || typeof rawValue !== 'string') break;
+    if (count >= MAX_HEADER_COUNT) break;
+    if (typeof rawValue !== 'string') continue;
     const name = sanitizeString(rawName.toLowerCase(), redactor, MAX_HEADER_NAME_CHARACTERS, '');
     if (name.length === 0) continue;
     if (Object.hasOwn(result, name)) continue;
@@ -611,7 +612,8 @@ function normalizeScopes(
 ): readonly string[] {
   const normalized: string[] = [];
   for (const scope of scopes ?? []) {
-    if (normalized.length >= MAX_SCOPES || typeof scope !== 'string') break;
+    if (normalized.length >= MAX_SCOPES) break;
+    if (typeof scope !== 'string') continue;
     normalized.push(sanitizeString(scope, redactor, MAX_ISSUE_STRING_CHARACTERS, ''));
   }
   return Object.freeze(normalized);
@@ -623,7 +625,8 @@ function normalizeIssues(
 ): readonly EsiValidationIssue[] {
   const normalized: EsiValidationIssue[] = [];
   for (const issue of issues) {
-    if (normalized.length >= MAX_ISSUES || typeof issue !== 'object' || issue === null) break;
+    if (normalized.length >= MAX_ISSUES) break;
+    if (typeof issue !== 'object' || issue === null) continue;
     const path: (string | number)[] = [];
     for (const segment of issue.path ?? []) {
       if (path.length >= MAX_ISSUE_PATH_SEGMENTS) break;

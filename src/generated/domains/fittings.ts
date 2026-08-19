@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindFittingsDomainClient } from '../internal/domains/fittings.js';
 import type { FittingsDomainClient } from '../internal/domains/fittings-contract.js';
 
-export * from '../internal/domains/fittings-contract.js';
+export type * from '../internal/domains/fittings-contract.js';
 
 export function createFittingsClient(options: EsiClientOptions = {}): FittingsDomainClient {
   return bindFittingsDomainClient(new EsiClientConfiguration(options));

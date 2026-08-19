@@ -8,7 +8,7 @@ import type { EsiClientOptions } from '../../client/options.js';
 import { bindAllianceDomainClient } from '../internal/domains/alliance.js';
 import type { AllianceDomainClient } from '../internal/domains/alliance-contract.js';
 
-export * from '../internal/domains/alliance-contract.js';
+export type * from '../internal/domains/alliance-contract.js';
 
 export function createAllianceClient(options: EsiClientOptions = {}): AllianceDomainClient {
   return bindAllianceDomainClient(new EsiClientConfiguration(options));

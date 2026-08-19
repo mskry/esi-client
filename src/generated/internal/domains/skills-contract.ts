@@ -34,24 +34,20 @@ export interface GetCharactersCharacterIdSkillsOptions {
   readonly "xTenant"?: NonNullable<GetCharactersCharacterIdSkillsInput["header"]>["X-Tenant"];
 }
 
-export abstract class SkillsDomainClient {
-  protected constructor() {}
+export interface SkillsDomainClient {
+  getAttributes(characterId: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions): Promise<GetCharactersCharacterIdAttributesOutput>;
 
-  abstract getAttributes(characterId: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions): Promise<GetCharactersCharacterIdAttributesOutput>;
+  getSkillQueue(characterId: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions): Promise<GetCharactersCharacterIdSkillqueueOutput>;
 
-  abstract getSkillQueue(characterId: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions): Promise<GetCharactersCharacterIdSkillqueueOutput>;
+  getSkills(characterId: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions): Promise<GetCharactersCharacterIdSkillsOutput>;
 
-  abstract getSkills(characterId: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions): Promise<GetCharactersCharacterIdSkillsOutput>;
-
-  abstract withMetadata(): SkillsDomainClientWithMetadata;
+  withMetadata(): SkillsDomainClientWithMetadata;
 }
 
-export abstract class SkillsDomainClientWithMetadata {
-  protected constructor() {}
+export interface SkillsDomainClientWithMetadata {
+  getAttributes(characterId: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions): Promise<EsiResponse<GetCharactersCharacterIdAttributesOutput>>;
 
-  abstract getAttributes(characterId: NonNullable<GetCharactersCharacterIdAttributesInput['path']>["character_id"], options?: GetCharactersCharacterIdAttributesOptions): Promise<EsiResponse<GetCharactersCharacterIdAttributesOutput>>;
+  getSkillQueue(characterId: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions): Promise<EsiResponse<GetCharactersCharacterIdSkillqueueOutput>>;
 
-  abstract getSkillQueue(characterId: NonNullable<GetCharactersCharacterIdSkillqueueInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillqueueOptions): Promise<EsiResponse<GetCharactersCharacterIdSkillqueueOutput>>;
-
-  abstract getSkills(characterId: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions): Promise<EsiResponse<GetCharactersCharacterIdSkillsOutput>>;
+  getSkills(characterId: NonNullable<GetCharactersCharacterIdSkillsInput['path']>["character_id"], options?: GetCharactersCharacterIdSkillsOptions): Promise<EsiResponse<GetCharactersCharacterIdSkillsOutput>>;
 }

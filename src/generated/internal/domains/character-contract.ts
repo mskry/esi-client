@@ -136,68 +136,64 @@ export interface PostCharactersAffiliationOptions {
   readonly "xTenant"?: NonNullable<PostCharactersAffiliationInput["header"]>["X-Tenant"];
 }
 
-export abstract class CharacterDomainClient {
-  protected constructor() {}
+export interface CharacterDomainClient {
+  agentsResearch(characterId: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions): Promise<GetCharactersCharacterIdAgentsResearchOutput>;
 
-  abstract agentsResearch(characterId: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions): Promise<GetCharactersCharacterIdAgentsResearchOutput>;
+  calculateCspaCharge(characterId: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions): Promise<PostCharactersCharacterIdCspaOutput>;
 
-  abstract calculateCspaCharge(characterId: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions): Promise<PostCharactersCharacterIdCspaOutput>;
+  getCorporationRoles(characterId: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions): Promise<GetCharactersCharacterIdRolesOutput>;
 
-  abstract getCorporationRoles(characterId: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions): Promise<GetCharactersCharacterIdRolesOutput>;
+  getJumpFatigue(characterId: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions): Promise<GetCharactersCharacterIdFatigueOutput>;
 
-  abstract getJumpFatigue(characterId: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions): Promise<GetCharactersCharacterIdFatigueOutput>;
+  getPortrait(characterId: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions): Promise<GetCharactersCharacterIdPortraitOutput>;
 
-  abstract getPortrait(characterId: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions): Promise<GetCharactersCharacterIdPortraitOutput>;
+  getPublicInfo(characterId: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions): Promise<GetCharactersDetailOutput>;
 
-  abstract getPublicInfo(characterId: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions): Promise<GetCharactersDetailOutput>;
+  listBlueprints(characterId: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions): Promise<GetCharactersCharacterIdBlueprintsOutput>;
 
-  abstract listBlueprints(characterId: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions): Promise<GetCharactersCharacterIdBlueprintsOutput>;
+  listContactNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions): Promise<GetCharactersCharacterIdNotificationsContactsOutput>;
 
-  abstract listContactNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions): Promise<GetCharactersCharacterIdNotificationsContactsOutput>;
+  listCorporationHistory(characterId: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions): Promise<GetCharactersCharacterIdCorporationhistoryOutput>;
 
-  abstract listCorporationHistory(characterId: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions): Promise<GetCharactersCharacterIdCorporationhistoryOutput>;
+  listCorporationTitles(characterId: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions): Promise<GetCharactersCharacterIdTitlesOutput>;
 
-  abstract listCorporationTitles(characterId: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions): Promise<GetCharactersCharacterIdTitlesOutput>;
+  listMedals(characterId: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions): Promise<GetCharactersCharacterIdMedalsOutput>;
 
-  abstract listMedals(characterId: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions): Promise<GetCharactersCharacterIdMedalsOutput>;
+  listNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions): Promise<GetCharactersCharacterIdNotificationsOutput>;
 
-  abstract listNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions): Promise<GetCharactersCharacterIdNotificationsOutput>;
+  listStandings(characterId: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions): Promise<GetCharactersCharacterIdStandingsOutput>;
 
-  abstract listStandings(characterId: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions): Promise<GetCharactersCharacterIdStandingsOutput>;
+  lookupAffiliations(options: PostCharactersAffiliationOptions): Promise<PostCharactersAffiliationOutput>;
 
-  abstract lookupAffiliations(options: PostCharactersAffiliationOptions): Promise<PostCharactersAffiliationOutput>;
-
-  abstract withMetadata(): CharacterDomainClientWithMetadata;
+  withMetadata(): CharacterDomainClientWithMetadata;
 }
 
-export abstract class CharacterDomainClientWithMetadata {
-  protected constructor() {}
+export interface CharacterDomainClientWithMetadata {
+  agentsResearch(characterId: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions): Promise<EsiResponse<GetCharactersCharacterIdAgentsResearchOutput>>;
 
-  abstract agentsResearch(characterId: NonNullable<GetCharactersCharacterIdAgentsResearchInput['path']>["character_id"], options?: GetCharactersCharacterIdAgentsResearchOptions): Promise<EsiResponse<GetCharactersCharacterIdAgentsResearchOutput>>;
+  calculateCspaCharge(characterId: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions): Promise<EsiResponse<PostCharactersCharacterIdCspaOutput>>;
 
-  abstract calculateCspaCharge(characterId: NonNullable<PostCharactersCharacterIdCspaInput['path']>["character_id"], options: PostCharactersCharacterIdCspaOptions): Promise<EsiResponse<PostCharactersCharacterIdCspaOutput>>;
+  getCorporationRoles(characterId: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions): Promise<EsiResponse<GetCharactersCharacterIdRolesOutput>>;
 
-  abstract getCorporationRoles(characterId: NonNullable<GetCharactersCharacterIdRolesInput['path']>["character_id"], options?: GetCharactersCharacterIdRolesOptions): Promise<EsiResponse<GetCharactersCharacterIdRolesOutput>>;
+  getJumpFatigue(characterId: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions): Promise<EsiResponse<GetCharactersCharacterIdFatigueOutput>>;
 
-  abstract getJumpFatigue(characterId: NonNullable<GetCharactersCharacterIdFatigueInput['path']>["character_id"], options?: GetCharactersCharacterIdFatigueOptions): Promise<EsiResponse<GetCharactersCharacterIdFatigueOutput>>;
+  getPortrait(characterId: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions): Promise<EsiResponse<GetCharactersCharacterIdPortraitOutput>>;
 
-  abstract getPortrait(characterId: NonNullable<GetCharactersCharacterIdPortraitInput['path']>["character_id"], options?: GetCharactersCharacterIdPortraitOptions): Promise<EsiResponse<GetCharactersCharacterIdPortraitOutput>>;
+  getPublicInfo(characterId: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions): Promise<EsiResponse<GetCharactersDetailOutput>>;
 
-  abstract getPublicInfo(characterId: NonNullable<GetCharactersDetailInput['path']>["character_id"], options?: GetCharactersDetailOptions): Promise<EsiResponse<GetCharactersDetailOutput>>;
+  listBlueprints(characterId: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions): Promise<EsiResponse<GetCharactersCharacterIdBlueprintsOutput>>;
 
-  abstract listBlueprints(characterId: NonNullable<GetCharactersCharacterIdBlueprintsInput['path']>["character_id"], options?: GetCharactersCharacterIdBlueprintsOptions): Promise<EsiResponse<GetCharactersCharacterIdBlueprintsOutput>>;
+  listContactNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions): Promise<EsiResponse<GetCharactersCharacterIdNotificationsContactsOutput>>;
 
-  abstract listContactNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsContactsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsContactsOptions): Promise<EsiResponse<GetCharactersCharacterIdNotificationsContactsOutput>>;
+  listCorporationHistory(characterId: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions): Promise<EsiResponse<GetCharactersCharacterIdCorporationhistoryOutput>>;
 
-  abstract listCorporationHistory(characterId: NonNullable<GetCharactersCharacterIdCorporationhistoryInput['path']>["character_id"], options?: GetCharactersCharacterIdCorporationhistoryOptions): Promise<EsiResponse<GetCharactersCharacterIdCorporationhistoryOutput>>;
+  listCorporationTitles(characterId: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions): Promise<EsiResponse<GetCharactersCharacterIdTitlesOutput>>;
 
-  abstract listCorporationTitles(characterId: NonNullable<GetCharactersCharacterIdTitlesInput['path']>["character_id"], options?: GetCharactersCharacterIdTitlesOptions): Promise<EsiResponse<GetCharactersCharacterIdTitlesOutput>>;
+  listMedals(characterId: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions): Promise<EsiResponse<GetCharactersCharacterIdMedalsOutput>>;
 
-  abstract listMedals(characterId: NonNullable<GetCharactersCharacterIdMedalsInput['path']>["character_id"], options?: GetCharactersCharacterIdMedalsOptions): Promise<EsiResponse<GetCharactersCharacterIdMedalsOutput>>;
+  listNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions): Promise<EsiResponse<GetCharactersCharacterIdNotificationsOutput>>;
 
-  abstract listNotifications(characterId: NonNullable<GetCharactersCharacterIdNotificationsInput['path']>["character_id"], options?: GetCharactersCharacterIdNotificationsOptions): Promise<EsiResponse<GetCharactersCharacterIdNotificationsOutput>>;
+  listStandings(characterId: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions): Promise<EsiResponse<GetCharactersCharacterIdStandingsOutput>>;
 
-  abstract listStandings(characterId: NonNullable<GetCharactersCharacterIdStandingsInput['path']>["character_id"], options?: GetCharactersCharacterIdStandingsOptions): Promise<EsiResponse<GetCharactersCharacterIdStandingsOutput>>;
-
-  abstract lookupAffiliations(options: PostCharactersAffiliationOptions): Promise<EsiResponse<PostCharactersAffiliationOutput>>;
+  lookupAffiliations(options: PostCharactersAffiliationOptions): Promise<EsiResponse<PostCharactersAffiliationOutput>>;
 }

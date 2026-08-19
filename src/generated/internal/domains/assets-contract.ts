@@ -67,36 +67,32 @@ export interface PostCorporationsCorporationIdAssetsNamesOptions {
   readonly "xTenant"?: NonNullable<PostCorporationsCorporationIdAssetsNamesInput["header"]>["X-Tenant"];
 }
 
-export abstract class AssetsDomainClient {
-  protected constructor() {}
+export interface AssetsDomainClient {
+  listCharacterAssets(characterId: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions): Promise<GetCharactersCharacterIdAssetsOutput>;
 
-  abstract listCharacterAssets(characterId: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions): Promise<GetCharactersCharacterIdAssetsOutput>;
+  listCorporationAssets(corporationId: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions): Promise<GetCorporationsCorporationIdAssetsOutput>;
 
-  abstract listCorporationAssets(corporationId: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions): Promise<GetCorporationsCorporationIdAssetsOutput>;
+  lookupCharacterLocations(characterId: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions): Promise<PostCharactersCharacterIdAssetsLocationsOutput>;
 
-  abstract lookupCharacterLocations(characterId: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions): Promise<PostCharactersCharacterIdAssetsLocationsOutput>;
+  lookupCharacterNames(characterId: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions): Promise<PostCharactersCharacterIdAssetsNamesOutput>;
 
-  abstract lookupCharacterNames(characterId: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions): Promise<PostCharactersCharacterIdAssetsNamesOutput>;
+  lookupCorporationLocations(corporationId: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions): Promise<PostCorporationsCorporationIdAssetsLocationsOutput>;
 
-  abstract lookupCorporationLocations(corporationId: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions): Promise<PostCorporationsCorporationIdAssetsLocationsOutput>;
+  lookupCorporationNames(corporationId: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions): Promise<PostCorporationsCorporationIdAssetsNamesOutput>;
 
-  abstract lookupCorporationNames(corporationId: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions): Promise<PostCorporationsCorporationIdAssetsNamesOutput>;
-
-  abstract withMetadata(): AssetsDomainClientWithMetadata;
+  withMetadata(): AssetsDomainClientWithMetadata;
 }
 
-export abstract class AssetsDomainClientWithMetadata {
-  protected constructor() {}
+export interface AssetsDomainClientWithMetadata {
+  listCharacterAssets(characterId: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions): Promise<EsiResponse<GetCharactersCharacterIdAssetsOutput>>;
 
-  abstract listCharacterAssets(characterId: NonNullable<GetCharactersCharacterIdAssetsInput['path']>["character_id"], options?: GetCharactersCharacterIdAssetsOptions): Promise<EsiResponse<GetCharactersCharacterIdAssetsOutput>>;
+  listCorporationAssets(corporationId: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions): Promise<EsiResponse<GetCorporationsCorporationIdAssetsOutput>>;
 
-  abstract listCorporationAssets(corporationId: NonNullable<GetCorporationsCorporationIdAssetsInput['path']>["corporation_id"], options?: GetCorporationsCorporationIdAssetsOptions): Promise<EsiResponse<GetCorporationsCorporationIdAssetsOutput>>;
+  lookupCharacterLocations(characterId: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions): Promise<EsiResponse<PostCharactersCharacterIdAssetsLocationsOutput>>;
 
-  abstract lookupCharacterLocations(characterId: NonNullable<PostCharactersCharacterIdAssetsLocationsInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsLocationsOptions): Promise<EsiResponse<PostCharactersCharacterIdAssetsLocationsOutput>>;
+  lookupCharacterNames(characterId: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions): Promise<EsiResponse<PostCharactersCharacterIdAssetsNamesOutput>>;
 
-  abstract lookupCharacterNames(characterId: NonNullable<PostCharactersCharacterIdAssetsNamesInput['path']>["character_id"], options: PostCharactersCharacterIdAssetsNamesOptions): Promise<EsiResponse<PostCharactersCharacterIdAssetsNamesOutput>>;
+  lookupCorporationLocations(corporationId: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions): Promise<EsiResponse<PostCorporationsCorporationIdAssetsLocationsOutput>>;
 
-  abstract lookupCorporationLocations(corporationId: NonNullable<PostCorporationsCorporationIdAssetsLocationsInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsLocationsOptions): Promise<EsiResponse<PostCorporationsCorporationIdAssetsLocationsOutput>>;
-
-  abstract lookupCorporationNames(corporationId: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions): Promise<EsiResponse<PostCorporationsCorporationIdAssetsNamesOutput>>;
+  lookupCorporationNames(corporationId: NonNullable<PostCorporationsCorporationIdAssetsNamesInput['path']>["corporation_id"], options: PostCorporationsCorporationIdAssetsNamesOptions): Promise<EsiResponse<PostCorporationsCorporationIdAssetsNamesOutput>>;
 }

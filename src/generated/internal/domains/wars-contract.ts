@@ -36,24 +36,20 @@ export interface GetWarsWarIdKillmailsOptions {
   readonly "xTenant"?: NonNullable<GetWarsWarIdKillmailsInput["header"]>["X-Tenant"];
 }
 
-export abstract class WarsDomainClient {
-  protected constructor() {}
+export interface WarsDomainClient {
+  get(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<GetWarsWarIdOutput>;
 
-  abstract get(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<GetWarsWarIdOutput>;
+  list(options?: GetWarsOptions): Promise<GetWarsOutput>;
 
-  abstract list(options?: GetWarsOptions): Promise<GetWarsOutput>;
+  listKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<GetWarsWarIdKillmailsOutput>;
 
-  abstract listKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<GetWarsWarIdKillmailsOutput>;
-
-  abstract withMetadata(): WarsDomainClientWithMetadata;
+  withMetadata(): WarsDomainClientWithMetadata;
 }
 
-export abstract class WarsDomainClientWithMetadata {
-  protected constructor() {}
+export interface WarsDomainClientWithMetadata {
+  get(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<EsiResponse<GetWarsWarIdOutput>>;
 
-  abstract get(warId: NonNullable<GetWarsWarIdInput['path']>["war_id"], options?: GetWarsWarIdOptions): Promise<EsiResponse<GetWarsWarIdOutput>>;
+  list(options?: GetWarsOptions): Promise<EsiResponse<GetWarsOutput>>;
 
-  abstract list(options?: GetWarsOptions): Promise<EsiResponse<GetWarsOutput>>;
-
-  abstract listKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<EsiResponse<GetWarsWarIdKillmailsOutput>>;
+  listKillmails(warId: NonNullable<GetWarsWarIdKillmailsInput['path']>["war_id"], options?: GetWarsWarIdKillmailsOptions): Promise<EsiResponse<GetWarsWarIdKillmailsOutput>>;
 }

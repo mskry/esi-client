@@ -9,40 +9,20 @@ import type { EsiResponse } from '../../../client/response.js';
 import {
   PostRouteDescriptor,
 } from '../descriptors/routes.js';
-import {
+import type {
   RoutesDomainClient,
   RoutesDomainClientWithMetadata,
-  type PostRouteOptions,
+  PostRouteOptions,
 } from './routes-contract.js';
 import type {
   PostRouteInput,
   PostRouteOutput,
 } from '../../schemas/operations/routes.js';
 
-class RoutesDomainClientImplementation extends RoutesDomainClient {
+class RoutesDomainClientWithMetadataImplementation implements RoutesDomainClientWithMetadata {
   readonly #configuration: EsiClientConfiguration;
 
   constructor(configuration: EsiClientConfiguration) {
-    super();
-    this.#configuration = configuration;
-    Object.freeze(this);
-  }
-
-  calculate(originSystemId: NonNullable<PostRouteInput['path']>["origin_system_id"], destinationSystemId: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions): Promise<PostRouteOutput> {
-    const arguments_: PostRouteInput = { path: { "origin_system_id": originSystemId, "destination_system_id": destinationSystemId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
-    return executeOperation(this.#configuration, PostRouteDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate }).then((response) => response.data);
-  }
-
-  withMetadata(): RoutesDomainClientWithMetadata {
-    return new RoutesDomainClientWithMetadataImplementation(this.#configuration);
-  }
-}
-
-class RoutesDomainClientWithMetadataImplementation extends RoutesDomainClientWithMetadata {
-  readonly #configuration: EsiClientConfiguration;
-
-  constructor(configuration: EsiClientConfiguration) {
-    super();
     this.#configuration = configuration;
     Object.freeze(this);
   }
@@ -50,6 +30,23 @@ class RoutesDomainClientWithMetadataImplementation extends RoutesDomainClientWit
   calculate(originSystemId: NonNullable<PostRouteInput['path']>["origin_system_id"], destinationSystemId: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions): Promise<EsiResponse<PostRouteOutput>> {
     const arguments_: PostRouteInput = { path: { "origin_system_id": originSystemId, "destination_system_id": destinationSystemId }, header: { "If-Modified-Since": options?.["ifModifiedSince"], "If-None-Match": options?.["ifNoneMatch"], "X-Tenant": options?.["xTenant"] }, body: options?.["body"] };
     return executeOperation(this.#configuration, PostRouteDescriptor, arguments_, { compatibilityDate: options?.compatibilityDate });
+  }
+}
+
+class RoutesDomainClientImplementation implements RoutesDomainClient {
+  readonly #metadata: RoutesDomainClientWithMetadataImplementation;
+
+  constructor(configuration: EsiClientConfiguration) {
+    this.#metadata = new RoutesDomainClientWithMetadataImplementation(configuration);
+    Object.freeze(this);
+  }
+
+  calculate(originSystemId: NonNullable<PostRouteInput['path']>["origin_system_id"], destinationSystemId: NonNullable<PostRouteInput['path']>["destination_system_id"], options: PostRouteOptions): Promise<PostRouteOutput> {
+    return this.#metadata.calculate(originSystemId, destinationSystemId, options).then((response) => response.data);
+  }
+
+  withMetadata(): RoutesDomainClientWithMetadata {
+    return this.#metadata;
   }
 }
 
