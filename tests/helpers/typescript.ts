@@ -34,9 +34,11 @@ export async function prepareIsolatedDeclarationsProject(directory: string): Pro
 }
 
 export async function executeTypeScript(directory: string): Promise<void> {
-  await executeFile(join(process.cwd(), 'node_modules/.bin/tsc'), ['--project', 'tsconfig.json'], {
-    cwd: directory,
-  });
+  await executeFile(
+    process.execPath,
+    [join(process.cwd(), 'node_modules/typescript/bin/tsc'), '--project', 'tsconfig.json'],
+    { cwd: directory },
+  );
 }
 
 export async function expectIsolatedDeclarationsCompilation(directory: string): Promise<void> {

@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import { resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
@@ -20,7 +20,7 @@ const approvedTargets = new Set(
 export function classifyProjectPath(path) {
   const absolutePath = resolve(repositoryRoot, path);
   for (const target of approvedTargets) {
-    if (absolutePath === target || absolutePath.startsWith(`${target}/`)) return 'generated';
+    if (absolutePath === target || absolutePath.startsWith(`${target}${sep}`)) return 'generated';
   }
   return 'maintained';
 }

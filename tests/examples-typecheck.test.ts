@@ -16,7 +16,9 @@ describe('generated example type-check project', () => {
     const inspection = await inspectExamplesProject(root);
 
     expect(inspection.projectFiles).toEqual(inspection.generatedFiles);
-    expect(inspection.generatedFiles.map((path) => relative(root, path))).toEqual([
+    expect(
+      inspection.generatedFiles.map((path) => relative(root, path).replaceAll('\\', '/')),
+    ).toEqual([
       'examples/generated/authenticated.ts',
       'examples/generated/metadata.ts',
       'examples/generated/mutation-safety.ts',

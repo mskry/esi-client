@@ -16,11 +16,11 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v2
         with:
-          node-version: 22.18.0
-          cache: pnpm
+          runtime: node@22.18.0
+          cache: true
+          install: false
       - run: pnpm install --frozen-lockfile
       - run: pnpm validate

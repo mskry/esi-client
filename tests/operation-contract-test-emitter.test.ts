@@ -117,15 +117,23 @@ describe('generated operation contract tests', () => {
     );
 
     await expect(
-      executeFile(join(process.cwd(), 'node_modules/.bin/tsc'), ['--project', 'tsconfig.json'], {
-        cwd: outputDirectory,
-        maxBuffer: 10 * 1024 * 1024,
-      }),
+      executeFile(
+        process.execPath,
+        [join(process.cwd(), 'node_modules/typescript/bin/tsc'), '--project', 'tsconfig.json'],
+        {
+          cwd: outputDirectory,
+          maxBuffer: 10 * 1024 * 1024,
+        },
+      ),
     ).resolves.toBeDefined();
     await expect(
       executeFile(
-        join(process.cwd(), 'node_modules/.bin/vitest'),
-        ['run', 'tests/generated/operation-contracts.test.ts'],
+        process.execPath,
+        [
+          join(process.cwd(), 'node_modules/vitest/vitest.mjs'),
+          'run',
+          'tests/generated/operation-contracts.test.ts',
+        ],
         { cwd: outputDirectory, maxBuffer: 10 * 1024 * 1024 },
       ),
     ).resolves.toMatchObject({ stdout: expect.stringContaining('passed') });

@@ -186,7 +186,7 @@ describe('generation orchestration', () => {
             if (
               !failedReplacement &&
               phase === 'install' &&
-              destination.endsWith('docs/generated')
+              destination.endsWith(join('docs', 'generated'))
             ) {
               failedReplacement = true;
               throw new Error('replacement failed');

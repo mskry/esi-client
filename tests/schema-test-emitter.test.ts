@@ -109,14 +109,20 @@ describe('generated schema contract tests', () => {
     );
 
     await expect(
-      executeFile(join(process.cwd(), 'node_modules/.bin/tsc'), ['--project', 'tsconfig.json'], {
-        cwd: outputDirectory,
-      }),
+      executeFile(
+        process.execPath,
+        [join(process.cwd(), 'node_modules/typescript/bin/tsc'), '--project', 'tsconfig.json'],
+        { cwd: outputDirectory },
+      ),
     ).resolves.toBeDefined();
     await expect(
       executeFile(
-        join(process.cwd(), 'node_modules/.bin/vitest'),
-        ['run', 'tests/generated/schema-contracts.test.ts'],
+        process.execPath,
+        [
+          join(process.cwd(), 'node_modules/vitest/vitest.mjs'),
+          'run',
+          'tests/generated/schema-contracts.test.ts',
+        ],
         { cwd: outputDirectory },
       ),
     ).resolves.toMatchObject({ stdout: expect.stringContaining('passed') });
