@@ -4,10 +4,14 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { npmPack, usesWindowsCommandShell } from './lib/npm-pack.mjs';
+import { npmPack } from './lib/npm-pack.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const pnpmExecutable = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
+const attwCli = fileURLToPath(
+  new URL('./index.js', import.meta.resolve('@arethetypeswrong/cli/internal/getExitCode')),
+);
+const publintCli = fileURLToPath(new URL('./cli.js', import.meta.resolve('publint')));
+const tsdownCli = fileURLToPath(import.meta.resolve('tsdown/run'));
 
 export const packageValidationSteps = Object.freeze([
   'publint',
@@ -17,7 +21,7 @@ export const packageValidationSteps = Object.freeze([
 ]);
 
 export async function checkPackage({ built = false } = {}) {
-  if (!built) await run('build', pnpmExecutable, ['run', 'build']);
+  if (!built) await run('build', process.execPath, [tsdownCli]);
 
   const temporaryDirectory = await mkdtemp(join(tmpdir(), 'esi-client-package-check-'));
   try {
@@ -28,8 +32,8 @@ export async function checkPackage({ built = false } = {}) {
     await writeFile(packJson, JSON.stringify(pack));
 
     const commands = {
-      publint: [pnpmExecutable, ['exec', 'publint', '--strict', tarball]],
-      attw: [pnpmExecutable, ['exec', 'attw', tarball, '--profile', 'esm-only']],
+      publint: [process.execPath, [publintCli, '--strict', tarball]],
+      attw: [process.execPath, [attwCli, tarball, '--profile', 'esm-only']],
       'smoke:package': [
         process.execPath,
         [join(root, 'scripts/smoke-package.mjs'), '--tarball', tarball],
@@ -55,7 +59,6 @@ function run(name, command, arguments_) {
     let output = '';
     const child = spawn(command, arguments_, {
       cwd: root,
-      shell: usesWindowsCommandShell(command),
       stdio: ['inherit', 'pipe', 'pipe'],
     });
     child.stdout.on('data', (chunk) => {
